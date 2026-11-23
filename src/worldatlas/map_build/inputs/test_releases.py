@@ -17,13 +17,15 @@ class ReleaseAccessTests(unittest.TestCase):
     def test_missing_or_unavailable_catalog_is_reported_without_credentials(self):
         with patch.dict(os.environ, NEON_DATABASE_URL=""):
             with self.assertRaisesRegex(ValueError, "set NEON_DATABASE_URL"):
-                read_release_assets("v97.0")
+                read_release_assets("v97.0", R2Client(None))
         with (
             patch.dict(os.environ, NEON_DATABASE_URL="invalid"),
-            patch.object(psycopg, "connect", side_effect=psycopg.OperationalError("failed")),
+            patch.object(
+                psycopg, "connect", side_effect=psycopg.OperationalError("failed")
+            ),
         ):
             with self.assertRaisesRegex(ValueError, "Neon release lookup failed"):
-                read_release_assets("v97.0")
+                read_release_assets("v97.0", R2Client(None))
 
 
 @unittest.skipUnless(
@@ -44,7 +46,9 @@ class ReleaseLookupTests(unittest.TestCase):
             for name in ("rows.u32le.gz", "runs.u32le.gz")
         }
         objects["config.json"] = dict(
-            r2_key=folder + "config.json", sha256="d" * 64, size_bytes=50,
+            r2_key=folder + "config.json",
+            sha256="d" * 64,
+            size_bytes=50,
             content_type="application/json",
         )
         raw = json.dumps(
@@ -66,14 +70,9 @@ class ReleaseLookupTests(unittest.TestCase):
                 (identity, "test", hashlib.sha256(raw).hexdigest()),
             )
             try:
-                with (
-                    patch.dict(os.environ, NEON_DATABASE_URL=url),
-                    patch(
-                        "worldatlas.map_build.inputs.releases.make_r2_client",
-                        return_value=R2Client(storage),
-                    ),
-                ):
-                    candidate = read_release_assets(identity)
+                with patch.dict(os.environ, NEON_DATABASE_URL=url):
+                    client = R2Client(storage)
+                    candidate = read_release_assets(identity, client)
                     streams, config = candidate
                     self.assertEqual(
                         streams,
@@ -90,7 +89,9 @@ class ReleaseLookupTests(unittest.TestCase):
                             ),
                         ],
                     )
-                    self.assertEqual(config, dict(objects["config.json"], r2_bucket="test"))
+                    self.assertEqual(
+                        config, dict(objects["config.json"], r2_bucket="test")
+                    )
                     self.assertEqual(storage.key, folder + "manifest.json")
                     without_config = json.loads(raw)
                     without_config["objects"].pop("config.json")
@@ -99,16 +100,32 @@ class ReleaseLookupTests(unittest.TestCase):
                         return_value=without_config,
                     ):
                         with self.assertRaisesRegex(ValueError, "missing config.json"):
-                            read_release_assets(identity)
+                            read_release_assets(identity, client)
+                    for bad_hashes in ([], {}, dict(rows="b" * 64, runs="invalid")):
+                        with (
+                            self.subTest(bad_hashes=bad_hashes),
+                            patch(
+                                "worldatlas.map_build.inputs.releases.read_manifest",
+                                return_value={
+                                    **json.loads(raw),
+                                    "decoded_sha256": bad_hashes,
+                                },
+                            ),
+                            self.assertRaisesRegex(
+                                ValueError, "both decoded stream checksums"
+                            ),
+                        ):
+                            read_release_assets(identity, client)
                     with self.assertRaisesRegex(ValueError, "no unique release"):
-                        read_release_assets("v97.0")
+                        read_release_assets("v97.0", client)
                 with database.transaction(force_rollback=True):
                     database.execute(
                         "UPDATE atlas.map_releases SET is_official=true WHERE id=%s",
                         (identity,),
                     )
                     self.assertEqual(
-                        lookup_release(database, "v97.0"), lookup_release(database, identity)
+                        lookup_release(database, "v97.0"),
+                        lookup_release(database, identity),
                     )
             finally:
                 database.execute(

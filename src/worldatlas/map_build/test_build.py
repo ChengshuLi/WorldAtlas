@@ -48,12 +48,13 @@ class TimingTests(unittest.TestCase):
                 "processing_elapsed_seconds": 12345,
                 "source_download_elapsed_seconds": 54321,
             }
-            with timer.measure("physical", "verify-reused"):
-                pass
+            with patch.object(pipeline.time, "monotonic", side_effect=[8, 11]):
+                with timer.measure("physical", "verify-reused"):
+                    pass
             timer.mark_complete("physical", physical_report=receipt)
             result = timer.summary(receipt)["physical"]
             self.assertTrue(result["complete"])
-            self.assertLess(result["processing_elapsed_seconds"], 1)
+            self.assertEqual(result["processing_elapsed_seconds"], 3)
             self.assertEqual(result["source_download_elapsed_seconds"], 0)
             self.assertEqual(result["reused_from"], "/source/run")
             self.assertIsNone(result["producer_processing_elapsed_seconds"])
@@ -142,11 +143,12 @@ class TimingTests(unittest.TestCase):
             threads = [
                 threading.Thread(target=job, args=(name,)) for name in ("sea", "coast")
             ]
-            for thread in threads:
-                thread.start()
-            entered.wait()
-            for thread in threads:
-                thread.join()
+            with patch.object(pipeline.time, "monotonic", side_effect=[1, 2, 4, 6]):
+                for thread in threads:
+                    thread.start()
+                entered.wait()
+                for thread in threads:
+                    thread.join()
             timer.completed_groups.add("water")
             summary = timer.summary(None)["water"]
             self.assertTrue(summary["complete"])
@@ -227,9 +229,11 @@ class Fixture(unittest.TestCase):
         self.frozen = selection()
         self.r2_storage = Mock()
         self.r2_storage.get_object.side_effect = AssertionError("unexpected R2 request")
-        self.enterContext(patch.object(
-            r2, "make_r2_client", side_effect=lambda: R2Client(self.r2_storage)
-        ))
+        self.enterContext(
+            patch.object(
+                r2, "make_r2_client", side_effect=lambda: R2Client(self.r2_storage)
+            )
+        )
         for mocking in (
             patch.dict("os.environ", {"NEON_DATABASE_URL": "fixture"}),
             patch(
@@ -250,7 +254,10 @@ class Fixture(unittest.TestCase):
             "selection_notes": "Synthetic processor integration fixture",
             "sources": {
                 "land_config": {"land": []},
-                "inland_water": {"files": []},
+                "inland_water": {
+                    "file_count": 1,
+                    "files": [{"path": "water.parquet", "sha256": "a" * 64}],
+                },
             },
             "grid": dict(width=36, height=18, step=10),
         }
@@ -341,11 +348,11 @@ class Fixture(unittest.TestCase):
     def test_invalid_catalog_selector_fails_before_file_acquisition(self):
         for spec, message in (
             (dict(r2_source="absent"), "missing selected sources"),
-            (dict(r2_source=" "), "r2_source must be a nonblank Neon source ID"),
-            (dict(r2_source={"source_id": "fixture"}), "r2_source must be a nonblank Neon source ID"),
+            (dict(r2_source=" "), "r2_source"),
+            (dict(r2_source={"source_id": "fixture"}), "r2_source"),
             (
                 dict(r2_source="fixture", r2_bucket="test"),
-                "invalid raw catalog reference",
+                "Extra inputs",
             ),
         ):
             with self.subTest(spec=spec):
@@ -442,13 +449,11 @@ class Fixture(unittest.TestCase):
             dict(source_id="unrelated", **self.cloud(b"other")),
         ]
         self.select_coastline(source_id, [reference])
-        self.cfg["sources"]["inland_water"]["files"] = [
-            {"path": "raw/fixture", **reference}
-        ]
+        self.cfg["sources"]["inland_water"]["files"] = [reference]
         with (
             self.fake_r2({}, []) as download,
             patch.object(
-                pipeline, "catalog_references", wraps=pipeline.catalog_references
+                pipeline, "catalog_source_ids", wraps=pipeline.catalog_source_ids
             ) as scan,
         ):
             runner = self.make()
@@ -467,10 +472,12 @@ class Fixture(unittest.TestCase):
             runner.physical_config["land_config"], source_cache
         )
         self.assertEqual(requests, [resolved])
-        self.assertEqual(planned["land"][0]["dataset"], str(source_cache.path(resolved)))
+        self.assertEqual(
+            planned["land"][0]["dataset"], str(source_cache.path(resolved))
+        )
         self.assertEqual(
             runner.physical_config["inland_water"]["files"],
-            [{"path": "raw/fixture", **resolved}],
+            [resolved],
         )
 
     def test_coastline_download_uses_each_builds_work_directory(self):
@@ -491,10 +498,9 @@ class Fixture(unittest.TestCase):
                     )
                     source = source_cache.acquire(pin)
                     self.assertEqual(planned["land"][0]["dataset"], str(source))
-                    self.assertIn(pin_file(source), source_cache.pins)
                     self.assertTrue(source.is_relative_to(root))
                     self.assertEqual(source.read_bytes(), payload)
-                    self.assertEqual(len(source_cache.download_intervals), 1)
+                    self.assertEqual(len(source_cache.downloads), 1)
                     results.append(sha256_file(source))
                 finally:
                     runner.close()
@@ -536,71 +542,12 @@ class Fixture(unittest.TestCase):
         self.assertEqual(
             Path(land["files"][0]["path"]).parent, Path(land["files"][1]["path"]).parent
         )
-        self.assertEqual(len({item["path"] for item in source_cache.pins}), 3)
-
-    def test_invalid_zip_members_are_never_published_to_cache(self):
-        source_cache = self.make_cache()
-        packed = io.BytesIO()
-        payload = b"geometry"
-        with zipfile.ZipFile(packed, "w") as archive:
-            archive.writestr("data.shp", payload)
-        archive = self.cloud(packed.getvalue(), "sources/archive.zip")
-        output = self.inputs / archive["sha256"] / "data.shp"
-        pin = dict(archive=archive, member="data.shp", size_bytes=len(payload),
-                   sha256=hashlib.sha256(payload).hexdigest())
-        with self.fake_r2({"sources/archive.zip": packed.getvalue()}, []) as download:
-            for changes, reason in (
-                ({"member": 1}, "unsafe ZIP member"),
-                ({"member": "missing.shp"}, "must be one regular file"),
-                ({"sha256": "0" * 64}, "size or hash mismatch"),
-            ):
-                with self.subTest(changes=changes):
-                    with self.assertRaisesRegex(ValueError, reason):
-                        source_cache.acquire(dict(pin, **changes))
-                    self.assertFalse(output.exists())
-                    self.assertEqual(list(output.parent.glob("*.partial")), [])
-            self.assertEqual(source_cache.acquire(pin).read_bytes(), payload)
-            self.assertEqual(download.call_count, 1)
-
-    def test_zip_cache_publication_checks_a_concurrent_writers_bytes(self):
-        source_cache = self.make_cache()
-        packed = io.BytesIO()
-        payload = b"geometry"
-        with zipfile.ZipFile(packed, "w") as archive:
-            archive.writestr("one.shp", payload)
-            archive.writestr("two.shp", payload)
-        archive = self.cloud(packed.getvalue(), "sources/archive.zip")
-
-        link = os.link
-        for member, content in (("one.shp", payload), ("two.shp", b"corrupt!")):
-            with self.subTest(member=member):
-                output = self.inputs / archive["sha256"] / member
-
-                def race(source, destination):
-                    if destination == output:
-                        output.write_bytes(content)
-                    return link(source, destination)
-
-                pin = dict(archive=archive, member=member, size_bytes=len(payload),
-                           sha256=hashlib.sha256(payload).hexdigest())
-                with (
-                    self.fake_r2({"sources/archive.zip": packed.getvalue()}, []),
-                    patch.object(os, "link", side_effect=race),
-                ):
-                    if content == payload:
-                        self.assertEqual(source_cache.acquire(pin).read_bytes(), payload)
-                    else:
-                        with self.assertRaisesRegex(ValueError, "size or hash mismatch"):
-                            source_cache.acquire(pin)
-                self.assertEqual(output.read_bytes(), content)
-                self.assertEqual(list(output.parent.glob("*.partial")), [])
 
     def test_raw_manifest_keeps_shards_deferred_to_existing_physical_stage(self):
         raw = {
             "file_count": 1,
             "files": [
                 {
-                    "path": "raw/part.parquet",
                     "sha256": "a" * 64,
                     "r2_bucket": "worldatlas",
                     "r2_key": "raw/part.parquet",
@@ -613,39 +560,6 @@ class Fixture(unittest.TestCase):
             runner = self.make()
         make_client.assert_not_called()
         self.assertEqual(runner.physical_config["inland_water"], raw)
-
-    def test_wrong_download_is_never_published(self):
-        source_cache = self.make_cache()
-        spec = self.cloud(b"{}")
-        with self.fake_r2({"sources/input.json": b"wrong"}, []):
-            with self.assertRaisesRegex(
-                ValueError, "size or hash mismatch"
-            ):
-                source_cache.acquire(spec)
-        self.assertFalse(source_cache.path(spec).exists())
-        self.assertEqual(len(list((self.root / "inputs").rglob("download-*"))), 0)
-
-    def test_invalid_cloud_pin_is_rejected(self):
-        source_cache = self.make_cache()
-        spec = self.cloud(b"source", "raw/list.json")
-        for changes, message in (
-            ({"size_bytes": None}, "explicit SHA-256 and byte size"),
-            ({"r2_key": "raw/../list.json"}, "invalid pinned R2 location"),
-        ):
-            with self.subTest(changes=changes):
-                with self.assertRaisesRegex(ValueError, message):
-                    source_cache.acquire(dict(spec, **changes))
-
-    def test_cache_reuses_same_bytes_without_duplicate_file_pins(self):
-        source_cache = self.make_cache()
-        payload = b"archive byte sequence"
-        first = self.cloud(payload, "folder1/shared.bin")
-        second = self.cloud(payload, "folder2/shared.bin")
-        count = len(source_cache.pins)
-        with self.fake_r2({first["r2_key"]: payload}, []) as download:
-            self.assertEqual(source_cache.acquire(first), source_cache.acquire(second))
-            download.assert_called_once()
-        self.assertEqual(len(source_cache.pins), count + 1)
 
     def test_resume_rejects_changed_build_configuration(self):
         first = self.make()
@@ -705,18 +619,6 @@ class Fixture(unittest.TestCase):
                 runner.physical()
         report.assert_not_called()
 
-    def test_import_cache_is_reused_without_network_or_download_time(self):
-        payload = b"{}"
-        source = self.cloud(payload)
-        cached = self.inputs / source["sha256"] / "input.json"
-        cached.parent.mkdir()
-        cached.write_bytes(payload)
-        source_cache = self.make_cache()
-        with self.fake_r2({}, []) as download:
-            self.assertEqual(source_cache.acquire(source), cached)
-        download.assert_not_called()
-        self.assertEqual(source_cache.download_intervals, [])
-
     def test_relative_work_directory_is_relative_to_the_current_directory(self):
         config = write_json(self.inputs / "build.json", self.cfg)
         runner = pipeline.Pipeline(
@@ -724,31 +626,6 @@ class Fixture(unittest.TestCase):
         )
         self.addCleanup(runner.close)
         self.assertEqual(runner.root, self.root)
-
-    def test_cached_cloud_corruption_and_zip_path_escapes_fail_closed(self):
-        payload = b"{}"
-        spec = self.cloud(payload)
-        cached = self.root / "inputs" / spec["sha256"] / "input.json"
-        cached.parent.mkdir(parents=True)
-        source_cache = self.make_cache()
-        with self.fake_r2({}, []) as download:
-            cached.mkdir()
-            with self.assertRaisesRegex(
-                ValueError, "size or hash mismatch"
-            ):
-                source_cache.acquire(spec)
-            cached.rmdir()
-            cached.write_bytes(b"xx")
-            with self.assertRaisesRegex(
-                ValueError, "size or hash mismatch"
-            ):
-                source_cache.acquire(spec)
-        download.assert_not_called()
-        cached.write_bytes(payload)
-        with self.assertRaisesRegex(ValueError, "unsafe ZIP member"):
-            source_cache.acquire(
-                dict(archive=spec, member="../outside", sha256="a" * 64, size_bytes=1)
-            )
 
     def test_failure_report_is_not_a_completed_stage(self):
         runner = self.make()
@@ -778,7 +655,7 @@ class Fixture(unittest.TestCase):
         self.assertFalse((runner.out / "report.json").exists())
         self.assertEqual(read_json(runner.out / "failure.json")["status"], "incomplete")
 
-    def test_actual_raw_sources_to_fresh_components_in_process(self):
+    def prepare_raw_sources(self):
         grid = {"width": 8, "height": 4, "west": -180, "north": 90, "step": 45}
         raw = self.inputs / "raw"
         raw.mkdir()
@@ -804,7 +681,6 @@ class Fixture(unittest.TestCase):
             "schema": "land-raster-candidate-v1",
             "selection_notes": "synthetic",
             "strip_rows": 2,
-            "minimum_free_bytes": 0,
             "land": [
                 {
                     "dataset": str(land_file),
@@ -816,7 +692,6 @@ class Fixture(unittest.TestCase):
         water = {
             "schema": "water-shard-candidate-v2",
             "tile_size": 4,
-            "minimum_free_bytes": 0,
             "selection_notes": "synthetic",
             "policy": {"method": "overture-inland-subtype-v1"},
         }
@@ -867,10 +742,18 @@ class Fixture(unittest.TestCase):
             "minimum_free_bytes": 0,
             "max_parallel_shards": 1,
         }
+
+    def test_actual_raw_sources_to_fresh_components_in_process(self):
+        self.prepare_raw_sources()
+        grid = self.cfg["grid"]
         runner = self.make()
         with (
-            patch.object(physical_build.land, "run", wraps=physical_build.land.run) as land_run,
-            patch.object(physical_build.water, "run", wraps=physical_build.water.run) as water_run,
+            patch.object(
+                physical_build.land, "run", wraps=physical_build.land.run
+            ) as land_run,
+            patch.object(
+                physical_build.water, "run", wraps=physical_build.water.run
+            ) as water_run,
         ):
             physical = runner.physical()
         self.assertIs(land_run.call_args.args[-1], runner.grid)
@@ -882,11 +765,16 @@ class Fixture(unittest.TestCase):
             runner.physical_config["land_config"],
         )
         config_path.write_bytes(b"{}")
-        with self.assertRaisesRegex(ValueError, "saved physical build configuration changed"):
+        with self.assertRaisesRegex(
+            ValueError, "saved physical build configuration changed"
+        ):
             runner.physical()
         config_path.write_bytes(original_config)
         reused = pipeline.Pipeline(
-            runner.config_path, self.root / "reused", work_dir=self.root, reuse_from=runner.out
+            runner.config_path,
+            self.root / "reused",
+            work_dir=self.root,
+            reuse_from=runner.out,
         )
         self.addCleanup(reused.close)
         producer_report = (physical / "report.json").read_bytes()
@@ -900,7 +788,9 @@ class Fixture(unittest.TestCase):
             reused.identity["physical_reuse"]["source_run"], str(runner.out)
         )
         self.assertEqual(
-            pipeline.physical_reference(reused.out, runner.physical_config)["source_run"],
+            pipeline.physical_reference(reused.out, runner.physical_config)[
+                "source_run"
+            ],
             str(runner.out),
         )
         self.assertEqual((physical / "report.json").read_bytes(), producer_report)
@@ -911,12 +801,16 @@ class Fixture(unittest.TestCase):
         ):
             with self.subTest(section=section):
                 changed = dict(current, **{section: dict(current[section], **changes)})
-                with self.assertRaisesRegex(ValueError, f"physical input differs.*{section}"):
+                with self.assertRaisesRegex(
+                    ValueError, f"physical input differs.*{section}"
+                ):
                     pipeline.physical_reference(runner.out, changed)
         shorter_sources = dict(
             runner.physical_config, grid={**grid, "height": grid["height"] - 1}
         )
-        with self.assertRaisesRegex(ValueError, "physical reuse requires the same grid"):
+        with self.assertRaisesRegex(
+            ValueError, "physical reuse requires the same grid"
+        ):
             pipeline.physical_reference(runner.out, shorter_sources)
         runs_path = physical / "runs.u32le"
         original = runs_path.read_bytes()
@@ -929,7 +823,7 @@ class Fixture(unittest.TestCase):
         self.assertEqual(reused.physical(), physical)
         components = runner.out / "components"
         result = build_components(Grid(**grid), physical, components)
-        self.assertEqual(result["land_cells"], 5)
+        self.assertEqual(result["selected_cells"], 5)
         self.assertEqual(
             result["output_sha256"]["runs.u32le"],
             sha256_file(components / "runs.u32le"),
@@ -950,7 +844,14 @@ class Fixture(unittest.TestCase):
     def test_single_cloud_configuration_matches_local_raw_and_component_streams_in_another_root(
         self,
     ):
-        self.test_actual_raw_sources_to_fresh_components_in_process()
+        self.prepare_raw_sources()
+        self.cfg.pop("selection_notes", None)
+        self.cfg["sources"]["land_config"].pop("selection_notes")
+        self.cfg["sources"]["inland_water"].pop("selection_notes")
+        local = self.make()
+        local_physical = local.physical()
+        local_components = local.out / "components"
+        build_components(local.grid, local_physical, local_components)
         coastline = (self.inputs / "raw/land.geojson").read_bytes()
         zipped = io.BytesIO()
         with zipfile.ZipFile(zipped, "w") as archive:
@@ -976,7 +877,6 @@ class Fixture(unittest.TestCase):
             "file_count": 1,
             "files": [
                 {
-                    "path": "raw/water.parquet",
                     "sha256": water_source["sha256"],
                     "size_bytes": water_source["size_bytes"],
                     "r2_bucket": water_source["r2_bucket"],
@@ -1007,7 +907,9 @@ class Fixture(unittest.TestCase):
         source_cache.path(land_source).unlink()
         source_cache.path(land_source["archive"]).unlink()
         with patch.object(
-            r2, "make_r2_client", side_effect=AssertionError("reuse must not open an R2 client")
+            r2,
+            "make_r2_client",
+            side_effect=AssertionError("reuse must not open an R2 client"),
         ):
             reused = pipeline.Pipeline(
                 config, other / "reused", work_dir=other, reuse_from=runner.out
@@ -1017,8 +919,8 @@ class Fixture(unittest.TestCase):
         components = runner.out / "components"
         build_components(Grid(**cfg["grid"]), physical, components)
         for local, cloud in [
-            (self.root / "run/physical/physical", physical),
-            (self.root / "run/components", components),
+            (local_physical, physical),
+            (local_components, components),
         ]:
             for name in ("rows.u32le", "runs.u32le"):
                 self.assertEqual(sha256_file(local / name), sha256_file(cloud / name))

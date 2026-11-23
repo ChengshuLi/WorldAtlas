@@ -8,6 +8,25 @@ from fractions import Fraction
 import numpy as np
 
 
+def column_windows(first: int, end: int, width: int) -> tuple[tuple[int, int], ...]:
+    """Split a window no wider than one turn into ordinary column ranges.
+
+    Args:
+        first: First unwrapped column, which can be negative.
+        end: Exclusive end column.
+        width: Number of columns in the full grid.
+
+    Returns:
+        One or two (start, end) ranges in traversal order. For example, a
+        width of 8 splits [6, 10) into [6, 8) followed by [0, 2).
+    """
+    start = first % width
+    stop = start + end - first
+    if stop <= width:
+        return ((start, stop),)
+    return ((start, width), (0, stop - width))
+
+
 @dataclass(frozen=True)
 class Grid:
     """Describe a WGS84 grid that starts at 90°N and wraps at ±180°.
@@ -90,11 +109,12 @@ class Grid:
         if not (-180 <= longitude <= 180 and -90 <= latitude <= 90):
             return None
         step = Fraction(self.step)
-        # Keep the last representable longitude west of 180 in the last column.
+        # The raster step can round down. A longitude inside the declared
+        # turn still belongs to the grid even if division gives width.
         column = (Fraction(longitude) - Fraction(self.west)) // step
         row = (Fraction(self.north) - Fraction(latitude)) // step
         if 0 <= row < self.height:
-            return (0 if longitude == 180 else column), row
+            return (0 if longitude == 180 else min(column, self.width - 1)), row
 
     def extent(
         self, bounds: tuple[int, int, int, int]
@@ -117,6 +137,6 @@ class Grid:
         return (
             self.west + x0 * self.step,
             self.north - y1 * self.step,
-            self.west + x1 * self.step,
+            180.0 if x1 == self.width else self.west + x1 * self.step,
             self.north - y0 * self.step,
         )

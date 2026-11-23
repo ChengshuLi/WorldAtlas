@@ -1,9 +1,8 @@
 #!/usr/bin/python3
-"""Compose candidate physical land/water grid; optionally compare to a baseline."""
+"""Compose the physical land and water grid from verified rasters."""
 
 import hashlib
 import json
-import math
 import os
 import shutil
 from collections.abc import Callable
@@ -11,14 +10,13 @@ from pathlib import Path
 from typing import Any, BinaryIO, cast
 
 import numpy as np
-from osgeo import gdal, osr
+from osgeo import gdal
 
-from worldatlas.map_build.physical.sources import (
-    compare_row,
-    open_mask,
-    validate_reference,
-)
-from worldatlas.shared.files import sha256_file
+from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.execution.control import check_cancelled
+from worldatlas.map_build.execution.runtime import RunFilePins
+from worldatlas.map_build.inputs.configuration import FilePin
+from worldatlas.map_build.physical.sources import create_mask, open_mask
 
 gdal.UseExceptions()
 
@@ -74,114 +72,56 @@ def write_run_block(
 def main(
     config_path: Path | str,
     output: Path | str,
+    grid: Grid,
     *,
+    land: FilePin,
+    water: FilePin,
+    minimum_free_bytes: int,
+    rows_per_block: int,
+    files: RunFilePins,
     emit: Callable[..., None] | None = None,
 ) -> dict[str, Any]:
     """Combine the coastline land mask and inland water mask.
 
     Args:
-        config_path: Pinned inputs, grid and composition settings.
+        config_path: Saved composition request used for the report checksum.
         output: New directory for the GeoTIFF and row-run files.
+        grid: Shared, validated physical grid.
+        land: Pin for the binary coastline land mask.
+        water: Pin for the binary inland water mask.
+        minimum_free_bytes: Shared disk reserve in bytes.
+        rows_per_block: Number of grid rows to process at a time.
+        files: Attempt-local file checksum verifier.
         emit: Optional progress callback.
 
     Returns:
-        Report with output digests, physical counts and optional comparison.
+        Report with output digests and physical cell counts.
     """
     config_path = Path(config_path).resolve()
     data = config_path.read_bytes()
-    cfg = json.loads(data)
-    if cfg.get('schema') != 'candidate-physical-composition-v1' or not cfg.get(
-        'selection_notes'
-    ):
-        raise ValueError('explicit schema and selection notes required')
-    g = cfg['grid']
-    w, h, west, north, step = (
-        g[k] for k in ('width', 'height', 'west', 'north', 'step')
-    )
-    if (
-        not isinstance(w, int)
-        or isinstance(w, bool)
-        or w <= 0
-        or not isinstance(h, int)
-        or isinstance(h, bool)
-        or h <= 0
-        or not all(
-            isinstance(x, (int, float)) and math.isfinite(x)
-            for x in (west, north, step)
-        )
-        or step <= 0
-        or west < -180
-        or west + w * step > 180
-        or north > 90
-        or north - h * step < -90
-    ):
-        raise ValueError('invalid grid')
-    reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
-    rows_per_block = cfg.get('rows_per_block', 128)
-    if not isinstance(reserve, int) or isinstance(reserve, bool) or reserve < 0:
-        raise ValueError('invalid free-space reserve')
-    if type(rows_per_block) is not int or rows_per_block < 1:
-        raise ValueError('invalid rows_per_block')
+    w, h = grid.width, grid.height
     output = Path(output).resolve()
-    has_ref = bool(cfg.get('reference_mask'))
-    has_streams = bool(cfg.get('reference_streams'))
-    if has_ref != has_streams:
-        raise ValueError('reference mask and streams must be provided together')
-    keys = ('land', 'water', 'reference_mask') if has_ref else ('land', 'water')
-    inputs = (
-        [config_path]
-        + [Path(cfg[k]['path']).resolve() for k in keys]
-        + (
-            [
-                Path(cfg['reference_streams'][k]['path']).resolve()
-                for k in ('rows', 'runs')
-            ]
-            if has_ref
-            else []
-        )
-    )
+    source_masks = {'land': land, 'water': water}
+    inputs = [
+        config_path,
+        *(Path(pin['path']).resolve() for pin in source_masks.values()),
+    ]
     if len(set(inputs)) != len(inputs):
         raise ValueError('inputs must be distinct')
     if any(p.is_relative_to(output) or output.is_relative_to(p.parent) for p in inputs):
         raise ValueError(
             'output must be outside input directories and must not contain inputs'
         )
-    masks = [open_mask(cfg[k], g) for k in keys]
-    rr, rv = (
-        validate_reference(cfg['reference_streams'], w, h) if has_ref else (None, None)
-    )
+    masks = [open_mask(pin, grid, files) for pin in source_masks.values()]
     os.mkdir(output)
     out = Path(output)
-    tif = gdal.GetDriverByName('GTiff').Create(
-        str(out / 'physical-dry.tif'),
-        w,
-        h,
-        1,
-        gdal.GDT_Byte,
-        options=[
-            'TILED=YES',
-            'BLOCKXSIZE=512',
-            'BLOCKYSIZE=512',
-            'NBITS=1',
-            'COMPRESS=DEFLATE',
-            'SPARSE_OK=YES',
-            'BIGTIFF=YES',
-        ],
-    )
-    tif.SetGeoTransform((west, step, 0, north, 0, -step))
-    s = osr.SpatialReference()
-    s.ImportFromEPSG(4326)
-    tif.SetSpatialRef(s)
+    tif = create_mask(out / 'physical-dry.tif', grid)
     offsets = [0]
-    extra = missing = 0
-    candidate_count = historic_count = 0
-    spancount = 0
-    with (
-        (out / 'runs.u32le').open('xb') as runs,
-        (out / 'mismatch-spans.jsonl').open('x') as diff,
-    ):
+    candidate_count = 0
+    with (out / 'runs.u32le').open('xb') as runs:
         for y in range(0, h, rows_per_block):
-            if shutil.disk_usage(out).free < reserve:
+            check_cancelled()
+            if shutil.disk_usage(out).free < minimum_free_bytes:
                 raise ValueError(
                     'free disk below configured reserve; partial output preserved'
                 )
@@ -190,108 +130,54 @@ def main(
             if any(array is None for array in arrays):
                 raise ValueError('GDAL could not read a physical mask')
             arrays = cast(list[np.ndarray], arrays)
-            land, water = arrays[:2]
-            ref = arrays[2] if has_ref else None
+            land_values, water_values = arrays
             if any(
                 (np.max(x) > 1 if x.dtype == np.uint8 else np.any((x != 0) & (x != 1)))
                 for x in arrays
             ):
                 raise ValueError('nonbinary mask')
-            if land.dtype == water.dtype == np.uint8:
-                np.subtract(1, water, out=water)
-                np.bitwise_and(land, water, out=land)
-                dry = land
+            if land_values.dtype == water_values.dtype == np.uint8:
+                np.subtract(1, water_values, out=water_values)
+                np.bitwise_and(land_values, water_values, out=land_values)
+                dry = land_values
             else:
                 # Binary masks from other GDAL types are supported as before.
-                dry = np.logical_and(land == 1, water == 0).astype(np.uint8)
+                dry = np.logical_and(land_values == 1, water_values == 0).astype(
+                    np.uint8
+                )
             tif.GetRasterBand(1).WriteArray(dry, 0, y)
             candidate_count += int(np.count_nonzero(dry))
-            if ref is not None:
-                historic_count += int(np.count_nonzero(ref))
-                extra += int(np.count_nonzero((dry == 1) & (ref == 0)))
-                missing += int(np.count_nonzero((dry == 0) & (ref == 1)))
             write_run_block(dry, runs, offsets, w, binary=True)
-            if ref is not None and rr is not None and rv is not None:
-                for j in range(n):
-                    i = y + j
-                    historic_codes = np.where(ref[j], 17, 1).astype(np.uint8)
-                    reference_runs = rv[int(rr[i]) : int(rr[i + 1])]
-                    nbad, _ = compare_row(historic_codes, reference_runs, w)
-                    if nbad:
-                        raise ValueError(
-                            f'historic binary mask disagrees with historic physical stream at row {i}'
-                        )
-                    spans = compare_row(
-                        np.where(dry[j], 17, 1).astype(np.uint8), reference_runs, w
-                    )[1]
-                    for start, end, oldcode, newcode in spans:
-                        diff.write(
-                            json.dumps(
-                                {
-                                    'row': i,
-                                    'start': start,
-                                    'end': end,
-                                    'reference': oldcode,
-                                    'candidate': newcode,
-                                },
-                                separators=(',', ':'),
-                            )
-                            + '\n'
-                        )
-                        spancount += 1
-            progress = {'rows_done': y + n, 'candidate_dry_cells': candidate_count}
-            if has_ref:
-                progress.update(
-                    {
-                        'candidate_extra_land': extra,
-                        'candidate_missing_land': missing,
-                        'mismatch_spans': spancount,
-                    }
-                )
             if emit is not None:
-                emit(json.dumps(progress), flush=True)
+                emit(
+                    json.dumps(
+                        {'rows_done': y + n, 'candidate_dry_cells': candidate_count}
+                    ),
+                    flush=True,
+                )
+    check_cancelled()
     tif.FlushCache()
     tif = None
     masks = []
     with (out / 'rows.u32le').open('xb') as f:
         np.asarray(offsets, dtype='<u4').tofile(f)
-    for key in keys:
-        if sha256_file(cfg[key]['path']) != cfg[key]['sha256']:
+    for key, pin in source_masks.items():
+        if files.pin(pin['path'])['sha256'] != pin['sha256']:
             raise ValueError(f'{key} changed during processing')
-    if has_ref:
-        validate_reference(cfg['reference_streams'], w, h)
     if config_path.read_bytes() != data:
         raise ValueError('config changed during processing')
     report = {
         'status': 'candidate-only',
         'configuration_sha256': hashlib.sha256(data).hexdigest(),
-        'grid': g,
+        'grid': vars(grid),
         'rows_per_block': rows_per_block,
-        'inputs': {'land': cfg['land'], 'water': cfg['water']},
+        'inputs': source_masks,
         'candidate_dry_cells': candidate_count,
-        'historic_dry_cells': historic_count,
-        'candidate_extra_land_cells': extra,
-        'candidate_missing_land_cells': missing,
-        'mismatch_spans': spancount,
-        'mismatch_spans_sha256': sha256_file(out / 'mismatch-spans.jsonl'),
         'output_sha256': {
-            name: sha256_file(out / name)
+            name: files.pin(out / name)['sha256']
             for name in ('physical-dry.tif', 'rows.u32le', 'runs.u32le')
         },
-        'limitations': 'Approximate physical land/water only, with continent assignments handled downstream. Review every mismatch before use.',
     }
-    if not has_ref:
-        for key in (
-            'historic_dry_cells',
-            'candidate_extra_land_cells',
-            'candidate_missing_land_cells',
-            'mismatch_spans',
-            'mismatch_spans_sha256',
-        ):
-            report.pop(key)
-        report['limitations'] = (
-            'Candidate physical land/water only, with continent assignments handled downstream.'
-        )
     with (out / 'config.json').open('xb') as f:
         f.write(data)
     with (out / 'report.json').open('x') as f:

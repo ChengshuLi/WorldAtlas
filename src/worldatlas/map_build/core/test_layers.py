@@ -12,7 +12,7 @@ from worldatlas.map_build.core.layers import (
     write_run_rows,
 )
 from worldatlas.map_build.core.rle import open_grid, row
-from worldatlas.map_build.water.shared_nearest import crop
+from worldatlas.map_build.core.rle import crop
 
 
 class LayersTests(unittest.TestCase):
@@ -100,6 +100,7 @@ class LayersTests(unittest.TestCase):
         grid = Grid(4, 2, 90)
         values = np.zeros((2, 4), dtype=np.uint32)
         self.assertEqual(list(patch_rows(values, grid.bounds, grid)), [])
+        self.assertEqual(list(patch_rows(values[:, :0], (3, 3, 0, 2), grid)), [])
         with self.assertRaisesRegex(ValueError, "dimensions"):
             list(patch_rows(values, (0, 3, 0, 2), grid))
 

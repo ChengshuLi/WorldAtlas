@@ -1,3 +1,4 @@
+from functools import partial
 from pathlib import Path
 import subprocess
 import threading
@@ -6,7 +7,13 @@ import unittest
 from unittest.mock import patch
 
 from worldatlas.map_build.execution.runtime import (
-    Checkpoints, Timing, inventory, journal_anchor, repository_identity, verify_anchor,
+    Checkpoints,
+    RunFilePins,
+    Timing,
+    inventory,
+    journal_anchor,
+    repository_identity,
+    verify_anchor,
 )
 from worldatlas.shared.files import pin_file
 
@@ -43,6 +50,26 @@ class RepositoryIdentityTests(unittest.TestCase):
             self.assertEqual(identity['setup'], {'environment.yml': 'name: changed\n'})
 
 
+class FilePinsTests(unittest.TestCase):
+    def test_only_stable_files_receive_pins(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'source'
+            pins = RunFilePins()
+            with self.assertRaisesRegex(ValueError, 'not a file'):
+                pins.pin(Path(directory))
+            path.write_bytes(b'original')
+            original = pin_file(path)
+
+            def edit_while_hashing(file):
+                file.write_bytes(b'changed during read')
+                return original['sha256']
+
+            with patch('worldatlas.map_build.execution.runtime.sha256_file', side_effect=edit_while_hashing):
+                with self.assertRaisesRegex(ValueError, 'file changed while hashing'):
+                    pins.pin(path)
+            self.assertEqual(pins.pin(path), pin_file(path))
+
+
 class FunctionCheckpointTests(unittest.TestCase):
     def setUp(self):
         temporary = tempfile.TemporaryDirectory()
@@ -60,7 +87,6 @@ class FunctionCheckpointTests(unittest.TestCase):
             'calculate',
             'water',
             action,
-            (),
             timing=self.timing,
             inputs=[pin_file(self.source)],
             outputs=[self.output],
@@ -89,9 +115,7 @@ class FunctionCheckpointTests(unittest.TestCase):
         result = self.checkpoints.run_function(
             'calculate',
             'water',
-            calculate,
-            (),
-            kwargs={'suffix': 'selected'},
+            partial(calculate, suffix='selected'),
             timing=self.timing,
             inputs=[pin_file(self.source)],
             outputs=[self.output],
@@ -132,8 +156,12 @@ class FunctionCheckpointTests(unittest.TestCase):
             with self.subTest(name=name, output=output):
                 with self.assertRaisesRegex(ValueError, message):
                     self.checkpoints.run_function(
-                        name, 'water', self.calculate, (), timing=self.timing,
-                        inputs=[pin_file(self.source)], outputs=[output],
+                        name,
+                        'water',
+                        self.calculate,
+                        timing=self.timing,
+                        inputs=[pin_file(self.source)],
+                        outputs=[output],
                     )
         self.assertFalse(self.output.exists())
 
@@ -169,7 +197,6 @@ class FunctionCheckpointTests(unittest.TestCase):
                 'calculate',
                 'physical',
                 interrupted,
-                (),
                 timing=self.timing,
                 inputs=[pin_file(self.source)],
                 outputs=[self.output],
@@ -184,7 +211,6 @@ class FunctionCheckpointTests(unittest.TestCase):
             'calculate',
             'physical',
             continue_stage,
-            (),
             timing=self.timing,
             inputs=[pin_file(self.source)],
             outputs=[self.output],
@@ -231,6 +257,7 @@ class TimingJournalTests(unittest.TestCase):
                 )
             with self.assertRaisesRegex(ValueError, 'non-monotonic processing interval'):
                 timing.interval_details('land')
+
     def test_checkpoint_pin_checks_prefix_and_allows_ordinary_appends(self):
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / 'timing-events.jsonl'
@@ -281,7 +308,6 @@ class TimingJournalTests(unittest.TestCase):
                 self.assertGreater(intervals[timing.attempt][0][1], 0)
             finally:
                 timing.close()
-
 
 
 if __name__ == '__main__':

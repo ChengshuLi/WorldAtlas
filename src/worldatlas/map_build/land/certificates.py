@@ -12,22 +12,7 @@ from numpy.typing import ArrayLike
 from scipy.spatial import cKDTree  # pyright: ignore[reportAttributeAccessIssue]
 
 from worldatlas.geodesy.wgs84 import MIN_RADIUS as M_MIN
-from worldatlas.geodesy.wgs84 import geodesic_distances
-
-
-def _unit(lat: ArrayLike, lon: ArrayLike) -> np.ndarray:
-    """Convert geographic coordinates to points on a unit sphere.
-
-    Args:
-        lat: Latitudes in degrees.
-        lon: Longitudes in degrees.
-
-    Returns:
-        N-by-3 float array of unit-sphere Cartesian coordinates.
-    """
-    p = np.deg2rad(lat)
-    l = np.deg2rad(lon)
-    return np.column_stack((np.cos(p) * np.cos(l), np.cos(p) * np.sin(l), np.sin(p)))
+from worldatlas.geodesy.wgs84 import geodesic_distances, unit_sphere
 
 
 class CertificateIndex:
@@ -135,14 +120,18 @@ class CertificateIndex:
             if not positions:
                 raise ValueError('missing category tile')
             pos = np.asarray(positions)
-            self.trees[code] = cKDTree(_unit(pos[:, 0], pos[:, 1]))
+            self.trees[code] = cKDTree(unit_sphere(pos[:, 0], pos[:, 1]))
             self.radii[code] = max(rad)
-            v = rep[rep[:, 2] == code]
-            coords = np.column_stack(
-                (north - (v[:, 0] + 0.5) * step, -180 + (v[:, 1] + 0.5) * step)
-            )
-            self.repcoords[code] = coords
-            self.reptrees[code] = cKDTree(_unit(coords[:, 0], coords[:, 1]))
+            if refinement is None:
+                v = rep[rep[:, 2] == code]
+                coords = np.column_stack(
+                    (north - (v[:, 0] + 0.5) * step, -180 + (v[:, 1] + 0.5) * step)
+                )
+                self.repcoords[code] = coords
+                self.reptrees[code] = cKDTree(unit_sphere(coords[:, 0], coords[:, 1]))
+        if refinement is not None:
+            self.repcoords = refinement.repcoords
+            self.reptrees = refinement.reptrees
 
     def witnesses(
         self, rows: ArrayLike, cols: ArrayLike, hints: ArrayLike
@@ -176,7 +165,7 @@ class CertificateIndex:
             raise ValueError('invalid query witnesses')
         lat = self.north - (rows + 0.5) * self.step
         lon = -180 + (cols + 0.5) * self.step
-        xyz = _unit(lat, lon)
+        xyz = unit_sphere(lat, lon)
         upper = np.full(len(rows), np.nan)
         chosen = np.empty((len(rows), 2), dtype=float)
         for code in self.codes:
@@ -236,7 +225,7 @@ class CertificateIndex:
             raise ValueError('invalid runs or bound')
         lat = self.north - (rows + 0.5) * self.step
         lon = -180 + ((starts + ends - 1) / 2 + 0.5) * self.step
-        xyz = _unit(lat, lon)
+        xyz = unit_sphere(lat, lon)
         qr = (ends - starts - 1) * self.step * math.pi / 360
         return self._certify_points(xyz, qr, uppers, hints)
 

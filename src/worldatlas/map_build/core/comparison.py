@@ -89,6 +89,7 @@ def compare(
     directory: Path | str,
     reference_sha256: dict[str, str],
     *,
+    candidate_sha256: dict[str, str],
     reference_bindings: Iterable[MapCodeBinding] | None = None,
     candidate_bindings: Iterable[MapCodeBinding] | None = None,
 ) -> dict[str, Any]:
@@ -99,7 +100,8 @@ def compare(
         reference: Directory with the baseline grid.
         grid: Shared grid dimensions.
         directory: New directory for the comparison files.
-        reference_sha256: Expected digest for each reference stream.
+        reference_sha256: Verified digests for the reference rows and runs.
+        candidate_sha256: Verified digests for the candidate rows and runs.
         reference_bindings: Optional code meanings for the reference.
         candidate_bindings: Code meanings for the candidate, required when
             reference meanings are supplied.
@@ -119,17 +121,12 @@ def compare(
     if reference_bindings is not None and candidate_bindings is not None:
         lookup = reference_lookup(reference_bindings, candidate_bindings)
     names = ("rows.u32le", "runs.u32le")
-    if set(reference_sha256) != set(names):
-        raise ValueError("both reference stream checksums are required")
+    if set(reference_sha256) != set(names) or set(candidate_sha256) != set(names):
+        raise ValueError("both stream checksums are required for each grid")
     if (reference / "rows.u32le").stat().st_size != 4 * (grid.height + 1):
         raise ValueError("reference grid must have the same row count as the candidate")
     start = time.monotonic()
-    before = {
-        label: {name: sha256_file(root / name) for name in names}
-        for label, root in (("reference", reference), ("candidate", candidate))
-    }
-    if before["reference"] != reference_sha256:
-        raise ValueError("reference stream checksum differs")
+    before = {"reference": reference_sha256, "candidate": candidate_sha256}
     directory.mkdir()
     changed, transitions, offsets = 0, Counter(), [0]
     bounds = None

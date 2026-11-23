@@ -27,3 +27,15 @@ class GridTests(unittest.TestCase):
         self.assertEqual(grid.extent((0, 2, 0, 1)), (-180, 0, 0, 90))
         with self.assertRaisesRegex(ValueError, "invalid grid window"):
             grid.extent((0, 2, 0, 2))
+
+    def test_longitude_turn_covers_both_edges_for_nonbinary_steps(self):
+        for width in (19, 39, 169):
+            with self.subTest(width=width):
+                grid = Grid(width, 1, 360 / width)
+                self.assertEqual(grid.cell_at(180, 90), (0, 0))
+                self.assertEqual(
+                    grid.cell_at(math.nextafter(180, 0), 90), (width - 1, 0)
+                )
+                self.assertEqual(grid.cell_at(math.nextafter(-180, 0), 90), (0, 0))
+                self.assertIsNone(grid.cell_at(math.nextafter(180, math.inf), 90))
+                self.assertEqual(grid.extent(grid.bounds)[2], 180)

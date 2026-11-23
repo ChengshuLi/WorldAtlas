@@ -123,6 +123,25 @@ class AreaOperations(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "label is outside the grid"):
                 self.solve(Path(temp), [(101, -1, 4)])
 
+    def test_last_column_accepts_a_label_just_west_of_the_seam(self):
+        grid = Grid(169, 4, 360 / 169)
+        with tempfile.TemporaryDirectory() as temp, ExitStack() as stack:
+            root = Path(temp)
+            for name, start, code in (("physical", 0, 1), ("parent", 160, 1)):
+                records = ((y, [(start, grid.width, code)]) for y in range(grid.height))
+                write_layer(root / name, grid, records)
+            write_layer(root / "snapshot", grid, ())
+            streams = [stack.enter_context(open_grid(root / name, grid))
+                       for name in ("physical", "parent", "snapshot")]
+            rule = dict(physical_class="water", unit="cell", unassigned_only=False, features={})
+            scope = Scope(rule, grid, *streams, lambda kind: self.fail("cell rule needs no components"))
+            cut = grid.west + 165 * grid.step
+            line = dict(geometry=dict(type="LineString", coordinates=[[cut, 90], [cut, 80]]))
+            targets = [dict(entity_id=owner, point=dict(geometry=dict(type="Point", coordinates=[lon, 86])))
+                       for owner, lon in ((101, grid.longitude(161)), (807, np.nextafter(180, 0)))]
+            result = divide_area(scope, [line], targets, root / "division")
+            self.assertEqual(result["counts"], {"101": 20, "807": 16})
+
     def test_boundary_segments_may_meet_inside_the_division_scope(self):
         with tempfile.TemporaryDirectory() as temp:
             result = self.solve(

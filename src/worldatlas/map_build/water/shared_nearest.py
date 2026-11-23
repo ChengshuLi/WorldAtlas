@@ -12,82 +12,14 @@ from collections.abc import Sequence
 from typing import Any, cast
 
 import numpy as np
-from numpy.typing import ArrayLike
 
 # SciPy publishes the compiled tree without type information.
 from scipy.spatial import cKDTree  # pyright: ignore[reportAttributeAccessIssue]
 
-from worldatlas.geodesy.wgs84 import MIN_RADIUS, geodesic_distances
+from worldatlas.geodesy.wgs84 import MIN_RADIUS, geodesic_distances, unit_sphere
 
 # Shore code maps to prepared coordinates and the corresponding search tree.
 type ShoreIndexes = dict[int, tuple[dict[str, Any], cKDTree]]
-
-
-def unit(lat: ArrayLike, lon: ArrayLike) -> np.ndarray:
-    """Convert paired geographic coordinates to points on a unit sphere.
-
-    Args:
-        lat: Latitudes in degrees.
-        lon: Longitudes in degrees.
-
-    Returns:
-        N-by-3 float array of Cartesian coordinates.
-    """
-    lat = np.deg2rad(lat)
-    lon = np.deg2rad(lon)
-    c = np.cos(lat)
-    return np.column_stack((c * np.cos(lon), c * np.sin(lon), np.sin(lat)))
-
-
-def crop(
-    rows: np.ndarray, runs: np.ndarray, y: int, x0: int, x1: int, width: int
-) -> np.ndarray:
-    """Expand part of one row-run row to a code per cell.
-
-    Args:
-        rows: Row offsets into the run array.
-        runs: Flattened (end_column, code) pairs.
-        y: Row to read.
-        x0: First unwrapped column.
-        x1: Exclusive end column. It may cross the longitude seam.
-        width: Number of columns in the full grid.
-
-    Returns:
-        A uint32 array with x1 - x0 codes in column order.
-
-    Raises:
-        ValueError: The window or row-run records are invalid.
-    """
-    if not (0 <= y < len(rows) - 1 and 0 < x1 - x0 <= width):
-        raise ValueError("invalid crop")
-    first, last = int(rows[y]), int(rows[y + 1])
-    ends = runs[2 * first : 2 * last : 2]
-    vals = runs[2 * first + 1 : 2 * last : 2]
-    if (
-        not len(ends)
-        or int(ends[0]) <= 0
-        or int(ends[-1]) != width
-        or np.any(ends[1:] <= ends[:-1])
-    ):
-        raise ValueError(f"invalid RLE row {y}")
-    if x0 == 0 and x1 == width:
-        lengths = np.diff(np.concatenate((np.array([0], dtype=ends.dtype), ends)))
-        return np.repeat(vals, lengths).astype(np.uint32, copy=False)
-    result = np.empty(x1 - x0, dtype=np.uint32)
-    cur = 0
-    x = x0
-    while x < x1:
-        xm = x % width
-        take = min(x1 - x, width - xm)
-        stop = xm + take
-        i = int(np.searchsorted(ends, xm, side="right"))
-        j = int(np.searchsorted(ends, stop, side="left")) + 1
-        clipped = np.minimum(ends[i:j], stop).astype(np.int64)
-        lengths = np.diff(np.r_[xm, clipped])
-        result[cur : cur + take] = np.repeat(vals[i:j], lengths)
-        cur += take
-        x += take
-    return result
 
 
 def boundary_lower(
@@ -131,14 +63,12 @@ def boundary_lower(
     return np.maximum(0.0, d - 0.001)
 
 
-def make_indexes(
-    centers: dict[str, np.ndarray], pairs: Sequence[tuple[int, int, int]]
-) -> ShoreIndexes:
+def make_indexes(centers: dict[str, np.ndarray], owners: Sequence[int]) -> ShoreIndexes:
     """Index the full list of shore cells for each participating owner.
 
     Args:
         centers: Matching latitude, longitude, category, and unit-sphere arrays.
-        pairs: Category tuples whose second field selects the shore code.
+        owners: Owner IDs in exact tie order.
 
     Returns:
         Shore code mapped to (shore_data, tree). The data includes a small
@@ -148,7 +78,7 @@ def make_indexes(
         ValueError: A participating category has no shore in the crop.
     """
     indexes = {}
-    for _, land_code, _ in pairs:
+    for land_code in owners:
         mask = centers["category"] == land_code
         if not np.any(mask):
             raise ValueError(
@@ -171,7 +101,7 @@ def nearest_class_bounds(
     lat: np.ndarray,
     lon: np.ndarray,
     points: np.ndarray,
-    pairs: Sequence[tuple[int, int, int]],
+    owners: Sequence[int],
     indexes: ShoreIndexes,
     *,
     upper_limit: float | np.ndarray | None = None,
@@ -185,7 +115,7 @@ def nearest_class_bounds(
         lat: Query latitudes in degrees.
         lon: Matching longitudes in degrees.
         points: N-by-3 unit-sphere query points.
-        pairs: Category tuples in search order.
+        owners: Owner IDs in exact tie order.
         indexes: Complete indexes by shore code.
         upper_limit: Optional distance cutoff in metres.
 
@@ -195,7 +125,7 @@ def nearest_class_bounds(
         its measured upper bound for each query.
     """
     count = len(points)
-    lower = np.empty((count, len(pairs)), dtype=np.float64)
+    lower = np.empty((count, len(owners)), dtype=np.float64)
     targets_lon = np.empty_like(lower)
     targets_lat = np.empty_like(lower)
     query_options = {}
@@ -205,7 +135,7 @@ def nearest_class_bounds(
         # Find a real candidate for each point first, then use the largest
         # measured distance as a shared limit for the whole batch.
         witness_upper = np.full(count, np.inf)
-        for _, code, _ in pairs:
+        for code in owners:
             data, _ = indexes[code]
             if "witness_tree" in data:
                 _, ids = data["witness_tree"].query(points, k=1, workers=1)
@@ -224,7 +154,7 @@ def nearest_class_bounds(
         if search_limit + 0.001 < math.pi * MIN_RADIUS:
             chord_limit = 2 * math.sin((search_limit + 0.001) / (2 * MIN_RADIUS))
             query_options["distance_upper_bound"] = np.nextafter(chord_limit, np.inf)
-    for col, (_, code, _) in enumerate(pairs):
+    for col, code in enumerate(owners):
         data, tree = indexes[code]
         chord, ix = tree.query(points, k=1, workers=1, **query_options)
         found = np.isfinite(chord)
@@ -376,7 +306,7 @@ def classify_wgs84(
     width: int,
     height: int,
     step: float,
-    pairs: Sequence[tuple[int, int, int]],
+    owners: Sequence[int],
     indexes: ShoreIndexes,
     *,
     band: float | None = None,
@@ -390,7 +320,7 @@ def classify_wgs84(
         width: Number of grid columns.
         height: Number of grid rows.
         step: Cell size in degrees.
-        pairs: (category, shore_code, output_code) records in tie order.
+        owners: Owner IDs in exact tie order.
         indexes: Shore indexes by code.
         band: Optional distance limit in metres.
 
@@ -437,10 +367,10 @@ def classify_wgs84(
     x = x + np.ceil((x0 - x) / width) * width
     if np.any(y < y0) or np.any(y > y1) or np.any(x < x0) or np.any(x > x1):
         raise ValueError("query lies outside crop")
-    points = unit(lat, lon)
+    points = unit_sphere(lat, lon)
     boundary = boundary_lower(lat, lon, bounds, width, height, step)
-    available = [p for p in pairs if p[1] in indexes]
-    if band is None and len(available) != len(pairs):
+    available = [owner for owner in owners if owner in indexes]
+    if band is None and len(available) != len(owners):
         raise ValueError("missing participant shore")
     if not available:
         if band is None or np.any(boundary <= band):
@@ -460,7 +390,7 @@ def classify_wgs84(
         outside = (lows.min(axis=1) > band) & (boundary > band)
         inside = unique & (upper <= band)
         fast = outside | inside
-    for i, (_, _, code) in enumerate(available):
+    for i, code in enumerate(available):
         out[inside & (best == i)] = code
     pending = np.flatnonzero(~fast)
     if len(pending):
@@ -470,7 +400,7 @@ def classify_wgs84(
         if band is not None:
             limit = np.minimum(limit, band + 0.000001)
         distances = np.full((len(pending), len(available)), np.inf)
-        for col, (_, lc, _) in enumerate(available):
+        for col, lc in enumerate(available):
             relevant = (lows[pending, col] <= limit) | (best[pending] == col)
             queries = pending[relevant]
             if len(queries):
@@ -491,35 +421,6 @@ def classify_wgs84(
         # Strict minimum wins; argmin chooses the first supplied class only
         # when computed distances are exactly equal.
         winners = np.argmin(candidates, axis=1)
-        codes = np.asarray([p[2] for p in available], dtype=np.uint32)
+        codes = np.asarray(available, dtype=np.uint32)
         out[pending[inside]] = codes[winners]
     return out, {"bounded": int(fast.sum()), "exact": int(len(pending))}
-
-
-def classify(
-    lat: np.ndarray,
-    lon: np.ndarray,
-    bounds: tuple[int, int, int, int],
-    width: int,
-    height: int,
-    step: float,
-    pairs: Sequence[tuple[int, int, int]],
-    indexes: ShoreIndexes,
-) -> tuple[np.ndarray, int, int]:
-    """Classify query cells with unrestricted distance to participating shores.
-
-    Args:
-        lat: Latitudes in degrees.
-        lon: Matching longitudes in degrees.
-        bounds: Grid window covered by the indexes.
-        width: Number of grid columns.
-        height: Number of grid rows.
-        step: Cell size in degrees.
-        pairs: Category tuples in tie order.
-        indexes: Complete indexes by shore code.
-
-    Returns:
-        (output_codes, bounded_count, exact_count).
-    """
-    out, stats = classify_wgs84(lat, lon, bounds, width, height, step, pairs, indexes)
-    return out, stats["bounded"], stats["exact"]

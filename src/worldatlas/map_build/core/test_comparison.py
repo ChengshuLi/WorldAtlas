@@ -5,7 +5,11 @@ from unittest.mock import patch
 
 import numpy as np
 
-from worldatlas.map_build.core.comparison import comparable_codes, compare, reference_lookup
+from worldatlas.map_build.core.comparison import (
+    comparable_codes,
+    compare,
+    reference_lookup,
+)
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.shared.files import sha256_file
@@ -29,25 +33,63 @@ class ComparisonTests(unittest.TestCase):
             before, after = root / "before", root / "after"
             write_layer(before, grid, [(0, [(0, 4, 7)])])
             write_layer(after, grid, [(0, [(0, 4, 8)])])
-            pins = {name: sha256_file(before / name) for name in ("rows.u32le", "runs.u32le")}
+            pins = {
+                name: sha256_file(before / name)
+                for name in ("rows.u32le", "runs.u32le")
+            }
+            candidate = {
+                name: sha256_file(after / name) for name in ("rows.u32le", "runs.u32le")
+            }
             cases = (
-                ({}, {}, "both reference stream checksums"),
-                (dict(pins, **{"runs.u32le": "bad"}), {}, "checksum differs"),
+                ({}, {}, "both stream checksums"),
                 (pins, {"reference_bindings": []}, "both category mappings"),
             )
             for expected, options, error in cases:
-                with self.subTest(error=error), self.assertRaisesRegex(ValueError, error):
-                    compare(after, before, grid, root / "diff", expected, **options)
+                with (
+                    self.subTest(error=error),
+                    self.assertRaisesRegex(ValueError, error),
+                ):
+                    compare(
+                        after,
+                        before,
+                        grid,
+                        root / "diff",
+                        expected,
+                        candidate_sha256=candidate,
+                        **options,
+                    )
+
+            with self.assertRaisesRegex(ValueError, "input changed"):
+                compare(
+                    after,
+                    before,
+                    grid,
+                    root / "bad-digest",
+                    dict(pins, **{"runs.u32le": "bad"}),
+                    candidate_sha256=candidate,
+                )
 
             def hash_then_change(path):
-                if path == before / "rows.u32le" and (root / "diff/changes.u32le").exists():
+                if (
+                    path == before / "rows.u32le"
+                    and (root / "diff/changes.u32le").exists()
+                ):
                     with (after / "runs.u32le").open("ab") as stream:
                         stream.write(b"changed")
                 return sha256_file(path)
 
-            with patch("worldatlas.map_build.core.comparison.sha256_file", hash_then_change):
+            with patch(
+                "worldatlas.map_build.core.comparison.sha256_file", hash_then_change
+            ):
                 with self.assertRaisesRegex(ValueError, "input changed"):
-                    compare(after, before, grid, root / "diff", pins)
+                    compare(
+                        after,
+                        before,
+                        grid,
+                        root / "diff",
+                        pins,
+                        candidate_sha256=candidate,
+                    )
             self.assertFalse((root / "diff/report.json").exists())
 
     def test_release_comparison_uses_category_meaning_and_reports_original_codes(self):
@@ -70,7 +112,10 @@ class ComparisonTests(unittest.TestCase):
                 name: sha256_file(root / "before" / name)
                 for name in ("rows.u32le", "runs.u32le")
             }
-            for output, pairs in (("recoded", {}), ("changed", {"17->17": 1, "2->17": 1})):
+            for output, pairs in (
+                ("recoded", {}),
+                ("changed", {"17->17": 1, "2->17": 1}),
+            ):
                 with self.subTest(output=output):
                     report = compare(
                         root / output,
@@ -78,6 +123,9 @@ class ComparisonTests(unittest.TestCase):
                         grid,
                         root / (output + "-diff"),
                         hashes,
+                        candidate_sha256={
+                            name: sha256_file(root / output / name) for name in hashes
+                        },
                         reference_bindings=old,
                         candidate_bindings=new,
                     )
@@ -89,9 +137,7 @@ class ComparisonTests(unittest.TestCase):
         tall, short = Grid(4, 2, 90), Grid(4, 1, 90)
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            write_layer(
-                root / "tall", tall, [(0, [(0, 4, 81)]), (1, [(0, 4, 11)])]
-            )
+            write_layer(root / "tall", tall, [(0, [(0, 4, 81)]), (1, [(0, 4, 11)])])
             write_layer(root / "short", short, [(0, [(0, 4, 81)])])
             for candidate, reference, grid in (
                 ("short", "tall", short),
@@ -104,7 +150,15 @@ class ComparisonTests(unittest.TestCase):
                     }
                     with self.assertRaisesRegex(ValueError, "same row count"):
                         compare(
-                            root / candidate, root / reference, grid, root / "diff", hashes
+                            root / candidate,
+                            root / reference,
+                            grid,
+                            root / "diff",
+                            hashes,
+                            candidate_sha256={
+                                name: sha256_file(root / candidate / name)
+                                for name in hashes
+                            },
                         )
                     self.assertFalse((root / "diff").exists())
 
@@ -123,7 +177,14 @@ class ComparisonTests(unittest.TestCase):
                 for name in ("rows.u32le", "runs.u32le")
             }
             report = compare(
-                root / "after", root / "before", grid, root / "diff", hashes
+                root / "after",
+                root / "before",
+                grid,
+                root / "diff",
+                hashes,
+                candidate_sha256={
+                    name: sha256_file(root / "after" / name) for name in hashes
+                },
             )
             self.assertEqual(report["changed_cells"], 2)
             self.assertEqual(report["pair_counts"], {"81->70000": 2})
@@ -136,7 +197,12 @@ class ComparisonTests(unittest.TestCase):
                 [0, 1, 1],
             )
             same = compare(
-                root / "before", root / "before", grid, root / "same", hashes
+                root / "before",
+                root / "before",
+                grid,
+                root / "same",
+                hashes,
+                candidate_sha256=hashes,
             )
             self.assertTrue(same["byte_identical"])
             self.assertEqual(same["changed_cells"], 0)

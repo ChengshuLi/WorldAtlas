@@ -12,6 +12,21 @@ MIN_RADIUS = _GEOD.a * (1 - _GEOD.f * (2 - _GEOD.f))
 MAX_RADIUS = _GEOD.a / (1 - _GEOD.f)
 
 
+def unit_sphere(latitudes: ArrayLike, longitudes: ArrayLike) -> np.ndarray:
+    """Convert paired coordinates into Cartesian positions on a unit sphere.
+
+    Args:
+        latitudes: Latitudes in degrees.
+        longitudes: Matching longitudes in degrees.
+
+    Returns:
+        N-by-3 float array, one XYZ position per input point.
+    """
+    lat, lon = np.deg2rad(latitudes), np.deg2rad(longitudes)
+    cosine = np.cos(lat)
+    return np.column_stack((cosine * np.cos(lon), cosine * np.sin(lon), np.sin(lat)))
+
+
 def geodesic_distance(first: Sequence[float], second: Sequence[float]) -> float:
     """Measure the shortest distance along the WGS84 surface.
 

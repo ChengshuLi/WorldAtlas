@@ -1,15 +1,16 @@
 import unittest
 import numpy as np
 from scipy.spatial import cKDTree
+from worldatlas.geodesy.wgs84 import unit_sphere
 from worldatlas.geodesy.wgs84 import geodesic_distances
 from worldatlas.map_build.water import shared_nearest as s
 
 
 def run(lat, lon, qlat, qlon):
     d = {"lat": np.asarray(lat, dtype=float), "lon": np.asarray(lon, dtype=float)}
-    d["mids"] = s.unit(d["lat"], d["lon"])
+    d["mids"] = unit_sphere(d["lat"], d["lon"])
     t = cKDTree(d["mids"])
-    p = s.unit([qlat], [qlon])[0]
+    p = unit_sphere([qlat], [qlon])[0]
 
     class Track:
         n = t.n
@@ -44,9 +45,9 @@ class Tests(unittest.TestCase):
     def test_more_than_old_limit_is_complete_and_tie_priority_is_preserved(self):
         n = 100005
         data = {"lat": np.zeros(n), "lon": np.zeros(n)}
-        data["mids"] = s.unit(data["lat"], data["lon"])
+        data["mids"] = unit_sphere(data["lat"], data["lon"])
         tree = cKDTree(data["mids"])
-        pairs = [("first", 17, 1), ("second", 18, 2)]
+        owners = [17, 18]
         indexes = {17: (data, tree), 18: (data, tree)}
         (codes, stats) = s.classify_wgs84(
             np.array([0.0]),
@@ -55,10 +56,10 @@ class Tests(unittest.TestCase):
             360,
             180,
             1.0,
-            pairs,
+            owners,
             indexes,
         )
-        self.assertEqual(codes.tolist(), [1])
+        self.assertEqual(codes.tolist(), [17])
         self.assertEqual(stats["exact"], 1)
 
     def test_tied_chord_order_can_change_between_prefix_queries(self):
@@ -67,8 +68,8 @@ class Tests(unittest.TestCase):
         lat[16] = 10.0
         lon[16] = 0.0
         data = {"lat": lat, "lon": lon}
-        data["mids"] = s.unit(lat, lon)
-        point = s.unit([0.0], [0.0])[0]
+        data["mids"] = unit_sphere(lat, lon)
+        point = unit_sphere([0.0], [0.0])[0]
         chord = float(np.linalg.norm(data["mids"][0] - point))
 
         class TiedTree:

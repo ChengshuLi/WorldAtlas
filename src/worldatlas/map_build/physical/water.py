@@ -23,8 +23,11 @@ import pyarrow.parquet as pq
 from osgeo import gdal, ogr, osr
 
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.physical.water_batch import WaterBatch
-from worldatlas.shared.files import sha256_file
+from worldatlas.map_build.execution.control import check_cancelled
+from worldatlas.map_build.execution.runtime import RunFilePins
+from worldatlas.map_build.inputs.configuration import WaterSettings
+from worldatlas.map_build.physical.sources import create_mask
+from worldatlas.map_build.physical.water_batch import GeometryStatus, WaterBatch
 
 gdal.UseExceptions()
 ogr.UseExceptions()
@@ -158,7 +161,7 @@ def classifications(subtypes: pyarrow.Array) -> tuple[np.ndarray, int, int]:
         pyarrow.types.is_string(subtypes.type)
         or pyarrow.types.is_large_string(subtypes.type)
     ):
-        return np.zeros(len(subtypes), dtype=np.uint8), len(subtypes), 0
+        return np.zeros(len(subtypes), dtype=bool), len(subtypes), 0
     trimmed = pc.utf8_trim(subtypes, characters=PYTHON_WHITESPACE)  # pyright: ignore[reportAttributeAccessIssue]
     missing = pc.or_(pc.is_null(subtypes), pc.fill_null(pc.equal(trimmed, ''), False))  # pyright: ignore[reportAttributeAccessIssue]
     excluded = pc.is_in(  # pyright: ignore[reportAttributeAccessIssue]
@@ -252,15 +255,21 @@ def gdal_batch(
         feature_id = ids.get([first + failed])[0]
         message = (
             'missing geometry'
-            if status[failed] == 5
+            if status[failed] == GeometryStatus.MISSING
             else 'invalid or empty WKB geometry'
         )
         raise ValueError(f'{message}: {feature_id}')
-    for code, name in ((1, 'polygons'), (3, 'non_polygon'), (4, 'invalid_polygon')):
+    for code, name in (
+        (GeometryStatus.POLYGON, 'polygons'),
+        (GeometryStatus.NON_POLYGON, 'non_polygon'),
+        (GeometryStatus.INVALID_POLYGON, 'invalid_polygon'),
+    ):
         count = int(np.count_nonzero(status == code))
         if count:
             counts[name] += count
-    invalid.extend(ids.get(first + np.flatnonzero(status == 4)))
+    invalid.extend(
+        ids.get(first + np.flatnonzero(status == GeometryStatus.INVALID_POLYGON))
+    )
 
 
 def run(
@@ -269,9 +278,10 @@ def run(
     output: Path | str,
     config_path: Path | str,
     grid: Grid,
-    batch_size: int | None = None,
-    engine: str | None = None,
     *,
+    settings: WaterSettings,
+    minimum_free_bytes: int,
+    files: RunFilePins,
     emit: Callable[..., None] = print,
 ) -> dict[str, Any]:
     """Verify one water shard and rasterize its eligible polygons.
@@ -280,10 +290,11 @@ def run(
         source: Local source GeoParquet file.
         expected: SHA-256 digest for the source file.
         output: New directory for the shard mask and report.
-        config_path: Inland-water rasterization settings and file list.
+        config_path: Saved settings and file list used for the report checksum.
         grid: Shared physical build grid.
-        batch_size: Optional number of features to read per Arrow batch.
-        engine: Optional rasterizer choice, "gdal" or "python".
+        settings: Validated inland-water rasterizer options.
+        minimum_free_bytes: Shared physical build disk reserve in bytes.
+        files: Attempt-local file checksum verifier.
         emit: Progress callback.
 
     Returns:
@@ -303,38 +314,14 @@ def run(
             'output must be outside input directories and must not contain inputs'
         )
     config_bytes = config_path.read_bytes()
-    cfg = json.loads(config_bytes)
-    if cfg.get('schema') != 'water-shard-candidate-v2' or not cfg.get(
-        'selection_notes'
-    ):
-        raise ValueError(
-            'explicit supported configuration and selection notes required'
-        )
-    policy = cfg['policy']
+    policy = settings.get('policy', {'method': 'overture-inland-subtype-v1'})
     width, height = grid.width, grid.height
     west, north, step = grid.west, grid.north, grid.step
-    tile = cfg.get('tile_size', 1024)
-    reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
-    if not isinstance(reserve, int) or isinstance(reserve, bool) or reserve < 0:
-        raise ValueError('invalid free-space reserve')
-    if not isinstance(tile, int) or isinstance(tile, bool) or not 1 <= tile <= 4096:
-        raise ValueError('invalid tile size')
-    if policy != {'method': 'overture-inland-subtype-v1'}:
-        raise ValueError('explicit Overture inland subtype policy required')
-    if batch_size is None:
-        batch_size = cfg.get('batch_size', 8192)
-    if type(batch_size) is not int or batch_size < 1:
-        raise ValueError('batch size must be a positive integer')
-    engine = engine or cfg.get('rasterizer', 'gdal')
-    if engine not in ('gdal', 'python'):
-        raise ValueError(
-            'rasterizer must be gdal or python; runtime native compilation is retired'
-        )
-    if 'native_method' in cfg:
-        raise ValueError(
-            'retired native_method; select the in-process method with batch_method'
-        )
-    if len(expected) != 64 or sha256_file(source) != expected.lower():
+    tile = settings.get('tile_size', 1024)
+    reserve = minimum_free_bytes
+    batch_size = settings.get('batch_size', 8192)
+    engine = settings.get('rasterizer', 'gdal')
+    if len(expected) != 64 or files.pin(source)['sha256'] != expected.lower():
         raise ValueError('source SHA-256 does not match expected digest')
     pf = pq.ParquetFile(source, pre_buffer=False)
     md = pf.schema_arrow.metadata or {}
@@ -356,42 +343,21 @@ def run(
     out = Path(output)
     kernel = None
     if engine == 'gdal':
-        kernel = WaterBatch(out, cfg.get('batch_method', 'hybrid'))
-    raster = gdal.GetDriverByName('GTiff').Create(
-        str(out / 'water.tif'),
-        width,
-        height,
-        1,
-        gdal.GDT_Byte,
-        options=[
-            'TILED=YES',
-            'BLOCKXSIZE=512',
-            'BLOCKYSIZE=512',
-            'NBITS=1',
-            'COMPRESS=DEFLATE',
-            'SPARSE_OK=YES',
-            'BIGTIFF=YES',
-        ],
-    )
-    raster.SetGeoTransform((west, step, 0, north, 0, -step))
-    srs = osr.SpatialReference()
-    srs.ImportFromEPSG(4326)
+        kernel = WaterBatch(settings.get('batch_method', 'hybrid'))
+    raster = create_mask(out / 'water.tif', grid)
+    srs = raster.GetSpatialRef()
     srs.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
-    raster.SetSpatialRef(srs)
     counts = Counter()
     invalid = []
     ids = SourceIds(pf) if kernel else None
     # A feature's raster burn is identical across batches because the operation
     # is a monotone union (the mask is initialized to zero and burns only 1).
-    for batch_no, batch in enumerate(
-        pf.iter_batches(
-            batch_size=batch_size,
-            columns=['subtype', 'geometry']
-            if kernel
-            else ['id', 'subtype', 'geometry'],
-            use_threads=False,
-        )
+    for batch in pf.iter_batches(
+        batch_size=batch_size,
+        columns=['subtype', 'geometry'] if kernel else ['id', 'subtype', 'geometry'],
+        use_threads=False,
     ):
+        check_cancelled()
         if shutil.disk_usage(out).free < reserve:
             raise ValueError(
                 'free disk below configured reserve; partial output preserved'
@@ -440,9 +406,10 @@ def run(
             ),
             flush=True,
         )
+    check_cancelled()
     raster.FlushCache()
     raster = None
-    if sha256_file(source) != expected.lower():
+    if files.pin(source)['sha256'] != expected.lower():
         raise ValueError('source changed during processing')
     if config_path.read_bytes() != config_bytes:
         raise ValueError('configuration changed during processing')
@@ -458,7 +425,7 @@ def run(
         'source': str(source),
         'source_sha256': expected.lower(),
         'rows_in_source': pf.metadata.num_rows,
-        'script_sha256': sha256_file(Path(__file__).resolve()),
+        'script_sha256': files.pin(__file__)['sha256'],
         'rasterizer': engine,
         'gdal_kernel': kernel.provenance if kernel else None,
         'batch_timings': kernel.timings if kernel else None,
@@ -466,7 +433,7 @@ def run(
         'batch_size': batch_size,
         'invalid_feature_ids': 'invalid-feature-ids.json' if invalid else None,
         'policy': policy,
-        'selection_notes': cfg['selection_notes'],
+        'selection_notes': settings.get('selection_notes'),
         'configuration_sha256': hashlib.sha256(config_bytes).hexdigest(),
         'geometry_policy': 'GEOS validity checked; invalid geometries excluded and IDs reported; no repair',
         'grid': vars(grid),
@@ -484,7 +451,7 @@ def run(
                 )
             ),
         },
-        'output_sha256': sha256_file(out / 'water.tif'),
+        'output_sha256': files.pin(out / 'water.tif')['sha256'],
         'limitations': 'Candidate water mask only, not a historical or complete physical mask. Review invalid features and compare against preserved references before use.',
     }
     with (out / 'report.json').open('x') as f:

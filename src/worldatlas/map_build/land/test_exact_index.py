@@ -175,8 +175,9 @@ class Exact(unittest.TestCase):
             index.nearest_run(-1, 150, 151, 0)
         t, unaligned, _ = self.make([(0, 150, 17)], w=512, C=192)
         self.addCleanup(t.cleanup)
-        with self.assertRaisesRegex(ValueError, 'unaligned fine seed index'):
-            unaligned.certificate_tiles
+        self.assertEqual(unaligned.leaf_cells, 64)
+        self.assertEqual(unaligned.certificate_tiles, [(0, 2, (17,))])
+        self.assertEqual(unaligned.nearest_run(0, 150, 151, 0)[0], {17: 0})
 
 
 if __name__ == '__main__':

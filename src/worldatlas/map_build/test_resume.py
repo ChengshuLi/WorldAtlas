@@ -27,7 +27,10 @@ class ExecutorResumeTests(unittest.TestCase):
                         {"dataset": str(self.source), "files": [pin_file(self.source)]}
                     ]
                 },
-                "inland_water": {"files": []},
+                "inland_water": {
+                    "file_count": 1,
+                    "files": [{"path": "water.parquet", "sha256": "a" * 64}],
+                },
             },
         }
         self.config = write_json(inputs / "request.json", cfg)
@@ -120,10 +123,19 @@ class ExecutorResumeTests(unittest.TestCase):
         interrupted.mkdir()
         resumed = self.runner(resume=True)
         incomplete = [
-            event for event in resumed.timing.records
+            event
+            for event in resumed.timing.records
             if event["event"] == "unmeasured-initialization"
         ]
         self.assertEqual([event["attempt"] for event in incomplete], ["interrupted"])
+        resumed.close()
+        resumed_again = self.runner(resume=True)
+        summary = resumed_again.timing.summary(None)["setup"]
+        self.assertFalse(summary["timing_complete"])
+        self.assertEqual(
+            [event["attempt"] for event in summary["unmeasured_interrupted_attempts"]],
+            ["interrupted"],
+        )
 
     def test_corrupt_unsealed_timing_releases_the_run_lock(self):
         runner = self.runner()
@@ -153,8 +165,11 @@ class ExecutorResumeTests(unittest.TestCase):
                 self.runner(resume=True)
         self.assertEqual(read_json(failure), previous)
 
-        self.runner(resume=True)
+        resumed = self.runner(resume=True)
         self.assertFalse(failure.exists())
+        summary = resumed.timing.summary(None)["setup"]
+        self.assertTrue(summary["timing_complete"])
+        self.assertEqual(summary["unmeasured_interrupted_attempts"], [])
         preserved = next(self.out.glob("preserved/failure-*/0-failure.json"))
         self.assertEqual(read_json(preserved), previous)
 
@@ -170,7 +185,6 @@ class ExecutorResumeTests(unittest.TestCase):
             "fixture-stage",
             "water",
             calculate,
-            (),
             timing=runner.timing,
             inputs=[pin_file(self.source)],
             outputs=[output],

@@ -1,5 +1,6 @@
 """Exact fallback excludes a class only after a conservative distance proof."""
 
+from worldatlas.geodesy.wgs84 import unit_sphere
 from worldatlas.map_build.water.test_helpers import index_present
 import unittest
 from unittest.mock import patch
@@ -12,7 +13,7 @@ REFERENCE_GEOD = Geod(ellps="WGS84")
 
 class RelevantMinimaTest(unittest.TestCase):
     (width, height, step) = (131072, 65536, 360 / 131072)
-    pairs = [(1, 17, 1), (2, 18, 2), (3, 19, 3)]
+    owners = [17, 18, 19]
 
     def indexes(self, lat, lon, categories):
         (lat, lon) = (np.asarray(lat), np.asarray(lon))
@@ -20,10 +21,10 @@ class RelevantMinimaTest(unittest.TestCase):
             {
                 "lat": lat,
                 "lon": lon,
-                "mids": s.unit(lat, lon),
+                "mids": unit_sphere(lat, lon),
                 "category": np.asarray(categories),
             },
-            self.pairs,
+            self.owners,
         )
 
     def classify(self, lat, lon, indexes, **kwargs):
@@ -34,7 +35,7 @@ class RelevantMinimaTest(unittest.TestCase):
             self.width,
             self.height,
             self.step,
-            self.pairs,
+            self.owners,
             indexes,
             **kwargs,
         )
@@ -52,7 +53,7 @@ class RelevantMinimaTest(unittest.TestCase):
                 wraps=s.exact_minima_by_ordered_chord,
             ) as exact:
                 (result, stats) = self.classify([0.0], [0.0], indexes, **kwargs)
-            self.assertEqual(result.tolist(), [1])
+            self.assertEqual(result.tolist(), [17])
             self.assertEqual(stats["exact"], 1)
             self.assertEqual(len(exact.call_args_list), 2)
             self.assertTrue(
@@ -77,7 +78,7 @@ class RelevantMinimaTest(unittest.TestCase):
             ) as exact:
                 result, stats = self.classify([0.0], [0.0], indexes, band=22224.0)
                 computed = REFERENCE_GEOD.inv(0.0, 0.0, near[0], near[1])[2]
-                self.assertEqual(result.tolist(), [1 if computed <= 22224.0 else 0])
+                self.assertEqual(result.tolist(), [17 if computed <= 22224.0 else 0])
             self.assertEqual(len(exact.call_args_list), 1)
 
     def test_matches_complete_search_near_band_and_between_classes(self):
@@ -106,11 +107,11 @@ class RelevantMinimaTest(unittest.TestCase):
                         )[2].reshape(80, 12),
                         axis=1,
                     )
-                    for (_, code, _) in self.pairs
+                    for code in self.owners
                 ]
             )
             minimum = exact.min(axis=1)
-            expected = np.argmin(exact, axis=1).astype(np.uint8) + 1
+            expected = np.asarray(self.owners)[np.argmin(exact, axis=1)]
             for band in (None, 22224.0):
                 reference = expected.copy()
                 if band is not None:

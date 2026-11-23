@@ -15,9 +15,10 @@ from scipy.spatial import cKDTree
 from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import patch_rows, write_layer
-from worldatlas.map_build.land.assignments import assign_components, read_assignments
+from worldatlas.map_build.land.assignments import assign_components
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.connected import build_components
+from worldatlas.geodesy.wgs84 import unit_sphere
 from worldatlas.map_build.land import hints
 from worldatlas.map_build.land.reference_index import build_reference_index
 from worldatlas.map_build.land.search_engine import (
@@ -29,7 +30,7 @@ from worldatlas.map_build.land.search_engine import (
     finalize,
     first_points,
 )
-from worldatlas.shared.files import read_json
+from worldatlas.shared.files import read_json, sha256_file
 
 
 def reference_rows(path, grid):
@@ -81,11 +82,15 @@ class AssignmentTests(unittest.TestCase):
             report = assign_components(
                 components,
                 root / "index",
-                bindings,
                 root / "assignments",
                 roots=set(components.totals()) - mainland,
             )
-            observed = read_assignments(report)
+            report, roots, owners = report
+            observed = dict(zip(roots.tolist(), owners.tolist(), strict=True))
+            for key, dtype, values in (("roots", "<u4", roots), ("entities", "<i8", owners)):
+                path = Path(report[key])
+                self.assertEqual(sha256_file(path), report["output_sha256"][path.name])
+                np.testing.assert_array_equal(np.fromfile(path, dtype=dtype), values)
             cells = defaultdict(list)
             for y in range(grid.height):
                 for a, b, ident in components.row(y):
@@ -108,14 +113,24 @@ class AssignmentTests(unittest.TestCase):
                 for yy, xx, code, _ in seed_cells
             }
             winner = min(distances, key=lambda code: (distances[code], code))
-            expected[ident] = next(
-                b["entity_id"] for b in bindings if b["code"] == winner
-            )
+            expected[ident] = winner
         self.assertEqual(observed, expected)
-        path = Path(report["entities"])
-        path.write_bytes(path.read_bytes() + b"changed")
-        with self.assertRaisesRegex(ValueError, "assignment file differs"):
-            read_assignments(report)
+
+    def test_island_with_certified_owner_skips_exact_search(self):
+        root, grid, seeds, _ = self.fixture([(10, 2)])
+        reference_code = seeds[0][2]
+        build_reference_index(
+            grid, ((y, records[records[:, 2] == reference_code])
+                   for y, records in reference_rows(root / "seeds", grid)
+                   if reference_code in records[:, 2]),
+            root / "index", tile_cells=8,
+        )
+        with ComponentGrid(root / "physical", root / "components", grid) as components:
+            island = components.component_at(float(grid.longitude(2)), float(grid.latitude(10)))
+            with patch('worldatlas.map_build.land.assignments.engine.exact_pass', side_effect=AssertionError('one owner is already certified')):
+                _, roots, owners = assign_components(components, root / "index", root / "assignments", roots={island})
+        self.assertEqual(roots.tolist(), [island])
+        self.assertEqual(owners.tolist(), [seeds[0][2]])
 
     def test_all_land_already_seeded_needs_no_island_distance_search(self):
         root, grid, seed_cells, bindings = self.fixture([])
@@ -129,17 +144,16 @@ class AssignmentTests(unittest.TestCase):
                 )
                 for y, x, _, _ in seed_cells
             }
-            result = assign_components(
+            result, roots, owners = assign_components(
                 components,
                 root / "index",
-                bindings,
                 root / "assignments",
                 roots=[],
             )
-        self.assertEqual(read_assignments(result), {})
+        self.assertEqual((roots.tolist(), owners.tolist()), ([], []))
         self.assertEqual(result["exact_queries"], 0)
-        with self.assertRaisesRegex(ValueError, "unique ordered roots"):
-            read_assignments(dict(result, assigned_components=1))
+        self.assertEqual(result["assigned_components"], 0)
+        self.assertEqual(Path(result["roots"]).stat().st_size, 0)
 
     def test_component_search_checks_grid_samples_and_selected_roots(self):
         root, grid, _, bindings = self.fixture([(10, 1)])
@@ -153,19 +167,19 @@ class AssignmentTests(unittest.TestCase):
             config.write_text(json.dumps(data))
             with self.assertRaisesRegex(ValueError, "seed index grid differs"):
                 assign_components(
-                    components, directory, bindings, root / "result", roots=[]
+                    components, directory, root / "result", roots=[]
                 )
             config.write_bytes(original)
             with self.assertRaisesRegex(
                 ValueError, "roots must identify existing parent"
             ):
                 assign_components(
-                    components, directory, bindings, root / "result", roots=[999]
+                    components, directory, root / "result", roots=[999]
                 )
             (directory / "representatives.u32le").write_bytes(b"changed")
             with self.assertRaisesRegex(ValueError, "representative seed cells differ"):
                 assign_components(
-                    components, directory, bindings, root / "result", roots=[]
+                    components, directory, root / "result", roots=[]
                 )
 
     def test_a_smaller_distance_wins_even_below_the_old_tie_threshold(self):
@@ -280,10 +294,10 @@ class ComponentRunTests(unittest.TestCase):
                 first_points(path, offsets, [5], 3)
             rows, columns = first_points(path, offsets, [], 3)
             self.assertEqual((rows.tolist(), columns.tolist()), ([], []))
-            with self.assertRaisesRegex(ValueError, "invalid component stream/cursor"):
-                list(blocks(path, cursor=2))
+            with self.assertRaisesRegex(ValueError, "invalid component stream or block size"):
+                list(blocks(path, block_records=0))
             path.write_bytes(b"truncated")
-            with self.assertRaisesRegex(ValueError, "invalid component stream/cursor"):
+            with self.assertRaisesRegex(ValueError, "invalid component stream or block size"):
                 list(blocks(path))
 
     def test_stream_detects_record_truncated_between_batches(self):
@@ -373,7 +387,7 @@ class ShoreHints(unittest.TestCase):
         longitudes = [-2, -1, 0, 2, 0]
         owners = [303, 101, 202, 404, 505]
         points = [(0, -0.5), (0, 0), (89.5, 0)]
-        tree = cKDTree(hints._xyz(latitudes, longitudes))
+        tree = cKDTree(unit_sphere(latitudes, longitudes))
         geod = Geod(ellps="WGS84")
         expected = [
             min(
@@ -392,7 +406,7 @@ class ShoreHints(unittest.TestCase):
         self.assertEqual(result.tolist(), expected)
 
     def test_empty_query_returns_no_codes_and_invalid_coordinates_raise(self):
-        tree = cKDTree(hints._xyz([0], [0]))
+        tree = cKDTree(unit_sphere([0], [0]))
         self.assertEqual(
             hints.wgs84_nearest_categories(tree, [0], [0], [17], [], []).tolist(), []
         )
@@ -400,7 +414,7 @@ class ShoreHints(unittest.TestCase):
             hints.wgs84_nearest_categories(tree, [0], [0], [17], [91], [0])
 
     def test_candidate_hint_keeps_the_nearest_cell_even_if_radius_scan_omits_it(self):
-        tree = cKDTree(hints._xyz([0], [0]))
+        tree = cKDTree(unit_sphere([0], [0]))
         search = SimpleNamespace(query=tree.query, query_ball_point=lambda *_, **__: [])
         self.assertEqual(
             hints.wgs84_nearest_categories(search, [0], [0], [17], [0], [0]).tolist(),
@@ -408,7 +422,7 @@ class ShoreHints(unittest.TestCase):
         )
 
     def test_failed_geodesic_cannot_produce_a_hint(self):
-        tree = cKDTree(hints._xyz([0], [0]))
+        tree = cKDTree(unit_sphere([0], [0]))
         for measured, message in (
             ([np.array([np.nan])], "invalid WGS84 upper bound"),
             ([np.array([0.0]), np.array([np.nan])], "invalid WGS84 distance"),

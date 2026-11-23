@@ -2,13 +2,14 @@
 
 import gzip
 import hashlib
+import re
 import shutil
-from contextlib import closing
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import cast
 
 import psycopg
+from typing_extensions import TypedDict
 
 from worldatlas.map_releases.catalog import (
     lookup_release,
@@ -16,20 +17,36 @@ from worldatlas.map_releases.catalog import (
 )
 from worldatlas.shared.database import connect_neon
 from worldatlas.shared.files import json_bytes, sha256_file, verify_pins
-from worldatlas.shared.r2 import make_r2_client
+from worldatlas.shared.r2 import R2Client
 from worldatlas.source_assets.cache import FileSpec, SourceCache
 
-type ComparisonPins = dict[str, dict[str, str]]
+
+class StreamPin(TypedDict, closed=True):
+    """A local comparison file with checksummed, decoded bytes."""
+
+    path: str
+    sha256: str
+
+
+class ComparisonPins(TypedDict):
+    """Verified map streams and category mapping for the reference release."""
+
+    reference_rows: StreamPin
+    reference_runs: StreamPin
+    reference_config: StreamPin
+
+
 type ReleaseStream = tuple[str, FileSpec, str]
 
 
 def read_release_assets(
-    identity: str,
+    identity: str, storage: R2Client
 ) -> tuple[list[ReleaseStream], FileSpec]:
     """Read the map stream locations from a verified release manifest.
 
     Args:
         identity: Exact release ID or official map version.
+        storage: Open R2 client shared with the comparison cache.
 
     Returns:
         (streams, config). Each stream contains its name, a ready-to-use R2
@@ -45,18 +62,24 @@ def read_release_assets(
             release = lookup_release(database, identity)
     except psycopg.Error:
         raise ValueError("Neon release lookup failed; check database access") from None
-    with closing(make_r2_client()) as storage:
-        manifest = read_manifest(storage, release)
+    manifest = read_manifest(storage, release)
     bucket = release["r2_bucket"]
     objects = manifest["objects"]
     config = objects.get("config.json")
     if config is None:
         raise ValueError(f"comparison release {release['id']} is missing config.json")
+    hashes = manifest.get("decoded_sha256", {})
+    if not isinstance(hashes, dict) or any(
+        not isinstance(hashes.get(name), str)
+        or not re.fullmatch("[0-9a-f]{64}", hashes[name])
+        for name in ("rows", "runs")
+    ):
+        raise ValueError("comparison release requires both decoded stream checksums")
     streams: list[ReleaseStream] = [
         (
             name,
             dict(objects[f"{name}.u32le.gz"], r2_bucket=bucket),
-            manifest["decoded_sha256"][name],
+            hashes[name],
         )
         for name in ("rows", "runs")
     ]
@@ -77,16 +100,16 @@ def cache_release_reference(version: str, cache: SourceCache) -> ComparisonPins:
     Raises:
         ValueError: The manifest is invalid or a file fails checksum verification.
     """
-    streams, config = read_release_assets(version)
+    streams, config = read_release_assets(version, cache.client)
     # Releases with the same decoded streams can share the comparison files.
     decoded_hashes = {name: decoded_hash for name, _, decoded_hash in streams}
     digest = hashlib.sha256(json_bytes(decoded_hashes)).hexdigest()
     directory = cache.directory / ("release-" + digest)
     directory.mkdir(parents=True, exist_ok=True)
-    reference: ComparisonPins = {}
+    reference: dict[str, StreamPin] = {}
     for name, source, decoded_hash in streams:
         path = directory / f"{name}.u32le"
-        pin = {"path": str(path), "sha256": decoded_hash}
+        pin: StreamPin = {"path": str(path), "sha256": decoded_hash}
         if path.exists():
             verify_pins([pin])
         else:
@@ -99,9 +122,12 @@ def cache_release_reference(version: str, cache: SourceCache) -> ComparisonPins:
                 if sha256_file(pending) != decoded_hash:
                     raise ValueError("decoded reference stream hash mismatch")
                 pending.replace(path)
-        reference[f"reference_{name}"] = pin
-    reference["reference_config"] = {
-        "path": str(cache.acquire(config)),
-        "sha256": cast(str, config["sha256"]),
+        reference[name] = pin
+    return {
+        "reference_rows": reference["rows"],
+        "reference_runs": reference["runs"],
+        "reference_config": {
+            "path": str(cache.acquire(config)),
+            "sha256": cast(str, config["sha256"]),
+        },
     }
-    return reference

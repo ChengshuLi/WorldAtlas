@@ -15,6 +15,7 @@ from worldatlas.shared.files import (
     JSONValue,
     compact_json_bytes,
     read_json,
+    sha256_file,
     verify_pins,
 )
 from worldatlas.source_assets.cache import SourceCache
@@ -64,6 +65,12 @@ def compare_release(
         != identity["input_selection_sha256"]
     ):
         raise ValueError("the saved geographic selection changed after the build")
+    candidate_hashes = {
+        f"{name}.u32le": build["final"][name]["sha256"] for name in ("rows", "runs")
+    }
+    for name, digest in candidate_hashes.items():
+        if sha256_file(final / name) != digest:
+            raise ValueError("final map files changed after the build")
 
     with closing(SourceCache(work_dir / "inputs")) as cache:
         pins = cache_release_reference(release, cache)
@@ -91,13 +98,10 @@ def compare_release(
             grid,
             pending,
             {"rows.u32le": rows["sha256"], "runs.u32le": runs["sha256"]},
+            candidate_sha256=candidate_hashes,
             reference_bindings=reference_bindings,
             candidate_bindings=selection["geography"]["category_bindings"],
         )
-        if report["input_sha256"]["candidate"] != {
-            f"{name}.u32le": build["final"][name]["sha256"] for name in ("rows", "runs")
-        }:
-            raise ValueError("final map files changed after the build")
         pending.rename(output)
     return report
 

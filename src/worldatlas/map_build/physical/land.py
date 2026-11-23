@@ -10,11 +10,13 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
-from osgeo import gdal, ogr, osr
+from osgeo import gdal, ogr
 
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.physical.sources import checked_files, open_layer
-from worldatlas.shared.files import sha256_file
+from worldatlas.map_build.execution.control import check_cancelled
+from worldatlas.map_build.execution.runtime import RunFilePins
+from worldatlas.map_build.inputs.configuration import LandSettings, LocalFile
+from worldatlas.map_build.physical.sources import checked_files, create_mask, open_layer
 
 gdal.UseExceptions()
 
@@ -24,14 +26,20 @@ def run(
     output: Path | str,
     grid: Grid,
     *,
+    settings: LandSettings[LocalFile],
+    minimum_free_bytes: int,
+    files: RunFilePins,
     emit: Callable[..., None] = print,
 ) -> dict[str, Any]:
     """Mark each grid cell whose centre lies in a selected coastline polygon.
 
     Args:
-        config_path: JSON settings with pinned coastline layers.
+        config_path: Saved coastline request used for the report checksum.
         output: New directory for the land raster and report.
         grid: Shared physical build grid.
+        settings: Local coastline files, selection, and rasterization options.
+        minimum_free_bytes: Shared physical build disk reserve in bytes.
+        files: Attempt-local file checksum verifier.
         emit: Progress callback.
 
     Returns:
@@ -39,25 +47,14 @@ def run(
     """
     config_path = Path(config_path).resolve()
     data = config_path.read_bytes()
-    cfg = json.loads(data)
-    if cfg.get('schema') != 'land-raster-candidate-v1' or not cfg.get(
-        'selection_notes'
-    ):
-        raise ValueError('explicit schema and selection notes required')
     width, height = grid.width, grid.height
     west, north, step = grid.west, grid.north, grid.step
-    specs = cfg['land']
-    if not isinstance(specs, list) or not specs:
+    specs = settings['land']
+    if not specs:
         raise ValueError('nonempty explicitly pinned land inputs required')
-    strip = cfg.get('strip_rows', 512)
-    reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
-    if not isinstance(strip, int) or isinstance(strip, bool) or strip < 1:
-        raise ValueError('invalid strip_rows')
-    if not isinstance(reserve, int) or isinstance(reserve, bool) or reserve < 0:
-        raise ValueError('invalid free-space reserve')
-    feature_index = cfg.get('feature_index', 'row-fids')
-    if feature_index not in ('row-fids', 'scan'):
-        raise ValueError('feature_index must be row-fids or scan')
+    strip = settings.get('strip_rows', 512)
+    reserve = minimum_free_bytes
+    feature_index = settings.get('feature_index', 'row-fids')
     output = Path(output).resolve()
     paths = [config_path] + [
         Path(f['path']).resolve() for spec in specs for f in spec['files']
@@ -70,7 +67,7 @@ def run(
         )
     # Validate all files, CRS, selection and geometries before creating outputs.
     for spec in specs:
-        checked_files(spec)
+        checked_files(spec, files)
     opened = []
     indexes = []
     for spec in specs:
@@ -112,28 +109,11 @@ def run(
         )
     feature_counts = [item[2] for item in opened]
     os.mkdir(output)
-    ds = gdal.GetDriverByName('GTiff').Create(
-        str(output / 'land.tif'),
-        width,
-        height,
-        1,
-        gdal.GDT_Byte,
-        options=[
-            'TILED=YES',
-            'BLOCKXSIZE=512',
-            'BLOCKYSIZE=512',
-            'NBITS=1',
-            'COMPRESS=DEFLATE',
-            'SPARSE_OK=YES',
-            'BIGTIFF=YES',
-        ],
-    )
-    ds.SetGeoTransform((west, step, 0, north, 0, -step))
-    sr = osr.SpatialReference()
-    sr.ImportFromEPSG(4326)
-    ds.SetSpatialRef(sr)
+    ds = create_mask(output / 'land.tif', grid)
     land_cells = 0
+    east = grid.extent(grid.bounds)[2]
     for y in range(0, height, strip):
+        check_cancelled()
         if shutil.disk_usage(output).free < reserve:
             raise ValueError(
                 'free disk below configured reserve; partial output preserved'
@@ -144,9 +124,7 @@ def run(
         mem.SetGeoTransform((west, step, 0, top, 0, -step))
         for (_, layer, _), index in zip(opened, indexes):
             if index is None:
-                layer.SetSpatialFilterRect(
-                    west, top - n * step, west + width * step, top
-                )
+                layer.SetSpatialFilterRect(west, top - n * step, east, top)
                 layer.ResetReading()
                 gdal.RasterizeLayer(mem, [1], layer, burn_values=[1])
                 layer.SetSpatialFilter(None)
@@ -172,11 +150,12 @@ def run(
         land_cells += int(values.sum())
         ds.GetRasterBand(1).WriteArray(values, 0, y)
         emit(json.dumps({'rows_done': y + n, 'land_cells': land_cells}), flush=True)
+    check_cancelled()
     ds.FlushCache()
     ds = None
     opened = []
     for spec in specs:
-        checked_files(spec)
+        checked_files(spec, files)
     if config_path.read_bytes() != data:
         raise ValueError('configuration changed during processing')
     report = {
@@ -187,7 +166,7 @@ def run(
         'feature_index': feature_index,
         'indexed_layers': [index is not None for index in indexes],
         'land_cells': land_cells,
-        'land_sha256': sha256_file(output / 'land.tif'),
+        'land_sha256': files.pin(output / 'land.tif')['sha256'],
         'gdal': gdal.VersionInfo('--version'),
         'rasterization': 'GDAL default polygon rasterization, ALL_TOUCHED off',
         'limitations': 'Candidate mask only; source decisions and geographic correctness require review.',

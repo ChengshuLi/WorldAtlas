@@ -1,3 +1,4 @@
+from worldatlas.geodesy.wgs84 import unit_sphere
 from worldatlas.map_build.water.test_helpers import index_present
 import unittest
 from unittest.mock import patch
@@ -14,25 +15,25 @@ class CoastalDistanceBoundTests(unittest.TestCase):
     def test_empty_query_returns_empty_distance_arrays(self):
         empty = np.empty(0)
         centers = dict(lat=[0.0], lon=[0.0], category=np.array([17]),
-                       mids=shared_nearest.unit([0], [0]))
-        pairs = [(1, 17, 1)]
-        indexes = index_present({k: np.asarray(v) for k, v in centers.items()}, pairs)
+                       mids=unit_sphere([0], [0]))
+        owners = [17]
+        indexes = index_present({k: np.asarray(v) for k, v in centers.items()}, owners)
         lower, best, upper = shared_nearest.nearest_class_bounds(
-            empty, empty, np.empty((0, 3)), pairs, indexes, upper_limit=22224,
+            empty, empty, np.empty((0, 3)), owners, indexes, upper_limit=22224,
         )
         self.assertEqual((lower.shape, best.shape, upper.shape), ((0, 1), (0,), (0,)))
 
     def test_shore_distance_paths_reject_failed_inverse_geodesics(self):
         latitude = longitude = np.array([0.0])
-        points = shared_nearest.unit(latitude, longitude)
+        points = unit_sphere(latitude, longitude)
         centers = dict(lat=latitude, lon=longitude, category=np.array([17]), mids=points)
-        pairs = [(1, 17, 1)]
-        indexes = index_present(centers, pairs)
+        owners = [17]
+        indexes = index_present(centers, owners)
         data, tree = indexes[17]
         with patch.object(shared_nearest, "geodesic_distances", return_value=np.array([np.nan])):
             with self.assertRaisesRegex(ValueError, "invalid inverse geodesic"):
                 shared_nearest.nearest_class_bounds(
-                    latitude, longitude, points, pairs, indexes, upper_limit=22224,
+                    latitude, longitude, points, owners, indexes, upper_limit=22224,
                 )
             with self.assertRaisesRegex(ValueError, "invalid inverse geodesic"):
                 shared_nearest.exact_minima_by_ordered_chord(
@@ -42,7 +43,7 @@ class CoastalDistanceBoundTests(unittest.TestCase):
                 shared_nearest.scan_exact_minimum(points[0], 0.0, 0.0, data, 100)
 
     def test_band_search_keeps_a_proven_finite_bound_for_distant_shores(self):
-        pairs = [(81, 70000, 90000), (42, 300, 4321)]
+        owners = [70000, 300]
         shore_lat = np.array([0.0, 0.2, 70.0, 72.0])
         shore_lon = np.array([0.0, 0.2, 40.0, 42.0])
         categories = np.array([70000, 70000, 300, 300])
@@ -50,15 +51,15 @@ class CoastalDistanceBoundTests(unittest.TestCase):
             lat=shore_lat,
             lon=shore_lon,
             category=categories,
-            mids=shared_nearest.unit(shore_lat, shore_lon),
+            mids=unit_sphere(shore_lat, shore_lon),
         )
-        indexes = index_present(centers, pairs)
+        indexes = index_present(centers, owners)
         lat, lon = np.array([0.0, 0.1, 89.0]), np.array([0.0, 0.1, 120.0])
         lower, _, upper = shared_nearest.nearest_class_bounds(
-            lat, lon, shared_nearest.unit(lat, lon), pairs, indexes, upper_limit=22224
+            lat, lon, unit_sphere(lat, lon), owners, indexes, upper_limit=22224
         )
         for i in range(len(lat)):
-            for col, (_, code, _) in enumerate(pairs):
+            for col, code in enumerate(owners):
                 take = categories == code
                 exact = REFERENCE_GEOD.inv(
                     np.full(int(take.sum()), lon[i]),

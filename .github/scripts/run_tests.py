@@ -20,7 +20,6 @@ from psycopg import sql
 from psycopg.conninfo import make_conninfo
 
 import worldatlas
-from worldatlas.source_imports.shared.contracts import database_checks
 
 ROOT = Path(__file__).resolve().parents[2]
 PACKAGE = Path(worldatlas.__file__).resolve().parent
@@ -31,6 +30,7 @@ SUITES = {
     'source_imports': True,
     'map_build': True,
     'map_releases': False,
+    'shared': False,
 }
 
 
@@ -89,8 +89,8 @@ def run_suite(
 def main() -> int:
     """Run the requested suites and return their combined exit status.
 
-    Check that the generated SQL is current, prepare isolated database
-    fixtures where needed, and stop the temporary server on exit.
+    For suites that use PostgreSQL, verify the generated SQL and prepare
+    isolated fixtures. Stop the temporary server on exit.
 
     Returns:
         Zero when all selected suites pass or one if any suite fails.
@@ -100,19 +100,26 @@ def main() -> int:
         '--suite', choices=SUITES, help='run one suite; defaults to all suites'
     )
     args = parser.parse_args()
-    if (
-        ROOT / "database/schema/construction_contracts.sql"
-    ).read_text() != database_checks():
-        parser.error(
-            "construction checks are stale; regenerate database/schema/construction_contracts.sql"
-        )
     selected = (args.suite,) if args.suite else tuple(SUITES)
+    needs_database = any(SUITES[name] for name in selected)
+    if (
+        needs_database
+        and subprocess.run(
+            [
+                sys.executable,
+                '-m',
+                'worldatlas.source_imports.shared.contracts',
+                str(ROOT / 'database/schema/construction_contracts.sql'),
+                '--check',
+            ]
+        ).returncode
+    ):
+        return 1
     # Keep the socket path short enough for macOS. Python fixtures use
     # their ordinary temporary directories independently of the server.
     with tempfile.TemporaryDirectory(prefix='worldatlas-tests-', dir='/tmp') as temp:
         directory = Path(temp)
         data = directory / 'data'
-        needs_database = any(SUITES[name] for name in selected)
         if needs_database:
             subprocess.run(
                 [

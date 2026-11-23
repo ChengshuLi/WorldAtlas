@@ -1,15 +1,6 @@
-"""Batched RLE interval overlay for the exact four-neighbor shoreline index.
-
-All physical and land boundaries remain cuts. Adjacent physical rows are shifted
-by one row in flattened coordinates. A shared cut-rank map propagates all four
-RLE value streams without repeated binary searches or per-cell expansion.
-Batches are complete row ranges, not data/resource ceilings.
-"""
+"""Find four-neighbor coastline runs from the physical grid alone."""
 
 import numpy as np
-from numpy.typing import ArrayLike
-
-from worldatlas.map_build.water.shore_spans import ShoreSpans
 
 
 def flat_rows(
@@ -46,50 +37,45 @@ def flat_rows(
     return ends, categories, first
 
 
-class ShoreIndex(ShoreSpans):
+class ShoreIndex:
     """Find land cells that share an edge with physical water."""
 
     def __init__(
         self,
         physical: tuple[np.ndarray, np.ndarray],
-        land: tuple[np.ndarray, np.ndarray],
         width: int,
         height: int,
         *,
         rows_per_batch: int = 256,
-        land_codes: ArrayLike | None = None,
     ) -> None:
         """Build shore runs in row batches.
 
         Args:
             physical: Row-run grid with land (17) and water (1).
-            land: Labels on the land cells.
             width: Number of columns.
             height: Number of rows.
             rows_per_batch: Number of rows to process together.
-            land_codes: Optional set of valid land labels.
 
         Raises:
-            ValueError: A row is invalid or a physical land cell lacks a valid label.
+            ValueError: A physical row or batch size is invalid.
         """
         if any(
             type(value) is not int or value <= 0
             for value in (width, height, rows_per_batch)
         ):
             raise ValueError("invalid grid or row batch")
-        for offsets, runs in (physical, land):
-            if (
-                len(offsets) != height + 1
-                or len(runs) % 2
-                or int(offsets[0]) != 0
-                or int(offsets[-1]) != len(runs) // 2
-                or np.any(offsets[1:] <= offsets[:-1])
-            ):
-                raise ValueError("invalid RLE row")
+        offsets, runs = physical
+        if (
+            len(offsets) != height + 1
+            or len(runs) % 2
+            or int(offsets[0]) != 0
+            or int(offsets[-1]) != len(runs) // 2
+            or np.any(offsets[1:] <= offsets[:-1])
+        ):
+            raise ValueError("invalid RLE row")
         self.width, self.height = width, height
         all_starts = []
         all_ends = []
-        all_codes = []
         offsets = [np.asarray([0], dtype=np.uint64)]
         total = 0
         prows, _ = physical
@@ -99,9 +85,8 @@ class ShoreIndex(ShoreSpans):
             context_first = max(0, y0 - 1)
             context_end = min(height, y1 + 1)
             pe, pv, first = flat_rows(physical, context_first, context_end, width)
-            le, lv, _ = flat_rows(land, y0, y1, width)
             if np.any((pv != 1) & (pv != 17)):
-                raise ValueError("invalid physical or land row")
+                raise ValueError("invalid physical row")
 
             def portion(a: int, b: int) -> tuple[np.ndarray, np.ndarray]:
                 """Look up a subrange of the physical rows in the current batch.
@@ -123,7 +108,7 @@ class ShoreIndex(ShoreSpans):
             following, next_values = portion(min(height, y0 + 1), min(height, y1 + 1))
             following = following - width
             current, cv = portion(y0, y1)
-            # Missing polar neighbors contribute no water. Each of the four
+            # Missing polar neighbors contribute no water. Each of the three
             # RLE streams then covers the entire current block.
             if y0 == 0:
                 previous = np.r_[np.uint64(width), previous]
@@ -131,7 +116,7 @@ class ShoreIndex(ShoreSpans):
             if y1 == height:
                 following = np.r_[following, np.uint64(end)]
                 next_values = np.r_[next_values, np.uint32(0)]
-            groups = (current, le, previous, following)
+            groups = (current, previous, following)
             cuts, inverse = np.unique(
                 np.concatenate((np.asarray([begin], dtype=np.uint64), *groups)),
                 return_inverse=True,
@@ -157,25 +142,14 @@ class ShoreIndex(ShoreSpans):
 
             starts, stops = cuts[:-1], cuts[1:]
             physical_values = expand(cv, ranks[0])
-            categories = expand(lv, ranks[1])
-            valid = (
-                categories > 0
-                if land_codes is None
-                else np.isin(categories, land_codes)
-            )
-            if np.any((physical_values == 17) & ~valid):
-                raise ValueError("invalid physical or land row")
-            wet = expand(prev_values == 1, ranks[2]) | expand(
-                next_values == 1, ranks[3]
+            wet = expand(prev_values == 1, ranks[1]) | expand(
+                next_values == 1, ranks[2]
             )
             chosen = (physical_values == 17) & wet
-            aa, bb, cc = starts[chosen], stops[chosen], categories[chosen]
+            aa, bb = starts[chosen], stops[chosen]
             ce = current
             changes = np.flatnonzero((cv[:-1] != cv[1:]) & (ce[:-1] % width != 0))
             side = np.where(cv[changes] == 17, ce[changes] - 1, ce[changes])
-            side_categories = categories[
-                np.where(cv[changes] == 17, ranks[0][changes] - 1, ranks[0][changes])
-            ]
             current_first = int(prows[y0])
             firsts = prows[y0:y1].astype(np.int64) - current_first
             lasts = prows[y0 + 1 : y1 + 1].astype(np.int64) - current_first - 1
@@ -185,25 +159,16 @@ class ShoreIndex(ShoreSpans):
             seam = np.where(
                 first_land, seam_rows * width, seam_rows * width + width - 1
             )
-            row_end_ranks = ranks[0][lasts]
-            row_start_ranks = np.r_[0, row_end_ranks[:-1]]
-            seam_categories = categories[
-                np.where(
-                    first_land, row_start_ranks[different], row_end_ranks[different] - 1
-                )
-            ]
             side = np.concatenate((side, seam))
             if len(side):
                 aa = np.concatenate((aa, side))
                 bb = np.concatenate((bb, side + 1))
-                cc = np.concatenate((cc, side_categories, seam_categories))
             if len(aa):
                 order = np.argsort(aa, kind="stable")
-                aa, bb, cc = aa[order], bb[order], cc[order]
+                aa, bb = aa[order], bb[order]
                 split = np.r_[
                     True,
                     (aa[1:] > np.maximum.accumulate(bb)[:-1])
-                    | (cc[1:] != cc[:-1])
                     | (aa[1:] // width != aa[:-1] // width),
                 ]
                 indices = np.flatnonzero(split)
@@ -213,7 +178,6 @@ class ShoreIndex(ShoreSpans):
                 all_ends.append(
                     (np.maximum.reduceat(bb, indices) - row * width).astype(np.uint32)
                 )
-                all_codes.append(cc[indices].astype(np.uint32))
             else:
                 counts = np.zeros(y1 - y0, dtype=np.int64)
             offsets.append(total + np.cumsum(counts, dtype=np.uint64))
@@ -224,7 +188,4 @@ class ShoreIndex(ShoreSpans):
         )
         self.ends = (
             np.concatenate(all_ends) if all_ends else np.empty(0, dtype=np.uint32)
-        )
-        self.codes = (
-            np.concatenate(all_codes) if all_codes else np.empty(0, dtype=np.uint32)
         )

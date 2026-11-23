@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import fcntl
-import hashlib
 import json
 import math
 import os
@@ -14,15 +13,25 @@ import traceback
 import uuid
 from collections.abc import Callable, Iterable, Iterator, Mapping
 from contextlib import contextmanager
+from dataclasses import dataclass
+from functools import partial
 from pathlib import Path
+from stat import S_ISREG
 from typing import Any, TypedDict, cast
 
+from worldatlas.map_build.execution.journal import (
+    append_records,
+    create_journal,
+    prefix_digest,
+    preserve_torn_tail,
+)
+from worldatlas.map_build.inputs.configuration import FilePin
 from worldatlas.shared.files import (
+    JSONValue,
     pin_file,
     read_json,
     sha256_file,
     sync_directory,
-    verify_pins,
     write_json,
 )
 
@@ -42,16 +51,8 @@ def journal_anchor(path: Path | str) -> dict[str, str | int]:
     """
     path = Path(path).resolve(strict=True)
     size = path.stat().st_size
-    h = hashlib.sha256()
-    with path.open("rb") as stream:
-        remaining = size
-        while remaining:
-            block = stream.read(min(1 << 20, remaining))
-            if not block:
-                raise ValueError("timing journal shortened while sealing prefix")
-            h.update(block)
-            remaining -= len(block)
-    return {"path": str(path), "bytes": size, "sha256": h.hexdigest()}
+    digest = prefix_digest(path, size, "timing journal shortened while sealing prefix")
+    return {"path": str(path), "bytes": size, "sha256": digest}
 
 
 def verify_anchor(anchor: dict[str, Any], expected_path: Path | str) -> None:
@@ -71,24 +72,101 @@ def verify_anchor(anchor: dict[str, Any], expected_path: Path | str) -> None:
         or anchor["bytes"] < 0
     ):
         raise ValueError("invalid timing journal anchor")
-    remaining = anchor["bytes"]
-    h = hashlib.sha256()
-    with Path(expected_path).open("rb") as stream:
-        while remaining:
-            block = stream.read(min(1 << 20, remaining))
-            if not block:
-                raise ValueError("timing journal lost a checkpointed prefix")
-            h.update(block)
-            remaining -= len(block)
-    if h.hexdigest() != anchor["sha256"]:
+    digest = prefix_digest(
+        Path(expected_path),
+        anchor["bytes"],
+        "timing journal lost a checkpointed prefix",
+    )
+    if digest != anchor["sha256"]:
         raise ValueError("timing journal checkpoint prefix changed")
 
 
-def inventory(paths: Iterable[Path | str]) -> list[dict[str, str]]:
+class RunFilePins:
+    """Remember file checksums while their filesystem identity is unchanged."""
+
+    def __init__(self) -> None:
+        """Start an empty checksum cache for one build attempt."""
+        self.digests: dict[Path, tuple[os.stat_result, str]] = {}
+
+    @staticmethod
+    def stamp(stat: os.stat_result) -> tuple[int, int, int, int, int]:
+        """Identify the file and the last changes to its bytes or metadata.
+
+        Args:
+            stat: File metadata returned by the operating system.
+
+        Returns:
+            Device, inode, size, modification time and change time. Both times
+            use the full nanosecond values reported by the operating system.
+        """
+        return (
+            stat.st_dev,
+            stat.st_ino,
+            stat.st_size,
+            stat.st_mtime_ns,
+            stat.st_ctime_ns,
+        )
+
+    def pin(self, path: Path | str) -> dict[str, str]:
+        """Record a file's checksum, rehashing it whenever it changes.
+
+        Args:
+            path: Local path to a completed output or its pinned input.
+
+        Returns:
+            Absolute path and SHA-256, in the standard file pin format.
+
+        Raises:
+            ValueError: The path is not a regular file or changes during hashing.
+        """
+        path = Path(path).resolve(strict=True)
+        before = path.stat()
+        if not S_ISREG(before.st_mode):
+            raise ValueError(f"not a file: {path}")
+        previous = self.digests.get(path)
+        if previous is not None and self.stamp(previous[0]) == self.stamp(before):
+            return {"path": str(path), "sha256": previous[1]}
+        checksum = sha256_file(path)
+        if self.stamp(path.stat()) != self.stamp(before):
+            raise ValueError(f"file changed while hashing: {path}")
+        self.digests[path] = (before, checksum)
+        return {"path": str(path), "sha256": checksum}
+
+    def verify(self, pins: Iterable[Mapping[str, str] | FilePin]) -> None:
+        """Check the file identity and checksum of every supplied pin.
+
+        Args:
+            pins: Records with a path and expected SHA-256.
+
+        Raises:
+            ValueError: One of the files no longer matches its pin.
+        """
+        for expected in pins:
+            if self.pin(expected["path"])["sha256"] != expected["sha256"]:
+                raise ValueError("checkpoint/input hash mismatch: " + expected["path"])
+
+    def row_streams(self, directory: Path | str) -> list[dict[str, str]]:
+        """Record checksums for both files in a row-run layer.
+
+        Args:
+            directory: Physical, membership, or ownership layer directory.
+
+        Returns:
+            Pins for rows.u32le followed by runs.u32le.
+        """
+        return [
+            self.pin(Path(directory) / name) for name in ("rows.u32le", "runs.u32le")
+        ]
+
+
+def inventory(
+    paths: Iterable[Path | str], pin: Callable[[Path], dict[str, str]] = pin_file
+) -> list[dict[str, str]]:
     """List and hash the regular files in the supplied outputs.
 
     Args:
         paths: Files or directories to scan in order.
+        pin: Checksum operation for each regular file.
 
     Returns:
         File pins in traversal order, with each directory sorted by filename.
@@ -107,7 +185,7 @@ def inventory(paths: Iterable[Path | str]) -> list[dict[str, str]]:
         if path.is_symlink():
             raise ValueError("symlink checkpoint output: " + str(path))
         elif path.is_file():
-            result.append(pin_file(path))
+            result.append(pin(path))
         elif path.is_dir():
             for child in sorted(path.iterdir()):
                 visit(child)
@@ -279,6 +357,7 @@ class Checkpoints:
             attempt: Identifier of the current build attempt.
         """
         self.root, self.attempt = Path(root).resolve(), attempt
+        self.files = RunFilePins()
         self.root.mkdir(exist_ok=True)
         self.preserved = self.root.parent / "preserved"
 
@@ -330,8 +409,8 @@ class Checkpoints:
             receipt["invocation"]
         ) != request(invocation):
             raise ValueError("completed command identity changed: " + name)
-        verify_pins(self.data_pins(receipt))
-        if inventory(outputs) != receipt["outputs"]:
+        self.files.verify(self.data_pins(receipt))
+        if inventory(outputs, self.files.pin) != receipt["outputs"]:
             raise ValueError("completed stage output changed: " + name)
         return True
 
@@ -407,8 +486,8 @@ class Checkpoints:
             verify_anchor(
                 receipt["timing_anchor"], self.root.parent / "timing-events.jsonl"
             )
-            verify_pins(self.data_pins(receipt))
-            if inventory(receipt["output_roots"]) != receipt["outputs"]:
+            self.files.verify(self.data_pins(receipt))
+            if inventory(receipt["output_roots"], self.files.pin) != receipt["outputs"]:
                 raise ValueError("completed stage output changed: " + path.parent.name)
 
     def begin(self, name: str) -> Path:
@@ -442,7 +521,7 @@ class Checkpoints:
             inputs: Expected path and SHA-256 pins for the inputs.
             timing_anchor: Timing log path, prefix length and digest.
         """
-        verify_pins(inputs)
+        self.files.verify(inputs)
         write_json(
             self.stage(name) / "complete.json",
             {
@@ -452,34 +531,30 @@ class Checkpoints:
                 "invocation": invocation,
                 "inputs": inputs,
                 "output_roots": [os.path.abspath(p) for p in outputs],
-                "outputs": inventory(outputs),
+                "outputs": inventory(outputs, self.files.pin),
             },
         )
 
-    def run_function(
+    def run_function[Result: JSONValue](
         self,
         name: str,
         group: str,
-        function: Callable[..., Any],
-        args: tuple[Any, ...],
+        operation: Callable[[], Result],
         *,
         timing: Timing,
         inputs: list[dict[str, str]],
         outputs: Iterable[Path | str],
-        kwargs: dict[str, Any] | None = None,
         resume_marker: Path | str | None = None,
-    ) -> Any:
+    ) -> Result:
         """Run a stage or load its verified result from a previous attempt.
 
         Args:
             name: Stage ID for the checkpoint.
             group: Timing group that contains this stage.
-            function: Stage function returning JSON-compatible data.
-            args: Positional arguments to the stage function.
+            operation: Stage function with its inputs already supplied.
             timing: Timing journal for the run.
             inputs: Input file pins.
             outputs: Output files and directories to verify.
-            kwargs: Additional keyword arguments to the function.
             resume_marker: If present, keep partial outputs for a producer that can
                 resume its own work.
 
@@ -498,6 +573,7 @@ class Checkpoints:
         ):
             raise ValueError("stage output outside run or replaces run root")
         result_path = self.stage(name) / "result.json"
+        function = operation.func if isinstance(operation, partial) else operation
         invocation = {
             "stage": name,
             "inputs": inputs,
@@ -506,7 +582,7 @@ class Checkpoints:
         }
         sealed = [*outputs, result_path]
         if self.completed(name, invocation, sealed):
-            return read_json(result_path)
+            return cast(Result, read_json(result_path))
         if resume_marker is not None and Path(resume_marker).is_file():
             # The producer owns its validated internal checkpoints. Preserve
             # those outputs so it can continue completed shards or tiles.
@@ -514,7 +590,7 @@ class Checkpoints:
         else:
             self.preserve(name, sealed)
         attempt = self.begin(name)
-        verify_pins(inputs)
+        self.files.verify(inputs)
         write_json(
             attempt / "admitted.json",
             {
@@ -525,13 +601,50 @@ class Checkpoints:
         )
         try:
             with timing.measure(group, name):
-                result = function(*args, **(kwargs or {}))
+                result = operation()
             write_json(result_path, result)
         except BaseException:
             (attempt / "error.log").write_text(traceback.format_exc(), encoding="utf-8")
             raise
         self.complete(name, invocation, sealed, inputs, timing.anchor())
-        return read_json(result_path)
+        return cast(Result, read_json(result_path))
+
+
+@dataclass(frozen=True)
+class StageExecutor:
+    """Run stages using a complete checkpoint store and timing journal."""
+
+    checkpoints: Checkpoints
+    timing: Timing
+
+
+def execute_stage[Result: JSONValue](
+    executor: StageExecutor | None,
+    name: str,
+    group: str,
+    operation: Callable[[], Result],
+    *,
+    inputs: list[dict[str, str]],
+    outputs: Iterable[Path | str],
+) -> Result:
+    """Run a bound operation directly or through its checkpoint.
+
+    Args:
+        executor: Checkpoint store and timing journal, or None for a local calculation.
+        name: Checkpoint ID.
+        group: Timing group.
+        operation: Function with all its inputs already supplied.
+        inputs: Files that must still match their pins.
+        outputs: Files or directories produced by the operation.
+
+    Returns:
+        The calculated result or the same result loaded from a completed stage.
+    """
+    if executor is None:
+        return operation()
+    return executor.checkpoints.run_function(
+        name, group, operation, timing=executor.timing, inputs=inputs, outputs=outputs
+    )
 
 
 class Timing:
@@ -565,7 +678,6 @@ class Timing:
         self.lock = threading.RLock()
         self.records = []
         self.active = {}
-        self.open = set()
         self.completed_groups = set()
         self.stopped = threading.Event()
         self.thread = None
@@ -586,25 +698,14 @@ class Timing:
                     backup = self.path.with_name(
                         self.path.name + ".torn-" + uuid.uuid4().hex
                     )
-                    with backup.open("xb") as stream:
-                        stream.write(raw)
-                        stream.flush()
-                        os.fsync(stream.fileno())
-                    sync_directory(backup.parent)
-                    with self.path.open("r+b") as stream:
-                        stream.truncate(valid)
-                        stream.flush()
-                        os.fsync(stream.fileno())
+                    preserve_torn_tail(self.path, valid, backup, raw)
                     break
                 self.records.append(record)
                 if record["event"] == "group-complete":
                     self.completed_groups.add(record["group"])
                 valid += len(line)
         else:
-            with self.path.open("x") as stream:
-                stream.flush()
-                os.fsync(stream.fileno())
-            sync_directory(self.path.parent)
+            create_journal(self.path)
         self.event({"event": "attempt", "id": self.attempt})
         if heartbeat_seconds:
             self.thread = threading.Thread(
@@ -620,6 +721,32 @@ class Timing:
         """
         self.events([value])
 
+    def record_interrupted_setup(self, attempts: Iterable[str]) -> None:
+        """Record attempts that stopped before writing a setup start event.
+
+        A recorded start without an end already contributes a lower bound.
+        The saved prefix marker is independent of whether the interval is known.
+
+        Args:
+            attempts: IDs of earlier attempts in this run.
+        """
+        recorded = {
+            record["attempt"]
+            for record in self.records
+            if record.get("group") == "setup"
+            and record["event"] in ("start", "unmeasured-initialization")
+        }
+        self.events(
+            {
+                "event": "unmeasured-initialization",
+                "attempt": attempt,
+                "id": "setup/interrupted-initialization",
+                "group": "setup",
+            }
+            for attempt in attempts
+            if attempt not in recorded
+        )
+
     def events(self, values: Iterable[dict[str, Any]]) -> None:
         """Append a batch of events and flush them to disk.
 
@@ -630,13 +757,7 @@ class Timing:
         if not values:
             return
         with self.lock:
-            with self.path.open("a") as stream:
-                for value in values:
-                    stream.write(
-                        json.dumps(value, sort_keys=True, allow_nan=False) + "\n"
-                    )
-                stream.flush()
-                os.fsync(stream.fileno())
+            append_records(self.path, values)
             self.records.extend(values)
 
     def _heartbeat(self, seconds: float) -> None:
@@ -696,7 +817,6 @@ class Timing:
         with self.lock:
             self.event(record)
             self.active[token] = record
-            self.open.add(token)
         try:
             yield record
         except BaseException:
@@ -730,7 +850,6 @@ class Timing:
                 }
             )
             self.active.pop(token, None)
-            self.open.discard(token)
 
     def anchor(self) -> dict[str, str | int]:
         """Hash the current timing log while writes are locked.
@@ -815,11 +934,17 @@ class Timing:
                     beats.get(token, float("-inf")), record["monotonic_seconds"]
                 )
         by_attempt = {}
-        incomplete = [
-            {"attempt": record.get("attempt"), "id": record["id"]}
+        measured_attempts = {attempt for attempt, _ in starts}
+        unknown_setup = {
+            record["attempt"]: record["id"]
             for record in self.records
             if record["event"] == "unmeasured-initialization"
             and record.get("group") == group
+            and record["attempt"] not in measured_attempts
+        }
+        incomplete = [
+            {"attempt": attempt, "id": ident}
+            for attempt, ident in unknown_setup.items()
         ]
         details = [
             {

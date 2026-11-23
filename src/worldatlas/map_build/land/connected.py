@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any
 
 from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.core.run_components import RunComponents
 from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.shared.files import sha256_file
 
@@ -103,39 +104,10 @@ def build(
         or rows[-1] != len(runs) // 2
     ):
         raise ValueError("invalid stream lengths")
-    parents, sizes = array("I"), array("I")
+    connected = RunComponents()
     outrows, spans = array("I", [0]), array("I")
     previous = []
     cells = 0
-
-    def find(node: int) -> int:
-        """Find the root shared by every run in a component.
-
-        Args:
-            node: Run index.
-
-        Returns:
-            Root index. Parent links are shortened during the lookup.
-        """
-        while parents[node] != node:
-            parents[node] = parents[parents[node]]
-            node = parents[node]
-        return node
-
-    def unite(a: int, b: int) -> None:
-        """Join two touching runs in the same component.
-
-        Args:
-            a: Index of the first run.
-            b: Index of the second run.
-        """
-        a, b = find(a), find(b)
-        if a == b:
-            return
-        if sizes[a] < sizes[b]:
-            a, b = b, a
-        parents[b] = a
-        sizes[a] += sizes[b]
 
     for y in range(height):
         guard()
@@ -148,12 +120,7 @@ def build(
             if not x < end <= width or code not in (0, 1, 17) or code == last_code:
                 raise ValueError("invalid or noncanonical physical run")
             if code == physical_code:
-                node = len(parents)
-                # Reaching this limit requires over four billion in-memory runs.
-                if node == 0xFFFFFFFF:  # pragma: no cover
-                    raise ValueError("too many component runs")
-                parents.append(node)
-                sizes.append(1)
+                node = connected.add()
                 current.append((x, end, node))
                 spans.extend((x, end, node))
                 cells += end - x
@@ -164,27 +131,31 @@ def build(
         while i < len(previous) and j < len(current):
             a, b = previous[i], current[j]
             if a[0] < b[1] and b[0] < a[1]:
-                unite(a[2], b[2])
+                connected.union(a[2], b[2])
             if a[1] < b[1]:
                 i += 1
             else:
                 j += 1
         if current and current[0][0] == 0 and current[-1][1] == width:
-            unite(current[0][2], current[-1][2])
-        outrows.append(len(parents))
+            connected.union(current[0][2], current[-1][2])
+        outrows.append(len(connected.parent))
         previous = current
     # A later row can join two pieces that looked separate earlier. Find each
     # run’s final component after connecting every row and the longitude seam.
     components = 0
-    for node in range(len(parents)):
+    for node in range(len(connected.parent)):
         if node % 65536 == 0:
             guard()
-        root = find(node)
+        root = connected.find(node)
         spans[3 * node + 2] = root
         components += root == node
     _write(output_rows, outrows)
     _write(output_runs, spans)
-    return {"runs": len(parents), "components": components, "land_cells": cells}
+    return {
+        "runs": len(connected.parent),
+        "components": components,
+        "selected_cells": cells,
+    }
 
 
 def build_components(

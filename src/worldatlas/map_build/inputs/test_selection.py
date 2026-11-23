@@ -42,6 +42,13 @@ class BindingTests(unittest.TestCase):
             dict(code=2, entity_id=2, physical_class="water"),
         ]
 
+    def test_edited_selection_keeps_polygon_rings_strict(self):
+        self.geography["features"] = [dict(
+            id="edited", geometry=dict(type="Polygon", coordinates=[[[0, 0], [1, 0], [1, 1], [0, 1]]]),
+        )]
+        with self.assertRaisesRegex(ValueError, "closed"):
+            prepare_geography(self.geography)
+
     def test_invalid_bindings_identify_the_problem(self):
         for override, message in (
             ({"code": 0}, "map code 0 must be an integer from 1 to 4294967295"),

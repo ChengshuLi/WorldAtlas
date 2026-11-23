@@ -183,14 +183,15 @@ class EndToEndTests(unittest.TestCase):
                     schema="land-raster-candidate-v1",
                     selection_notes="Fixture coast",
                     strip_rows=4,
-                    minimum_free_bytes=0,
                     feature_index="row-fids",
                     land=[
                         dict(
                             dataset=str(coast),
                             layer=None,
                             where="kind = 'land'",
-                            files=[dict(pin_file(coast), size_bytes=coast.stat().st_size)],
+                            files=[
+                                dict(pin_file(coast), size_bytes=coast.stat().st_size)
+                            ],
                         )
                     ],
                 )
@@ -198,7 +199,6 @@ class EndToEndTests(unittest.TestCase):
                     schema="water-shard-candidate-v2",
                     selection_notes="Fixture water",
                     tile_size=4,
-                    minimum_free_bytes=0,
                     policy=dict(method="overture-inland-subtype-v1"),
                 )
                 cfg = write_json(
@@ -217,11 +217,21 @@ class EndToEndTests(unittest.TestCase):
                             inland_water=dict(
                                 **water_config,
                                 file_count=1,
-                                files=[dict(path=shard.name, sha256=pin_file(shard)["sha256"])],
+                                files=[
+                                    dict(
+                                        path=shard.name,
+                                        sha256=pin_file(shard)["sha256"],
+                                    )
+                                ],
                             ),
                         ),
                     ),
                 )
+                without_band = json.loads(cfg.read_text())
+                del without_band["coastal_band_metres"]
+                incomplete_config = write_json(raw / "without-band.json", without_band)
+                with self.assertRaisesRegex(ValueError, "requires coastal_band_metres"):
+                    Pipeline(incomplete_config, root / "invalid", work_dir=root, selection=selected)
                 runner = Pipeline(cfg, root / "run", work_dir=root, selection=selected)
                 execute_rule = engine.execute_rule
                 started_rules = []
@@ -236,21 +246,18 @@ class EndToEndTests(unittest.TestCase):
                         runner.run()
                 self.assertEqual(len(started_rules), 1)
                 errors = list((root / "run/checkpoints").glob("*/attempt-*/error.log"))
-                self.assertTrue(any("InterruptedError" in path.read_text() for path in errors))
+                self.assertTrue(
+                    any("InterruptedError" in path.read_text() for path in errors)
+                )
                 self.assertFalse((root / "run/logs").exists())
-                with (
-                    patch.object(
-                        selection_inputs, "compile_rules",
-                        wraps=selection_inputs.compile_rules,
-                    ) as compile_parent,
-                    patch(
-                        "worldatlas.map_build.division.hierarchy.compile_rules",
-                        side_effect=AssertionError("prepared rules must be reused"),
-                    ),
-                ):
+                compile_rule = selection_inputs.RuleIndex.compile
+                with patch.object(
+                    selection_inputs.RuleIndex, "compile", autospec=True, side_effect=compile_rule
+                ) as compile_parent:
                     runner = Pipeline(cfg, root / "run", work_dir=root, resume=True)
                     report = runner.run()
-                compile_parent.assert_called_once_with(frozen["geography"], 0)
+                compile_parent.assert_called_once()
+                self.assertEqual(compile_parent.call_args.args[1], 0)
                 self.assertEqual(report["status"], "complete")
                 self.assertTrue(
                     all(r["outputs_complete"] for r in report["stages"].values())
@@ -264,8 +271,13 @@ class EndToEndTests(unittest.TestCase):
                 self.assertEqual(counts["999"], 2)
                 resumed = subprocess.run(
                     [
-                        sys.executable, "-m", "worldatlas.map_build.build",
-                        str(cfg), str(root / "run"), "--work-dir", str(root),
+                        sys.executable,
+                        "-m",
+                        "worldatlas.map_build.build",
+                        str(cfg),
+                        str(root / "run"),
+                        "--work-dir",
+                        str(root),
                         "--resume",
                     ],
                     check=True,
@@ -292,10 +304,15 @@ class EndToEndTests(unittest.TestCase):
                 standalone = root / "standalone-physical"
                 shutil.copytree(root / "run/physical", standalone / "physical")
                 result = Pipeline(
-                    cfg, root / "reuse-standalone", work_dir=root, selection=selected,
+                    cfg,
+                    root / "reuse-standalone",
+                    work_dir=root,
+                    selection=selected,
                     reuse_from=standalone,
                 ).run()
-                self.assertEqual(result["final"]["runs"]["sha256"], report["final"]["runs"]["sha256"])
+                self.assertEqual(
+                    result["final"]["runs"]["sha256"], report["final"]["runs"]["sha256"]
+                )
 
                 interrupted = Pipeline(
                     cfg,
@@ -323,7 +340,9 @@ class EndToEndTests(unittest.TestCase):
                 ):
                     with (
                         self.subTest(flags=flags),
-                        self.assertRaisesRegex(ValueError, "--resume uses saved options"),
+                        self.assertRaisesRegex(
+                            ValueError, "--resume uses saved options"
+                        ),
                     ):
                         Pipeline(
                             cfg, root / "continued", work_dir=root, resume=True, **flags
@@ -340,21 +359,33 @@ class EndToEndTests(unittest.TestCase):
                 runs.tofile(release_runs)
                 release_config = write_json(
                     release_folder / "config.json",
-                    {**grid, "categories": [
-                        dict(id=binding["code"] + 100, entity_id=binding["entity_id"],
-                             physical_class=binding["physical_class"])
-                        for binding in frozen["geography"]["category_bindings"]
-                    ]},
+                    {
+                        **grid,
+                        "categories": [
+                            dict(
+                                id=binding["code"] + 100,
+                                entity_id=binding["entity_id"],
+                                physical_class=binding["physical_class"],
+                            )
+                            for binding in frozen["geography"]["category_bindings"]
+                        ],
+                    },
                 )
                 comparison_pins = {
                     f"reference_{name}": pin_file(path)
                     for name, path in (
-                        ("rows", release_rows), ("runs", release_runs), ("config", release_config)
+                        ("rows", release_rows),
+                        ("runs", release_runs),
+                        ("config", release_config),
                     )
                 }
                 physical_only = Pipeline(
-                    cfg, root / "physical-only", work_dir=root, selection=selected,
-                    reuse_from=root / "reused", recompute_division=True,
+                    cfg,
+                    root / "physical-only",
+                    work_dir=root,
+                    selection=selected,
+                    reuse_from=root / "reused",
+                    recompute_division=True,
                 )
                 physical_only.close()
                 resumed = Pipeline(
@@ -371,7 +402,11 @@ class EndToEndTests(unittest.TestCase):
                 run_path = root / "physical-only"
                 report_pin = pin_file(run_path / "report.json")
                 comparison_path = root / "comparison"
-                with patch.object(comparison_command, "cache_release_reference", return_value=comparison_pins):
+                with patch.object(
+                    comparison_command,
+                    "cache_release_reference",
+                    return_value=comparison_pins,
+                ):
                     compared = comparison_command.compare_release(
                         run_path, "v9.0", comparison_path, work_dir=root
                     )
@@ -382,39 +417,71 @@ class EndToEndTests(unittest.TestCase):
                 self.assertEqual(pin_file(run_path / "report.json"), report_pin)
 
                 changed = Pipeline(
-                    cfg, root / "changed-config", work_dir=root, selection=selected,
+                    cfg,
+                    root / "changed-config",
+                    work_dir=root,
+                    selection=selected,
                     reuse_from=root / "run",
                 )
                 original_config = cfg.read_bytes()
                 cfg.write_bytes(original_config + b"\n")
-                with self.assertRaisesRegex(ValueError, "source configuration changed during pipeline"):
+                with self.assertRaisesRegex(
+                    ValueError, "source configuration changed during pipeline"
+                ):
                     changed.run()
                 self.assertFalse((changed.out / "report.json").exists())
                 cfg.write_bytes(original_config)
 
+                changed_snapshot = Pipeline(
+                    cfg,
+                    root / "changed-snapshot",
+                    work_dir=root,
+                    selection=selected,
+                    reuse_from=root / "run",
+                )
+                snapshot = changed_snapshot.out / "build-config.json"
+                snapshot.write_bytes(snapshot.read_bytes() + b"\n")
+                with self.assertRaisesRegex(
+                    ValueError, "saved build configuration changed during pipeline"
+                ):
+                    changed_snapshot.run()
+                self.assertFalse((changed_snapshot.out / "report.json").exists())
+
                 unknown_stage = Pipeline(
-                    cfg, root / "unknown-stage", work_dir=root, selection=selected,
+                    cfg,
+                    root / "unknown-stage",
+                    work_dir=root,
+                    selection=selected,
                     reuse_from=root / "run",
                 )
                 with unknown_stage.timing.measure("unexpected", "unfinished stage"):
                     pass
-                with self.assertRaisesRegex(ValueError, "all stage outputs must be complete"):
+                with self.assertRaisesRegex(
+                    ValueError, "all stage outputs must be complete"
+                ):
                     unknown_stage.run()
                 self.assertFalse((unknown_stage.out / "report.json").exists())
 
                 physical_report = root / "run/physical/report.json"
                 original = physical_report.read_bytes()
-                physical_report.write_text(json.dumps(dict(json.loads(original), status="incomplete")))
-                with self.assertRaisesRegex(ValueError, "physical source run is incomplete"):
+                physical_report.write_text(
+                    json.dumps(dict(json.loads(original), status="incomplete"))
+                )
+                with self.assertRaisesRegex(
+                    ValueError, "physical source run is incomplete"
+                ):
                     physical_reference(root / "run", runner.physical_config)
                 physical_report.write_bytes(original)
                 (root / "run/physical/configs/land.json").unlink()
                 self.assertEqual(
-                    physical_reference(root / "run", runner.physical_config)["status"], "reused"
+                    physical_reference(root / "run", runner.physical_config)["status"],
+                    "reused",
                 )
                 settings = root / "run/physical-build-config.json"
                 settings.write_bytes(settings.read_bytes() + b"\n")
-                with self.assertRaisesRegex(ValueError, "physical source configuration changed"):
+                with self.assertRaisesRegex(
+                    ValueError, "physical source configuration changed"
+                ):
                     physical_reference(root / "run", runner.physical_config)
             finally:
                 with psycopg.connect(url) as db:

@@ -31,7 +31,8 @@ Coastal and basin claims run independently against the same ownership snapshot, 
 
 ## Code and tests
 
-| Files | Responsibility || --- | --- |
+| Files | Responsibility |
+| --- | --- |
 | `contracts.py` | Resolve frozen rule, feature and target links. |
 | `intervals.py`, `scope.py` | Prepare compact query intervals and merge independent claims. |
 | `connectivity.py` | Build shared connected-component domains for reference-point scopes. |

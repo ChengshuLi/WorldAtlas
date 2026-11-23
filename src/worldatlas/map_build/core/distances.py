@@ -22,7 +22,8 @@ def run_pairs_batch(
     records: ArrayLike,
     width: int,
     north: float = 90.0,
-    incumbent: float = math.inf,
+    *,
+    incumbent: float,
 ) -> tuple[dict[int, float], int]:
     """Compare one run of cells with many reference runs.
 

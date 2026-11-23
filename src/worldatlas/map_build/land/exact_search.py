@@ -10,8 +10,9 @@ import numpy as np
 # SciPy publishes the compiled tree without type information.
 from scipy.spatial import cKDTree  # pyright: ignore[reportAttributeAccessIssue]
 
+from worldatlas.geodesy.wgs84 import MIN_RADIUS as M_MIN
+from worldatlas.geodesy.wgs84 import unit_sphere
 from worldatlas.map_build.core.distances import run_pairs_batch
-from worldatlas.map_build.land.certificates import M_MIN, _unit
 
 
 class ExactIndex:
@@ -51,7 +52,8 @@ class ExactIndex:
         self.C = tile_cells
         self.guard = guard_m
         self.cache = {}
-        self.leaf_cells = min(tile_cells, 128)
+        # A fine tile must fit exactly into a source tile for both indexes.
+        self.leaf_cells = math.gcd(tile_cells, 128)
         self.leaves: list[tuple[tuple[int, int], int, int, int, int, np.ndarray]] = []
         self.leaf_cache = {}
         if (
@@ -64,8 +66,6 @@ class ExactIndex:
             raise ValueError('invalid config')
         self.records = {}
         self.ids = []
-        pos = []
-        radius = []
         for ty, tx, codes, count, sha in tiles:
             if (
                 (ty, tx) in self.records
@@ -83,8 +83,6 @@ class ExactIndex:
                 raise ValueError('tile outside grid')
             self.records[(ty, tx)] = (set(codes), count, sha)
             self.ids.append((ty, tx))
-            pos.append((north - (y0 + y1) * step / 2, -180 + (x0 + x1) * step / 2))
-            radius.append(((y1 - y0) + (x1 - x0)) * step * math.pi / 360)
         if not self.ids:
             raise ValueError('empty tile index')
         self.codes = tuple(
@@ -92,11 +90,6 @@ class ExactIndex:
                 {code for codes, count, sha in self.records.values() for code in codes}
             )
         )
-        pos = np.asarray(pos)
-        self.xyz = _unit(pos[:, 0], pos[:, 1])
-        self.tree = cKDTree(self.xyz)
-        self.radii = np.asarray(radius)
-        self.maxrad = float(self.radii.max())
 
     def _load(self, key: tuple[int, int]) -> np.ndarray:
         """Read and verify a tile's reference runs, then cache them.
@@ -187,7 +180,7 @@ class ExactIndex:
         self.leaves = leaves
         self.leaf_codes = codes
         latitudes, longitudes = np.asarray(positions).T
-        self.leaf_xyz = _unit(latitudes, longitudes)
+        self.leaf_xyz = unit_sphere(latitudes, longitudes)
         self.leaf_tree = cKDTree(self.leaf_xyz)
         self.leaf_radii = np.asarray(radii)
         self.leaf_maxrad = float(max(radii))
@@ -200,9 +193,6 @@ class ExactIndex:
             (tile_row, tile_column, codes) records on the finer tile grid.
         """
         self.prepare_leaves()
-        # Production source tiles are an exact multiple of the fine leaf grid.
-        if self.C % self.leaf_cells:
-            raise ValueError('unaligned fine seed index')
         return [
             (sy // self.leaf_cells, sx // self.leaf_cells, codes)
             for (_, sy, ey, sx, ex, selected), codes in zip(
@@ -256,7 +246,7 @@ class ExactIndex:
             raise ValueError('invalid query')
         lat = self.north - (y + 0.5) * self.step
         lon = -180 + ((a + b - 1) / 2 + 0.5) * self.step
-        point = _unit(np.array([lat]), np.array([lon]))[0]
+        point = unit_sphere(np.array([lat]), np.array([lon]))[0]
         qr = (b - a - 1) * self.step * math.pi / 360
         self.prepare_leaves()
         limit = (upper + self.guard) / M_MIN + self.leaf_maxrad + qr
@@ -299,29 +289,11 @@ class ExactIndex:
                 continue
             data = self._load_leaf(int(i))
             seen += len(data)
-            # Minimum longitude gap of two circular integer intervals, vectorized.
-            aa = data[:, 1].astype(np.int64)
-            bb = data[:, 2].astype(np.int64)
-            gap = np.full(len(data), self.w, dtype=np.int64)
-            for shift in (-self.w, 0, self.w):
-                gap = np.minimum(
-                    gap,
-                    np.maximum(
-                        0, np.maximum(aa + shift - (b - 1), a - (bb - 1 + shift))
-                    ),
-                )
-            p1 = math.radians(lat)
-            p2 = np.deg2rad(self.north - (data[:, 0].astype(float) + 0.5) * self.step)
-            dl = np.deg2rad(gap * self.step)
-            dp = p2 - p1
-            hav = np.sin(dp / 2) ** 2 + math.cos(p1) * np.cos(p2) * np.sin(dl / 2) ** 2
-            angle = 2 * np.arcsin(np.sqrt(np.clip(hav, 0, 1)))
-            selected = np.flatnonzero(angle * M_MIN <= incumbent + self.guard)
             ds, count = run_pairs_batch(
                 y,
                 a,
                 b,
-                data[selected],
+                data,
                 self.w,
                 north=self.north,
                 incumbent=incumbent,
@@ -332,5 +304,5 @@ class ExactIndex:
         return out, {
             'tiles': len(indices),
             'seed_runs_scanned': seen,
-            'run_pairs_wgs84_tested': tested,
+            'run_pairs_considered': tested,
         }

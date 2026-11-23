@@ -3,6 +3,7 @@
 import base64
 import gzip
 import json
+from collections.abc import Mapping
 from importlib.metadata import distribution
 from pathlib import Path, PurePosixPath
 from typing import Any
@@ -160,18 +161,16 @@ def source_files(content: dict[str, Any]) -> dict[str, bytes]:
     return files
 
 
-def restore_source(content: dict[str, Any], output: Path | str) -> None:
-    """Restore the archived files into a new directory.
+def restore_source(files: Mapping[str, bytes], output: Path | str) -> None:
+    """Write the files decoded and checked by source_files into a new directory.
 
     Args:
-        content: Source archive to validate and extract.
+        files: Paths relative to the source root, mapped to verified file bytes.
         output: Directory to create for the unpacked copy.
 
     Raises:
-        ValueError: The archive is invalid.
         FileExistsError: The output directory already exists.
     """
-    files = source_files(content)
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
     for name, raw in files.items():

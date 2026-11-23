@@ -35,7 +35,7 @@ class SourceArchiveTests(unittest.TestCase):
         (self.package / "module.py").write_text("changed after capture")
         archived = self.root / "source.json.gz"
         write_source(archived, captured)
-        restore_source(read_source(archived), self.root / "restored")
+        restore_source(source_files(read_source(archived)), self.root / "restored")
         self.assertEqual(
             (self.root / "restored/src/worldatlas/module.py").read_bytes(),
             b"value = 42\r\n",
@@ -45,7 +45,7 @@ class SourceArchiveTests(unittest.TestCase):
             (self.project / "environment.yml").read_bytes(),
         )
         with self.assertRaises(FileExistsError):
-            restore_source(captured, self.root / "restored")
+            restore_source(source_files(captured), self.root / "restored")
 
     def test_installed_distribution_supplies_setup_files(self):
         package = self.root / "site-packages/worldatlas"
@@ -121,7 +121,7 @@ class SourceArchiveTests(unittest.TestCase):
                 content["files"][name] = raw
                 target = self.root / "invalid"
                 with self.assertRaises(ValueError):
-                    restore_source(content, target)
+                    restore_source(source_files(content), target)
                 self.assertFalse(target.exists())
 
     def test_file_directory_collisions_are_rejected(self):

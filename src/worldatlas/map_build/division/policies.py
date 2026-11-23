@@ -15,7 +15,11 @@ if TYPE_CHECKING:
 
 from worldatlas.map_build.core.geometry import rasterize
 from worldatlas.map_build.core.layers import write_layer
-from worldatlas.map_build.division.nearest import nearest, query_roots
+from worldatlas.map_build.division.nearest import (
+    cell_queries,
+    component_queries,
+    query_roots,
+)
 from worldatlas.map_build.water.basins import participants, physical_water
 
 
@@ -35,7 +39,8 @@ def nearest_land(
     Raises:
         ValueError: A reference point does not identify parent land.
     """
-    if not query_roots(scope):
+    query = query_roots(scope)
+    if not query:
         return write_layer(directory, scope.grid, ())
     roots = set()
     components = context.components("land")
@@ -50,7 +55,7 @@ def nearest_land(
         components=components,
         reference_components=roots,
     )
-    return nearest(scope, references, "component", directory=directory)
+    return component_queries(scope, references, query, directory)
 
 
 def nearest_coastal_water(
@@ -68,7 +73,7 @@ def nearest_coastal_water(
         to later rules.
     """
     limit = context.configuration["coastal_band_metres"]
-    return nearest(scope, context.water_shores(), "cell", limit, directory=directory)
+    return cell_queries(scope, context.water_shores(), limit, directory=directory)
 
 
 def nearest_basin_water(
@@ -98,18 +103,14 @@ def nearest_basin_water(
         context.parent_physical,
         cast(tuple[np.ndarray, np.ndarray], context.land_ownership),
         scope.grid,
-        [
-            (e, e, e)
-            for e in getattr(context, "shore_order", [p[0] for p in shores.pairs])
-        ],
+        context.shore_order,
     )
-    eligible = {p[0] for p in shores.pairs}
+    eligible = set(shores.owners)
     counts = {owner: n for owner, n in counts.items() if owner in eligible}
     references = shores.filtered(set(counts))
-    result = nearest(
+    result = cell_queries(
         scope,
         references,
-        "cell",
         directory=directory,
     )
     result["participant_shore_edges"] = counts
@@ -130,4 +131,4 @@ def nearest_water(
     Returns:
         Claim layer report with counts by owner.
     """
-    return nearest(scope, context.water_shores(), "cell", directory=directory)
+    return cell_queries(scope, context.water_shores(), directory=directory)

@@ -12,8 +12,11 @@ import subprocess
 import numpy as np
 import pyarrow as pa
 import pyarrow.parquet as pq
+from pydantic import TypeAdapter
 from osgeo import gdal, ogr
 from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.inputs.configuration import WaterSettings
+from worldatlas.map_build.execution.runtime import RunFilePins
 from worldatlas.map_build.physical import water as build
 from worldatlas.map_build.physical import water_batch
 from worldatlas.map_build.physical.water_batch import WaterBatch
@@ -69,6 +72,19 @@ class WaterShardTests(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
+    def rasterize(self, source, digest, output, config, grid, batch_size=None, engine=None, **kwargs):
+        settings = json.loads(config.read_bytes())
+        reserve = settings.pop('minimum_free_bytes', 0)
+        if batch_size is not None:
+            settings['batch_size'] = batch_size
+        if engine is not None:
+            settings['rasterizer'] = engine
+        return build.run(
+            source, digest, output, config, grid,
+            settings=TypeAdapter(WaterSettings).validate_python(settings, strict=True),
+            minimum_free_bytes=reserve, files=RunFilePins(), **kwargs,
+        )
+
     def fixture(self):
         def wkt(s):
             return bytes(ogr.CreateGeometryFromWkt(s).ExportToWkb())
@@ -123,7 +139,7 @@ class WaterShardTests(unittest.TestCase):
         p, digest = self.fixture()
         for n in (1, 10):
             out = self.path / f'o{n}'
-            build.run(p, digest, out, self.config, self.grid, n)
+            self.rasterize(p, digest, out, self.config, self.grid, n)
             report = json.loads((out / 'report.json').read_text())
             self.assertEqual(report['counts']['polygons'], 3)
             self.assertEqual(report['counts']['excluded_classification'], 2)
@@ -186,7 +202,7 @@ class WaterShardTests(unittest.TestCase):
         reports = []
         for engine in ('python', 'gdal'):
             out = self.path / engine
-            build.run(p, digest, out, self.config, self.grid, 17, engine)
+            self.rasterize(p, digest, out, self.config, self.grid, 17, engine)
             reports.append(json.loads((out / 'report.json').read_text()))
         self.assertEqual(reports[0]['counts'], reports[1]['counts'])
         np.testing.assert_array_equal(
@@ -198,21 +214,27 @@ class WaterShardTests(unittest.TestCase):
     def test_gdal_arrow_slices_large_offsets_and_validity_bitmap(self):
         out = self.path / 'kernel'
         out.mkdir()
-        kernel = WaterBatch(out)
+        kernel = WaterBatch()
         polygon = bytes(
             ogr.CreateGeometryFromWkt(
                 'POLYGON ((-180 90,-135 90,-135 45,-180 45,-180 90))'
             ).ExportToWkb()
         )
         for dtype in (pa.binary(), pa.large_binary()):
-            geometry = pa.array([polygon, None, polygon, None, polygon], type=dtype).slice(2, 3)
+            geometry = pa.array(
+                [polygon, None, polygon, None, polygon], type=dtype
+            ).slice(2, 3)
             raster = gdal.GetDriverByName('MEM').Create('', 8, 4, 1, gdal.GDT_Byte)
             raster.SetGeoTransform((-180, 45, 0, 90, 0, -45))
-            status, failed = kernel.burn(raster, geometry, [1, 0, 1], [8, 4, -180, 90, 45], 4)
+            status, failed = kernel.burn(
+                raster, geometry, [1, 0, 1], [8, 4, -180, 90, 45], 4
+            )
             self.assertIsNone(failed)
             self.assertEqual(status.tolist(), [1, 0, 1])
             self.assertEqual(int(raster.ReadAsArray().sum()), 1)
-            status, failed = kernel.burn(raster, geometry, [1, 1, 1], [8, 4, -180, 90, 45], 4)
+            status, failed = kernel.burn(
+                raster, geometry, [1, 1, 1], [8, 4, -180, 90, 45], 4
+            )
             self.assertEqual(failed, 1)
             self.assertEqual(status.tolist(), [1, 5, 0])
 
@@ -227,7 +249,7 @@ class WaterShardTests(unittest.TestCase):
         ):
             first = WaterBatch()
             second = WaterBatch()
-            build.run(p, digest, self.path / 'python-api', self.config, self.grid)
+            self.rasterize(p, digest, self.path / 'python-api', self.config, self.grid)
         self.assertEqual(first.provenance, second.provenance)
         first.timings['tile_burn_seconds'] = 1
         self.assertEqual(second.timings['tile_burn_seconds'], 0)
@@ -264,15 +286,17 @@ class WaterShardTests(unittest.TestCase):
             rows.append({'id': str(len(rows)), 'subtype': 'lake', 'geometry': value + b'extra'})
         pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata), p)
         for engine in ('python', 'gdal'):
-            build.run(p, sha256_file(p), self.path / engine, self.config, self.grid, engine=engine)
+            self.rasterize(p, sha256_file(p), self.path / engine, self.config, self.grid, engine=engine)
         self.assertEqual(
             sha256_file(self.path / 'python/water.tif'), sha256_file(self.path / 'gdal/water.tif')
         )
 
-    def test_point_shortcut_matches_ogr_for_endianness_dimensions_and_nonfinite_values(self):
+    def test_point_shortcut_matches_ogr_for_endianness_dimensions_and_nonfinite_values(
+        self,
+    ):
         out = self.path / 'point-kernel'
         out.mkdir()
-        kernel = WaterBatch(out)
+        kernel = WaterBatch()
         points = [
             struct.pack(order + 'BIdd', endian, 1, x, y)
             for order, endian in (('<', 1), ('>', 0))
@@ -343,16 +367,20 @@ class WaterShardTests(unittest.TestCase):
     def test_borrowed_tile_buffer_preserves_existing_burns_and_partial_edge_tiles(self):
         out = self.path / 'edge-kernel'
         out.mkdir()
-        kernel = WaterBatch(out)
+        kernel = WaterBatch()
         raster = gdal.GetDriverByName('MEM').Create('', 7, 3, 1, gdal.GDT_Byte)
         raster.SetGeoTransform((-180, 45, 0, 90, 0, -45))
         initial = np.zeros((3, 7), dtype=np.uint8)
         initial[0, 0] = 1
         raster.GetRasterBand(1).WriteArray(initial)
         polygon = bytes(
-            ogr.CreateGeometryFromWkt('POLYGON ((45 0,135 0,135 -45,45 -45,45 0))').ExportToWkb()
+            ogr.CreateGeometryFromWkt(
+                'POLYGON ((45 0,135 0,135 -45,45 -45,45 0))'
+            ).ExportToWkb()
         )
-        status, failed = kernel.burn(raster, pa.array([polygon]), [1], [7, 3, -180, 90, 45], 4)
+        status, failed = kernel.burn(
+            raster, pa.array([polygon]), [1], [7, 3, -180, 90, 45], 4
+        )
         self.assertIsNone(failed)
         self.assertEqual(status.tolist(), [1])
         initial[2, 5:7] = 1
@@ -453,7 +481,7 @@ class WaterShardTests(unittest.TestCase):
                     )
         pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata), p)
         for engine in ('python', 'gdal'):
-            build.run(p, sha256_file(p), self.path / engine, self.config, self.grid, 19, engine)
+            self.rasterize(p, sha256_file(p), self.path / engine, self.config, self.grid, 19, engine)
         np.testing.assert_array_equal(
             gdal.Open(str(self.path / 'python/water.tif')).ReadAsArray(),
             gdal.Open(str(self.path / 'gdal/water.tif')).ReadAsArray(),
@@ -462,7 +490,7 @@ class WaterShardTests(unittest.TestCase):
     def test_gdal_rejects_bad_and_empty_wkb_without_burning_batch(self):
         out = self.path / 'kernel'
         out.mkdir()
-        kernel = WaterBatch(out)
+        kernel = WaterBatch()
         polygon = bytes(
             ogr.CreateGeometryFromWkt(
                 'POLYGON ((-180 90,-135 90,-135 45,-180 45,-180 90))'
@@ -497,11 +525,15 @@ class WaterShardTests(unittest.TestCase):
         for method in ('hybrid', 'tiled'):
             out = self.path / method
             out.mkdir()
-            kernel = WaterBatch(out, method)
+            kernel = WaterBatch(method)
             raster = gdal.GetDriverByName('MEM').Create('', 8, 4, 1, gdal.GDT_Byte)
             raster.SetGeoTransform((-180, 45, 0, 90, 0, -45))
             status, failed = kernel.burn(
-                raster, pa.array([polygon, multipart] * 25), [1] * 50, [8, 4, -180, 90, 45], 2
+                raster,
+                pa.array([polygon, multipart] * 25),
+                [1] * 50,
+                [8, 4, -180, 90, 45],
+                2,
             )
             self.assertIsNone(failed)
             self.assertEqual(status.tolist(), [1] * 50)
@@ -524,7 +556,7 @@ class WaterShardTests(unittest.TestCase):
         out = self.path / 'vector'
         out.mkdir()
         with self.assertRaisesRegex(ValueError, 'global vector mode does not preserve'):
-            WaterBatch(out, 'vector')
+            WaterBatch('vector')
 
     def test_production_grid_center_tie_edges_keep_reference_values(self):
         p, _ = self.fixture()
@@ -555,7 +587,7 @@ class WaterShardTests(unittest.TestCase):
         reports = []
         for engine in ('python', 'gdal'):
             out = self.path / engine
-            build.run(p, sha256_file(p), out, self.config, self.grid, engine=engine)
+            self.rasterize(p, sha256_file(p), out, self.config, self.grid, engine=engine)
             reports.append(json.loads((out / 'report.json').read_text()))
             raster = gdal.Open(str(out / 'water.tif'))
             self.assertEqual(int(raster.ReadAsArray(75722, 8650, 1, 1)[0, 0]), 1)
@@ -601,24 +633,18 @@ class WaterShardTests(unittest.TestCase):
         reports = []
         for engine in ('python', 'gdal'):
             out = self.path / engine
-            build.run(p, sha256_file(p), out, self.config, self.grid, engine=engine)
+            self.rasterize(p, sha256_file(p), out, self.config, self.grid, engine=engine)
             reports.append(json.loads((out / 'report.json').read_text()))
         self.assertEqual(reports[0]['output_sha256'], reports[1]['output_sha256'])
 
-    def test_batch_config_and_override(self):
+    def test_batch_size_comes_from_settings(self):
         p, digest = self.fixture()
         cfg = json.loads(self.config.read_text())
         cfg['batch_size'] = 2
         self.config.write_text(json.dumps(cfg))
-        for name, override, expected in [('config', None, 2), ('override', 3, 3)]:
-            out = self.path / name
-            build.run(p, digest, out, self.config, self.grid, override)
-            self.assertEqual(json.loads((out / 'report.json').read_text())['batch_size'], expected)
-        cfg['batch_size'] = True
-        self.config.write_text(json.dumps(cfg))
-        with self.assertRaisesRegex(ValueError, 'positive integer'):
-            build.run(p, digest, self.path / 'invalid-batch', self.config, self.grid)
-        self.assertFalse((self.path / 'invalid-batch').exists())
+        out = self.path / 'batch-configured'
+        self.rasterize(p, digest, out, self.config, self.grid)
+        self.assertEqual(json.loads((out / 'report.json').read_text())['batch_size'], 2)
 
     def test_subtype_only_accepts_without_sources_or_class(self):
         polygon = bytes(
@@ -641,7 +667,7 @@ class WaterShardTests(unittest.TestCase):
         p = self.inputs / 'minimal.parquet'
         pq.write_table(table, p)
         out = self.path / 'minimal-output'
-        build.run(p, hashlib.sha256(p.read_bytes()).hexdigest(), out, self.config, self.grid)
+        self.rasterize(p, hashlib.sha256(p.read_bytes()).hexdigest(), out, self.config, self.grid)
         report = json.loads((out / 'report.json').read_text())
         self.assertEqual(report['counts']['polygons'], 1)
         self.assertEqual(report['counts']['excluded_classification'], 2)
@@ -655,8 +681,8 @@ class WaterShardTests(unittest.TestCase):
         cfg['schema'] = 'water-shard-candidate-v1'
         self.config.write_text(json.dumps(cfg))
         out = self.path / 'old-policy'
-        with self.assertRaisesRegex(ValueError, 'supported configuration'):
-            build.run(p, digest, out, self.config, self.grid)
+        with self.assertRaisesRegex(ValueError, 'schema'):
+            self.rasterize(p, digest, out, self.config, self.grid)
         self.assertFalse(out.exists())
 
     def test_compiled_engine_configuration_is_rejected_before_output(self):
@@ -665,8 +691,8 @@ class WaterShardTests(unittest.TestCase):
         cfg['rasterizer'] = 'native'
         self.config.write_text(json.dumps(cfg))
         out = self.path / 'retired-engine'
-        with self.assertRaisesRegex(ValueError, 'runtime native compilation is retired'):
-            build.run(p, digest, out, self.config, self.grid)
+        with self.assertRaisesRegex(ValueError, 'rasterizer'):
+            self.rasterize(p, digest, out, self.config, self.grid)
         self.assertFalse(out.exists())
 
     def test_free_space_guard(self):
@@ -676,7 +702,7 @@ class WaterShardTests(unittest.TestCase):
         self.config.write_text(json.dumps(cfg))
         out = self.path / 'no-space'
         with self.assertRaisesRegex(ValueError, 'free disk below configured reserve'):
-            build.run(p, digest, out, self.config, self.grid)
+            self.rasterize(p, digest, out, self.config, self.grid)
         self.assertFalse(out.exists())
 
     def test_progress_can_report_rss_on_platforms_with_or_without_proc(self):
@@ -695,7 +721,7 @@ class WaterShardTests(unittest.TestCase):
                     return 'Name:\tpython\nVmRSS:\t128 kB\n'
 
                 with mock.patch.object(Path, 'read_text', new=read):
-                    build.run(
+                    self.rasterize(
                         source, digest, self.path / f'proc-{available}', self.config, self.grid,
                         emit=lambda line, **_: progress.append(json.loads(line)),
                     )
@@ -713,7 +739,7 @@ class WaterShardTests(unittest.TestCase):
             side_effect=lambda path: SimpleNamespace(free=0 if Path(path) == out.resolve() else 1024),
         ):
             with self.assertRaisesRegex(ValueError, 'partial output preserved'):
-                build.run(source, digest, out, self.config, self.grid)
+                self.rasterize(source, digest, out, self.config, self.grid)
         self.assertFalse((out / 'report.json').exists())
 
     def test_water_report_requires_unchanged_source_and_config(self):
@@ -730,7 +756,7 @@ class WaterShardTests(unittest.TestCase):
                     path.write_bytes(original + b'\n')
 
                 with self.assertRaisesRegex(ValueError, message):
-                    build.run(source, digest, out, self.config, self.grid, emit=change)
+                    self.rasterize(source, digest, out, self.config, self.grid, emit=change)
                 self.assertFalse((out / 'report.json').exists())
                 path.write_bytes(original)
 
@@ -749,7 +775,7 @@ class WaterShardTests(unittest.TestCase):
                 with self.subTest(engine=engine, message=message):
                     out = self.path / f'{engine}-{replacement is None}'
                     with self.assertRaisesRegex(ValueError, message):
-                        build.run(source, sha256_file(source), out, self.config, self.grid, engine=engine)
+                        self.rasterize(source, sha256_file(source), out, self.config, self.grid, engine=engine)
                     self.assertFalse((out / 'report.json').exists())
 
     def test_python_rasterizer_reports_invalid_polygon_with_same_id_as_gdal(self):
@@ -765,7 +791,7 @@ class WaterShardTests(unittest.TestCase):
         reports = []
         for engine in ('gdal', 'python'):
             out = self.path / engine
-            reports.append(build.run(source, sha256_file(source), out, self.config, self.grid, engine=engine))
+            reports.append(self.rasterize(source, sha256_file(source), out, self.config, self.grid, engine=engine))
             self.assertEqual(json.loads((out / 'invalid-feature-ids.json').read_text()), ['lake'])
         self.assertEqual(reports[0]['counts'], reports[1]['counts'])
         self.assertTrue(all(r['status'] == 'incomplete-input-issues' for r in reports))
@@ -774,18 +800,6 @@ class WaterShardTests(unittest.TestCase):
         source, digest = self.fixture()
         cfg = json.loads(self.config.read_text())
         out = self.path / 'invalid'
-        for setting, value, message in (
-            ('minimum_free_bytes', -1, 'invalid free-space reserve'),
-            ('tile_size', 0, 'invalid tile size'),
-            ('policy', {}, 'explicit Overture inland subtype policy'),
-            ('native_method', 'old', 'retired native_method'),
-        ):
-            with self.subTest(setting=setting):
-                self.config.write_text(json.dumps(dict(cfg, **{setting: value})))
-                with self.assertRaisesRegex(ValueError, message):
-                    build.run(source, digest, out, self.config, self.grid)
-                self.assertFalse(out.exists())
-        self.config.write_text(json.dumps(cfg))
         table = pq.read_table(source)
         for column, message in (
             (dict(encoding='WKT'), 'unexpected GeoParquet geometry encoding'),
@@ -798,26 +812,22 @@ class WaterShardTests(unittest.TestCase):
                     source,
                 )
                 with self.assertRaisesRegex(ValueError, message):
-                    build.run(source, sha256_file(source), out, self.config, self.grid)
+                    self.rasterize(source, sha256_file(source), out, self.config, self.grid)
                 self.assertFalse(out.exists())
 
     def test_integrity_and_collision(self):
         p, digest = self.fixture()
         with self.assertRaises(ValueError):
-            build.run(p, '0' * 64, self.path / 'bad', self.config, self.grid)
+            self.rasterize(p, '0' * 64, self.path / 'bad', self.config, self.grid)
         self.assertFalse((self.path / 'bad').exists())
         existing = self.path / 'existing'
         existing.mkdir()
         with self.assertRaises(FileExistsError):
-            build.run(p, digest, existing, self.config, self.grid)
+            self.rasterize(p, digest, existing, self.config, self.grid)
         with self.assertRaises(ValueError):
-            build.run(p, digest, self.path, self.config, self.grid)
+            self.rasterize(p, digest, self.path, self.config, self.grid)
         with self.assertRaises(ValueError):
-            build.run(p, digest, self.inputs / 'nested-output', self.config, self.grid)
-        self.config.write_text('{}')
-        with self.assertRaises(ValueError):
-            build.run(p, digest, self.path / 'badconfig', self.config, self.grid)
-        self.assertFalse((self.path / 'badconfig').exists())
+            self.rasterize(p, digest, self.inputs / 'nested-output', self.config, self.grid)
 
 
 if __name__ == '__main__':

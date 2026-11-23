@@ -9,7 +9,7 @@ from typing import LiteralString, cast
 from psycopg import Connection
 
 from worldatlas.geodesy.geojson import validate_geometry
-from worldatlas.map_build.division.contracts import CompiledDivision, compile_rules
+from worldatlas.map_build.division.contracts import CompiledDivision, RuleIndex
 from worldatlas.map_build.inputs.selection_types import (
     BuildSelection,
     ConstructionRecord,
@@ -92,8 +92,8 @@ def read_selection(
 
     Args:
         database: Open PostgreSQL connection for a read-only transaction.
-        raw_sources: Additional Neon source IDs from the build config, including
-            physical inputs and any comparison files specified with ``r2_source``.
+        raw_sources: Catalog IDs for the coastline and inland-water files selected
+            in the build config.
         parents: Parent IDs to load with their ancestors, or None for all
             divisions.
 
@@ -147,10 +147,8 @@ def read_selection(
 
         # data["sources"] names the files behind the saved geometry and rule
         # citations. Keep their catalog rows so we can trace those records.
-        # raw_sources adds catalog IDs for files the map-building pipeline may
-        # download in a later stage. These include the coastline polygon ZIP,
-        # inland-water files, and any comparison files referenced by source ID.
-        # Here we save the catalog rows for both groups.
+        # The physical stage may download the coastline and inland-water sources
+        # listed in raw_sources. Save the catalog rows for both groups here.
         references = set(raw_sources) | {
             source["source_id"] for source in data["sources"]
         }
@@ -200,8 +198,8 @@ def prepare_geography(domain: GeographicSelection) -> dict[int, CompiledDivision
         )
     for feature in domain["features"]:
         validate_geometry(feature["geometry"])
-    parents = {r["parent_id"] for r in domain["rules"]}
-    compiled = {parent: compile_rules(domain, parent) for parent in parents}
+    index = RuleIndex(domain)
+    compiled = {parent: index.compile(parent) for parent in index.rules}
     validate_map_code_bindings(domain)
     return compiled
 

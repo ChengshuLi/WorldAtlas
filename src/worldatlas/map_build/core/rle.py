@@ -6,7 +6,7 @@ from pathlib import Path
 
 import numpy as np
 
-from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.core.grid import Grid, column_windows
 
 
 def row(
@@ -38,6 +38,44 @@ def row(
     ):
         raise ValueError('invalid row-run row')
     return ends, codes
+
+
+def crop(
+    rows: np.ndarray, runs: np.ndarray, y: int, x0: int, x1: int, width: int
+) -> np.ndarray:
+    """Expand part of one row-run row to a code per cell.
+
+    Args:
+        rows: Row offsets into the run array.
+        runs: Flattened (end_column, code) pairs.
+        y: Row to read.
+        x0: First unwrapped column.
+        x1: Exclusive end column. It may cross the longitude seam.
+        width: Number of columns in the full grid.
+
+    Returns:
+        A uint32 array with x1 - x0 codes in column order.
+
+    Raises:
+        ValueError: The window or row-run records are invalid.
+    """
+    if not (0 <= y < len(rows) - 1 and 0 < x1 - x0 <= width):
+        raise ValueError("invalid crop")
+    ends, vals = row((rows, runs), y, width)
+    if x0 == 0 and x1 == width:
+        lengths = np.diff(np.concatenate((np.array([0], dtype=ends.dtype), ends)))
+        return np.repeat(vals, lengths).astype(np.uint32, copy=False)
+    result = np.empty(x1 - x0, dtype=np.uint32)
+    cur = 0
+    for xm, stop in column_windows(x0, x1, width):
+        take = stop - xm
+        i = int(np.searchsorted(ends, xm, side="right"))
+        j = int(np.searchsorted(ends, stop, side="left")) + 1
+        clipped = np.minimum(ends[i:j], stop).astype(np.int64)
+        lengths = np.diff(np.r_[xm, clipped])
+        result[cur : cur + take] = np.repeat(vals[i:j], lengths)
+        cur += take
+    return result
 
 
 def close_memmap(array: np.memmap) -> None:

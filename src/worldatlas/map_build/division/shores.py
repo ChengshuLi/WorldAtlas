@@ -10,10 +10,32 @@ import numpy as np
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.rle import row
 from worldatlas.map_build.division.scope import selected
+from worldatlas.map_build.inputs.selection_types import GeographicSelection
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.water.shared_nearest import ShoreIndexes, make_indexes
 from worldatlas.map_build.water.shore_index import ShoreIndex
 from worldatlas.map_build.water.shore_spans import ShoreSpans
+
+
+def land_owner_order(
+    geography: GeographicSelection, children: Collection[int]
+) -> list[int]:
+    """Record the existing tie order as child IDs.
+
+    Args:
+        geography: Frozen category bindings and geographic records.
+        children: Child entities in this division.
+
+    Returns:
+        Land-owning children in the order of their land map codes.
+    """
+    return [
+        binding["entity_id"]
+        for binding in sorted(
+            geography["category_bindings"], key=lambda item: item["code"]
+        )
+        if binding["physical_class"] == "land" and binding["entity_id"] in children
+    ]
 
 
 class ReferenceCells(ShoreSpans):
@@ -46,8 +68,8 @@ class ReferenceCells(ShoreSpans):
         self.ends = ends
         self.codes = owners
         present = set(map(int, np.unique(owners)))
-        self.pairs = [(e, e, e) for e in order if e in present]
-        if present - {p[0] for p in self.pairs}:
+        self.owners = tuple(owner for owner in order if owner in present)
+        if present - set(self.owners):
             raise ValueError("shore owner is not a selected child")
         self._indexes = None
         self._index_lock = threading.Lock()
@@ -64,12 +86,12 @@ class ReferenceCells(ShoreSpans):
         """
         with self._index_lock:
             if self._indexes is None:
-                if not self.pairs:
+                if not self.owners:
                     raise ValueError("no eligible physical shores")
                 centers = self.centers_for_crop(
-                    self.grid.bounds, self.grid.step, [p[0] for p in self.pairs]
+                    self.grid.bounds, self.grid.step, self.owners
                 )
-                self._indexes = make_indexes(centers, self.pairs)
+                self._indexes = make_indexes(centers, self.owners)
             return self._indexes
 
     def layer_rows(self) -> Iterator[tuple[int, np.ndarray]]:
@@ -115,8 +137,8 @@ class ReferenceSubset:
             ValueError: An allowed owner has no eligible shore.
         """
         self.source = source
-        self.pairs = [p for p in source.pairs if p[0] in owners]
-        if set(owners) - {p[0] for p in self.pairs}:
+        self.owners = tuple(owner for owner in source.owners if owner in owners)
+        if set(owners) - set(self.owners):
             raise ValueError("basin participant lacks an eligible physical shore")
 
     @property
@@ -126,22 +148,29 @@ class ReferenceSubset:
         Returns:
             Owner IDs mapped to their complete spatial indexes and shore coordinates.
         """
-        return {p[0]: self.source.indexes[p[0]] for p in self.pairs}
+        return {owner: self.source.indexes[owner] for owner in self.owners}
 
 
 class ShoreGeometry:
     """Keep one copy of the physical shores for all divisions of this grid."""
 
-    def __init__(self, physical: tuple[np.ndarray, np.ndarray], grid: Grid) -> None:
+    def __init__(
+        self,
+        physical: tuple[np.ndarray, np.ndarray],
+        grid: Grid,
+        *,
+        rows_per_batch: int = 256,
+    ) -> None:
         """Find land cells touching water along a grid edge.
 
         Args:
             physical: Physical row offsets and run data.
             grid: Dimensions and coordinates of the physical grid.
+            rows_per_batch: Number of rows to process at a time.
         """
         self.grid = grid
         self.spans = ShoreIndex(
-            physical, physical, grid.width, grid.height, land_codes=[17]
+            physical, grid.width, grid.height, rows_per_batch=rows_per_batch
         )
 
     def attach(

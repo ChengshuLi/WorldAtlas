@@ -14,9 +14,9 @@ from worldatlas.map_build.division.policies import nearest_basin_water, nearest_
 from worldatlas.map_build.division.scope import Scope
 from worldatlas.map_build.land.connected import build_components
 from worldatlas.map_build.land.components import ComponentGrid
-from worldatlas.map_build.division.nearest import nearest
+from worldatlas.map_build.division.nearest import cell_queries
 from worldatlas.map_build.division.shores import ShoreGeometry
-from worldatlas.map_build.water.shared_nearest import crop
+from worldatlas.map_build.core.rle import crop
 
 
 class ScopeRows(unittest.TestCase):
@@ -164,8 +164,8 @@ class ScopeRows(unittest.TestCase):
                     components=SimpleNamespace(row=lambda _: np.empty((0, 3), dtype=np.uint32)),
                 )
             references = shores.attach(data[2], [101, 807])
-            first = nearest(raw, references, "cell", directory=root / "raw")
-            second = nearest(prepared, references, "cell", directory=root / "prepared")
+            first = cell_queries(raw, references, directory=root / "raw")
+            second = cell_queries(prepared, references, directory=root / "prepared")
             self.assertEqual(sum(first["counts"].values()), 2)
             self.assertEqual(first["counts"], second["counts"])
             for name in ("rows.u32le", "runs.u32le"):

@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from worldatlas.map_build.water.shared_nearest import crop
+from worldatlas.map_build.core.rle import crop
 
 
 class FullRowCropFastPath(unittest.TestCase):
@@ -55,7 +55,7 @@ class FullRowCropFastPath(unittest.TestCase):
     def test_full_row_still_rejects_malformed_rle(self):
         rows = np.array([0, 2], dtype=np.uint32)
         runs = np.array([2, 1, 6, 17], dtype=np.uint32)
-        with self.assertRaisesRegex(ValueError, 'invalid RLE row'):
+        with self.assertRaisesRegex(ValueError, 'invalid row-run row'):
             crop(rows, runs, 0, 0, 7, 7)
 
 

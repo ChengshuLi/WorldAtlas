@@ -9,7 +9,7 @@ from collections.abc import Callable, Sequence
 
 import numpy as np
 
-from worldatlas.geodesy.wgs84 import MAX_RADIUS, MIN_RADIUS
+from worldatlas.geodesy.wgs84 import MAX_RADIUS, MIN_RADIUS, unit_sphere
 from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.water import shared_nearest as s
 from worldatlas.map_build.water.shared_nearest import ShoreIndexes
@@ -111,7 +111,7 @@ def classify(
     width: int,
     height: int,
     step: float,
-    pairs: Sequence[tuple[int, int, int]],
+    owners: Sequence[int],
     indexes: ShoreIndexes,
     point_classifier: Callable[[np.ndarray, np.ndarray], tuple[np.ndarray, int, int]],
     block: int = 64,
@@ -128,7 +128,7 @@ def classify(
         width: Full grid width in columns.
         height: Full grid height in rows.
         step: Cell size in degrees.
-        pairs: Category, shore code and output code in tie order.
+        owners: Owner IDs in exact tie order.
         indexes: Spatial indexes by shore code.
         point_classifier: Function for unresolved points. Takes latitude and
             longitude arrays and returns codes and bounded and exact counts.
@@ -143,17 +143,9 @@ def classify(
     if water.ndim != 2 or water.dtype != np.bool_:
         raise ValueError("boolean selection grid required")
     if (
-        not isinstance(pairs, (list, tuple))
-        or len(pairs) < (2 if band is None else 0)
-        or any(
-            not isinstance(p, (list, tuple))
-            or len(p) != 3
-            or type(p[1]) is not int
-            or type(p[2]) is not int
-            for p in pairs
-        )
-        or len({p[1] for p in pairs}) != len(pairs)
-        or len({p[2] for p in pairs}) != len(pairs)
+        len(owners) < (2 if band is None else 0)
+        or any(type(owner) is not int or not 0 < owner < 2**32 for owner in owners)
+        or len(set(owners)) != len(owners)
     ):
         raise ValueError("invalid participant classes")
     nr, nc = water.shape
@@ -208,13 +200,13 @@ def classify(
     keep = wet(a, b, c, d) > 0
     a, b, c, d = a[keep], b[keep], c[keep], d[keep]
     leaves = []
-    available = [p for p in pairs if p[1] in indexes]
-    complete = len(available) == len(pairs) or band is not None
+    available = [owner for owner in owners if owner in indexes]
+    complete = len(available) == len(owners) or band is not None
     while len(a):
         check_cancelled()
         lat = 90 - (y0 + (a + b) / 2) * step
         lon = -180 + (x0 + (c + d) / 2) * step
-        points = s.unit(lat, lon)
+        points = unit_sphere(lat, lon)
         half_lat, half_lon = (b - a - 1) * step / 2, (d - c - 1) * step / 2
         # Integrating the straight lat/lon segment bounds its ellipsoidal
         # length by this maximum metric norm. A geodesic is no longer.
@@ -272,7 +264,7 @@ def classify(
             if len(probe):
                 exact_lower = lower[probe].copy()
                 exact_upper = np.full_like(exact_lower, np.inf)
-                for col, (_, code, _) in enumerate(available):
+                for col, code in enumerate(available):
                     # Excluded classes keep their already-valid lower bound.
                     needed = exact_lower[:, col] <= upper[probe] + 2 * radius[probe]
                     if band is not None:
@@ -309,7 +301,7 @@ def classify(
         good = inside | outside
         stats["certified_cells"] += int(wet(a[good], b[good], c[good], d[good]).sum())
         for i in np.flatnonzero(inside):
-            output[a[i] : b[i], c[i] : d[i]] = available[int(best[i])][2]
+            output[a[i] : b[i], c[i] : d[i]] = available[int(best[i])]
         pending = ~good
         leaf = pending & (b - a == 1) & (d - c == 1)
         if np.any(leaf):
@@ -349,11 +341,7 @@ def classify(
         if (
             codes.shape != gx.shape
             or not np.issubdtype(codes.dtype, np.integer)
-            or np.any(
-                ~np.isin(
-                    codes, ([0] if band is not None else []) + [p[2] for p in pairs]
-                )
-            )
+            or np.any(~np.isin(codes, ([0] if band is not None else []) + list(owners)))
             or any(
                 not isinstance(v, (int, np.integer)) or isinstance(v, (bool, np.bool_))
                 for v in (bounded, exact)

@@ -5,7 +5,7 @@ from collections.abc import Sequence
 
 import numpy as np
 
-from worldatlas.map_build.water import shared_nearest as shore
+from worldatlas.geodesy.wgs84 import unit_sphere
 
 
 class ShoreSpans:
@@ -90,7 +90,7 @@ class ShoreSpans:
             np.concatenate(categories),
         )
         return {
-            "mids": shore.unit(lat, lon),
+            "mids": unit_sphere(lat, lon),
             "lat": lat,
             "lon": lon,
             "category": category,

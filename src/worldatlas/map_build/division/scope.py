@@ -8,13 +8,13 @@ from shapely.geometry import mapping, shape
 
 from worldatlas.map_build.core.geometry import PolygonRasterizer
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.core.rle import row
+from worldatlas.map_build.core.layers import column_spans
+from worldatlas.map_build.core.rle import crop, row
 from worldatlas.map_build.core.wrapping import wrapped_grid_bounds
 from worldatlas.map_build.division.contracts import CompiledRule, point_coordinates
 from worldatlas.map_build.division.intervals import overlay, prepare
 from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.land.components import ComponentGrid
-from worldatlas.map_build.water.shared_nearest import crop
 
 
 def selected(values: np.ndarray, identifiers: Sequence[int] | np.ndarray) -> np.ndarray:
@@ -279,17 +279,9 @@ class Scope:
         """
         assert self.bounds is not None
         x0, x1 = self.bounds[:2]
-        records = []
-        for a, b in ((x0, min(x1, self.grid.width)), (0, max(0, x1 - self.grid.width))):
-            if a == b:
-                continue
-            offset = (a - x0) % self.grid.width
-            v = values[offset : offset + b - a]
-            cuts = np.r_[0, np.flatnonzero(v[1:] != v[:-1]) + 1, len(v)]
-            records.extend(
-                (a + int(lo), a + int(hi), 1) for lo, hi in zip(cuts, cuts[1:]) if v[lo]
-            )
-        return complete_row(self.grid.width, sorted(records))
+        return complete_row(
+            self.grid.width, column_spans(values, x0, x1, self.grid.width)
+        )
 
     def component_row(
         self, y: int, roots: dict[str, np.ndarray]

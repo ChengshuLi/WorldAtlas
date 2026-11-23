@@ -1,7 +1,6 @@
 """Run-interval regions separated by boundary cuts between cell centres."""
 
 import math
-from array import array
 from bisect import bisect_left
 from collections import defaultdict
 from collections.abc import Callable, Collection, Iterable, Iterator, Sequence
@@ -14,6 +13,7 @@ from shapely.geometry import LineString, MultiLineString, Point
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.rle import close_memmap
+from worldatlas.map_build.core.run_components import RunComponents
 from worldatlas.map_build.execution.control import check_cancelled
 
 
@@ -242,60 +242,6 @@ def split_eligible(
     return out
 
 
-class _DSU:
-    """Group connected runs by a common root ID."""
-
-    def __init__(self) -> None:
-        """Start without any runs to connect."""
-        self.parent = array("I")
-        self.size = array("I")
-
-    def add(self) -> int:
-        """Add a run as its own connected set.
-
-        Returns:
-            New run ID.
-        """
-        i = len(self.parent)
-        # Reaching this limit requires materializing over four billion nodes.
-        if i >= 0xFFFFFFFF:  # pragma: no cover
-            raise OverflowError("run-node count exceeds uint32 DSU capacity")
-        self.parent.append(i)
-        self.size.append(1)
-        return i
-
-    def find(self, x: int) -> int:
-        """Find the root of a run's connected set.
-
-        Args:
-            x: Run ID.
-
-        Returns:
-            Current root ID. Shorten the parent chain along the way.
-        """
-        p = self.parent
-        while p[x] != x:
-            p[x] = p[p[x]]
-            x = p[x]
-        return x
-
-    def union(self, a: int, b: int) -> None:
-        """Join the connected sets of two runs if they are distinct.
-
-        Args:
-            a: ID of the first run.
-            b: ID of the second run.
-        """
-        ra = self.find(a)
-        rb = self.find(b)
-        if ra == rb:
-            return
-        if self.size[ra] < self.size[rb]:
-            ra, rb = rb, ra
-        self.parent[rb] = ra
-        self.size[ra] += self.size[rb]
-
-
 def _blocked_count(sorted_x: Sequence[int], lo: int, hi: int) -> int:
     """Count blocked columns within an interval.
 
@@ -370,8 +316,8 @@ def continuous_face_links(
     path: Path,
     offsets: Sequence[int],
     paths: Iterable[Sequence[tuple[Fraction, Fraction]]],
-    dsu: _DSU,
-    uncut: _DSU,
+    dsu: RunComponents,
+    uncut: RunComponents,
     grid: Grid,
 ) -> None:
     """Join parts of the same geometric face separated by a narrow grid gap.
@@ -511,8 +457,8 @@ def divide_regions(
         ):
             raise ValueError("invalid divided-face label")
         labels_by_row[y].append((index, entity, x))
-    dsu = _DSU()
-    uncut = _DSU() if cuts.paths else None
+    dsu = RunComponents()
+    uncut = RunComponents() if cuts.paths else None
     offsets = [0]
     previous = []
     label_nodes = {}

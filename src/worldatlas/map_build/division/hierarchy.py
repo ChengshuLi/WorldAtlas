@@ -3,25 +3,30 @@
 import hashlib
 from collections.abc import Callable, Iterable, Iterator
 from contextlib import ExitStack
+from functools import partial
 from pathlib import Path
-from typing import Any, cast
+from typing import Any
 
 import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.core.rle import open_grid, row
-from worldatlas.map_build.division.contracts import CompiledDivision, compile_rules
+from worldatlas.map_build.division.contracts import CompiledDivision
 from worldatlas.map_build.division.engine import ParentDivision, land_groups
 from worldatlas.map_build.division.intervals import overlay, spans
-from worldatlas.map_build.division.shores import ShoreGeometry
-from worldatlas.map_build.execution.runtime import Checkpoints, Timing
+from worldatlas.map_build.division.shores import ShoreGeometry, land_owner_order
+from worldatlas.map_build.execution.runtime import (
+    RunFilePins,
+    StageExecutor,
+    execute_stage,
+)
 from worldatlas.map_build.inputs.selection_types import GeographicSelection
 from worldatlas.shared.files import (
+    JSONValue,
     json_bytes,
-    pin_file,
     read_json,
-    verify_pins,
+    write_bytes_atomic,
     write_json,
 )
 
@@ -90,6 +95,7 @@ def definition(
     configuration: dict[str, Any],
     *,
     compiled: CompiledDivision,
+    files: RunFilePins,
     land_only: bool = False,
 ) -> dict[str, Any]:
     """Record only the inputs that affect the parent's assignment.
@@ -103,6 +109,7 @@ def definition(
             grid.
         configuration: Build settings used by the selected rules.
         compiled: This parent's child entities and assembled rules.
+        files: Attempt-local file checksum verifier.
         land_only: Whether to record the land calculation separately.
 
     Returns:
@@ -148,20 +155,15 @@ def definition(
             for _, e in sorted(children.items())
         ],
         rules=operative,
-        binding_order=[
-            (b["entity_id"], b["physical_class"], b["code"])
-            for b in sorted(geography["category_bindings"], key=lambda b: b["code"])
-            if b["entity_id"] in children
-        ],
+        land_owner_order=land_owner_order(geography, children),
         physical={
-            name: pin_file(Path(physical) / name)["sha256"]
-            for name in ("rows.u32le", "runs.u32le")
+            Path(pin["path"]).name: pin["sha256"] for pin in files.row_streams(physical)
         },
         membership=None
         if membership is None
         else {
-            name: pin_file(Path(membership) / name)["sha256"]
-            for name in ("rows.u32le", "runs.u32le")
+            Path(pin["path"]).name: pin["sha256"]
+            for pin in files.row_streams(membership)
         },
     )
     if any(r["operation"] == "nearest_coastal_water" for r in rules):
@@ -262,11 +264,10 @@ class HierarchyDivision:
         directory: Path | str,
         configuration: dict[str, Any],
         *,
-        compiled_divisions: dict[int, CompiledDivision] | None = None,
+        compiled_divisions: dict[int, CompiledDivision],
         requested: Iterable[int] | None = None,
         reuse: Path | str | None = None,
-        checkpoints: Checkpoints | None = None,
-        timing: Timing | None = None,
+        executor: StageExecutor | None = None,
     ) -> None:
         """Prepare the hierarchy, work directory, and optional reuse settings.
 
@@ -276,18 +277,17 @@ class HierarchyDivision:
             physical: Directory containing physical row-run files.
             directory: Output directory for division results.
             configuration: Build settings used by the rules.
-            compiled_divisions: Child entities and assembled rules keyed by parent
-                ID. When omitted, compile the rules here for a standalone division.
+            compiled_divisions: Child entities and assembled rules keyed by parent ID.
             requested: Parent IDs to divide, or None for all.
             reuse: Directory containing earlier division results.
-            checkpoints: Optional store for completed work.
-            timing: Optional timing log for the division.
+            executor: Optional checkpoint and timing runner.
         """
         self.geography, self.grid, self.physical = geography, grid, Path(physical)
         self.directory = Path(directory)
         self.directory.mkdir(exist_ok=True)
         self.configuration = configuration
-        self.checkpoints, self.timing = checkpoints, timing
+        self.executor = executor
+        self.files = executor.checkpoints.files if executor else RunFilePins()
         self.parents = selected_parents(geography, requested)
         self.compiled_divisions = compiled_divisions
         self.reuse = (
@@ -306,36 +306,31 @@ class HierarchyDivision:
                 self._shores = ShoreGeometry(physical, self.grid)
         return self._shores
 
-    def task(
+    def task[Result: JSONValue](
         self,
         name: str,
-        function: Callable[..., Any],
-        args: tuple[Any, ...],
+        operation: Callable[[], Result],
         inputs: list[dict[str, str]],
         outputs: list[Path],
-    ) -> Any:
-        """Run one division step or load its completed result.
+    ) -> Result:
+        """Run a hierarchy stage and return its calculated or saved result.
 
         Args:
-            name: Checkpoint name.
-            function: Function that performs the work.
-            args: Positional arguments for the function.
-            inputs: Input paths and checksums.
-            outputs: Files or directories the task produces.
+            name: Checkpoint ID for this stage.
+            operation: Function with all its inputs supplied.
+            inputs: Pinned input files.
+            outputs: Files or directories produced by the stage.
 
         Returns:
-            Step result, read from the checkpoint if one exists.
+            Calculated or verified saved stage result.
         """
-        if self.checkpoints is None:
-            return function(*args)
-        return self.checkpoints.run_function(
+        return execute_stage(
+            self.executor,
             name,
             "division",
-            function,
-            args,
+            operation,
             inputs=inputs,
             outputs=outputs,
-            timing=cast(Timing, self.timing),
         )
 
     def run(self) -> dict[str, Any]:
@@ -348,24 +343,15 @@ class HierarchyDivision:
         ownership = None
         receipts = {}
         for parent in self.parents:
-            compiled = (
-                compile_rules(self.geography, parent)
-                if self.compiled_divisions is None
-                else self.compiled_divisions[parent]
-            )
+            compiled = self.compiled_divisions[parent]
             directory = self.directory / ("parent-" + str(parent))
             directory.mkdir(exist_ok=True)
-            parent_directory = None
+            parent_directory = directory / "membership"
             if ownership is not None:
-                parent_directory = directory / "membership"
                 self.task(
                     "membership-" + str(parent),
-                    membership,
-                    (self.grid, ownership, parent, parent_directory),
-                    [
-                        pin_file(ownership / name)
-                        for name in ("rows.u32le", "runs.u32le")
-                    ],
+                    partial(membership, self.grid, ownership, parent, parent_directory),
+                    self.files.row_streams(ownership),
                     [parent_directory],
                 )
             settings = definition(
@@ -373,18 +359,20 @@ class HierarchyDivision:
                 parent,
                 self.grid,
                 self.physical,
-                parent_directory,
+                parent_directory if ownership is not None else None,
                 self.configuration,
                 compiled=compiled,
+                files=self.files,
             )
             data = json_bytes(settings)
             identity = hashlib.sha256(data).hexdigest()
             selected = directory / "definition.json"
             if selected.exists():
-                if selected.read_bytes() != data:
+                if self.files.pin(selected)["sha256"] != identity:
                     raise ValueError("parent definition changed on resume")
             else:
-                write_json(selected, settings)
+                write_bytes_atomic(selected, data)
+            definition_pin = {"path": str(selected.resolve()), "sha256": identity}
             receipt_path = directory / "result.json"
             saved = (
                 read_json(receipt_path)
@@ -392,7 +380,7 @@ class HierarchyDivision:
                 else self.reuse.get(str(parent))
             )
             if saved is not None and saved["definition_sha256"] == identity:
-                verify_pins(saved["outputs"])
+                self.files.verify(saved["outputs"])
                 output = Path(saved["directory"])
                 receipt = dict(saved, reused=True)
             else:
@@ -401,9 +389,10 @@ class HierarchyDivision:
                     parent,
                     self.grid,
                     self.physical,
-                    parent_directory,
+                    parent_directory if ownership is not None else None,
                     self.configuration,
                     compiled=compiled,
+                    files=self.files,
                     land_only=True,
                 )
                 land_identity = hashlib.sha256(json_bytes(land_settings)).hexdigest()
@@ -416,15 +405,16 @@ class HierarchyDivision:
                     directory / "calculation",
                     self.configuration,
                     compiled=compiled,
-                    parent_directory=parent_directory,
-                    checkpoints=self.checkpoints,
-                    timing=cast(Timing, self.timing),
-                    input_pins=[pin_file(selected)],
+                    parent_directory=parent_directory
+                    if ownership is not None
+                    else None,
+                    executor=self.executor,
+                    input_pins=[definition_pin],
                     shore_provider=self.shores,
                 )
                 try:
                     if prior_land and prior_land["definition_sha256"] == land_identity:
-                        verify_pins(prior_land["outputs"])
+                        self.files.verify(prior_land["outputs"])
                         land = context.use_land(prior_land["directory"])
                         land_receipt = dict(prior_land, reused=True)
                     else:
@@ -433,7 +423,7 @@ class HierarchyDivision:
                             directory=str(land),
                             definition_sha256=land_identity,
                             outputs=[
-                                pin_file(Path(land) / name)
+                                self.files.pin(Path(land) / name)
                                 for name in ("rows.u32le", "runs.u32le", "report.json")
                             ],
                             reused=False,
@@ -447,7 +437,7 @@ class HierarchyDivision:
                     reused=False,
                     land=land_receipt,
                     outputs=[
-                        pin_file(output / name)
+                        self.files.pin(output / name)
                         for name in ("rows.u32le", "runs.u32le", "report.json")
                     ],
                 )
@@ -460,15 +450,18 @@ class HierarchyDivision:
                 merged = directory / "finest"
                 self.task(
                     "substitute-" + str(parent),
-                    substitute,
-                    (self.grid, ownership, parent_directory, output, merged),
+                    partial(
+                        substitute,
+                        self.grid,
+                        ownership,
+                        parent_directory,
+                        output,
+                        merged,
+                    ),
                     [
-                        pin_file(selected),
+                        definition_pin,
                         *receipt["outputs"],
-                        *[
-                            pin_file(ownership / name)
-                            for name in ("rows.u32le", "runs.u32le")
-                        ],
+                        *self.files.row_streams(ownership),
                     ],
                     [merged],
                 )
@@ -476,7 +469,7 @@ class HierarchyDivision:
         if ownership is None:
             raise ValueError("no geographic division selected")
         for receipt in receipts.values():
-            verify_pins(receipt["outputs"])
+            self.files.verify(receipt["outputs"])
         report = dict(directory=str(ownership), parents=receipts, grid=vars(self.grid))
         path = self.directory / "report.json"
         if not path.exists():

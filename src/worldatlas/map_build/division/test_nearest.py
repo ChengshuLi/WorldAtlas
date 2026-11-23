@@ -7,10 +7,11 @@ from unittest.mock import patch
 import numpy as np
 from pyproj import Geod
 
+from worldatlas.geodesy.wgs84 import unit_sphere
 from worldatlas.map_build.water import shared_nearest as nearest
 from worldatlas.map_build.water.rectangle_nearest import classify
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.division.nearest import nearest as assign_nearest
+from worldatlas.map_build.division.nearest import cell_queries
 from worldatlas.map_build.division.policies import nearest_land
 from worldatlas.map_build.division.scope import Scope
 from worldatlas.map_build.division.shores import ReferenceCells
@@ -25,14 +26,29 @@ class StrictNearest(unittest.TestCase):
             lon=np.asarray(longitude, dtype=float),
             category=np.asarray(owners, dtype=np.uint32),
         )
-        centers["mids"] = nearest.unit(centers["lat"], centers["lon"])
-        pairs = [(owner, owner, owner) for owner in dict.fromkeys(owners)]
-        return centers, pairs, nearest.make_indexes(centers, pairs)
+        centers["mids"] = unit_sphere(centers["lat"], centers["lon"])
+        order = list(dict.fromkeys(owners))
+        return centers, order, nearest.make_indexes(centers, order)
 
     def query(self, latitude, longitude, pairs, indexes, **kwargs):
         return nearest.classify_wgs84(
             latitude, longitude, self.bounds, 360, 180, 1, pairs, indexes, **kwargs
         )
+
+    def test_nearest_land_in_an_empty_parent_has_no_claims(self):
+        grid = Grid(8, 2, 45)
+        offsets = np.arange(3, dtype=np.uint32)
+        water = offsets, np.array([8, 1, 8, 1], dtype=np.uint32)
+        empty = offsets, np.array([8, 0, 8, 0], dtype=np.uint32)
+        context = unittest.mock.Mock()
+        scope = Scope(
+            dict(physical_class="land", unit="component", unassigned_only=True, features={}),
+            grid, water, empty, empty, context.components,
+        )
+        with TemporaryDirectory() as temp:
+            result = nearest_land(context, scope, Path(temp) / "claims")
+        self.assertEqual(result["counts"], {})
+        context.shore_geometry.attach.assert_not_called()
 
     def test_random_queries_match_all_reference_distances(self):
         rng = np.random.default_rng(1927)
@@ -50,9 +66,9 @@ class StrictNearest(unittest.TestCase):
                 )[2]
             )
             minima = [
-                distance[centers["category"] == owner].min() for owner, _, _ in pairs
+                distance[centers["category"] == owner].min() for owner in pairs
             ]
-            expected.append(pairs[int(np.argmin(minima))][0])
+            expected.append(pairs[int(np.argmin(minima))])
         self.assertEqual(actual.tolist(), expected)
         self.assertEqual(stats["bounded"] + stats["exact"], len(lat))
 
@@ -80,7 +96,7 @@ class StrictNearest(unittest.TestCase):
 
     def test_index_must_contain_all_unrestricted_participants(self):
         centers, pairs, indexes = self.references([0], [0], [101])
-        missing = (807, 807, 807)
+        missing = 807
         with self.assertRaisesRegex(ValueError, "missing participant shore"):
             self.query([0], [0], [*pairs, missing], indexes)
         with self.assertRaisesRegex(ValueError, "no shore"):
@@ -116,27 +132,6 @@ class StrictNearest(unittest.TestCase):
         owners, stats = self.query([], [], pairs, indexes)
         self.assertEqual(owners.tolist(), [])
         self.assertEqual(stats, {"bounded": 0, "exact": 0})
-
-    def test_empty_component_rule_returns_no_assignments(self):
-        grid = Grid(8, 4, 45)
-        # An empty parent has no eligible land, even with unassigned water.
-        offsets = np.arange(grid.height + 1, dtype=np.uint32)
-        empty_owner = offsets, np.tile(np.array([grid.width, 0], dtype=np.uint32), grid.height)
-        physical = offsets, np.tile(np.array([grid.width, 1], dtype=np.uint32), grid.height)
-        points = np.empty(0, dtype=np.uint32)
-        references = ReferenceCells(grid, np.zeros_like(offsets), points, points, points, [])
-        scope = Scope(
-            dict(features={}, physical_class="land", unit="component", unassigned_only=True),
-            grid, physical, empty_owner, empty_owner, lambda kind: None,
-        )
-        with TemporaryDirectory() as folder:
-            path = Path(folder) / "assignments"
-            self.assertEqual(assign_nearest(scope, references, "component", directory=path)["counts"], {})
-            self.assertEqual(nearest_land(None, scope, Path(folder) / "policy")["counts"], {})
-            with self.assertRaisesRegex(ValueError, "requires a cell or component"):
-                assign_nearest(scope, references, "row", directory=path)
-            with self.assertRaisesRegex(ValueError, "does not support a coastal distance limit"):
-                assign_nearest(scope, references, "component", 100, directory=path)
 
     def test_reference_index_rejects_unknown_or_missing_shore_owners(self):
         grid = Grid(8, 4, 45)

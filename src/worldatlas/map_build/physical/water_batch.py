@@ -8,6 +8,7 @@ import hashlib
 import math
 import struct
 import time
+from enum import IntEnum
 from pathlib import Path
 from typing import cast
 
@@ -130,17 +131,25 @@ def strip_wkb(
     return struct.pack('<BII', 1, 3, len(rings)) + b''.join(rings)
 
 
+class GeometryStatus(IntEnum):
+    """Outcome of checking one selected source geometry."""
+
+    SKIPPED = 0
+    POLYGON = 1
+    MALFORMED = 2
+    NON_POLYGON = 3
+    INVALID_POLYGON = 4
+    MISSING = 5
+    NONFINITE = 6
+
+
 class WaterBatch:
     """Mark water from Arrow geometry batches using GDAL and NumPy tiles."""
 
-    def __init__(
-        self, output: Path | str | None = None, method: str = 'hybrid'
-    ) -> None:
+    def __init__(self, method: str = 'hybrid') -> None:
         """Prepare the batch rasterizer and its timing counters.
 
         Args:
-            output: Legacy caller argument. The kernel writes to the raster supplied
-                to burn.
             method: "hybrid" to batch polygon burns or "tiled" to limit them to
                 individual tiles.
 
@@ -218,7 +227,7 @@ class WaterBatch:
             positions = np.arange(count) + geometry.offset
             valid = (bits[positions // 8] & (1 << (positions % 8))) != 0
         points = finite_points(data, starts, lengths, selected & valid)
-        status[points] = 3
+        status[points] = GeometryStatus.NON_POLYGON
         tiles = {}
         coordinates = {}
         views = []
@@ -235,7 +244,7 @@ class WaterBatch:
                 Status array with later rows cleared, and the failed index.
             """
             status[index] = code
-            status[index + 1 :] = 0
+            status[index + 1 :] = GeometryStatus.SKIPPED
             return status, int(index)
 
         def extent(
@@ -259,27 +268,27 @@ class WaterBatch:
 
         for i in np.flatnonzero(selected & ~points):
             if not valid[i]:
-                return fail(i, 5)
+                return fail(i, GeometryStatus.MISSING)
             length = int(lengths[i])
             if length <= 0 or length > np.iinfo(np.int32).max:
-                return fail(i, 2)
+                return fail(i, GeometryStatus.MALFORMED)
             try:
                 raw = ogr.CreateGeometryFromWkb(geometry[i].as_py())
             except RuntimeError:
-                return fail(i, 2)
+                return fail(i, GeometryStatus.MALFORMED)
             if raw is None or raw.IsEmpty():
-                return fail(i, 2)
+                return fail(i, GeometryStatus.MALFORMED)
             kind = ogr.GT_Flatten(raw.GetGeometryType())
             if kind not in (ogr.wkbPolygon, ogr.wkbMultiPolygon):
-                status[i] = 3
+                status[i] = GeometryStatus.NON_POLYGON
                 continue
             if not raw.IsValid():
-                status[i] = 4
+                status[i] = GeometryStatus.INVALID_POLYGON
                 continue
             bounds = raw.GetEnvelope()
             if not all(map(math.isfinite, bounds)):
-                return fail(i, 6)
-            status[i] = 1
+                return fail(i, GeometryStatus.NONFINITE)
+            status[i] = GeometryStatus.POLYGON
             parsed.append((int(i), raw, kind, bounds))
         for i, raw, kind, bounds in parsed:
             x0, x1, y0, y1 = extent(bounds)

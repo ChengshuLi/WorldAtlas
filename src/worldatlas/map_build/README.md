@@ -19,7 +19,7 @@ Supply `--work-dir` and an output directory for every build. The builder creates
 | Option | When to use it |
 | --- | --- |
 | `--divide PARENT_ID` | Optional. By default, divide every parent with rules in the saved selection. Supply a parent entity ID to run only its division and the ancestor divisions it needs. For example, `--divide 0` divides World into continents. Repeat the option to select several parents. |
-| `--reuse-from PREVIOUS_RUN` | Use an earlier physical grid whose report points to its saved settings. The grid and the saved `land_config` and `inland_water` sections must match exactly. The builder verifies the two row files and their report. It also reuses compatible geographic assignments, including land assignments alone when only the water rules changed. |
+| `--reuse-from PREVIOUS_RUN` | Use an earlier physical grid whose report points to its saved settings. The grid and the saved `land_config` and `inland_water` sections must match exactly. The builder verifies the row-run files and their report. It also reuses compatible divisions. An edit confined to the later water stages can reuse the earlier assignments, including any water claimed by an explicit area or boundary rule in those earlier stages. |
 | `--recompute-division` | Off by default. Use with `--reuse-from` to reuse only the physical grid and recalculate the requested land and water assignments. |
 | `--resume` | Continue an interrupted build using its saved selection and options. Pass the original config, output directory, and `--work-dir`. Omit `--selection`, `--divide`, `--reuse-from`, and `--recompute-division`. |
 | `--selection INPUT_SELECTION.json` | Start a fresh build with a saved geographic selection. To rebuild a release, use its restored configuration, selection and captured code. |
@@ -49,7 +49,7 @@ The build configuration sets the grid, physical inputs, coastal distance and pro
 - Each layer in `sources.land_config.land` lists all required coastline files once in `files`. Set `dataset` to the member path, local path, R2 key, or Neon source ID of the entry GDAL opens. For a Shapefile, select the `.shp` and include its companion files in the list.
 - `sources.inland_water` holds the water policy, rasterizer settings, and raw file list together. Catalog references supply `size_bytes` from Neon. Direct R2 references must supply it alongside the bucket, key, and SHA-256.
 
-The builder creates one `Grid` and passes it to both rasterizers. It saves the grid once in `physical-build-config.json` so the [standalone physical command](physical/README.md#use) can build the same grid from that file.
+All physical stages use the same `Grid`. The builder saves its dimensions and source pins in `physical-build-config.json` so the [standalone physical command](physical/README.md#use) can repeat that part of the build. `physical_controls.minimum_free_bytes` sets one disk reserve for the physical stages.
 
 Set `r2_source` to the raw file’s Neon catalog ID, such as `"r2_source": "osm-land-polygons-split-4326"`. For a ZIP member, put the source ID inside its `archive` entry. The catalog gives the builder the R2 location, expected size and checksum. The builder keeps verified downloads under the workspace’s `inputs/` directory for future builds.
 
@@ -66,7 +66,7 @@ Source imports save the coordinates of boundaries, areas and reference points in
 | Prepare | Build configuration and working Neon records or a saved selection | Saved geography and the resolved sources and settings for the physical build. |
 | Build the physical grid | Coastline polygons, inland-water polygons and grid settings | A land/water grid. A cell is land if it falls inside the coastline mask and outside the inland-water mask. |
 | Divide each parent | The land/water grid, the parent’s cells and its rules | An entity ID for each cell, using the most detailed division that was built. |
-| Encode | The owner and cell type for each cell | Final map codes and the number of cells using each code. |
+| Package | The owner and cell type for each cell | Final map codes and cell counts. Release packaging separately creates the downloadable archive and viewer bundle. |
 | Verify | Final map files and input checksums | The completed run report with final file checksums and timings. |
 
 ### Dividing the hierarchy
@@ -115,12 +115,13 @@ Each layer has its own pair of files. The physical grid stores land or water. Th
 
 | File or directory | Purpose |
 | --- | --- |
-| `build-config.json` | Preserves the settings passed to the builder for inspection after the original configuration changes. |
-| `input-selection.json` | Preserves the rules, geometry and catalog entries for resume and replay without rereading working records in Neon. |
+| `build-config.json` | Saves the settings used by the build. The completed report pins its checksum for release staging. |
+| `input-selection.json` | Preserves the rules, geometry, entity IDs, map-code bindings and catalog entries the builder checked. Resume and replay use this snapshot. |
 | `run-identity.json` | Records the options and input checksums required to resume the same run. |
 | `physical-build-config.json` | Lets the standalone physical command read the grid, coastline settings, and inland-water settings and file pins from one file. |
 | `physical/` | Keeps the coastline mask, inland-water masks and combined physical grid so rasterization can resume and later builds can reuse the grid. |
 | `division/parent-{ID}/` | Keeps calculations together for each parent. For example, World uses `division/parent-0/`. |
+| `division/parent-{ID}/definition.json` | Records the operative rules, geometry, and physical and membership file checksums that identify this parent calculation. |
 | `division/parent-{ID}/result.json` | Records where the parent’s ownership grid lives so the builder can resume after a completed division. A reused result can point to an earlier run. |
 | `final/` | The finished map grid, encoded as map codes. |
 | `final/report.json` | Counts the cells using each map code. Release staging uses the counts to check coverage and build the legend. |

@@ -10,7 +10,7 @@ from typing import Any
 
 import numpy as np
 
-from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.core.grid import Grid, column_windows
 
 
 def merge_rows(
@@ -197,6 +197,36 @@ def write_run_rows(
     return report
 
 
+def column_spans(
+    values: np.ndarray, first: int, end: int, width: int
+) -> list[tuple[int, int, int]]:
+    """Convert one possibly wrapped row of values to nonzero runs.
+
+    Args:
+        values: 1-D cell values in the window's traversal order.
+        first: First unwrapped column.
+        end: Exclusive end of the window.
+        width: Number of columns in the full grid.
+
+    Returns:
+        Sorted (first, end, value) records with zero-valued runs omitted.
+    """
+    spans = []
+    offset = 0
+    for left, right in column_windows(first, end, width):
+        if left == right:
+            continue
+        part = values[offset : offset + right - left]
+        stops = np.r_[0, np.flatnonzero(part[1:] != part[:-1]) + 1, len(part)]
+        spans.extend(
+            (left + int(a), left + int(b), int(part[a]))
+            for a, b in zip(stops, stops[1:])
+            if part[a]
+        )
+        offset += right - left
+    return sorted(spans)
+
+
 def patch_rows(
     values: np.ndarray, bounds: tuple[int, int, int, int], grid: Grid
 ) -> Iterator[tuple[int, list[tuple[int, int, int]]]]:
@@ -218,16 +248,6 @@ def patch_rows(
     if values.shape != (y1 - y0, x1 - x0):
         raise ValueError("assignment dimensions differ from its bounds")
     for y, row in enumerate(values, y0):
-        spans = []
-        for a, b in ((x0, min(x1, grid.width)), (0, max(0, x1 - grid.width))):
-            if a == b:
-                continue
-            offset = (a - x0) % grid.width
-            part = row[offset : offset + b - a]
-            stops = np.r_[0, np.flatnonzero(part[1:] != part[:-1]) + 1, len(part)]
-            for first, last in zip(stops, stops[1:]):
-                code = int(part[first])
-                if code:
-                    spans.append((a + int(first), a + int(last), code))
-        if spans:
-            yield y, sorted(spans)
+        records = column_spans(row, x0, x1, grid.width)
+        if records:
+            yield y, records

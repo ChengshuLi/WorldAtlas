@@ -31,7 +31,6 @@ def positions(ids: np.ndarray, roots: np.ndarray) -> tuple[np.ndarray, np.ndarra
 
 def blocks(
     path: Path | str,
-    cursor: int = 0,
     block_records: int = 100000,
     guard: Callable[[], None] = check_cancelled,
 ) -> Iterator[tuple[int, np.ndarray]]:
@@ -39,7 +38,6 @@ def blocks(
 
     Args:
         path: Little-endian uint32 component run file.
-        cursor: First run record index to read.
         block_records: Maximum records to read together.
         guard: Cancellation callback before each read.
 
@@ -47,14 +45,13 @@ def blocks(
         (first_record, array), with N-by-3 records of (start, end, component_id).
 
     Raises:
-        ValueError: The cursor or file length is invalid.
+        ValueError: The block size or file length is invalid.
     """
     size = Path(path).stat().st_size
-    if size % 12 or cursor < 0 or cursor > size // 12 or block_records < 1:
-        raise ValueError("invalid component stream/cursor")
-    off = cursor
+    if size % 12 or block_records < 1:
+        raise ValueError("invalid component stream or block size")
+    off = 0
     with open(path, "rb") as f:
-        f.seek(cursor * 12)
         while True:
             guard()
             b = f.read(block_records * 12)
@@ -281,12 +278,10 @@ def certificate_pass(
     upper: np.ndarray,
     hints: np.ndarray,
     amb: np.ndarray,
-    cursor: int = 0,
     chunk: int = 1024,
     guard: Callable[[], None] = check_cancelled,
-    progress: Callable[..., None] = lambda *x: None,
     block_records: int = 100000,
-) -> tuple[np.ndarray, int, int]:
+) -> tuple[np.ndarray, int]:
     """Try to prove the candidate owner for every run of each component.
 
     Args:
@@ -297,14 +292,12 @@ def certificate_pass(
         upper: Measured upper distance bound per component, in metres.
         hints: Candidate owner per component.
         amb: Bool array to mark when a component needs exact search.
-        cursor: First run record index to read.
         chunk: Maximum size of an interval, in cells.
         guard: Cancellation callback.
-        progress: Optional progress callback.
         block_records: Input run records per read.
 
     Returns:
-        (ambiguity_mask, tested_interval_count, end_record_index).
+        (ambiguity_mask, tested_interval_count).
     """
     roots = np.asarray(roots, dtype=np.uint32)
     upper = np.asarray(upper, dtype=float)
@@ -318,17 +311,16 @@ def certificate_pass(
     ):
         raise ValueError("bad certificate state")
     count = 0
-    endcursor = cursor
-    for off, a in blocks(path, cursor, block_records, guard):
+    last = 0
+    for off, a in blocks(path, block_records, guard):
         for y, x, z, p in expanded(a, off, co, roots, chunk):
             good = index.certify_runs(y, x, z, upper[p], hints[p])
             np.logical_or.at(amb, p, ~good)
             count += len(p)
-        endcursor = off + len(a)
-        progress(endcursor, count, amb)
-    if endcursor != int(co[-1]):
+        last = off + len(a)
+    if last != int(co[-1]):
         raise ValueError("incomplete certificate stream")
-    return amb, count, endcursor
+    return amb, count
 
 
 def exact_pass(
@@ -339,12 +331,10 @@ def exact_pass(
     hints: np.ndarray,
     amb: np.ndarray,
     best: np.ndarray,
-    cursor: int = 0,
     chunk: int = 1024,
     guard: Callable[[], None] = check_cancelled,
-    progress: Callable[..., None] = lambda *x: None,
     block_records: int = 10000,
-) -> tuple[np.ndarray, int, int]:
+) -> tuple[np.ndarray, int]:
     """Find exact WGS84 distance minima for the components still unresolved.
 
     Args:
@@ -355,14 +345,12 @@ def exact_pass(
         hints: Candidate owners.
         amb: Bool array marking components needing exact distances.
         best: Component-by-owner distance minima to update, in metres.
-        cursor: First input run record to process.
         chunk: Maximum query interval length in cells.
         guard: Cancellation callback.
-        progress: Optional progress callback.
         block_records: Input run records per read.
 
     Returns:
-        (distance_minima, tested_interval_count, end_record_index).
+        (distance_minima, tested_interval_count).
     """
     roots = np.asarray(roots, dtype=np.uint32)
     hints = np.asarray(hints, dtype=np.uint32)
@@ -377,8 +365,8 @@ def exact_pass(
     if not found.all() or not np.isfinite(best[np.arange(len(roots)), columns]).all():
         raise ValueError("missing real upper witness")
     count = 0
-    endcursor = cursor
-    for off, a in blocks(path, cursor, block_records, guard):
+    last = 0
+    for off, a in blocks(path, block_records, guard):
         for ys, xs, ends, pos in expanded(a, off, co, roots, chunk, ambiguous=amb):
             for i in range(len(pos)):
                 guard()
@@ -391,11 +379,10 @@ def exact_pass(
                     column = index.codes.index(code)
                     best[p, column] = min(best[p, column], d)
                 count += 1
-        endcursor = off + len(a)
-        progress(endcursor, count, best)
-    if endcursor != int(co[-1]):
+        last = off + len(a)
+    if last != int(co[-1]):
         raise ValueError("incomplete exact stream")
-    return best, count, endcursor
+    return best, count
 
 
 def finalize(

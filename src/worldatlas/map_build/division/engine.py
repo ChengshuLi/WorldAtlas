@@ -10,8 +10,9 @@ from collections.abc import Callable, Iterable, Iterator, Sequence
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import ExitStack
 from contextvars import copy_context
+from functools import partial
 from pathlib import Path
-from typing import Any, cast
+from typing import Any
 
 import numpy as np
 
@@ -24,13 +25,21 @@ from worldatlas.map_build.division.connectivity import build_domain
 from worldatlas.map_build.division.contracts import CompiledDivision, CompiledRule
 from worldatlas.map_build.division.intervals import Eligibility, combine, overlay, spans
 from worldatlas.map_build.division.scope import Scope
-from worldatlas.map_build.division.shores import ReferenceCells, ShoreGeometry
+from worldatlas.map_build.division.shores import (
+    ReferenceCells,
+    ShoreGeometry,
+    land_owner_order,
+)
 from worldatlas.map_build.execution.control import check_cancelled, stage
-from worldatlas.map_build.execution.runtime import Checkpoints, Timing
+from worldatlas.map_build.execution.runtime import (
+    RunFilePins,
+    StageExecutor,
+    execute_stage,
+)
 from worldatlas.map_build.inputs.selection_types import GeographicSelection
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.connected import build_components
-from worldatlas.shared.files import pin_file
+from worldatlas.shared.files import JSONValue
 
 
 def rule_directory(calculation: Path | str, rule_id: str) -> Path:
@@ -218,8 +227,7 @@ class ParentDivision:
         *,
         compiled: CompiledDivision,
         parent_directory: Path | str | None = None,
-        checkpoints: Checkpoints | None = None,
-        timing: Timing | None = None,
+        executor: StageExecutor | None = None,
         input_pins: Iterable[dict[str, str]] = (),
         shore_provider: Callable[[], ShoreGeometry] | None = None,
     ) -> None:
@@ -235,8 +243,7 @@ class ParentDivision:
             compiled: This parent's child entities and assembled rules.
             parent_directory: Inherited mask of the parent's cells. Omit only for
                 the root.
-            checkpoints: Optional store for completed work.
-            timing: Optional timing log used by the checkpoint runner.
+            executor: Optional checkpoint and timing runner.
             input_pins: Paths and SHA-256 digests for this division's inputs.
             shore_provider: Optional shared physical shore calculation.
 
@@ -255,7 +262,8 @@ class ParentDivision:
         self.directory = Path(directory)
         self.directory.mkdir(exist_ok=True)
         self.physical_directory = Path(physical_directory)
-        self.checkpoints, self.timing = checkpoints, timing
+        self.executor = executor
+        self.files = executor.checkpoints.files if executor else RunFilePins()
         self.input_pins = list(input_pins)
         self.resources = ExitStack()
         self.lock = threading.RLock()
@@ -266,11 +274,7 @@ class ParentDivision:
         self.shore_provider = shore_provider
         self.land_ownership = None
         self.land_directory = None
-        self.shore_order = [
-            b["entity_id"]
-            for b in sorted(geography["category_bindings"], key=lambda b: b["code"])
-            if b["physical_class"] == "land" and b["entity_id"] in self.children
-        ]
+        self.shore_order = land_owner_order(geography, self.children)
         try:
             if parent_directory is None:
                 parent = next(e for e in geography["entities"] if e["id"] == parent_id)
@@ -281,8 +285,8 @@ class ParentDivision:
                 parent_directory = self.directory / "parent-membership"
                 self.task(
                     "parent-membership",
-                    write_layer,
-                    (
+                    partial(
+                        write_layer,
                         parent_directory,
                         grid,
                         ((y, [(0, grid.width, 1)]) for y in range(grid.height)),
@@ -304,7 +308,6 @@ class ParentDivision:
                 self.task(
                     "parent-physical",
                     self._prepare_physical,
-                    (),
                     [self.parent_physical_directory],
                     inputs=self.input_pins + self.pins(self.parent_directory),
                 )
@@ -315,8 +318,7 @@ class ParentDivision:
             self.empty_directory = empty
             self.task(
                 "empty",
-                write_layer,
-                (empty, grid, ()),
+                partial(write_layer, empty, grid, ()),
                 [empty],
                 inputs=self.input_pins,
             )
@@ -338,44 +340,34 @@ class ParentDivision:
         Returns:
             File pins for rows.u32le and runs.u32le in that order.
         """
-        return [
-            pin_file(Path(directory) / name) for name in ("rows.u32le", "runs.u32le")
-        ]
+        return self.files.row_streams(directory)
 
-    def task(
+    def task[Result: JSONValue](
         self,
         name: str,
-        function: Callable[..., Any],
-        args: tuple[Any, ...],
+        operation: Callable[[], Result],
         outputs: Iterable[Path | str],
         *,
         inputs: list[dict[str, str]],
-        kwargs: dict[str, Any] | None = None,
-    ) -> Any:
-        """Run a calculation or reuse its verified checkpoint.
+    ) -> Result:
+        """Run one calculation inside the parent's checkpoint namespace.
 
         Args:
-            name: Name of the task within this parent.
-            function: Calculation to perform.
-            args: Positional arguments to the function.
-            outputs: Paths the calculation writes.
-            inputs: File pins to verify before reuse.
-            kwargs: Additional keyword arguments.
+            name: Local stage name.
+            operation: Function with all inputs supplied.
+            outputs: Files or directories it produces.
+            inputs: File pins to verify before and after work.
 
         Returns:
-            The calculation's result, or the equivalent saved JSON value.
+            Calculated or verified saved stage result.
         """
-        if self.checkpoints is None:
-            return function(*args, **(kwargs or {}))
-        return self.checkpoints.run_function(
+        return execute_stage(
+            self.executor,
             f"parent-{self.parent_id}-{name}",
             "division",
-            function,
-            args,
+            operation,
             inputs=inputs,
             outputs=outputs,
-            timing=cast(Timing, self.timing),
-            kwargs=kwargs,
         )
 
     def _prepare_physical(self) -> dict[str, Any]:
@@ -417,11 +409,15 @@ class ParentDivision:
                 directory = self.directory / (kind + "-components")
                 self.task(
                     kind + "-components",
-                    build_components,
-                    (self.grid, self.parent_physical_directory, directory),
+                    partial(
+                        build_components,
+                        self.grid,
+                        self.parent_physical_directory,
+                        directory,
+                        physical_code=code,
+                    ),
                     [directory],
                     inputs=self.input_pins + self.pins(self.parent_physical_directory),
-                    kwargs=dict(physical_code=code),
                 )
                 data = ComponentGrid(
                     self.parent_physical_directory,
@@ -497,8 +493,8 @@ class ParentDivision:
                 with open_grid(snapshot_directory, self.grid) as snapshot:
                     self.task(
                         name,
-                        build_domain,
-                        (
+                        partial(
+                            build_domain,
                             self.grid,
                             self.physical,
                             self.parent,
@@ -566,8 +562,7 @@ class ParentDivision:
                 try:
                     result = self.task(
                         directory.name,
-                        execute_rule,
-                        (self, rule, snapshot, directory),
+                        partial(execute_rule, self, rule, snapshot, directory),
                         [directory],
                         inputs=inputs,
                     )
@@ -613,8 +608,8 @@ class ParentDivision:
         claim_pins = [p for _, r in claims for p in self.pins(r["directory"])]
         result = self.task(
             name,
-            merge_claims,
-            (
+            partial(
+                merge_claims,
                 self.grid,
                 self.physical_directory,
                 self.parent_directory,

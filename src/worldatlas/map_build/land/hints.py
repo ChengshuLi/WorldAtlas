@@ -9,25 +9,10 @@ from numpy.typing import ArrayLike
 from scipy.spatial import cKDTree  # pyright: ignore[reportAttributeAccessIssue]
 
 from worldatlas.geodesy.wgs84 import MIN_RADIUS as MIN_CURVATURE_RADIUS
-from worldatlas.geodesy.wgs84 import geodesic_distances
+from worldatlas.geodesy.wgs84 import geodesic_distances, unit_sphere
 
 BOUND_CUSHION_M = 0.001
 DISTANCE_BATCH = 65536
-
-
-def _xyz(lat: ArrayLike, lon: ArrayLike) -> np.ndarray:
-    """Convert latitude and longitude to unit-sphere coordinates.
-
-    Args:
-        lat: Latitudes in degrees.
-        lon: Corresponding longitudes in degrees.
-
-    Returns:
-        N-by-3 coordinate array, one Cartesian point per location.
-    """
-    a = np.deg2rad(lat)
-    b = np.deg2rad(lon)
-    return np.column_stack((np.cos(a) * np.cos(b), np.cos(a) * np.sin(b), np.sin(a)))
 
 
 def wgs84_nearest_categories(
@@ -74,7 +59,7 @@ def wgs84_nearest_categories(
         raise ValueError('invalid geodesic nearest inputs')
     if not len(qlat):
         return np.empty(0, dtype=np.uint32)
-    xyz = _xyz(qlat, qlon)
+    xyz = unit_sphere(qlat, qlon)
     _, first = tree.query(xyz, k=1, workers=1)
     first = np.asarray(first, dtype=np.int64)
     upper = geodesic_distances(qlon, qlat, lon[first], lat[first])

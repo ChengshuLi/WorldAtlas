@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import copy
 import hashlib
 import json
 import math
@@ -13,8 +12,8 @@ import sys
 import threading
 import time
 import uuid
-from collections.abc import Iterator
 from datetime import datetime, timezone
+from functools import partial
 from pathlib import Path
 from types import FrameType
 from typing import Any, NotRequired, TypedDict, cast
@@ -34,6 +33,7 @@ from worldatlas.map_build.execution.control import stage as stage_context
 from worldatlas.map_build.execution.runtime import (
     Checkpoints,
     RunLock,
+    StageExecutor,
     Timing,
     code_identity,
     repository_identity,
@@ -41,9 +41,9 @@ from worldatlas.map_build.execution.runtime import (
 )
 from worldatlas.map_build.inputs.configuration import (
     BUILD_CONFIGURATION,
-    BuildSources,
-    FileEntry,
-    catalog_source_id,
+    PhysicalConfiguration,
+    catalog_source_ids,
+    physical_configuration,
     require_separate_cache_and_output,
 )
 from worldatlas.map_build.inputs.selection import (
@@ -61,6 +61,7 @@ from worldatlas.shared.files import (
     read_json,
     sha256_file,
     verify_pins,
+    write_bytes_atomic,
     write_json,
 )
 
@@ -114,34 +115,9 @@ def runtime_identity() -> RuntimeIdentity:
     }
 
 
-def catalog_references(
-    sources: BuildSources,
-) -> Iterator[tuple[FileEntry, str]]:
-    """Find the file entries that name a raw source in Neon.
-
-    Args:
-        sources: Coastline and inland-water file settings.
-
-    Yields:
-        Pairs of the file entry to update and its source ID. A ZIP member
-        uses the selector on its archive, not on the member itself.
-
-    Raises:
-        ValueError: A selector is invalid or the entry also pins its R2 bytes.
-    """
-    files = list(sources["inland_water"]["files"])
-    for layer in sources["land_config"]["land"]:
-        files.extend(layer["files"])
-    # Walk only the file entries and their archives. The other settings do not name files.
-    for file in files:
-        entry = file
-        while isinstance(entry, dict):
-            if "r2_source" in entry:
-                yield entry, catalog_source_id(entry)
-            entry = entry.get("archive")
-
-
-def physical_reference(run: Path | str, configuration: dict[str, Any]) -> PhysicalReuse:
+def physical_reference(
+    run: Path | str, configuration: PhysicalConfiguration
+) -> PhysicalReuse:
     """Find reusable physical outputs for the same grid and raw inputs.
 
     Args:
@@ -235,10 +211,12 @@ class Pipeline:
         setup_started = time.monotonic()
         setup_utc = datetime.now(timezone.utc).isoformat()
         self.config_path = Path(config).resolve(strict=True)
-        self.config_pin = pin_file(self.config_path)
-        self.cfg = BUILD_CONFIGURATION.validate_json(
-            self.config_path.read_bytes(), strict=True
-        )
+        config_bytes = self.config_path.read_bytes()
+        self.config_pin = {
+            "path": str(self.config_path),
+            "sha256": hashlib.sha256(config_bytes).hexdigest(),
+        }
+        self.cfg = BUILD_CONFIGURATION.validate_json(config_bytes, strict=True)
         self.grid = Grid(**self.cfg["grid"])
 
         self.resume = resume
@@ -248,13 +226,19 @@ class Pipeline:
             divide, reuse_from, recompute_division
         )
 
-        sources = copy.deepcopy(self.cfg["sources"])
-        references = list(catalog_references(sources))
-        source_ids = {source_id for _, source_id in references}
-        self.selection = self._load_selection(source_ids, selection)
+        self.selection = self._load_selection(
+            catalog_source_ids(self.cfg["sources"]), selection
+        )
         self.compiled_divisions = prepare_geography(self.selection["geography"])
-        self._fill_catalog_entries(references)
-        self.physical_config = self._physical_configuration(sources)
+        if "coastal_band_metres" not in self.cfg and any(
+            rule["operation"] == "nearest_coastal_water"
+            for division in self.compiled_divisions.values()
+            for rule in division.rules
+        ):
+            raise ValueError("nearest_coastal_water requires coastal_band_metres")
+        self.physical_config = physical_configuration(
+            self.cfg, self.selection["raw_sources"], self.grid, self.root / "inputs"
+        )
         self.physical_reuse = (
             physical_reference(self.reuse_from, self.physical_config)
             if self.reuse_from is not None
@@ -385,25 +369,6 @@ class Pipeline:
                 parents=self.requested_parents,
             )
 
-    def _physical_configuration(self, sources: BuildSources) -> dict[str, Any]:
-        """Record the grid and source settings for a standalone physical build.
-
-        Args:
-            sources: Source settings with catalog entries expanded to file pins.
-
-        Returns:
-            A JSON-ready configuration with the grid, coastline and inland water.
-        """
-        return {
-            **self.cfg.get("physical_controls", {}),
-            "schema": "raw-physical-pipeline-v3",
-            "selection_notes": self.cfg.get("selection_notes"),
-            "source_directory": str(self.root / "inputs"),
-            "grid": vars(self.grid),
-            "land_config": sources["land_config"],
-            "inland_water": sources["inland_water"],
-        }
-
     def _prepare_run_identity(self) -> None:
         """Record the inputs and options that must match when resuming."""
         self.identity: RunIdentity = {
@@ -429,7 +394,9 @@ class Pipeline:
         Raises:
             ValueError: Saved settings, identity, checkpoints or timing records changed.
         """
-        saved_config = self.out / "build-config.json"
+        self.saved_config = self.out / "build-config.json"
+        config_bytes = json_bytes(self.cfg)
+        self.saved_config_sha256 = hashlib.sha256(config_bytes).hexdigest()
         if saved_identity is not None:
             saved = dict(saved_identity)
             # Earlier run identities also recorded the first attempt's provenance.
@@ -445,11 +412,11 @@ class Pipeline:
                 raise ValueError(
                     "resume request, input selection or output identity changed"
                 )
-            if saved_config.read_bytes() != json_bytes(self.cfg):
+            if self.saved_config.read_bytes() != config_bytes:
                 raise ValueError("saved build configuration changed")
         else:
             write_json(self.out / "run-identity.json", self.identity)
-            write_json(saved_config, self.cfg)
+            write_bytes_atomic(self.saved_config, config_bytes)
         attempts = self.out / "attempts"
         self.attempt = uuid.uuid4().hex
         self.checkpoints = Checkpoints(self.out / "checkpoints", self.attempt)
@@ -512,59 +479,13 @@ class Pipeline:
             }
         )
         if self.resume:
-            for earlier_attempt in (self.out / "attempts").iterdir():
-                if (
-                    earlier_attempt != self.attempt_dir
-                    and not (earlier_attempt / "setup-timing.json").exists()
-                ):
-                    self.timing.event(
-                        {
-                            "event": "unmeasured-initialization",
-                            "attempt": earlier_attempt.name,
-                            "id": "setup/interrupted-initialization",
-                            "group": "setup",
-                        }
-                    )
+            self.timing.record_interrupted_setup(
+                earlier_attempt.name
+                for earlier_attempt in self.attempt_dir.parent.iterdir()
+                if earlier_attempt != self.attempt_dir
+            )
         self.timing.mark_complete("setup")
         write_json(self.attempt_dir / "setup-timing.json", self.timing.anchor())
-
-    def _fill_catalog_entries(self, references: list[tuple[FileEntry, str]]) -> None:
-        """Fill in R2 file details in place from the catalog saved with the build.
-
-        For each ``r2_source``, look up the ID in ``self.selection["raw_sources"]``.
-        Keep that same ID as ``source_id`` and add the R2 bucket, object key, byte
-        size, and SHA-256. Later stages use these details to fetch and verify files.
-
-        Args:
-            references: Pairs of file or ZIP archive dictionaries from the copied
-                settings and their source IDs.
-
-        Raises:
-            ValueError: A source ID has no catalog row in the saved selection.
-        """
-        if not references:
-            return
-
-        catalog = {
-            source["source_id"]: source for source in self.selection["raw_sources"]
-        }
-        if any(source_id not in catalog for _, source_id in references):
-            raise ValueError("raw catalog is missing selected sources")
-        for entry, source_id in references:
-            del entry["r2_source"]
-            source = catalog[source_id]
-            entry.update(
-                {
-                    key: source[key]
-                    for key in (
-                        "source_id",
-                        "r2_bucket",
-                        "r2_key",
-                        "sha256",
-                        "size_bytes",
-                    )
-                }
-            )
 
     def physical_attempts(self) -> list[dict[str, Any]]:
         """Read complete events from the physical build's timing log.
@@ -699,9 +620,13 @@ class Pipeline:
                 self.checkpoints.run_function(
                     "physical",
                     "physical",
-                    physical_build.run,
-                    (request, self.out / "physical"),
-                    kwargs={"grid": self.grid, "resume": marker.is_file()},
+                    partial(
+                        physical_build.run,
+                        request,
+                        self.out / 'physical',
+                        grid=self.grid,
+                        resume=marker.is_file(),
+                    ),
                     timing=self.timing,
                     inputs=[pin_file(request)],
                     outputs=[self.out / "physical"],
@@ -739,8 +664,7 @@ class Pipeline:
             compiled_divisions=self.compiled_divisions,
             requested=self.requested_parents,
             reuse=previous,
-            checkpoints=self.checkpoints,
-            timing=self.timing,
+            executor=StageExecutor(self.checkpoints, self.timing),
         )
         return Path(operation.run()["directory"])
 
@@ -764,12 +688,12 @@ class Pipeline:
         result = self.checkpoints.run_function(
             "encode",
             "package",
-            encode,
-            (
+            partial(
+                encode,
                 self.grid,
                 physical,
                 ownership,
-                self.selection["geography"]["category_bindings"],
+                self.selection['geography']['category_bindings'],
                 output,
             ),
             timing=self.timing,
@@ -820,6 +744,10 @@ class Pipeline:
                 verify_pins(physical_inputs)
                 if pin_file(self.config_path) != self.config_pin:
                     raise ValueError("source configuration changed during pipeline")
+                if sha256_file(self.saved_config) != self.saved_config_sha256:
+                    raise ValueError(
+                        "saved build configuration changed during pipeline"
+                    )
                 final_pins = {
                     key: pin_file(final / name)
                     for key, name in [
@@ -836,6 +764,7 @@ class Pipeline:
                 "schema": "worldatlas-end-to-end-report-v2",
                 "status": "complete",
                 "request": self.config_pin,
+                "saved_configuration_sha256": self.saved_config_sha256,
                 "runner": pin_file(__file__),
                 "original_run_identity": pin_file(self.out / "run-identity.json"),
                 "stages": stages,
