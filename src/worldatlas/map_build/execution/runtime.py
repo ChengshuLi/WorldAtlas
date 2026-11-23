@@ -244,14 +244,15 @@ class RunLock:
 class Checkpoints:
     """Save and verify a build stage's completed outputs."""
 
-    def __init__(self, root: Path | str, attempt: str) -> None:
+    def __init__(self, root: Path | str, build_attempt_id: str) -> None:
         """Prepare the run's checkpoint directory.
 
         Args:
             root: Directory for stage checkpoint files.
-            attempt: Identifier of the current build attempt.
+            build_attempt_id: Identifier for this invocation of the build.
         """
-        self.root, self.attempt = Path(root).resolve(), attempt
+        self.root = Path(root).resolve()
+        self.build_attempt_id = build_attempt_id
         self.files = RunFilePins()
         self.root.mkdir(exist_ok=True)
         self.preserved = self.root.parent / "preserved"
@@ -380,18 +381,18 @@ class Checkpoints:
                 raise ValueError("completed stage output changed: " + path.parent.name)
 
     def begin(self, name: str) -> Path:
-        """Create a directory for one stage attempt.
+        """Create a directory for one attempt to run a checkpointed task.
 
         Args:
-            name: Stage ID.
+            name: Task ID used for the checkpoint directory.
 
         Returns:
-            Path to the new attempt directory.
+            Path to the new task attempt directory under the task's checkpoint.
         """
-        path = self.stage(name) / ("attempt-" + uuid.uuid4().hex)
-        path.mkdir()
-        sync_directory(path.parent)
-        return path
+        task_attempt_dir = self.stage(name) / ("attempt-" + uuid.uuid4().hex)
+        task_attempt_dir.mkdir()
+        sync_directory(task_attempt_dir.parent)
+        return task_attempt_dir
 
     def complete(
         self,
@@ -415,7 +416,7 @@ class Checkpoints:
             self.stage(name) / "complete.json",
             {
                 "schema": "worldatlas-command-checkpoint-v1",
-                "attempt": self.attempt,
+                "attempt": self.build_attempt_id,
                 "timing_anchor": timing_anchor,
                 "invocation": invocation,
                 "inputs": inputs,
@@ -435,19 +436,22 @@ class Checkpoints:
         outputs: Iterable[Path | str],
         timing_kind: str = "processing",
     ) -> Result:
-        """Run a stage or load its verified result from a previous attempt.
+        """Run a task or load its verified result from an earlier task attempt.
+
+        Each new task attempt records its starting inputs in ``admitted.json``
+        and stores any traceback from the operation in ``error.log``.
 
         Args:
-            name: Stage ID for the checkpoint.
-            group: Timing group that contains this stage.
-            operation: Stage function with its inputs already supplied.
+            name: Task ID for the checkpoint.
+            group: Stage that receives the task's elapsed time.
+            operation: Task function with its arguments already supplied.
             timing: Timing journal for the run.
             inputs: Input file pins.
             outputs: Output files and directories to verify.
             timing_kind: How the operation counts toward stage timing.
 
         Returns:
-            The stage result decoded from its saved JSON file.
+            The task result decoded from its saved JSON file.
 
         Raises:
             ValueError: An output path escapes the run or saved data no longer matches.
@@ -473,10 +477,10 @@ class Checkpoints:
         if self.completed(name, invocation, sealed):
             return cast(Result, read_json(result_path))
         self.preserve(name, sealed)
-        attempt = self.begin(name)
+        task_attempt_dir = self.begin(name)
         self.files.verify(input_pins)
         write_json(
-            attempt / "admitted.json",
+            task_attempt_dir / "admitted.json",
             {
                 "invocation": invocation,
                 "inputs": input_pins,
@@ -488,7 +492,9 @@ class Checkpoints:
                 result = operation()
             write_json(result_path, result)
         except BaseException:
-            (attempt / "error.log").write_text(traceback.format_exc(), encoding="utf-8")
+            (task_attempt_dir / "error.log").write_text(
+                traceback.format_exc(), encoding="utf-8"
+            )
             raise
         self.complete(name, invocation, sealed, input_pins, timing.anchor())
         return cast(Result, read_json(result_path))
