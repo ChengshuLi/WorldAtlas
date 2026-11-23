@@ -30,6 +30,8 @@ from worldatlas.shared.files import (
     write_json,
 )
 
+TASK_CHECKPOINT_SCHEMA = "worldatlas-task-checkpoint-v2"
+
 
 class RunFilePins:
     """Remember file checksums while their filesystem identity is unchanged."""
@@ -277,51 +279,38 @@ class Checkpoints:
         path.mkdir(exist_ok=True)
         return path
 
-    def completed(
-        self, name: str, invocation: dict[str, Any], outputs: Iterable[Path | str]
-    ) -> bool:
-        """Verify the inputs and output files of a completed stage.
+    def _verify_completion(
+        self, path: Path, invocation: dict[str, Any] | None = None
+    ) -> dict[str, Any]:
+        """Read a completion record and verify its files and timing log.
 
         Args:
-            name: Stage ID.
-            invocation: Current stage inputs and expected output paths.
-            outputs: Files or directories the stage should have written.
+            path: Path to the task's completion record.
+            invocation: Current task request to compare with the saved request.
 
         Returns:
-            True after successful verification, or False if no receipt exists.
+            The saved record, including the task's return value.
 
         Raises:
-            ValueError: Timing, input, or output records do not match.
+            ValueError: The record uses an unsupported format or its data changed.
         """
-        path = self.stage(name) / "complete.json"
-        if not path.exists():
-            return False
         receipt = read_json(path)
-        verify_anchor(receipt["timing_anchor"], self.root.parent / TIMING_LOG)
-        request = lambda value: {k: v for k, v in value.items() if k != "code"}
-        if receipt.get("schema") != "worldatlas-command-checkpoint-v1" or request(
-            receipt["invocation"]
-        ) != request(invocation):
+        name = path.parent.name
+        if receipt.get("schema") != TASK_CHECKPOINT_SCHEMA:
+            raise ValueError(
+                "resume this task with its original checkpoint format: " + name
+            )
+        saved = receipt["invocation"]
+        # The function name is provenance. Resume compares the task's data.
+        if invocation is not None and any(
+            saved[key] != invocation[key] for key in ("stage", "inputs", "outputs")
+        ):
             raise ValueError("completed command identity changed: " + name)
-        self.files.verify(self.data_pins(receipt))
-        if self.files.inventory(outputs) != receipt["outputs"]:
+        verify_anchor(receipt["timing_anchor"], self.root.parent / TIMING_LOG)
+        self.files.verify(saved["inputs"])
+        if self.files.inventory(saved["outputs"]) != receipt["outputs"]:
             raise ValueError("completed stage output changed: " + name)
-        return True
-
-    @staticmethod
-    def data_pins(receipt: dict[str, Any]) -> list[dict[str, str]]:
-        # Earlier checkpoints also included the executable Python file among
-        # their inputs. Preserve the receipt and verify its data inputs only.
-        """Find the input file pins that must still match on resume.
-
-        Args:
-            receipt: Completed stage record.
-
-        Returns:
-            Path and SHA-256 dictionaries for the stage's data files.
-        """
-        code_path = receipt["invocation"].get("code", {}).get("path")
-        return [pin for pin in receipt["inputs"] if pin["path"] != code_path]
+        return receipt
 
     def preserve(
         self, name: str, paths: Iterable[Path | str]
@@ -374,11 +363,7 @@ class Checkpoints:
             admission = read_json(path)
             verify_anchor(admission["timing_anchor"], self.root.parent / TIMING_LOG)
         for path in self.root.glob("*/complete.json"):
-            receipt = read_json(path)
-            verify_anchor(receipt["timing_anchor"], self.root.parent / TIMING_LOG)
-            self.files.verify(self.data_pins(receipt))
-            if self.files.inventory(receipt["output_roots"]) != receipt["outputs"]:
-                raise ValueError("completed stage output changed: " + path.parent.name)
+            self._verify_completion(path)
 
     def begin(self, name: str) -> Path:
         """Create a directory for one attempt to run a checkpointed task.
@@ -394,34 +379,31 @@ class Checkpoints:
         sync_directory(task_attempt_dir.parent)
         return task_attempt_dir
 
-    def complete(
+    def _write_completion(
         self,
-        name: str,
+        path: Path,
         invocation: dict[str, Any],
-        outputs: list[Path],
-        inputs: Iterable[Mapping[str, str] | FilePin],
+        result: JSONValue,
         timing_anchor: dict[str, str | int],
     ) -> None:
-        """Write a stage's completion record after verifying its saved outputs.
+        """Save the task's return value and verified files in one record.
 
         Args:
-            name: Stage ID.
-            invocation: Stage request used to check resume compatibility.
-            outputs: Directories and files to hash as completed outputs.
-            inputs: Expected path and SHA-256 pins for the inputs.
+            path: Destination for the completion record.
+            invocation: Task request with input pins and expected output paths.
+            result: JSON-compatible value returned by the task.
             timing_anchor: Timing log path, prefix length and digest.
         """
-        self.files.verify(inputs)
+        self.files.verify(invocation["inputs"])
         write_json(
-            self.stage(name) / "complete.json",
+            path,
             {
-                "schema": "worldatlas-command-checkpoint-v1",
+                "schema": TASK_CHECKPOINT_SCHEMA,
                 "attempt": self.build_attempt_id,
                 "timing_anchor": timing_anchor,
                 "invocation": invocation,
-                "inputs": inputs,
-                "output_roots": [os.path.abspath(p) for p in outputs],
-                "outputs": self.files.inventory(outputs),
+                "outputs": self.files.inventory(invocation["outputs"]),
+                "result": result,
             },
         )
 
@@ -451,7 +433,7 @@ class Checkpoints:
             timing_kind: How the operation counts toward stage timing.
 
         Returns:
-            The task result decoded from its saved JSON file.
+            The task result decoded from ``complete.json``.
 
         Raises:
             ValueError: An output path escapes the run or saved data no longer matches.
@@ -465,7 +447,7 @@ class Checkpoints:
             for path in outputs
         ):
             raise ValueError("stage output outside run or replaces run root")
-        result_path = self.stage(name) / "result.json"
+        completion_path = self.stage(name) / "complete.json"
         function = operation.func if isinstance(operation, partial) else operation
         invocation = {
             "stage": name,
@@ -473,10 +455,11 @@ class Checkpoints:
             "outputs": list(map(str, outputs)),
             "code": {"module": function.__module__, "function": function.__qualname__},
         }
-        sealed = [*outputs, result_path]
-        if self.completed(name, invocation, sealed):
-            return cast(Result, read_json(result_path))
-        self.preserve(name, sealed)
+        if completion_path.exists():
+            return cast(
+                Result, self._verify_completion(completion_path, invocation)["result"]
+            )
+        self.preserve(name, outputs)
         task_attempt_dir = self.begin(name)
         self.files.verify(input_pins)
         write_json(
@@ -490,14 +473,13 @@ class Checkpoints:
         try:
             with timing.measure(group, name, kind=timing_kind):
                 result = operation()
-            write_json(result_path, result)
+            self._write_completion(completion_path, invocation, result, timing.anchor())
         except BaseException:
             (task_attempt_dir / "error.log").write_text(
                 traceback.format_exc(), encoding="utf-8"
             )
             raise
-        self.complete(name, invocation, sealed, input_pins, timing.anchor())
-        return cast(Result, read_json(result_path))
+        return cast(Result, read_json(completion_path)["result"])
 
 
 @contextmanager

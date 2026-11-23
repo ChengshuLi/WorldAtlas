@@ -128,6 +128,7 @@ Each layer has its own pair of files. The physical grid stores land or water. Th
 | `report.json` | Marks the run complete and records final file paths, checksums and stage timings. Its `physical_directory` field locates the physical grid, including a grid reused from an earlier run. |
 | `attempts/` | Records the code and runtime for each run attempt. Release staging uses these records to package the code needed for replay. |
 | `checkpoints/` | Records inputs and outputs for completed steps so resume can verify and reuse them. |
+| `checkpoints/{STEP}/complete.json` | Stores the task's return value and the checksums needed to reuse it. The builder writes it after the task and its output checks finish. |
 | `checkpoints/{STEP}/attempt-{ID}/error.log` | The traceback for a failed step, kept beside that attempt’s checkpoint. |
 | `timing-events.jsonl` | Keeps timing events as work runs so totals can be reconstructed after an interruption. |
 | `attempts/{ATTEMPT_ID}/failure.json` | Summarizes progress and timing when this attempt ends with a caught error or interruption. |

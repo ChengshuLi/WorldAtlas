@@ -13,7 +13,7 @@ from worldatlas.map_build.execution.runtime import (
     repository_identity,
 )
 from worldatlas.map_build.execution.timing import Timing
-from worldatlas.shared.files import pin_file
+from worldatlas.shared.files import json_bytes, pin_file, read_json
 
 
 class RepositoryIdentityTests(unittest.TestCase):
@@ -97,12 +97,26 @@ class FunctionCheckpointTests(unittest.TestCase):
 
     def test_resume_trusts_function_changes_and_preserves_the_output_record(self):
         first = self.call(self.calculate)
+        checkpoint_dir = self.root / 'checkpoints/calculate'
+        completion = read_json(checkpoint_dir / 'complete.json')
+        self.assertEqual(completion['result'], first)
+        self.assertEqual(completion['outputs'], [pin_file(self.output / 'result')])
+        self.assertFalse((checkpoint_dir / 'result.json').exists())
 
         def changed_function():
             self.fail('a completed calculation was repeated')
 
         self.assertEqual(self.call(changed_function), first)
         self.assertEqual(Path(first['result']).read_text(), 'input')
+
+    def test_resume_rejects_an_older_completion_record(self):
+        result = self.call(self.calculate)
+        checkpoint_dir = self.root / 'checkpoints/calculate'
+        path = checkpoint_dir / 'complete.json'
+        path.write_bytes(json_bytes({'schema': 'worldatlas-command-checkpoint-v1'}))
+        (checkpoint_dir / 'result.json').write_bytes(json_bytes(result))
+        with self.assertRaisesRegex(ValueError, 'original checkpoint format'):
+            self.checkpoints.verify_all()
 
     def test_stage_accepts_explicit_keyword_inputs(self):
         def calculate(*, suffix):
@@ -138,6 +152,7 @@ class FunctionCheckpointTests(unittest.TestCase):
 
         with self.assertRaises(InterruptedError):
             self.call(interrupted)
+        self.assertFalse((self.root / 'checkpoints/calculate/complete.json').exists())
         self.call(self.calculate)
         preserved = list((self.root / 'preserved').glob('calculate-*/0-output/partial'))
         self.assertEqual(len(preserved), 1)
