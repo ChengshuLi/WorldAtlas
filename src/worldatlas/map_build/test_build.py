@@ -636,7 +636,7 @@ class Fixture(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "fixture failure"):
                 runner.run()
         self.assertFalse((runner.out / "report.json").exists())
-        failure = read_json(runner.out / "failure.json")
+        failure = read_json(runner.attempt_dir / "failure.json")
         self.assertFalse(failure["stages"]["division"]["complete"])
         self.assertFalse(failure["stages"]["package"]["complete"])
 
@@ -649,7 +649,9 @@ class Fixture(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "fixture stage failed"):
                 runner.run()
         self.assertFalse((runner.out / "report.json").exists())
-        self.assertEqual(read_json(runner.out / "failure.json")["status"], "incomplete")
+        self.assertEqual(
+            read_json(runner.attempt_dir / "failure.json")["status"], "incomplete"
+        )
 
     def prepare_raw_sources(self):
         grid = {"width": 8, "height": 4, "west": -180, "north": 90, "step": 45}

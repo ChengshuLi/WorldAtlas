@@ -130,7 +130,7 @@ Each layer has its own pair of files. The physical grid stores land or water. Th
 | `checkpoints/` | Records inputs and outputs for completed steps so resume can verify and reuse them. |
 | `checkpoints/{STEP}/attempt-{ID}/error.log` | The traceback for a failed step, kept beside that attempt’s checkpoint. |
 | `timing-events.jsonl` | Keeps timing events as work runs so totals can be reconstructed after an interruption. |
-| `failure.json` | Summarizes progress and timing when the builder catches an error or interruption. |
+| `attempts/{ATTEMPT_ID}/failure.json` | Summarizes progress and timing when this attempt ends with a caught error or interruption. |
 | `preserved/` | Holds files moved aside before a retry, for debugging only. Resume ignores this directory. |
 | `run.lock` | Prevents two builders from writing to the same run at once. |
 | `physical.lock` | Protects physical output from concurrent writers, including calls to the standalone physical command. |

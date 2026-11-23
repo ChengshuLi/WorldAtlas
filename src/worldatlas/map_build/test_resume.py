@@ -167,12 +167,15 @@ class ExecutorResumeTests(unittest.TestCase):
         journal.write_bytes(prior)
         self.runner(resume=True)
 
-    def test_setup_timing_failure_preserves_the_previous_failure_report(self):
+    def test_each_failed_attempt_keeps_its_own_failure_report(self):
         first = self.runner()
-        first.close()
-        failure = self.out / "failure.json"
-        previous = {"status": "incomplete"}
-        write_json(failure, previous)
+        with (
+            patch.object(first, "physical", side_effect=ValueError("first failure")),
+            self.assertRaisesRegex(ValueError, "first failure"),
+        ):
+            first.run()
+        first_failure = first.attempt_dir / "failure.json"
+        first_report = first_failure.read_bytes()
 
         def write(path, value):
             if path.name == "setup-timing.json":
@@ -182,15 +185,21 @@ class ExecutorResumeTests(unittest.TestCase):
         with patch.object(timing, "write_json", side_effect=write):
             with self.assertRaisesRegex(OSError, "cannot save setup timing"):
                 self.runner(resume=True)
-        self.assertEqual(read_json(failure), previous)
 
         resumed = self.runner(resume=True)
-        self.assertFalse(failure.exists())
+        resumed_failure = resumed.attempt_dir / "failure.json"
+        self.assertFalse(resumed_failure.exists())
         summary = resumed.timing.summary(None)["setup"]
         self.assertTrue(summary["timing_complete"])
         self.assertEqual(summary["unmeasured_interrupted_attempts"], [])
-        preserved = next(self.out.glob("preserved/failure-*/0-failure.json"))
-        self.assertEqual(read_json(preserved), previous)
+        with (
+            patch.object(resumed, "physical", side_effect=ValueError("second failure")),
+            self.assertRaisesRegex(ValueError, "second failure"),
+        ):
+            resumed.run()
+        self.assertEqual(read_json(resumed_failure)["status"], "incomplete")
+        self.assertEqual(first_failure.read_bytes(), first_report)
+        self.assertFalse((self.out / "failure.json").exists())
 
     def execute(self, runner):
         output = self.out / "result"

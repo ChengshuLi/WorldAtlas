@@ -10,7 +10,6 @@ import signal
 import sys
 import threading
 import uuid
-from contextlib import ExitStack
 from functools import partial
 from pathlib import Path
 from types import FrameType
@@ -249,8 +248,7 @@ class Pipeline:
             self.out.mkdir(mode=0o700)
             write_json(self.out / "input-selection.json", self.selection)
         self.run_lock = RunLock(self.out / "run.lock")
-        with ExitStack() as setup:
-            setup.callback(self.run_lock.close)
+        try:
             self._start_attempt(saved_identity, config_bytes)
             self.timing = Timing.open_run(
                 self.attempt_dir,
@@ -258,9 +256,9 @@ class Pipeline:
                 resume=self.resume,
                 physical_reuse=self.physical_reuse,
             )
-            setup.callback(self.timing.close)
-            self.checkpoints.preserve("failure", [self.out / "failure.json"])
-            setup.pop_all()
+        except BaseException:
+            self.run_lock.close()
+            raise
 
     def _prepare_workspace(self, output: Path | str, work_dir: Path | str) -> None:
         """Resolve the workspace and require a usable run directory within it.
@@ -557,7 +555,7 @@ class Pipeline:
     def run(self) -> dict[str, Any]:
         """Run the build through physical grid, ownership, and final encoding.
 
-        Write a success or failure report and close the run even if a stage fails.
+        Write the finished run report or this attempt's failure report, then close.
 
         Returns:
             Build report with pinned inputs and outputs and stage timings.
@@ -613,7 +611,7 @@ class Pipeline:
             return result
         except BaseException:
             write_json(
-                self.out / "failure.json",
+                self.attempt_dir / "failure.json",
                 {
                     "schema": "worldatlas-end-to-end-failure-v1",
                     "status": "incomplete",
