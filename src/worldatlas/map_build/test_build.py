@@ -464,7 +464,7 @@ class Fixture(unittest.TestCase):
         self.assertEqual(land["files"], [resolved])
         source_cache = self.make_cache()
         planned, requests = physical_build.plan_land_inputs(
-            runner.physical_config["land_config"], source_cache.directory
+            runner.physical_config["land_config"], source_cache
         )
         self.assertEqual(requests, [resolved])
         self.assertEqual(planned["land"][0]["dataset"], str(source_cache.path(resolved)))
@@ -487,7 +487,7 @@ class Fixture(unittest.TestCase):
                     self.assertEqual(runner.out, root / "run")
                     source_cache = self.make_cache(root / "inputs")
                     planned, (pin,) = physical_build.plan_land_inputs(
-                        runner.physical_config["land_config"], source_cache.directory
+                        runner.physical_config["land_config"], source_cache
                     )
                     source = source_cache.acquire(pin)
                     self.assertEqual(planned["land"][0]["dataset"], str(source))
@@ -523,7 +523,7 @@ class Fixture(unittest.TestCase):
             runner = self.make()
             source_cache = self.make_cache()
             planned, requests = physical_build.plan_land_inputs(
-                runner.physical_config["land_config"], source_cache.directory
+                runner.physical_config["land_config"], source_cache
             )
             self.assertEqual(calls, [])
             for request in requests:
@@ -922,12 +922,15 @@ class Fixture(unittest.TestCase):
         )
         with self.assertRaisesRegex(ValueError, "physical reuse requires the same grid"):
             pipeline.physical_reference(runner.out, shorter_sources)
-        mask = physical / "physical-dry.tif"
-        original = mask.read_bytes()
-        mask.write_bytes(original + b"changed")
+        runs_path = physical / "runs.u32le"
+        original = runs_path.read_bytes()
+        runs_path.write_bytes(original + b"changed")
         with self.assertRaisesRegex(ValueError, "checkpoint/input hash mismatch"):
             reused.physical()
-        mask.write_bytes(original)
+        runs_path.write_bytes(original)
+        (physical / "physical-dry.tif").unlink()
+        (runner.out / "physical/pipeline-identity.json").unlink()
+        self.assertEqual(reused.physical(), physical)
         components = runner.out / "components"
         result = build_components(Grid(**grid), physical, components)
         self.assertEqual(result["land_cells"], 5)
@@ -944,11 +947,8 @@ class Fixture(unittest.TestCase):
             ],
             0,
         )
-        identity_path = runner.out / "physical/pipeline-identity.json"
-        identity = read_json(identity_path)
-        identity.pop("inland_water")
-        identity_path.write_bytes(json_bytes(identity))
-        with self.assertRaisesRegex(ValueError, "saved inland_water configuration"):
+        config_path.unlink()
+        with self.assertRaisesRegex(FileNotFoundError, r"physical-build-config\.json"):
             pipeline.physical_reference(runner.out, runner.physical_config)
 
     def test_single_cloud_configuration_matches_local_raw_and_component_streams_in_another_root(

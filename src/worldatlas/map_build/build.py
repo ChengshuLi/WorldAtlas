@@ -58,7 +58,6 @@ from worldatlas.map_build.inputs.selection_types import BuildSelection
 from worldatlas.map_build.physical import build as physical_build
 from worldatlas.shared.database import connect_neon, neon_connection_url
 from worldatlas.shared.files import (
-    JSONValue,
     json_bytes,
     pin_file,
     read_json,
@@ -88,7 +87,6 @@ class RunIdentity(TypedDict):
 
     schema: str
     request: dict[str, str]
-    source_pins: list[dict[str, str]]
     code: dict[str, str]
     repository: RepositoryIdentity | None
     scripts_root: str
@@ -150,26 +148,6 @@ def catalog_references(
             entry = entry.get("archive")
 
 
-def _physical_input_data(value: JSONValue) -> JSONValue:
-    """Remove descriptive selection notes from a physical input comparison.
-
-    Args:
-        value: A JSON value in the physical configuration.
-
-    Returns:
-        Equivalent JSON without any selection notes.
-    """
-    if isinstance(value, list):
-        return [_physical_input_data(item) for item in value]
-    if isinstance(value, dict):
-        return {
-            key: _physical_input_data(item)
-            for key, item in value.items()
-            if key != "selection_notes"
-        }
-    return value
-
-
 def physical_reference(run: Path | str, configuration: dict[str, Any]) -> PhysicalReuse:
     """Find reusable physical outputs for the same grid and raw inputs.
 
@@ -178,8 +156,7 @@ def physical_reference(run: Path | str, configuration: dict[str, Any]) -> Physic
         configuration: Current physical build request with pinned sources.
 
     Returns:
-        Dictionary with the original run path and SHA-256 pins for its
-        reports and physical grid files.
+        The original run path and SHA-256 pins for the row files and grid report.
 
     Raises:
         ValueError: The earlier output is incomplete, its saved settings
@@ -192,53 +169,38 @@ def physical_reference(run: Path | str, configuration: dict[str, Any]) -> Physic
         if reuse is not None:
             run = Path(reuse["source_run"]).resolve(strict=True)
     root = run / "physical"
-    report_path = root / "report.json"
-    report = read_json(report_path)
-    if report.get("status") != "candidate-only":
-        raise ValueError("physical source run is incomplete")
+    report = read_json(root / "report.json")
+    if report.get("status") != "candidate-only" or "configuration" not in report:
+        raise ValueError("physical source run is incomplete or missing settings")
     if Grid(**report["grid"]) != Grid(**configuration["grid"]):
         raise ValueError("physical reuse requires the same grid as the source run")
 
-    identity_path = root / "pipeline-identity.json"
-    identity = read_json(identity_path)
-    if "inland_water" not in identity:
-        raise ValueError(
-            "physical reuse requires a run with a saved inland_water configuration"
-        )
-    land, _ = physical_build.plan_land_inputs(
-        configuration["land_config"], Path(configuration["source_directory"])
-    )
-    for key, selected in (
-        ("land_config", land),
-        ("inland_water", configuration["inland_water"]),
-    ):
-        pin = identity[key]
-        data = Path(pin["path"]).read_bytes()
-        if hashlib.sha256(data).hexdigest() != pin["sha256"]:
-            raise ValueError("physical source configuration changed: " + key)
-        if _physical_input_data(json.loads(data)) != _physical_input_data(selected):
+    config_pin = report["configuration"]
+    request = Path(config_pin["path"])
+    data = request.read_bytes()
+    if hashlib.sha256(data).hexdigest() != config_pin["sha256"]:
+        raise ValueError("physical source configuration changed: " + str(request))
+    previous = json.loads(data)
+    # Rewording a description does not change the rasterization inputs.
+    ignore_notes = {"selection_notes": None}
+    for key in ("land_config", "inland_water"):
+        if (previous[key] | ignore_notes) != (configuration[key] | ignore_notes):
             raise ValueError("physical input differs from the source run: " + key)
-    output = root / "physical"
-    pins = [
-        pin_file(report_path),
-        {
-            "path": str(identity_path),
-            "sha256": report["pipeline_identity_sha256"],
-        },
-        {
-            "path": str(output / "report.json"),
-            "sha256": report["stage_reports"]["physical"]["sha256"],
-        },
-    ]
-    pins.extend(
-        {"path": str(output / name), "sha256": report["physical_output_sha256"][name]}
-        for name in ("physical-dry.tif", "rows.u32le", "runs.u32le")
-    )
+
+    checksums = report["physical_output_sha256"]
+    files = {
+        "rows.u32le": checksums["rows.u32le"],
+        "runs.u32le": checksums["runs.u32le"],
+        "report.json": report["stage_reports"]["physical"]["sha256"],
+    }
     return {
         "schema": "worldatlas-physical-reuse-v1",
         "status": "reused",
         "source_run": str(run),
-        "pins": pins,
+        "pins": [
+            {"path": str(root / "physical" / name), "sha256": digest}
+            for name, digest in files.items()
+        ],
     }
 
 
@@ -457,7 +419,6 @@ class Pipeline:
         self.identity: RunIdentity = {
             "schema": "worldatlas-end-to-end-run-identity-v1",
             "request": self.config_pin,
-            "source_pins": self.physical_reuse["pins"] if self.physical_reuse else [],
             "code": self.code,
             "repository": self.repository,
             "scripts_root": str(PACKAGE_ROOT),
@@ -735,7 +696,7 @@ class Pipeline:
         """Build, resume, or reuse the physical land and water grid.
 
         Returns:
-            Directory containing the physical raster, row-run files and report.
+            Directory containing the physical row-run files and report.
         """
         request = self.out / "physical-build-config.json"
         if request.exists():
@@ -855,10 +816,14 @@ class Pipeline:
                 return report
             with self.timing.measure("physical", "stage-total"):
                 physical = self.physical()
-            physical_inputs = [
-                pin_file(physical / name)
-                for name in ("rows.u32le", "runs.u32le", "report.json")
-            ]
+            physical_inputs = (
+                self.physical_reuse["pins"]
+                if self.physical_reuse is not None
+                else [
+                    pin_file(physical / name)
+                    for name in ("rows.u32le", "runs.u32le", "report.json")
+                ]
+            )
             physical_report = self.physical_reuse or read_json(
                 self.out / "physical/report.json"
             )
@@ -874,9 +839,7 @@ class Pipeline:
             self.timing.mark_complete("package")
             with self.timing.measure("verification", "stage-total"):
                 verify_pins(physical_inputs)
-                if pin_file(self.config_path) != self.config_pin or any(
-                    pin_file(p["path"]) != p for p in self.identity["source_pins"]
-                ):
+                if pin_file(self.config_path) != self.config_pin:
                     raise ValueError("source configuration changed during pipeline")
                 final_pins = {
                     key: pin_file(final / name)

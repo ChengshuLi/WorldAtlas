@@ -408,7 +408,11 @@ class EndToEndTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "physical source run is incomplete"):
                     physical_reference(root / "run", runner.physical_config)
                 physical_report.write_bytes(original)
-                settings = root / "run/physical/configs/land.json"
+                (root / "run/physical/configs/land.json").unlink()
+                self.assertEqual(
+                    physical_reference(root / "run", runner.physical_config)["status"], "reused"
+                )
+                settings = root / "run/physical-build-config.json"
                 settings.write_bytes(settings.read_bytes() + b"\n")
                 with self.assertRaisesRegex(ValueError, "physical source configuration changed"):
                     physical_reference(root / "run", runner.physical_config)

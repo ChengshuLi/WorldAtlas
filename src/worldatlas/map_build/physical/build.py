@@ -42,25 +42,24 @@ from worldatlas.shared.files import (
     write_json,
 )
 from worldatlas.source_assets import cache as source_cache
-from worldatlas.source_assets.cache import FileSpec, SourceCache, cached_file_path
+from worldatlas.source_assets.cache import FileSpec, SourceCache
 
 HERE = Path(__file__).resolve().parent
 
 
 def plan_land_inputs(
-    settings: LandSettings, source_directory: Path
+    settings: LandSettings, cache: SourceCache
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Prepare local coastline paths without acquiring any R2 files.
 
     Args:
         settings: Land rasterization settings with local and R2 file pins.
-        source_directory: Directory where R2 files are cached.
+        cache: Shared cache used to derive each R2 destination.
 
     Returns:
         Land settings with local file paths, and the R2 requests needed to
         populate the cache before rasterization.
     """
-    source_directory = source_directory.resolve()
     requests = []
 
     def local_file(spec: dict[str, Any]) -> dict[str, Any]:
@@ -76,7 +75,7 @@ def plan_land_inputs(
             return spec
         requests.append(spec)
         return {
-            "path": str(cached_file_path(source_directory, spec)),
+            "path": str(cache.path(spec)),
             "sha256": spec["sha256"],
             "size_bytes": spec["size_bytes"],
         }
@@ -397,6 +396,7 @@ def _run(
     """
     config_path = Path(config_path).resolve()
     data = config_path.read_bytes()
+    config_digest = hashlib.sha256(data).hexdigest()
     cfg = PHYSICAL_CONFIGURATION.validate_json(data, strict=True)
     if grid is None:
         grid = Grid(**cfg['grid'])
@@ -410,7 +410,7 @@ def _run(
     cache = resources.enter_context(
         closing(SourceCache(source_directory, check_cancelled=control.check_cancelled))
     )
-    land_cfg, land_downloads = plan_land_inputs(cfg['land_config'], source_directory)
+    land_cfg, land_downloads = plan_land_inputs(cfg['land_config'], cache)
     water_cfg = cfg['inland_water']
     if 'native_method' in water_cfg:
         raise ValueError('retired native_method; use batch_method')
@@ -508,7 +508,7 @@ def _run(
     water_path = stage_documents['inland_water'][0]
     identity = {
         'schema': 'raw-physical-resume-identity-v1',
-        'configuration_sha256': hashlib.sha256(data).hexdigest(),
+        'configuration_sha256': config_digest,
         **stage_pins,
         'script_sha256': scripts,
         'land_source_pins': source_pins,
@@ -527,8 +527,7 @@ def _run(
             stages = report.get('stage_reports', {})
             if (
                 report.get('status') != 'candidate-only'
-                or report.get('configuration_sha256')
-                != identity['configuration_sha256']
+                or report['configuration']['sha256'] != config_digest
                 or report.get('pipeline_identity_sha256') != sha256_file(identity_path)
                 or report.get('processing_journal_sha256')
                 != sha256_file(output / 'processing-events.jsonl')
@@ -904,7 +903,7 @@ def _run(
         raise ValueError('land source changed during processing')
     report = {
         'status': 'candidate-only',
-        'configuration_sha256': hashlib.sha256(data).hexdigest(),
+        'configuration': {'path': str(config_path), 'sha256': config_digest},
         'grid': grid_settings,
         **stage_pins,
         'water_batch_size': batch_size,

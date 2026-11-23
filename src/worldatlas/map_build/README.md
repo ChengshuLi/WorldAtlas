@@ -19,7 +19,7 @@ Supply `--work-dir` and an output directory for every build. The builder creates
 | Option | When to use it |
 | --- | --- |
 | `--divide PARENT_ID` | Optional. By default, divide every parent with rules in the saved selection. Supply a parent entity ID to run only its division and the ancestor divisions it needs. For example, `--divide 0` divides World into continents. Repeat the option to select several parents. |
-| `--reuse-from PREVIOUS_RUN` | Start a new build using the physical grid from an earlier local run. The grid and physical inputs must match, and the earlier physical run must have the current coastline and inland-water configuration format. By default, the builder also reuses compatible geographic assignments, including land assignments alone when only the water rules changed. |
+| `--reuse-from PREVIOUS_RUN` | Use an earlier physical grid whose report points to its saved settings. The grid, coastline and inland-water settings must match. The builder ignores selection notes and verifies the two row files and their report. It also reuses compatible geographic assignments, including land assignments alone when only the water rules changed. |
 | `--recompute-division` | Off by default. Use with `--reuse-from` to reuse only the physical grid and recalculate the requested land and water assignments. |
 | `--resume` | Continue an interrupted build using its saved selection and options. Pass the original config, output directory, and `--work-dir`. Omit `--selection`, `--divide`, `--reuse-from`, and `--recompute-division`. |
 | `--selection INPUT_SELECTION.json` | Start a fresh build with a saved geographic selection. To rebuild a release, use its restored configuration, selection and captured code. |
