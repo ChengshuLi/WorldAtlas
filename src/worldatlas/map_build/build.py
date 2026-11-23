@@ -15,7 +15,6 @@ import threading
 import time
 import uuid
 from collections.abc import Iterator
-from contextlib import closing
 from datetime import datetime, timezone
 from pathlib import Path
 from types import FrameType
@@ -67,7 +66,6 @@ from worldatlas.shared.files import (
     verify_pins,
     write_json,
 )
-from worldatlas.source_assets.cache import SourceCache
 
 HERE = Path(__file__).resolve().parent
 PACKAGE_ROOT = HERE.parent
@@ -194,53 +192,37 @@ def physical_reference(run: Path | str, configuration: dict[str, Any]) -> Physic
         if reuse is not None:
             run = Path(reuse["source_run"]).resolve(strict=True)
     root = run / "physical"
-    identity = read_json(root / "pipeline-identity.json")
-    report = read_json(root / "report.json")
+    report_path = root / "report.json"
+    report = read_json(report_path)
     if report.get("status") != "candidate-only":
         raise ValueError("physical source run is incomplete")
-    output = root / "physical"
-    produced = read_json(output / "report.json")
-    if Grid(**produced["grid"]) != Grid(**configuration["grid"]):
+    if Grid(**report["grid"]) != Grid(**configuration["grid"]):
         raise ValueError("physical reuse requires the same grid as the source run")
-    with closing(SourceCache(Path(configuration["source_directory"]))) as cache:
-        land, _ = physical_build.plan_land_inputs(configuration["land_config"], cache)
 
-    def saved_settings(key: str) -> dict[str, JSONValue]:
-        """Read a stage configuration after checking its saved fingerprint.
-
-        Args:
-            key: Stage configuration name in the saved identity.
-
-        Returns:
-            Verified settings from the completed run.
-        """
-        pin = identity[key]
-        previous = Path(pin["path"])
-        if sha256_file(previous) != pin["sha256"]:
-            raise ValueError("physical source configuration changed: " + key)
-        return read_json(previous)
-
-    saved_land = saved_settings("land_config")
-    if "inland_water" in identity:
-        saved_water = saved_settings("inland_water")
-    else:
-        # Completed runs from the split configuration can still supply their grid.
-        saved_land.pop("grid")
-        saved_water = saved_settings("water_config") | saved_settings("source_manifest")
-        saved_water.pop("grid")
-        for entry in cast(list[FileEntry], saved_water["files"]):
-            if "size" in entry:
-                entry["size_bytes"] = entry.pop("size")
-    for key, previous, selected in (
-        ("land_config", saved_land, land),
-        ("inland_water", saved_water, configuration["inland_water"]),
+    identity_path = root / "pipeline-identity.json"
+    identity = read_json(identity_path)
+    if "inland_water" not in identity:
+        raise ValueError(
+            "physical reuse requires a run with a saved inland_water configuration"
+        )
+    land, _ = physical_build.plan_land_inputs(
+        configuration["land_config"], Path(configuration["source_directory"])
+    )
+    for key, selected in (
+        ("land_config", land),
+        ("inland_water", configuration["inland_water"]),
     ):
-        if _physical_input_data(previous) != _physical_input_data(selected):
+        pin = identity[key]
+        data = Path(pin["path"]).read_bytes()
+        if hashlib.sha256(data).hexdigest() != pin["sha256"]:
+            raise ValueError("physical source configuration changed: " + key)
+        if _physical_input_data(json.loads(data)) != _physical_input_data(selected):
             raise ValueError("physical input differs from the source run: " + key)
+    output = root / "physical"
     pins = [
-        pin_file(root / "report.json"),
+        pin_file(report_path),
         {
-            "path": str(root / "pipeline-identity.json"),
+            "path": str(identity_path),
             "sha256": report["pipeline_identity_sha256"],
         },
         {
@@ -249,7 +231,7 @@ def physical_reference(run: Path | str, configuration: dict[str, Any]) -> Physic
         },
     ]
     pins.extend(
-        {"path": str(output / name), "sha256": produced["output_sha256"][name]}
+        {"path": str(output / name), "sha256": report["physical_output_sha256"][name]}
         for name in ("physical-dry.tif", "rows.u32le", "runs.u32le")
     )
     return {

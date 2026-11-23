@@ -464,7 +464,7 @@ class Fixture(unittest.TestCase):
         self.assertEqual(land["files"], [resolved])
         source_cache = self.make_cache()
         planned, requests = physical_build.plan_land_inputs(
-            runner.physical_config["land_config"], source_cache
+            runner.physical_config["land_config"], source_cache.directory
         )
         self.assertEqual(requests, [resolved])
         self.assertEqual(planned["land"][0]["dataset"], str(source_cache.path(resolved)))
@@ -487,7 +487,7 @@ class Fixture(unittest.TestCase):
                     self.assertEqual(runner.out, root / "run")
                     source_cache = self.make_cache(root / "inputs")
                     planned, (pin,) = physical_build.plan_land_inputs(
-                        runner.physical_config["land_config"], source_cache
+                        runner.physical_config["land_config"], source_cache.directory
                     )
                     source = source_cache.acquire(pin)
                     self.assertEqual(planned["land"][0]["dataset"], str(source))
@@ -523,7 +523,7 @@ class Fixture(unittest.TestCase):
             runner = self.make()
             source_cache = self.make_cache()
             planned, requests = physical_build.plan_land_inputs(
-                runner.physical_config["land_config"], source_cache
+                runner.physical_config["land_config"], source_cache.directory
             )
             self.assertEqual(calls, [])
             for request in requests:
@@ -609,10 +609,9 @@ class Fixture(unittest.TestCase):
             ],
         }
         self.cfg["sources"]["inland_water"].update(raw)
-        with patch.object(pipeline, "SourceCache") as cache, self.fake_r2({}, []) as download:
+        with patch.object(r2, "make_r2_client") as make_client:
             runner = self.make()
-        cache.assert_not_called()
-        download.assert_not_called()
+        make_client.assert_not_called()
         self.assertEqual(runner.physical_config["inland_water"], raw)
 
     def test_wrong_download_is_never_published(self):
@@ -945,40 +944,12 @@ class Fixture(unittest.TestCase):
             ],
             0,
         )
-        # An earlier completed run saved separate settings and source list pins.
-        old_manifest = {
-            key: runner.physical_config["inland_water"][key]
-            for key in ("file_count", "files")
-        }
-        old_manifest = json.loads(json_bytes(old_manifest))
-        entry = old_manifest["files"][0]
         identity_path = runner.out / "physical/pipeline-identity.json"
         identity = read_json(identity_path)
-        del identity["inland_water"]
-        for name, settings in (
-            ("land_config", dict(land, grid=grid)),
-            ("water_config", dict(water, grid=grid)),
-        ):
-            old_path = write_json(self.inputs / f"legacy-{name}.json", settings)
-            identity[name] = pin_file(old_path)
-        report_path = runner.out / "physical/report.json"
-        report = read_json(report_path)
-        size = entry.pop("size_bytes")
-        for size_key in ("size_bytes", "size"):
-            with self.subTest(old_water_size_key=size_key):
-                old_manifest["files"] = [{**entry, size_key: size}]
-                old_path = write_json(
-                    self.inputs / f"legacy-manifest-{size_key}.json", old_manifest
-                )
-                identity["source_manifest"] = pin_file(old_path)
-                identity_path.write_bytes(json_bytes(identity))
-                report["pipeline_identity_sha256"] = sha256_file(identity_path)
-                report_path.write_bytes(json_bytes(report))
-                reuse = pipeline.physical_reference(runner.out, runner.physical_config)
-                self.assertEqual(reuse["status"], "reused")
-                self.assertEqual(
-                    reuse["pins"], [pin_file(pin["path"]) for pin in reuse["pins"]]
-                )
+        identity.pop("inland_water")
+        identity_path.write_bytes(json_bytes(identity))
+        with self.assertRaisesRegex(ValueError, "saved inland_water configuration"):
+            pipeline.physical_reference(runner.out, runner.physical_config)
 
     def test_single_cloud_configuration_matches_local_raw_and_component_streams_in_another_root(
         self,
@@ -1039,13 +1010,14 @@ class Fixture(unittest.TestCase):
         source_cache = self.make_cache(other / "inputs")
         source_cache.path(land_source).unlink()
         source_cache.path(land_source["archive"]).unlink()
-        with self.fake_r2({}, []) as download:
+        with patch.object(
+            r2, "make_r2_client", side_effect=AssertionError("reuse must not open an R2 client")
+        ):
             reused = pipeline.Pipeline(
                 config, other / "reused", work_dir=other, reuse_from=runner.out
             )
             self.addCleanup(reused.close)
             self.assertEqual(reused.physical(), physical)
-        download.assert_not_called()
         components = runner.out / "components"
         build_components(Grid(**cfg["grid"]), physical, components)
         for local, cloud in [

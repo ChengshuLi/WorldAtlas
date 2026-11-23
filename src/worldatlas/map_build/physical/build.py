@@ -42,24 +42,25 @@ from worldatlas.shared.files import (
     write_json,
 )
 from worldatlas.source_assets import cache as source_cache
-from worldatlas.source_assets.cache import FileSpec, SourceCache
+from worldatlas.source_assets.cache import FileSpec, SourceCache, cached_file_path
 
 HERE = Path(__file__).resolve().parent
 
 
 def plan_land_inputs(
-    settings: LandSettings, cache: SourceCache
+    settings: LandSettings, source_directory: Path
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Prepare local coastline paths without acquiring any R2 files.
 
     Args:
         settings: Land rasterization settings with local and R2 file pins.
-        cache: Shared cache used to derive each R2 destination.
+        source_directory: Directory where R2 files are cached.
 
     Returns:
         Land settings with local file paths, and the R2 requests needed to
         populate the cache before rasterization.
     """
+    source_directory = source_directory.resolve()
     requests = []
 
     def local_file(spec: dict[str, Any]) -> dict[str, Any]:
@@ -75,7 +76,7 @@ def plan_land_inputs(
             return spec
         requests.append(spec)
         return {
-            "path": str(cache.path(spec)),
+            "path": str(cached_file_path(source_directory, spec)),
             "sha256": spec["sha256"],
             "size_bytes": spec["size_bytes"],
         }
@@ -409,7 +410,7 @@ def _run(
     cache = resources.enter_context(
         closing(SourceCache(source_directory, check_cancelled=control.check_cancelled))
     )
-    land_cfg, land_downloads = plan_land_inputs(cfg['land_config'], cache)
+    land_cfg, land_downloads = plan_land_inputs(cfg['land_config'], source_directory)
     water_cfg = cfg['inland_water']
     if 'native_method' in water_cfg:
         raise ValueError('retired native_method; use batch_method')

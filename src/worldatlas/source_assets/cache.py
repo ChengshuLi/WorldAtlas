@@ -96,6 +96,45 @@ def _check_file(path: Path, digest: str, size: int) -> None:
     raise ValueError(f"source file size or hash mismatch: {path}")
 
 
+def cached_file_path(directory: Path, spec: FileSpec) -> Path:
+    """Find where a pinned R2 object or ZIP member belongs locally.
+
+    A whole R2 object uses its own SHA-256 as the directory name and the
+    filename from its R2 key. A ZIP member uses the ZIP's SHA-256 and its
+    path inside the ZIP. That keeps ``land_polygons.shp`` beside its
+    ``.dbf`` and ``.shx`` files so GDAL can open the Shapefile.
+
+    Args:
+        directory: Absolute root of the cache.
+        spec: A whole object's R2 pin, or a member pin with an ``archive``
+            pin and the exact ``member`` name inside that ZIP.
+
+    Returns:
+        The absolute cache path, whether or not the file exists yet.
+
+    Raises:
+        ValueError: A pin or member path is invalid.
+    """
+    digest, _ = _fingerprint(spec)
+    if "archive" not in spec:
+        _, key = _location(spec)
+        return directory / digest / Path(key).name
+
+    archive, member = spec["archive"], spec.get("member")
+    if not isinstance(archive, dict):
+        raise ValueError("ZIP archive must be a pinned file")
+    if (
+        not isinstance(member, str)
+        or "\\" in member
+        or any(part in ("", ".", "..") for part in member.split("/"))
+    ):
+        raise ValueError("unsafe ZIP member")
+    # Validate the archive pin before using its checksum as the directory name.
+    cached_file_path(directory, archive)
+    archive_digest, _ = _fingerprint(archive)
+    return directory / archive_digest / member
+
+
 class SourceCache:
     """Reuse verified files across runs and skip repeat verification within one run.
 
@@ -127,41 +166,15 @@ class SourceCache:
         self._client.close()
 
     def path(self, spec: FileSpec) -> Path:
-        """Find where a pinned R2 object or ZIP member belongs locally.
-
-        A whole R2 object uses its own SHA-256 as the directory name and the
-        filename from its R2 key. A ZIP member uses the ZIP's SHA-256 and its
-        path inside the ZIP. That keeps ``land_polygons.shp`` beside its
-        ``.dbf`` and ``.shx`` files so GDAL can open the Shapefile.
+        """Return the local path assigned to an R2 object or ZIP member.
 
         Args:
-            spec: A whole object's R2 pin, or a member pin with an ``archive``
-                pin and the exact ``member`` name inside that ZIP.
+            spec: R2 object's pin, or member pin with its ZIP archive reference.
 
         Returns:
-            The absolute cache path, whether or not the file exists yet.
-
-        Raises:
-            ValueError: A pin or member path is invalid.
+            The absolute cache path, even if the file has yet to be fetched.
         """
-        digest, _ = _fingerprint(spec)
-        if "archive" not in spec:
-            _, key = _location(spec)
-            return self.directory / digest / Path(key).name
-
-        archive, member = spec["archive"], spec.get("member")
-        if not isinstance(archive, dict):
-            raise ValueError("ZIP archive must be a pinned file")
-        if (
-            not isinstance(member, str)
-            or "\\" in member
-            or any(part in ("", ".", "..") for part in member.split("/"))
-        ):
-            raise ValueError("unsafe ZIP member")
-        # Validate the archive pin before using its checksum as the directory name.
-        self.path(archive)
-        archive_digest, _ = _fingerprint(archive)
-        return self.directory / archive_digest / member
+        return cached_file_path(self.directory, spec)
 
     def _verified_file(
         self,
