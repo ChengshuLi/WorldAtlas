@@ -675,7 +675,7 @@ def main() -> None:
                 return_bytes=True,
             )
         restore_inputs(
-            read_inputs(raw, saved["inputs"].get("release_id", release["id"])),
+            read_inputs(raw, release["id"]),
             args.output,
         )
         print(f"Restored inputs to {args.output}")

@@ -1087,6 +1087,18 @@ b.run(sys.argv[1], sys.argv[2])
             b.run(self.config, out)
         self.assertFalse(out.exists())
 
+    def test_coastline_dataset_must_name_one_pinned_file(self):
+        layer = self.cfg['land_config']['land'][0]
+        dataset, files = layer['dataset'], layer['files']
+        output = self.root / 'invalid-dataset'
+        for name, pins in (('missing.geojson', files), (dataset, files * 2)):
+            with self.subTest(name=name, files=pins):
+                layer.update(dataset=name, files=pins)
+                self.config.write_text(json.dumps(self.cfg))
+                with self.assertRaisesRegex(ValueError, 'must name exactly one entry in files'):
+                    b.run(self.config, output)
+                self.assertFalse(output.exists())
+
     def test_physical_preflight_checks_available_disk_and_reports_cli_errors(self):
         self.cfg['minimum_free_bytes'] = 1
         self.config.write_text(json.dumps(self.cfg))

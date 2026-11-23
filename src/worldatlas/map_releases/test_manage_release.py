@@ -18,6 +18,7 @@ from unittest.mock import Mock, patch
 from botocore.exceptions import ClientError
 
 from worldatlas.shared.r2 import R2Client, R2ObjectMissing
+from worldatlas.map_build.execution.code_archive import SCHEMA as SOURCE_SCHEMA
 from worldatlas.map_build.execution.code_archive import capture_source, write_source
 from worldatlas.map_build.test_support import selection
 from worldatlas.map_releases.catalog import (
@@ -370,10 +371,12 @@ class BundleTests(unittest.TestCase):
             read_inputs(body, "v9.0-rc.2")
         restored = self.output / "restored"
         restore_inputs(archived, restored)
-        self.assertEqual(
-            json.loads((restored / "selection.json").read_bytes()), self.selection
-        )
-        self.assertEqual(json.loads((restored / "run.json").read_bytes())["divide"], [0, 12])
+        self.assertEqual(archived["selection"], self.selection)
+        self.assertEqual(archived["run"]["divide"], [0, 12])
+        for record in ("configuration", "selection", "run", "report"):
+            self.assertEqual(
+                json.loads((restored / f"{record}.json").read_bytes()), archived[record]
+            )
         with self.assertRaises(FileExistsError):
             restore_inputs(archived, restored)
         again = self.output / "again.gz"
@@ -384,7 +387,7 @@ class BundleTests(unittest.TestCase):
             selection=archived["selection"],
             run=archived["run"],
             report=archived["report"],
-            source_code=archived.get("source_code"),
+            source_code=archived["source_code"],
         )
         self.assertEqual(again.read_bytes(), body)
 
@@ -420,36 +423,6 @@ class BundleTests(unittest.TestCase):
         (self.attempt / "producer.json").write_text(json.dumps({"source_archive": pin_file(other)}))
         with self.assertRaisesRegex(ValueError, "inside its build attempt"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
-
-    def test_historical_restore_applies_locations_without_rewriting_original_records(
-        self,
-    ):
-        body = self.output / FILENAME
-        write_inputs(
-            body,
-            release_id="v8.0",
-            configuration={"source": "evidence/a"},
-            selection=None,
-            run=None,
-            report=None,
-            records=[{"source_id": "old", "document_text": "original text"}],
-            raw_sources=[{"r2_key": "evidence/a"}],
-            notes=["Original code was not recorded."],
-            relocations={"evidence/a": "sources/a"},
-        )
-        saved = read_inputs(body.read_bytes(), "v8.0")
-        destination = self.output / "restored"
-        restore_inputs(saved, destination)
-        self.assertEqual(saved["configuration"]["source"], "evidence/a")
-        self.assertEqual(
-            json.loads((destination / "configuration.json").read_bytes())["source"],
-            "sources/a",
-        )
-        self.assertFalse((destination / "selection.json").exists())
-        self.assertEqual(
-            json.loads((destination / "supporting_records.json").read_bytes()),
-            saved["supporting_records"],
-        )
 
     def test_release_rejects_a_code_bound_to_a_missing_entity(self):
         self.selection["geography"]["category_bindings"][0]["entity_id"] = 999
@@ -1038,14 +1011,23 @@ class CommandTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as temp:
             archive, output = Path(temp) / FILENAME, Path(temp) / "restored"
-            write_inputs(archive, release_id=candidate, configuration={}, selection={"coordinates": [0, 1]},
-                         run=None, report=None)
+            snapshot = dict(
+                schema=SOURCE_SCHEMA,
+                files=dict.fromkeys(
+                    ("environment.yml", "pyproject.toml", "README.md", "src/worldatlas/__init__.py"),
+                    "",
+                ),
+            )
+            write_inputs(
+                archive, release_id=candidate, configuration={}, selection={"coordinates": [0, 1]},
+                run={}, report={}, source_code={"a" * 64: snapshot},
+            )
             body = archive.read_bytes()
             asset = dict(r2_key=f"releases/{candidate}/{FILENAME}", size_bytes=len(body),
                          sha256=hashlib.sha256(body).hexdigest(), content_type="application/gzip")
             release = dict(id=candidate, r2_bucket=RELEASE_BUCKET)
             storage.get_object.return_value = dict(Body=io.BytesIO(body), ContentLength=len(body), ContentType="application/gzip")
-            manifest = dict(inputs={}, objects={FILENAME: asset})
+            manifest = dict(objects={FILENAME: asset})
             with (patch.object(sys, "argv", ["worldatlas-release", "restore-inputs", candidate, str(output)]),
                   patch.dict(os.environ, NEON_DATABASE_URL="host=atlas-pooler.example.org"),
                   patch("psycopg.connect", side_effect=lambda *_args, **_kwargs: connection()),

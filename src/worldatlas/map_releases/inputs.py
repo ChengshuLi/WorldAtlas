@@ -1,221 +1,156 @@
-"""Capture and restore a release's frozen inputs without querying working geography."""
+"""Save and restore the inputs and code used by a completed map build."""
 
 import gzip
 import json
-from collections.abc import Sequence
+import re
 from pathlib import Path
-from typing import Any
+from typing import TypedDict, cast
 
 from worldatlas.map_build.execution.code_archive import restore_source, source_files
 from worldatlas.map_build.inputs.configuration import (
-    BUILD_SOURCES,
-    PHYSICAL_CONTROLS,
-    LandFile,
-    land_dataset_index,
+    BuildConfiguration,
+    file_requests,
     source_file,
 )
 from worldatlas.map_build.inputs.selection_types import BuildSelection
 from worldatlas.shared.files import JSONValue, json_bytes
-from worldatlas.source_assets.cache import validate_object_pin
 
 FILENAME = "inputs.json.gz"
 SCHEMA = "worldatlas-release-inputs-v1"
+REPLAY_FILES = ("configuration", "selection", "run", "report")
+
+
+class ReleaseInputs(TypedDict):
+    """Record a completed build and the code needed to replay it."""
+
+    schema: str
+    release_id: str
+    configuration: BuildConfiguration
+    selection: BuildSelection
+    run: dict[str, JSONValue]
+    report: dict[str, JSONValue]
+    source_code: dict[str, dict[str, JSONValue]]
 
 
 def validate_replay_sources(
-    configuration: dict[str, Any], selection: BuildSelection
+    configuration: BuildConfiguration, selection: BuildSelection
 ) -> None:
-    """Check that physical inputs can be read again on a fresh machine.
+    """Check that a fresh machine can download the build's physical inputs.
+
+    For a file selected from a ZIP archive, check how to fetch the ZIP itself.
 
     Args:
-        configuration: Original build request to include in the archive.
-        selection: Frozen source catalog and geographic records.
+        configuration: Settings already validated and used by the map build.
+        selection: Frozen geographic records, including the raw source catalog.
 
     Raises:
-        ValueError: A physical input or shard setting would prevent an empty-cache replay.
+        ValueError: A source is a local file or its catalog entry is missing.
     """
-    sources = BUILD_SOURCES.validate_python(configuration["sources"], strict=True)
     source_ids = {row["source_id"] for row in selection["raw_sources"]}
-
-    def require_source(name: str, spec: LandFile) -> None:
-        """Check one raw source can be downloaded for release replay.
-
-        Args:
-            name: The file's location in the configuration.
-            spec: A validated physical file or archive member selection.
-
-        Raises:
-            ValueError: The file lacks an R2 pin or catalog entry.
-        """
-        entry = source_file(spec)
-        if "r2_source" in entry:
-            if entry["r2_source"] in source_ids:
-                return
-        elif "r2_bucket" in entry:
-            validate_object_pin(entry)
-            return
-        raise ValueError(f"release replay requires an R2 pin for {name}")
-
-    for index, layer in enumerate(sources["land_config"]["land"]):
-        for file_index, spec in enumerate(layer["files"]):
-            require_source(f"land_config.land[{index}].files[{file_index}]", spec)
-        land_dataset_index(layer)
-    PHYSICAL_CONTROLS.validate_python(
-        configuration.get("physical_controls", {}), strict=True
-    )
-    for index, spec in enumerate(sources["inland_water"]["files"]):
-        require_source(f"inland_water.files[{index}]", spec)
+    for request in file_requests(configuration["sources"]):
+        source = source_file(request)
+        if "path" in source:
+            raise ValueError(
+                f"release replay requires an R2 source for {source['path']}"
+            )
+        if "r2_source" in source and source["r2_source"] not in source_ids:
+            raise ValueError(
+                f"release replay is missing catalog source {source['r2_source']!r}"
+            )
 
 
 def write_inputs(
     path: Path | str,
     *,
     release_id: str,
-    configuration: dict[str, Any],
-    selection: BuildSelection | dict[str, JSONValue] | None,
-    run: dict[str, Any],
-    report: dict[str, Any],
-    records: Sequence[dict[str, Any]] = (),
-    raw_sources: Sequence[dict[str, Any]] = (),
-    notes: Sequence[str] = (),
-    relocations: dict[str, str] | None = None,
-    metadata: dict[str, Any] | None = None,
-    source_code: dict[str, dict[str, Any]] | None = None,
+    configuration: BuildConfiguration,
+    selection: BuildSelection,
+    run: dict[str, JSONValue],
+    report: dict[str, JSONValue],
+    source_code: dict[str, dict[str, JSONValue]],
 ) -> None:
-    """Write the frozen build inputs as a new gzip-compressed JSON file.
+    """Write the completed build's inputs and code as gzip-compressed JSON.
 
     Args:
         path: Destination file, which must be new.
         release_id: Exact release ID recorded inside the archive.
-        configuration: Saved map build request.
-        selection: Frozen geographic records and raw source catalog entries.
-        run: Saved run identity and attempt records.
+        configuration: Saved map build settings.
+        selection: Frozen geographic records and raw source catalog.
+        run: Saved run identity and build attempt records.
         report: Saved build report with output references and timings.
-        records: Optional supporting records retained during a historical backfill.
-        raw_sources: Optional raw source records stored separately by a backfill.
-        notes: Optional notes on the provenance or gaps in a historical archive.
-        relocations: Optional mapping from old source locations to new locations.
-        metadata: Optional archive metadata, such as its historical origin.
-        source_code: Captured code snapshots keyed by their archive checksums.
+        source_code: Captured code snapshots keyed by their SHA-256 checksums.
 
     Raises:
         FileExistsError: The destination file already exists.
     """
-    content: dict[str, Any] = dict(
+    content = ReleaseInputs(
         schema=SCHEMA,
         release_id=release_id,
         configuration=configuration,
         selection=selection,
         run=run,
         report=report,
+        source_code=source_code,
     )
-    if source_code:
-        content["source_code"] = source_code
-    if records:
-        content["supporting_records"] = records
-    if raw_sources:
-        content["raw_sources"] = raw_sources
-    if notes:
-        content["notes"] = list(notes)
-    if relocations:
-        content["relocations"] = relocations
-    if metadata:
-        content["metadata"] = metadata
-    # Omit per-run gzip metadata so a staging retry can match the stored bytes.
-    with (
-        Path(path).open("xb") as output,
-        gzip.GzipFile(
-            filename="", fileobj=output, mode="wb", mtime=0, compresslevel=6
-        ) as compressed,
-    ):
-        compressed.write(json_bytes(content))
+    # Staging retries must produce the same bytes.
+    with Path(path).open("xb") as output:
+        output.write(gzip.compress(json_bytes(content), compresslevel=6, mtime=0))
 
 
-def read_inputs(raw: bytes, release_id: str) -> dict[str, Any]:
-    """Read a verified input archive and check its release identity.
+def read_inputs(raw: bytes, release_id: str) -> ReleaseInputs:
+    """Read the frozen inputs for one release.
 
     Args:
         raw: Gzip-compressed JSON bytes already checked against the manifest.
         release_id: Release ID expected inside the archive.
 
     Returns:
-        Parsed configuration, selection, and any other saved records.
+        Saved configuration, selection, run, report, and source code.
 
     Raises:
-        ValueError: The archive format or release ID differs from the expected value.
+        ValueError: The release identity or archive format differs from what is expected.
         OSError: The gzip stream is invalid.
     """
     content = json.loads(gzip.decompress(raw))
-    if content.get("schema") != SCHEMA or content.get("release_id") != release_id:
+    if (
+        not isinstance(content, dict)
+        or content.get("schema") != SCHEMA
+        or content.get("release_id") != release_id
+    ):
         raise ValueError("input archive has a different format or release identity")
-    return content
+    if (
+        content.keys() != ReleaseInputs.__required_keys__
+        or not all(
+            isinstance(content[key], dict) for key in (*REPLAY_FILES, "source_code")
+        )
+        or not content["source_code"]
+    ):
+        raise ValueError("input archive requires a complete build and captured code")
+    return cast(ReleaseInputs, content)
 
 
-def restore_inputs(content: dict[str, Any], output: Path | str) -> None:
-    """Extract the saved inputs that a separate map build can use for replay.
+def restore_inputs(content: ReleaseInputs, output: Path | str) -> None:
+    """Save the archived build records and unpack its code into a new directory.
 
     Args:
         content: Parsed release archive from ``read_inputs``.
-        output: New directory for the saved JSON records and code snapshots.
+        output: Directory for configuration.json, selection.json, run.json,
+            report.json, and the captured code under code/.
 
     Raises:
         FileExistsError: The destination already exists.
         ValueError: A captured code snapshot has an invalid identity or contents.
     """
-    # Check all code snapshots before creating any output files.
+    # Check the code paths before creating any output files.
     snapshots = {}
-    for identity, code in content.get("source_code", {}).items():
-        if (
-            not isinstance(identity, str)
-            or len(identity) != 64
-            or any(c not in "0123456789abcdef" for c in identity)
-        ):
+    for checksum, code in content["source_code"].items():
+        if not re.fullmatch("[0-9a-f]{64}", checksum):
             raise ValueError("invalid source archive identity")
-        snapshots[identity] = source_files(code)
+        snapshots[checksum] = source_files(code)
+
     output = Path(output)
-    output.mkdir(parents=True, exist_ok=False)
-
-    def relocated(value: JSONValue) -> Any:
-        """Copy a JSON value and update source locations.
-
-        Args:
-            value: Value from the saved release inputs.
-
-        Returns:
-            JSON-compatible copy with matching paths replaced.
-        """
-        if isinstance(value, dict):
-            return {key: relocated(item) for key, item in value.items()}
-        if isinstance(value, list):
-            return [relocated(item) for item in value]
-        if isinstance(value, str):
-            return content.get("relocations", {}).get(value, value)
-        return value
-
-    for key in (
-        "configuration",
-        "selection",
-        "run",
-        "report",
-        "supporting_records",
-        "raw_sources",
-        "notes",
-        "metadata",
-    ):
-        if content.get(key) is not None:
-            # Update replay inputs. Keep the historical report and run record
-            # as captured so their paths still describe what the original run did.
-            value = (
-                relocated(content[key])
-                if key in ("configuration", "selection", "raw_sources")
-                else content[key]
-            )
-            if key == "configuration" and isinstance(value.get("sources"), dict):
-                # Older releases may have local comparison paths. Replay only
-                # needs the inputs that produce the map cells.
-                value["sources"].pop("reference_rows", None)
-                value["sources"].pop("reference_runs", None)
-            (output / (key + ".json")).write_bytes(json_bytes(value))
-
-    for identity, files in snapshots.items():
-        restore_source(files, output / "code" / identity)
+    output.mkdir(parents=True)
+    for key in REPLAY_FILES:
+        (output / f"{key}.json").write_bytes(json_bytes(content[key]))
+    for checksum, files in snapshots.items():
+        restore_source(files, output / "code" / checksum)

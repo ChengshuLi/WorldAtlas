@@ -8,7 +8,7 @@ import numpy as np
 from osgeo import gdal, ogr, osr
 from pydantic import TypeAdapter
 from worldatlas.map_build.execution.runtime import RunFilePins
-from worldatlas.map_build.inputs.configuration import LandSettings, LocalFile, PHYSICAL_CONTROLS
+from worldatlas.map_build.inputs.configuration import LandSettings, LocalFile, PhysicalControls
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.physical import land as b
 from worldatlas.map_build.physical.sources import checked_files
@@ -63,7 +63,7 @@ class RasterizeLandTests(unittest.TestCase):
 
     def rasterize(self, config, output, grid, **kwargs):
         settings = json.loads(config.read_bytes())
-        controls = PHYSICAL_CONTROLS.validate_python(
+        controls = TypeAdapter(PhysicalControls).validate_python(
             {'minimum_free_bytes': settings.pop('minimum_free_bytes', 0)}, strict=True,
         )
         return b.run(

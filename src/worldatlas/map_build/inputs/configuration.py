@@ -203,9 +203,7 @@ class PhysicalConfiguration(PhysicalControls):
 
 
 BUILD_CONFIGURATION = TypeAdapter(BuildConfiguration)
-BUILD_SOURCES = TypeAdapter(BuildSources)
 PHYSICAL_CONFIGURATION = TypeAdapter(PhysicalConfiguration)
-PHYSICAL_CONTROLS = TypeAdapter(PhysicalControls)
 
 
 def require_separate_cache_and_output(cache: Path, output: Path) -> None:

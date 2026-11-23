@@ -98,16 +98,6 @@ def _zip_member(spec: FileSpec) -> tuple[FileSpec, str]:
     return archive, member
 
 
-def validate_object_pin(spec: FileSpec) -> None:
-    """Validate a complete, direct R2 object reference.
-
-    Args:
-        spec: Bucket, key, byte size and checksum of the object.
-    """
-    _location(spec)
-    _fingerprint(spec)
-
-
 def _check_file(path: Path, digest: str, size: int) -> None:
     """Verify a local file's byte count and SHA-256.
 

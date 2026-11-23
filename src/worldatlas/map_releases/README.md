@@ -53,9 +53,7 @@ worldatlas-build /absolute/path/to/restored-inputs/configuration.json \
 
 Check the `divide` field in the restored `run.json`. If it lists parent IDs, add one `--divide` argument for each ID when you rebuild. For example, `[0, 12]` means add `--divide 0 --divide 12`. If the field is null or absent, use the command as shown.
 
-The extracted configuration and selection apply any source relocations recorded by the archive. Optional comparison paths from the original machine are omitted from the extracted configuration. The archive preserves the original records and reports.
-
-Historical backfills use the same archive format. They can contain supporting records from older pipelines and notes describing unavailable configuration, code or reports. They do not invent missing inputs from today's Neon records. An archive without a modern `selection` requires its historical implementation; the restore command still extracts all available records and notes.
+Restore copies the saved build records as recorded. Use the release tooling from the corresponding revision for older archives that predate complete build and code snapshots.
 
 ## How it works
 
