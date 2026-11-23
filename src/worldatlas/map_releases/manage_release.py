@@ -256,7 +256,7 @@ def stage(
 
 
 def publish(db: psycopg.Connection, storage: R2Client, candidate: str) -> bool:
-    """Switch the homepage to an approved candidate.
+    """Make the approved candidate the release served at the homepage.
 
     Args:
         db: Connection holding the release write lock.
@@ -264,11 +264,14 @@ def publish(db: psycopg.Connection, storage: R2Client, candidate: str) -> bool:
         candidate: Exact numbered candidate ID approved for publication.
 
     Returns:
-        True if the homepage was written, or False if this release is already
-        official and another release is selected for the homepage.
+        True after the homepage write succeeds, including when retrying a
+        candidate already marked current in Neon. False when the candidate is
+        already official and its ``is_current`` flag is false. For example, if
+        v8.4 is current, retrying an official v8.3 leaves the homepage on v8.4.
 
     Raises:
-        ValueError: The candidate cannot be published or an asset fails verification.
+        ValueError: The candidate cannot be published or a file fails verification.
+        ClientError: R2 rejects the homepage write.
     """
     release = lookup_release(db, candidate)
     map_version = release["map_version"]
