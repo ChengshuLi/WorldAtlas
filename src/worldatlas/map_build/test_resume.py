@@ -111,6 +111,7 @@ class ExecutorResumeTests(unittest.TestCase):
         (self.out / "build-config.json").write_bytes(b"{}")
         with self.assertRaisesRegex(ValueError, "saved build configuration changed"):
             self.runner(resume=True)
+        self.assertEqual(list((self.out / "attempts").iterdir()), [first.attempt_dir])
 
     def test_resume_marks_an_interrupted_setup_with_no_sealed_timing(self):
         runner = self.runner()
@@ -134,6 +135,28 @@ class ExecutorResumeTests(unittest.TestCase):
             self.runner(resume=True)
         journal.write_bytes(prior)
         self.runner(resume=True)
+
+    def test_setup_timing_failure_preserves_the_previous_failure_report(self):
+        first = self.runner()
+        first.close()
+        failure = self.out / "failure.json"
+        previous = {"status": "incomplete"}
+        write_json(failure, previous)
+
+        def write(path, value):
+            if path.name == "setup-timing.json":
+                raise OSError("cannot save setup timing")
+            return write_json(path, value)
+
+        with patch.object(pipeline, "write_json", side_effect=write):
+            with self.assertRaisesRegex(OSError, "cannot save setup timing"):
+                self.runner(resume=True)
+        self.assertEqual(read_json(failure), previous)
+
+        self.runner(resume=True)
+        self.assertFalse(failure.exists())
+        preserved = next(self.out.glob("preserved/failure-*/0-failure.json"))
+        self.assertEqual(read_json(preserved), previous)
 
     def execute(self, runner):
         output = self.out / "result"

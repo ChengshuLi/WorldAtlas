@@ -242,6 +242,7 @@ class Pipeline:
         self.grid = Grid(**self.cfg["grid"])
 
         self.resume = resume
+        self.cancelled = threading.Event()
         self._prepare_workspace(output, work_dir)
         saved_identity = self._resolve_run_options(
             divide, reuse_from, recompute_division
@@ -268,6 +269,7 @@ class Pipeline:
         try:
             self._start_attempt(saved_identity)
             self._record_setup_timing(setup_started, setup_utc)
+            self.checkpoints.preserve("failure", [self.out / "failure.json"])
         except BaseException:
             if hasattr(self, "timing"):
                 self.timing.close()
@@ -419,14 +421,15 @@ class Pipeline:
             self.identity["physical_reuse"] = self.physical_reuse
 
     def _start_attempt(self, saved_identity: RunIdentity | None) -> None:
-        """Verify the run identity and save the code for this attempt.
+        """Prepare the run's saved inputs and capture the code for this attempt.
 
         Args:
             saved_identity: Saved run identity on resume.
 
         Raises:
-            ValueError: The saved identity, checkpoints or timing records changed.
+            ValueError: Saved settings, identity, checkpoints or timing records changed.
         """
+        saved_config = self.out / "build-config.json"
         if saved_identity is not None:
             saved = dict(saved_identity)
             # Earlier run identities also recorded the first attempt's provenance.
@@ -442,8 +445,11 @@ class Pipeline:
                 raise ValueError(
                     "resume request, input selection or output identity changed"
                 )
+            if saved_config.read_bytes() != json_bytes(self.cfg):
+                raise ValueError("saved build configuration changed")
         else:
             write_json(self.out / "run-identity.json", self.identity)
+            write_json(saved_config, self.cfg)
         attempts = self.out / "attempts"
         self.attempt = uuid.uuid4().hex
         self.checkpoints = Checkpoints(self.out / "checkpoints", self.attempt)
@@ -475,7 +481,7 @@ class Pipeline:
             setup_utc: Setup start time as an ISO 8601 UTC string.
 
         Raises:
-            ValueError: The saved build configuration changed.
+            ValueError: The saved timing log contains invalid events.
         """
         self.timing = Timing(
             self.out / "timing-events.jsonl",
@@ -483,13 +489,6 @@ class Pipeline:
             attempt=self.attempt,
             heartbeat_seconds=1.0,
         )
-        self.cancelled = threading.Event()
-        saved_config = self.out / "build-config.json"
-        if not self.resume:
-            write_json(saved_config, self.cfg)
-        elif saved_config.read_bytes() != json_bytes(self.cfg):
-            raise ValueError("saved build configuration changed")
-        self.checkpoints.preserve("failure", [self.out / "failure.json"])
         setup_finished = time.monotonic()
         token = uuid.uuid4().hex
         self.timing.event(
