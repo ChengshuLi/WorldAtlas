@@ -24,6 +24,7 @@ from worldatlas.map_build.build import Pipeline, physical_reference
 from worldatlas.map_build.division import engine
 from worldatlas.map_build.inputs import selection as selection_inputs
 from worldatlas.map_build.inputs.selection import read_selection
+from worldatlas.map_build.physical import water as physical_water
 from worldatlas.map_build.physical.build import run as build_physical
 from worldatlas.shared.files import compact_json_bytes, pin_file, read_json, sha256_file, write_json
 
@@ -233,6 +234,21 @@ class EndToEndTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "requires coastal_band_metres"):
                     Pipeline(incomplete_config, root / "invalid", work_dir=root, selection=selected)
                 runner = Pipeline(cfg, root / "run", work_dir=root, selection=selected)
+                rasterize_water = physical_water.run
+
+                def interrupt_rasterization(*args, **kwargs):
+                    runner.cancel()
+                    return rasterize_water(*args, **kwargs)
+
+                with patch.object(physical_water, "run", new=interrupt_rasterization):
+                    with self.assertRaisesRegex(InterruptedError, "pipeline cancelled"):
+                        runner.run()
+                checkpoint_dir = root / "run/checkpoints"
+                self.assertFalse(
+                    (checkpoint_dir / "physical-shard-00000/complete.json").exists()
+                )
+
+                runner = Pipeline(cfg, root / "run", work_dir=root, resume=True)
                 execute_rule = engine.execute_rule
                 started_rules = []
 
@@ -245,7 +261,6 @@ class EndToEndTests(unittest.TestCase):
                     with self.assertRaisesRegex(InterruptedError, "pipeline cancelled"):
                         runner.run()
                 self.assertEqual(len(started_rules), 1)
-                checkpoint_dir = root / "run/checkpoints"
                 physical_receipts = {
                     path: path.read_bytes()
                     for path in checkpoint_dir.glob("physical-*/complete.json")

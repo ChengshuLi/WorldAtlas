@@ -460,15 +460,14 @@ class Pipeline:
         if self.physical_reuse is not None:
             self.checkpoints.files.verify(self.physical_reuse["pins"])
             return Path(self.physical_reuse["source_run"]) / "physical" / "physical"
-        with stage_context(self.cancelled):
-            physical_build.build(
-                self.physical_config,
-                self.grid,
-                request_pin,
-                self.out / "physical",
-                checkpoints=self.checkpoints,
-                timing=self.timing,
-            )
+        physical_build.build(
+            self.physical_config,
+            self.grid,
+            request_pin,
+            self.out / "physical",
+            checkpoints=self.checkpoints,
+            timing=self.timing,
+        )
         return self.out / "physical" / "physical"
 
     def divide(self, physical: Path) -> Path:
@@ -546,30 +545,31 @@ class Pipeline:
                 verify_pins(report["final"].values())
                 self.timing.verify_report(report)
                 return report
-            with self.timing.stage("physical"):
-                physical = self.physical()
-                physical_inputs = [
-                    *self.checkpoints.files.row_streams(physical),
-                    self.checkpoints.files.pin(physical / "report.json"),
-                ]
-            with stage_context(self.cancelled), self.timing.stage("division"):
-                ownership = self.divide(physical)
-            with self.timing.stage("package"):
-                final = self.package(physical, ownership)
-            with self.timing.stage("verification"):
-                self.checkpoints.files.verify(physical_inputs)
-                if sha256_file(self.saved_config) != self.config_pin["sha256"]:
-                    raise ValueError(
-                        "saved build configuration changed during pipeline"
-                    )
-                final_pins = {
-                    key: pin_file(final / name)
-                    for key, name in [
-                        ("rows", "rows.u32le"),
-                        ("runs", "runs.u32le"),
-                        ("report", "report.json"),
+            with stage_context(self.cancelled):
+                with self.timing.stage("physical"):
+                    physical = self.physical()
+                    physical_inputs = [
+                        *self.checkpoints.files.row_streams(physical),
+                        self.checkpoints.files.pin(physical / "report.json"),
                     ]
-                }
+                with self.timing.stage("division"):
+                    ownership = self.divide(physical)
+                with self.timing.stage("package"):
+                    final = self.package(physical, ownership)
+                with self.timing.stage("verification"):
+                    self.checkpoints.files.verify(physical_inputs)
+                    if sha256_file(self.saved_config) != self.config_pin["sha256"]:
+                        raise ValueError(
+                            "saved build configuration changed during pipeline"
+                        )
+                    final_pins = {
+                        key: pin_file(final / name)
+                        for key, name in [
+                            ("rows", "rows.u32le"),
+                            ("runs", "runs.u32le"),
+                            ("report", "report.json"),
+                        ]
+                    }
             result = {
                 "schema": "worldatlas-end-to-end-report-v2",
                 "status": "complete",
