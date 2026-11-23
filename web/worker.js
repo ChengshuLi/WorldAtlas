@@ -62,7 +62,7 @@ export default {
     }
     const etag = request.headers.get("If-None-Match");
     const asset = await readAsset(env.ATLAS, key, { head, etag, includeMetadata: true });
-    if (!asset) return new Response("Not found", { status: 404 });
+    if (!asset) return new Response(head ? null : "Not found", { status: 404 });
     asset.headers.set("X-Content-Type-Options", "nosniff");
     asset.headers.set("Cache-Control", "public, max-age=300");
     return new Response(asset.body, {

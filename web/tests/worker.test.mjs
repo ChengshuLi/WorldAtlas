@@ -119,12 +119,16 @@ test("numbered candidates stay separate from the published homepage", async () =
   assert.equal(await (await worker.fetch(request("/releases/v9.0-rc.1/index.html", "HEAD"), storage)).text(), "");
   assert.equal((await worker.fetch(request("/v9.0-rc"), storage)).status, 404);
   assert.equal((await worker.fetch(request("/releases/v9.0-rc.3/index.html"), storage)).status, 404);
+  const missingHead = await worker.fetch(request("/releases/v9.0-rc.3/index.html", "HEAD"), storage);
+  assert.equal(missingHead.status, 404);
+  assert.equal(missingHead.body, null);
   assert.deepEqual(requested, [
     "index.html",
     "index.html",
     "releases/v9.0-rc.1/index.html",
     "releases/v9.0-rc.2/index.html",
     "releases/v9.0-rc.1/index.html",
+    "releases/v9.0-rc.3/index.html",
     "releases/v9.0-rc.3/index.html",
   ]);
 });

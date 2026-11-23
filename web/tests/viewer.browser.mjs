@@ -55,6 +55,7 @@ function bundle(prefix, version, east) {
     height: mapHeight,
     step: 360 / mapWidth,
     map_version: version,
+    inland_water_release: version === "v8.0" ? "2026-08-19.0" : "2026-10-21.0",
     legend: "legend/entities.json",
     categories: [
       { id: 1, entity_id: 1, physical_class: "water" },
@@ -726,6 +727,8 @@ test(
         await sources.click();
         const dialog = page.getByRole("dialog", { name: "Data sources" });
         assert.equal(await dialog.getByRole("link", { name: "OpenStreetMap contributors" }).isVisible(), true);
+        assert.equal(await dialog.locator("#inland-water-release").textContent(),
+          version === "v8.0" ? ", release 2026-08-19.0" : ", release 2026-10-21.0");
         assert.equal(new URL(page.url()).pathname, path);
         await page.keyboard.press("Escape");
         assert.equal(await dialog.isVisible(), false);
@@ -738,6 +741,62 @@ test(
   },
 );
 
+test("small pointer motion still picks a cell while dragging preserves the pick", async () => {
+  const page = await browser.newPage({ viewport: { width: 1024, height: 720 } });
+  try {
+    await loaded(page, `/${candidate}/index.html`, "v9.0");
+    await page.getByRole("button", { name: "Collapse legend" }).click();
+    const canvas = page.locator("#canvas");
+    const box = await canvas.boundingBox();
+    const point = await pickPoint(page, 82, 20);
+    const color = await visiblePixel(page, point);
+    const x = box.x + point.x, y = box.y + point.y;
+    await page.mouse.move(x, y);
+    await page.mouse.down();
+    await page.mouse.move(x + 3, y);
+    await page.mouse.up();
+    assert.equal(await canvas.evaluate((element) => element === document.activeElement), true);
+    const selection = page.locator("#selection");
+    const pick = await selection.textContent();
+    assert.match(pick, /^Cell 82, 20 · .* · Asia \(land\)$/);
+    assert.deepEqual(await visiblePixel(page, point), color);
+
+    await page.mouse.move(x, y);
+    await page.mouse.down();
+    await page.mouse.move(x + 50, y);
+    assert.notDeepEqual(await visiblePixel(page, point), color);
+    await page.mouse.move(x + 2, y);
+    await page.mouse.up();
+    assert.equal(await selection.textContent(), pick);
+  } finally {
+    await page.close();
+  }
+});
+
+test("hovering one legend entry brightens it and keeps the other entry outlined", async () => {
+  const page = await browser.newPage({ viewport: { width: 1024, height: 720 } });
+  try {
+    await loaded(page, `/${candidate}/index.html`, "v9.0");
+    const africa = page.getByRole("button", { name: /Africa/ });
+    const asia = page.getByRole("button", { name: /Asia/ });
+    const map = page.locator("#canvas");
+    const {x, y, width} = await map.boundingBox();
+    const water = await pickPoint(page, 70, 20);
+    const border = { x: Math.ceil(width * 60 / mapWidth - 0.5) - 1, y: water.y };
+    await africa.click();
+    const dimmed = await visiblePixel(page, water);
+    assert.deepEqual(await visiblePixel(page, border), [255, 255, 255, 255]);
+    await asia.hover();
+    assert.deepEqual(await visiblePixel(page, water), [84, 141, 183, 255]);
+    assert.deepEqual(await visiblePixel(page, border), [255, 255, 255, 255]);
+    assert.equal(await asia.getAttribute("aria-pressed"), "false");
+    await page.mouse.move(x + 40, y + water.y);
+    assert.deepEqual(await visiblePixel(page, water), dimmed);
+  } finally {
+    await page.close();
+  }
+});
+
 test("keyboard focus and map drawing survive legend edits and page caching", async () => {
   const page = await browser.newPage({ viewport: { width: 1024, height: 768 } });
   try {
@@ -745,6 +804,8 @@ test("keyboard focus and map drawing survive legend edits and page caching", asy
     await page.locator("#canvas").focus();
     await page.keyboard.press("Tab");
     assert.equal(await page.evaluate(() => document.activeElement.id), "tool-in");
+    await page.keyboard.press("Shift+Tab");
+    assert.equal(await page.evaluate(() => document.activeElement.id), "canvas");
 
     const position = await pickPoint(page, 94, 20);
     assert.deepEqual(await visiblePixel(page, position), [222, 118, 110, 255]);

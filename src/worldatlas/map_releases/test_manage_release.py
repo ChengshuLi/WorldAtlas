@@ -59,7 +59,7 @@ class BundleTests(unittest.TestCase):
         self.output = root / "bundle"
         for directory in (self.run / "final", self.viewer, self.output):
             directory.mkdir(parents=True)
-        request = root / "config.json"
+        request = self.request = root / "config.json"
         self.snapshot = self.run / "input-selection.json"
         self.selection = selection()
         self.selection["geography"]["entities"].append(
@@ -83,10 +83,16 @@ class BundleTests(unittest.TestCase):
                     "sources": {
                         "land_config": {"land": []},
                         "inland_water": {
-                            "files": [dict(
-                                path="raw/shard.parquet", r2_bucket="test", r2_key="sources/shard.parquet",
-                                sha256="c" * 64, size_bytes=10,
-                            )],
+                            "release": "2026-10-21.0",
+                            "file_count": 1,
+                            "files": [
+                                dict(
+                                    r2_bucket="test",
+                                    r2_key="sources/shard.parquet",
+                                    sha256="c" * 64,
+                                    size_bytes=10,
+                                )
+                            ],
                         },
                     },
                     "physical_controls": {
@@ -94,6 +100,10 @@ class BundleTests(unittest.TestCase):
                     },
                 }
             )
+        )
+        self.saved_configuration = self.run / "build-config.json"
+        self.saved_configuration.write_text(
+            json.dumps(json.loads(request.read_text()), indent=2) + "\n"
         )
         identity = self.run / "run-identity.json"
         identity.write_text(
@@ -134,7 +144,9 @@ class BundleTests(unittest.TestCase):
         self.attempt.mkdir(parents=True)
         write_source(self.attempt / "source-code.json.gz", self.code)
         (self.attempt / "producer.json").write_text(
-            json.dumps({"source_archive": pin_file(self.attempt / "source-code.json.gz")})
+            json.dumps(
+                {"source_archive": pin_file(self.attempt / "source-code.json.gz")}
+            )
         )
         self.report = self.run / "report.json"
         self.report.write_text(
@@ -144,6 +156,9 @@ class BundleTests(unittest.TestCase):
                     "status": "complete",
                     "original_run_identity": pin_file(identity),
                     "request": pin_file(request),
+                    "saved_configuration_sha256": pin_file(self.saved_configuration)[
+                        "sha256"
+                    ],
                     "comparison": None,
                     "final": {
                         name: pin_file(final / filename)
@@ -176,6 +191,7 @@ class BundleTests(unittest.TestCase):
         config = json.loads((self.output / "config.json").read_text())
         self.assertEqual(config["local_grid"]["rows"], "rows.u32le.gz")
         self.assertEqual(config["map_version"], "v9.0")
+        self.assertEqual(config["inland_water_release"], "2026-10-21.0")
         self.assertEqual(config["water_rgb"], [84, 141, 183])
         self.assertNotIn("counts", config)
         self.assertEqual(config["legend"], "legend/entities.json")
@@ -200,10 +216,47 @@ class BundleTests(unittest.TestCase):
             manifest["decoded_sha256"]["runs"], hashlib.sha256(self.runs).hexdigest()
         )
 
+    def test_bundle_without_known_water_edition_omits_it(self):
+        request = json.loads(self.saved_configuration.read_bytes())
+        del request["sources"]["inland_water"]["release"]
+        self.saved_configuration.write_text(json.dumps(request))
+        report = json.loads(self.report.read_bytes())
+        report["saved_configuration_sha256"] = pin_file(self.saved_configuration)["sha256"]
+        self.report.write_text(json.dumps(report))
+        build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+        self.assertNotIn("inland_water_release", json.loads((self.output / "config.json").read_bytes()))
+
     def test_changed_map_output_cannot_be_staged(self):
         (self.run / "final/runs.u32le").write_bytes(b"x" * len(self.runs))
         with self.assertRaisesRegex(ValueError, "runs size or checksum differs"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+
+    def test_staging_uses_saved_configuration_after_original_moves(self):
+        request = pin_file(self.request)
+        self.request.rename(self.request.with_name("moved-config.json"))
+        build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+        archived = read_inputs((self.output / FILENAME).read_bytes(), "v9.0-rc.1")
+        self.assertEqual(
+            archived["configuration"], json.loads(self.saved_configuration.read_bytes())
+        )
+        self.assertEqual(archived["report"]["request"], request)
+
+    def test_changed_saved_configuration_blocks_staging(self):
+        self.saved_configuration.write_bytes(
+            self.saved_configuration.read_bytes() + b"\n"
+        )
+        with self.assertRaisesRegex(ValueError, "configuration checksum"):
+            build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+
+    def test_older_report_can_stage_with_original_request(self):
+        report = json.loads(self.report.read_bytes())
+        del report["saved_configuration_sha256"]
+        self.report.write_text(json.dumps(report))
+        build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+        archived = read_inputs((self.output / FILENAME).read_bytes(), "v9.0-rc.1")
+        self.assertEqual(
+            archived["configuration"], json.loads(self.request.read_bytes())
+        )
 
     def test_stage_checks_map_stream_size_when_checksum_matches(self):
         rows = self.run / "final/rows.u32le"

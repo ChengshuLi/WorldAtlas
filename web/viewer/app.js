@@ -374,6 +374,9 @@ async function startViewer() {
     const response = await fetch(configURL);
     if (!response.ok) throw Error("Map configuration could not load");
     meta = await response.json();
+    if (meta.inland_water_release) {
+      $("#inland-water-release").textContent = `, release ${meta.inland_water_release}`;
+    }
     const legend = fetch(new URL(meta.legend, configURL), { signal }).then((response) => {
       if (!response.ok) throw Error("Map legend could not load");
       return response.json();

@@ -6,7 +6,13 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from worldatlas.map_releases.inputs import SCHEMA, read_inputs, restore_inputs, validate_replay_sources, write_inputs
+from worldatlas.map_releases.inputs import (
+    SCHEMA,
+    read_inputs,
+    restore_inputs,
+    validate_replay_sources,
+    write_inputs,
+)
 
 
 class ReplaySourcesTests(unittest.TestCase):
@@ -14,14 +20,21 @@ class ReplaySourcesTests(unittest.TestCase):
 
     def setUp(self):
         """Prepare an inline request with a cataloged coastline and water shard."""
-        self.shape = {"archive": {"r2_source": "coast"}, "member": "shore.shp"}
-        self.shard = {"path": "shard.parquet", "r2_source": "inland"}
+        self.shape = {
+            "archive": {"r2_source": "coast"},
+            "member": "shore.shp",
+            "size_bytes": 12,
+            "sha256": "a" * 64,
+        }
+        self.shard = {"r2_source": "inland"}
         self.sources = {
             "land_config": {"land": [{"dataset": "shore.shp", "files": [self.shape]}]},
-            "inland_water": {"files": [self.shard]},
+            "inland_water": {"file_count": 1, "files": [self.shard]},
         }
         self.configuration = dict(sources=self.sources)
-        self.selection = {"raw_sources": [{"source_id": "coast"}, {"source_id": "inland"}]}
+        self.selection = {
+            "raw_sources": [{"source_id": "coast"}, {"source_id": "inland"}]
+        }
 
     def test_inline_documents_resolve_catalog_references_and_archive_members(self):
         validate_replay_sources(self.configuration, self.selection)
@@ -32,8 +45,12 @@ class ReplaySourcesTests(unittest.TestCase):
         local = {"path": "/other-machine/file", "sha256": "a" * 64}
         for settings, key, value, field in (
             (land, "files", [local], r"land_config\.land\[0\]\.files\[0\]"),
-            (land, "files", [dict(self.shape, archive=local["path"])],
-             r"land_config\.land\[0\]\.files\[0\]"),
+            (
+                land,
+                "files",
+                [dict(self.shape, archive=local["path"])],
+                r"land_config\.land\.0\.files\.0",
+            ),
             (water, "files", [local], r"inland_water\.files\[0\]"),
         ):
             with self.subTest(field=field):
@@ -53,10 +70,14 @@ class ReplaySourcesTests(unittest.TestCase):
                     validate_replay_sources(self.configuration, self.selection)
 
     def test_direct_water_shard_pin_requires_a_byte_size(self):
-        self.sources["inland_water"]["files"] = [dict(
-            path="old.parquet", r2_bucket="test", r2_key="sources/old.parquet", sha256="a" * 64,
-        )]
-        with self.assertRaisesRegex(ValueError, "requires an R2 object and byte size"):
+        self.sources["inland_water"]["files"] = [
+            dict(
+                r2_bucket="test",
+                r2_key="sources/old.parquet",
+                sha256="a" * 64,
+            )
+        ]
+        with self.assertRaisesRegex(ValueError, "size_bytes"):
             validate_replay_sources(self.configuration, self.selection)
 
     def test_water_file_requires_its_catalog_entry(self):

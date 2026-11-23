@@ -31,15 +31,19 @@ export function validateGrid(meta, rows, runs) {
     if (end !== meta.width) throw Error("Native row is incomplete");
   }
 }
-export function cellValue(rows, runs, x, y) {
+// Find the run whose exclusive ending column is just past x.
+export function findRun(rows, runs, x, y) {
   let lo = rows[y],
     hi = rows[y + 1];
   while (lo < hi) {
-    const mid = (lo + hi) >>> 1;
+    const mid = lo + ((hi - lo) >>> 1);
     if (runs[2 * mid] <= x) lo = mid + 1;
     else hi = mid;
   }
-  return runs[2 * lo + 1];
+  return lo;
+}
+export function cellValue(rows, runs, x, y) {
+  return runs[2 * findRun(rows, runs, x, y) + 1];
 }
 export async function loadLocalGrid(meta, base, signal) {
   async function load(name) {

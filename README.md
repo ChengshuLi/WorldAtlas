@@ -8,7 +8,7 @@ WorldAtlas builds and publishes versioned maps from raw source data and editable
 
 ### Pipeline code
 
-The root [`environment.yml`](environment.yml) defines the shared Python environment. It covers source imports, map building and their tests. The root [`pyproject.toml`](pyproject.toml) installs the `worldatlas` package and its three commands. Website dependencies are managed separately in [`package.json`](package.json).
+The root [`environment.yml`](environment.yml) defines the shared Python environment, including GDAL and PostgreSQL. Installing the package provides `worldatlas-import`, `worldatlas-build`, `worldatlas-compare` and `worldatlas-release`. Website dependencies are in [`package.json`](package.json).
 
 Install [Micromamba](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html), then create the environment and enter a shell using it:
 
@@ -20,7 +20,7 @@ micromamba run -n worldatlas bash
 
 Run the commands below from the repository root in that shell. For exact release replays, use the environment documented in the [restored release archive](src/worldatlas/map_releases/README.md#restore-inputs).
 
-Geographic and numerical libraries use tested exact versions because upgrades can change map coordinates or cells. Python accepts patch updates within 3.13. Pydantic uses a fixed version so it generates the same JSON Schema in each environment. Storage and database clients accept compatible updates. Boto3 selects its own matching Botocore dependency. Each build records the actual runtime versions. CMake is needed only when compiling GDAL and stays outside the runtime environment.
+Geographic and numerical libraries use tested exact versions because upgrades can change map coordinates or cells. Python accepts patch updates within 3.13. Pydantic uses a fixed version so it generates the same JSON Schema in each environment. Storage and database clients accept compatible updates. Each build records the installed runtime versions.
 
 Set `NEON_DATABASE_URL` to the direct connection URL for the working `worldatlas` database. Use the working branch's connection details from your Neon project. See the [database guide](database/README.md) for its schema. For R2, reuse the `worldatlas-r2` profile in `~/.aws/credentials`, or set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. With the profile:
 

@@ -1,3 +1,5 @@
+import { findRun } from "./grid-data.js";
+
 const dimBrightness = 0.55;
 
 // Canvas fallback renders the same fully loaded native runs, never an overview.
@@ -55,15 +57,9 @@ export function renderPixels(
         0,
         Math.floor((0.5 - ox) / scale) - copy * meta.width,
       );
-      let lo = data.rows[y],
-        hi = data.rows[y + 1];
-      while (lo < hi) {
-        const mid = (lo + hi) >>> 1;
-        if (data.runs[mid * 2] <= left) lo = mid + 1;
-        else hi = mid;
-      }
+      const run = findRun(data.rows, data.runs, left, y);
       let start = Math.max(0, boundaryPixel(copy * meta.width));
-      for (let r = lo; r < data.rows[y + 1] && start < width; r++) {
+      for (let r = run; r < data.rows[y + 1] && start < width; r++) {
         const end = Math.min(
           width,
           Math.max(0, boundaryPixel(copy * meta.width + data.runs[r * 2])),

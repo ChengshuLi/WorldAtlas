@@ -8,6 +8,7 @@ Restore extracts the saved inputs for a separate map build.
 import argparse
 import gzip
 import hashlib
+import json
 import mimetypes
 import re
 import shutil
@@ -158,7 +159,7 @@ def build_bundle(
     if request_pin != identity["request"]:
         raise ValueError("build configuration does not match the run")
     final = report["final"]
-    verify_pins([request_pin, final["report"]])
+    verify_pins([final["report"]])
     # The report identifies the final outputs. A run can also contain streams
     # from physical rasterization and intermediate divisions.
     final_directory = Path(final["report"]["path"]).parent
@@ -181,7 +182,17 @@ def build_bundle(
     ):
         raise ValueError("the saved geographic selection changed after the build")
 
-    request = read_json(Path(request_pin["path"]))
+    if "saved_configuration_sha256" in report:
+        configuration_path = run / "build-config.json"
+        expected_configuration = report["saved_configuration_sha256"]
+    else:
+        # Older reports pinned only the original request.
+        configuration_path = Path(request_pin["path"])
+        expected_configuration = request_pin["sha256"]
+    configuration_bytes = configuration_path.read_bytes()
+    if hashlib.sha256(configuration_bytes).hexdigest() != expected_configuration:
+        raise ValueError("build configuration checksum does not match the report")
+    request = json.loads(configuration_bytes)
     validate_replay_sources(request, selection)
     summary = read_json(final_directory / "report.json")
     grid = vars(Grid(**summary["grid"]))
@@ -212,7 +223,8 @@ def build_bundle(
         attempts.append(dict(attempt, attempt_id=attempt_id))
         # A resumed build can use different code. Keep each attempt's reference
         # while storing identical captured bytes just once.
-        source_code[source["sha256"]] = read_source(Path(source["path"]))
+        if source["sha256"] not in source_code:
+            source_code[source["sha256"]] = read_source(Path(source["path"]))
     if not attempts:
         raise ValueError("completed build has no captured code snapshot")
     captured_run = dict(identity, attempts=attempts)
@@ -275,6 +287,9 @@ def build_bundle(
 
     config = bundle / "config.json"
     viewer_config = read_json(config)
+    water_edition = request["sources"]["inland_water"].get("release")
+    if water_edition:
+        viewer_config["inland_water_release"] = water_edition
     # A mixed entity has separate land and water codes but one legend entry.
     # Add the counts for both codes and use the entity's land color in the legend.
     legend = {}

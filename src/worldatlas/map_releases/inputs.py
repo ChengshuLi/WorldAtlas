@@ -8,9 +8,11 @@ from typing import Any
 
 from worldatlas.map_build.execution.code_archive import restore_source, source_files
 from worldatlas.map_build.inputs.configuration import (
+    BUILD_SOURCES,
     PHYSICAL_CONTROLS,
-    catalog_source_id,
+    LandFile,
     land_dataset_index,
+    source_file,
 )
 from worldatlas.map_build.inputs.selection_types import BuildSelection
 from worldatlas.shared.files import JSONValue, json_bytes
@@ -32,38 +34,27 @@ def validate_replay_sources(
     Raises:
         ValueError: A physical input or shard setting would prevent an empty-cache replay.
     """
-    sources = configuration["sources"]
+    sources = BUILD_SOURCES.validate_python(configuration["sources"], strict=True)
     source_ids = {row["source_id"] for row in selection["raw_sources"]}
 
-    def r2_source(spec: JSONValue) -> bool:
-        """Check whether a specification can be downloaded using the frozen inputs.
+    def require_source(name: str, spec: LandFile) -> None:
+        """Check one raw source can be downloaded for release replay.
 
         Args:
-            spec: Candidate physical input or archive member.
-
-        Returns:
-            True if the specification identifies an R2 object.
-        """
-        if not isinstance(spec, dict):
-            return False
-        if "r2_source" in spec:
-            return catalog_source_id(spec) in source_ids
-        if "archive" in spec:
-            return r2_source(spec["archive"])
-        return all(spec.get(key) for key in ("r2_bucket", "r2_key", "sha256"))
-
-    def require_source(name: str, spec: JSONValue) -> None:
-        """Reject an input that a new machine could not download.
-
-        Args:
-            name: Input name for error messages.
-            spec: Candidate physical input.
+            name: The file's location in the configuration.
+            spec: A validated physical file or archive member selection.
 
         Raises:
-            ValueError: The input specifies only a local file.
+            ValueError: The file lacks an R2 pin or catalog entry.
         """
-        if not r2_source(spec):
-            raise ValueError(f"release replay requires an R2 pin for {name}")
+        entry = source_file(spec)
+        if "r2_source" in entry:
+            if entry["r2_source"] in source_ids:
+                return
+        elif "r2_bucket" in entry:
+            validate_object_pin(entry)
+            return
+        raise ValueError(f"release replay requires an R2 pin for {name}")
 
     for index, layer in enumerate(sources["land_config"]["land"]):
         for file_index, spec in enumerate(layer["files"]):
@@ -73,15 +64,7 @@ def validate_replay_sources(
         configuration.get("physical_controls", {}), strict=True
     )
     for index, spec in enumerate(sources["inland_water"]["files"]):
-        name = f"inland_water.files[{index}]"
-        require_source(name, spec)
-        if "r2_source" not in spec:
-            try:
-                validate_object_pin(spec)
-            except ValueError as error:
-                raise ValueError(
-                    f"release replay requires an R2 object and byte size for {name}"
-                ) from error
+        require_source(f"inland_water.files[{index}]", spec)
 
 
 def write_inputs(
@@ -180,6 +163,7 @@ def restore_inputs(content: dict[str, Any], output: Path | str) -> None:
         ValueError: A captured code snapshot has an invalid identity or contents.
     """
     # Check all code snapshots before creating any output files.
+    snapshots = {}
     for identity, code in content.get("source_code", {}).items():
         if (
             not isinstance(identity, str)
@@ -187,7 +171,7 @@ def restore_inputs(content: dict[str, Any], output: Path | str) -> None:
             or any(c not in "0123456789abcdef" for c in identity)
         ):
             raise ValueError("invalid source archive identity")
-        source_files(code)
+        snapshots[identity] = source_files(code)
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
 
@@ -233,5 +217,5 @@ def restore_inputs(content: dict[str, Any], output: Path | str) -> None:
                 value["sources"].pop("reference_runs", None)
             (output / (key + ".json")).write_bytes(json_bytes(value))
 
-    for identity, code in content.get("source_code", {}).items():
-        restore_source(code, output / "code" / identity)
+    for identity, files in snapshots.items():
+        restore_source(files, output / "code" / identity)

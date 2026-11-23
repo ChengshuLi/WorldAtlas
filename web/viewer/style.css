@@ -5,6 +5,9 @@ body {
   --small-text-size: 12px;
   --title-text-size: 20px;
   margin: 0;
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
   background: #eaf0f2;
   color: #1b3341;
   font:
@@ -67,7 +70,6 @@ button:disabled {
 }
 #map {
   position: relative;
-  height: calc(100dvh - 76px);
   overflow: hidden;
 }
 #canvas {
@@ -240,9 +242,6 @@ button:disabled {
   }
   .brand p {
     max-width: 215px;
-  }
-  #map {
-    height: calc(100dvh - 86px);
   }
   .tools {
     position: static;
