@@ -133,15 +133,14 @@ Each layer has its own pair of files. The physical grid stores land or water. Th
 | `attempts/{ATTEMPT_ID}/failure.json` | Summarizes progress and timing when this attempt ends with a caught error or interruption. |
 | `preserved/` | Holds files moved aside before a retry, for debugging only. Resume ignores this directory. |
 | `run.lock` | Prevents two builders from writing to the same run at once. |
-| `physical.lock` | Protects physical output from concurrent writers, including calls to the standalone physical command. |
 
 **Timing.** If two rules run during the same ten seconds, those ten seconds count once toward the stage total. The report lists download time separately and counts only time while the build is running. If the build stops before recording when a task ended, the report gives the minimum time it can account for.
 
-The [timing recorder](execution/timing.py) measures each stage and writes its totals to the run report. A stage that keeps its own timings can provide a reader for its totals. The physical builder uses this interface and records its work in a separate [checkpoint log](physical/README.md#how-it-works) so individual raster tasks can resume when it runs on its own.
+The [timing recorder](execution/timing.py) measures every stage in the same log. The same checkpoint runner saves raster tasks, division work and final encoding. The [standalone physical command](physical/README.md#how-it-works) uses these tools in its own output directory.
 
 **Code snapshots.** Each attempt saves its WorldAtlas code and setup files in `attempts/{ATTEMPT_ID}/source-code.json.gz`. Its `producer.json` records the checksum. If you edit the code between attempts, resume can reuse verified outputs from the old code and run the unfinished steps with the new code. Release staging keeps each snapshot. [Archived code](../map_releases/README.md#archived-code)
 
-**Stopping and resuming.** Press Ctrl+C to stop a build. Continue from verified checkpoints with the `--resume` command described above. If a rule fails, the builder cancels queued rules in that group and asks running rules to stop between batches.
+**Stopping and resuming.** Press Ctrl+C to stop a build. Continue from verified checkpoints with the `--resume` command described above. If a rule fails, the builder cancels queued rules in that group and asks running rules to stop between batches. To continue a run saved by the earlier checkpoint format, use its original code. Completed runs can still supply grids through `--reuse-from`.
 
 ## GDAL and release replays
 

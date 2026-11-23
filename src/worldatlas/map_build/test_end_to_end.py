@@ -5,7 +5,6 @@ import io
 import json
 import os
 from pathlib import Path
-import shutil
 import subprocess
 import sys
 import tempfile
@@ -25,6 +24,7 @@ from worldatlas.map_build.build import Pipeline, physical_reference
 from worldatlas.map_build.division import engine
 from worldatlas.map_build.inputs import selection as selection_inputs
 from worldatlas.map_build.inputs.selection import read_selection
+from worldatlas.map_build.physical.build import run as build_physical
 from worldatlas.shared.files import compact_json_bytes, pin_file, read_json, sha256_file, write_json
 
 
@@ -245,6 +245,16 @@ class EndToEndTests(unittest.TestCase):
                     with self.assertRaisesRegex(InterruptedError, "pipeline cancelled"):
                         runner.run()
                 self.assertEqual(len(started_rules), 1)
+                checkpoint_dir = root / "run/checkpoints"
+                physical_receipts = {
+                    path: path.read_bytes()
+                    for path in checkpoint_dir.glob("physical-*/complete.json")
+                }
+                self.assertEqual(
+                    {path.parent.name for path in physical_receipts},
+                    {"physical-land", "physical-shard-00000", "physical-union",
+                     "physical-compose", "physical-report"},
+                )
                 errors = list((root / "run/checkpoints").glob("*/attempt-*/error.log"))
                 self.assertTrue(
                     any("InterruptedError" in path.read_text() for path in errors)
@@ -256,6 +266,14 @@ class EndToEndTests(unittest.TestCase):
                 ) as compile_parent:
                     runner = Pipeline(cfg, root / "run", work_dir=root, resume=True)
                     report = runner.run()
+                self.assertEqual(
+                    {path: path.read_bytes() for path in physical_receipts},
+                    physical_receipts,
+                )
+                self.assertEqual(
+                    list((root / "run").rglob("timing-events.jsonl")),
+                    [root / "run/timing-events.jsonl"],
+                )
                 compile_parent.assert_called_once()
                 self.assertEqual(compile_parent.call_args.args[1], 0)
                 self.assertEqual(report["status"], "complete")
@@ -302,7 +320,14 @@ class EndToEndTests(unittest.TestCase):
                 self.assertTrue(division["parents"]["0"]["reused"])
 
                 standalone = root / "standalone-physical"
-                shutil.copytree(root / "run/physical", standalone / "physical")
+                standalone.mkdir()
+                physical = build_physical(
+                    root / "run/physical-build-config.json", standalone / "physical"
+                )
+                self.assertEqual(
+                    physical["physical_output_sha256"],
+                    read_json(root / "run/physical/report.json")["physical_output_sha256"],
+                )
                 result = Pipeline(
                     cfg,
                     root / "reuse-standalone",

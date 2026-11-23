@@ -22,13 +22,12 @@ import pyarrow.parquet as pq
 
 from worldatlas.map_build import build as pipeline
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.execution.timing import ProducerDurations, ProducerTotals, Timing, elapsed_union
+from worldatlas.map_build.execution.timing import Timing, elapsed_union
 from worldatlas.shared import r2
 from worldatlas.shared.r2 import R2Client
 from worldatlas.source_assets.cache import SourceCache
 from worldatlas.map_build.land.connected import build_components
 from worldatlas.map_build.physical import build as physical_build
-from worldatlas.map_build.physical.timing import read_physical_totals
 from worldatlas.map_build.test_support import selection
 from worldatlas.shared.files import (
     json_bytes,
@@ -40,68 +39,6 @@ from worldatlas.shared.files import (
 
 
 class TimingTests(unittest.TestCase):
-    def test_interrupted_physical_report_keeps_the_recorded_lower_bound(self):
-        with tempfile.TemporaryDirectory() as td:
-            report = write_json(
-                Path(td) / "report.json",
-                {
-                    "status": "candidate-only",
-                    "timing_complete": False,
-                    "processing_elapsed_seconds": None,
-                    "recorded_processing_elapsed_seconds": 8,
-                    "source_download_elapsed_seconds": 3,
-                },
-            )
-            self.assertEqual(
-                read_physical_totals(report, reused_from=None),
-                ProducerTotals(recorded_processing_seconds=8, download_only_seconds=3),
-            )
-
-    def test_reused_physical_outputs_count_current_verification_only(self):
-        with tempfile.TemporaryDirectory() as td:
-            timer = Timing(
-                Path(td) / "events.jsonl",
-                producer_reports={
-                    "physical": lambda: read_physical_totals(
-                        Path(td) / "unused.json", reused_from="/source/run"
-                    )
-                },
-            )
-            self.addCleanup(timer.close)
-            with patch.object(time, "monotonic", side_effect=[8, 11]):
-                with timer.measure("physical", "verify-reused"):
-                    pass
-            timer.mark_complete("physical")
-            result = timer.summary()["physical"]
-            self.assertTrue(result["complete"])
-            self.assertEqual(result["processing_elapsed_seconds"], 3)
-            self.assertEqual(result["source_download_elapsed_seconds"], 0)
-            self.assertEqual(result["reused_from"], "/source/run")
-            self.assertIsNone(result["producer_processing_elapsed_seconds"])
-
-    def test_producer_invocation_uses_the_reported_attempt_from_this_call(self):
-        with tempfile.TemporaryDirectory() as td:
-            timer = Timing(Path(td) / "events.jsonl")
-            self.addCleanup(timer.close)
-            with patch.object(time, "monotonic", side_effect=[0, 10, 10, 20, 20, 30]):
-                with timer.measure_producer("tiles"):
-                    pass
-                with self.assertRaises(RuntimeError), timer.measure_producer("tiles") as invocation:
-                    invocation.attempt_started = True
-                    raise RuntimeError("interrupted before the producer recorded its end")
-                with self.assertRaisesRegex(ValueError, "invalid tiles invocation timing"):
-                    with timer.measure_producer("tiles") as invocation:
-                        invocation.attempt_started = True
-                        invocation.durations = ProducerDurations(8, 3)
-            overhead = [
-                event["seconds"] for event in timer.records
-                if event["event"] == "tiles-command-overhead"
-            ]
-            self.assertEqual(overhead, [10])
-            self.assertFalse(
-                any(event["event"] == "tiles-invocation-processing" for event in timer.records)
-            )
-
     def test_selected_configuration_has_portable_sources(self):
         path = Path(pipeline.__file__).parent / "config.json"
         cfg = read_json(path)
@@ -118,66 +55,6 @@ class TimingTests(unittest.TestCase):
         self.assertEqual(elapsed_union([]), 0)
         with self.assertRaises(ValueError):
             elapsed_union([(2, 1)])
-
-    def test_completed_intervals_survive_and_failures_remain_incomplete(self):
-        with tempfile.TemporaryDirectory() as td:
-            totals = ProducerTotals(
-                processing_seconds=5,
-                recorded_processing_seconds=5,
-                download_only_seconds=20,
-                complete=True,
-            )
-            timer = Timing(
-                Path(td) / "events.jsonl", producer_reports={"tiles": lambda: totals}
-            )
-            with patch.object(
-                time, "monotonic", side_effect=[10, 13, 20, 21, 40, 40, 65, 65]
-            ):
-                with timer.measure("water", "basin"):
-                    pass
-                with self.assertRaises(RuntimeError):
-                    with timer.measure("water", "coast"):
-                        raise RuntimeError("interrupted")
-                with timer.measure("tiles", "stage-total"):
-                    with timer.measure("tiles", "tiles", kind="command"):
-                        pass
-            timer.completed_groups.add("tiles")
-            doc = timer.summary()
-            self.assertEqual(doc["water"]["processing_elapsed_seconds"], 4)
-            self.assertFalse(doc["water"]["complete"])
-            self.assertEqual(doc["tiles"]["processing_elapsed_seconds"], 5)
-            self.assertEqual(doc["tiles"]["source_download_elapsed_seconds"], 20)
-            records = [json.loads(line) for line in timer.path.read_text().splitlines()]
-            self.assertEqual(
-                [r["event"] for r in records if r["event"] != "attempt"],
-                [
-                    "start",
-                    "complete",
-                    "start",
-                    "failed",
-                    "start",
-                    "start",
-                    "complete",
-                    "complete",
-                ],
-            )
-
-    def test_invalid_acquisition_timing_cannot_be_a_complete_stage(self):
-        with tempfile.TemporaryDirectory() as td:
-            timer = Timing(
-                Path(td) / "events.jsonl",
-                producer_reports={
-                    "tiles": lambda: ProducerTotals(download_only_seconds=4, complete=True)
-                },
-            )
-            with patch.object(time, "monotonic", side_effect=[1, 3]):
-                with timer.measure("tiles", "stage-total"):
-                    pass
-            timer.completed_groups.add("tiles")
-            summary = timer.summary()["tiles"]
-            self.assertFalse(summary["complete"])
-            self.assertIsNone(summary["processing_elapsed_seconds"])
-            self.assertIsNotNone(summary["timing_error"])
 
     def test_parallel_jobs_are_measured_as_union_not_sum(self):
         with tempfile.TemporaryDirectory() as td:
@@ -623,22 +500,6 @@ class Fixture(unittest.TestCase):
                 resume=True,
             )
 
-    def test_failure_to_open_the_physical_timer_does_not_create_an_invocation(self):
-        runner = self.make()
-
-        @contextmanager
-        def unavailable(*_, **__):
-            raise OSError("cannot write the timing journal")
-            yield
-
-        with (
-            patch.object(runner.timing, "measure", new=unavailable),
-            patch.object(runner.timing, "_record_producer_invocation") as report,
-        ):
-            with self.assertRaisesRegex(OSError, "cannot write the timing journal"):
-                runner.physical()
-        report.assert_not_called()
-
     def test_relative_work_directory_is_relative_to_the_current_directory(self):
         config = write_json(self.inputs / "build.json", self.cfg)
         runner = pipeline.Pipeline(
@@ -841,7 +702,6 @@ class Fixture(unittest.TestCase):
             reused.physical()
         runs_path.write_bytes(original)
         (physical / "physical-dry.tif").unlink()
-        (runner.out / "physical/pipeline-identity.json").unlink()
         self.assertEqual(reused.physical(), physical)
         components = runner.out / "components"
         result = build_components(Grid(**grid), physical, components)
@@ -854,9 +714,7 @@ class Fixture(unittest.TestCase):
             np.fromfile(physical / "rows.u32le", dtype="<u4"), [0, 3, 5, 6, 7]
         )
         self.assertEqual(
-            read_json(runner.out / "physical/report.json")[
-                "source_download_elapsed_seconds"
-            ],
+            runner.timing.summary()["physical"]["source_download_elapsed_seconds"],
             0,
         )
         config_path.unlink()
@@ -924,7 +782,7 @@ class Fixture(unittest.TestCase):
             physical = runner.physical()
         report = read_json(runner.out / "physical/report.json")
         self.assertEqual(report["downloaded_shard_count"], 1)
-        self.assertGreater(report["source_download_elapsed_seconds"], 0)
+        self.assertGreater(runner.timing.summary()["physical"]["source_download_elapsed_seconds"], 0)
         source_cache = self.make_cache(other / "inputs")
         source_cache.path(land_source).unlink()
         source_cache.path(land_source["archive"]).unlink()

@@ -11,13 +11,13 @@ python3 -m worldatlas.map_build.physical.build \
   RUN/physical-build-config.json /absolute/path/to/new-physical-output
 ```
 
-Use `--resume` after interruption. Completed land, water shards, union and composition are checked against their actual inputs and output hashes. Code changes are recorded as provenance and do not block resume. Partial calculation outputs are retained for inspection. The cache discards incomplete downloads.
+Use `--resume` after interruption. Completed land, water shards, union and composition are checked against their actual inputs and output hashes. Partial calculation outputs go to `preserved/` for inspection. The cache discards incomplete downloads.
 
 ## How it works
 
 The physical build saves one settings file per step under `configs/`. The coastline, water-shard, union and composition reports record the checksum of the settings they used. Before combining water masks, the builder checks each shard report against the expected source, settings and grid. After combining them, it verifies that the input files still match their checksums.
 
-`processing-events.jsonl` records completed tasks with their output checksums, as well as processing and download times. On resume, the physical builder uses this log to find completed tasks and verifies their files before reusing them.
+Each completed task has a receipt in the shared `checkpoints/` directory. Its receipt pins the task's inputs and outputs. The shared `timing-events.jsonl` records work and downloads. In a full build, both live at the run root alongside the receipts and timings for the other stages. In a standalone build, they live in its output directory. The standalone command prints timing with the grid report.
 
 The final `physical/` directory contains `physical-dry.tif`, `rows.u32le`, `runs.u32le` and `report.json`. Physical streams use code 17 for land and code 1 for water. Entity assignments are calculated later using registry bindings.
 

@@ -18,7 +18,6 @@ import pyarrow.parquet as pq
 from osgeo import gdal, ogr
 from worldatlas.shared import r2
 from worldatlas.shared.r2 import R2Client
-from worldatlas.map_build.physical.timing import ProcessingJournal
 from worldatlas.map_build.physical import build as b
 from worldatlas.shared.files import sha256_file, write_json
 
@@ -43,136 +42,6 @@ def intercept_stages(effect):
 
 
 class PipelineTests(unittest.TestCase):
-    def test_interrupted_parallel_units_use_wall_time_union(self):
-        with tempfile.TemporaryDirectory() as d:
-            root = Path(d)
-            j = ProcessingJournal(root, 20, False)
-            j.add({'event': 'attempt_start', 'attempt': 'old'})
-            for start, end in ((0, 10), (5, 15)):
-                j.add(
-                    {
-                        'event': 'unit_complete',
-                        'attempt': 'old',
-                        'unit': 'test',
-                        'start_monotonic_seconds': start,
-                        'end_monotonic_seconds': end,
-                        'processing_elapsed_seconds': end - start,
-                    }
-                )
-            with mock.patch.object(b.time, 'monotonic', return_value=23):
-                j.finish('complete')
-            r = j.summary()
-            self.assertFalse(r['timing_complete'])
-            self.assertIsNone(r['processing_elapsed_seconds'])
-            self.assertEqual(r['recorded_processing_elapsed_seconds'], 18)
-
-    def test_overlapping_transfers_and_processing_share_wall_time(self):
-        with tempfile.TemporaryDirectory() as temp:
-            journal = ProcessingJournal(Path(temp), time.monotonic(), False)
-            for attempt in ('interrupted', 'older'):
-                journal.add(dict(event='attempt_start', attempt=attempt))
-            for start, end in ((0, 8), (2, 16)):
-                journal.add(
-                    dict(
-                        event='download_complete',
-                        attempt='interrupted',
-                        seconds=end - start,
-                        start_monotonic_seconds=start,
-                        end_monotonic_seconds=end,
-                    )
-                )
-            journal.add(dict(event='download_complete', attempt='older', seconds=2))
-            for start, end in ((5, 15), (10, 25)):
-                journal.add(
-                    dict(
-                        event='unit_complete',
-                        attempt='interrupted',
-                        start_monotonic_seconds=start,
-                        end_monotonic_seconds=end,
-                    )
-                )
-            journal.finish('complete')
-            self.assertEqual(journal.recorded_time('interrupted'), (20, 5))
-            self.assertEqual(journal.summary()['source_download_elapsed_seconds'], 7)
-
-    def test_corrupt_processing_journal_is_rejected(self):
-        for change, message in (
-            (
-                [dict(event='unknown', attempt='current')],
-                'unknown processing journal event',
-            ),
-            (
-                [dict(event='attempt_start', attempt='current')],
-                'invalid processing journal attempts',
-            ),
-            (
-                [dict(event='download_complete', attempt='missing', seconds=1)],
-                'event without attempt',
-            ),
-            (
-                [
-                    dict(event='attempt_start', attempt='older'),
-                    dict(event='download_complete', attempt='older', seconds=-1),
-                ],
-                'invalid processing journal download duration',
-            ),
-            (
-                [
-                    dict(event='attempt_start', attempt='interrupted'),
-                    dict(
-                        event='unit_complete',
-                        attempt='interrupted',
-                        start_monotonic_seconds=2,
-                        end_monotonic_seconds=1,
-                    ),
-                ],
-                'invalid processing interval',
-            ),
-        ):
-            with self.subTest(message=message), tempfile.TemporaryDirectory() as temp:
-                journal = ProcessingJournal(Path(temp), time.monotonic(), False)
-                for record in change:
-                    journal.add(
-                        dict(
-                            record,
-                            attempt=journal.attempt
-                            if record['attempt'] == 'current'
-                            else record['attempt'],
-                        )
-                    )
-                journal.finish('complete')
-                with self.assertRaisesRegex(ValueError, message):
-                    journal.summary()
-
-    def test_closing_attempt_twice_or_with_bad_duration_is_rejected(self):
-        with tempfile.TemporaryDirectory() as temp:
-            journal = ProcessingJournal(
-                Path(temp), time.monotonic() + 1_000_000, False
-            )
-            with self.assertRaisesRegex(ValueError, 'invalid attempt timing'):
-                journal.finish('complete')
-            journal.started = time.monotonic()
-            journal.finish('complete')
-            with self.assertRaisesRegex(ValueError, 'attempt already ended'):
-                journal.finish('failed')
-
-    def test_invalid_attempt_end_record_is_rejected(self):
-        with tempfile.TemporaryDirectory() as temp:
-            journal = ProcessingJournal(Path(temp), time.monotonic(), False)
-            journal.finish('complete')
-            entry = journal.events[-1]
-            entry['status'] = 'unknown'
-            with self.assertRaisesRegex(
-                ValueError, 'invalid processing journal status'
-            ):
-                journal.summary()
-            entry['status'] = 'complete'
-            entry['processing_elapsed_seconds'] = -1
-            with self.assertRaisesRegex(
-                ValueError, 'invalid processing journal duration'
-            ):
-                journal.summary()
-
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.root = Path(self.tmp.name).resolve()
@@ -300,47 +169,22 @@ class PipelineTests(unittest.TestCase):
             return name(*args, **kwargs)
 
         with intercept_stages(stage):
-            b.run(self.config, out, resume=True)
-        report = json.loads((out / 'report.json').read_text())
+            report = b.run(self.config, out, resume=True)
         self.assertTrue(report['timing_complete'])
         self.assertGreater(report['processing_elapsed_seconds'], 0)
         self.assertNotIn(LAND, seen)
         self.assertNotIn(WATER, seen)
-        self.assertEqual(b.run(self.config, out, resume=True), report)
+        resumed = b.run(self.config, out, resume=True)
+        self.assertEqual(resumed['physical_output_sha256'], report['physical_output_sha256'])
 
     def test_concurrent_attempt_is_rejected(self):
         out = self.root / 'locked'
-        lock = self.root / 'locked.lock'
+        b.run(self.config, out)
+        lock = out / 'run.lock'
         with lock.open('w') as f:
             fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
             with self.assertRaisesRegex(ValueError, 'another pipeline runner'):
-                b.run(self.config, out)
-        self.assertFalse(out.exists())
-
-    def test_resume_before_journal_creation_marks_timing_incomplete(self):
-        out = self.root / 'early-interruption'
-        with mock.patch.object(b, 'ProcessingJournal', side_effect=OSError('journal interrupted')):
-            with self.assertRaisesRegex(OSError, 'journal interrupted'):
-                b.run(self.config, out)
-        report = b.run(self.config, out, resume=True)
-        self.assertFalse(report['timing_complete'])
-        self.assertIsNone(report['processing_elapsed_seconds'])
-
-    def test_resume_hard_interruption_reports_unknown_total(self):
-        out = self.root / 'crashed'
-        self.interrupt_before_union(out)
-        journal = out / 'processing-events.jsonl'
-        lines = journal.read_text().splitlines()
-        self.assertEqual(json.loads(lines[-1])['event'], 'attempt_end')
-        journal.write_text('\n'.join(lines[:-1]) + '\n{"event":')
-        b.run(self.config, out, resume=True)
-        report = json.loads((out / 'report.json').read_text())
-        self.assertFalse(report['timing_complete'])
-        self.assertIsNone(report['processing_elapsed_seconds'])
-        self.assertGreater(report['recorded_processing_elapsed_seconds'], 0)
-        self.assertEqual(
-            [p.read_text() for p in (out / 'interrupted').glob('journal-tail-*')], ['{"event":']
-        )
+                b.run(self.config, out, resume=True)
 
     def test_actual_kill_preserves_units_and_marks_timing_incomplete(self):
         out = self.root / 'actual-kill'
@@ -375,8 +219,7 @@ b.run(sys.argv[1], sys.argv[2])
             if proc.poll() is None:
                 proc.kill()
             proc.wait(timeout=10)
-        b.run(self.config, out, resume=True)
-        report = json.loads((out / 'report.json').read_text())
+        report = b.run(self.config, out, resume=True)
         self.assertFalse(report['timing_complete'])
         self.assertIsNone(report['processing_elapsed_seconds'])
         self.assertGreater(report['recorded_processing_elapsed_seconds'], 0)
@@ -385,11 +228,11 @@ b.run(sys.argv[1], sys.argv[2])
         out = self.root / 'tampered'
         self.interrupt_before_union(out)
         (out / 'shards/00000/water.tif').write_bytes(b'tampered')
-        with self.assertRaisesRegex(ValueError, 'shard checkpoint mismatch'):
+        with self.assertRaisesRegex(ValueError, 'completed stage output changed: physical-shard-00000'):
             b.run(self.config, out, resume=True)
         self.cfg['selection_notes'] = 'changed'
         self.config.write_text(json.dumps(self.cfg))
-        with self.assertRaisesRegex(ValueError, 'resume identity mismatch'):
+        with self.assertRaisesRegex(ValueError, 'saved stage request changed'):
             b.run(self.config, out, resume=True)
 
     def test_resume_trusts_changed_code_and_retains_completed_data(self):
@@ -418,60 +261,29 @@ b.run(sys.argv[1], sys.argv[2])
         out = self.root / 'finished'
         b.run(self.config, out)
         (out / 'shards/00000/water.tif').write_bytes(b'tampered')
-        with self.assertRaisesRegex(ValueError, 'water shard checkpoint mismatch'):
+        with self.assertRaisesRegex(ValueError, 'completed stage output changed: physical-shard-00000|checkpoint/input hash mismatch: .*water.tif'):
             b.run(self.config, out, resume=True)
 
     def test_completed_resume_validates_the_report_masks_and_final_streams(self):
         out = self.root / 'finished'
         original = b.run(self.config, out)
         for name, message in (
-            ('report.json', 'completed physical report mismatch'),
-            ('land/land.tif', 'completed stage output mismatch: land'),
-            ('union/water-union.tif', 'completed stage output mismatch: union'),
-            ('physical/runs.u32le', 'completed physical output mismatch'),
+            ('report.json', 'completed stage output changed: physical-report'),
+            ('land/land.tif', 'completed stage output changed: physical-land|checkpoint/input hash mismatch: .*land.tif'),
+            ('union/water-union.tif', 'completed stage output changed: physical-union|checkpoint/input hash mismatch: .*water-union.tif'),
+            ('physical/runs.u32le', 'completed stage output changed: physical-compose|checkpoint/input hash mismatch: .*runs.u32le'),
         ):
             with self.subTest(name=name):
                 path = out / name
                 content = path.read_bytes()
                 path.write_bytes(b'{}')
-                with self.assertRaisesRegex(ValueError, message):
-                    b.run(self.config, out, resume=True)
-                path.write_bytes(content)
-        self.assertEqual(b.run(self.config, out, resume=True), original)
-
-    def test_completed_resume_requires_shard_reports_for_the_actual_settings(self):
-        out = self.root / 'finished'
-        b.run(self.config, out)
-        pipeline_path = out / 'report.json'
-        union_path = out / 'union' / 'report.json'
-        pipeline = json.loads(pipeline_path.read_bytes())
-        union = json.loads(union_path.read_bytes())
-
-        def save_union(report):
-            union_path.write_text(json.dumps(report))
-            pipeline['stage_reports']['union']['sha256'] = sha256_file(union_path)
-            pipeline_path.write_text(json.dumps(pipeline))
-
-        save_union(dict(union, shards=[]))
-        with self.assertRaisesRegex(ValueError, 'completed shard inventory mismatch'):
-            b.run(self.config, out, resume=True)
-
-        pin = union['shards'][0]['report']
-        path = Path(pin['path'])
-        shard = json.loads(path.read_bytes())
-        for changes, message in (
-            (dict(policy={'method': 'unexpected'}), 'mismatched report: 0'),
-            (dict(source_sha256='f' * 64), 'mismatched report: 0'),
-            (dict(rows_in_source=0), 'mismatched report: 0'),
-            (dict(rasterizer='unknown'), 'unknown water rasterizer for shard: 0'),
-            (dict(gdal_kernel={}), 'invalid in-process GDAL water kernel for shard: 0'),
-        ):
-            with self.subTest(changes=changes):
-                path.write_text(json.dumps(dict(shard, **changes)))
-                pin['sha256'] = sha256_file(path)
-                save_union(union)
-                with self.assertRaisesRegex(ValueError, message):
-                    b.run(self.config, out, resume=True)
+                try:
+                    with self.assertRaisesRegex(ValueError, message):
+                        b.run(self.config, out, resume=True)
+                finally:
+                    path.write_bytes(content)
+        resumed = b.run(self.config, out, resume=True)
+        self.assertEqual(resumed['physical_output_sha256'], original['physical_output_sha256'])
 
     def test_shard_rasterizers_must_match_before_union_and_on_resume(self):
         first = self.raw / 'water.parquet'
@@ -514,8 +326,28 @@ b.run(sys.argv[1], sys.argv[2])
         report = json.loads(path.read_bytes())
         report['gdal_kernel']['binding_sha256'] = '0' * 64
         path.write_text(json.dumps(report))
-        with self.assertRaisesRegex(ValueError, 'water shard checkpoint mismatch'):
+        with self.assertRaisesRegex(ValueError, 'completed stage output changed: physical-shard-00000|checkpoint/input hash mismatch: .*shards/00000/report.json'):
             b.run(self.config, out, resume=True)
+
+    def test_invalid_rasterizer_reports_cannot_complete_a_shard(self):
+        for i, (changes, message) in enumerate((
+            ({'rasterizer': 'unknown'}, 'unknown water rasterizer'),
+            ({'gdal_kernel': {}}, 'invalid in-process GDAL water kernel'),
+        )):
+            with self.subTest(changes=changes):
+                out = self.root / f'bad-rasterizer-{i}'
+
+                def change_report(function, *args, **kwargs):
+                    result = function(*args, **kwargs)
+                    if function is WATER:
+                        report_path = Path(args[2]) / 'report.json'
+                        report = json.loads(report_path.read_bytes())
+                        report_path.write_text(json.dumps(report | changes))
+                    return result
+
+                with intercept_stages(change_report), self.assertRaisesRegex(ValueError, message):
+                    b.run(self.config, out)
+                self.assertFalse((out / 'checkpoints/physical-shard-00000/complete.json').exists())
 
     def test_complete_physical_stage_does_not_start_processes(self):
         with mock.patch.object(
@@ -541,7 +373,7 @@ b.run(sys.argv[1], sys.argv[2])
                 b.run(self.config, out)
         b.run(self.config, out, resume=True)
         self.assertEqual(
-            [p.read_text() for p in (out / 'interrupted').glob('00000-*/partial')], ['preserve']
+            [p.read_text() for p in (out / 'preserved').glob('physical-shard-00000-*/0-00000/partial')], ['preserve']
         )
 
     def test_resume_reuses_union_after_composition_failure(self):
@@ -565,6 +397,13 @@ b.run(sys.argv[1], sys.argv[2])
             b.run(self.config, out, resume=True)
         self.assertEqual(seen, [COMPOSE])
 
+    def test_resume_rejects_changed_settings_for_an_unfinished_task(self):
+        out = self.root / 'union-settings'
+        self.interrupt_before_union(out)
+        (out / 'configs/union.json').write_bytes(b'{}')
+        with self.assertRaisesRegex(ValueError, 'resumed stage config mismatch'):
+            b.run(self.config, out, resume=True)
+
     def test_resume_after_report_write_failure_reuses_composition(self):
         out = self.root / 'report-resume'
 
@@ -578,11 +417,11 @@ b.run(sys.argv[1], sys.argv[2])
                 b.run(self.config, out)
         with intercept_stages(AssertionError('unexpected rebuild')):
             for name, message in (
-                ('configs/land.json', 'resumed stage config mismatch'),
-                ('land/report.json', 'land checkpoint mismatch'),
-                ('configs/union.json', 'resumed stage config mismatch'),
-                ('union/report.json', 'union checkpoint mismatch'),
-                ('physical/runs.u32le', 'physical checkpoint mismatch'),
+                ('configs/land.json', 'checkpoint/input hash mismatch'),
+                ('land/report.json', 'completed stage output changed: physical-land'),
+                ('configs/union.json', 'checkpoint/input hash mismatch'),
+                ('union/report.json', 'completed stage output changed: physical-union'),
+                ('physical/runs.u32le', 'completed stage output changed: physical-compose'),
             ):
                 with self.subTest(name=name):
                     path = out / name
@@ -656,11 +495,10 @@ b.run(sys.argv[1], sys.argv[2])
         with mock.patch.object(
             r2, 'make_r2_client', return_value=R2Client(client)
         ) as make_client:
-            b.run(self.config, out)
+            report = b.run(self.config, out)
             make_client.assert_called_once_with()
         client.get_object.assert_called_once()
         client.close.assert_called_once()
-        report = json.loads((out / 'report.json').read_text())
         self.assertEqual(report['downloaded_shard_count'], 1)
         self.assertGreaterEqual(report['source_download_elapsed_seconds'], 0.05)
         self.assertGreaterEqual(report['processing_elapsed_seconds'], 0)
@@ -815,7 +653,7 @@ b.run(sys.argv[1], sys.argv[2])
 
     def test_end_to_end_without_reference(self):
         out = self.root / 'out'
-        subprocess.run(
+        result = subprocess.run(
             [
                 sys.executable,
                 '-m',
@@ -827,7 +665,8 @@ b.run(sys.argv[1], sys.argv[2])
             capture_output=True,
             text=True,
         )
-        report = json.loads((out / 'report.json').read_text())
+        lines = result.stdout.splitlines()
+        report = json.loads("\n".join(lines[lines.index("{") :]))
         self.assertEqual(report['status'], 'candidate-only')
         self.assertEqual(report['shard_count'], 1)
         self.assertGreaterEqual(report['processing_elapsed_seconds'], 0)
@@ -1060,7 +899,7 @@ b.run(sys.argv[1], sys.argv[2])
         out = self.root / 'traversal'
         with self.assertRaisesRegex(ValueError, 'relative to the source directory'):
             b.run(self.config, out)
-        self.assertFalse(out.exists())
+        self.assertFalse((out / 'land').exists())
 
     def test_rejects_a_raw_file_symlink_to_outside_the_manifest_directory(self):
         source = self.raw / 'water.parquet'
@@ -1070,10 +909,10 @@ b.run(sys.argv[1], sys.argv[2])
         out = self.root / 'escaped-source'
         with self.assertRaisesRegex(ValueError, 'raw source escapes the source directory'):
             b.run(self.config, out)
-        self.assertFalse(out.exists())
+        self.assertFalse((out / 'land').exists())
 
     def test_requires_a_valid_output_location_and_current_land_input(self):
-        with self.assertRaisesRegex(ValueError, 'output parent must exist'):
+        with self.assertRaisesRegex(ValueError, 'output must have an existing parent'):
             b.run(self.config, self.root / 'missing' / 'output')
         for output in (self.raw / 'output', self.root):
             with self.subTest(output=output):
@@ -1086,19 +925,19 @@ b.run(sys.argv[1], sys.argv[2])
         out = self.root / 'changed-input'
         with self.assertRaisesRegex(ValueError, 'land source hash mismatch'):
             b.run(self.config, out)
-        self.assertFalse(out.exists())
+        self.assertFalse((out / 'land').exists())
 
     def test_coastline_dataset_must_name_one_pinned_file(self):
         layer = self.cfg['land_config']['land'][0]
         dataset, files = layer['dataset'], layer['files']
-        output = self.root / 'invalid-dataset'
-        for name, pins in (('missing.geojson', files), (dataset, files * 2)):
+        for i, (name, pins) in enumerate((('missing.geojson', files), (dataset, files * 2))):
+            output = self.root / f'invalid-dataset-{i}'
             with self.subTest(name=name, files=pins):
                 layer.update(dataset=name, files=pins)
                 self.config.write_text(json.dumps(self.cfg))
                 with self.assertRaisesRegex(ValueError, 'must name exactly one entry in files'):
                     b.run(self.config, output)
-                self.assertFalse(output.exists())
+                self.assertFalse((output / 'land').exists())
 
     def test_physical_preflight_checks_available_disk_and_reports_cli_errors(self):
         self.cfg['minimum_free_bytes'] = 1
@@ -1107,9 +946,10 @@ b.run(sys.argv[1], sys.argv[2])
         with mock.patch.object(b.shutil, 'disk_usage', return_value=mock.Mock(free=0)):
             with self.assertRaisesRegex(ValueError, 'free disk below pipeline reserve'):
                 b.run(self.config, out)
-        self.assertFalse(out.exists())
+        self.assertFalse((out / 'land').exists())
 
         self.config.write_text('{}')
+        out = self.root / 'invalid-config'
         result = subprocess.run(
             [
                 sys.executable,
@@ -1123,13 +963,13 @@ b.run(sys.argv[1], sys.argv[2])
         )
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('validation errors for PhysicalConfiguration', result.stderr)
-        self.assertFalse(out.exists())
+        self.assertFalse((out / 'land').exists())
 
     def test_interrupted_physical_checkpoints_require_their_journal(self):
         out = self.root / 'interrupted'
         self.interrupt_before_union(out)
-        (out / 'processing-events.jsonl').unlink()
-        with self.assertRaisesRegex(ValueError, 'missing processing journal for existing checkpoints'):
+        (out / 'timing-events.jsonl').unlink()
+        with self.assertRaises(FileNotFoundError):
             b.run(self.config, out, resume=True)
         self.assertFalse((out / 'report.json').exists())
 
@@ -1231,8 +1071,8 @@ b.run(sys.argv[1], sys.argv[2])
                 'paths and hashes must be unique',
             ),
         ]
-        out = self.root / 'invalid'
-        for section, changes, error in cases:
+        for i, (section, changes, error) in enumerate(cases):
+            out = self.root / f'invalid-{i}'
             with self.subTest(section=section, changes=changes):
                 water = dict(valid_water)
                 configuration = dict(self.cfg)
@@ -1241,7 +1081,7 @@ b.run(sys.argv[1], sys.argv[2])
                 self.config.write_text(json.dumps(configuration))
                 with self.assertRaisesRegex(ValueError, error):
                     b.run(self.config, out)
-                self.assertFalse(out.exists())
+                self.assertFalse((out / 'land').exists())
 
 
 

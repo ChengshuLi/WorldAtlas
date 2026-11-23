@@ -7,9 +7,8 @@ import math
 import threading
 import time
 import uuid
-from collections.abc import Callable, Generator, Iterable, Mapping
+from collections.abc import Generator, Iterable, Mapping
 from contextlib import contextmanager
-from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, NamedTuple, Self
@@ -21,7 +20,7 @@ from worldatlas.map_build.execution.journal import (
     preserve_torn_tail,
     verify_anchor,
 )
-from worldatlas.shared.files import JSONValue, read_json, write_json
+from worldatlas.shared.files import read_json, write_json
 
 TIMING_LOG = "timing-events.jsonl"
 
@@ -42,44 +41,6 @@ class SetupStart(NamedTuple):
         return cls(time.monotonic(), datetime.now(timezone.utc).isoformat())
 
 
-class ProducerDurations(NamedTuple):
-    """Seconds spent processing and downloading without other active work."""
-
-    processing: float
-    download_only: float
-
-
-@dataclass
-class ProducerInvocation:
-    """Receive the outcome of one call to a separately timed producer.
-
-    A call may only verify a saved result, or it may start an attempt.
-    A started attempt has durations once its end has been written to disk.
-    """
-
-    attempt_started: bool = False
-    durations: ProducerDurations | None = None
-
-
-@dataclass(frozen=True)
-class ProducerTotals:
-    """Summarize work from the producer's own journal across its attempts."""
-
-    processing_seconds: float | None = None
-    recorded_processing_seconds: float | None = None
-    download_only_seconds: float | None = None
-    complete: bool = False
-    reused_from: str | None = None
-
-
-@dataclass
-class _Interval:
-    """Track the monotonic seconds at both ends of one measured operation."""
-
-    started: float
-    ended: float | None = None
-
-
 def verify_setup_timing(run: Path) -> None:
     """Verify the timing log prefixes sealed by the run's earlier attempts.
 
@@ -88,24 +49,6 @@ def verify_setup_timing(run: Path) -> None:
     """
     for marker in (run / "attempts").glob("*/setup-timing.json"):
         verify_anchor(read_json(marker), run / TIMING_LOG)
-
-
-def duration_seconds(value: JSONValue) -> float | None:
-    """Read a duration from a producer report.
-
-    Args:
-        value: JSON value expected to hold seconds.
-
-    Returns:
-        The finite nonnegative duration, or None if the value is invalid.
-    """
-    if (
-        (type(value) is int or type(value) is float)
-        and math.isfinite(value)
-        and value >= 0
-    ):
-        return value
-    return None
 
 
 def elapsed_union(intervals: Iterable[tuple[float, float]]) -> float:
@@ -175,7 +118,7 @@ class Timing:
         attempt: str | None = None,
         heartbeat_seconds: float = 0,
         earlier_attempts: Iterable[str] = (),
-        producer_reports: Mapping[str, Callable[[], ProducerTotals]] | None = None,
+        groups: Iterable[str] = (),
     ) -> None:
         """Open a timing log and optionally start recording ongoing work.
 
@@ -186,7 +129,7 @@ class Timing:
             heartbeat_seconds: Seconds between progress entries for active work.
                 Zero disables them.
             earlier_attempts: IDs of existing attempt directories in this run.
-            producer_reports: Readers for stages that keep their own timing totals.
+            groups: Stage names to include even before work starts.
 
         Raises:
             ValueError: A line before the last one is incomplete or invalid.
@@ -194,7 +137,7 @@ class Timing:
         self.path = Path(path)
         self.attempt = attempt or uuid.uuid4().hex
         self.earlier_attempts = tuple(sorted(earlier_attempts))
-        self._producer_reports = dict(producer_reports or {})
+        self.groups = tuple(groups)
         self.lock = threading.RLock()
         self.records = []
         self.active = {}
@@ -237,7 +180,7 @@ class Timing:
         setup_started: SetupStart,
         *,
         resume: bool,
-        producer_reports: Mapping[str, Callable[[], ProducerTotals]],
+        groups: Iterable[str] = (),
     ) -> Self:
         """Open the run's timing log, record setup, and begin heartbeats.
 
@@ -245,7 +188,7 @@ class Timing:
             attempt_dir: Directory for this attempt inside the run's attempts folder.
             setup_started: Clock readings captured before input validation.
             resume: Whether this run already has a timing log.
-            producer_reports: Readers for stages that keep their own timing totals.
+            groups: Stage names to show as pending before they run.
 
         Returns:
             The open timing recorder. Call close when the run ends.
@@ -258,12 +201,12 @@ class Timing:
             log_path,
             resume=resume and log_path.exists(),
             attempt=attempt_dir.name,
+            groups=groups,
             earlier_attempts=(
                 path.name
                 for path in attempts.iterdir()
                 if path.is_dir() and path != attempt_dir
             ),
-            producer_reports=producer_reports,
         )
         token = uuid.uuid4().hex
         ended = time.monotonic()
@@ -313,81 +256,9 @@ class Timing:
         Yields:
             Control to the stage's work.
         """
-        with self.measure(group, "stage-total"):
+        with self.measure(group, "stage-total", kind="wall"):
             yield
         self.mark_complete(group)
-
-    @contextmanager
-    def measure_producer(self, group: str) -> Generator[ProducerInvocation]:
-        """Measure a call to a producer that reports its own work time.
-
-        Args:
-            group: Stage timing group that contains the producer call.
-
-        Yields:
-            A place for the producer to report whether it started
-            an attempt and how many seconds it processed and downloaded.
-
-        Raises:
-            ValueError: The producer reported more time than the call took.
-        """
-        invocation = ProducerInvocation()
-        interval = None
-        try:
-            with self.measure(group, f"{group}-invocation", kind="command") as interval:
-                yield invocation
-        finally:
-            if interval is not None and interval.ended is not None:
-                self._record_producer_invocation(
-                    group, invocation, interval.ended - interval.started
-                )
-
-    def _record_producer_invocation(
-        self, group: str, invocation: ProducerInvocation, elapsed: float
-    ) -> None:
-        """Save verification overhead and any known producer processing time.
-
-        Args:
-            group: Stage that ran the producer.
-            invocation: Outcome reported directly by the producer.
-            elapsed: Total seconds spent on the call.
-
-        Raises:
-            ValueError: Producer durations do not fit inside the call.
-        """
-        durations = invocation.durations
-        if durations is None:
-            if not invocation.attempt_started:
-                self.event(
-                    {
-                        "event": f"{group}-command-overhead",
-                        "id": group,
-                        "seconds": elapsed,
-                    }
-                )
-            # Without a durable attempt end, the producer's report will carry
-            # a lower bound from the completed work when the build resumes.
-            return
-        processing, download_only = durations
-        if (
-            any(duration_seconds(value) is None for value in durations)
-            or processing + download_only > elapsed
-        ):
-            raise ValueError(f"invalid {group} invocation timing")
-        self.events(
-            [
-                {
-                    "event": f"{group}-command-overhead",
-                    "id": group,
-                    "seconds": elapsed - processing - download_only,
-                },
-                {
-                    "event": f"{group}-invocation-processing",
-                    "id": group,
-                    "seconds": processing,
-                },
-            ]
-        )
 
     def report_fields(self) -> dict[str, Any]:
         """Assemble the timing fields in a successful run's report.
@@ -398,7 +269,7 @@ class Timing:
         Raises:
             ValueError: A stage lacks a record of completed outputs.
         """
-        stages = self.summary(require_producer_reports=True)
+        stages = self.summary()
         if not all(stage["outputs_complete"] for stage in stages.values()):
             raise ValueError("all stage outputs must be complete")
         return {
@@ -470,19 +341,15 @@ class Timing:
     @contextmanager
     def measure(
         self, group: str, name: str, *, kind: str = "processing"
-    ) -> Generator[_Interval]:
+    ) -> Generator[None]:
         """Record when a piece of work starts and stops.
 
         Args:
             group: Parent stage to which this work contributes.
             name: Name of the work within the stage.
-            kind: Timing category such as processing or command.
+            kind: Timing category such as processing, download, or inclusive wall time.
 
-        Yields:
-            The interval with its start in monotonic seconds. Its end time
-            is filled in when the block exits, including when the work failed.
         """
-        interval = _Interval(time.monotonic())
         token = uuid.uuid4().hex
         record = {
             "event": "start",
@@ -490,40 +357,36 @@ class Timing:
             "id": f"{group}/{name}",
             "group": group,
             "kind": kind,
-            "monotonic_seconds": interval.started,
+            "monotonic_seconds": time.monotonic(),
         }
         with self.lock:
             self.event(record)
             self.active[token] = record
         try:
-            yield interval
+            yield
         except BaseException:
-            self._finish(token, record, interval, "failed")
+            self._finish(token, record, "failed")
             raise
         else:
-            self._finish(token, record, interval, "complete")
+            self._finish(token, record, "complete")
 
-    def _finish(
-        self, token: str, record: dict[str, Any], interval: _Interval, event: str
-    ) -> None:
+    def _finish(self, token: str, record: dict[str, Any], event: str) -> None:
         """Record an interval's end and remove it from active work.
 
         Args:
             token: Unique interval ID.
             record: Start-event fields that identify this work.
-            interval: Clock readings. The end is set here.
             event: Outcome, either "complete" or "failed".
         """
         with self.lock:
-            interval.ended = time.monotonic()
             self.event(
                 {
                     "event": event,
                     "token": token,
                     "id": record["id"],
                     "group": record["group"],
-                    "start_monotonic_seconds": interval.started,
-                    "monotonic_seconds": interval.ended,
+                    "start_monotonic_seconds": record["monotonic_seconds"],
+                    "monotonic_seconds": time.monotonic(),
                 }
             )
             self.active.pop(token, None)
@@ -546,7 +409,7 @@ class Timing:
             group: Stage whose results are ready.
         """
         with self.lock:
-            summary = self._stage_summary(group, require_producer_report=True)
+            summary = self._stage_summary(group)
             summary.update(outputs_complete=True, complete=summary["timing_complete"])
             self.event(
                 {
@@ -653,67 +516,47 @@ class Timing:
             by_attempt.setdefault(token[0], []).append((a, b))
         return by_attempt, incomplete, details
 
-    def summary(
-        self, *, require_producer_reports: bool = False
-    ) -> dict[str, dict[str, Any]]:
+    def summary(self) -> dict[str, dict[str, Any]]:
         """Summarize wall-clock time for each stage without counting overlap twice.
 
-        Args:
-            require_producer_reports: Require readable reports for stages with
-                their own recorder. A failure summary can use partial timing.
-
         Returns:
-            Stage names mapped to report dictionaries with processing seconds,
-            output readiness, and details of any intervals with unknown ends.
+            Stage names mapped to report dictionaries with processing and
+            download seconds, output readiness, and any interrupted intervals.
         """
         names = dict.fromkeys(
-            (
-                "setup",
-                "physical",
-                "division",
-                "package",
-                "verification",
-                *self._producer_reports,
-                *(r["group"] for r in self.records if "group" in r),
-            )
+            (*self.groups, *(r["group"] for r in self.records if "group" in r))
         )
-        return {
-            name: self._stage_summary(
-                name, require_producer_report=require_producer_reports
-            )
-            for name in names
-        }
+        return {name: self._stage_summary(name) for name in names}
 
-    def _stage_summary(
-        self, group: str, *, require_producer_report: bool
-    ) -> dict[str, Any]:
+    def _stage_summary(self, group: str) -> dict[str, Any]:
         """Summarize measured work and output status for one stage.
 
         Args:
             group: Stage name.
-            require_producer_report: Raise if the producer report is unavailable.
 
         Returns:
             Timing and completion fields for this stage.
         """
         intervals, missing, interrupted = self.interval_details(group)
-        measured = sum(elapsed_union(items) for items in intervals.values())
+        downloads, _ = self.intervals(group, kind="download")
+        processing, _ = (
+            self.intervals(group, kind="processing") if downloads else ({}, [])
+        )
+        # Count overlapping downloads only once, and count time shared with
+        # actual processing as processing. Wall-clock spans include both.
+        download_only = sum(
+            _elapsed_outside(items, processing.get(attempt, []))
+            for attempt, items in downloads.items()
+        )
+        measured = (
+            sum(elapsed_union(items) for items in intervals.values()) - download_only
+        )
         complete = not missing
-        producer_fields = {}
-        if reader := self._producer_reports.get(group):
-            try:
-                totals = reader()
-            except (ValueError, OSError):
-                if require_producer_report:
-                    raise
-                totals = ProducerTotals()
-            measured, complete, producer_fields = self._producer_stage_totals(
-                group, intervals, measured, complete, totals
-            )
         outputs_complete = group in self.completed_groups
         return {
             "processing_elapsed_seconds": measured if complete else None,
             "recorded_processing_elapsed_seconds": measured,
+            "source_download_elapsed_seconds": download_only,
             "recorded_processing_is_lower_bound": not complete,
             "complete": outputs_complete and complete,
             "outputs_complete": outputs_complete,
@@ -722,80 +565,4 @@ class Timing:
             "interrupted_interval_details": interrupted,
             "unrecorded_interruption_tail_seconds": None if not complete else 0.0,
             "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
-            **producer_fields,
         }
-
-    def _producer_stage_totals(
-        self,
-        group: str,
-        intervals: Mapping[str, list[tuple[float, float]]],
-        measured: float,
-        complete: bool,
-        totals: ProducerTotals,
-    ) -> tuple[float, bool, dict[str, Any]]:
-        """Combine a producer's timing with time spent around its calls.
-
-        Args:
-            group: Stage that calls the producer.
-            intervals: Stage intervals keyed by pipeline attempt ID.
-            measured: Wall-clock seconds recorded for the stage.
-            complete: Whether all stage intervals have known endpoints.
-            totals: Processing and download totals from the producer.
-
-        Returns:
-            Processing seconds, whether they cover all the work, and timing
-            fields for the producer.
-        """
-        if totals.reused_from is not None:
-            return (
-                measured,
-                complete,
-                {
-                    "source_download_elapsed_seconds": 0.0,
-                    "producer_processing_elapsed_seconds": None,
-                    "timing_error": None,
-                    "reused_from": totals.reused_from,
-                },
-            )
-
-        # Substitute the producer's split so downloads do not count as processing.
-        invocations, _ = self.intervals(group, kind="command")
-        outside_invocations = sum(
-            _elapsed_outside(items, invocations.get(attempt, []))
-            for attempt, items in intervals.items()
-        )
-        producer_seconds = totals.recorded_processing_seconds
-        error = None
-        if producer_seconds is None:
-            producer_seconds = self._sum_seconds(f"{group}-invocation-processing")
-            complete = False
-            error = f"{group} producer has no valid measured processing total"
-        verification_seconds = self._sum_seconds(f"{group}-command-overhead")
-        measured = outside_invocations + verification_seconds + producer_seconds
-        complete = complete and totals.complete
-        downloads = totals.download_only_seconds
-        if downloads is None:
-            complete = False
-            error = f"missing or invalid {group} acquisition timing"
-        return (
-            measured,
-            complete,
-            {
-                "source_download_elapsed_seconds": downloads,
-                "producer_processing_elapsed_seconds": totals.processing_seconds,
-                "timing_error": error,
-            },
-        )
-
-    def _sum_seconds(self, event: str) -> float:
-        """Add the durations of one type of invocation event.
-
-        Args:
-            event: Event name with a duration recorded in the seconds field.
-
-        Returns:
-            Total recorded seconds across attempts.
-        """
-        return sum(
-            record["seconds"] for record in self.records if record["event"] == event
-        )

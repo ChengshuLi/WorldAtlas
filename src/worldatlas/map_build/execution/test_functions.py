@@ -182,41 +182,6 @@ class FunctionCheckpointTests(unittest.TestCase):
                 self.checkpoints.preserve('restart', [outside])
             self.assertEqual(outside.read_text(), 'leave in place')
 
-    def test_producer_owned_marker_preserves_internal_checkpoints(self):
-        marker = self.output / 'resume.json'
-
-        def interrupted():
-            self.output.mkdir()
-            marker.write_text('completed first unit')
-            raise InterruptedError('interrupted')
-
-        with self.assertRaises(InterruptedError):
-            self.checkpoints.run_function(
-                'calculate',
-                'physical',
-                interrupted,
-                timing=self.timing,
-                inputs=[pin_file(self.source)],
-                outputs=[self.output],
-                resume_marker=marker,
-            )
-
-        def continue_stage():
-            self.assertEqual(marker.read_text(), 'completed first unit')
-            return {'resumed': True}
-
-        result = self.checkpoints.run_function(
-            'calculate',
-            'physical',
-            continue_stage,
-            timing=self.timing,
-            inputs=[pin_file(self.source)],
-            outputs=[self.output],
-            resume_marker=marker,
-        )
-        self.assertTrue(result['resumed'])
-
-
 class TimingJournalTests(unittest.TestCase):
     def test_timing_prefix_cannot_be_sealed_if_the_file_shrinks_while_reading(self):
         with tempfile.TemporaryDirectory() as temp:

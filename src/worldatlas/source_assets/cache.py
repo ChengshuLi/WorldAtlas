@@ -6,6 +6,7 @@ import shutil
 import time
 import zipfile
 from collections.abc import Callable, Mapping
+from contextlib import AbstractContextManager, nullcontext
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 from typing import IO, NamedTuple
@@ -131,16 +132,21 @@ class SourceCache:
         directory: Path,
         *,
         check_cancelled: Callable[[], None] = lambda: None,
+        measure_download: Callable[[str], AbstractContextManager[None]] = (
+            lambda _key: nullcontext()
+        ),
     ) -> None:
         """Set up a local cache with one R2 client.
 
         Args:
             directory: Root directory for cached files.
             check_cancelled: Callback that raises if a download should stop.
+            measure_download: Context to record a transfer while it is active.
         """
         self.directory = directory.resolve()
         self.client = r2.make_r2_client()
         self._check_cancelled = check_cancelled
+        self._measure_download = measure_download
         self.downloads: list[Download] = []
         self._verified: set[tuple[Path, str, int]] = set()
 
@@ -263,7 +269,7 @@ class SourceCache:
         started = time.monotonic()
         completed = False
         try:
-            with self.client.open(bucket, key) as remote:
+            with self._measure_download(key), self.client.open(bucket, key) as remote:
                 if remote.size_bytes is not None and remote.size_bytes != size:
                     raise ValueError("R2 source file size or hash mismatch")
                 remaining = size

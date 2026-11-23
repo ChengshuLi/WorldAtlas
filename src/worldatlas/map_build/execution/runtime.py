@@ -7,7 +7,8 @@ import os
 import subprocess
 import traceback
 import uuid
-from collections.abc import Callable, Iterable, Mapping
+from collections.abc import Callable, Generator, Iterable, Mapping
+from contextlib import closing, contextmanager
 from dataclasses import dataclass
 from functools import partial
 from pathlib import Path
@@ -15,7 +16,12 @@ from stat import S_ISREG
 from typing import Any, TypedDict, cast
 
 from worldatlas.map_build.execution.journal import verify_anchor
-from worldatlas.map_build.execution.timing import TIMING_LOG, Timing
+from worldatlas.map_build.execution.timing import (
+    TIMING_LOG,
+    SetupStart,
+    Timing,
+    verify_setup_timing,
+)
 from worldatlas.map_build.inputs.configuration import FilePin
 from worldatlas.shared.files import (
     JSONValue,
@@ -393,7 +399,7 @@ class Checkpoints:
         name: str,
         invocation: dict[str, Any],
         outputs: list[Path],
-        inputs: list[dict[str, str]] | list[FilePin],
+        inputs: Iterable[Mapping[str, str] | FilePin],
         timing_anchor: dict[str, str | int],
     ) -> None:
         """Write a stage's completion record after verifying its saved outputs.
@@ -426,9 +432,9 @@ class Checkpoints:
         operation: Callable[[], Result],
         *,
         timing: Timing,
-        inputs: list[dict[str, str]] | list[FilePin],
+        inputs: Iterable[Mapping[str, str] | FilePin],
         outputs: Iterable[Path | str],
-        resume_marker: Path | str | None = None,
+        timing_kind: str = "processing",
     ) -> Result:
         """Run a stage or load its verified result from a previous attempt.
 
@@ -439,8 +445,7 @@ class Checkpoints:
             timing: Timing journal for the run.
             inputs: Input file pins.
             outputs: Output files and directories to verify.
-            resume_marker: If present, keep partial outputs for a producer that can
-                resume its own work.
+            timing_kind: How the operation counts toward stage timing.
 
         Returns:
             The stage result decoded from its saved JSON file.
@@ -448,6 +453,7 @@ class Checkpoints:
         Raises:
             ValueError: An output path escapes the run or saved data no longer matches.
         """
+        input_pins = [{"path": pin["path"], "sha256": pin["sha256"]} for pin in inputs]
         outputs = [Path(path).absolute() for path in outputs]
         run = self.root.parent
         if any(
@@ -460,37 +466,32 @@ class Checkpoints:
         function = operation.func if isinstance(operation, partial) else operation
         invocation = {
             "stage": name,
-            "inputs": inputs,
+            "inputs": input_pins,
             "outputs": list(map(str, outputs)),
             "code": {"module": function.__module__, "function": function.__qualname__},
         }
         sealed = [*outputs, result_path]
         if self.completed(name, invocation, sealed):
             return cast(Result, read_json(result_path))
-        if resume_marker is not None and Path(resume_marker).is_file():
-            # The producer owns its validated internal checkpoints. Preserve
-            # those outputs so it can continue completed shards or tiles.
-            self.preserve(name, [result_path])
-        else:
-            self.preserve(name, sealed)
+        self.preserve(name, sealed)
         attempt = self.begin(name)
-        self.files.verify(inputs)
+        self.files.verify(input_pins)
         write_json(
             attempt / "admitted.json",
             {
                 "invocation": invocation,
-                "inputs": inputs,
+                "inputs": input_pins,
                 "timing_anchor": timing.anchor(),
             },
         )
         try:
-            with timing.measure(group, name):
+            with timing.measure(group, name, kind=timing_kind):
                 result = operation()
             write_json(result_path, result)
         except BaseException:
             (attempt / "error.log").write_text(traceback.format_exc(), encoding="utf-8")
             raise
-        self.complete(name, invocation, sealed, inputs, timing.anchor())
+        self.complete(name, invocation, sealed, input_pins, timing.anchor())
         return cast(Result, read_json(result_path))
 
 
@@ -500,6 +501,49 @@ class StageExecutor:
 
     checkpoints: Checkpoints
     timing: Timing
+
+    @classmethod
+    @contextmanager
+    def open_workspace(
+        cls, root: Path, request: FilePin, *, resume: bool
+    ) -> Generator[StageExecutor]:
+        """Open a workspace for a standalone stage with the ordinary run tools.
+
+        Args:
+            root: Output directory for the standalone run.
+            request: Path and digest of its input configuration.
+            resume: Whether to continue the saved request.
+
+        Yields:
+            An executor holding the workspace lock, checkpoints, and timing log.
+
+        Raises:
+            ValueError: The workspace state or saved request differs.
+        """
+        setup_started = SetupStart.now()
+        if root.exists() != resume or not root.parent.is_dir():
+            raise ValueError(
+                "output must have an existing parent and exist only on resume"
+            )
+        if not resume:
+            root.mkdir()
+        with closing(RunLock(root / "run.lock")):
+            saved = root / "run-request.json"
+            if resume:
+                if not saved.is_file() or read_json(saved) != request:
+                    raise ValueError("saved stage request changed or is missing")
+            else:
+                write_json(saved, request)
+            attempt = uuid.uuid4().hex
+            checkpoints = Checkpoints(root / "checkpoints", attempt)
+            checkpoints.verify_all()
+            verify_setup_timing(root)
+            attempt_dir = root / "attempts" / attempt
+            attempt_dir.mkdir(parents=True)
+            with closing(
+                Timing.open_run(attempt_dir, setup_started, resume=resume)
+            ) as timing:
+                yield cls(checkpoints, timing)
 
 
 def execute_stage[Result: JSONValue](

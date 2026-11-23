@@ -1,5 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 from contextvars import copy_context
+from contextlib import redirect_stdout
 import io
 import threading
 import unittest
@@ -18,3 +19,9 @@ class StageControlTests(unittest.TestCase):
                 workers.submit(copy_context().run, check_cancelled).result()
         self.assertEqual(log.getvalue(), 'started\n')
         check_cancelled()
+
+    def test_progress_can_be_printed_outside_a_worker_context(self):
+        log = io.StringIO()
+        with redirect_stdout(log):
+            emit('started')
+        self.assertEqual(log.getvalue(), 'started\n')

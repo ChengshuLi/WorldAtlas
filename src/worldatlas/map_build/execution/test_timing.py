@@ -1,34 +1,34 @@
 """Restart safety: active-time arithmetic, checkpoints and pinned outputs."""
 
+from contextlib import ExitStack
 from pathlib import Path
 import tempfile
 import time
 import unittest
 from unittest.mock import patch
 
-from worldatlas.map_build.execution.timing import ProducerTotals, Timing
+from worldatlas.map_build.execution.timing import Timing
 
 
 class ActiveTimingTests(unittest.TestCase):
-    def test_missing_producer_report_allows_partial_timing_but_blocks_completion(self):
+    def test_stage_totals_separate_only_download_time_outside_processing(self):
         with tempfile.TemporaryDirectory() as td:
-            report = Path(td) / "tiles.json"
-
-            def read_totals():
-                return ProducerTotals(processing_seconds=float(report.read_text()))
-
-            timing = Timing(
-                Path(td) / "timing.jsonl",
-                producer_reports={"tiles": read_totals},
-            )
-            self.addCleanup(timing.close)
-            with self.assertRaises(FileNotFoundError):
-                with timing.stage("tiles"):
-                    pass
-
-            summary = timing.summary()["tiles"]
-            self.assertFalse(summary["outputs_complete"])
-            self.assertFalse(summary["timing_complete"])
+            timing = Timing(Path(td) / "timing.jsonl", groups=("tiles", "publish"))
+            with patch.object(time, "monotonic", side_effect=[0, 0, 2, 5, 8, 15, 16, 20]):
+                with timing.stage("tiles"), timing.measure("tiles", "file", kind="download"):
+                    with ExitStack() as rasterize:
+                        with self.assertRaises(InterruptedError), timing.measure(
+                            "tiles", "failed-file", kind="download"
+                        ):
+                            rasterize.enter_context(timing.measure("tiles", "rasterize"))
+                            raise InterruptedError("transfer stopped")
+            stages = timing.summary()
+            self.assertEqual(set(stages), {"tiles", "publish"})
+            self.assertEqual(stages["tiles"]["processing_elapsed_seconds"], 14)
+            self.assertEqual(stages["tiles"]["source_download_elapsed_seconds"], 6)
+            self.assertTrue(stages["tiles"]["complete"])
+            self.assertFalse(stages["publish"]["outputs_complete"])
+            timing.close()
 
     def test_downtime_and_changed_monotonic_origin_are_never_counted(self):
         with tempfile.TemporaryDirectory() as td:
@@ -120,50 +120,6 @@ class ActiveTimingTests(unittest.TestCase):
             )
             second.close()
 
-    def test_producer_completion_uses_the_download_excluding_producer_total(self):
-        with tempfile.TemporaryDirectory() as td:
-            totals = ProducerTotals(
-                processing_seconds=7,
-                recorded_processing_seconds=7,
-                download_only_seconds=5,
-                complete=True,
-            )
-            timing = Timing(
-                Path(td) / "timing.jsonl",
-                attempt="first",
-                producer_reports={"tiles": lambda: totals},
-            )
-            for token, start, end, kind in [
-                ("parent", 10, 25, "processing"),
-                ("child", 12, 24, "command"),
-            ]:
-                timing.event(
-                    {
-                        "event": "start",
-                        "token": token,
-                        "id": "tiles/" + token,
-                        "group": "tiles",
-                        "kind": kind,
-                        "monotonic_seconds": start,
-                    }
-                )
-                timing.event(
-                    {
-                        "event": "complete",
-                        "token": token,
-                        "id": "tiles/" + token,
-                        "group": "tiles",
-                        "monotonic_seconds": end,
-                    }
-                )
-            timing.mark_complete("tiles")
-            snapshot = timing.records[-1]["timing_summary"]
-            self.assertEqual(snapshot["processing_elapsed_seconds"], 10)
-            self.assertEqual(snapshot["source_download_elapsed_seconds"], 5)
-            self.assertFalse(snapshot["recorded_processing_is_lower_bound"])
-            self.assertTrue(snapshot["complete"])
-            timing.close()
-
     def test_interrupted_parent_and_child_prefixes_are_not_double_counted(self):
         with tempfile.TemporaryDirectory() as td:
             timing = Timing(Path(td) / "timing.jsonl", attempt="first")
@@ -222,7 +178,7 @@ class ActiveTimingTests(unittest.TestCase):
     def test_missing_initialization_does_not_invent_a_zero_length_interval(self):
         with tempfile.TemporaryDirectory() as td:
             timing = Timing(
-                Path(td) / "timing.jsonl", attempt="second", earlier_attempts=["first"]
+                Path(td) / "timing.jsonl", attempt="second", groups=("setup",), earlier_attempts=["first"]
             )
             result = timing.summary()["setup"]
             (detail,) = result["interrupted_interval_details"]

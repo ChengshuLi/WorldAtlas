@@ -81,13 +81,8 @@ class ExecutorResumeTests(unittest.TestCase):
         first.close()
         identity_path = self.out / "run-identity.json"
         identity = read_json(identity_path)
-        self.assertNotIn("runtime_paths", identity)
-        producer = read_json(first.attempt_dir / "producer.json")
-        for key in ("code", "repository", "runtime", "scripts_root"):
+        for key in ("code", "repository", "runtime", "runtime_paths", "scripts_root"):
             self.assertNotIn(key, identity)
-            identity[key] = producer[key]
-        identity["runtime_paths"] = {"PROJ_DATA": "/old/proj/data", "PROJ_LIB": None}
-        identity_path.write_bytes(json_bytes(identity))
         original = pin_file(identity_path)
         with (
             patch.object(
@@ -103,6 +98,15 @@ class ExecutorResumeTests(unittest.TestCase):
                 read_json(resumed.attempt_dir / "producer.json")["code"],
                 {"changed.py": "0" * 64},
             )
+
+    def test_resume_rejects_an_earlier_checkpoint_layout_before_starting_an_attempt(self):
+        first = self.runner()
+        first.close()
+        identity = self.out / "run-identity.json"
+        identity.write_bytes(json_bytes(read_json(identity) | {"schema": "worldatlas-end-to-end-run-identity-v1"}))
+        with self.assertRaisesRegex(ValueError, "original checkpoint format"):
+            self.runner(resume=True)
+        self.assertEqual(list((self.out / "attempts").iterdir()), [first.attempt_dir])
 
     def test_two_live_runners_cannot_resume_same_run(self):
         self.runner()

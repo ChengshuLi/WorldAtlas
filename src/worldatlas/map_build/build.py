@@ -54,7 +54,6 @@ from worldatlas.map_build.inputs.selection import (
 )
 from worldatlas.map_build.inputs.selection_types import BuildSelection
 from worldatlas.map_build.physical import build as physical_build
-from worldatlas.map_build.physical.timing import read_physical_totals
 from worldatlas.shared.database import connect_neon, neon_connection_url
 from worldatlas.shared.files import (
     compact_json_bytes,
@@ -69,6 +68,7 @@ from worldatlas.shared.files import (
 
 HERE = Path(__file__).resolve().parent
 PACKAGE_ROOT = HERE.parent
+RUN_IDENTITY_SCHEMA = "worldatlas-end-to-end-run-identity-v2"
 
 
 type RuntimeIdentity = dict[str, str | dict[str, str]]
@@ -255,15 +255,7 @@ class Pipeline:
                 self.attempt_dir,
                 setup_started,
                 resume=self.resume,
-                producer_reports={
-                    "physical": partial(
-                        read_physical_totals,
-                        self.out / "physical/report.json",
-                        reused_from=self.physical_reuse["source_run"]
-                        if self.physical_reuse
-                        else None,
-                    ),
-                },
+                groups=("setup", "physical", "division", "package", "verification"),
             )
         except BaseException:
             self.run_lock.close()
@@ -331,6 +323,8 @@ class Pipeline:
                     "run has no supported checkpoint identity; preserve it and start a fresh run"
                 )
             identity: RunIdentity = read_json(identity_path)
+            if identity["schema"] != RUN_IDENTITY_SCHEMA:
+                raise ValueError("resume this run with its original checkpoint format")
             saved_identity = identity
             divide = identity.get("divide")
             reuse_from = identity["reuse_from"]
@@ -381,7 +375,7 @@ class Pipeline:
     def _prepare_run_identity(self) -> None:
         """Record the inputs and options that must match when resuming."""
         self.identity: RunIdentity = {
-            "schema": "worldatlas-end-to-end-run-identity-v1",
+            "schema": RUN_IDENTITY_SCHEMA,
             "request": self.config_pin,
             "output": str(self.out),
             "divide": self.requested_parents,
@@ -408,17 +402,7 @@ class Pipeline:
         """
         self.saved_config = self.out / "build-config.json"
         if saved_identity is not None:
-            saved = dict(saved_identity)
-            # Earlier run identities also recorded the first attempt's provenance.
-            for key in (
-                "code",
-                "repository",
-                "runtime",
-                "runtime_paths",
-                "scripts_root",
-            ):
-                saved.pop(key, None)
-            if saved != self.identity:
+            if saved_identity != self.identity:
                 raise ValueError(
                     "resume request, input selection or output identity changed"
                 )
@@ -475,29 +459,15 @@ class Pipeline:
             path=str(request), sha256=hashlib.sha256(data).hexdigest()
         )
         if self.physical_reuse is not None:
-            verify_pins(self.physical_reuse["pins"])
+            self.checkpoints.files.verify(self.physical_reuse["pins"])
             return Path(self.physical_reuse["source_run"]) / "physical" / "physical"
-        marker = self.out / "physical/pipeline-identity.json"
-        with (
-            stage_context(self.cancelled),
-            self.timing.measure_producer("physical") as invocation,
-        ):
-            self.checkpoints.run_function(
-                name="physical",
-                group="physical",
-                operation=partial(
-                    physical_build.build,
-                    self.physical_config,
-                    self.grid,
-                    request_pin,
-                    self.out / "physical",
-                    resume=marker.is_file(),
-                    invocation=invocation,
-                ),
-                timing=self.timing,
-                inputs=[request_pin],
-                outputs=[self.out / "physical"],
-                resume_marker=marker,
+        with stage_context(self.cancelled):
+            physical_build.build(
+                self.physical_config,
+                self.grid,
+                request_pin,
+                self.out / "physical",
+                executor=StageExecutor(self.checkpoints, self.timing),
             )
         return self.out / "physical" / "physical"
 
@@ -577,20 +547,16 @@ class Pipeline:
                 return report
             with self.timing.stage("physical"):
                 physical = self.physical()
-                physical_inputs = (
-                    self.physical_reuse["pins"]
-                    if self.physical_reuse is not None
-                    else [
-                        pin_file(physical / name)
-                        for name in ("rows.u32le", "runs.u32le", "report.json")
-                    ]
-                )
+                physical_inputs = [
+                    *self.checkpoints.files.row_streams(physical),
+                    self.checkpoints.files.pin(physical / "report.json"),
+                ]
             with stage_context(self.cancelled), self.timing.stage("division"):
                 ownership = self.divide(physical)
             with self.timing.stage("package"):
                 final = self.package(physical, ownership)
             with self.timing.stage("verification"):
-                verify_pins(physical_inputs)
+                self.checkpoints.files.verify(physical_inputs)
                 if sha256_file(self.saved_config) != self.config_pin["sha256"]:
                     raise ValueError(
                         "saved build configuration changed during pipeline"
