@@ -181,11 +181,9 @@ def physical_reference(run: Path | str, configuration: dict[str, Any]) -> Physic
     if hashlib.sha256(data).hexdigest() != config_pin["sha256"]:
         raise ValueError("physical source configuration changed: " + str(request))
     previous = json.loads(data)
-    # Rewording a description does not change the rasterization inputs.
-    ignore_notes = {"selection_notes": None}
-    for key in ("land_config", "inland_water"):
-        if (previous[key] | ignore_notes) != (configuration[key] | ignore_notes):
-            raise ValueError("physical input differs from the source run: " + key)
+    for section in ("land_config", "inland_water"):
+        if previous[section] != configuration[section]:
+            raise ValueError("physical input differs from the source run: " + section)
 
     checksums = report["physical_output_sha256"]
     files = {

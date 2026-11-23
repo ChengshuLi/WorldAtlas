@@ -904,19 +904,15 @@ class Fixture(unittest.TestCase):
             str(runner.out),
         )
         self.assertEqual((physical / "report.json").read_bytes(), producer_report)
-        notes = dict(land)
-        notes["selection_notes"] = "Reworded description of the same selected sources"
-        self.assertEqual(
-            pipeline.physical_reference(
-                runner.out, {**runner.physical_config, "land_config": notes}
-            )["status"],
-            "reused",
-        )
-        changed = dict(notes, land=[], different=True)
-        with self.assertRaisesRegex(ValueError, "physical input differs"):
-            pipeline.physical_reference(
-                runner.out, {**runner.physical_config, "land_config": changed}
-            )
+        current = runner.physical_config
+        for section, changes in (
+            ("land_config", {"selection_notes": "Same coastline"}),
+            ("inland_water", {"rasterizer": "python"}),
+        ):
+            with self.subTest(section=section):
+                changed = dict(current, **{section: dict(current[section], **changes)})
+                with self.assertRaisesRegex(ValueError, f"physical input differs.*{section}"):
+                    pipeline.physical_reference(runner.out, changed)
         shorter_sources = dict(
             runner.physical_config, grid={**grid, "height": grid["height"] - 1}
         )
