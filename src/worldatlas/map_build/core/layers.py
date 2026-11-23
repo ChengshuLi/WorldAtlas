@@ -59,6 +59,67 @@ def write_layer(
     Raises:
         ValueError: A row or span is invalid, or the run offsets exceed uint32.
     """
+    return write_run_rows(directory, grid, _complete_rows(rows, grid.width))
+
+
+def _complete_rows(
+    rows: Iterable[tuple[int, list[tuple[int, int, int]]]], width: int
+) -> Iterator[tuple[int, np.ndarray, np.ndarray]]:
+    """Fill the gaps in sparse spans with zero-valued runs.
+
+    Args:
+        rows: Ordered row indices and (start, end, code) spans.
+        width: Number of columns to cover.
+
+    Yields:
+        (row, ends, codes) with a uint32 array for each run field.
+
+    Raises:
+        ValueError: A span is outside the row, overlaps, or has an invalid code.
+    """
+    for y, spans in rows:
+        ends, codes = [], []
+        stop = 0
+        for a, b, code in spans:
+            if (
+                any(type(v) is not int for v in (a, b, code))
+                or not stop <= a < b <= width
+                or not 0 < code < 2**32
+            ):
+                raise ValueError("invalid output span")
+            if a > stop:
+                ends.append(a)
+                codes.append(0)
+            ends.append(b)
+            codes.append(code)
+            stop = b
+        if stop < width:
+            ends.append(width)
+            codes.append(0)
+        yield y, np.asarray(ends, dtype=np.uint32), np.asarray(codes, dtype=np.uint32)
+
+
+def write_run_rows(
+    directory: Path | str,
+    grid: Grid,
+    rows: Iterable[tuple[int, np.ndarray, np.ndarray]],
+) -> dict[str, Any]:
+    """Write complete rows directly from run arrays.
+
+    Args:
+        directory: New directory for the streams and layer report.
+        grid: Dimensions of the complete output.
+        rows: Ordered (row, ends, codes) tuples. Ends are exclusive columns.
+            Both arrays are one-dimensional uint32 with equal length. Code
+            zero marks unassigned cells. Omitted rows are entirely unassigned.
+
+    Returns:
+        Layer report with counts by code, assigned bounds, and total runs.
+
+    Raises:
+        ValueError: Rows are unordered, runs are invalid, or the stream
+            exceeds the uint32 format.
+    """
     directory = Path(directory)
     directory.mkdir()
     iterator = iter(rows)
@@ -82,56 +143,48 @@ def write_layer(
                 offsets.extend(range(offsets[-1] + 1, offsets[-1] + length + 1))
                 y = stop
                 continue
-            spans = current[1]
-            if spans:
-                bounds = [int(spans[0][0]), int(spans[-1][1]), y, y + 1]
+            _, ends, codes = current
+            if (
+                ends.ndim != 1
+                or ends.shape != codes.shape
+                or ends.dtype != np.uint32
+                or codes.dtype != np.uint32
+                or not len(ends)
+                or ends[0] == 0
+                or ends[-1] != grid.width
+                or np.any(ends[1:] <= ends[:-1])
+            ):
+                raise ValueError("invalid complete output row")
+            # A repeated code needs only the exclusive end of its last run.
+            stops = np.empty(ends.size, dtype=bool)
+            stops[:-1] = codes[1:] != codes[:-1]
+            stops[-1] = True
+            ends, codes = ends[stops], codes[stops]
+            np.column_stack((ends, codes)).astype("<u4", copy=False).tofile(output)
+            assigned = np.flatnonzero(codes)
+            if assigned.size:
+                starts = np.r_[np.uint32(0), ends[:-1]]
+                left, right = int(starts[assigned[0]]), int(ends[assigned[-1]])
                 if assigned_bounds is None:
-                    assigned_bounds = bounds
+                    assigned_bounds = [left, right, y, y + 1]
                 else:
-                    assigned_bounds = [
-                        min(assigned_bounds[0], bounds[0]),
-                        max(assigned_bounds[1], bounds[1]),
-                        assigned_bounds[2],
-                        y + 1,
-                    ]
-            pairs = []
-            stop = 0
-
-            def append(end: int, code: int) -> None:
-                """Extend the last run or append a run with a new code.
-
-                Args:
-                    end: Exclusive end column.
-                    code: Value of this run.
-                """
-                if pairs and pairs[-1][1] == code:
-                    pairs[-1] = (end, code)
-                else:
-                    pairs.append((end, code))
-
-            for a, b, code in spans:
-                if (
-                    any(type(v) is not int for v in (a, b, code))
-                    or not stop <= a < b <= grid.width
-                    or not 0 < code < 2**32
-                ):
-                    raise ValueError("invalid output span")
-                if a > stop:
-                    append(a, 0)
-                append(b, code)
-                counts[str(code)] += b - a
-                stop = b
-            if stop < grid.width:
-                append(grid.width, 0)
-            np.asarray(pairs, dtype="<u4").tofile(output)
-            offsets.append(offsets[-1] + len(pairs))
-            # Testing this limit would require writing over four billion runs.
-            if offsets[-1] >= 2**32:  # pragma: no cover
-                raise ValueError("run offsets exceed the u32 representation")
+                    assigned_bounds[0] = min(assigned_bounds[0], left)
+                    assigned_bounds[1] = max(assigned_bounds[1], right)
+                    assigned_bounds[3] = y + 1
+                ids, indices = np.unique(codes[assigned], return_inverse=True)
+                totals = np.zeros(len(ids), dtype=np.uint64)
+                np.add.at(totals, indices, ends[assigned] - starts[assigned])
+                for code, count in zip(ids, totals, strict=True):
+                    counts[str(int(code))] += int(count)
+            offsets.append(offsets[-1] + len(ends))
             current = next(iterator, None)
             y += 1
         if current is not None:
             raise ValueError("assignment row outside the grid")
+    # Reaching this limit requires writing over four billion runs, which is
+    # impractical in tests.
+    if offsets[-1] >= 2**32:  # pragma: no cover
+        raise ValueError("run offsets exceed the u32 representation")
     np.asarray(offsets, dtype="<u4").tofile(directory / "rows.u32le")
     report = {
         "directory": str(directory.resolve()),

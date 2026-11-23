@@ -5,7 +5,12 @@ import unittest
 import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.core.layers import merge_rows, patch_rows, write_layer
+from worldatlas.map_build.core.layers import (
+    merge_rows,
+    patch_rows,
+    write_layer,
+    write_run_rows,
+)
 from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.water.shared_nearest import crop
 
@@ -33,8 +38,63 @@ class LayersTests(unittest.TestCase):
         )
         with tempfile.TemporaryDirectory() as directory:
             for index, (error, records) in enumerate(cases):
-                with self.subTest(records=records), self.assertRaisesRegex(ValueError, error):
+                with (
+                    self.subTest(records=records),
+                    self.assertRaisesRegex(ValueError, error),
+                ):
                     write_layer(Path(directory) / str(index), grid, records)
+
+    def test_complete_rows_match_sparse_output_with_uint32_codes_and_gaps(self):
+        grid = Grid(12, 5, 30)
+        high = 2**32 - 1
+        with tempfile.TemporaryDirectory() as temp:
+            sparse = Path(temp) / "sparse"
+            arrays = Path(temp) / "arrays"
+            expected = write_layer(
+                sparse, grid, [(1, [(2, 4, high), (4, 6, high), (8, 12, 7)])]
+            )
+            result = write_run_rows(
+                arrays,
+                grid,
+                [
+                    (
+                        1,
+                        np.array([2, 4, 6, 8, 12], dtype="u4"),
+                        np.array([0, high, high, 0, 7], dtype="u4"),
+                    ),
+                    (3, np.array([12], dtype="u4"), np.array([0], dtype="u4")),
+                ],
+            )
+            self.assertEqual(result, dict(expected, directory=str(arrays.resolve())))
+            self.assertEqual(result["counts"], {str(high): 4, "7": 4})
+            self.assertEqual(result["assigned_bounds"], [2, 12, 1, 2])
+            for name in ("rows.u32le", "runs.u32le"):
+                self.assertEqual(
+                    (sparse / name).read_bytes(), (arrays / name).read_bytes()
+                )
+
+    def test_complete_rows_reject_wrong_types_shapes_and_ends(self):
+        grid = Grid(4, 1, 90)
+        valid = np.array([2, 4], dtype="u4")
+        cases = (
+            (valid.reshape(1, 2), valid),
+            (valid, valid[:1]),
+            (valid.astype("i8"), valid),
+            (valid, valid.astype("i8")),
+            (valid[:0], valid[:0]),
+            (np.array([0, 4], dtype="u4"), valid),
+            (np.array([2, 3], dtype="u4"), valid),
+            (np.array([4, 4], dtype="u4"), valid),
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            for index, (ends, codes) in enumerate(cases):
+                with self.subTest(ends=ends, codes=codes):
+                    with self.assertRaisesRegex(
+                        ValueError, "invalid complete output row"
+                    ):
+                        write_run_rows(
+                            Path(directory) / str(index), grid, [(0, ends, codes)]
+                        )
 
     def test_patch_rejects_shape_mismatch_and_skips_empty_rows(self):
         grid = Grid(4, 2, 90)

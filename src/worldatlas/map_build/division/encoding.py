@@ -8,9 +8,9 @@ from typing import Any
 import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.core.layers import write_layer
+from worldatlas.map_build.core.layers import write_run_rows
 from worldatlas.map_build.core.rle import open_grid, row
-from worldatlas.map_build.division.intervals import overlay, spans
+from worldatlas.map_build.division.intervals import overlay
 from worldatlas.map_build.inputs.selection_types import MapCodeBinding
 
 
@@ -48,14 +48,14 @@ def encode(
         physical = resources.enter_context(open_grid(physical_directory, grid))
         ownership = resources.enter_context(open_grid(ownership_directory, grid))
 
-        def rows() -> Iterator[tuple[int, list[tuple[int, int, int]]]]:
+        def rows() -> Iterator[tuple[int, np.ndarray, np.ndarray]]:
             """Encode matching runs of land or water and entity IDs one row at a time.
 
             Yields:
-                (row, spans), where each span is (start_column, end_column, map_code).
+                (row, ends, codes) with one uint32 array for each run field.
             """
             for y in range(grid.height):
-                starts, ends, (kind, entity) = overlay(
+                _, ends, (kind, entity) = overlay(
                     row(physical, y, grid.width), row(ownership, y, grid.width)
                 )
                 lookup = (entity.astype(np.uint64) << 1) | (kind == 17).astype(
@@ -67,8 +67,6 @@ def encode(
                 if np.any((entity != 0) & ~valid):
                     raise ValueError("missing entity/physical-class map binding")
                 values = np.where(entity != 0, codes[safe], 0)
-                records = spans(starts, ends, values)
-                if records:
-                    yield y, records
+                yield y, ends.astype(np.uint32, copy=False), values
 
-        return write_layer(directory, grid, rows())
+        return write_run_rows(directory, grid, rows())
