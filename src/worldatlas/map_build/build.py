@@ -445,8 +445,13 @@ class Pipeline:
         else:
             write_json(self.out / "run-identity.json", self.identity)
         attempts = self.out / "attempts"
-        attempts.mkdir(mode=0o700, exist_ok=self.resume)
         self.attempt = uuid.uuid4().hex
+        self.checkpoints = Checkpoints(self.out / "checkpoints", self.attempt)
+        self.checkpoints.verify_all()
+        for marker in attempts.glob("*/setup-timing.json"):
+            verify_anchor(read_json(marker), self.out / "timing-events.jsonl")
+
+        attempts.mkdir(mode=0o700, exist_ok=self.resume)
         self.attempt_dir = attempts / self.attempt
         self.attempt_dir.mkdir()
         source_archive = self.attempt_dir / "source-code.json.gz"
@@ -461,10 +466,6 @@ class Pipeline:
                 "source_archive": pin_file(source_archive),
             },
         )
-        self.checkpoints = Checkpoints(self.out / "checkpoints", self.attempt)
-        self.checkpoints.verify_all()
-        for marker in (self.out / "attempts").glob("*/setup-timing.json"):
-            verify_anchor(read_json(marker), self.out / "timing-events.jsonl")
 
     def _record_setup_timing(self, setup_started: float, setup_utc: str) -> None:
         """Open the timing log and record the completed setup.

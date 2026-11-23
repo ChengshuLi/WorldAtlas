@@ -47,8 +47,10 @@ class ExecutorResumeTests(unittest.TestCase):
         self.execute(first)
         first.close()
         (self.out / "result/result.bin").write_bytes(b"changed")
+        attempts = self.out / "attempts"
         with self.assertRaisesRegex(ValueError, "output changed"):
             self.runner(resume=True)
+        self.assertEqual(list(attempts.iterdir()), [first.attempt_dir])
 
     def test_changed_input_pin_fails_before_reuse(self):
         first = self.runner()
@@ -65,6 +67,7 @@ class ExecutorResumeTests(unittest.TestCase):
         (self.out / "timing-events.jsonl").write_bytes(b"")
         with self.assertRaisesRegex(ValueError, "timing journal lost"):
             self.runner(resume=True)
+        self.assertEqual(list((self.out / "attempts").iterdir()), [first.attempt_dir])
 
     def test_changed_code_is_recorded_and_resume_keeps_the_original_identity(self):
         first = self.runner()
