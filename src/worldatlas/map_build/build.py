@@ -33,7 +33,6 @@ from worldatlas.map_build.execution.code_archive import capture_source, write_so
 from worldatlas.map_build.execution.control import stage as stage_context
 from worldatlas.map_build.execution.runtime import (
     Checkpoints,
-    RepositoryIdentity,
     RunLock,
     Timing,
     code_identity,
@@ -86,11 +85,7 @@ class RunIdentity(TypedDict):
 
     schema: str
     request: dict[str, str]
-    code: dict[str, str]
-    repository: RepositoryIdentity | None
-    scripts_root: str
     output: str
-    runtime: RuntimeIdentity
     divide: list[int] | None
     reuse_from: str | None
     recompute_division: bool
@@ -251,7 +246,6 @@ class Pipeline:
         saved_identity = self._resolve_run_options(
             divide, reuse_from, recompute_division
         )
-        self.runtime = runtime_identity()
 
         sources = copy.deepcopy(self.cfg["sources"])
         references = list(catalog_references(sources))
@@ -409,17 +403,11 @@ class Pipeline:
         }
 
     def _prepare_run_identity(self) -> None:
-        """Collect the inputs, code and options to save for the run."""
-        self.code = code_identity(PACKAGE_ROOT)
-        self.repository = repository_identity(PACKAGE_ROOT)
+        """Record the inputs and options that must match when resuming."""
         self.identity: RunIdentity = {
             "schema": "worldatlas-end-to-end-run-identity-v1",
             "request": self.config_pin,
-            "code": self.code,
-            "repository": self.repository,
-            "scripts_root": str(PACKAGE_ROOT),
             "output": str(self.out),
-            "runtime": self.runtime,
             "divide": self.requested_parents,
             "reuse_from": str(self.reuse_from) if self.reuse_from is not None else None,
             "recompute_division": self.recompute_division,
@@ -441,18 +429,16 @@ class Pipeline:
         """
         if saved_identity is not None:
             saved = dict(saved_identity)
-            current = dict(self.identity)
-            # A new attempt can use different code and installed libraries.
+            # Earlier run identities also recorded the first attempt's provenance.
             for key in (
                 "code",
                 "repository",
                 "runtime",
-                "runtime_paths",  # Earlier run records included raw PROJ environment variables.
+                "runtime_paths",
                 "scripts_root",
             ):
                 saved.pop(key, None)
-                current.pop(key, None)
-            if saved != current:
+            if saved != self.identity:
                 raise ValueError(
                     "resume request, input selection or output identity changed"
                 )
@@ -468,9 +454,9 @@ class Pipeline:
         write_json(
             self.attempt_dir / "producer.json",
             {
-                "code": self.code,
-                "repository": self.repository,
-                "runtime": self.runtime,
+                "code": code_identity(PACKAGE_ROOT),
+                "repository": repository_identity(PACKAGE_ROOT),
+                "runtime": runtime_identity(),
                 "scripts_root": str(PACKAGE_ROOT),
                 "source_archive": pin_file(source_archive),
             },

@@ -75,6 +75,10 @@ class ExecutorResumeTests(unittest.TestCase):
         identity_path = self.out / "run-identity.json"
         identity = read_json(identity_path)
         self.assertNotIn("runtime_paths", identity)
+        producer = read_json(first.attempt_dir / "producer.json")
+        for key in ("code", "repository", "runtime", "scripts_root"):
+            self.assertNotIn(key, identity)
+            identity[key] = producer[key]
         identity["runtime_paths"] = {"PROJ_DATA": "/old/proj/data", "PROJ_LIB": None}
         identity_path.write_bytes(json_bytes(identity))
         original = pin_file(identity_path)
