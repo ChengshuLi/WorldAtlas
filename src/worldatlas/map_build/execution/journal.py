@@ -5,6 +5,7 @@ import json
 import os
 from collections.abc import Iterable, Mapping
 from pathlib import Path
+from typing import Any
 
 from worldatlas.shared.files import JSONValue, sync_directory, write_bytes_atomic
 
@@ -70,3 +71,48 @@ def preserve_torn_tail(path: Path, valid_bytes: int, backup: Path, data: bytes) 
         stream.truncate(valid_bytes)
         stream.flush()
         os.fsync(stream.fileno())
+
+
+def journal_anchor(path: Path | str) -> dict[str, str | int]:
+    """Record the current bytes of an append-only timing log.
+
+    Args:
+        path: Timing log file.
+
+    Returns:
+        Dictionary with its absolute "path", byte count "bytes", and "sha256".
+        Future writes can append bytes without invalidating this record.
+
+    Raises:
+        ValueError: The file shrank while it was being read.
+    """
+    path = Path(path).resolve(strict=True)
+    size = path.stat().st_size
+    digest = prefix_digest(path, size, "timing journal shortened while sealing prefix")
+    return {"path": str(path), "bytes": size, "sha256": digest}
+
+
+def verify_anchor(anchor: dict[str, Any], expected_path: Path | str) -> None:
+    """Check that the recorded start of a timing log is unchanged.
+
+    Args:
+        anchor: Path, byte count and SHA-256 from journal_anchor.
+        expected_path: Timing log path for this run.
+
+    Raises:
+        ValueError: The recorded prefix changed or the record is invalid.
+    """
+    if (
+        set(anchor) != {"path", "bytes", "sha256"}
+        or Path(anchor["path"]).resolve() != Path(expected_path).resolve()
+        or type(anchor["bytes"]) is not int
+        or anchor["bytes"] < 0
+    ):
+        raise ValueError("invalid timing journal anchor")
+    digest = prefix_digest(
+        Path(expected_path),
+        anchor["bytes"],
+        "timing journal lost a checkpointed prefix",
+    )
+    if digest != anchor["sha256"]:
+        raise ValueError("timing journal checkpoint prefix changed")

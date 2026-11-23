@@ -6,17 +6,15 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import math
 import signal
 import sys
 import threading
-import time
 import uuid
-from datetime import datetime, timezone
+from contextlib import ExitStack
 from functools import partial
 from pathlib import Path
 from types import FrameType
-from typing import Any, NotRequired, TypedDict, cast
+from typing import Any, NotRequired, TypedDict
 
 import numpy
 import pyarrow
@@ -34,10 +32,13 @@ from worldatlas.map_build.execution.runtime import (
     Checkpoints,
     RunLock,
     StageExecutor,
-    Timing,
     code_identity,
     repository_identity,
-    verify_anchor,
+)
+from worldatlas.map_build.execution.timing import (
+    SetupStart,
+    Timing,
+    verify_setup_timing,
 )
 from worldatlas.map_build.inputs.configuration import (
     BUILD_CONFIGURATION,
@@ -209,8 +210,7 @@ class Pipeline:
         Raises:
             ValueError: Settings, pinned inputs, or resume options are incompatible.
         """
-        setup_started = time.monotonic()
-        setup_utc = datetime.now(timezone.utc).isoformat()
+        setup_started = SetupStart.now()
         config_path = Path(config).resolve(strict=True)
         config_bytes = config_path.read_bytes()
         self.config_pin = {
@@ -253,15 +253,18 @@ class Pipeline:
             self.out.mkdir(mode=0o700)
             write_json(self.out / "input-selection.json", self.selection)
         self.run_lock = RunLock(self.out / "run.lock")
-        try:
+        with ExitStack() as setup:
+            setup.callback(self.run_lock.close)
             self._start_attempt(saved_identity, config_bytes)
-            self._record_setup_timing(setup_started, setup_utc)
+            self.timing = Timing.open_run(
+                self.attempt_dir,
+                setup_started,
+                resume=self.resume,
+                physical_reuse=self.physical_reuse,
+            )
+            setup.callback(self.timing.close)
             self.checkpoints.preserve("failure", [self.out / "failure.json"])
-        except BaseException:
-            if hasattr(self, "timing"):
-                self.timing.close()
-            self.run_lock.close()
-            raise
+            setup.pop_all()
 
     def _prepare_workspace(self, output: Path | str, work_dir: Path | str) -> None:
         """Resolve the workspace and require a usable run directory within it.
@@ -425,8 +428,7 @@ class Pipeline:
         self.attempt = uuid.uuid4().hex
         self.checkpoints = Checkpoints(self.out / "checkpoints", self.attempt)
         self.checkpoints.verify_all()
-        for marker in attempts.glob("*/setup-timing.json"):
-            verify_anchor(read_json(marker), self.out / "timing-events.jsonl")
+        verify_setup_timing(self.out)
 
         attempts.mkdir(mode=0o700, exist_ok=self.resume)
         self.attempt_dir = attempts / self.attempt
@@ -443,148 +445,6 @@ class Pipeline:
                 "source_archive": pin_file(source_archive),
             },
         )
-
-    def _record_setup_timing(self, setup_started: float, setup_utc: str) -> None:
-        """Open the timing log and record the completed setup.
-
-        Args:
-            setup_started: Setup start time from the monotonic clock, in seconds.
-            setup_utc: Setup start time as an ISO 8601 UTC string.
-
-        Raises:
-            ValueError: The saved timing log contains invalid events.
-        """
-        self.timing = Timing(
-            self.out / "timing-events.jsonl",
-            resume=self.resume,
-            attempt=self.attempt,
-            heartbeat_seconds=1.0,
-            earlier_attempts=(
-                path.name
-                for path in self.attempt_dir.parent.iterdir()
-                if path.is_dir() and path != self.attempt_dir
-            ),
-        )
-        setup_finished = time.monotonic()
-        token = uuid.uuid4().hex
-        self.timing.event(
-            {
-                "event": "start",
-                "token": token,
-                "id": "setup/source-validation",
-                "group": "setup",
-                "monotonic_seconds": setup_started,
-                "utc": setup_utc,
-            }
-        )
-        self.timing.event(
-            {
-                "event": "complete",
-                "token": token,
-                "id": "setup/source-validation",
-                "group": "setup",
-                "start_monotonic_seconds": setup_started,
-                "monotonic_seconds": setup_finished,
-            }
-        )
-        self.timing.mark_complete("setup")
-        write_json(self.attempt_dir / "setup-timing.json", self.timing.anchor())
-
-    def physical_attempts(self) -> list[dict[str, Any]]:
-        """Read complete events from the physical build's timing log.
-
-        Returns:
-            Event dictionaries in file order. Stop at an incomplete or invalid
-            entry, and return an empty list when the log is absent.
-        """
-        path = self.out / "physical/processing-events.jsonl"
-        if not path.exists():
-            return []
-        # Only newline-terminated, complete durable records can supply timing.
-        lines = path.read_bytes().splitlines(keepends=True)
-        records = []
-        for line in lines:
-            if not line.endswith(b"\n"):
-                break
-            try:
-                records.append(json.loads(line))
-            except ValueError:
-                break
-        return records
-
-    def record_physical_invocation(
-        self, measurement: dict[str, Any], previous: list[dict[str, Any]]
-    ) -> None:
-        """Record how much of a physical build call was processing or verification.
-
-        Args:
-            measurement: Start and end times for the call, from the timing journal.
-            previous: Physical build events recorded before the call.
-
-        Raises:
-            ValueError: A recorded duration is invalid or the total exceeds
-                the measured call time.
-        """
-        before = {
-            record.get("attempt")
-            for record in previous
-            if record.get("event") == "attempt_start"
-        }
-        after = self.physical_attempts()
-        started = {
-            record.get("attempt")
-            for record in after
-            if record.get("event") == "attempt_start"
-        } - before
-        ends = [
-            record
-            for record in after
-            if record.get("event") == "attempt_end" and record.get("attempt") in started
-        ]
-        elapsed = (
-            measurement["end_monotonic_seconds"] - measurement["monotonic_seconds"]
-        )
-        if not started:
-            # A completed producer verification (or rejected preflight) did not
-            # start another producer attempt. Its entire invocation is validation.
-            self.timing.event(
-                {
-                    "event": "physical-command-overhead",
-                    "id": "physical",
-                    "seconds": elapsed,
-                }
-            )
-        elif len(started) == len(ends) == 1:
-            processing = ends[0].get("processing_elapsed_seconds")
-            downloads = ends[0].get("source_download_elapsed_seconds")
-            if (
-                not all(
-                    type(value) in (int, float)
-                    and math.isfinite(cast(float, value))
-                    and cast(float, value) >= 0
-                    for value in (processing, downloads)
-                )
-                or cast(float, processing) + cast(float, downloads) > elapsed
-            ):
-                raise ValueError("invalid physical invocation timing")
-            self.timing.event(
-                {
-                    "event": "physical-command-overhead",
-                    "id": "physical",
-                    "seconds": elapsed
-                    - cast(float, processing)
-                    - cast(float, downloads),
-                }
-            )
-            self.timing.event(
-                {
-                    "event": "physical-invocation-processing",
-                    "id": "physical",
-                    "seconds": processing,
-                }
-            )
-        # A killed producer with no durable attempt end supplies no exact tail.
-        # Its own report will retain timing_complete=false after shard resume.
 
     def close(self) -> None:
         """Close the timing journal and release the run lock."""
@@ -615,38 +475,27 @@ class Pipeline:
             verify_pins(self.physical_reuse["pins"])
             return Path(self.physical_reuse["source_run"]) / "physical" / "physical"
         marker = self.out / "physical/pipeline-identity.json"
-        previous = self.physical_attempts()
-        measurement = None
-        try:
-            with (
-                stage_context(self.cancelled),
-                self.timing.measure(
-                    "physical", "physical-invocation", kind="command"
-                ) as measurement,
-            ):
-                self.checkpoints.run_function(
-                    "physical",
-                    "physical",
-                    partial(
-                        physical_build.build,
-                        self.physical_config,
-                        self.grid,
-                        request_pin,
-                        self.out / 'physical',
-                        resume=marker.is_file(),
-                    ),
-                    timing=self.timing,
-                    inputs=[request_pin],
-                    outputs=[self.out / "physical"],
-                    resume_marker=marker,
-                )
-        finally:
-            # A normal return always has an end time. Only an interruption
-            # or timing error can bypass accounting and propagate an exception.
-            if (
-                measurement and "end_monotonic_seconds" in measurement
-            ):  # pragma: no branch
-                self.record_physical_invocation(measurement, previous)
+        with (
+            stage_context(self.cancelled),
+            self.timing.physical_invocation() as invocation,
+        ):
+            self.checkpoints.run_function(
+                "physical",
+                "physical",
+                partial(
+                    physical_build.build,
+                    self.physical_config,
+                    self.grid,
+                    request_pin,
+                    self.out / "physical",
+                    resume=marker.is_file(),
+                    invocation=invocation,
+                ),
+                timing=self.timing,
+                inputs=[request_pin],
+                outputs=[self.out / "physical"],
+                resume_marker=marker,
+            )
         return self.out / "physical" / "physical"
 
     def divide(self, physical: Path) -> Path:
@@ -658,11 +507,11 @@ class Pipeline:
         Returns:
             Directory with the completed ownership row-run grid.
         """
-        previous = None
+        reusable_division = None
         if self.reuse_from is not None and not self.recompute_division:
             division = self.reuse_from / "division"
             if (division / "report.json").is_file():
-                previous = division
+                reusable_division = division
         operation = HierarchyDivision(
             self.selection["geography"],
             self.grid,
@@ -670,7 +519,7 @@ class Pipeline:
             self.out / "division",
             dict(self.cfg),
             compiled_divisions=self.compiled_divisions,
-            reuse=previous,
+            reuse=reusable_division,
             executor=StageExecutor(self.checkpoints, self.timing),
         )
         return Path(operation.run()["directory"])
@@ -717,37 +566,27 @@ class Pipeline:
         Returns:
             Build report with pinned inputs and outputs and stage timings.
         """
-        physical = None
         try:
             if (self.out / "report.json").exists():
                 report = read_json(self.out / "report.json")
                 verify_pins(report["final"].values())
-                verify_anchor(report["timing_anchor"], self.timing.path)
+                self.timing.verify_report(report)
                 return report
-            with self.timing.measure("physical", "stage-total"):
+            with self.timing.stage("physical"):
                 physical = self.physical()
-            physical_inputs = (
-                self.physical_reuse["pins"]
-                if self.physical_reuse is not None
-                else [
-                    pin_file(physical / name)
-                    for name in ("rows.u32le", "runs.u32le", "report.json")
-                ]
-            )
-            physical_report = self.physical_reuse or read_json(
-                self.out / "physical/report.json"
-            )
-            self.timing.mark_complete("physical", physical_report=physical_report)
-            with (
-                stage_context(self.cancelled),
-                self.timing.measure("division", "stage-total"),
-            ):
+                physical_inputs = (
+                    self.physical_reuse["pins"]
+                    if self.physical_reuse is not None
+                    else [
+                        pin_file(physical / name)
+                        for name in ("rows.u32le", "runs.u32le", "report.json")
+                    ]
+                )
+            with stage_context(self.cancelled), self.timing.stage("division"):
                 ownership = self.divide(physical)
-            self.timing.mark_complete("division")
-            with self.timing.measure("package", "stage-total"):
+            with self.timing.stage("package"):
                 final = self.package(physical, ownership)
-            self.timing.mark_complete("package")
-            with self.timing.measure("verification", "stage-total"):
+            with self.timing.stage("verification"):
                 verify_pins(physical_inputs)
                 if sha256_file(self.saved_config) != self.config_pin["sha256"]:
                     raise ValueError(
@@ -761,21 +600,13 @@ class Pipeline:
                         ("report", "report.json"),
                     ]
                 }
-            self.timing.mark_complete("verification")
-            stages = self.timing.summary(physical_report)
-            if not all(stage["outputs_complete"] for stage in stages.values()):
-                raise ValueError("all stage outputs must be complete")
             result = {
                 "schema": "worldatlas-end-to-end-report-v2",
                 "status": "complete",
                 "request": self.config_pin,
                 "runner": pin_file(__file__),
                 "original_run_identity": pin_file(self.out / "run-identity.json"),
-                "stages": stages,
-                "timing_complete": all(
-                    stage["timing_complete"] for stage in stages.values()
-                ),
-                "timing_anchor": self.timing.anchor(),
+                **self.timing.report_fields(),
                 "physical_directory": str(physical),
                 "physical_outputs": physical_inputs,
                 "final": final_pins,
@@ -785,19 +616,12 @@ class Pipeline:
             write_json(self.out / "report.json", result)
             return result
         except BaseException:
-            report = self.out / "physical/report.json"
-            try:
-                physical_report = self.physical_reuse or (
-                    read_json(report) if report.exists() else None
-                )
-            except (ValueError, OSError):
-                physical_report = None
             write_json(
                 self.out / "failure.json",
                 {
                     "schema": "worldatlas-end-to-end-failure-v1",
                     "status": "incomplete",
-                    "stages": self.timing.summary(physical_report),
+                    "stages": self.timing.failed_stage_summary(),
                     "limitations": "Resume validates source and output pins. Code changes are recorded as provenance. Missing interrupted endpoints remain timing-incomplete; no downtime is added.",
                 },
             )

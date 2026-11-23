@@ -20,11 +20,11 @@ from worldatlas.map_build.division.hierarchy import (
 )
 from worldatlas.map_build.division.engine import ParentDivision
 from worldatlas.map_build.execution.control import check_cancelled, stage
+from worldatlas.map_build.execution.timing import Timing
 from worldatlas.map_build.execution.runtime import (
     Checkpoints,
     RunFilePins,
     StageExecutor,
-    Timing,
 )
 from worldatlas.map_build.test_support import selection
 from worldatlas.shared.files import sha256_file

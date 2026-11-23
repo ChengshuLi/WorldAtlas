@@ -18,6 +18,7 @@ import pyarrow.parquet as pq
 from osgeo import gdal, ogr
 from worldatlas.shared import r2
 from worldatlas.shared.r2 import R2Client
+from worldatlas.map_build.physical.timing import ProcessingJournal
 from worldatlas.map_build.physical import build as b
 from worldatlas.shared.files import sha256_file, write_json
 
@@ -45,7 +46,7 @@ class PipelineTests(unittest.TestCase):
     def test_interrupted_parallel_units_use_wall_time_union(self):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
-            j = b.ProcessingJournal(root, 20, False)
+            j = ProcessingJournal(root, 20, False)
             j.add({'event': 'attempt_start', 'attempt': 'old'})
             for start, end in ((0, 10), (5, 15)):
                 j.add(
@@ -67,7 +68,7 @@ class PipelineTests(unittest.TestCase):
 
     def test_overlapping_transfers_and_processing_share_wall_time(self):
         with tempfile.TemporaryDirectory() as temp:
-            journal = b.ProcessingJournal(Path(temp), time.monotonic(), False)
+            journal = ProcessingJournal(Path(temp), time.monotonic(), False)
             for attempt in ('interrupted', 'older'):
                 journal.add(dict(event='attempt_start', attempt=attempt))
             for start, end in ((0, 8), (2, 16)):
@@ -129,7 +130,7 @@ class PipelineTests(unittest.TestCase):
             ),
         ):
             with self.subTest(message=message), tempfile.TemporaryDirectory() as temp:
-                journal = b.ProcessingJournal(Path(temp), time.monotonic(), False)
+                journal = ProcessingJournal(Path(temp), time.monotonic(), False)
                 for record in change:
                     journal.add(
                         dict(
@@ -145,7 +146,7 @@ class PipelineTests(unittest.TestCase):
 
     def test_closing_attempt_twice_or_with_bad_duration_is_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
-            journal = b.ProcessingJournal(
+            journal = ProcessingJournal(
                 Path(temp), time.monotonic() + 1_000_000, False
             )
             with self.assertRaisesRegex(ValueError, 'invalid attempt timing'):
@@ -157,7 +158,7 @@ class PipelineTests(unittest.TestCase):
 
     def test_invalid_attempt_end_record_is_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
-            journal = b.ProcessingJournal(Path(temp), time.monotonic(), False)
+            journal = ProcessingJournal(Path(temp), time.monotonic(), False)
             journal.finish('complete')
             entry = journal.events[-1]
             entry['status'] = 'unknown'

@@ -10,6 +10,7 @@ import io
 from pathlib import Path
 import zipfile
 import tempfile
+import time
 import threading
 import unittest
 from unittest.mock import Mock, patch
@@ -21,7 +22,7 @@ import pyarrow.parquet as pq
 
 from worldatlas.map_build import build as pipeline
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.execution.runtime import elapsed_union
+from worldatlas.map_build.execution.timing import PhysicalDurations, Timing, elapsed_union
 from worldatlas.shared import r2
 from worldatlas.shared.r2 import R2Client
 from worldatlas.source_assets.cache import SourceCache
@@ -40,7 +41,7 @@ from worldatlas.shared.files import (
 class TimingTests(unittest.TestCase):
     def test_reused_physical_outputs_count_current_verification_only(self):
         with tempfile.TemporaryDirectory() as td:
-            timer = pipeline.Timing(Path(td) / "events.jsonl")
+            timer = Timing(Path(td) / "events.jsonl")
             self.addCleanup(timer.close)
             receipt = {
                 "status": "reused",
@@ -48,7 +49,7 @@ class TimingTests(unittest.TestCase):
                 "processing_elapsed_seconds": 12345,
                 "source_download_elapsed_seconds": 54321,
             }
-            with patch.object(pipeline.time, "monotonic", side_effect=[8, 11]):
+            with patch.object(time, "monotonic", side_effect=[8, 11]):
                 with timer.measure("physical", "verify-reused"):
                     pass
             timer.mark_complete("physical", physical_report=receipt)
@@ -58,6 +59,29 @@ class TimingTests(unittest.TestCase):
             self.assertEqual(result["source_download_elapsed_seconds"], 0)
             self.assertEqual(result["reused_from"], "/source/run")
             self.assertIsNone(result["producer_processing_elapsed_seconds"])
+
+    def test_physical_invocation_uses_the_reported_attempt_from_this_call(self):
+        with tempfile.TemporaryDirectory() as td:
+            timer = Timing(Path(td) / "events.jsonl")
+            self.addCleanup(timer.close)
+            with patch.object(time, "monotonic", side_effect=[0, 10, 10, 20, 20, 30]):
+                with timer.physical_invocation():
+                    pass
+                with self.assertRaises(RuntimeError), timer.physical_invocation() as invocation:
+                    invocation.attempt_started = True
+                    raise RuntimeError("interrupted before the producer recorded its end")
+                with self.assertRaisesRegex(ValueError, "invalid physical invocation timing"):
+                    with timer.physical_invocation() as invocation:
+                        invocation.attempt_started = True
+                        invocation.durations = PhysicalDurations(8, 3)
+            overhead = [
+                event["seconds"] for event in timer.records
+                if event["event"] == "physical-command-overhead"
+            ]
+            self.assertEqual(overhead, [10])
+            self.assertFalse(
+                any(event["event"] == "physical-invocation-processing" for event in timer.records)
+            )
 
     def test_selected_configuration_has_portable_sources(self):
         path = Path(pipeline.__file__).parent / "config.json"
@@ -78,9 +102,9 @@ class TimingTests(unittest.TestCase):
 
     def test_completed_intervals_survive_and_failures_remain_incomplete(self):
         with tempfile.TemporaryDirectory() as td:
-            timer = pipeline.Timing(Path(td) / "events.jsonl")
+            timer = Timing(Path(td) / "events.jsonl")
             with patch.object(
-                pipeline.time, "monotonic", side_effect=[10, 13, 20, 21, 40, 40, 65, 65]
+                time, "monotonic", side_effect=[10, 13, 20, 21, 40, 40, 65, 65]
             ):
                 with timer.measure("water", "basin"):
                     pass
@@ -119,8 +143,8 @@ class TimingTests(unittest.TestCase):
 
     def test_invalid_acquisition_timing_cannot_be_a_complete_stage(self):
         with tempfile.TemporaryDirectory() as td:
-            timer = pipeline.Timing(Path(td) / "events.jsonl")
-            with patch.object(pipeline.time, "monotonic", side_effect=[1, 3]):
+            timer = Timing(Path(td) / "events.jsonl")
+            with patch.object(time, "monotonic", side_effect=[1, 3]):
                 with timer.measure("physical", "stage-total"):
                     pass
             timer.completed_groups.add("physical")
@@ -133,7 +157,7 @@ class TimingTests(unittest.TestCase):
 
     def test_parallel_jobs_are_measured_as_union_not_sum(self):
         with tempfile.TemporaryDirectory() as td:
-            timer = pipeline.Timing(Path(td) / "events.jsonl")
+            timer = Timing(Path(td) / "events.jsonl")
             entered = threading.Barrier(3)
 
             def job(name):
@@ -143,7 +167,7 @@ class TimingTests(unittest.TestCase):
             threads = [
                 threading.Thread(target=job, args=(name,)) for name in ("sea", "coast")
             ]
-            with patch.object(pipeline.time, "monotonic", side_effect=[1, 2, 4, 6]):
+            with patch.object(time, "monotonic", side_effect=[1, 2, 4, 6]):
                 for thread in threads:
                     thread.start()
                 entered.wait()
@@ -575,34 +599,6 @@ class Fixture(unittest.TestCase):
                 resume=True,
             )
 
-    def test_physical_timing_reads_only_complete_records(self):
-        runner = self.make()
-        directory = runner.out / "physical"
-        directory.mkdir()
-        journal = directory / "processing-events.jsonl"
-        event = {"event": "attempt_start", "attempt": "fixture"}
-        start = json.dumps(event).encode() + b"\n"
-        for tail in (b'{"event":', b'invalid-json\n'):
-            with self.subTest(tail=tail):
-                journal.write_bytes(start + tail)
-                self.assertEqual(runner.physical_attempts(), [event])
-        end = {
-            "event": "attempt_end", "attempt": "fixture",
-            "processing_elapsed_seconds": 8, "source_download_elapsed_seconds": 3,
-        }
-        journal.write_bytes(start + json.dumps(end).encode() + b"\n")
-        with self.assertRaisesRegex(ValueError, "invalid physical invocation timing"):
-            runner.record_physical_invocation(
-                {"monotonic_seconds": 0, "end_monotonic_seconds": 10}, [],
-            )
-        journal.write_bytes(start)
-        runner.record_physical_invocation(
-            {"monotonic_seconds": 0, "end_monotonic_seconds": 10}, [],
-        )
-        self.assertFalse(
-            any(event["event"] == "physical-invocation-processing" for event in runner.timing.records)
-        )
-
     def test_failure_to_open_the_physical_timer_does_not_create_an_invocation(self):
         runner = self.make()
 
@@ -613,7 +609,7 @@ class Fixture(unittest.TestCase):
 
         with (
             patch.object(runner.timing, "measure", new=unavailable),
-            patch.object(runner, "record_physical_invocation") as report,
+            patch.object(runner.timing, "_record_physical_invocation") as report,
         ):
             with self.assertRaisesRegex(OSError, "cannot write the timing journal"):
                 runner.physical()

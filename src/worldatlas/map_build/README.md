@@ -137,6 +137,8 @@ Each layer has its own pair of files. The physical grid stores land or water. Th
 
 **Timing.** If two rules run during the same ten seconds, those ten seconds count once toward the stage total. The report lists download time separately and counts only time while the build is running. If the build stops before recording when a task ended, the report gives the minimum time it can account for.
 
+The [timing recorder](execution/timing.py) tracks when each stage starts and ends and writes the totals for the run report. The physical builder reports the processing and download time for its current call directly. Its own [checkpoint log](physical/README.md#how-it-works) supports resuming individual raster tasks, including when the physical builder runs on its own.
+
 **Code snapshots.** Each attempt saves its WorldAtlas code and setup files in `attempts/{ATTEMPT_ID}/source-code.json.gz`. Its `producer.json` records the checksum. If you edit the code between attempts, resume can reuse verified outputs from the old code and run the unfinished steps with the new code. Release staging keeps each snapshot. [Archived code](../map_releases/README.md#archived-code)
 
 **Stopping and resuming.** Press Ctrl+C to stop a build. Continue from verified checkpoints with the `--resume` command described above. If a rule fails, the builder cancels queued rules in that group and asks running rules to stop between batches.

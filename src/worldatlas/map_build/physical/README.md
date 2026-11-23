@@ -17,6 +17,8 @@ Use `--resume` after interruption. Completed land, water shards, union and compo
 
 The physical build saves one settings file per step under `configs/`. The coastline, water-shard, union and composition reports record the checksum of the settings they used. Before combining water masks, the builder checks each shard report against the expected source, settings and grid. After combining them, it verifies that the input files still match their checksums.
 
+`processing-events.jsonl` records completed tasks with their output checksums, as well as processing and download times. On resume, the physical builder uses this log to find completed tasks and verifies their files before reusing them.
+
 The final `physical/` directory contains `physical-dry.tif`, `rows.u32le`, `runs.u32le` and `report.json`. Physical streams use code 17 for land and code 1 for water. Entity assignments are calculated later using registry bindings.
 
 R2 uses the normal boto3 credential chain, with credentials outside the code. The physical stage caches the coastline ZIP and extracts its required files before drawing land. It can download the next water file while rasterizing the current file. Verified water files stay in the shared input cache for the next build. The current 32 files take about 29 GB. The timing report includes both kinds of downloads and counts overlapping rasterization as processing. A build that reuses a completed physical grid skips both downloads.

@@ -6,14 +6,13 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+from worldatlas.map_build.execution.journal import journal_anchor, verify_anchor
 from worldatlas.map_build.execution.runtime import (
     Checkpoints,
     RunFilePins,
-    Timing,
-    journal_anchor,
     repository_identity,
-    verify_anchor,
 )
+from worldatlas.map_build.execution.timing import Timing
 from worldatlas.shared.files import pin_file
 
 

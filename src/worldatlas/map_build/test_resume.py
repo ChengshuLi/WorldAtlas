@@ -5,6 +5,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 from worldatlas.map_build import build as pipeline
+from worldatlas.map_build.execution import timing
 from worldatlas.map_build.test_support import selection
 from worldatlas.shared.files import json_bytes, pin_file, read_json, write_json
 
@@ -139,6 +140,22 @@ class ExecutorResumeTests(unittest.TestCase):
             ["interrupted"],
         )
 
+    def test_resume_starts_the_timing_log_if_first_setup_failed_before_opening_it(self):
+        with patch.object(timing, "create_journal", side_effect=OSError("disk unavailable")):
+            with self.assertRaisesRegex(OSError, "disk unavailable"):
+                self.runner()
+        interrupted, = (self.out / "attempts").iterdir()
+        self.assertFalse((self.out / "timing-events.jsonl").exists())
+
+        resumed = self.runner(resume=True)
+        setup = resumed.timing.summary(None)["setup"]
+        self.assertTrue(setup["outputs_complete"])
+        self.assertFalse(setup["timing_complete"])
+        self.assertEqual(
+            setup["unmeasured_interrupted_attempts"],
+            [{"attempt": interrupted.name, "id": "setup/interrupted-initialization"}],
+        )
+
     def test_corrupt_unsealed_timing_releases_the_run_lock(self):
         runner = self.runner()
         runner.close()
@@ -162,7 +179,7 @@ class ExecutorResumeTests(unittest.TestCase):
                 raise OSError("cannot save setup timing")
             return write_json(path, value)
 
-        with patch.object(pipeline, "write_json", side_effect=write):
+        with patch.object(timing, "write_json", side_effect=write):
             with self.assertRaisesRegex(OSError, "cannot save setup timing"):
                 self.runner(resume=True)
         self.assertEqual(read_json(failure), previous)

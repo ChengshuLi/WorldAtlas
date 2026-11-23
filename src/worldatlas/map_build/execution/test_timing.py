@@ -2,11 +2,11 @@
 
 from pathlib import Path
 import tempfile
+import time
 import unittest
 from unittest.mock import patch
 
-from worldatlas.map_build.execution import runtime as pipeline
-from worldatlas.map_build.execution.runtime import Timing
+from worldatlas.map_build.execution.timing import Timing
 
 
 class ActiveTimingTests(unittest.TestCase):
@@ -14,13 +14,13 @@ class ActiveTimingTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             path = Path(td) / "timing.jsonl"
             first = Timing(path, attempt="first")
-            with patch.object(pipeline.time, "monotonic", side_effect=[100, 104]):
+            with patch.object(time, "monotonic", side_effect=[100, 104]):
                 with first.measure("water", "sea"):
                     pass
             first.close()
             second = Timing(path, resume=True, attempt="second")
             # This represents a different boot with a smaller monotonic clock.
-            with patch.object(pipeline.time, "monotonic", side_effect=[1, 4]):
+            with patch.object(time, "monotonic", side_effect=[1, 4]):
                 with second.measure("water", "coast"):
                     pass
             second.mark_complete("water")
@@ -61,7 +61,7 @@ class ActiveTimingTests(unittest.TestCase):
             )
             first.close()
             second = Timing(path, resume=True, attempt="second")
-            with patch.object(pipeline.time, "monotonic", side_effect=[10000, 10003]):
+            with patch.object(time, "monotonic", side_effect=[10000, 10003]):
                 with second.measure("water", "sea"):
                     pass
             second.mark_complete("water")
@@ -211,13 +211,13 @@ class ActiveTimingTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             path = Path(td) / "timing.jsonl"
             first = Timing(path, attempt="first")
-            with patch.object(pipeline.time, "monotonic", side_effect=[10, 13]):
+            with patch.object(time, "monotonic", side_effect=[10, 13]):
                 with self.assertRaises(KeyboardInterrupt):
                     with first.measure("land", "stage2"):
                         raise KeyboardInterrupt()
             first.close()
             second = Timing(path, resume=True, attempt="second")
-            with patch.object(pipeline.time, "monotonic", side_effect=[10000, 10002]):
+            with patch.object(time, "monotonic", side_effect=[10000, 10002]):
                 with second.measure("land", "stage2"):
                     pass
             second.mark_complete("land")
@@ -273,7 +273,7 @@ class ActiveTimingTests(unittest.TestCase):
                 )
             first.close()
             second = Timing(path, resume=True, attempt="second")
-            with patch.object(pipeline.time, "monotonic", side_effect=[1, 3]):
+            with patch.object(time, "monotonic", side_effect=[1, 3]):
                 with second.measure("water", "c"):
                     pass
             second.mark_complete("water")

@@ -4,7 +4,6 @@
 import argparse
 import hashlib
 import json
-import math
 import os
 import re
 import shutil
@@ -22,12 +21,8 @@ from typing import Any
 import worldatlas.geodesy.ogr as geometry_io
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution import control
-from worldatlas.map_build.execution.journal import (
-    append_records,
-    create_journal,
-    preserve_torn_tail,
-)
-from worldatlas.map_build.execution.runtime import RunFilePins, RunLock, elapsed_union
+from worldatlas.map_build.execution.runtime import RunFilePins, RunLock
+from worldatlas.map_build.execution.timing import PhysicalInvocation
 from worldatlas.map_build.inputs.configuration import (
     PHYSICAL_CONFIGURATION,
     FilePin,
@@ -41,6 +36,7 @@ from worldatlas.map_build.inputs.configuration import (
 )
 from worldatlas.map_build.physical import composition, land, water
 from worldatlas.map_build.physical import union as water_union
+from worldatlas.map_build.physical.timing import PROCESSING_LOG, ProcessingJournal
 from worldatlas.map_build.physical.union import ShardMask
 from worldatlas.shared import r2
 from worldatlas.shared.files import (
@@ -52,7 +48,7 @@ from worldatlas.shared.files import (
     write_json,
 )
 from worldatlas.source_assets import cache as source_cache
-from worldatlas.source_assets.cache import Download, FileSpec, SourceCache
+from worldatlas.source_assets.cache import FileSpec, SourceCache
 
 HERE = Path(__file__).resolve().parent
 
@@ -100,218 +96,6 @@ def plan_land_inputs(
     return {**settings, "land": layers}, requests
 
 
-class ProcessingJournal:
-    """Record physical work that survives a restart."""
-
-    def __init__(self, output: Path, started: float, resume: bool) -> None:
-        """Open the journal and record the start of this attempt.
-
-        Args:
-            output: Physical run directory.
-            started: Start time from the monotonic performance clock.
-            resume: Continue an existing journal, saving any partial final entry.
-        """
-        self.path = output / 'processing-events.jsonl'
-        self.started = started
-        self.attempt = uuid.uuid4().hex
-        self.lock = threading.Lock()
-        self.finished = False
-        self.events = []
-        if resume:
-            raw = self.path.read_bytes()
-            end = raw.rfind(b'\n') + 1
-            if end < len(raw):
-                interrupted = output / 'interrupted'
-                interrupted.mkdir(mode=0o700, exist_ok=True)
-                sync_directory(output)
-                tail = interrupted / ('journal-tail-' + uuid.uuid4().hex)
-                preserve_torn_tail(self.path, end, tail, raw[end:])
-            self.events = [json.loads(line) for line in raw[:end].splitlines()]
-        else:
-            create_journal(self.path)
-        self.add({'event': 'attempt_start', 'attempt': self.attempt})
-
-    def add(self, event: dict[str, Any]) -> None:
-        """Append an event to disk and the in-memory journal.
-
-        Args:
-            event: JSON-compatible event fields.
-        """
-        with self.lock:
-            append_records(self.path, [event])
-            self.events.append(event)
-
-    def unit(
-        self, name: str, started: float, report_sha256: str, output_sha256: str
-    ) -> None:
-        """Record one completed output and its measured work.
-
-        Args:
-            name: Name of the task that produced the files.
-            started: Clock reading when the task began.
-            report_sha256: Verified checksum of the producer report.
-            output_sha256: Verified checksum of the primary output.
-        """
-        ended = time.monotonic()
-        self.add(
-            {
-                'event': 'unit_complete',
-                'attempt': self.attempt,
-                'unit': name,
-                'start_monotonic_seconds': started,
-                'end_monotonic_seconds': ended,
-                'processing_elapsed_seconds': ended - started,
-                'report_sha256': report_sha256,
-                'output_sha256': output_sha256,
-            }
-        )
-
-    def record_download(self, transfer: Download, source: str) -> None:
-        """Record the time spent transferring one coastline ZIP or water shard.
-
-        Args:
-            transfer: Transfer time interval with its outcome.
-            source: Input type, either "land" or "water".
-        """
-        self.add(
-            {
-                'event': 'download_complete'
-                if transfer.completed
-                else 'download_failed',
-                'attempt': self.attempt,
-                'source': source,
-                'start_monotonic_seconds': transfer.started,
-                'end_monotonic_seconds': transfer.ended,
-                'seconds': transfer.ended - transfer.started,
-            }
-        )
-
-    def recorded_time(self, attempt: str) -> tuple[float, float]:
-        """Count recorded processing and download-only time for one attempt.
-
-        Args:
-            attempt: ID of the physical build attempt.
-
-        Returns:
-            (processing_seconds, download_only_seconds). Concurrent transfers
-            count once, and time spent rasterizing counts as processing.
-        """
-        processing = []
-        downloads = []
-        serial_downloads = 0.0
-        for event in self.events:
-            if event['attempt'] != attempt:
-                continue
-            if event['event'] == 'unit_complete':
-                intervals = processing
-            elif event['event'] in ('download_complete', 'download_failed'):
-                # Older journals measured serial transfers by duration alone.
-                if 'start_monotonic_seconds' not in event:
-                    serial_downloads += event['seconds']
-                    continue
-                intervals = downloads
-            else:
-                continue
-            intervals.append(
-                (event['start_monotonic_seconds'], event['end_monotonic_seconds'])
-            )
-        active = elapsed_union(processing)
-        return active, elapsed_union(processing + downloads) - active + serial_downloads
-
-    def finish(self, status: str) -> None:
-        """Record the attempt's final duration and status.
-
-        Args:
-            status: Outcome such as complete or failed.
-        """
-        if self.finished:
-            raise ValueError('attempt already ended')
-        elapsed = time.monotonic() - self.started
-        _, download_only = self.recorded_time(self.attempt)
-        if not math.isfinite(elapsed) or elapsed < download_only:
-            raise ValueError('invalid attempt timing')
-        self.add(
-            {
-                'event': 'attempt_end',
-                'attempt': self.attempt,
-                'status': status,
-                'processing_elapsed_seconds': elapsed - download_only,
-                'source_download_elapsed_seconds': download_only,
-            }
-        )
-        self.finished = True
-
-    def summary(self) -> dict[str, Any]:
-        """Summarize work across physical build attempts.
-
-        Returns:
-            Dictionary with known processing and download seconds. A missing
-            end time leaves processing as a lower bound.
-        """
-        if any(
-            e.get('event')
-            not in (
-                'attempt_start',
-                'attempt_end',
-                'unit_complete',
-                'download_complete',
-                'download_failed',
-            )
-            for e in self.events
-        ):
-            raise ValueError('unknown processing journal event')
-        starts = {
-            e['attempt'] for e in self.events if e.get('event') == 'attempt_start'
-        }
-        ends = {e['attempt']: e for e in self.events if e.get('event') == 'attempt_end'}
-        if (
-            len(starts) != sum(e.get('event') == 'attempt_start' for e in self.events)
-            or len(ends) != sum(e.get('event') == 'attempt_end' for e in self.events)
-            or not set(ends) <= starts
-        ):
-            raise ValueError('invalid processing journal attempts')
-        if any(e.get('status') not in ('complete', 'failed') for e in ends.values()):
-            raise ValueError('invalid processing journal status')
-        if any(e.get('attempt') not in starts for e in self.events):
-            raise ValueError('processing journal event without attempt')
-        if any(
-            type(e.get(k)) not in (int, float) or not math.isfinite(e[k]) or e[k] < 0
-            for e in ends.values()
-            for k in ('processing_elapsed_seconds', 'source_download_elapsed_seconds')
-        ):
-            raise ValueError('invalid processing journal duration')
-        if any(
-            type(e.get('seconds')) not in (int, float)
-            or not math.isfinite(e['seconds'])
-            or e['seconds'] < 0
-            for e in self.events
-            if e.get('event') in ('download_complete', 'download_failed')
-        ):
-            raise ValueError('invalid processing journal download duration')
-        missing = starts - set(ends)
-        lower = sum(e['processing_elapsed_seconds'] for e in ends.values())
-        download = sum(e['source_download_elapsed_seconds'] for e in ends.values())
-        for attempt in missing:
-            processing, download_only = self.recorded_time(attempt)
-            lower += processing
-            download += download_only
-        return {
-            'timing_complete': not missing,
-            'processing_elapsed_seconds': lower if not missing else None,
-            'recorded_processing_elapsed_seconds': lower,
-            'source_download_elapsed_seconds': download,
-            'source_download_elapsed_scope': 'complete'
-            if not missing
-            else 'recorded-lower-bound',
-            'invocation_processing_elapsed_seconds': ends[self.attempt][
-                'processing_elapsed_seconds'
-            ],
-            'invocation_source_download_elapsed_seconds': ends[self.attempt][
-                'source_download_elapsed_seconds'
-            ],
-        }
-
-
 def run(
     config_path: Path | str, output: Path | str, *, resume: bool = False
 ) -> dict[str, Any]:
@@ -339,6 +123,7 @@ def build(
     output: Path | str,
     *,
     resume: bool = False,
+    invocation: PhysicalInvocation | None = None,
 ) -> dict[str, Any]:
     """Build or resume the physical grid under an exclusive run lock.
 
@@ -348,6 +133,7 @@ def build(
         request: Path and checksum of the saved physical configuration.
         output: Directory that holds this physical run.
         resume: Whether to continue a run already started.
+        invocation: Optional recipient for this call's timing, including on failure.
 
     Returns:
         Physical build report with completed outputs and timings.
@@ -364,9 +150,13 @@ def build(
                 settings, grid, request, output, started, resume, journal, resources
             )
         except BaseException:
-            if journal[0] is not None and not journal[0].finished:
+            if journal[0] is not None and journal[0].durations is None:
                 journal[0].finish('failed')
             raise
+        finally:
+            if invocation is not None and journal[0] is not None:
+                invocation.attempt_started = True
+                invocation.durations = journal[0].durations
 
 
 def _run(
@@ -588,7 +378,7 @@ def _run(
                 or report['configuration']['sha256'] != config_digest
                 or report.get('pipeline_identity_sha256') != checksum(identity_path)
                 or report.get('processing_journal_sha256')
-                != checksum(output / 'processing-events.jsonl')
+                != checksum(output / PROCESSING_LOG)
                 or set(stages) != {'land', 'union', 'physical'}
                 or any(
                     Path(stages[k]['path']).resolve() != output / k / 'report.json'
@@ -636,7 +426,7 @@ def _run(
         (output / 'configs').mkdir()
         (output / 'shards').mkdir()
         write_json(identity_path, identity, sort_keys=False)
-    journal_exists = (output / 'processing-events.jsonl').exists()
+    journal_exists = (output / PROCESSING_LOG).exists()
     if resume and not journal_exists:
         if (
             (output / 'land').exists()
@@ -663,22 +453,6 @@ def _run(
         else:
             write_bytes_atomic(path, content)
 
-    def prior(name: str) -> dict[str, Any] | None:
-        """Find the last completed checkpoint for a named task.
-
-        Args:
-            name: Physical task or shard name.
-
-        Returns:
-            Saved event dictionary, or None if the task has not completed.
-        """
-        matches = [
-            e
-            for e in journal.events
-            if e.get('event') == 'unit_complete' and e.get('unit') == name
-        ]
-        return matches[-1] if matches else None
-
     def quarantine(path: Path) -> None:
         """Move existing partial output aside for inspection.
 
@@ -694,7 +468,7 @@ def _run(
             sync_directory(target)
 
     land_dir = output / 'land'
-    land_checkpoint = prior('land') if resume else None
+    land_checkpoint = journal.checkpoint('land') if resume else None
     if land_checkpoint:
         land_report = read_json(land_dir / 'report.json')
         if (
@@ -757,7 +531,7 @@ def _run(
         control.check_cancelled()
         i, (path, digest, remote) = item
         destination = output / 'shards' / f'{i:05d}'
-        checkpoint = prior(f'shard-{i:05d}') if resume else None
+        checkpoint = journal.checkpoint(f'shard-{i:05d}') if resume else None
         if checkpoint:
             return verify_shard(
                 i,
@@ -864,7 +638,7 @@ def _run(
 
     union_config = bind_config(config_dir / 'union.json', union_cfg)
     union_dir = output / 'union'
-    union_checkpoint = prior('union') if resume else None
+    union_checkpoint = journal.checkpoint('union') if resume else None
     if union_checkpoint:
         union_report = read_json(union_dir / 'report.json')
         if (
@@ -924,7 +698,7 @@ def _run(
     }
     compose_config = bind_config(config_dir / 'compose.json', compose_cfg)
     physical_dir = output / 'physical'
-    physical_checkpoint = prior('physical') if resume else None
+    physical_checkpoint = journal.checkpoint('physical') if resume else None
     if physical_checkpoint:
         physical = read_json(physical_dir / 'report.json')
         outputs = physical.get('output_sha256', {})
@@ -995,12 +769,7 @@ def _run(
         'physical_output_sha256': physical['output_sha256'],
         'limitations': 'Candidate physical land/water only; not historical source reproduction or continent labels.',
     }
-    report['downloaded_shard_count'] = sum(
-        event['event'] == 'download_complete'
-        and event['attempt'] == journal.attempt
-        and event['source'] == 'water'
-        for event in journal.events
-    )
+    report['downloaded_shard_count'] = journal.downloaded_water_shards()
     report['downloaded_shard_count_scope'] = 'current invocation'
     journal.finish('complete')
     report.update(journal.summary())
