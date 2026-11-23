@@ -6,14 +6,19 @@ from zipfile import ZipFile, ZipInfo
 
 
 def archive_member(archive: ZipFile, name: str) -> ZipInfo:
-    """Find the single regular file with this exact archive path.
+    """Select one file by its exact path inside a ZIP archive.
+
+    For example, after ``entry = archive_member(archive, "data/coast.shp")``,
+    ``archive.read(entry)`` reads the entire file as bytes. Use
+    ``with archive.open(entry) as stream:`` to read it a chunk at a time.
 
     Args:
         archive: Open ZIP file.
         name: Relative path inside it, such as "data/coast.shp".
 
     Returns:
-        The ZIP entry to open.
+        A ZipInfo with the exact entry's filename and metadata, such as its
+        uncompressed size. The caller uses it to open the file in the ZIP.
 
     Raises:
         ValueError: The path is invalid or does not name exactly one regular file.
