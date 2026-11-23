@@ -231,14 +231,10 @@ class Pipeline:
             catalog_source_ids(self.cfg["sources"]), selection
         )
         self.compiled_divisions = prepare_geography(
-            self.selection["geography"], self.requested_parents
+            self.selection["geography"],
+            self.requested_parents,
+            configured_settings=self.cfg.keys(),
         )
-        if "coastal_band_metres" not in self.cfg and any(
-            rule["operation"] == "nearest_coastal_water"
-            for division in self.compiled_divisions.values()
-            for rule in division.rules
-        ):
-            raise ValueError("nearest_coastal_water requires coastal_band_metres")
         self.physical_config = physical_configuration(
             self.cfg, self.selection["raw_sources"], self.grid, self.root / "inputs"
         )

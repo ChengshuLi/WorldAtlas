@@ -61,16 +61,17 @@ class BindingTests(unittest.TestCase):
             dict(rule_id=str(parent), entity_id=child, label_point_id=None)
             for parent, child in ((0, 2), (2, 4))
         ]
-        self.assertEqual(list(prepare_geography(self.geography, [2])), [0, 2])
+        compiled = prepare_geography(self.geography, [2], configured_settings=())
+        self.assertEqual(list(compiled), [0, 2])
         with self.assertRaisesRegex(ValueError, 'target'):
-            prepare_geography(self.geography)
+            prepare_geography(self.geography, configured_settings=())
 
     def test_edited_selection_keeps_polygon_rings_strict(self):
         self.geography["features"] = [dict(
             id="edited", geometry=dict(type="Polygon", coordinates=[[[0, 0], [1, 0], [1, 1], [0, 1]]]),
         )]
         with self.assertRaisesRegex(ValueError, "closed"):
-            prepare_geography(self.geography)
+            prepare_geography(self.geography, configured_settings=())
 
     def test_invalid_bindings_identify_the_problem(self):
         for override, message in (
@@ -112,7 +113,7 @@ class BindingTests(unittest.TestCase):
     def test_preparing_geography_rejects_an_unsupported_schema(self):
         geography = dict(self.geography, schema="obsolete")
         with self.assertRaisesRegex(ValueError, "unsupported geographic selection"):
-            prepare_geography(geography)
+            prepare_geography(geography, configured_settings=())
 
 
 @unittest.skipUnless(

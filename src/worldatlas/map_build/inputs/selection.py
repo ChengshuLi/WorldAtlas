@@ -1,7 +1,7 @@
 """Freeze working geographic decisions in one short, read-only transaction."""
 
 import json
-from collections.abc import Iterable
+from collections.abc import Collection, Iterable
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import LiteralString, cast
@@ -169,19 +169,23 @@ def read_selection(
 
 
 def prepare_geography(
-    domain: GeographicSelection, requested: Iterable[int] | None = None
+    domain: GeographicSelection,
+    requested: Iterable[int] | None = None,
+    *,
+    configured_settings: Collection[str],
 ) -> dict[int, CompiledDivision]:
-    """Check frozen geometry and map codes and assemble the rules for each parent.
+    """Compile selected divisions and check their geometry, codes and settings.
 
     Args:
         domain: Geographic part of a frozen selection.
         requested: Parent IDs to divide, or None for all saved divisions.
+        configured_settings: Names of settings present in the validated build config.
 
     Returns:
         Compiled divisions keyed by parent ID, with ancestors before descendants.
 
     Raises:
-        ValueError: The schema, geometry, rules, or bindings are invalid.
+        ValueError: The selection is invalid or a selected rule needs a missing setting.
     """
     if domain.get("schema") != "worldatlas-geographic-division-v2":
         raise ValueError(
@@ -194,6 +198,12 @@ def prepare_geography(
         parent: index.compile(parent) for parent in selected_parents(domain, requested)
     }
     validate_map_code_bindings(domain)
+    if "coastal_band_metres" not in configured_settings and any(
+        rule["operation"] == "nearest_coastal_water"
+        for division in compiled.values()
+        for rule in division.rules
+    ):
+        raise ValueError("nearest_coastal_water requires coastal_band_metres")
     return compiled
 
 
