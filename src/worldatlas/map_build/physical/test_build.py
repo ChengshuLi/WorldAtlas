@@ -933,30 +933,41 @@ b.run(sys.argv[1], sys.argv[2])
         self.assertFalse((out / 'union').exists())
         self.assertFalse((out / 'report.json').exists())
 
-    def test_cancel_after_first_water_batch_and_resume_to_identical_grid(self):
+    def test_worker_failure_cancels_other_worker_between_batches_and_can_resume(self):
         shard = self.raw / 'water.parquet'
         table = pq.read_table(shard)
         pq.write_table(pa.concat_tables([table] * 3), shard)
-        self.cfg['inland_water']['files'][0]['sha256'] = sha256_file(shard)
-        self.cfg['inland_water']['batch_size'] = 1
+        second = self.raw / 'second.parquet'
+        pq.write_table(table, second)
+        self.cfg['inland_water'].update(
+            files=[dict(path=file.name, sha256=sha256_file(file)) for file in (shard, second)],
+            file_count=2, batch_size=1,
+        )
+        self.cfg['max_parallel_shards'] = 2
         self.config.write_text(json.dumps(self.cfg))
         out = self.root / 'cancelled'
-        batches = []
+        seen = []
+        first_batch = threading.Event()
 
         with b.control.stage() as cancelled:
+            def hold_at_first_batch(message, **_):
+                seen.append(json.loads(message)['rows'])
+                first_batch.set()
+                self.assertTrue(cancelled.wait(timeout=10))
 
-            def cancel_on_water_progress(message, **_):
-                if message.startswith('{"rows":'):
-                    batches.append(json.loads(message)['rows'])
-                    cancelled.set()
+            def fail_second_worker(function, *args, **kwargs):
+                if function is WATER:
+                    if args[0] == second:
+                        self.assertTrue(first_batch.wait(timeout=10))
+                        raise ValueError('second water worker failed')
+                    kwargs['emit'] = hold_at_first_batch
+                return function(*args, **kwargs)
 
-            with mock.patch.object(
-                b.control, 'emit', side_effect=cancel_on_water_progress
-            ):
-                with self.assertRaisesRegex(InterruptedError, 'pipeline cancelled'):
+            with intercept_stages(fail_second_worker):
+                with self.assertRaisesRegex(ValueError, 'second water worker failed'):
                     b.run(self.config, out)
 
-        self.assertEqual(batches, [1])
+        self.assertEqual(seen, [1])
         self.assertTrue((out / 'land/report.json').is_file())
         self.assertFalse((out / 'shards/00000/report.json').exists())
         self.assertFalse((out / 'union').exists())
