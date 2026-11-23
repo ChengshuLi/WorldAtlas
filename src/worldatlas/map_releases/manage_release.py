@@ -6,12 +6,7 @@ Restore extracts the saved inputs for a separate map build.
 """
 
 import argparse
-import gzip
 import hashlib
-import json
-import mimetypes
-import re
-import shutil
 import tempfile
 from contextlib import closing
 from io import BytesIO
@@ -20,19 +15,16 @@ from typing import Any, BinaryIO
 
 import psycopg
 
-from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.execution.code_archive import read_source
-from worldatlas.map_build.inputs.selection import (
-    entity_colors,
-    validate_map_code_bindings,
-)
-from worldatlas.map_build.inputs.selection_types import BuildSelection
+from worldatlas.map_releases.bundle import build_bundle
 from worldatlas.map_releases.catalog import (
+    CANDIDATE,
+    HOMEPAGE,
     RELEASE_BUCKET,
     lookup_release,
     read_manifest,
     release_prefix,
     validate_manifest,
+    version,
 )
 from worldatlas.map_releases.inputs import (
     FILENAME as INPUTS_FILE,
@@ -40,315 +32,14 @@ from worldatlas.map_releases.inputs import (
 from worldatlas.map_releases.inputs import (
     read_inputs,
     restore_inputs,
-    validate_replay_sources,
-    write_inputs,
 )
 from worldatlas.shared.database import connect_neon, neon_connection_url
-from worldatlas.shared.files import (
-    compact_json_bytes,
-    json_bytes,
-    pin_file,
-    read_json,
-    sha256_file,
-    verify_pins,
-)
+from worldatlas.shared.files import json_bytes
 from worldatlas.shared.r2 import (
     R2Client,
     R2ObjectMissing,
     make_r2_client,
 )
-
-STREAMS = ("rows", "runs")
-CANDIDATE = re.compile(r"(?P<version>v[0-9]+\.[0-9]+)-rc\.[1-9][0-9]*")
-HOMEPAGE = "index.html"
-# Use Python's built-in media types to keep manifests stable across machines.
-MEDIA_TYPES = mimetypes.MimeTypes()
-
-
-def version(candidate: str) -> str:
-    """Get the map version from a numbered release candidate.
-
-    Args:
-        candidate: Numbered release ID, such as ``v8.4-rc.1``.
-
-    Returns:
-        The version shared by its candidates, such as ``v8.4``.
-
-    Raises:
-        ValueError: The ID is missing a valid candidate number.
-    """
-    match = CANDIDATE.fullmatch(candidate)
-    if not match:
-        raise ValueError("candidate must look like v9.0-rc.1")
-    return match["version"]
-
-
-def release_categories(selection: BuildSelection) -> list[dict[str, Any]]:
-    """Build the viewer's category records from the build's frozen geography.
-
-    Args:
-        selection: Saved build selection containing entities and category bindings.
-
-    Returns:
-        Records sorted by map code, with the entity ID, display name, physical
-        class, and RGB color for land categories.
-
-    Raises:
-        ValueError: A category binding is invalid or a land entity lacks a color.
-    """
-    validate_map_code_bindings(selection["geography"])
-    snapshot = selection["geography"]
-    names = {entity["id"]: entity["name"] for entity in snapshot["entities"]}
-    bindings = snapshot["category_bindings"]
-    colors = {
-        row["entity_id"]: list(bytes.fromhex(row["color_rgb"][1:]))
-        for row in entity_colors(selection)
-        if row["color_rgb"] is not None
-    }
-    land_ids = {b["entity_id"] for b in bindings if b["physical_class"] == "land"}
-    if missing := sorted(land_ids - colors.keys()):
-        raise ValueError(f"Saved colors are missing for land entities {missing}")
-    categories = []
-    for binding in sorted(bindings, key=lambda b: b["code"]):
-        entity_id = binding["entity_id"]
-        physical_class = binding["physical_class"]
-        category = {
-            "id": binding["code"],
-            "entity_id": entity_id,
-            "name": names[entity_id],
-            "physical_class": physical_class,
-        }
-        if physical_class == "land":
-            category["rgb"] = colors[entity_id]
-        categories.append(category)
-    return categories
-
-
-def build_bundle(
-    candidate: str, run: Path, viewer: Path, bundle: Path
-) -> dict[str, Any]:
-    """Package a completed build and its captured inputs in a local directory.
-
-    Args:
-        candidate: Numbered release ID used in asset URLs.
-        run: Directory containing the completed build and its frozen inputs.
-        viewer: Directory containing the unbundled website files.
-        bundle: Empty directory that will receive the release files.
-
-    Returns:
-        The manifest of packaged files and their verified checksums.
-
-    Raises:
-        ValueError: The build is incomplete, a pinned input or output differs,
-            or a release asset fails validation.
-    """
-    report = read_json(run / "report.json")
-    if (
-        report.get("schema") != "worldatlas-end-to-end-report-v2"
-        or report.get("status") != "complete"
-        or any(
-            not report["stages"].get(name, {}).get("outputs_complete")
-            for name in ("physical", "division", "package", "verification")
-        )
-    ):
-        raise ValueError("a completed map build is required")
-    identity_pin = report["original_run_identity"]
-    if identity_pin != pin_file(run / "run-identity.json"):
-        raise ValueError("build identity does not match the report")
-    identity = read_json(run / "run-identity.json")
-    request_pin = report["request"]
-    if request_pin != identity["request"]:
-        raise ValueError("build configuration does not match the run")
-    final = report["final"]
-    verify_pins([final["report"]])
-    # The report identifies the final outputs. A run can also contain streams
-    # from physical rasterization and intermediate divisions.
-    final_directory = Path(final["report"]["path"]).parent
-    for name, filename in (
-        ("rows", "rows.u32le"),
-        ("runs", "runs.u32le"),
-        ("report", "report.json"),
-    ):
-        path = Path(final[name]["path"]).resolve(strict=True)
-        if not path.is_relative_to(run.resolve()) or path != final_directory / filename:
-            raise ValueError(
-                "expected final outputs together inside the build directory"
-            )
-    # The build already validated the rules. Packaging uses the frozen selection
-    # as provenance and reads the category bindings needed by the viewer.
-    selection: BuildSelection = read_json(run / "input-selection.json")
-    if (
-        hashlib.sha256(compact_json_bytes(selection)).hexdigest()
-        != identity["input_selection_sha256"]
-    ):
-        raise ValueError("the saved geographic selection changed after the build")
-
-    configuration_bytes = (run / "build-config.json").read_bytes()
-    if hashlib.sha256(configuration_bytes).hexdigest() != request_pin["sha256"]:
-        raise ValueError("build configuration checksum does not match the report")
-    request = json.loads(configuration_bytes)
-    validate_replay_sources(request, selection)
-    summary = read_json(final_directory / "report.json")
-    grid = vars(Grid(**summary["grid"]))
-    counts = summary["counts"]
-    if sum(counts.values()) != grid["width"] * grid["height"]:
-        raise ValueError("the output counts must cover the entire grid")
-    categories = release_categories(selection)
-    if {code for code, count in counts.items() if count} - {
-        str(c["id"]) for c in categories
-    }:
-        raise ValueError("geographic snapshot is missing categories used by the map")
-
-    attempts, source_code = [], {}
-    for producer in sorted((run / "attempts").glob("*/producer.json")):
-        attempt_id = producer.parent.name
-        attempt = read_json(producer)
-        source = attempt.get("source_archive")
-        if not source:
-            raise ValueError(
-                f"build attempt {attempt_id} has no captured code snapshot"
-            )
-        if (
-            Path(source["path"]).resolve()
-            != (producer.parent / "source-code.json.gz").resolve()
-        ):
-            raise ValueError("source archive must be inside its build attempt")
-        verify_pins([source])
-        attempts.append(dict(attempt, attempt_id=attempt_id))
-        # A resumed build can use different code. Keep each attempt's reference
-        # while storing identical captured bytes just once.
-        if source["sha256"] not in source_code:
-            source_code[source["sha256"]] = read_source(Path(source["path"]))
-    if not attempts:
-        raise ValueError("completed build has no captured code snapshot")
-    captured_run = dict(identity, attempts=attempts)
-
-    for source in sorted(viewer.rglob("*")):
-        rel = source.relative_to(viewer)
-        if source.is_symlink() or not all(
-            re.fullmatch(r"[A-Za-z0-9_-][A-Za-z0-9_.-]*", part) for part in rel.parts
-        ):
-            raise ValueError(f"invalid viewer asset path: {rel}")
-        if source.is_dir() or source.suffix == ".md":
-            continue
-        destination = bundle / rel
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(source, destination)
-
-    index = bundle / "index.html"
-    html = index.read_text()
-    if html.count("<head>") != 1 or re.search(r"<base\b", html, re.I):
-        raise ValueError("the viewer homepage must have a single head and no base URL")
-    # The same HTML is served at / and under the candidate URL. In both places,
-    # relative script, legend, and map URLs must resolve inside this release.
-    index.write_text(
-        html.replace("<head>", f'<head><base href="/{release_prefix(candidate)}">', 1)
-    )
-
-    combined = hashlib.sha256()
-    grid_config = {"run_count": summary["run_count"]}
-    # There is one 32-bit offset per row plus a final end offset. Each run
-    # has two 32-bit values, its end column and its category code.
-    stream_sizes = {"rows": 4 * (grid["height"] + 1), "runs": 8 * summary["run_count"]}
-    decoded = {}
-    for stream in STREAMS:
-        output = bundle / f"{stream}.u32le.gz"
-        raw = Path(final[stream]["path"])
-        checksum = hashlib.sha256()
-        size = 0
-        with (
-            raw.open("rb") as src,
-            output.open("xb") as dst,
-            gzip.GzipFile(filename="", fileobj=dst, mode="wb", mtime=0) as compressed,
-        ):
-            # Hash the decoded bytes during compression to verify the streams
-            # without reading the large uncompressed files a second time.
-            while chunk := src.read(4 << 20):
-                size += len(chunk)
-                checksum.update(chunk)
-                combined.update(chunk)
-                compressed.write(chunk)
-        if (
-            size != stream_sizes[stream]
-            or checksum.hexdigest() != final[stream]["sha256"]
-        ):
-            raise ValueError(
-                f"{stream} size or checksum differs from the completed build"
-            )
-        decoded[stream] = checksum.hexdigest()
-        grid_config[stream] = output.name
-        grid_config[stream + "_sha256"] = decoded[stream]
-
-    config = bundle / "config.json"
-    viewer_config = read_json(config)
-    water_edition = request["sources"]["inland_water"].get("release")
-    if water_edition:
-        viewer_config["inland_water_release"] = water_edition
-    # A mixed entity has separate land and water codes but one legend entry.
-    # Add the counts for both codes and use the entity's land color in the legend.
-    legend = {}
-    for category in categories:
-        entity_id = category["entity_id"]
-        entry = legend.setdefault(
-            entity_id,
-            {
-                "id": entity_id,
-                "name": category["name"],
-                "color": viewer_config["water_rgb"],
-                "count": 0,
-            },
-        )
-        entry["count"] += counts.get(str(category["id"]), 0)
-        if category["physical_class"] == "land":
-            entry["color"] = category["rgb"]
-    legend_path = bundle / "legend" / "entities.json"
-    legend_path.parent.mkdir(exist_ok=True)
-    legend_path.write_bytes(json_bytes(list(legend.values())))
-    viewer_config.update(
-        width=grid["width"],
-        height=grid["height"],
-        step=grid["step"],
-        map_version=version(candidate),
-        local_grid=grid_config,
-        combined_sha256=combined.hexdigest(),
-        legend="legend/entities.json",
-        categories=[
-            {key: category[key] for key in ("id", "entity_id", "physical_class")}
-            for category in categories
-        ],
-    )
-    config.write_bytes(json_bytes(viewer_config))
-
-    write_inputs(
-        bundle / INPUTS_FILE,
-        release_id=candidate,
-        configuration=request,
-        selection=selection,
-        run=captured_run,
-        report=report,
-        source_code=source_code,
-    )
-    # The manifest pins stored object bytes. The decoded stream hashes above
-    # let the viewer and a later rebuild verify the uncompressed map.
-    objects = {
-        path.relative_to(bundle).as_posix(): {
-            "r2_key": release_prefix(candidate) + path.relative_to(bundle).as_posix(),
-            "sha256": sha256_file(path),
-            "size_bytes": path.stat().st_size,
-            "content_type": (
-                "application/gzip"
-                if path.suffix == ".gz"
-                else MEDIA_TYPES.guess_file_type(path)[0] or "application/octet-stream"
-            ),
-        }
-        for path in sorted(bundle.rglob("*"))
-        if path.is_file()
-    }
-    return {
-        "inputs": {"archive": INPUTS_FILE},
-        "decoded_sha256": decoded,
-        "objects": objects,
-    }
 
 
 def verify_object(
@@ -385,6 +76,25 @@ def verify_object(
                 destination.write(chunk)
     if checksum.hexdigest() != expected["sha256"]:
         raise ValueError(f"published bytes differ from the candidate: {key}")
+
+
+def read_verified_object(
+    storage: R2Client, bucket: str, key: str, expected: dict[str, Any]
+) -> bytes:
+    """Read an R2 file and return its bytes after verification.
+
+    Args:
+        storage: Open R2 client.
+        bucket: Bucket containing the file.
+        key: Exact file key within the bucket.
+        expected: Manifest entry with its size, content type, and checksum.
+
+    Returns:
+        The verified file contents.
+    """
+    with BytesIO() as buffer:
+        verify_object(storage, bucket, key, expected, destination=buffer)
+        return buffer.getvalue()
 
 
 def upload_bundle(
@@ -574,19 +284,14 @@ def publish(db: psycopg.Connection, storage: R2Client, candidate: str) -> bool:
     objects = read_manifest(storage, release)["objects"]
     if INPUTS_FILE not in objects:
         raise ValueError("release has no frozen input archive")
-    if HOMEPAGE not in objects:
+    homepage = objects.get(HOMEPAGE)
+    if homepage is None:
         raise ValueError("release has no viewer homepage")
     etag = storage.etag(bucket, HOMEPAGE)
-    with BytesIO() as homepage:
-        for name, asset in objects.items():
-            verify_object(
-                storage,
-                bucket,
-                asset["r2_key"],
-                asset,
-                destination=homepage if name == HOMEPAGE else None,
-            )
-        html = homepage.getvalue()
+    html = read_verified_object(storage, bucket, homepage["r2_key"], homepage)
+    for name, asset in objects.items():
+        if name != HOMEPAGE:
+            verify_object(storage, bucket, asset["r2_key"], asset)
     # Commit the approved choice before updating R2. If R2 fails, a retry can
     # update the homepage while this choice is current, even after a restart.
     with db.transaction():
@@ -638,21 +343,14 @@ def main() -> None:
     if map_version is None:
         with connect_neon(url=url, autocommit=True) as db:
             release = lookup_release(db, args.candidate)
-        with BytesIO() as archive:
-            with closing(make_r2_client()) as storage:
-                saved = read_manifest(storage, release)
-                asset = saved["objects"].get(INPUTS_FILE)
-                if asset is None:
-                    raise ValueError("release has no input archive")
-                verify_object(
-                    storage,
-                    release["r2_bucket"],
-                    asset["r2_key"],
-                    asset,
-                    destination=archive,
-                )
-            content = read_inputs(archive.getvalue(), release["id"])
-        restore_inputs(content, args.output)
+        with closing(make_r2_client()) as storage:
+            asset = read_manifest(storage, release)["objects"].get(INPUTS_FILE)
+            if asset is None:
+                raise ValueError("release has no input archive")
+            raw = read_verified_object(
+                storage, release["r2_bucket"], asset["r2_key"], asset
+            )
+        restore_inputs(read_inputs(raw, release["id"]), args.output)
         print(f"Restored inputs to {args.output}")
         return
 

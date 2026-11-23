@@ -21,11 +21,13 @@ from worldatlas.shared.r2 import R2Client, R2ObjectMissing
 from worldatlas.map_build.execution.code_archive import SCHEMA as SOURCE_SCHEMA
 from worldatlas.map_build.execution.code_archive import capture_source, write_source
 from worldatlas.map_build.test_support import selection
+from worldatlas.map_releases.bundle import build_bundle
 from worldatlas.map_releases.catalog import (
     RELEASE_BUCKET,
     lookup_release,
     read_manifest,
     validate_manifest,
+    version,
 )
 from worldatlas.map_releases.inputs import (
     FILENAME,
@@ -34,14 +36,11 @@ from worldatlas.map_releases.inputs import (
     write_inputs,
 )
 from worldatlas.map_releases.manage_release import (
-    build_bundle,
     main,
     publish,
-    release_categories,
     retire_previews,
     stage,
     verify_object,
-    version,
 )
 from worldatlas.shared.files import compact_json_bytes, pin_file
 
@@ -257,13 +256,18 @@ class BundleTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "rows size or checksum differs"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
 
-    def test_bundle_requires_completed_stages_and_original_identity(self):
+    def test_bundle_requires_completed_build_and_original_identity(self):
         report = json.loads(self.report.read_bytes())
-        incomplete = dict(report, stages={})
+        incomplete = dict(report, status="incomplete")
         self.report.write_text(json.dumps(incomplete))
         with self.assertRaisesRegex(ValueError, "a completed map build is required"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
         identity = self.run / "run-identity.json"
+        other_identity = identity.with_name("other-run.json")
+        shutil.copyfile(identity, other_identity)
+        self.report.write_text(json.dumps(dict(report, original_run_identity=pin_file(other_identity))))
+        with self.assertRaisesRegex(ValueError, "build identity does not match"):
+            build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
         identity.write_text("{}")
         self.report.write_text(json.dumps(report))
         with self.assertRaisesRegex(ValueError, "build identity does not match"):
@@ -423,11 +427,6 @@ class BundleTests(unittest.TestCase):
         (self.attempt / "producer.json").write_text(json.dumps({"source_archive": pin_file(other)}))
         with self.assertRaisesRegex(ValueError, "inside its build attempt"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
-
-    def test_release_rejects_a_code_bound_to_a_missing_entity(self):
-        self.selection["geography"]["category_bindings"][0]["entity_id"] = 999
-        with self.assertRaisesRegex(ValueError, "refers to invalid entity ID 999"):
-            release_categories(self.selection)
 
     def test_missing_land_color_blocks_staging(self):
         self.selection["geography"]["entities"][1]["color_rgb"] = None

@@ -10,6 +10,8 @@ from psycopg import Connection
 from worldatlas.shared.r2 import R2Client
 
 RELEASE_BUCKET = "worldatlas"
+HOMEPAGE = "index.html"
+CANDIDATE = re.compile(r"(?P<version>v[0-9]+\.[0-9]+)-rc\.[1-9][0-9]*")
 
 
 def release_prefix(release_id: str) -> str:
@@ -22,6 +24,24 @@ def release_prefix(release_id: str) -> str:
         The release folder with a trailing slash, such as ``releases/v8.4-rc.1/``.
     """
     return f"releases/{release_id}/"
+
+
+def version(candidate: str) -> str:
+    """Get the map version from a numbered release candidate.
+
+    Args:
+        candidate: Numbered release ID, such as ``v8.4-rc.1``.
+
+    Returns:
+        The version shared by its candidates, such as ``v8.4``.
+
+    Raises:
+        ValueError: The ID is missing a valid candidate number.
+    """
+    match = CANDIDATE.fullmatch(candidate)
+    if not match:
+        raise ValueError("candidate must look like v9.0-rc.1")
+    return match["version"]
 
 
 def lookup_release(database: Connection, identity: str) -> dict[str, Any]:

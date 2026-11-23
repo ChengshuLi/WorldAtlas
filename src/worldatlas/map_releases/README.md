@@ -79,6 +79,6 @@ The snapshot includes source and setup definitions. Reproduction uses the record
 
 ## Code and tests
 
-[`manage_release.py`](manage_release.py) drives staging and publication. [`catalog.py`](catalog.py) resolves bundle identities and verifies manifests. [`inputs.py`](inputs.py) creates and restores the input archive. Tests cover packaging, restoration and interruption cases.
+[`bundle.py`](bundle.py) prepares the local bundle from a completed build. [`manage_release.py`](manage_release.py) drives staging and publication. [`catalog.py`](catalog.py) resolves bundle identities and verifies manifests. [`inputs.py`](inputs.py) creates and restores the input archive. Tests cover packaging, restoration and interruption cases.
 
 Run tests with `python .github/scripts/run_tests.py --suite map_releases`.

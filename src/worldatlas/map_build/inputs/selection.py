@@ -17,7 +17,6 @@ from worldatlas.map_build.division.contracts import (
 from worldatlas.map_build.inputs.selection_types import (
     BuildSelection,
     ConstructionRecord,
-    EntityColor,
     FeatureReference,
     GeographicFeature,
     GeographicSelection,
@@ -69,21 +68,6 @@ def validate_map_code_bindings(geography: GeographicSelection) -> None:
             )
         codes.add(code)
         pairs.add(pair)
-
-
-def entity_colors(selection: BuildSelection) -> list[EntityColor]:
-    """Collect the configured colors of entities in a selection.
-
-    Args:
-        selection: Frozen build inputs containing geographic entities.
-
-    Returns:
-        Dictionaries with an "entity_id" and "color_rgb" in entity order.
-    """
-    return [
-        {"entity_id": e["id"], "color_rgb": e.get("color_rgb")}
-        for e in selection["geography"]["entities"]
-    ]
 
 
 def read_selection(

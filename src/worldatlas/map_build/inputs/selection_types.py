@@ -43,13 +43,6 @@ class GeographicEntity(TypedDict):
     color_rgb: str | None
 
 
-class EntityColor(TypedDict):
-    """Pair a geographic entity ID with its saved display color."""
-
-    entity_id: int
-    color_rgb: str | None
-
-
 class MapCodeBinding(TypedDict):
     """Name the entity and physical class represented by one map code."""
 
