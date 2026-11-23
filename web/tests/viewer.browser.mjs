@@ -512,6 +512,7 @@ test("selection matches the displayed pixel at a land-water boundary", async () 
       await loaded(page, `/${candidate}/index.html`, "v9.0");
       await page.getByRole("button", { name: "Collapse legend" }).click();
       const canvas = page.locator("#canvas");
+      assert.equal((await canvas.boundingBox()).width, 320);
       const boundary = { x: 213, y: (await pickPoint(page, 80, 20)).y };
       // The coast crosses this CSS pixel at x = 213⅓. Its first backing pixel
       // samples land at 1× (x = 213.5) and water at 2× (x = 213.25).
@@ -539,6 +540,8 @@ test("the legend and map controls fit in narrow and short windows", async () => 
   });
   try {
     await loaded(page, `/${candidate}/index.html`, "v9.0");
+    // A wider header label must leave the map and controls within the viewport.
+    await page.addStyleTag({ content: ".digest-label { font-size: 1.25em; }" });
     const selection = page.locator("#selection");
     const short = await selection.boundingBox();
     await selection.evaluate((element) => {
