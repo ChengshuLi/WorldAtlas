@@ -3,21 +3,43 @@
 import re
 from collections.abc import Mapping, Sequence
 from pathlib import Path
-from typing import Any
+from typing import NotRequired, TypedDict
 
-from psycopg import Connection
 from psycopg.types.json import Jsonb
 
 from worldatlas.geodesy.geojson import validate_geometry
+from worldatlas.shared.files import JSONValue
 from worldatlas.source_imports.shared.recipe_types import NONBLANK_PATTERN
 from worldatlas.source_imports.shared.runtime import Runtime
 
 
-def save_features(runtime: Runtime, features: Sequence[Mapping[str, Any]]) -> list[str]:
+class Feature(TypedDict):
+    """One construction output and its WGS84 GeoJSON."""
+
+    feature_id: str
+    geometry: Mapping[str, JSONValue]
+
+
+class ImportTiming(TypedDict):
+    """Transfer and processing durations in seconds."""
+
+    download_seconds: float
+    processing_seconds: float
+
+
+class FeatureResult(TypedDict):
+    """Files, saved IDs and timings reported by a feature importer."""
+
+    feature_ids: list[str]
+    source: NotRequired[str]
+    timing: ImportTiming
+
+
+def save_features(runtime: Runtime, features: Sequence[Feature]) -> list[str]:
     """Save one construction batch while its recipe is locked for reading.
 
     PostgreSQL's FOR SHARE row lock prevents edits to the recipe until the
-    save transaction ends.
+    save transaction ends. Features omitted from this batch are retained.
 
     Args:
         runtime: Connection factory and snapshot of the recipe used.
@@ -30,6 +52,20 @@ def save_features(runtime: Runtime, features: Sequence[Mapping[str, Any]]) -> li
         ValueError: The recipe changed, the batch is invalid, or a feature
             ID already belongs to another construction.
     """
+    identifiers = [feature["feature_id"] for feature in features]
+    if (
+        not identifiers
+        or any(not re.search(NONBLANK_PATTERN, ident) for ident in identifiers)
+        or len(set(identifiers)) != len(identifiers)
+    ):
+        raise ValueError("feature IDs must be nonempty and unique")
+    records = []
+    for feature in features:
+        geometry = feature["geometry"]
+        validate_geometry(geometry)
+        records.append(
+            (feature["feature_id"], Jsonb(dict(geometry)), runtime.recipe_id)
+        )
     with runtime.connect() as database, database.transaction():
         row = database.execute(
             "SELECT method,arguments FROM atlas.construction_records WHERE id=%s FOR SHARE",
@@ -39,38 +75,6 @@ def save_features(runtime: Runtime, features: Sequence[Mapping[str, Any]]) -> li
             raise ValueError(
                 "construction changed during calculation; rerun its current settings"
             )
-        return _write_features(database, features, construction_id=runtime.recipe_id)
-
-
-def _write_features(
-    database: Connection, features: Sequence[Mapping[str, Any]], *, construction_id: str
-) -> list[str]:
-    """Write the complete batch atomically on the supplied connection.
-
-    Args:
-        database: PostgreSQL connection used for the write.
-        features: Feature IDs and their constructed geometries.
-        construction_id: Owner of all features in the batch.
-
-    Returns:
-        Saved feature IDs in input order.
-    """
-    identifiers = [feature["feature_id"] for feature in features]
-    if (
-        not identifiers
-        or any(
-            not isinstance(ident, str) or not re.search(NONBLANK_PATTERN, ident)
-            for ident in identifiers
-        )
-        or len(set(identifiers)) != len(identifiers)
-    ):
-        raise ValueError("feature IDs must be nonempty and unique")
-    records = []
-    for feature in features:
-        geometry = feature["geometry"]
-        validate_geometry(geometry)
-        records.append((feature["feature_id"], Jsonb(geometry), construction_id))
-    with database.transaction():
         with database.cursor() as cursor:
             cursor.executemany(
                 "INSERT INTO atlas.source_features (id,geometry,construction_id) VALUES (%s,%s,%s) "
@@ -89,7 +93,7 @@ def feature_result(
     *,
     download_seconds: float = 0.0,
     source: Path | str | None = None,
-) -> dict[str, Any]:
+) -> FeatureResult:
     """Summarize the features, files, and timings of an import.
 
     Args:
@@ -101,11 +105,13 @@ def feature_result(
     Returns:
         The JSON-serializable result reported by the import command.
     """
-    result: dict[str, Any] = {"feature_ids": feature_ids}
+    result: FeatureResult = {
+        "feature_ids": feature_ids,
+        "timing": {
+            "download_seconds": download_seconds,
+            "processing_seconds": elapsed - download_seconds,
+        },
+    }
     if source is not None:
         result["source"] = str(source)
-    result["timing"] = {
-        "download_seconds": download_seconds,
-        "processing_seconds": elapsed - download_seconds,
-    }
     return result

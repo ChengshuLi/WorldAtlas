@@ -13,7 +13,14 @@ from zipfile import ZipFile
 
 import psycopg
 from psycopg.types.json import Jsonb
-from shapely.geometry import GeometryCollection, LineString, MultiPolygon, Polygon, box, shape
+from shapely.geometry import (
+    GeometryCollection,
+    LineString,
+    MultiPolygon,
+    Polygon,
+    box,
+    shape,
+)
 
 from worldatlas.source_imports.iho.areas import (
     EPSG_4326,
@@ -104,15 +111,20 @@ class ImportTests(unittest.TestCase):
     """Exercise the command with a real database and a minimal S-130 archive."""
 
     def test_command_imports_only_the_selected_gml_member(self):
-        gml = ElementTree.tostring(parse_document(sea_area_xml("area", "urn:mrn:example", polygon_xml(SQUARE))))
+        gml = ElementTree.tostring(
+            parse_document(sea_area_xml("area", "urn:mrn:example", polygon_xml(SQUARE)))
+        )
         archive = BytesIO()
         with ZipFile(archive, "w") as output:
             output.writestr("unused.gml", b"unused member")
             output.writestr("selected.gml", gml)
         raw = archive.getvalue()
         recipe = dict(
-            source_id="iho-test", gml_member="selected.gml",
-            selections=[dict(feature_id="test-sea", source_feature_id="urn:mrn:example")],
+            source_id="iho-test",
+            gml_member="selected.gml",
+            selections=[
+                dict(feature_id="test-sea", source_feature_id="urn:mrn:example")
+            ],
         )
         client = Mock()
         client.get_object.return_value = {"Body": BytesIO(raw)}
@@ -133,30 +145,46 @@ class ImportTests(unittest.TestCase):
                     "VALUES ('iho-recipe','s130_areas',%s,'Select one archived area')",
                     (Jsonb(recipe),),
                 )
-                argv = ["worldatlas-import", "--recipe", "iho-recipe", "--work-dir", work]
+                argv = [
+                    "worldatlas-import",
+                    "--recipe",
+                    "iho-recipe",
+                    "--work-dir",
+                    work,
+                ]
                 output = StringIO()
                 with (
                     mock_patch.dict(os.environ, NEON_DATABASE_URL=url),
                     mock_patch("sys.argv", argv),
-                    mock_patch("psycopg.connect", side_effect=lambda *_args, **_kw: nullcontext(database)),
+                    mock_patch(
+                        "psycopg.connect",
+                        side_effect=lambda *_args, **_kw: nullcontext(database),
+                    ),
                     mock_patch("boto3.client", return_value=client),
                     redirect_stdout(output),
                 ):
                     main()
-                    stored = "SELECT geometry FROM atlas.source_features WHERE id='test-sea'"
-                    geometry, = database.execute(stored).fetchone()
+                    stored = (
+                        "SELECT geometry FROM atlas.source_features WHERE id='test-sea'"
+                    )
+                    (geometry,) = database.execute(stored).fetchone()
                     self.assertEqual(shape(geometry).area, 4)
                     result = json.loads(output.getvalue())
                     self.assertEqual(result["feature_ids"], ["test-sea"])
-                    self.assertEqual(database.execute(
-                        "SELECT source_id FROM atlas.construction_sources WHERE construction_id='iho-recipe'"
-                    ).fetchall(), [("iho-test",)])
+                    self.assertEqual(
+                        database.execute(
+                            "SELECT source_id FROM atlas.construction_sources WHERE construction_id='iho-recipe'"
+                        ).fetchall(),
+                        [("iho-test",)],
+                    )
 
                     database.execute(
                         "UPDATE atlas.construction_records SET arguments=%s WHERE id='iho-recipe'",
                         (Jsonb(dict(recipe, gml_member="missing.gml")),),
                     )
-                    with self.assertRaisesRegex(ValueError, "expected exactly one IHO GML member"):
+                    with self.assertRaisesRegex(
+                        ValueError, "ZIP member must be one regular file"
+                    ):
                         main()
                     self.assertEqual(database.execute(stored).fetchone(), (geometry,))
                 client.get_object.assert_called_once_with(Bucket="test", Key="s130.zip")

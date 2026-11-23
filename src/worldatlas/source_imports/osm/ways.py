@@ -128,9 +128,8 @@ def osm_way_chain(
     Raises:
         ValueError: The source files, assembled line, or save fails validation.
     """
-    paths = acquire_sources(
-        runtime, way_source_ids, evidence_source_ids=evidence_source_ids or ()
-    )
+    # The saved recipe links its evidence to the catalog. Read only the ways.
+    paths = acquire_sources(runtime, way_source_ids)
     geometry = assemble(paths)
-    save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])
+    save_features(runtime, [{"feature_id": feature_id, "geometry": geometry}])
     return dict(feature_id=feature_id, vertices=len(geometry['coordinates']))

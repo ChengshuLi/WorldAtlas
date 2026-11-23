@@ -3,7 +3,7 @@
 import json
 import time
 from pathlib import Path
-from typing import Any, Literal, NotRequired, TypedDict
+from typing import Literal, NotRequired, TypedDict
 
 import osmium
 from osmium.geom import GeoJSONFactory
@@ -13,7 +13,12 @@ from worldatlas.geodesy.geojson import validate_geometry
 from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources
-from worldatlas.source_imports.shared.storage import feature_result, save_features
+from worldatlas.source_imports.shared.storage import (
+    Feature,
+    FeatureResult,
+    feature_result,
+    save_features,
+)
 
 
 class OsmSelection(TypedDict):
@@ -32,9 +37,7 @@ class OsmSelection(TypedDict):
 OBJECT_TYPES = {"node": "n", "way": "w", "relation": "r"}
 
 
-def read_features(
-    path: Path | str, selections: list[OsmSelection]
-) -> list[dict[str, Any]]:
+def read_features(path: Path | str, selections: list[OsmSelection]) -> list[Feature]:
     """Read the requested objects and return their GeoJSON features.
 
     With ``with_areas()``, Osmium yields original OSM objects and emits a
@@ -162,10 +165,7 @@ def read_features(
             )
 
     return [
-        dict(
-            feature_id=selection["feature_id"],
-            geometry=geometries[key],
-        )
+        {"feature_id": selection["feature_id"], "geometry": geometries[key]}
         for key, selection in requested.items()
     ]
 
@@ -175,7 +175,7 @@ def selected_osm_features(
     *,
     source_id: SourceId,
     selections: list[OsmSelection],
-) -> dict[str, Any]:
+) -> FeatureResult:
     """Download an OSM extract and save its selected features in Neon.
 
     Args:

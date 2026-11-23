@@ -8,7 +8,7 @@ from collections.abc import Mapping, Sequence
 from importlib.metadata import version
 from itertools import pairwise
 from pathlib import Path
-from typing import Any, NotRequired, TypedDict, cast
+from typing import Any, NotRequired, cast
 
 import numpy as np
 import pyproj
@@ -16,7 +16,9 @@ import shapely
 from osgeo import gdal, osr
 from pyproj import Transformer, datadir
 from shapely.geometry import LineString
+from typing_extensions import TypedDict
 
+from worldatlas.geodesy.geojson import Position
 from worldatlas.geodesy.wgs84 import geodesic, geodesic_distance
 from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
@@ -39,6 +41,7 @@ from worldatlas.source_imports.watersheds.drainage import (
 from worldatlas.source_imports.watersheds.sources import (
     FileSelection,
     SourceLine,
+    SourcePoint,
     Sources,
 )
 from worldatlas.source_imports.watersheds.terrain import (
@@ -52,6 +55,91 @@ from worldatlas.source_imports.watersheds.waterways import (
 LOGGER = logging.getLogger(__name__)
 
 Bounds = tuple[float, float, float, float]
+
+
+class DivideCorner(TypedDict, closed=True):
+    """Select the divide corner closest to a reviewed source point."""
+
+    nearest_divide: NonEmptyText
+    near: SourcePoint
+
+
+type BoundaryPoint = SourcePoint | DivideCorner
+
+
+class SourceSection(TypedDict, closed=True):
+    """Use a named line that was read from a source file."""
+
+    line: NonEmptyText
+
+
+class DivideSection(TypedDict, closed=True):
+    """Use a terrain divide as calculated."""
+
+    divide: NonEmptyText
+
+
+class DivideViaPoints(TypedDict, closed=True):
+    """Follow the terrain divide through reviewed source points."""
+
+    divide: NonEmptyText
+    via: list[SourcePoint]
+    max_step_m: float
+
+
+class FlowConnection(TypedDict, closed=True):
+    """Follow drainage from a divide to the mapped head of a stream."""
+
+    terrain: NonEmptyText
+    point: SourcePoint
+    inside_group: int | NonEmptyText
+    outside_groups: list[int]
+    max_step_m: float
+
+
+class FlowSection(TypedDict, closed=True):
+    """Use a calculated route to a mapped stream head."""
+
+    flow: FlowConnection
+
+
+class GeodesicConnector(TypedDict, closed=True):
+    """Connect two reviewed points using short WGS84 geodesic segments."""
+
+    start: BoundaryPoint
+    end: BoundaryPoint
+    max_step_m: float
+
+
+class GeodesicSection(TypedDict, closed=True):
+    """Use a geodesic connector between two boundary sections."""
+
+    geodesic: GeodesicConnector
+
+
+type BoundarySection = (
+    SourceSection | DivideSection | DivideViaPoints | FlowSection | GeodesicSection
+)
+
+
+class JoinSelection(TypedDict, closed=True):
+    """Choose the intersection of adjacent sections nearest this coordinate."""
+
+    near: Position
+
+
+class ClosedSink(TypedDict, closed=True):
+    """Stop flow at a reviewed inland location and label its destination."""
+
+    point: SourcePoint
+    group: int | NonEmptyText
+
+
+class OceanMask(TypedDict, closed=True):
+    """Choose categorical rasters and the values that mean ocean."""
+
+    sources: list[NonEmptyText | FileSelection]
+    values: list[int]
 
 
 class TerrainDomain(TypedDict):
@@ -77,7 +165,7 @@ class DrainageSettings(TypedDict):
 
     basins: list[NonEmptyText | FileSelection]
     basin_attribute: NonEmptyText
-    groups: dict[NonEmptyText, list[Any]]
+    groups: dict[NonEmptyText, list[NonEmptyText | int]]
     waterways: NotRequired[list[NonEmptyText | FileSelection]]
     reverse_waterways: NotRequired[list[NonEmptyText | int]]
     waterway_groups: NotRequired[dict[NonEmptyText, list[NonEmptyText | int]]]
@@ -97,8 +185,8 @@ class TerrainSettings(TypedDict):
     interfaces: list[tuple[int | NonEmptyText, int | NonEmptyText]]
     secondary: NotRequired[list[NonEmptyText | FileSelection]]
     height_offset: NotRequired[NonEmptyText]
-    closed_sinks: NotRequired[list[dict[str, Any]]]
-    ocean_mask: NotRequired[dict[str, Any]]
+    closed_sinks: NotRequired[list[ClosedSink]]
+    ocean_mask: NotRequired[OceanMask]
 
 
 def runtime_versions() -> dict[str, Any]:
@@ -147,10 +235,10 @@ def construct_boundary(
     files: Mapping[str, Path],
     *,
     line_selections: Mapping[str, SourceLine],
-    sections: Sequence[dict[str, Any]],
-    joins: Sequence[dict[str, Any]],
-    start: dict[str, Any],
-    end: dict[str, Any],
+    sections: Sequence[BoundarySection],
+    joins: Sequence[JoinSelection],
+    start: BoundaryPoint,
+    end: BoundaryPoint,
     terrains: Mapping[str, TerrainSettings] | None = None,
     drainage: Mapping[str, DrainageSettings] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
@@ -255,9 +343,11 @@ def construct_boundary(
         # A named fork can be a boundary waypoint if its branches drain to
         # the two groups we are separating, for example 3 and 7.
         for section in sections:
-            if section.get('divide') != name:
+            if 'divide' not in section or section['divide'] != name:
                 continue
-            for waypoint in section.get('via', ()):
+            if 'via' not in section:
+                continue
+            for waypoint in section['via']:
                 if 'node' not in waypoint:
                     continue
                 node = str(waypoint['node'])
@@ -308,10 +398,10 @@ def construct_boundary(
             )
             terrain_seconds = time.monotonic() - tick
             step = time.monotonic()
-            seeds, seed_report = rasterize_waterway_destinations(
+            seeds, seed_report, way_ids = rasterize_waterway_destinations(
                 network, assigned, grid
             )
-            relevant_ways.update(network.way_ids_intersecting_grid_bounds(grid))
+            relevant_ways.update(way_ids)
 
             def seed_point(row: int, column: int, group: int, message: str) -> None:
                 """Mark a cell as draining to the specified group.
@@ -481,7 +571,7 @@ def construct_boundary(
     phase = time.monotonic()
 
     def resolve_section_point(
-        specification: dict[str, Any], *, retain_join: bool = False
+        specification: BoundaryPoint, *, retain_join: bool = False
     ) -> Join | tuple[float, float]:
         """Find the point at which to start or end a boundary section.
 
@@ -510,7 +600,7 @@ def construct_boundary(
             section_lines.append(lines[section['line']])
         elif 'divide' in section:
             section_lines.append(divides[section['divide']])
-            if section.get('via'):
+            if 'via' in section and section['via']:
                 waypoints[index] = {
                     'points': [
                         sources.resolve_recipe_point(p, lines) for p in section['via']
@@ -575,10 +665,10 @@ def watershed_boundary(
     feature_id: NonEmptyText,
     sources: dict[NonEmptyText, SourceId],
     lines: dict[NonEmptyText, SourceLine],
-    sections: list[dict[str, Any]],
-    joins: list[dict[str, Any]],
-    start: dict[str, Any],
-    end: dict[str, Any],
+    sections: list[BoundarySection],
+    joins: list[JoinSelection],
+    start: BoundaryPoint,
+    end: BoundaryPoint,
     terrains: dict[NonEmptyText, TerrainSettings] | None = None,
     drainage: dict[NonEmptyText, DrainageSettings] | None = None,
     evidence_sources: list[SourceId] | None = None,
@@ -605,11 +695,12 @@ def watershed_boundary(
     Raises:
         ValueError: Source acquisition, boundary construction, or save validation fails.
     """
+    # Neon checks the evidence links when the recipe is saved. Only calculation
+    # inputs go through the file cache.
     acquisition = {}
     paths = acquire_sources(
         runtime,
         list(sources.values()),
-        evidence_source_ids=evidence_sources or (),
         timing=acquisition,
     )
     # Turn the downloaded paths back into the file names the recipe uses.
@@ -627,7 +718,7 @@ def watershed_boundary(
     versions = runtime_versions()
     started = time.monotonic()
     # Save only after the complete line passes the drainage and crossing checks.
-    save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])
+    save_features(runtime, [{"feature_id": feature_id, "geometry": geometry}])
     staging_seconds = acquisition['source_staging_seconds']
     report.update(
         feature_id=feature_id,

@@ -63,6 +63,10 @@ class BasinTests(unittest.TestCase):
             with self.subTest(groups=groups), self.assertRaisesRegex(ValueError, 'known group IDs'):
                 Basins([self.path], 'DEST', groups, [0, 0, 2, 2])
 
+    def test_distinct_drainage_groups_cannot_use_aliases_for_one_id(self):
+        with self.assertRaisesRegex(ValueError, 'equivalent numeric drainage group IDs'):
+            self.basins({'3': [100], '03': [200]})
+
     def test_basin_source_requires_one_georeferenced_layer(self):
         path = self.root / 'basins.gpkg'
         with gdal.GetDriverByName('GPKG').Create(str(path), 0, 0, 0, gdal.GDT_Unknown) as dataset:

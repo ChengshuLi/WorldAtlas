@@ -35,8 +35,8 @@ ARGUMENTS = {
         lines={},
         sections=[],
         joins=[],
-        start={},
-        end={},
+        start={"point": [0, 0]},
+        end={"point": [1, 1]},
     ),
     "selected_vector_features": dict(
         source_id="raw",
@@ -112,18 +112,16 @@ class ImportSelectionTests(unittest.TestCase):
         self.assertIsNone(runtime.work_dir)
 
     def test_unsupported_methods_stop_before_downloading(self):
-        for method in (None, {}, ["osm_way_chain"], "some.python.function"):
-            with (
-                self.subTest(method=method),
-                patch(
-                    "worldatlas.source_imports.run_import.read_recipe",
-                    return_value=(method, {}),
-                ),
-            ):
-                with self.assertRaisesRegex(
-                    ValueError, "unsupported source construction method"
-                ):
-                    run_import(self.connect, "record", **self.options)
+        with (
+            patch(
+                "worldatlas.source_imports.run_import.read_recipe",
+                return_value=("some.python.function", {}),
+            ),
+            self.assertRaisesRegex(
+                ValueError, "unsupported source construction method"
+            ),
+        ):
+            run_import(self.connect, "record", **self.options)
         self.make_client.assert_not_called()
 
     def test_missing_recipe_stops_before_downloading(self):

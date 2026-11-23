@@ -220,6 +220,11 @@ class VectorTests(unittest.TestCase):
         original = json.dumps(document)
         self.path.write_text(original)
         selection = self.recipe["selections"][0]
+        selection["fill_holes"] = True
+        result = read_features(self.path, **self.recipe)[0]["geometry"]
+        expected_multi = dict(type="MultiPolygon", coordinates=[large, [small[0]]])
+        self.assertTrue(validate_geometry(result).equals(validate_geometry(expected_multi)))
+        del selection["fill_holes"]
         selection["polygon_containing"] = [0.5, 0.5]
         result = read_features(self.path, **self.recipe)[0]["geometry"]
         self.assertEqual(result, dict(type="Polygon", coordinates=small))
@@ -231,6 +236,12 @@ class VectorTests(unittest.TestCase):
         expected = dict(type="Polygon", coordinates=[small[0]])
         self.assertTrue(validate_geometry(result).equals(validate_geometry(expected)))
         self.assertEqual(self.path.read_text(), original)
+        document["features"][0]["geometry"] = dict(type="Polygon", coordinates=small)
+        self.path.write_text(json.dumps(document))
+        result = read_features(self.path, **self.recipe)[0]["geometry"]
+        self.assertTrue(validate_geometry(result).equals(validate_geometry(expected)))
+        document["features"][0]["geometry"] = dict(type="MultiPolygon", coordinates=[large, small])
+        self.path.write_text(original)
         for point in ([1.5, 1.5], [0, 0.5], [30, 30]):
             selection["polygon_containing"] = point
             with (

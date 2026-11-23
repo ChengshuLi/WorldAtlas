@@ -3,7 +3,7 @@
 from collections.abc import Mapping
 from typing import Annotated, Literal
 
-from pydantic import BeforeValidator, Field, TypeAdapter
+from pydantic import AfterValidator, BeforeValidator, Field, TypeAdapter
 from shapely.geometry import shape
 from shapely.geometry.base import BaseGeometry
 from typing_extensions import TypedDict
@@ -39,6 +39,30 @@ type Position = Annotated[
 ]
 
 
+def _closed_ring[PointCoordinates](
+    points: list[PointCoordinates],
+) -> list[PointCoordinates]:
+    """Check that the ring includes its closing vertex.
+
+    Args:
+        points: Positions in ring order, including the repeated first point.
+
+    Returns:
+        The same list of positions.
+
+    Raises:
+        ValueError: The first and last positions differ.
+    """
+    if points[0] != points[-1]:
+        raise ValueError("polygon rings must be closed")
+    return points
+
+
+type Ring[PointCoordinates] = Annotated[
+    Coordinates[PointCoordinates], Field(min_length=4), AfterValidator(_closed_ring)
+]
+
+
 class Geometry[Kind: str, Coordinates](TypedDict, closed=True):
     """Record the GeoJSON type and coordinate arrays for one geometry."""
 
@@ -49,12 +73,10 @@ class Geometry[Kind: str, Coordinates](TypedDict, closed=True):
 type GeoJSONGeometry[PointCoordinates = list[float]] = Annotated[
     Geometry[Literal["Point"], PointCoordinates]
     | Geometry[Literal["MultiPoint", "LineString"], Coordinates[PointCoordinates]]
+    | Geometry[Literal["MultiLineString"], Coordinates[Coordinates[PointCoordinates]]]
+    | Geometry[Literal["Polygon"], Coordinates[Ring[PointCoordinates]]]
     | Geometry[
-        Literal["MultiLineString", "Polygon"],
-        Coordinates[Coordinates[PointCoordinates]],
-    ]
-    | Geometry[
-        Literal["MultiPolygon"], Coordinates[Coordinates[Coordinates[PointCoordinates]]]
+        Literal["MultiPolygon"], Coordinates[Coordinates[Ring[PointCoordinates]]]
     ],
     Field(discriminator="type"),
 ]

@@ -3,9 +3,10 @@
 from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
 
 from psycopg import Connection
+
+from worldatlas.shared.files import JSONValue
 
 
 @dataclass(frozen=True)
@@ -22,5 +23,5 @@ class Runtime:
     connect: Callable[[], Connection]
     recipe_id: str
     method: str
-    arguments: dict[str, Any]
+    arguments: dict[str, JSONValue]
     work_dir: Path | None = None

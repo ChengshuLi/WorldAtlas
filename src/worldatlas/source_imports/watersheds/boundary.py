@@ -658,15 +658,17 @@ def connect_divide_to_stream_head(
             labels[neighbor], outside_groups
         )
     reached = interface.ravel().copy()
+    downstream = flow.ravel()
+    groups = labels.ravel()
     # Start on the inside cells touching the divide, then follow their water
     # downhill. Only reached cells are candidates near the mapped point.
     todo = list(map(int, np.flatnonzero(reached)))
     while todo:
-        following = int(flow.ravel()[todo.pop()])
+        following = int(downstream[todo.pop()])
         if (
             following >= 0
             and not reached[following]
-            and labels.ravel()[following] == inside_group
+            and groups[following] == inside_group
         ):
             reached[following] = True
             todo.append(following)
@@ -680,17 +682,17 @@ def connect_divide_to_stream_head(
     lengths = {terminal: 0.0}
     candidates = []
     # Work back from the chosen cell. Measure each path back to a cell
-    # touching the divide and keep the shortest one.
+    # touching the divide. Continue only through cells in the same group.
     for value in cells_draining_to(flow, terminal):
         index = int(value)
         rr, cc = divmod(index, width)
         if index != terminal:
-            parent = int(flow.ravel()[index])
+            parent = int(downstream[index])
+            if groups[index] != inside_group or parent not in lengths:
+                continue
             lengths[index] = lengths[parent] + geodesic_distance(
                 center(index), center(parent)
             )
-        if labels[rr, cc] != inside_group:
-            continue
         for dr, dc in ((-1, 0), (0, -1), (0, 1), (1, 0)):
             nr, nc = rr + dr, cc + dc
             if (
@@ -707,7 +709,7 @@ def connect_divide_to_stream_head(
     _, index, neighbor = min(candidates)
     cells = [index]
     while cells[-1] != terminal:
-        cells.append(int(flow.ravel()[cells[-1]]))
+        cells.append(int(downstream[cells[-1]]))
     centers = [center(value) for value in cells]
     snap = geodesic_distance(centers[-1], point)
     connector = geodesic(centers[-1], point, max_step_m) if snap else [tuple(point)]

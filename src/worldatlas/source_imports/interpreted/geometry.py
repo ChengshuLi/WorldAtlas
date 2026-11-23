@@ -1,12 +1,18 @@
 """Import explicitly interpreted points and scope areas from cataloged sources."""
 
 import time
-from typing import Any, Literal, TypedDict
+from collections.abc import Mapping
+from typing import Literal, TypedDict, cast
 
+from worldatlas.shared.files import JSONValue
 from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
-from worldatlas.source_imports.shared.sources import acquire_sources
-from worldatlas.source_imports.shared.storage import feature_result, save_features
+from worldatlas.source_imports.shared.storage import (
+    Feature,
+    FeatureResult,
+    feature_result,
+    save_features,
+)
 
 
 class Point(TypedDict):
@@ -35,7 +41,7 @@ def interpreted_geometry(
     *,
     source_ids: list[SourceId],
     selections: list[Selection],
-) -> dict[str, Any]:
+) -> FeatureResult:
     """Store reviewed label points and computation scopes from the recipe.
 
     Args:
@@ -58,6 +64,12 @@ def interpreted_geometry(
         raise ValueError("interpreted geometry needs at least one selection")
 
     started = time.monotonic()
-    acquire_sources(runtime, [], evidence_source_ids=source_ids)
-    feature_ids = save_features(runtime, selections)
+    features: list[Feature] = [
+        {
+            "feature_id": selection["feature_id"],
+            "geometry": cast(Mapping[str, JSONValue], selection["geometry"]),
+        }
+        for selection in selections
+    ]
+    feature_ids = save_features(runtime, features)
     return feature_result(feature_ids, time.monotonic() - started)

@@ -10,11 +10,12 @@ import logging
 from collections.abc import Callable
 from functools import partial
 from pathlib import Path
-from typing import Any
+from typing import cast
 
 import psycopg
 
 from worldatlas.shared.database import connect_neon, neon_connection_url
+from worldatlas.shared.files import JSONValue
 from worldatlas.source_imports.iho.areas import s130_areas
 from worldatlas.source_imports.interpreted.geometry import interpreted_geometry
 from worldatlas.source_imports.osm.features import selected_osm_features
@@ -40,7 +41,7 @@ IMPORTERS = {
 
 def read_recipe(
     database: psycopg.Connection, recipe_id: str
-) -> tuple[str, dict[str, Any]]:
+) -> tuple[str, dict[str, JSONValue]]:
     """Return the stored method and arguments for a construction ID.
 
     Args:
@@ -67,7 +68,7 @@ def run_import(
     recipe_id: str,
     *,
     work_dir: Path | None = None,
-) -> dict[str, Any]:
+) -> dict[str, JSONValue]:
     """Run a construction validated when it was saved in Neon.
 
     Pass the saved keyword arguments and a separate ``Runtime`` object
@@ -87,10 +88,12 @@ def run_import(
     """
     with connect() as database:
         method, arguments = read_recipe(database, recipe_id)
-    importer = IMPORTERS.get(method) if isinstance(method, str) else None
+    importer = IMPORTERS.get(method)
     if importer is None:
         raise ValueError(f"unsupported source construction method: {method!r}")
-    return importer(
+    # The database has checked these keyword arguments against this method.
+    invoke = cast(Callable[..., dict[str, JSONValue]], importer)
+    return invoke(
         Runtime(
             connect=connect,
             recipe_id=recipe_id,

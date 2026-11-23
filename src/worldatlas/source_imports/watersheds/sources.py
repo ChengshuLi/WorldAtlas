@@ -4,17 +4,20 @@ import json
 from collections.abc import Iterable, Mapping
 from itertools import pairwise
 from pathlib import Path
-from typing import Any, NotRequired, TypedDict
+from typing import Annotated, NotRequired, cast
 from zipfile import ZipFile
 
-import numpy as np
 import osmium
 from osmium.filter import IdFilter
 from osmium.osm import Node
+from pydantic import Field
 from shapely.geometry import LineString
+from typing_extensions import TypedDict
 
+from worldatlas.geodesy.geojson import Position, validate_geometry
+from worldatlas.source_assets.archives import archive_member
 from worldatlas.source_imports.shared.recipe_types import NonEmptyText
-from worldatlas.source_imports.shared.sources import archive_member, gdal_dataset_path
+from worldatlas.source_imports.shared.sources import gdal_dataset_path
 from worldatlas.source_imports.watersheds.boundary import choose_intersection_join
 from worldatlas.source_imports.watersheds.waterways import Waterways
 
@@ -37,7 +40,7 @@ class GeoJSONLine(FileSelection):
     third feature in the file. The first feature is at position 0.
     """
 
-    geojson_feature: int
+    geojson_feature: Annotated[int, Field(ge=0)]
 
 
 class OsmWayLine(TypedDict):
@@ -63,6 +66,29 @@ class OsmRiverLine(TypedDict):
 
 
 SourceLine = GeoJSONLine | OsmWayLine | OsmRiverLine
+
+
+class CoordinatePoint(TypedDict, closed=True):
+    """Supply an explicit WGS84 longitude and latitude."""
+
+    point: Position
+
+
+class OsmNodePoint(TypedDict, closed=True):
+    """Select a node in one OSM source."""
+
+    source: NonEmptyText
+    node: NonEmptyText | int
+
+
+class IntersectionPoint(TypedDict, closed=True):
+    """Select the meeting point of two lines closest to a known location."""
+
+    intersection: tuple[NonEmptyText, NonEmptyText]
+    near: Position
+
+
+type SourcePoint = CoordinatePoint | OsmNodePoint | IntersectionPoint
 
 
 class Sources:
@@ -170,7 +196,7 @@ class Sources:
         return self.networks[key]
 
     def resolve_recipe_point(
-        self, specification: dict[str, Any], lines: Mapping[str, LineString]
+        self, specification: SourcePoint, lines: Mapping[str, LineString]
     ) -> tuple[float, float]:
         """Find the longitude and latitude of a point named in the recipe.
 
@@ -188,7 +214,7 @@ class Sources:
                 duplicated, or invalid, or the selected lines never meet.
         """
         if 'point' in specification:
-            longitude, latitude = map(float, specification['point'])
+            longitude, latitude = specification['point']
             return longitude, latitude
         if 'node' in specification:
             source, node = specification['source'], str(specification['node'])
@@ -266,7 +292,10 @@ class Sources:
             else:
                 with path.open('rb') as stream:
                     document = json.load(stream)
-            geometry = document['features'][part['geojson_feature']]['geometry']
+            index = part['geojson_feature']
+            if not 0 <= index < len(document['features']):
+                raise ValueError('GeoJSON feature position is outside the source')
+            geometry = document['features'][index]['geometry']
             if geometry['type'] != 'LineString':
                 raise ValueError('selected GeoJSON feature must be a line')
             points = geometry['coordinates']
@@ -276,17 +305,13 @@ class Sources:
             raise ValueError('source line needs at least two selected points')
         # All three readers must give us one longitude and one latitude per
         # point. For example, [10, 95] fails because latitude stops at 90°.
-        coordinates = np.asarray(points, dtype=float)
-        if (
-            coordinates.shape != (len(points), 2)
-            or not np.isfinite(coordinates).all()
-            or np.any(np.abs(coordinates[:, 0]) > 180)
-            or np.any(np.abs(coordinates[:, 1]) > 90)
-        ):
+        try:
+            line = validate_geometry({'type': 'LineString', 'coordinates': points})
+        except ValueError as error:
             raise ValueError(
                 'source line requires finite WGS84 longitude/latitude pairs'
-            )
-        return LineString(coordinates)
+            ) from error
+        return cast(LineString, line)
 
     def join_river_relation_ways(
         self, specification: OsmRiverLine

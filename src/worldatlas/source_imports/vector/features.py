@@ -7,10 +7,12 @@ from typing import Any, NotRequired
 from zipfile import ZipFile
 
 from osgeo import gdal, ogr, osr
-from shapely import union_all
-from shapely.geometry import Polygon, mapping
+from shapely import to_geojson, union_all
+from shapely.geometry import MultiPolygon, Polygon
+from shapely.geometry.base import BaseGeometry
 
 from worldatlas.geodesy.geojson import validate_geometry
+from worldatlas.source_assets.archives import archive_member
 from worldatlas.source_imports.shared.recipe_types import (
     FeatureIdentity,
     NonEmptyText,
@@ -18,7 +20,12 @@ from worldatlas.source_imports.shared.recipe_types import (
 )
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources, gdal_dataset_path
-from worldatlas.source_imports.shared.storage import feature_result, save_features
+from worldatlas.source_imports.shared.storage import (
+    Feature,
+    FeatureResult,
+    feature_result,
+    save_features,
+)
 
 
 class VectorSelection(FeatureIdentity):
@@ -50,40 +57,45 @@ def native_geojson_geometry(
     path = Path(path)
     if member is not None:
         with ZipFile(path) as archive:
-            return json.loads(archive.read(member))
+            return json.loads(archive.read(archive_member(archive, member)))
     return json.loads(path.read_bytes())
 
 
 def polygon_containing(
-    geometry: dict[str, Any], coordinates: list[float] | tuple[float, float]
-) -> dict[str, Any]:
+    geometry: dict[str, Any],
+    shape: BaseGeometry,
+    coordinates: list[float] | tuple[float, float],
+) -> tuple[dict[str, Any], Polygon]:
     """Select an original polygon part by an interior WGS84 point.
 
     Args:
         geometry: Polygon or multipolygon to search.
+        shape: The already validated Shapely geometry with the same rings.
         coordinates: Longitude and latitude of the selection point.
 
     Returns:
-        The selected polygon, including its original rings.
+        The original polygon GeoJSON and its matching Shapely polygon.
 
     Raises:
         ValueError: The point is invalid or falls inside anything other
             than one polygon interior.
     """
     point = validate_geometry({"type": "Point", "coordinates": coordinates})
-    if geometry["type"] not in ("Polygon", "MultiPolygon"):
+    if isinstance(shape, Polygon):
+        polygons, rings = [shape], [geometry["coordinates"]]
+    elif isinstance(shape, MultiPolygon):
+        polygons, rings = list(shape.geoms), geometry["coordinates"]
+    else:
         raise ValueError("polygon_containing needs polygon geometry")
-    parts = (
-        [geometry["coordinates"]]
-        if geometry["type"] == "Polygon"
-        else geometry["coordinates"]
-    )
     selected = [
-        rings for rings in parts if Polygon(rings[0], rings[1:]).contains(point)
+        (part_rings, polygon)
+        for part_rings, polygon in zip(rings, polygons, strict=True)
+        if polygon.contains(point)
     ]
     if len(selected) != 1:
         raise ValueError("selection point must be strictly inside one source polygon")
-    return {"type": "Polygon", "coordinates": selected[0]}
+    original_rings, polygon = selected[0]
+    return {"type": "Polygon", "coordinates": original_rings}, polygon
 
 
 def read_features(
@@ -93,7 +105,7 @@ def read_features(
     selections: list[VectorSelection],
     member: str | None = None,
     layer: str | None = None,
-) -> list[dict[str, Any]]:
+) -> list[Feature]:
     """Extract selected vector records and convert their geometry to WGS84.
 
     Args:
@@ -125,12 +137,9 @@ def read_features(
         )
     if source is None:
         raise ValueError("source vector dataset cannot be opened")
-    layer_name = layer
-    if layer_name is None and source.GetLayerCount() != 1:
+    if layer is None and source.GetLayerCount() != 1:
         raise ValueError("select one source vector layer")
-    source_layer = (
-        source.GetLayerByName(layer_name) if layer_name else source.GetLayer(0)
-    )
+    source_layer = source.GetLayerByName(layer) if layer else source.GetLayer(0)
     if source_layer is None:
         raise ValueError("selected vector layer is missing")
     if id_field == "@fid":
@@ -195,22 +204,24 @@ def read_features(
             if status != 0:
                 raise ValueError("source geometry coordinate conversion failed")
             value = json.loads(geometry.ExportToJson(options=export_options))
-        validate_geometry(value)
+        shape = validate_geometry(value)
         # Test containment against the original holes before filling any of them.
         if "polygon_containing" in selection:
-            value = polygon_containing(value, selection["polygon_containing"])
-        if selection.get("fill_holes", False):
-            if value["type"] not in ("Polygon", "MultiPolygon"):
-                raise ValueError("fill_holes requires a polygon source")
-            parts = (
-                [value["coordinates"]]
-                if value["type"] == "Polygon"
-                else value["coordinates"]
+            value, shape = polygon_containing(
+                value, shape, selection["polygon_containing"]
             )
+        if selection.get("fill_holes", False):
+            if isinstance(shape, Polygon):
+                polygons = [shape]
+            elif isinstance(shape, MultiPolygon):
+                polygons = list(shape.geoms)
+            else:
+                raise ValueError("fill_holes requires a polygon source")
             # Build from exterior rings only. A union also merges parts that
             # overlap once their holes are filled.
-            value = mapping(union_all([Polygon(rings[0]) for rings in parts]))
-            value = json.loads(json.dumps(value, allow_nan=False))
+            value = json.loads(
+                to_geojson(union_all([Polygon(p.exterior) for p in polygons]))
+            )
             validate_geometry(value)
         result.append(
             {
@@ -229,7 +240,7 @@ def selected_vector_features(
     selections: list[VectorSelection],
     member: NonEmptyText | None = None,
     layer: NonEmptyText | None = None,
-) -> dict[str, Any]:
+) -> FeatureResult:
     """Import selected vector features as WGS84 GeoJSON.
 
     Args:

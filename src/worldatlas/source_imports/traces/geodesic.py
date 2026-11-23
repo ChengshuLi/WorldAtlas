@@ -8,7 +8,6 @@ from worldatlas.geodesy.geojson import validate_geometry
 from worldatlas.geodesy.wgs84 import geodesic
 from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
-from worldatlas.source_imports.shared.sources import acquire_sources
 from worldatlas.source_imports.shared.storage import save_features
 
 
@@ -79,12 +78,10 @@ def geodesic_trace(
         Saved feature ID and vertex count.
 
     Raises:
-        ValueError: The trace is invalid, a cited source is missing or
-            repeated, or the geometry cannot be saved for the current recipe.
+        ValueError: The trace is invalid, a cited source is repeated, or the geometry cannot be saved for the current recipe.
     """
     if not source_ids or len(set(source_ids)) != len(source_ids):
         raise ValueError("trace sources must be nonempty and distinct")
     geometry = construct(points, max_step_metres)
-    acquire_sources(runtime, [], evidence_source_ids=source_ids)
-    save_features(runtime, [dict(feature_id=feature_id, geometry=geometry)])
+    save_features(runtime, [{"feature_id": feature_id, "geometry": geometry}])
     return dict(feature_id=feature_id, vertices=len(geometry['coordinates']))

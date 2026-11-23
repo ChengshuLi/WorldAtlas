@@ -47,6 +47,8 @@ class Basins:
         """
         self.polygons, self.values = [], []
         self.groups = {int(group): set(values) for group, values in groups.items()}
+        if len(self.groups) != len(groups):
+            raise ValueError('equivalent numeric drainage group IDs are repeated')
         if not self.groups or any(
             group < 0 or not values for group, values in self.groups.items()
         ):

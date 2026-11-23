@@ -16,6 +16,7 @@ from shapely.affinity import translate
 from shapely.geometry import GeometryCollection, MultiPolygon, Polygon, box, mapping
 from shapely.geometry.base import BaseGeometry
 
+from worldatlas.source_assets.archives import archive_member
 from worldatlas.source_imports.shared.recipe_types import (
     FeatureIdentity,
     NonEmptyText,
@@ -23,7 +24,12 @@ from worldatlas.source_imports.shared.recipe_types import (
 )
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources
-from worldatlas.source_imports.shared.storage import feature_result, save_features
+from worldatlas.source_imports.shared.storage import (
+    Feature,
+    FeatureResult,
+    feature_result,
+    save_features,
+)
 
 NS = {"s130": "http://www.iho.int/S130/2.0", "gml": "http://www.opengis.net/gml/3.2"}
 GML_ID = "{http://www.opengis.net/gml/3.2}id"
@@ -52,9 +58,7 @@ def read_document(path: Path | str, member: str) -> ElementTree.Element:
         ElementTree.ParseError: The selected member is invalid XML.
     """
     with ZipFile(path) as archive:
-        if archive.namelist().count(member) != 1:
-            raise ValueError(f"expected exactly one IHO GML member named {member!r}")
-        with archive.open(member) as source:
+        with archive.open(archive_member(archive, member)) as source:
             return ElementTree.parse(source).getroot()
 
 
@@ -288,7 +292,7 @@ class SeaAreas:
 
 def read_areas(
     path: Path | str, *, gml_member: str, selections: list[FeatureIdentity]
-) -> list[dict[str, Any]]:
+) -> list[Feature]:
     """Read complete S-130 areas from a verified archive.
 
     Args:
@@ -316,7 +320,7 @@ def s130_areas(
     source_id: SourceId,
     gml_member: NonEmptyText,
     selections: list[FeatureIdentity],
-) -> dict[str, Any]:
+) -> FeatureResult:
     """Import complete S-130 sea areas with linked surfaces and holes.
 
     Args:

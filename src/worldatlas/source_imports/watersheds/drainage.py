@@ -218,15 +218,30 @@ def _trace_cell_group_labels(
     """
     links = flow.ravel()
     labels = seeds.ravel().copy()
+    stopped = links == -1
+    labels[stopped & (labels < 0)] = terminals.ravel()[stopped & (labels < 0)]
+    return _follow_destinations(flow, labels)
+
+
+@njit(cache=True)
+def _follow_destinations(flow: np.ndarray, labels: np.ndarray) -> np.ndarray:
+    """Propagate labels backwards from the first known destination on each path.
+
+    Args:
+        flow: Grid of next-cell indices, with -1 where flow stops.
+        labels: Flat array of destination values already known, with -1 elsewhere.
+            Updated in place with the resolved labels.
+
+    Returns:
+        A view of the completed labels with the same shape as flow.
+    """
+    links = flow.ravel()
     state = np.zeros(links.size, np.uint8)
     path = np.empty(links.size, np.int64)
     # State 0 means untouched, 1 means on the current walk, and 2 means
     # the result is settled. Finding a 1 again means the flow made a loop.
     for index in range(links.size):
-        if labels[index] >= 0:
-            state[index] = 2
-        elif links[index] == -1:
-            labels[index] = terminals.ravel()[index]
+        if labels[index] >= 0 or links[index] == -1:
             state[index] = 2
     for start in range(links.size):
         if state[start] == 2:
@@ -359,16 +374,23 @@ def trace_destination_masks(
     for cells in seeds.values():
         known |= cells
     groups = sorted(set(seeds) | {int(g) for g in np.unique(terminals) if g >= 0})
+    # Trace to the first known cell once. Its position lets us recover every
+    # group there, including a stream that reaches more than one destination.
+    stop = (flow == -1) & ~known
+    reference = np.full(shape, UNKNOWN, dtype=np.int64)
+    positions = np.flatnonzero(known | (stop & (terminals >= 0)))
+    reference.ravel()[positions] = positions
+    destinations = _follow_destinations(flow, reference.ravel())
+    assigned = destinations >= 0
+    cells = destinations[assigned]
     result = {}
     for group in groups:
-        present = seeds.get(group, np.zeros(shape, dtype=bool))
-        # When checking group 3, a river marked only for group 7 answers
-        # False here. It still stops the trace because its destination is known.
-        seed = np.where(known, present.astype('int64'), UNKNOWN)
-        terminal = np.where(
-            terminals >= 0, (terminals == group).astype('int64'), UNKNOWN
-        )
-        result[group] = trace_cell_group_labels(flow, seed, terminal) == 1
+        at_destination = stop & (terminals == group)
+        if group in seeds:
+            at_destination |= seeds[group]
+        mask = np.zeros(shape, dtype=bool)
+        mask[assigned] = at_destination.ravel()[cells]
+        result[group] = mask
     return result
 
 

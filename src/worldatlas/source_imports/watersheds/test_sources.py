@@ -27,6 +27,15 @@ class SourceGeometryTests(unittest.TestCase):
         line = sources.read_source_line(dict(source='provider', geojson_feature=0))
         self.assertEqual(list(line.coords), [(0., 0.), (1., 1.), (2., 0.)])
 
+    def test_geojson_feature_positions_cannot_wrap_or_exceed_the_file(self):
+        path = self.root / 'source.geojson'
+        path.write_text(json.dumps({'features': [{'geometry': {
+            'type': 'LineString', 'coordinates': [[0, 0], [1, 1]]}}]}))
+        sources = Sources({'provider': path})
+        for position in (-1, 1):
+            with self.subTest(position=position), self.assertRaisesRegex(ValueError, 'position is outside'):
+                sources.read_source_line(dict(source='provider', geojson_feature=position))
+
     def test_relation_order_is_reconstructed_from_its_selected_source_members(self):
         path = self.root / 'river.osm'
         # The relation lists the ways out of order, and both start at node 2.

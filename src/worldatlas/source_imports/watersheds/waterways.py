@@ -32,7 +32,7 @@ from shapely.geometry.base import BaseGeometry, BaseMultipartGeometry
 from shapely.strtree import STRtree
 
 from worldatlas.geodesy.ogr import geometry_layer
-from worldatlas.source_imports.shared.sources import archive_member
+from worldatlas.source_assets.archives import archive_member
 from worldatlas.source_imports.watersheds.basins import Basins
 from worldatlas.source_imports.watersheds.terrain import Grid, wrap_array_as_raster
 
@@ -359,34 +359,43 @@ class Waterways:
             return
         self.nodes[ident], self._node_versions[ident] = point, version
 
-    def _merge_way(self, ident: str, way: Way) -> None:
+    def _merge_way(self, ident: str, way: OsmWay) -> None:
         """Keep the latest version of a way and apply the stream filter.
 
         Args:
             ident: OSM way ID.
-            way: Way's version, tags, and ordered node IDs.
+            way: Pyosmium way, valid until the reader advances.
 
         Raises:
-            ValueError: Matching versions have different way information.
+            ValueError: Matching versions disagree about the retained way.
         """
-        is_river_or_stream = way.is_river_or_stream
         previous_version, previous_is_river_or_stream = self._way_versions.get(
             ident, (None, None)
         )
-        if previous_version is not None and way.version <= previous_version:
-            if way.version == previous_version and (
+        version = way.version
+        if previous_version is not None and version < previous_version:
+            return
+        is_river_or_stream = way.tags.get('waterway') in ('river', 'stream')
+        # Track a newer version even when its new tag excludes it. That keeps
+        # an older stream from returning after the source retags it as a canal.
+        # We only need to copy node IDs and tags for ways we keep.
+        selected = None
+        if not self.rivers_and_streams_only or is_river_or_stream:
+            selected = Way(
+                tuple(str(node.ref) for node in way.nodes), dict(way.tags), version
+            )
+        if version == previous_version:
+            if (
                 previous_is_river_or_stream != is_river_or_stream
-                or (ident in self.ways and self.ways[ident] != way)
+                or self.ways.get(ident) != selected
             ):
                 raise ValueError('conflicting same-version OSM way')
             return
-        # If version 5 changed a stream to a canal, remember version 5 even
-        # when we only keep streams. Version 4 cannot add the old stream back.
-        self._way_versions[ident] = (way.version, is_river_or_stream)
-        if self.rivers_and_streams_only and not is_river_or_stream:
+        self._way_versions[ident] = (version, is_river_or_stream)
+        if selected is None:
             self.ways.pop(ident, None)
         else:
-            self.ways[ident] = way
+            self.ways[ident] = selected
 
     def _merge_relation(
         self, ident: str, version: int, members: tuple[tuple[str, str, str], ...]
@@ -425,14 +434,7 @@ class Waterways:
                     raise ValueError('invalid OSM node coordinates')
                 self._merge_node(ident, obj.version, (location.lon, location.lat))
             elif isinstance(obj, OsmWay):
-                self._merge_way(
-                    ident,
-                    Way(
-                        tuple(str(node.ref) for node in obj.nodes),
-                        dict(obj.tags),
-                        obj.version,
-                    ),
-                )
+                self._merge_way(ident, obj)
             else:
                 # The reader is configured to yield only nodes, ways, and relations.
                 assert isinstance(obj, Relation)
@@ -1147,7 +1149,7 @@ def rasterize_waterway_lines(lines: Sequence[LineString], grid: Grid) -> np.ndar
 
 def rasterize_waterway_destinations(
     network: Waterways, assigned: Mapping[tuple[str, str], tuple[int, ...]], grid: Grid
-) -> tuple[dict[int, np.ndarray], dict[str, Any]]:
+) -> tuple[dict[int, np.ndarray], dict[str, Any], list[str]]:
     """Mark terrain cells touched by mapped rivers with known destinations.
 
     Args:
@@ -1156,9 +1158,9 @@ def rasterize_waterway_destinations(
         grid: Elevation grid on which to mark those stretches.
 
     Returns:
-        A map from group ID to a grid of True and False values, plus a cell-count
-        report. If a stream reaches groups 3 and 7, each cell it touches is
-        marked True in both grids.
+        Group masks, the cell-count report and the source way IDs in this crop.
+        If a stream reaches groups 3 and 7, each cell it touches is True in
+        both masks.
     """
     groups = sorted({group for possible in assigned.values() for group in possible})
     way_ids = network.way_ids_intersecting_grid_bounds(grid)
@@ -1177,8 +1179,9 @@ def rasterize_waterway_destinations(
     count = np.zeros(grid.elevation.shape, dtype='int64')
     for cells in seeds.values():
         count += cells
-    return seeds, {
+    report = {
         'shared_seed_cells': int((count > 1).sum()),
         'seed_cells': {str(group): int(cells.sum()) for group, cells in seeds.items()},
         'nearby_ways': len(way_ids),
     }
+    return seeds, report, way_ids

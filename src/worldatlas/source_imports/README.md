@@ -26,7 +26,7 @@ SELECT id, construction_id FROM atlas.source_features;
 SELECT method, basis, arguments FROM atlas.construction_records WHERE id = 'CONSTRUCTION_ID';
 ```
 
-Edit the recipe and rerun the same construction ID to update working geometry. A construction can produce several features. Each feature is saved under its own ID and links back to the construction. Neon updates the raw-source links when the construction arguments change. A failed import leaves the previous geometry intact. At save time, the importer checks that the recipe still matches the one it used and rejects any feature ID already linked to another construction.
+Edit the recipe and rerun the same construction ID to update working geometry. A construction can produce several features. Each feature is saved under its own ID and links back to the construction. Outputs omitted from an edited recipe stay in Neon until explicitly removed. Neon updates the raw-source links when the construction arguments change. A failed import leaves the previous geometry intact. At save time, the importer checks that the recipe still matches the one it used and rejects any feature ID already linked to another construction.
 
 The command prints a JSON result identifying the saved features. `--work-dir` is the local raw-file cache, shared with the map builder. Both commands check the catalog's byte sizes and checksums before reusing downloads.
 

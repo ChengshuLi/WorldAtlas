@@ -12,7 +12,8 @@ from unittest.mock import Mock, patch
 
 import psycopg
 from psycopg.types.json import Jsonb
-from worldatlas.source_imports.shared.storage import _write_features
+from worldatlas.source_imports.shared.runtime import Runtime
+from worldatlas.source_imports.shared.storage import save_features
 from worldatlas.source_imports.run_import import run_import
 
 
@@ -105,49 +106,40 @@ class StorageTests(unittest.TestCase):
             1,
         )
 
-    def test_missing_construction_rolls_back_the_complete_feature_batch(self):
-        self.build()
-        before = self.rows()
-        features = [
-            dict(
-                feature_id="point-a",
-                source_id="raw",
-                source_feature_id="a",
-                geometry={"type": "Point", "coordinates": [11, 21]},
-            ),
-            dict(
-                feature_id="point-b",
-                source_id="missing",
-                source_feature_id="b",
-                geometry={"type": "Point", "coordinates": [12, 22]},
-            ),
-        ]
-        with self.assertRaises(psycopg.errors.ForeignKeyViolation):
-            _write_features(self.database, features, construction_id="missing")
-        self.assertEqual(self.rows(), before)
-
-    def test_save_preserves_small_coordinates(self):
-        geometry = {"type": "Point", "coordinates": [-0.0, 1e-24]}
-        _write_features(
-            self.database,
-            [
-                dict(
-                    feature_id="zero",
-                    source_id="raw",
-                    source_feature_id="a",
-                    geometry=geometry,
-                )
-            ],
-            construction_id="__features",
+    def save(self, features):
+        runtime = Runtime(
+            connect=lambda: nullcontext(self.database),
+            recipe_id="__features",
+            method="selected_vector_features",
+            arguments=self.recipe,
         )
-        self.assertEqual(self.rows()[0][1], geometry)
+        return save_features(runtime, features)
 
-    def test_duplicate_feature_ids_leave_existing_geometry_intact(self):
+    def test_save_preserves_small_coordinates_and_unselected_features(self):
+        self.build()
+        geometry = {"type": "Point", "coordinates": [-0.0, 1e-24]}
+        self.assertEqual(
+            self.save([dict(feature_id="zero", geometry=geometry)]), ["zero"]
+        )
+        self.assertEqual(
+            self.rows(),
+            [
+                ("point-a", {"type": "Point", "coordinates": [10, 20]}, "__features"),
+                ("zero", geometry, "__features"),
+            ],
+        )
+
+    def test_duplicate_and_blank_ids_leave_existing_geometry_intact(self):
         self.build()
         before = self.rows()
-        feature = dict(feature_id="point-a", geometry={"type": "Point", "coordinates": [11, 21]})
-        with self.assertRaisesRegex(ValueError, "feature IDs must be nonempty and unique"):
-            _write_features(self.database, [feature, feature], construction_id="__features")
+        feature = dict(
+            feature_id="point-a", geometry={"type": "Point", "coordinates": [11, 21]}
+        )
+        for batch in ([], [feature, feature], [dict(feature, feature_id="  ")]):
+            with self.assertRaisesRegex(
+                ValueError, "feature IDs must be nonempty and unique"
+            ):
+                self.save(batch)
         self.assertEqual(self.rows(), before)
 
     def test_conflicting_feature_owner_rolls_back_an_earlier_insert(self):

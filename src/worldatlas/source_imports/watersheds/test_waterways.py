@@ -472,7 +472,8 @@ class WaterwayTests(unittest.TestCase):
         grid = Grid(np.zeros((2, 2)), (0., 1., 0., 2., 0., -1.), 'EPSG:4326')
         network = Waterways([path])
         assigned, _ = network.trace_destinations_from_ways({3: ['10'], 9876543210: ['20']})
-        seeds, report = rasterize_waterway_destinations(network, assigned, grid)
+        seeds, report, way_ids = rasterize_waterway_destinations(network, assigned, grid)
+        self.assertEqual(set(way_ids), set(network.way_ids_intersecting_grid_bounds(grid)))
         np.testing.assert_array_equal(unique_destination_labels(seeds, grid.elevation.shape),
                                       [[3, 3], [9876543210, 9876543210]])
         self.assertEqual(report['shared_seed_cells'], 0)

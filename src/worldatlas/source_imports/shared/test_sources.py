@@ -25,20 +25,34 @@ class SourceAcquisitionTests(unittest.TestCase):
         database.execute.return_value = [
             (ident, 'test', ident, hashlib.sha256(raw).hexdigest(), len(raw))
             for ident, raw in payloads.items()
+            if ident != 'evidence'
         ]
         storage = Mock()
-        storage.get_object.side_effect = lambda **args: {'Body': io.BytesIO(payloads[args['Key']])}
-        with (tempfile.TemporaryDirectory() as directory,
-              patch('boto3.client', return_value=storage)):
-            runtime = Runtime(connect=lambda: nullcontext(database),
-                              recipe_id='test', method='watershed_boundary', arguments={},
-                              work_dir=Path(directory))
-            paths = acquire_sources(runtime, ['second', 'first'],
-                                    evidence_source_ids=['evidence'])
-            self.assertEqual([path.read_bytes() for path in paths],
-                             [payloads['second'], payloads['first']])
+        storage.get_object.side_effect = lambda **args: {
+            'Body': io.BytesIO(payloads[args['Key']])
+        }
+        with (
+            tempfile.TemporaryDirectory() as directory,
+            patch('boto3.client', return_value=storage),
+        ):
+            runtime = Runtime(
+                connect=lambda: nullcontext(database),
+                recipe_id='test',
+                method='watershed_boundary',
+                arguments={},
+                work_dir=Path(directory),
+            )
+            paths = acquire_sources(runtime, ['second', 'first'])
+            self.assertEqual(
+                [path.read_bytes() for path in paths],
+                [payloads['second'], payloads['first']],
+            )
 
         database.execute.assert_called_once()
-        self.assertCountEqual(database.execute.call_args.args[1][0], payloads)
-        self.assertEqual([call.kwargs['Key'] for call in storage.get_object.call_args_list],
-                         ['second', 'first'])
+        self.assertCountEqual(
+            database.execute.call_args.args[1][0], ['first', 'second']
+        )
+        self.assertEqual(
+            [call.kwargs['Key'] for call in storage.get_object.call_args_list],
+            ['second', 'first'],
+        )

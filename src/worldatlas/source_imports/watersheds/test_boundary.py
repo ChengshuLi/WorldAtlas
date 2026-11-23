@@ -304,6 +304,16 @@ class BoundaryTests(unittest.TestCase):
         self.assertEqual(report['interface_cells'], [[0, 1], [0, 0]])
         self.assertEqual(tuple(curve.coords[-1]), (.015, .005))
 
+    def test_stream_head_route_cannot_leave_and_reenter_its_group(self):
+        grid = Grid(np.zeros((2, 4)), (0.0, 0.01, 0.0, 0.02, 0.0, -0.01), 'EPSG:4326')
+        groups = np.array([[1, 2, 3, 2], [1, 2, 2, 2]])
+        flow = np.array([[-1, 2, 3, -1], [-1, 6, 7, 3]])
+        line, report = connect_divide_to_stream_head(
+            grid, flow, groups, (0.035, 0.015), 2, [1], 100.0
+        )
+        self.assertEqual(report['interface_cells'], [[1, 1], [1, 0]])
+        self.assertNotIn(grid.cell_coordinates(0, 2), line.coords)
+
     def test_stream_head_connection_is_built_directly_from_flow_and_exact_source_point(self):
         grid = Grid(np.zeros((3, 3)), (44., .001, 0., 43., 0., -.001), 'EPSG:4326')
         labels = np.array([[1, 2, 2], [1, 2, 2], [1, 2, 2]])

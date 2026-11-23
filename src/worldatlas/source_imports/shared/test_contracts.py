@@ -149,6 +149,22 @@ class DatabaseContractTests(unittest.TestCase):
             "SELECT source_id FROM atlas.construction_sources WHERE construction_id='__evidence_required'"
         ).fetchall(), [("raw",)])
 
+    def test_invalid_nested_watershed_settings_are_rejected_in_neon(self):
+        base = ARGUMENTS["watershed_boundary"]
+        cases = (
+            {"lines": {"river": {"source": "raw", "geojson_feature": -1}}},
+            {"lines": {"river": {"source": "raw", "ways": 42}}},
+            {"start": {"point": [0, 0], "coords": [0, 0]}},
+        )
+        for changes in cases:
+            with self.subTest(changes=changes), self.assertRaises(psycopg.errors.CheckViolation):
+                with self.database.transaction():
+                    self.database.execute(
+                        "INSERT INTO atlas.construction_records(id,method,arguments,basis) "
+                        "VALUES ('__bad_recipe','watershed_boundary',%s,'Invalid test input')",
+                        (Jsonb(base | changes),),
+                    )
+
     def test_file_and_evidence_sources_are_linked_once(self):
         for ident in ("other", "evidence"):
             self.database.execute(
@@ -165,7 +181,7 @@ class DatabaseContractTests(unittest.TestCase):
             },
             evidence_sources=["evidence", "raw"],
             lines={"boundary": {"source": "single", "way": 1}},
-            start={"source_id": "ordinary-untyped-text"},
+            start={"source": "single", "node": 1},
         )
         self.database.execute(
             "INSERT INTO atlas.construction_records(id,method,arguments,basis) "

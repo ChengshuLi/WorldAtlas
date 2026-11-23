@@ -4,7 +4,7 @@ Import points and polygons from archived OpenStreetMap objects, or join archived
 
 ## Use
 
-Both methods use the [common import command](../README.md#run-one-construction) with the construction ID, R2 endpoint, and work directory.
+Both methods use the [common import command](../README.md#run-one-construction) with the construction ID and the existing source cache directory.
 
 ## How it works
 
