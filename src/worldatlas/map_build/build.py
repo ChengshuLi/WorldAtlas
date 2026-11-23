@@ -54,6 +54,7 @@ from worldatlas.map_build.inputs.selection import (
 )
 from worldatlas.map_build.inputs.selection_types import BuildSelection
 from worldatlas.map_build.physical import build as physical_build
+from worldatlas.map_build.physical.timing import read_physical_totals
 from worldatlas.shared.database import connect_neon, neon_connection_url
 from worldatlas.shared.files import (
     compact_json_bytes,
@@ -254,7 +255,15 @@ class Pipeline:
                 self.attempt_dir,
                 setup_started,
                 resume=self.resume,
-                physical_reuse=self.physical_reuse,
+                producer_reports={
+                    "physical": partial(
+                        read_physical_totals,
+                        self.out / "physical/report.json",
+                        reused_from=self.physical_reuse["source_run"]
+                        if self.physical_reuse
+                        else None,
+                    ),
+                },
             )
         except BaseException:
             self.run_lock.close()
@@ -471,12 +480,12 @@ class Pipeline:
         marker = self.out / "physical/pipeline-identity.json"
         with (
             stage_context(self.cancelled),
-            self.timing.physical_invocation() as invocation,
+            self.timing.measure_producer("physical") as invocation,
         ):
             self.checkpoints.run_function(
-                "physical",
-                "physical",
-                partial(
+                name="physical",
+                group="physical",
+                operation=partial(
                     physical_build.build,
                     self.physical_config,
                     self.grid,
@@ -536,9 +545,9 @@ class Pipeline:
             for name in ("rows.u32le", "runs.u32le")
         ]
         result = self.checkpoints.run_function(
-            "encode",
-            "package",
-            partial(
+            name="encode",
+            group="package",
+            operation=partial(
                 encode,
                 self.grid,
                 physical,
@@ -615,7 +624,7 @@ class Pipeline:
                 {
                     "schema": "worldatlas-end-to-end-failure-v1",
                     "status": "incomplete",
-                    "stages": self.timing.failed_stage_summary(),
+                    "stages": self.timing.summary(),
                     "limitations": "Resume validates source and output pins. Code changes are recorded as provenance. Missing interrupted endpoints remain timing-incomplete; no downtime is added.",
                 },
             )

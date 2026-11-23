@@ -6,10 +6,30 @@ import time
 import unittest
 from unittest.mock import patch
 
-from worldatlas.map_build.execution.timing import Timing
+from worldatlas.map_build.execution.timing import ProducerTotals, Timing
 
 
 class ActiveTimingTests(unittest.TestCase):
+    def test_missing_producer_report_allows_partial_timing_but_blocks_completion(self):
+        with tempfile.TemporaryDirectory() as td:
+            report = Path(td) / "tiles.json"
+
+            def read_totals():
+                return ProducerTotals(processing_seconds=float(report.read_text()))
+
+            timing = Timing(
+                Path(td) / "timing.jsonl",
+                producer_reports={"tiles": read_totals},
+            )
+            self.addCleanup(timing.close)
+            with self.assertRaises(FileNotFoundError):
+                with timing.stage("tiles"):
+                    pass
+
+            summary = timing.summary()["tiles"]
+            self.assertFalse(summary["outputs_complete"])
+            self.assertFalse(summary["timing_complete"])
+
     def test_downtime_and_changed_monotonic_origin_are_never_counted(self):
         with tempfile.TemporaryDirectory() as td:
             path = Path(td) / "timing.jsonl"
@@ -24,7 +44,7 @@ class ActiveTimingTests(unittest.TestCase):
                 with second.measure("water", "coast"):
                     pass
             second.mark_complete("water")
-            result = second.summary(None)["water"]
+            result = second.summary()["water"]
             self.assertEqual(result["processing_elapsed_seconds"], 7)
             self.assertTrue(result["timing_complete"])
             self.assertTrue(result["outputs_complete"])
@@ -65,7 +85,7 @@ class ActiveTimingTests(unittest.TestCase):
                 with second.measure("water", "sea"):
                     pass
             second.mark_complete("water")
-            result = second.summary(None)["water"]
+            result = second.summary()["water"]
             self.assertIsNone(result["processing_elapsed_seconds"])
             self.assertEqual(result["recorded_processing_elapsed_seconds"], 5)
             self.assertFalse(result["timing_complete"])
@@ -100,9 +120,19 @@ class ActiveTimingTests(unittest.TestCase):
             )
             second.close()
 
-    def test_physical_completion_uses_the_download_excluding_producer_total(self):
+    def test_producer_completion_uses_the_download_excluding_producer_total(self):
         with tempfile.TemporaryDirectory() as td:
-            timing = Timing(Path(td) / "timing.jsonl", attempt="first")
+            totals = ProducerTotals(
+                processing_seconds=7,
+                recorded_processing_seconds=7,
+                download_only_seconds=5,
+                complete=True,
+            )
+            timing = Timing(
+                Path(td) / "timing.jsonl",
+                attempt="first",
+                producer_reports={"tiles": lambda: totals},
+            )
             for token, start, end, kind in [
                 ("parent", 10, 25, "processing"),
                 ("child", 12, 24, "command"),
@@ -111,8 +141,8 @@ class ActiveTimingTests(unittest.TestCase):
                     {
                         "event": "start",
                         "token": token,
-                        "id": "physical/" + token,
-                        "group": "physical",
+                        "id": "tiles/" + token,
+                        "group": "tiles",
                         "kind": kind,
                         "monotonic_seconds": start,
                     }
@@ -121,18 +151,12 @@ class ActiveTimingTests(unittest.TestCase):
                     {
                         "event": "complete",
                         "token": token,
-                        "id": "physical/" + token,
-                        "group": "physical",
+                        "id": "tiles/" + token,
+                        "group": "tiles",
                         "monotonic_seconds": end,
                     }
                 )
-            producer = {
-                "status": "candidate-only",
-                "processing_elapsed_seconds": 7,
-                "source_download_elapsed_seconds": 5,
-                "timing_complete": True,
-            }
-            timing.mark_complete("physical", physical_report=producer)
+            timing.mark_complete("tiles")
             snapshot = timing.records[-1]["timing_summary"]
             self.assertEqual(snapshot["processing_elapsed_seconds"], 10)
             self.assertEqual(snapshot["source_download_elapsed_seconds"], 5)
@@ -162,7 +186,7 @@ class ActiveTimingTests(unittest.TestCase):
                         "monotonic_seconds": cutoff,
                     }
                 )
-            result = timing.summary(None)["water"]
+            result = timing.summary()["water"]
             self.assertEqual(result["recorded_processing_elapsed_seconds"], 8)
             self.assertEqual(
                 [
@@ -186,7 +210,7 @@ class ActiveTimingTests(unittest.TestCase):
                     "monotonic_seconds": 20,
                 }
             )
-            result = timing.summary(None)["land"]
+            result = timing.summary()["land"]
             self.assertIsNone(result["processing_elapsed_seconds"])
             self.assertEqual(result["recorded_processing_elapsed_seconds"], 0)
             (detail,) = result["interrupted_interval_details"]
@@ -200,7 +224,7 @@ class ActiveTimingTests(unittest.TestCase):
             timing = Timing(
                 Path(td) / "timing.jsonl", attempt="second", earlier_attempts=["first"]
             )
-            result = timing.summary(None)["setup"]
+            result = timing.summary()["setup"]
             (detail,) = result["interrupted_interval_details"]
             self.assertIsNone(detail["start_monotonic_seconds"])
             self.assertIsNone(detail["recorded_elapsed_seconds"])
@@ -222,7 +246,7 @@ class ActiveTimingTests(unittest.TestCase):
                     pass
             second.mark_complete("land")
             self.assertEqual(
-                second.summary(None)["land"]["processing_elapsed_seconds"], 5
+                second.summary()["land"]["processing_elapsed_seconds"], 5
             )
             second.close()
 
@@ -244,7 +268,7 @@ class ActiveTimingTests(unittest.TestCase):
                 stream.write(b'{"event":"compl')
             second = Timing(path, resume=True, attempt="second")
             self.assertEqual(len(list(Path(td).glob("timing.jsonl.torn-*"))), 1)
-            self.assertFalse(second.summary(None)["water"]["timing_complete"])
+            self.assertFalse(second.summary()["water"]["timing_complete"])
             self.assertTrue(path.read_bytes().endswith(b"\n"))
             second.close()
 
@@ -278,7 +302,7 @@ class ActiveTimingTests(unittest.TestCase):
                     pass
             second.mark_complete("water")
             self.assertEqual(
-                second.summary(None)["water"]["processing_elapsed_seconds"], 8
+                second.summary()["water"]["processing_elapsed_seconds"], 8
             )
             second.close()
 

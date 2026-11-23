@@ -123,7 +123,7 @@ class ExecutorResumeTests(unittest.TestCase):
         interrupted = self.out / "attempts" / "interrupted"
         interrupted.mkdir()
         resumed = self.runner(resume=True)
-        summary = resumed.timing.summary(None)["setup"]
+        summary = resumed.timing.summary()["setup"]
         self.assertEqual(
             [event["attempt"] for event in summary["unmeasured_interrupted_attempts"]],
             ["interrupted"],
@@ -133,7 +133,7 @@ class ExecutorResumeTests(unittest.TestCase):
         )
         resumed.close()
         resumed_again = self.runner(resume=True)
-        summary = resumed_again.timing.summary(None)["setup"]
+        summary = resumed_again.timing.summary()["setup"]
         self.assertFalse(summary["timing_complete"])
         self.assertEqual(
             [event["attempt"] for event in summary["unmeasured_interrupted_attempts"]],
@@ -148,7 +148,7 @@ class ExecutorResumeTests(unittest.TestCase):
         self.assertFalse((self.out / "timing-events.jsonl").exists())
 
         resumed = self.runner(resume=True)
-        setup = resumed.timing.summary(None)["setup"]
+        setup = resumed.timing.summary()["setup"]
         self.assertTrue(setup["outputs_complete"])
         self.assertFalse(setup["timing_complete"])
         self.assertEqual(
@@ -189,7 +189,7 @@ class ExecutorResumeTests(unittest.TestCase):
         resumed = self.runner(resume=True)
         resumed_failure = resumed.attempt_dir / "failure.json"
         self.assertFalse(resumed_failure.exists())
-        summary = resumed.timing.summary(None)["setup"]
+        summary = resumed.timing.summary()["setup"]
         self.assertTrue(summary["timing_complete"])
         self.assertEqual(summary["unmeasured_interrupted_attempts"], [])
         with (

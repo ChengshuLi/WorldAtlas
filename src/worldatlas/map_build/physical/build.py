@@ -22,7 +22,7 @@ import worldatlas.geodesy.ogr as geometry_io
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution import control
 from worldatlas.map_build.execution.runtime import RunFilePins, RunLock
-from worldatlas.map_build.execution.timing import PhysicalInvocation
+from worldatlas.map_build.execution.timing import ProducerInvocation
 from worldatlas.map_build.inputs.configuration import (
     PHYSICAL_CONFIGURATION,
     FilePin,
@@ -123,7 +123,7 @@ def build(
     output: Path | str,
     *,
     resume: bool = False,
-    invocation: PhysicalInvocation | None = None,
+    invocation: ProducerInvocation | None = None,
 ) -> dict[str, Any]:
     """Build or resume the physical grid under an exclusive run lock.
 

@@ -13,11 +13,48 @@ from worldatlas.map_build.execution.journal import (
     create_journal,
     preserve_torn_tail,
 )
-from worldatlas.map_build.execution.timing import PhysicalDurations, elapsed_union
-from worldatlas.shared.files import sync_directory
+from worldatlas.map_build.execution.timing import (
+    ProducerDurations,
+    ProducerTotals,
+    duration_seconds,
+    elapsed_union,
+)
+from worldatlas.shared.files import read_json, sync_directory
 from worldatlas.source_assets.cache import Download
 
 PROCESSING_LOG = "processing-events.jsonl"
+
+
+def read_physical_totals(
+    report_path: Path, *, reused_from: str | None
+) -> ProducerTotals:
+    """Read the processing and download totals for the physical stage.
+
+    Args:
+        report_path: Report written by the physical builder.
+        reused_from: Source run if the build reused a completed physical grid.
+
+    Returns:
+        Timing totals across the producer's attempts, or a reference to the
+        reused grid so only the current run's verification time counts.
+    """
+    if reused_from is not None:
+        return ProducerTotals(reused_from=reused_from)
+    report = read_json(report_path)
+    return ProducerTotals(
+        processing_seconds=duration_seconds(report.get("processing_elapsed_seconds")),
+        recorded_processing_seconds=duration_seconds(
+            report.get(
+                "recorded_processing_elapsed_seconds",
+                report.get("processing_elapsed_seconds"),
+            )
+        ),
+        download_only_seconds=duration_seconds(
+            report.get("source_download_elapsed_seconds")
+        ),
+        complete=report.get("status") == "candidate-only"
+        and report.get("timing_complete", True),
+    )
 
 
 class ProcessingJournal:
@@ -35,7 +72,7 @@ class ProcessingJournal:
         self.started = started
         self.attempt = uuid.uuid4().hex
         self.lock = threading.Lock()
-        self.durations: PhysicalDurations | None = None
+        self.durations: ProducerDurations | None = None
         self.events = []
         if resume:
             raw = self.path.read_bytes()
@@ -150,7 +187,7 @@ class ProcessingJournal:
         _, download_only = self.recorded_time(self.attempt)
         if not math.isfinite(elapsed) or elapsed < download_only:
             raise ValueError('invalid attempt timing')
-        durations = PhysicalDurations(elapsed - download_only, download_only)
+        durations = ProducerDurations(elapsed - download_only, download_only)
         self.add(
             {
                 'event': 'attempt_end',

@@ -22,12 +22,13 @@ import pyarrow.parquet as pq
 
 from worldatlas.map_build import build as pipeline
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.execution.timing import PhysicalDurations, Timing, elapsed_union
+from worldatlas.map_build.execution.timing import ProducerDurations, ProducerTotals, Timing, elapsed_union
 from worldatlas.shared import r2
 from worldatlas.shared.r2 import R2Client
 from worldatlas.source_assets.cache import SourceCache
 from worldatlas.map_build.land.connected import build_components
 from worldatlas.map_build.physical import build as physical_build
+from worldatlas.map_build.physical.timing import read_physical_totals
 from worldatlas.map_build.test_support import selection
 from worldatlas.shared.files import (
     json_bytes,
@@ -39,48 +40,66 @@ from worldatlas.shared.files import (
 
 
 class TimingTests(unittest.TestCase):
+    def test_interrupted_physical_report_keeps_the_recorded_lower_bound(self):
+        with tempfile.TemporaryDirectory() as td:
+            report = write_json(
+                Path(td) / "report.json",
+                {
+                    "status": "candidate-only",
+                    "timing_complete": False,
+                    "processing_elapsed_seconds": None,
+                    "recorded_processing_elapsed_seconds": 8,
+                    "source_download_elapsed_seconds": 3,
+                },
+            )
+            self.assertEqual(
+                read_physical_totals(report, reused_from=None),
+                ProducerTotals(recorded_processing_seconds=8, download_only_seconds=3),
+            )
+
     def test_reused_physical_outputs_count_current_verification_only(self):
         with tempfile.TemporaryDirectory() as td:
-            timer = Timing(Path(td) / "events.jsonl")
+            timer = Timing(
+                Path(td) / "events.jsonl",
+                producer_reports={
+                    "physical": lambda: read_physical_totals(
+                        Path(td) / "unused.json", reused_from="/source/run"
+                    )
+                },
+            )
             self.addCleanup(timer.close)
-            receipt = {
-                "status": "reused",
-                "source_run": "/source/run",
-                "processing_elapsed_seconds": 12345,
-                "source_download_elapsed_seconds": 54321,
-            }
             with patch.object(time, "monotonic", side_effect=[8, 11]):
                 with timer.measure("physical", "verify-reused"):
                     pass
-            timer.mark_complete("physical", physical_report=receipt)
-            result = timer.summary(receipt)["physical"]
+            timer.mark_complete("physical")
+            result = timer.summary()["physical"]
             self.assertTrue(result["complete"])
             self.assertEqual(result["processing_elapsed_seconds"], 3)
             self.assertEqual(result["source_download_elapsed_seconds"], 0)
             self.assertEqual(result["reused_from"], "/source/run")
             self.assertIsNone(result["producer_processing_elapsed_seconds"])
 
-    def test_physical_invocation_uses_the_reported_attempt_from_this_call(self):
+    def test_producer_invocation_uses_the_reported_attempt_from_this_call(self):
         with tempfile.TemporaryDirectory() as td:
             timer = Timing(Path(td) / "events.jsonl")
             self.addCleanup(timer.close)
             with patch.object(time, "monotonic", side_effect=[0, 10, 10, 20, 20, 30]):
-                with timer.physical_invocation():
+                with timer.measure_producer("tiles"):
                     pass
-                with self.assertRaises(RuntimeError), timer.physical_invocation() as invocation:
+                with self.assertRaises(RuntimeError), timer.measure_producer("tiles") as invocation:
                     invocation.attempt_started = True
                     raise RuntimeError("interrupted before the producer recorded its end")
-                with self.assertRaisesRegex(ValueError, "invalid physical invocation timing"):
-                    with timer.physical_invocation() as invocation:
+                with self.assertRaisesRegex(ValueError, "invalid tiles invocation timing"):
+                    with timer.measure_producer("tiles") as invocation:
                         invocation.attempt_started = True
-                        invocation.durations = PhysicalDurations(8, 3)
+                        invocation.durations = ProducerDurations(8, 3)
             overhead = [
                 event["seconds"] for event in timer.records
-                if event["event"] == "physical-command-overhead"
+                if event["event"] == "tiles-command-overhead"
             ]
             self.assertEqual(overhead, [10])
             self.assertFalse(
-                any(event["event"] == "physical-invocation-processing" for event in timer.records)
+                any(event["event"] == "tiles-invocation-processing" for event in timer.records)
             )
 
     def test_selected_configuration_has_portable_sources(self):
@@ -102,7 +121,15 @@ class TimingTests(unittest.TestCase):
 
     def test_completed_intervals_survive_and_failures_remain_incomplete(self):
         with tempfile.TemporaryDirectory() as td:
-            timer = Timing(Path(td) / "events.jsonl")
+            totals = ProducerTotals(
+                processing_seconds=5,
+                recorded_processing_seconds=5,
+                download_only_seconds=20,
+                complete=True,
+            )
+            timer = Timing(
+                Path(td) / "events.jsonl", producer_reports={"tiles": lambda: totals}
+            )
             with patch.object(
                 time, "monotonic", side_effect=[10, 13, 20, 21, 40, 40, 65, 65]
             ):
@@ -111,21 +138,15 @@ class TimingTests(unittest.TestCase):
                 with self.assertRaises(RuntimeError):
                     with timer.measure("water", "coast"):
                         raise RuntimeError("interrupted")
-                with timer.measure("physical", "stage-total"):
-                    with timer.measure("physical", "physical", kind="command"):
+                with timer.measure("tiles", "stage-total"):
+                    with timer.measure("tiles", "tiles", kind="command"):
                         pass
-            timer.completed_groups.add("physical")
-            doc = timer.summary(
-                {
-                    "status": "candidate-only",
-                    "processing_elapsed_seconds": 5,
-                    "source_download_elapsed_seconds": 20,
-                }
-            )
+            timer.completed_groups.add("tiles")
+            doc = timer.summary()
             self.assertEqual(doc["water"]["processing_elapsed_seconds"], 4)
             self.assertFalse(doc["water"]["complete"])
-            self.assertEqual(doc["physical"]["processing_elapsed_seconds"], 5)
-            self.assertEqual(doc["physical"]["source_download_elapsed_seconds"], 20)
+            self.assertEqual(doc["tiles"]["processing_elapsed_seconds"], 5)
+            self.assertEqual(doc["tiles"]["source_download_elapsed_seconds"], 20)
             records = [json.loads(line) for line in timer.path.read_text().splitlines()]
             self.assertEqual(
                 [r["event"] for r in records if r["event"] != "attempt"],
@@ -143,14 +164,17 @@ class TimingTests(unittest.TestCase):
 
     def test_invalid_acquisition_timing_cannot_be_a_complete_stage(self):
         with tempfile.TemporaryDirectory() as td:
-            timer = Timing(Path(td) / "events.jsonl")
+            timer = Timing(
+                Path(td) / "events.jsonl",
+                producer_reports={
+                    "tiles": lambda: ProducerTotals(download_only_seconds=4, complete=True)
+                },
+            )
             with patch.object(time, "monotonic", side_effect=[1, 3]):
-                with timer.measure("physical", "stage-total"):
+                with timer.measure("tiles", "stage-total"):
                     pass
-            timer.completed_groups.add("physical")
-            summary = timer.summary(
-                {"status": "candidate-only", "source_download_elapsed_seconds": 4}
-            )["physical"]
+            timer.completed_groups.add("tiles")
+            summary = timer.summary()["tiles"]
             self.assertFalse(summary["complete"])
             self.assertIsNone(summary["processing_elapsed_seconds"])
             self.assertIsNotNone(summary["timing_error"])
@@ -174,7 +198,7 @@ class TimingTests(unittest.TestCase):
                 for thread in threads:
                     thread.join()
             timer.completed_groups.add("water")
-            summary = timer.summary(None)["water"]
+            summary = timer.summary()["water"]
             self.assertTrue(summary["complete"])
             completed = [r for r in timer.records if r["event"] == "complete"]
             intervals = [
@@ -609,7 +633,7 @@ class Fixture(unittest.TestCase):
 
         with (
             patch.object(runner.timing, "measure", new=unavailable),
-            patch.object(runner.timing, "_record_physical_invocation") as report,
+            patch.object(runner.timing, "_record_producer_invocation") as report,
         ):
             with self.assertRaisesRegex(OSError, "cannot write the timing journal"):
                 runner.physical()
