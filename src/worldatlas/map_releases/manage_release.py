@@ -307,7 +307,7 @@ def publish(db: psycopg.Connection, storage: R2Client, candidate: str) -> bool:
             "UPDATE atlas.map_releases SET is_official=true,is_current=true WHERE id=%s",
             (candidate,),
         )
-    storage.put(
+    storage.put_if_unchanged(
         bucket,
         HOMEPAGE,
         html,

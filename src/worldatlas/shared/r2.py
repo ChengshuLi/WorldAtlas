@@ -72,7 +72,7 @@ class R2Client:
                 response.get("ContentEncoding"),
             )
 
-    def put(
+    def put_if_unchanged(
         self,
         bucket: str,
         key: str,
@@ -122,7 +122,9 @@ class R2Client:
                 write condition.
         """
         try:
-            self.put(bucket, key, body, content_type=content_type, expected_etag=None)
+            self.put_if_unchanged(
+                bucket, key, body, content_type=content_type, expected_etag=None
+            )
         except ClientError as exc:
             if exc.response["ResponseMetadata"]["HTTPStatusCode"] != 412:
                 raise
