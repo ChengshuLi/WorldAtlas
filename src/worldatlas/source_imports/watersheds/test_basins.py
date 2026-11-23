@@ -162,6 +162,17 @@ class BasinTests(unittest.TestCase):
         # Interior zero heights do not become ocean or drainage outlets.
         np.testing.assert_array_equal(labels[2:], np.full((2, 4), -1))
 
+    def test_corner_ocean_reaches_diagonal_shore_without_wrapping(self):
+        grid = Grid(np.zeros((4, 4)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
+        ocean = np.zeros((4, 4), dtype=bool)
+        ocean[0, 0] = True
+        outlets, labels = self.basins().classify_coastal_outlets(grid, ocean)
+        expected = np.zeros_like(ocean)
+        expected[:2, :2] = True
+        np.testing.assert_array_equal(outlets, expected)
+        self.assertEqual(labels[1, 1], 3)
+        self.assertEqual(labels[0, 0], -1)
+
     def test_coastal_outlet_without_source_basin_coverage_stays_unknown(self):
         grid = Grid(np.zeros((3, 3)), (3., .5, 0., 2., 0., -.5), 'EPSG:4326')
         ocean = np.zeros((3, 3), dtype=bool)
