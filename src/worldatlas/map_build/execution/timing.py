@@ -7,7 +7,7 @@ import math
 import threading
 import time
 import uuid
-from collections.abc import Iterable, Iterator, Mapping
+from collections.abc import Generator, Iterable, Mapping
 from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -291,7 +291,7 @@ class Timing:
         self.thread.start()
 
     @contextmanager
-    def stage(self, group: str) -> Iterator[None]:
+    def stage(self, group: str) -> Generator[None]:
         """Time a top-level stage and mark its outputs complete on success.
 
         Args:
@@ -306,7 +306,7 @@ class Timing:
         self.mark_complete(group, physical_report=report)
 
     @contextmanager
-    def physical_invocation(self) -> Iterator[PhysicalInvocation]:
+    def physical_invocation(self) -> Generator[PhysicalInvocation]:
         """Measure a physical build call, including cached-output verification.
 
         Yields:
@@ -479,7 +479,7 @@ class Timing:
     @contextmanager
     def measure(
         self, group: str, name: str, *, kind: str = "processing"
-    ) -> Iterator[_Interval]:
+    ) -> Generator[_Interval]:
         """Record when a piece of work starts and stops.
 
         Args:

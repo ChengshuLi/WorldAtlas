@@ -1,6 +1,6 @@
 """Read and write R2 objects without exposing S3 request and response formats."""
 
-from collections.abc import Iterator
+from collections.abc import Generator
 from contextlib import closing, contextmanager
 from dataclasses import dataclass
 from typing import IO
@@ -45,7 +45,7 @@ class R2Client:
         self._client.close()
 
     @contextmanager
-    def open(self, bucket: str, key: str) -> Iterator[R2Object]:
+    def open(self, bucket: str, key: str) -> Generator[R2Object]:
         """Open an object for streaming and close its body at the end of the block.
 
         Args:

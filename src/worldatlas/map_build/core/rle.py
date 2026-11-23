@@ -1,6 +1,6 @@
 """Read complete, little-endian row-run grids."""
 
-from collections.abc import Iterator
+from collections.abc import Generator
 from contextlib import contextmanager
 from pathlib import Path
 
@@ -91,7 +91,7 @@ def close_memmap(array: np.memmap) -> None:
 @contextmanager
 def open_grid(
     directory: Path | str, grid: Grid
-) -> Iterator[tuple[np.ndarray, np.ndarray]]:
+) -> Generator[tuple[np.ndarray, np.ndarray]]:
     """Open a grid's row-run files as read-only memory maps.
 
     Args:

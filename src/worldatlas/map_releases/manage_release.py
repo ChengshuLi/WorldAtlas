@@ -8,7 +8,7 @@ Restore extracts the saved inputs for a separate map build.
 import argparse
 import hashlib
 import tempfile
-from collections.abc import Iterator
+from collections.abc import Generator
 from contextlib import closing, contextmanager
 from io import BytesIO
 from pathlib import Path
@@ -319,7 +319,7 @@ def publish(db: psycopg.Connection, storage: R2Client, candidate: str) -> bool:
 
 
 @contextmanager
-def _release_writer(url: str) -> Iterator[tuple[psycopg.Connection, R2Client]]:
+def _release_writer(url: str) -> Generator[tuple[psycopg.Connection, R2Client]]:
     """Hold the lock shared by preview uploads and publication.
 
     Args:

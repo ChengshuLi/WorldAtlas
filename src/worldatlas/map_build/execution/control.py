@@ -1,7 +1,7 @@
 """Share progress output and cancellation with a stage's worker threads."""
 
 import threading
-from collections.abc import Iterator
+from collections.abc import Generator
 from contextlib import contextmanager
 from contextvars import ContextVar
 from typing import TextIO
@@ -14,7 +14,7 @@ _current: ContextVar[tuple[threading.Event, TextIO | None, threading.Lock] | Non
 @contextmanager
 def stage(
     cancelled: threading.Event | None = None, log: TextIO | None = None
-) -> Iterator[threading.Event]:
+) -> Generator[threading.Event]:
     """Give the current stage a cancellation event and progress stream.
 
     Args:
