@@ -8,12 +8,21 @@ import zipfile
 from collections.abc import Callable, Mapping
 from pathlib import Path
 from tempfile import NamedTemporaryFile
-from typing import IO
+from typing import IO, NamedTuple
 
 from worldatlas.shared import r2
 from worldatlas.shared.files import JSONValue
+from worldatlas.source_assets.archives import archive_member
 
 type FileSpec = Mapping[str, JSONValue]
+
+
+class Download(NamedTuple):
+    """An R2 transfer's clock readings and whether it received all bytes."""
+
+    started: float
+    ended: float
+    completed: bool
 
 
 def _fingerprint(spec: FileSpec) -> tuple[str, int]:
@@ -116,22 +125,22 @@ class SourceCache:
             check_cancelled: Callback that raises if a download should stop.
         """
         self.directory = directory.resolve()
-        self._client = r2.make_r2_client()
+        self.client = r2.make_r2_client()
         self._check_cancelled = check_cancelled
-        self.pins: list[dict[str, str]] = []
-        self.download_intervals: list[tuple[float, float]] = []
+        self.downloads: list[Download] = []
         self._verified: set[tuple[Path, str, int]] = set()
 
     def close(self) -> None:
         """Close the R2 client."""
-        self._client.close()
+        self.client.close()
 
     def path(self, spec: FileSpec) -> Path:
         """Find where a pinned R2 object or ZIP member belongs locally.
 
         A whole R2 object uses its own SHA-256 as the directory name and the
-        filename from its R2 key. A ZIP member uses the ZIP's SHA-256 and its
-        path inside the ZIP. That keeps ``land_polygons.shp`` beside its
+        filename from its R2 key. ZIP members go under ``zip-members``, using
+        the ZIP's SHA-256 and their paths inside it. A member can have the
+        same name as its archive. This keeps ``land_polygons.shp`` beside its
         ``.dbf`` and ``.shx`` files so GDAL can open the Shapefile.
 
         Args:
@@ -144,10 +153,31 @@ class SourceCache:
         Raises:
             ValueError: A pin or member path is invalid.
         """
-        digest, _ = _fingerprint(spec)
+        path, _, _, _ = self._plan(spec)
+        return path
+
+    def _plan(
+        self, spec: FileSpec
+    ) -> tuple[Path, str, int, Callable[[IO[bytes]], None]]:
+        """Resolve the local name, byte pin, and acquisition for one input.
+
+        Args:
+            spec: A direct R2 object or a ZIP member and its archive pin.
+
+        Returns:
+            (path, SHA-256, byte count, writer). The writer fetches the bytes
+            into an open file when the cache does not already have them.
+        """
+        digest, size = _fingerprint(spec)
         if "archive" not in spec:
-            _, key = _location(spec)
-            return self.directory / digest / Path(key).name
+            bucket, key = _location(spec)
+            path = self.directory / digest / Path(key).name
+            return (
+                path,
+                digest,
+                size,
+                lambda output: self._download(bucket, key, size, output),
+            )
 
         archive, member = spec["archive"], spec.get("member")
         if not isinstance(archive, dict):
@@ -158,10 +188,23 @@ class SourceCache:
             or any(part in ("", ".", "..") for part in member.split("/"))
         ):
             raise ValueError("unsafe ZIP member")
-        # Validate the archive pin before using its checksum as the directory name.
-        self.path(archive)
-        archive_digest, _ = _fingerprint(archive)
-        return self.directory / archive_digest / member
+        archive_path, archive_digest, archive_size, fetch = self._plan(archive)
+        path = self.directory / "zip-members" / archive_digest / member
+
+        def extract(output: IO[bytes]) -> None:
+            """Copy the selected member of the verified local ZIP.
+
+            Args:
+                output: Open temporary file for the extracted member.
+            """
+            local = self._verified_file(
+                archive_path, archive_digest, archive_size, fetch
+            )
+            with zipfile.ZipFile(local) as packed:
+                with packed.open(archive_member(packed, member)) as source:
+                    shutil.copyfileobj(source, output, 1 << 20)
+
+        return path, digest, size, extract
 
     def _verified_file(
         self,
@@ -205,7 +248,6 @@ class SourceCache:
             finally:
                 pending.unlink(missing_ok=True)
         self._verified.add(identity)
-        self.pins.append({"path": str(path), "sha256": digest})
         return path
 
     def acquire(self, spec: FileSpec) -> Path:
@@ -217,23 +259,7 @@ class SourceCache:
         Returns:
             The verified local file path.
         """
-        path = self.path(spec)
-        digest, size = _fingerprint(spec)
-        if "archive" in spec:
-            return self._verified_file(
-                path,
-                digest,
-                size,
-                lambda output: self._extract(spec, output),
-            )
-
-        bucket, key = _location(spec)
-        return self._verified_file(
-            path,
-            digest,
-            size,
-            lambda output: self._download(bucket, key, size, output),
-        )
+        return self._verified_file(*self._plan(spec))
 
     def _download(self, bucket: str, key: str, size: int, output: IO[bytes]) -> None:
         """Stream one R2 object, check its byte count, and record the transfer time.
@@ -248,10 +274,11 @@ class SourceCache:
             ValueError: The object's length differs from the expected byte count.
             InterruptedError: The cancellation callback requested a stop.
         """
+        self._check_cancelled()
         started = time.monotonic()
+        completed = False
         try:
-            self._check_cancelled()
-            with self._client.open(bucket, key) as remote:
+            with self.client.open(bucket, key) as remote:
                 if remote.size_bytes is not None and remote.size_bytes != size:
                     raise ValueError("R2 source file size or hash mismatch")
                 remaining = size
@@ -264,34 +291,6 @@ class SourceCache:
                     remaining -= len(chunk)
                 if remaining or remote.body.read(1):
                     raise ValueError("R2 source file size or hash mismatch")
+            completed = True
         finally:
-            self.download_intervals.append((started, time.monotonic()))
-
-    def _extract(self, spec: FileSpec, output: IO[bytes]) -> None:
-        """Copy one regular file out of a cached ZIP.
-
-        Acquire and verify the whole ZIP using the size and SHA-256 in
-        ``spec["archive"]``. Then copy the named member. The caller verifies
-        the extracted bytes using the size and SHA-256 at the top of ``spec``
-        before saving them at the final cache path.
-
-        Args:
-            spec: Pin for an extracted member, including the pin for its ZIP.
-            output: Open temporary file that receives the member's bytes.
-
-        Raises:
-            ValueError: The member is missing, ambiguous, or not a regular file.
-        """
-        archive, member = spec["archive"], spec["member"]
-        assert isinstance(archive, dict) and isinstance(member, str)
-        local = self.acquire(archive)
-        with zipfile.ZipFile(local) as packed:
-            matches = [item for item in packed.infolist() if item.filename == member]
-            if (
-                len(matches) != 1
-                or matches[0].is_dir()
-                or ((matches[0].external_attr >> 16) & 0o170000) == 0o120000
-            ):
-                raise ValueError("ZIP member must be one regular file")
-            with packed.open(matches[0]) as source:
-                shutil.copyfileobj(source, output, 1 << 20)
+            self.downloads.append(Download(started, time.monotonic(), completed))

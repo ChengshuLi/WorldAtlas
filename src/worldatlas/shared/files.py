@@ -158,7 +158,12 @@ def write_bytes_atomic(path: Path | str, data: bytes) -> Path:
         stream.write(data)
         stream.flush()
         os.fsync(stream.fileno())
-    os.link(pending, path)
+    try:
+        os.link(pending, path)
+    except FileExistsError:
+        # The result already exists. Keep it and discard this competing copy.
+        pending.unlink()
+        raise
     sync_directory(path.parent)
     pending.unlink()
     sync_directory(path.parent)
