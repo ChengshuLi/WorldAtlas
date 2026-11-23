@@ -721,6 +721,10 @@ class PublicationTests(unittest.TestCase):
             Bucket=RELEASE_BUCKET, Key="index.html", Body=self.files["index.html"],
             ContentType="text/html", CacheControl="no-cache", IfMatch='"current"',
         )
+        self.assertCountEqual(
+            [call.kwargs["Key"] for call in self.storage.get_object.call_args_list],
+            [self.folder + name for name in (*self.files, "manifest.json")],
+        )
         updates = [call.args for call in self.db.execute.call_args_list if call.args[0].startswith("UPDATE")]
         self.assertEqual(len(updates), 2)
         self.assertIn("SET is_current=false", updates[0][0])
@@ -1040,5 +1044,6 @@ class CommandTests(unittest.TestCase):
                     main()
             self.assertEqual(client.call_count, 2)
             client.assert_called_with()
+            storage.get_object.assert_called_once_with(Bucket=RELEASE_BUCKET, Key=asset["r2_key"])
             db.execute.assert_not_called()
             self.assertEqual(json.loads((output / "selection.json").read_bytes()), {"coordinates": [0, 1]})

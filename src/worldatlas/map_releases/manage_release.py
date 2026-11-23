@@ -14,8 +14,9 @@ import re
 import shutil
 import tempfile
 from contextlib import closing
+from io import BytesIO
 from pathlib import Path
-from typing import Any, Literal, overload
+from typing import Any, BinaryIO
 
 import psycopg
 
@@ -350,68 +351,40 @@ def build_bundle(
     }
 
 
-@overload
 def verify_object(
     storage: R2Client,
     bucket: str,
     key: str,
     expected: dict[str, Any],
     *,
-    return_bytes: Literal[True],
-) -> bytes:
-    """Return the verified object's bytes."""
-
-
-@overload
-def verify_object(
-    storage: R2Client,
-    bucket: str,
-    key: str,
-    expected: dict[str, Any],
-    *,
-    return_bytes: Literal[False] = False,
+    destination: BinaryIO | None = None,
 ) -> None:
-    """Verify the object without keeping its bytes."""
-
-
-def verify_object(
-    storage: R2Client,
-    bucket: str,
-    key: str,
-    expected: dict[str, Any],
-    *,
-    return_bytes: bool = False,
-) -> bytes | None:
-    """Verify an R2 object's size, content type, encoding, and checksum.
+    """Stream an R2 file and check its metadata and checksum.
 
     Args:
         storage: Open R2 client.
-        bucket: Bucket containing the object.
-        key: Exact object key within that bucket.
-        expected: Manifest entry containing the byte size, content type, and SHA-256.
-        return_bytes: Keep the verified body in memory for callers that need it.
-
-    Returns:
-        The object's bytes if requested, or None after streaming the checksum.
+        bucket: Bucket containing the file.
+        key: Exact file key within the bucket.
+        expected: Manifest entry with the byte count, content type, and SHA-256.
+        destination: Open binary stream to receive the bytes, if needed.
+            Use the copied bytes after verification succeeds.
 
     Raises:
-        ValueError: The object's metadata or bytes differ from the manifest.
-        R2ObjectMissing: The requested asset is missing.
+        ValueError: The file's metadata or checksum differs from the manifest.
+        R2ObjectMissing: The file is missing.
     """
+    checksum = hashlib.sha256()
     with storage.open(bucket, key) as remote:
         if remote.size_bytes != expected["size_bytes"] or remote.content_encoding:
             raise ValueError(f"wrong size or encoding for {key}")
         if remote.content_type != expected["content_type"]:
             raise ValueError(f"wrong content type for {key}")
-        data = remote.body.read() if return_bytes else None
-        checksum = (
-            hashlib.sha256(data)
-            if data is not None
-            else hashlib.file_digest(remote.body, "sha256")
-        )
+        while chunk := remote.body.read(1 << 20):
+            checksum.update(chunk)
+            if destination is not None:
+                destination.write(chunk)
     if checksum.hexdigest() != expected["sha256"]:
         raise ValueError(f"published bytes differ from the candidate: {key}")
-    return data
 
 
 def upload_bundle(
@@ -598,19 +571,22 @@ def publish(db: psycopg.Connection, storage: R2Client, candidate: str) -> bool:
         raise ValueError(
             f"the website serves releases from the {RELEASE_BUCKET!r} bucket"
         )
-    manifest = read_manifest(storage, release)
-    if INPUTS_FILE not in manifest["objects"]:
+    objects = read_manifest(storage, release)["objects"]
+    if INPUTS_FILE not in objects:
         raise ValueError("release has no frozen input archive")
-    etag = storage.etag(bucket, HOMEPAGE)
-    html = None
-    for name, asset in manifest["objects"].items():
-        data = verify_object(
-            storage, bucket, asset["r2_key"], asset, return_bytes=name == "index.html"
-        )
-        if name == "index.html":
-            html = data
-    if html is None:
+    if HOMEPAGE not in objects:
         raise ValueError("release has no viewer homepage")
+    etag = storage.etag(bucket, HOMEPAGE)
+    with BytesIO() as homepage:
+        for name, asset in objects.items():
+            verify_object(
+                storage,
+                bucket,
+                asset["r2_key"],
+                asset,
+                destination=homepage if name == HOMEPAGE else None,
+            )
+        html = homepage.getvalue()
     # Commit the approved choice before updating R2. If R2 fails, a retry can
     # update the homepage while this choice is current, even after a restart.
     with db.transaction():
@@ -662,22 +638,21 @@ def main() -> None:
     if map_version is None:
         with connect_neon(url=url, autocommit=True) as db:
             release = lookup_release(db, args.candidate)
-        with closing(make_r2_client()) as storage:
-            saved = read_manifest(storage, release)
-            asset = saved["objects"].get(INPUTS_FILE)
-            if asset is None:
-                raise ValueError("release has no input archive")
-            raw = verify_object(
-                storage,
-                release["r2_bucket"],
-                asset["r2_key"],
-                asset,
-                return_bytes=True,
-            )
-        restore_inputs(
-            read_inputs(raw, release["id"]),
-            args.output,
-        )
+        with BytesIO() as archive:
+            with closing(make_r2_client()) as storage:
+                saved = read_manifest(storage, release)
+                asset = saved["objects"].get(INPUTS_FILE)
+                if asset is None:
+                    raise ValueError("release has no input archive")
+                verify_object(
+                    storage,
+                    release["r2_bucket"],
+                    asset["r2_key"],
+                    asset,
+                    destination=archive,
+                )
+            content = read_inputs(archive.getvalue(), release["id"])
+        restore_inputs(content, args.output)
         print(f"Restored inputs to {args.output}")
         return
 
