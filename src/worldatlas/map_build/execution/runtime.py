@@ -9,7 +9,6 @@ import traceback
 import uuid
 from collections.abc import Callable, Generator, Iterable, Mapping
 from contextlib import closing, contextmanager
-from dataclasses import dataclass
 from functools import partial
 from pathlib import Path
 from stat import S_ISREG
@@ -495,81 +494,74 @@ class Checkpoints:
         return cast(Result, read_json(result_path))
 
 
-@dataclass(frozen=True)
-class StageExecutor:
-    """Run stages using a complete checkpoint store and timing journal."""
+@contextmanager
+def open_stage_workspace(
+    root: Path, request: FilePin, *, resume: bool
+) -> Generator[tuple[Checkpoints, Timing]]:
+    """Open a workspace for a standalone stage with the ordinary run tools.
 
-    checkpoints: Checkpoints
-    timing: Timing
+    Args:
+        root: Output directory for the standalone run.
+        request: Path and digest of its input configuration.
+        resume: Whether to continue the saved request.
 
-    @classmethod
-    @contextmanager
-    def open_workspace(
-        cls, root: Path, request: FilePin, *, resume: bool
-    ) -> Generator[StageExecutor]:
-        """Open a workspace for a standalone stage with the ordinary run tools.
+    Yields:
+        The checkpoint store and timer, with the workspace locked.
 
-        Args:
-            root: Output directory for the standalone run.
-            request: Path and digest of its input configuration.
-            resume: Whether to continue the saved request.
-
-        Yields:
-            An executor holding the workspace lock, checkpoints, and timing log.
-
-        Raises:
-            ValueError: The workspace state or saved request differs.
-        """
-        setup_started = SetupStart.now()
-        if root.exists() != resume or not root.parent.is_dir():
-            raise ValueError(
-                "output must have an existing parent and exist only on resume"
-            )
-        if not resume:
-            root.mkdir()
-        with closing(RunLock(root / "run.lock")):
-            saved = root / "run-request.json"
-            if resume:
-                if not saved.is_file() or read_json(saved) != request:
-                    raise ValueError("saved stage request changed or is missing")
-            else:
-                write_json(saved, request)
-            attempt = uuid.uuid4().hex
-            checkpoints = Checkpoints(root / "checkpoints", attempt)
-            checkpoints.verify_all()
-            verify_setup_timing(root)
-            attempt_dir = root / "attempts" / attempt
-            attempt_dir.mkdir(parents=True)
-            with closing(
-                Timing.open_run(attempt_dir, setup_started, resume=resume)
-            ) as timing:
-                yield cls(checkpoints, timing)
+    Raises:
+        ValueError: The workspace state or saved request differs.
+    """
+    setup_started = SetupStart.now()
+    if root.exists() != resume or not root.parent.is_dir():
+        raise ValueError("output must have an existing parent and exist only on resume")
+    if not resume:
+        root.mkdir()
+    with closing(RunLock(root / "run.lock")):
+        saved = root / "run-request.json"
+        if resume:
+            if not saved.is_file() or read_json(saved) != request:
+                raise ValueError("saved stage request changed or is missing")
+        else:
+            write_json(saved, request)
+        attempt = uuid.uuid4().hex
+        checkpoints = Checkpoints(root / "checkpoints", attempt)
+        checkpoints.verify_all()
+        verify_setup_timing(root)
+        attempt_dir = root / "attempts" / attempt
+        attempt_dir.mkdir(parents=True)
+        with closing(
+            Timing.open_run(attempt_dir, setup_started, resume=resume)
+        ) as timing:
+            yield checkpoints, timing
 
 
 def execute_stage[Result: JSONValue](
-    executor: StageExecutor | None,
     name: str,
     group: str,
     operation: Callable[[], Result],
     *,
+    checkpoints: Checkpoints | None,
+    timing: Timing | None,
     inputs: list[dict[str, str]],
     outputs: Iterable[Path | str],
 ) -> Result:
     """Run a bound operation directly or through its checkpoint.
 
     Args:
-        executor: Checkpoint store and timing journal, or None for a local calculation.
         name: Checkpoint ID.
         group: Timing group.
         operation: Function with all its inputs already supplied.
+        checkpoints: Saved work, or None to run directly.
+        timing: Run timer, required when checkpoints are supplied.
         inputs: Files that must still match their pins.
         outputs: Files or directories produced by the operation.
 
     Returns:
         The calculated result or the same result loaded from a completed stage.
     """
-    if executor is None:
+    if checkpoints is None:
         return operation()
-    return executor.checkpoints.run_function(
-        name, group, operation, timing=executor.timing, inputs=inputs, outputs=outputs
+    assert timing is not None, "checkpointed stages need a run timer"
+    return checkpoints.run_function(
+        name, group, operation, timing=timing, inputs=inputs, outputs=outputs
     )

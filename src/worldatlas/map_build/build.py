@@ -30,7 +30,6 @@ from worldatlas.map_build.execution.control import stage as stage_context
 from worldatlas.map_build.execution.runtime import (
     Checkpoints,
     RunLock,
-    StageExecutor,
     code_identity,
     repository_identity,
 )
@@ -467,7 +466,8 @@ class Pipeline:
                 self.grid,
                 request_pin,
                 self.out / "physical",
-                executor=StageExecutor(self.checkpoints, self.timing),
+                checkpoints=self.checkpoints,
+                timing=self.timing,
             )
         return self.out / "physical" / "physical"
 
@@ -493,7 +493,8 @@ class Pipeline:
             dict(self.cfg),
             compiled_divisions=self.compiled_divisions,
             reuse=reusable_division,
-            executor=StageExecutor(self.checkpoints, self.timing),
+            checkpoints=self.checkpoints,
+            timing=self.timing,
         )
         return Path(operation.run()["directory"])
 

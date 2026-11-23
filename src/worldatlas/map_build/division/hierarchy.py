@@ -17,10 +17,11 @@ from worldatlas.map_build.division.engine import ParentDivision, land_groups
 from worldatlas.map_build.division.intervals import overlay, spans
 from worldatlas.map_build.division.shores import ShoreGeometry, land_owner_order
 from worldatlas.map_build.execution.runtime import (
+    Checkpoints,
     RunFilePins,
-    StageExecutor,
     execute_stage,
 )
+from worldatlas.map_build.execution.timing import Timing
 from worldatlas.map_build.inputs.selection_types import GeographicSelection
 from worldatlas.shared.files import (
     JSONValue,
@@ -211,7 +212,8 @@ class HierarchyDivision:
         *,
         compiled_divisions: dict[int, CompiledDivision],
         reuse: Path | str | None = None,
-        executor: StageExecutor | None = None,
+        checkpoints: Checkpoints | None = None,
+        timing: Timing | None = None,
     ) -> None:
         """Prepare the hierarchy, work directory, and optional reuse settings.
 
@@ -223,14 +225,16 @@ class HierarchyDivision:
             configuration: Build settings used by the rules.
             compiled_divisions: Child entities and assembled rules keyed by parent ID.
             reuse: Directory containing earlier division results.
-            executor: Optional checkpoint and timing runner.
+            checkpoints: Saved work, or None to run directly.
+            timing: Shared run timer, required when checkpoints are supplied.
         """
         self.geography, self.grid, self.physical = geography, grid, Path(physical)
         self.directory = Path(directory)
         self.directory.mkdir(exist_ok=True)
         self.configuration = configuration
-        self.executor = executor
-        self.files = executor.checkpoints.files if executor else RunFilePins()
+        self.checkpoints = checkpoints
+        self.timing = timing
+        self.files = checkpoints.files if checkpoints is not None else RunFilePins()
         self.compiled_divisions = compiled_divisions
         self.reuse = (
             {} if reuse is None else read_json(Path(reuse) / "report.json")["parents"]
@@ -267,10 +271,11 @@ class HierarchyDivision:
             Calculated or verified saved stage result.
         """
         return execute_stage(
-            self.executor,
             name,
             "division",
             operation,
+            checkpoints=self.checkpoints,
+            timing=self.timing,
             inputs=inputs,
             outputs=outputs,
         )
@@ -349,7 +354,8 @@ class HierarchyDivision:
                     parent_directory=parent_directory
                     if ownership is not None
                     else None,
-                    executor=self.executor,
+                    checkpoints=self.checkpoints,
+                    timing=self.timing,
                     input_pins=[definition_pin],
                     shore_provider=self.shores,
                 )

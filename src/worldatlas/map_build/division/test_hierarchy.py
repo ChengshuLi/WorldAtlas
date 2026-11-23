@@ -24,7 +24,6 @@ from worldatlas.map_build.execution.timing import Timing
 from worldatlas.map_build.execution.runtime import (
     Checkpoints,
     RunFilePins,
-    StageExecutor,
 )
 from worldatlas.map_build.test_support import selection
 from worldatlas.shared.files import sha256_file
@@ -378,9 +377,8 @@ class HierarchyTests(unittest.TestCase):
                     root / "physical",
                     root / "division",
                     {}, compiled_divisions=compile_divisions(geography, [101]),
-                    executor=StageExecutor(
-                        Checkpoints(root / "checkpoints", "attempt"), timing
-                    ),
+                    checkpoints=Checkpoints(root / "checkpoints", "attempt"),
+                    timing=timing,
                 )
                 result = build.run()
                 for name in ("rows.u32le", "runs.u32le"):

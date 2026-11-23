@@ -18,7 +18,8 @@ from typing import Any
 import worldatlas.geodesy.ogr as geometry_io
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution import control
-from worldatlas.map_build.execution.runtime import StageExecutor
+from worldatlas.map_build.execution.runtime import Checkpoints, open_stage_workspace
+from worldatlas.map_build.execution.timing import Timing
 from worldatlas.map_build.inputs.configuration import (
     PHYSICAL_CONFIGURATION,
     FilePin,
@@ -112,12 +113,17 @@ def run(
     require_separate_cache_and_output(
         Path(settings['source_directory']).resolve(), output
     )
-    with StageExecutor.open_workspace(output, request, resume=resume) as executor:
-        with control.stage(), executor.timing.stage('physical'):
+    with open_stage_workspace(output, request, resume=resume) as (checkpoints, timing):
+        with control.stage(), timing.stage('physical'):
             report = build(
-                settings, Grid(**settings['grid']), request, output, executor=executor
+                settings,
+                Grid(**settings['grid']),
+                request,
+                output,
+                checkpoints=checkpoints,
+                timing=timing,
             )
-        return {**report, **executor.timing.summary()['physical']}
+        return {**report, **timing.summary()['physical']}
 
 
 def build(
@@ -126,7 +132,8 @@ def build(
     request: FilePin,
     output: Path,
     *,
-    executor: StageExecutor,
+    checkpoints: Checkpoints,
+    timing: Timing,
 ) -> dict[str, Any]:
     """Rasterize land and water through the shared run's checkpoints.
 
@@ -135,7 +142,8 @@ def build(
         grid: Grid shared with later map stages.
         request: Path and SHA-256 of the saved physical configuration.
         output: Directory for physical tasks and their reports.
-        executor: The same checkpoint and timing tools used by the other stages.
+        checkpoints: Saved work that can be verified and reused.
+        timing: Run timer shared with other stages.
 
     Returns:
         The physical output report with verified grid files.
@@ -145,12 +153,20 @@ def build(
         SourceCache(
             source_directory,
             check_cancelled=control.check_cancelled,
-            measure_download=lambda key: executor.timing.measure(
+            measure_download=lambda key: timing.measure(
                 'physical', f'download/{key}', kind='download'
             ),
         )
     ) as cache:
-        return _build(cfg, grid, request, output, executor=executor, cache=cache)
+        return _build(
+            cfg,
+            grid,
+            request,
+            output,
+            checkpoints=checkpoints,
+            timing=timing,
+            cache=cache,
+        )
 
 
 def _build(
@@ -159,7 +175,8 @@ def _build(
     request: FilePin,
     output: Path,
     *,
-    executor: StageExecutor,
+    checkpoints: Checkpoints,
+    timing: Timing,
     cache: SourceCache,
 ) -> dict[str, Any]:
     """Run physical tasks with one source cache for all of their inputs.
@@ -169,7 +186,8 @@ def _build(
         grid: Grid shared with later map stages.
         request: Path and SHA-256 of the saved physical configuration.
         output: Directory for physical tasks and their reports.
-        executor: Shared checkpoint and timing tools.
+        checkpoints: Saved work that can be verified and reused.
+        timing: Run timer for rasterization and downloads.
         cache: Open R2 source cache for this build.
 
     Returns:
@@ -224,7 +242,7 @@ def _build(
     scripts['geodesy/ogr.py'] = sha256_file(geometry_io.__file__)
     scripts['source_assets/cache.py'] = sha256_file(source_cache.__file__)
     scripts['shared/r2.py'] = sha256_file(r2.__file__)
-    files = executor.checkpoints.files
+    files = checkpoints.files
 
     def checksum(path: Path | str) -> str:
         """Read or reuse a verified file digest within this physical attempt.
@@ -310,11 +328,11 @@ def _build(
         Returns:
             The new result, or the verified saved result on resume.
         """
-        return executor.checkpoints.run_function(
+        return checkpoints.run_function(
             f'physical-{name}',
             'physical',
             operation,
-            timing=executor.timing,
+            timing=timing,
             inputs=[request, *inputs],
             outputs=[destination],
             timing_kind='wall' if includes_downloads else 'processing',
@@ -463,7 +481,7 @@ def _build(
                     source_path = cache.acquire(remote)
             with raster_slot:
                 control.check_cancelled()
-                with executor.timing.measure('physical', f'rasterize-{name}'):
+                with timing.measure('physical', f'rasterize-{name}'):
                     water.run(
                         source_path,
                         digest,
