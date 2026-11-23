@@ -9,8 +9,8 @@ from fractions import Fraction
 from pathlib import Path
 
 import numpy as np
-from shapely import contains_xy, get_parts, polygonize, union_all
-from shapely.geometry import LineString, Point
+from shapely import contains_xy, get_parts, line_merge, polygonize, union_all
+from shapely.geometry import LineString, MultiLineString, Point
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.rle import close_memmap
@@ -320,36 +320,42 @@ def geographic_cuts(geometries: Iterable[dict], grid: Grid) -> CutEdges:
     Returns:
         Cuts between cells, including across the longitude seam.
     """
+    lines = []
+    for geometry in geometries:
+        if geometry["type"] == "LineString":
+            lines.append(geometry["coordinates"])
+        else:
+            lines.extend(geometry["coordinates"])
+    if len(lines) > 1:
+        # A bend split between files must supply the same tangent as an
+        # interior vertex. Join exact endpoints and leave branches at junctions.
+        joined = line_merge(MultiLineString(lines))
+        lines = [part.coords for part in get_parts(joined)]
+
     paths = []
     west, north, step = map(Fraction, (grid.west, grid.north, grid.step))
-    for geometry in geometries:
-        lines = (
-            [geometry["coordinates"]]
-            if geometry["type"] == "LineString"
-            else geometry["coordinates"]
-        )
-        for line in lines:
-            coordinates = tuple(map(tuple, line))
-            coordinates = min(coordinates, coordinates[::-1])
-            path = []
-            previous = None
-            offset = 0
-            for lon, lat in coordinates:
-                longitude = Fraction(lon)
-                if previous is not None:
-                    difference = longitude - previous
-                    if difference > 180:
-                        offset -= 360
-                    elif difference < -180:
-                        offset += 360
-                path.append(
-                    (
-                        (longitude + offset - west) / step,
-                        (north - Fraction(lat)) / step,
-                    )
+    for line in lines:
+        coordinates = tuple(map(tuple, line))
+        coordinates = min(coordinates, coordinates[::-1])
+        path = []
+        previous = None
+        offset = 0
+        for lon, lat in coordinates:
+            longitude = Fraction(lon)
+            if previous is not None:
+                difference = longitude - previous
+                if difference > 180:
+                    offset -= 360
+                elif difference < -180:
+                    offset += 360
+            path.append(
+                (
+                    (longitude + offset - west) / step,
+                    (north - Fraction(lat)) / step,
                 )
-                previous = longitude
-            paths.append(path)
+            )
+            previous = longitude
+        paths.append(path)
     copies = [
         [(x + shift, y) for x, y in path]
         for path in paths
@@ -365,22 +371,23 @@ def continuous_face_links(
     offsets: Sequence[int],
     paths: Iterable[Sequence[tuple[Fraction, Fraction]]],
     dsu: _DSU,
+    uncut: _DSU,
     grid: Grid,
 ) -> None:
     """Join parts of the same geometric face separated by a narrow grid gap.
 
     A narrow passage can contain too few cell centres to link two pieces.
-    The actual source lines determine whether those pieces share one face.
+    Only runs connected within the scope before the boundary cuts can be
+    repaired. The source lines determine which face they share.
 
     Args:
         path: Binary file of (first_column, end_column, node_id) records.
         offsets: Run-record offsets for each row.
         paths: Boundary paths in grid coordinates.
         dsu: Sets of connected runs to update.
+        uncut: Sets of connected scope runs before applying the boundary.
         grid: Grid occupied by the runs.
     """
-    if not paths:
-        return
     lines = [LineString(p) for p in paths if len(p) > 1]
     # Douglas-Peucker changes only the supporting envelope by <= .25 grid cells;
     # the two-cell buffer contains the original line and neighbouring centres.
@@ -442,7 +449,7 @@ def continuous_face_links(
         try:
             for face in faces:
                 xmin, ymin, xmax, ymax = face.bounds
-                roots = set()
+                roots = {}
                 for y in range(
                     max(0, math.floor(ymin)), min(grid.height, math.floor(ymax) + 1)
                 ):
@@ -459,11 +466,9 @@ def continuous_face_links(
                         if contains_xy(
                             face, centers, np.full(len(centers), y + 0.5)
                         ).any():
-                            roots.add(dsu.find(int(node)))
-                if roots:
-                    representative = next(iter(roots))
-                    for root in roots:
-                        dsu.union(representative, root)
+                            node = int(node)
+                            scope_root = uncut.find(node)
+                            dsu.union(roots.setdefault(scope_root, node), node)
         finally:
             close_memmap(mapping)
 
@@ -507,6 +512,7 @@ def divide_regions(
             raise ValueError("invalid divided-face label")
         labels_by_row[y].append((index, entity, x))
     dsu = _DSU()
+    uncut = _DSU() if cuts.paths else None
     offsets = [0]
     previous = []
     label_nodes = {}
@@ -526,6 +532,10 @@ def divide_regions(
                 raw, sorted(cuts.horizontal.get(y, ())), grid.width
             ):
                 node = dsu.add()
+                if uncut is not None:
+                    uncut.add()
+                    if current and current[-1][1] == a:
+                        uncut.union(current[-1][2], node)
                 current.append((a, b, node))
                 for index, entity, x in labels_by_row.get(y, ()):
                     if a <= x < b:
@@ -537,19 +547,20 @@ def divide_regions(
                     a, b, n = previous[i]
                     c, d, m = current[j]
                     lo, hi = max(a, c), min(b, d)
-                    if lo < hi and hi - lo > _blocked_count(blocked, lo, hi):
-                        dsu.union(n, m)
+                    if lo < hi:
+                        if uncut is not None:
+                            uncut.union(n, m)
+                        if hi - lo > _blocked_count(blocked, lo, hi):
+                            dsu.union(n, m)
                     if b <= d:
                         i += 1
                     if d <= b:
                         j += 1
-            if (
-                current
-                and current[0][0] == 0
-                and current[-1][1] == grid.width
-                and y not in cuts.wrap
-            ):
-                dsu.union(current[0][2], current[-1][2])
+            if current and current[0][0] == 0 and current[-1][1] == grid.width:
+                if uncut is not None:
+                    uncut.union(current[0][2], current[-1][2])
+                if y not in cuts.wrap:
+                    dsu.union(current[0][2], current[-1][2])
             np.asarray(current, dtype="<u4").tofile(output)
             offsets.append(len(dsu.parent))
             previous = current
@@ -560,8 +571,10 @@ def divide_regions(
     )
     distinct, inverse = np.unique(initial_roots, return_inverse=True)
     # Join pieces in the same geometric face before checking its labels.
-    if len(distinct) > 1:
-        continuous_face_links(directory / "nodes.u32le", offsets, cuts.paths, dsu, grid)
+    if len(distinct) > 1 and uncut is not None:
+        continuous_face_links(
+            directory / "nodes.u32le", offsets, cuts.paths, dsu, uncut, grid
+        )
     roots = np.fromiter((dsu.find(int(root)) for root in distinct), dtype=np.uint32)[
         inverse
     ]

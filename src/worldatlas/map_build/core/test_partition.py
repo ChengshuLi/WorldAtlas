@@ -8,7 +8,9 @@ import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.partition import (
-    divide_regions, geographic_cuts, rasterize_barriers,
+    divide_regions,
+    geographic_cuts,
+    rasterize_barriers,
 )
 
 
@@ -21,7 +23,9 @@ class ExactCrossings(unittest.TestCase):
             (math.nextafter(7.5, math.inf), 12),
         ):
             with self.subTest(longitude=longitude):
-                line = dict(type="LineString", coordinates=[[longitude, 45], [longitude, 0]])
+                line = dict(
+                    type="LineString", coordinates=[[longitude, 45], [longitude, 0]]
+                )
                 cuts = geographic_cuts([line], self.grid)
                 self.assertEqual(cuts.horizontal[4], {edge})
 
@@ -39,6 +43,34 @@ class ExactCrossings(unittest.TestCase):
         cuts = geographic_cuts([line], self.grid)
         self.assertEqual(cuts.wrap, {3, 4, 5})
 
+    def test_split_boundary_preserves_labels_when_the_join_hits_a_cell_centre(self):
+        grid = Grid(8, 4, 45)
+        line = [(-90, 90), (-157.5, 22.5), (-90, -90)]
+        unchanged = dict(type="LineString", coordinates=[(0, 90), (0, -90)])
+        representations = (
+            dict(type="LineString", coordinates=line),
+            dict(type="MultiLineString", coordinates=[line[2:0:-1], line[:2]]),
+        )
+        streams = []
+        with tempfile.TemporaryDirectory() as temp:
+            for index, boundary in enumerate(representations):
+                output = Path(temp) / str(index)
+                owners = divide_regions(
+                    lambda _: [(0, 8)],
+                    grid,
+                    geographic_cuts([boundary, unchanged], grid),
+                    [(11, 2, 1), (22, 6, 1)],
+                    output,
+                )
+                self.assertEqual(sorted(owners.values()), [11, 22])
+                records = np.fromfile(output / "nodes.u32le", dtype="<u4").reshape(
+                    -1, 3
+                )
+                streams.append(
+                    [(start, end, owners[node]) for start, end, node in records]
+                )
+        self.assertEqual(*streams)
+
     def test_horizontal_centre_hits_are_independent_of_path_direction(self):
         line = [(2, 4.5), (5, 4.5), (5, 4.5), (8, 4.5)]
         forward = rasterize_barriers([line], self.grid.width, self.grid.height)
@@ -49,13 +81,19 @@ class ExactCrossings(unittest.TestCase):
 
     def test_antimeridian_crossings_do_not_cut_across_the_whole_map(self):
         line = [[-172.5, 45], [172.5, 30], [-172.5, 15]]
-        forward = geographic_cuts([dict(type="LineString", coordinates=line)], self.grid)
-        reverse = geographic_cuts([dict(type="LineString", coordinates=line[::-1])], self.grid)
+        forward = geographic_cuts(
+            [dict(type="LineString", coordinates=line)], self.grid
+        )
+        reverse = geographic_cuts(
+            [dict(type="LineString", coordinates=line[::-1])], self.grid
+        )
         self.assertEqual(forward.wrap, reverse.wrap)
         self.assertEqual(forward.vertical, reverse.vertical)
         self.assertEqual(forward.horizontal, reverse.horizontal)
         self.assertTrue(forward.wrap)
-        self.assertTrue(all(x in (0, 23) for xs in forward.vertical.values() for x in xs))
+        self.assertTrue(
+            all(x in (0, 23) for xs in forward.vertical.values() for x in xs)
+        )
 
     def test_backtracking_segment_at_exact_centres_is_direction_independent(self):
         line = [(2, 8), (8, 8), (4, 4)]
@@ -131,11 +169,17 @@ class ContinuousFaces(unittest.TestCase):
             ([(8, 12), (3, 6)], "intervals overlap or are unordered"),
             ([(0, 25)], "invalid eligible interval"),
         ):
-            with self.subTest(intervals=intervals), tempfile.TemporaryDirectory() as temp:
+            with (
+                self.subTest(intervals=intervals),
+                tempfile.TemporaryDirectory() as temp,
+            ):
                 with self.assertRaisesRegex(ValueError, message):
                     divide_regions(
-                        lambda y: intervals, self.grid, cuts,
-                        [(101, 1, 2)], Path(temp) / "faces",
+                        lambda y: intervals,
+                        self.grid,
+                        cuts,
+                        [(101, 1, 2)],
+                        Path(temp) / "faces",
                     )
 
     def test_label_must_identify_an_eligible_cell(self):
@@ -153,18 +197,71 @@ class ContinuousFaces(unittest.TestCase):
     def test_no_boundary_preserves_one_connected_face(self):
         with tempfile.TemporaryDirectory() as temp:
             roots = divide_regions(
-                lambda y: [(0, 24)], self.grid, geographic_cuts([], self.grid),
-                [(101, 1, 3)], Path(temp) / "faces",
+                lambda y: [(0, 24)],
+                self.grid,
+                geographic_cuts([], self.grid),
+                [(101, 1, 3)],
+                Path(temp) / "faces",
             )
         self.assertEqual(list(roots.values()), [101])
 
     def test_disjoint_scope_areas_keep_their_own_labels_without_a_boundary(self):
         with tempfile.TemporaryDirectory() as temp:
             roots = divide_regions(
-                lambda y: [(1, 3), (10, 13)], self.grid, geographic_cuts([], self.grid),
-                [(101, 1, 3), (807, 11, 3)], Path(temp) / "faces",
+                lambda y: [(1, 3), (10, 13)],
+                self.grid,
+                geographic_cuts([], self.grid),
+                [(101, 1, 3), (807, 11, 3)],
+                Path(temp) / "faces",
             )
             self.assertEqual(sorted(roots.values()), [101, 807])
+
+    def test_boundary_outside_the_scope_cannot_connect_disjoint_faces(self):
+        grid = Grid(12, 6, 30)
+        cuts = rasterize_barriers([[(3, 0), (3, 6)]], grid.width, grid.height)
+        with tempfile.TemporaryDirectory() as temp:
+            roots = divide_regions(
+                lambda y: [(1, 2)] if y in (1, 3) else [],
+                grid,
+                cuts,
+                [(11, 1, 1), (22, 1, 3)],
+                Path(temp) / "faces",
+            )
+        self.assertEqual(sorted(roots.values()), [11, 22])
+
+    def test_seam_boundary_keeps_opposite_faces_separate(self):
+        grid = Grid(8, 4, 45)
+        cuts = geographic_cuts(
+            [
+                {"type": "LineString", "coordinates": [(-180, 90), (-180, -90)]},
+                {"type": "LineString", "coordinates": [(0, 90), (0, -90)]},
+            ],
+            grid,
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            owners = divide_regions(
+                lambda _: [(0, 8)],
+                grid,
+                cuts,
+                [(11, 0, 0), (22, 7, 0)],
+                Path(temp) / "faces",
+            )
+        self.assertEqual(sorted(owners.values()), [11, 22])
+
+    def test_nearby_branch_endpoint_does_not_join_either_side_of_main_boundary(self):
+        grid = Grid(12, 6, 30)
+        cuts = rasterize_barriers(
+            [[(3, 0), (3, 6)], [(5, 3), (4, 3)]], grid.width, grid.height
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            owners = divide_regions(
+                lambda _: [(0, 10)],
+                grid,
+                cuts,
+                [(11, 1, 1), (22, 8, 1)],
+                Path(temp) / "faces",
+            )
+        self.assertEqual(sorted(owners.values()), [11, 22])
 
     def test_two_disjoint_runs_can_join_through_the_next_row(self):
         def intervals(y):
@@ -172,8 +269,11 @@ class ContinuousFaces(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as temp:
             roots = divide_regions(
-                intervals, self.grid, geographic_cuts([], self.grid),
-                [(101, 6, 0), (101, 4, 1)], Path(temp) / "faces",
+                intervals,
+                self.grid,
+                geographic_cuts([], self.grid),
+                [(101, 6, 0), (101, 4, 1)],
+                Path(temp) / "faces",
             )
             self.assertEqual(list(roots.values()), [101])
 
@@ -182,8 +282,13 @@ class ContinuousFaces(unittest.TestCase):
             cuts = rasterize_barriers(
                 [[(0, 6), (0, 6), (24, 6)]], self.grid.width, self.grid.height
             )
-            with self.assertRaisesRegex(ValueError, "endpoint has a repeated coordinate"):
+            with self.assertRaisesRegex(
+                ValueError, "endpoint has a repeated coordinate"
+            ):
                 divide_regions(
-                    self.intervals, self.grid, cuts,
-                    [(101, 1, 2), (807, 1, 10)], Path(temp) / "faces",
+                    self.intervals,
+                    self.grid,
+                    cuts,
+                    [(101, 1, 2), (807, 1, 10)],
+                    Path(temp) / "faces",
                 )
