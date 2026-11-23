@@ -21,7 +21,12 @@ from worldatlas.map_build.land.connected import build_components
 from worldatlas.map_build.land import hints
 from worldatlas.map_build.land.reference_index import build_reference_index
 from worldatlas.map_build.land.search_engine import (
-    blocks, certificate_pass, component_witnesses, exact_pass, expanded, finalize,
+    blocks,
+    certificate_pass,
+    component_witnesses,
+    exact_pass,
+    expanded,
+    finalize,
     first_points,
 )
 from worldatlas.shared.files import read_json
@@ -68,7 +73,9 @@ class AssignmentTests(unittest.TestCase):
         )
         with ComponentGrid(root / "physical", root / "components", grid) as components:
             mainland = {
-                components.component_at(float(grid.longitude(x)), float(grid.latitude(y)))
+                components.component_at(
+                    float(grid.longitude(x)), float(grid.latitude(y))
+                )
                 for y, x, _, _ in seed_cells
             }
             report = assign_components(
@@ -117,7 +124,9 @@ class AssignmentTests(unittest.TestCase):
         )
         with ComponentGrid(root / "physical", root / "components", grid) as components:
             mainland = {
-                components.component_at(float(grid.longitude(x)), float(grid.latitude(y)))
+                components.component_at(
+                    float(grid.longitude(x)), float(grid.latitude(y))
+                )
                 for y, x, _, _ in seed_cells
             }
             result = assign_components(
@@ -143,13 +152,21 @@ class AssignmentTests(unittest.TestCase):
             data["grid"]["height"] -= 1
             config.write_text(json.dumps(data))
             with self.assertRaisesRegex(ValueError, "seed index grid differs"):
-                assign_components(components, directory, bindings, root / "result", roots=[])
+                assign_components(
+                    components, directory, bindings, root / "result", roots=[]
+                )
             config.write_bytes(original)
-            with self.assertRaisesRegex(ValueError, "roots must identify existing parent"):
-                assign_components(components, directory, bindings, root / "result", roots=[999])
+            with self.assertRaisesRegex(
+                ValueError, "roots must identify existing parent"
+            ):
+                assign_components(
+                    components, directory, bindings, root / "result", roots=[999]
+                )
             (directory / "representatives.u32le").write_bytes(b"changed")
             with self.assertRaisesRegex(ValueError, "representative seed cells differ"):
-                assign_components(components, directory, bindings, root / "result", roots=[])
+                assign_components(
+                    components, directory, bindings, root / "result", roots=[]
+                )
 
     def test_a_smaller_distance_wins_even_below_the_old_tie_threshold(self):
         values = finalize(
@@ -162,8 +179,11 @@ class AssignmentTests(unittest.TestCase):
 
     def test_exact_ties_use_order_of_eligible_reference_owners(self):
         result = finalize(
-            [301, 301], [True, False], np.array([[10.0, 10.0], [1.0, 2.0]]),
-            [301, 999], priority_codes=[42, 999, 301],
+            [301, 301],
+            [True, False],
+            np.array([[10.0, 10.0], [1.0, 2.0]]),
+            [301, 999],
+            priority_codes=[42, 999, 301],
         )
         self.assertEqual(result.tolist(), [999, 301])
         np.testing.assert_array_equal(
@@ -171,7 +191,10 @@ class AssignmentTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(ValueError, "tie order must cover every reference"):
             finalize(
-                [301], [True], np.array([[10.0, 10.0]]), [301, 999],
+                [301],
+                [True],
+                np.array([[10.0, 10.0]]),
+                [301, 999],
                 priority_codes=[999, 999],
             )
 
@@ -187,11 +210,36 @@ class AssignmentTests(unittest.TestCase):
 
 
 class ComponentRunTests(unittest.TestCase):
-    def test_large_component_is_split_without_gaps_and_unresolved_mask_is_optional(self):
+    def test_queries_preserve_columns_above_the_signed_limit(self):
+        limit = 2**31
+        width = 2**32 - 1
+        runs = np.array(
+            [[limit - 3, limit + 252, 0], [width - 2, width, 1]], dtype="<u4"
+        )
+        offsets = np.array([0, 2])
+        roots = np.array([0, 1], dtype="<u4")
+        batches = list(expanded(runs, 0, offsets, roots, 1, 128))
+        self.assertEqual([len(batch[0]) for batch in batches], [128, 127, 2])
+        _, starts, ends, _ = map(np.concatenate, zip(*batches))
+        expected = [*range(limit - 3, limit + 252), width - 2, width - 1]
+        self.assertEqual(starts.tolist(), expected)
+        self.assertEqual(ends.tolist(), [column + 1 for column in expected])
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "runs.u32le"
+            runs.tofile(path)
+            _, first_columns = first_points(path, offsets, roots, width)
+        self.assertEqual(first_columns.tolist(), [limit - 3, width - 2])
+
+    def test_large_component_is_split_without_gaps_and_unresolved_mask_is_optional(
+        self,
+    ):
         runs = np.array([[0, 260, 0], [262, 270, 1], [2, 6, 2]], dtype=np.uint32)
         roots = np.array([0, 1, 2], dtype=np.uint32)
         offsets = np.array([0, 2, 3])
-        for ambiguity, expected in ((None, [130, 4, 2]), (np.array([True, False, True]), [130, 0, 2])):
+        for ambiguity, expected in (
+            (None, [130, 4, 2]),
+            (np.array([True, False, True]), [130, 0, 2]),
+        ):
             with self.subTest(expected=expected):
                 batches = list(
                     expanded(runs, 0, offsets, roots, 2, 128, ambiguous=ambiguity)
@@ -204,7 +252,9 @@ class ComponentRunTests(unittest.TestCase):
                         match = positions == i
                         self.assertEqual(set(rows[match]), {int(i == 2)})
                         self.assertEqual(starts[match].tolist(), list(range(lo, hi, 2)))
-                        self.assertEqual(ends[match].tolist(), list(range(lo + 2, hi + 1, 2)))
+                        self.assertEqual(
+                            ends[match].tolist(), list(range(lo + 2, hi + 1, 2))
+                        )
 
     def test_invalid_intervals_or_chunk_size_are_rejected(self):
         for run, chunk, message in (
@@ -213,7 +263,11 @@ class ComponentRunTests(unittest.TestCase):
         ):
             with self.subTest(run=run, chunk=chunk):
                 with self.assertRaisesRegex(ValueError, message):
-                    list(expanded(np.array([run]), 0, np.array([0, 1]), np.array([0]), chunk))
+                    list(
+                        expanded(
+                            np.array([run]), 0, np.array([0, 1]), np.array([0]), chunk
+                        )
+                    )
 
     def test_first_points_require_complete_and_valid_component_stream(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -268,17 +322,28 @@ class ComponentRunTests(unittest.TestCase):
                 with self.subTest(message=message):
                     with self.assertRaisesRegex(ValueError, message):
                         component_witnesses(
-                            path, runs, roots, columns, index, np.array(hints_value),
+                            path,
+                            runs,
+                            roots,
+                            columns,
+                            index,
+                            np.array(hints_value),
                         )
-            with patch.object(index, "witnesses", return_value=(np.array([np.nan]), None)):
+            with patch.object(
+                index, "witnesses", return_value=(np.array([np.nan]), None)
+            ):
                 with self.assertRaisesRegex(ValueError, "invalid WGS84 witness bound"):
                     component_witnesses(path, offsets, roots, 1, index, hints_by_root)
 
             ambiguous = np.array([True])
             with self.assertRaisesRegex(ValueError, "bad certificate state"):
-                certificate_pass(path, offsets, roots, index, [-1], hints_by_root, ambiguous)
+                certificate_pass(
+                    path, offsets, roots, index, [-1], hints_by_root, ambiguous
+                )
             with self.assertRaisesRegex(ValueError, "incomplete certificate stream"):
-                certificate_pass(path, [0, 2], roots, index, [1], hints_by_root, ambiguous)
+                certificate_pass(
+                    path, [0, 2], roots, index, [1], hints_by_root, ambiguous
+                )
             for best, hints_value, message in (
                 (np.array([1.0]), hints_by_root, "bad exact state"),
                 (np.array([[1.0]]), [999], "missing real upper witness"),
@@ -287,11 +352,18 @@ class ComponentRunTests(unittest.TestCase):
             ):
                 with self.subTest(message=message):
                     with self.assertRaisesRegex(ValueError, message):
-                        exact_pass(path, offsets, roots, index, hints_value, ambiguous, best)
+                        exact_pass(
+                            path, offsets, roots, index, hints_value, ambiguous, best
+                        )
             with self.assertRaisesRegex(ValueError, "incomplete exact stream"):
                 exact_pass(
-                    path, [0, 2], roots, index, hints_by_root,
-                    np.array([False]), np.array([[1.0]]),
+                    path,
+                    [0, 2],
+                    roots,
+                    index,
+                    hints_by_root,
+                    np.array([False]),
+                    np.array([[1.0]]),
                 )
 
 
@@ -331,7 +403,8 @@ class ShoreHints(unittest.TestCase):
         tree = cKDTree(hints._xyz([0], [0]))
         search = SimpleNamespace(query=tree.query, query_ball_point=lambda *_, **__: [])
         self.assertEqual(
-            hints.wgs84_nearest_categories(search, [0], [0], [17], [0], [0]).tolist(), [17]
+            hints.wgs84_nearest_categories(search, [0], [0], [17], [0], [0]).tolist(),
+            [17],
         )
 
     def test_failed_geodesic_cannot_produce_a_hint(self):

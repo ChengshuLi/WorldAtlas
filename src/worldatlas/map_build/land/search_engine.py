@@ -88,7 +88,7 @@ def first_points(
     """
     roots = np.asarray(roots, dtype=np.uint32)
     ys = np.full(len(roots), -1, dtype=np.int32)
-    xs = np.full(len(roots), -1, dtype=np.int32)
+    xs = np.full(len(roots), -1, dtype=np.int64)
     last = 0
     for off, a in blocks(path, guard=guard):
         if np.any(a[:, 0] >= a[:, 1]) or np.any(a[:, 1] > width):
@@ -202,8 +202,8 @@ def oversized_run_queries(
         ends = np.minimum(starts + chunk, end)
         yield (
             np.full(n, row, dtype=np.int32),
-            starts.astype(np.int32),
-            ends.astype(np.int32),
+            starts,
+            ends,
             np.full(n, root_position, dtype=np.int64),
         )
         start = int(ends[-1])
@@ -241,34 +241,36 @@ def expanded(
     idx = np.flatnonzero(match)
     if ambiguous is not None:
         idx = idx[ambiguous[pos[idx]]]
-    last = 0
+    lengths = a[idx, 1].astype(np.int64) - a[idx, 0].astype(np.int64)
+    counts = (lengths + chunk - 1) // chunk
+    cumulative = np.r_[0, np.cumsum(counts)]
+    first = 0
     # Process entire input block; each yielded query group is bounded.
-    while last < len(idx):
-        lengths = a[idx[last:], 1].astype(np.int64) - a[idx[last:], 0].astype(np.int64)
-        counts = (lengths + chunk - 1) // chunk
-        if counts[0] > max_queries:
+    while first < len(idx):
+        if counts[first] > max_queries:
             yield from oversized_run_queries(
-                a, base, co, pos, int(idx[last]), chunk, max_queries
+                a, base, co, pos, int(idx[first]), chunk, max_queries
             )
-            last += 1
+            first += 1
             continue
-        cum = np.cumsum(counts)
-        n = max(1, int(np.searchsorted(cum, max_queries, side="right")))
-        chosen = idx[last : last + n]
-        cc = counts[:n]
-        repeat = np.repeat(np.arange(n), cc)
-        within = np.arange(len(repeat)) - np.repeat(np.cumsum(cc) - cc, cc)
-        start = a[chosen[repeat], 0].astype(np.int64) + within * chunk
-        end = np.minimum(a[chosen[repeat], 1].astype(np.int64), start + chunk)
-        p = pos[chosen[repeat]]
-        rows = np.searchsorted(co, base + chosen[repeat], side="right") - 1
+        # Choose the last whole run whose intervals fit in this batch.
+        limit = cumulative[first] + max_queries
+        stop = int(np.searchsorted(cumulative, limit, side="right")) - 1
+        sizes = counts[first:stop]
+        chosen = np.repeat(idx[first:stop], sizes)
+        within = np.arange(cumulative[first], cumulative[stop]) - np.repeat(
+            cumulative[first:stop], sizes
+        )
+        start = a[chosen, 0].astype(np.int64) + within * chunk
+        end = np.minimum(a[chosen, 1].astype(np.int64), start + chunk)
+        rows = np.searchsorted(co, base + chosen, side="right") - 1
         yield (
             rows.astype(np.int32),
-            start.astype(np.int32),
-            end.astype(np.int32),
-            p.astype(np.int64),
+            start,
+            end,
+            pos[chosen],
         )
-        last += n
+        first = stop
 
 
 def certificate_pass(
