@@ -1,10 +1,9 @@
 """Import explicitly interpreted points and scope areas from cataloged sources."""
 
 import time
-from collections.abc import Mapping
-from typing import Literal, TypedDict, cast
+from typing import TypedDict
 
-from worldatlas.shared.files import JSONValue
+from worldatlas.geodesy.geojson import Point, Polygon
 from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.storage import (
@@ -13,20 +12,6 @@ from worldatlas.source_imports.shared.storage import (
     feature_result,
     save_features,
 )
-
-
-class Point(TypedDict):
-    """An explicitly selected WGS84 point."""
-
-    type: Literal["Point"]
-    coordinates: tuple[float, float]
-
-
-class Polygon(TypedDict):
-    """An explicit WGS84 polygon with exterior and interior rings."""
-
-    type: Literal["Polygon"]
-    coordinates: list[list[tuple[float, float]]]
 
 
 class Selection(TypedDict):
@@ -67,7 +52,7 @@ def interpreted_geometry(
     features: list[Feature] = [
         {
             "feature_id": selection["feature_id"],
-            "geometry": cast(Mapping[str, JSONValue], selection["geometry"]),
+            "geometry": selection["geometry"],
         }
         for selection in selections
     ]

@@ -70,11 +70,16 @@ class Geometry[Kind: str, Coordinates](TypedDict, closed=True):
     coordinates: Coordinates
 
 
+type Point[PointCoordinates = Position] = Geometry[Literal["Point"], PointCoordinates]
+type Polygon[PointCoordinates = Position] = Geometry[
+    Literal["Polygon"], Coordinates[Ring[PointCoordinates]]
+]
+
 type GeoJSONGeometry[PointCoordinates = list[float]] = Annotated[
-    Geometry[Literal["Point"], PointCoordinates]
+    Point[PointCoordinates]
     | Geometry[Literal["MultiPoint", "LineString"], Coordinates[PointCoordinates]]
     | Geometry[Literal["MultiLineString"], Coordinates[Coordinates[PointCoordinates]]]
-    | Geometry[Literal["Polygon"], Coordinates[Ring[PointCoordinates]]]
+    | Polygon[PointCoordinates]
     | Geometry[
         Literal["MultiPolygon"], Coordinates[Coordinates[Ring[PointCoordinates]]]
     ],

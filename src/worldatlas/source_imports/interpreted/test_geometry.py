@@ -109,3 +109,23 @@ class InterpretedGeometryTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, message):
                     run_import(connect, "recipe")
                 self.assertEqual(self.saved_features(), before)
+
+    def test_recipe_rejects_invalid_geojson(self):
+        geometries = (
+            dict(type="Point", coordinates=[181, 20]),
+            dict(type="Point", coordinates=[10, 91]),
+            dict(type="Polygon", coordinates=[]),
+            dict(type="Polygon", coordinates=[[[9, 18], [11, 18], [9, 18]]]),
+            dict(type="LineString", coordinates=[[9, 18], [11, 18]]),
+        )
+        for geometry in geometries:
+            with (
+                self.subTest(geometry=geometry),
+                self.assertRaises(psycopg.errors.CheckViolation) as rejected,
+                self.database.transaction(),
+            ):
+                selection = dict(feature_id="invalid", geometry=geometry)
+                self.store_arguments(dict(self.arguments, selections=[selection]))
+            self.assertEqual(
+                rejected.exception.diag.constraint_name, "construction_arguments_valid"
+            )
