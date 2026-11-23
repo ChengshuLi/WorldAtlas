@@ -957,6 +957,10 @@ class CommandTests(unittest.TestCase):
                 db.execute.assert_called_once_with(lock)
                 return published
 
+            def build_before_lock(*_):
+                db.execute.assert_not_called()
+                return {"inputs": {}}
+
             def cleanup(*_):
                 db.execute.assert_called_once_with(lock)
                 self.assertEqual("Published" in output.getvalue(), published)
@@ -968,7 +972,8 @@ class CommandTests(unittest.TestCase):
                   patch.dict(os.environ, NEON_DATABASE_URL="host=test"),
                   patch("psycopg.connect", return_value=nullcontext(db)),
                   patch(command + ".make_r2_client", return_value=R2Client(storage)) as client,
-                  patch(command + ".build_bundle", return_value={"inputs": {}}),
+                  patch(command + ".build_bundle", side_effect=build_before_lock) as bundle,
+                  patch(command + ".tempfile.TemporaryDirectory", wraps=tempfile.TemporaryDirectory) as temp_dir,
                   patch(f"{command}.{action}", side_effect=after_lock) as operation,
                   patch(command + ".retire_previews", side_effect=cleanup) as retire,
                   redirect_stdout(io.StringIO()) as output):
@@ -981,9 +986,13 @@ class CommandTests(unittest.TestCase):
             operation.assert_called_once()
             messages = output.getvalue()
             if action == "stage":
+                bundle.assert_called_once()
+                temp_dir.assert_called_once()
                 retire.assert_not_called()
                 self.assertIn("Preview:", messages)
             else:
+                bundle.assert_not_called()
+                temp_dir.assert_not_called()
                 retire.assert_called_once()
                 self.assertEqual(retire.call_args.args[2], "v9.0")
                 self.assertEqual("Published" in messages, published)
