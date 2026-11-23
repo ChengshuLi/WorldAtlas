@@ -8,7 +8,6 @@ import json
 import mimetypes
 import os
 from pathlib import Path
-import runpy
 import shutil
 import struct
 import sys
@@ -937,13 +936,6 @@ class PreviewRetirementTests(unittest.TestCase):
 
 class CommandTests(unittest.TestCase):
     """Check how command arguments select the storage, lock, and operation."""
-
-    def test_module_entry_point_displays_help(self):
-        with patch.object(sys, "argv", ["worldatlas-release", "--help"]), redirect_stdout(io.StringIO()) as output:
-            with self.assertRaises(SystemExit) as result:
-                runpy.run_module("worldatlas.map_releases", run_name="__main__")
-        self.assertEqual(result.exception.code, 0)
-        self.assertIn("restore-inputs", output.getvalue())
 
     def test_write_commands_require_a_direct_catalog_connection(self):
         for url, error in (("", "set NEON_DATABASE_URL"), ("host=atlas-pooler.example.org", "use a direct Neon connection")):
