@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import patch
 from worldatlas.map_build import build as pipeline
 from worldatlas.map_build.test_support import selection
-from worldatlas.shared.files import pin_file, read_json, write_json
+from worldatlas.shared.files import json_bytes, pin_file, read_json, write_json
 
 
 class ExecutorResumeTests(unittest.TestCase):
@@ -71,8 +71,13 @@ class ExecutorResumeTests(unittest.TestCase):
         self.assertEqual(
             read_json(self.out / "build-config.json"), read_json(self.config)
         )
-        original = pin_file(self.out / "run-identity.json")
         first.close()
+        identity_path = self.out / "run-identity.json"
+        identity = read_json(identity_path)
+        self.assertNotIn("runtime_paths", identity)
+        identity["runtime_paths"] = {"PROJ_DATA": "/old/proj/data", "PROJ_LIB": None}
+        identity_path.write_bytes(json_bytes(identity))
+        original = pin_file(identity_path)
         with (
             patch.object(
                 pipeline, "code_identity", return_value={"changed.py": "0" * 64}

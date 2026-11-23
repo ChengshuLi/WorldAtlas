@@ -8,7 +8,6 @@ import copy
 import hashlib
 import json
 import math
-import os
 import signal
 import sys
 import threading
@@ -49,7 +48,6 @@ from worldatlas.map_build.inputs.configuration import (
     require_separate_cache_and_output,
 )
 from worldatlas.map_build.inputs.selection import (
-    canonical_bytes,
     prepare_geography,
     read_saved,
     read_selection,
@@ -58,6 +56,7 @@ from worldatlas.map_build.inputs.selection_types import BuildSelection
 from worldatlas.map_build.physical import build as physical_build
 from worldatlas.shared.database import connect_neon, neon_connection_url
 from worldatlas.shared.files import (
+    compact_json_bytes,
     json_bytes,
     pin_file,
     read_json,
@@ -95,7 +94,6 @@ class RunIdentity(TypedDict):
     divide: list[int] | None
     reuse_from: str | None
     recompute_division: bool
-    runtime_paths: dict[str, str | None]
     input_selection_sha256: str
     physical_reuse: NotRequired[PhysicalReuse]
 
@@ -425,11 +423,8 @@ class Pipeline:
             "divide": self.requested_parents,
             "reuse_from": str(self.reuse_from) if self.reuse_from is not None else None,
             "recompute_division": self.recompute_division,
-            "runtime_paths": {
-                key: os.environ.get(key) for key in ("PROJ_DATA", "PROJ_LIB")
-            },
             "input_selection_sha256": hashlib.sha256(
-                canonical_bytes(self.selection)
+                compact_json_bytes(self.selection)
             ).hexdigest(),
         }
         if self.physical_reuse is not None:
@@ -452,7 +447,7 @@ class Pipeline:
                 "code",
                 "repository",
                 "runtime",
-                "runtime_paths",
+                "runtime_paths",  # Earlier run records included raw PROJ environment variables.
                 "scripts_root",
             ):
                 saved.pop(key, None)

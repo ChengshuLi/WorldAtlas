@@ -100,6 +100,29 @@ def json_bytes(value: JSONValue, *, sort_keys: bool = True) -> bytes:
     return (text + "\n").encode("utf-8")
 
 
+def compact_json_bytes(value: JSONValue) -> bytes:
+    """Encode a JSON value as compact, sorted UTF-8 for hashing.
+
+    Args:
+        value: JSON-compatible value to encode.
+
+    Returns:
+        Compact JSON with sorted keys, literal Unicode, and a trailing newline.
+
+    Raises:
+        TypeError: A value cannot be represented as JSON.
+        ValueError: A number is nonfinite or a container refers to itself.
+    """
+    text = json.dumps(
+        value,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
+    )
+    return (text + "\n").encode("utf-8")
+
+
 def sync_directory(path: Path | str) -> None:
     """Flush directory entry changes to disk.
 

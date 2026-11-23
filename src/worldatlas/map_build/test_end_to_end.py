@@ -24,8 +24,8 @@ from worldatlas.map_build import compare as comparison_command
 from worldatlas.map_build.build import Pipeline, physical_reference
 from worldatlas.map_build.division import engine
 from worldatlas.map_build.inputs import selection as selection_inputs
-from worldatlas.map_build.inputs.selection import read_selection, canonical_bytes
-from worldatlas.shared.files import pin_file, read_json, write_json
+from worldatlas.map_build.inputs.selection import read_selection
+from worldatlas.shared.files import compact_json_bytes, pin_file, read_json, write_json
 
 
 @unittest.skipUnless(
@@ -178,7 +178,7 @@ class EndToEndTests(unittest.TestCase):
                 with psycopg.connect(url) as db:
                     frozen = read_selection(db)
                 selected = raw / "selection.json"
-                selected.write_bytes(canonical_bytes(frozen))
+                selected.write_bytes(compact_json_bytes(frozen))
                 land_config = dict(
                     schema="land-raster-candidate-v1",
                     selection_notes="Fixture coast",

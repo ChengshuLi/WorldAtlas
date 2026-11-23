@@ -10,9 +10,13 @@ from tempfile import TemporaryDirectory
 from worldatlas.map_build.core.comparison import compare
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.inputs.releases import cache_release_reference
-from worldatlas.map_build.inputs.selection import canonical_bytes
 from worldatlas.map_build.inputs.selection_types import MapCodeBinding
-from worldatlas.shared.files import JSONValue, read_json, verify_pins
+from worldatlas.shared.files import (
+    JSONValue,
+    compact_json_bytes,
+    read_json,
+    verify_pins,
+)
 from worldatlas.source_assets.cache import SourceCache
 
 
@@ -56,7 +60,7 @@ def compare_release(
     selection = read_json(run / "input-selection.json")
     identity = read_json(identity_path)
     if (
-        hashlib.sha256(canonical_bytes(selection)).hexdigest()
+        hashlib.sha256(compact_json_bytes(selection)).hexdigest()
         != identity["input_selection_sha256"]
     ):
         raise ValueError("the saved geographic selection changed after the build")

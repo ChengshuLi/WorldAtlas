@@ -16,9 +16,8 @@ from worldatlas.map_build import compare as command
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.inputs import releases
-from worldatlas.map_build.inputs.selection import canonical_bytes
 from worldatlas.shared import r2
-from worldatlas.shared.files import pin_file, read_json, sha256_file, write_json
+from worldatlas.shared.files import compact_json_bytes, pin_file, read_json, sha256_file, write_json
 
 
 class CompareCommandTests(unittest.TestCase):
@@ -42,7 +41,7 @@ class CompareCommandTests(unittest.TestCase):
             self.run / "run-identity.json",
             {
                 "input_selection_sha256": hashlib.sha256(
-                    canonical_bytes(self.selection)
+                    compact_json_bytes(self.selection)
                 ).hexdigest(),
             },
         )

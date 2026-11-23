@@ -21,7 +21,6 @@ import psycopg
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.code_archive import read_source
 from worldatlas.map_build.inputs.selection import (
-    canonical_bytes,
     entity_colors,
     validate_map_code_bindings,
 )
@@ -44,6 +43,7 @@ from worldatlas.map_releases.inputs import (
 )
 from worldatlas.shared.database import connect_neon, neon_connection_url
 from worldatlas.shared.files import (
+    compact_json_bytes,
     json_bytes,
     pin_file,
     read_json,
@@ -176,7 +176,7 @@ def build_bundle(
     # as provenance and reads the category bindings needed by the viewer.
     selection: BuildSelection = read_json(run / "input-selection.json")
     if (
-        hashlib.sha256(canonical_bytes(selection)).hexdigest()
+        hashlib.sha256(compact_json_bytes(selection)).hexdigest()
         != identity["input_selection_sha256"]
     ):
         raise ValueError("the saved geographic selection changed after the build")

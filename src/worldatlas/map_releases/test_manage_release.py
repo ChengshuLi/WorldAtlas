@@ -20,7 +20,6 @@ from botocore.exceptions import ClientError
 
 from worldatlas.shared.r2 import R2Client, R2ObjectMissing
 from worldatlas.map_build.execution.code_archive import capture_source, write_source
-from worldatlas.map_build.inputs.selection import canonical_bytes
 from worldatlas.map_build.test_support import selection
 from worldatlas.map_releases.catalog import (
     RELEASE_BUCKET,
@@ -44,7 +43,7 @@ from worldatlas.map_releases.manage_release import (
     verify_object,
     version,
 )
-from worldatlas.shared.files import pin_file
+from worldatlas.shared.files import compact_json_bytes, pin_file
 
 
 class BundleTests(unittest.TestCase):
@@ -103,7 +102,7 @@ class BundleTests(unittest.TestCase):
                     "request": pin_file(request),
                     "divide": [0, 12],
                     "input_selection_sha256": hashlib.sha256(
-                        canonical_bytes(self.selection)
+                        compact_json_bytes(self.selection)
                     ).hexdigest(),
                 }
             )
@@ -312,7 +311,7 @@ class BundleTests(unittest.TestCase):
         self.snapshot.write_text(json.dumps(self.selection))
         identity_file = self.run / "run-identity.json"
         identity = json.loads(identity_file.read_bytes())
-        identity["input_selection_sha256"] = hashlib.sha256(canonical_bytes(self.selection)).hexdigest()
+        identity["input_selection_sha256"] = hashlib.sha256(compact_json_bytes(self.selection)).hexdigest()
         identity_file.write_text(json.dumps(identity))
         report = json.loads(self.report.read_bytes())
         report["original_run_identity"] = pin_file(identity_file)
@@ -421,7 +420,7 @@ class BundleTests(unittest.TestCase):
         identity_path = self.run / "run-identity.json"
         identity = json.loads(identity_path.read_text())
         identity["input_selection_sha256"] = hashlib.sha256(
-            canonical_bytes(self.selection)
+            compact_json_bytes(self.selection)
         ).hexdigest()
         identity_path.write_text(json.dumps(identity))
         report = json.loads(self.report.read_text())

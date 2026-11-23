@@ -67,31 +67,6 @@ def validate_map_code_bindings(geography: GeographicSelection) -> None:
         pairs.add(pair)
 
 
-def canonical_bytes(selection: BuildSelection) -> bytes:
-    """Encode a frozen selection as compact, sorted JSON for comparisons.
-
-    Args:
-        selection: Frozen input selection to encode.
-
-    Returns:
-        UTF-8 bytes with sorted keys and one trailing newline.
-
-    Raises:
-        TypeError: A value cannot be encoded as JSON.
-        ValueError: A number is nonfinite or a container refers to itself.
-    """
-    return (
-        json.dumps(
-            selection,
-            sort_keys=True,
-            separators=(",", ":"),
-            ensure_ascii=False,
-            allow_nan=False,
-        )
-        + "\n"
-    ).encode()
-
-
 def entity_colors(selection: BuildSelection) -> list[EntityColor]:
     """Collect the configured colors of entities in a selection.
 

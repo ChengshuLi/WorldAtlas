@@ -13,13 +13,13 @@ import psycopg
 from psycopg.types.json import Jsonb
 
 from worldatlas.map_build.inputs.selection import (
-    canonical_bytes,
     prepare_geography,
     read_saved,
     read_selection,
     validate_map_code_bindings,
 )
 from worldatlas.map_build.test_support import selection
+from worldatlas.shared.files import compact_json_bytes
 from worldatlas.source_assets.catalog import catalog_sources
 
 
@@ -72,7 +72,7 @@ class BindingTests(unittest.TestCase):
     def test_saved_values_are_read_without_querying_neon(self):
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / "selection.json"
-            path.write_bytes(canonical_bytes(self.frozen))
+            path.write_bytes(compact_json_bytes(self.frozen))
             self.assertEqual(read_saved(path), self.frozen)
             self.frozen["schema"] = "worldatlas-input-selection-v1"
             path.write_text(json.dumps(self.frozen))
@@ -178,11 +178,11 @@ class SelectionTests(unittest.TestCase):
             {(b["entity_id"], b["physical_class"]) for b in geography["category_bindings"]},
             {(2, "land"), (2, "water")},
         )
-        first = canonical_bytes(frozen)
+        first = compact_json_bytes(frozen)
         self.writer.execute(
             'UPDATE atlas.source_features SET geometry=\' {"type":"Point","coordinates":[11,21]}\' WHERE id=\'__selection_point\''
         )
-        self.assertEqual(canonical_bytes(frozen), first)
+        self.assertEqual(compact_json_bytes(frozen), first)
         self.assertEqual(
             self.read()["geography"]["features"][0]["geometry"]["coordinates"], [11, 21]
         )
