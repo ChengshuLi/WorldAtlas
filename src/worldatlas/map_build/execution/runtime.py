@@ -533,35 +533,3 @@ def open_stage_workspace(
             Timing.open_run(attempt_dir, setup_started, resume=resume)
         ) as timing:
             yield checkpoints, timing
-
-
-def execute_stage[Result: JSONValue](
-    name: str,
-    group: str,
-    operation: Callable[[], Result],
-    *,
-    checkpoints: Checkpoints | None,
-    timing: Timing | None,
-    inputs: list[dict[str, str]],
-    outputs: Iterable[Path | str],
-) -> Result:
-    """Run a bound operation directly or through its checkpoint.
-
-    Args:
-        name: Checkpoint ID.
-        group: Timing group.
-        operation: Function with all its inputs already supplied.
-        checkpoints: Saved work, or None to run directly.
-        timing: Run timer, required when checkpoints are supplied.
-        inputs: Files that must still match their pins.
-        outputs: Files or directories produced by the operation.
-
-    Returns:
-        The calculated result or the same result loaded from a completed stage.
-    """
-    if checkpoints is None:
-        return operation()
-    assert timing is not None, "checkpointed stages need a run timer"
-    return checkpoints.run_function(
-        name, group, operation, timing=timing, inputs=inputs, outputs=outputs
-    )

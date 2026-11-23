@@ -31,11 +31,7 @@ from worldatlas.map_build.division.shores import (
     land_owner_order,
 )
 from worldatlas.map_build.execution.control import check_cancelled, stage
-from worldatlas.map_build.execution.runtime import (
-    Checkpoints,
-    RunFilePins,
-    execute_stage,
-)
+from worldatlas.map_build.execution.runtime import Checkpoints
 from worldatlas.map_build.execution.timing import Timing
 from worldatlas.map_build.inputs.selection_types import GeographicSelection
 from worldatlas.map_build.land.components import ComponentGrid
@@ -227,9 +223,9 @@ class ParentDivision:
         configuration: dict[str, Any],
         *,
         compiled: CompiledDivision,
+        checkpoints: Checkpoints,
+        timing: Timing,
         parent_directory: Path | str | None = None,
-        checkpoints: Checkpoints | None = None,
-        timing: Timing | None = None,
         input_pins: Iterable[dict[str, str]] = (),
         shore_provider: Callable[[], ShoreGeometry] | None = None,
     ) -> None:
@@ -243,10 +239,10 @@ class ParentDivision:
             directory: Directory for this division's outputs.
             configuration: Build settings used by the rules.
             compiled: This parent's child entities and assembled rules.
+            checkpoints: Checkpoint store for this run.
+            timing: Run timer shared by all stages.
             parent_directory: Inherited mask of the parent's cells. Omit only for
                 the root.
-            checkpoints: Saved work, or None to run directly.
-            timing: Shared run timer, required when checkpoints are supplied.
             input_pins: Paths and SHA-256 digests for this division's inputs.
             shore_provider: Optional shared physical shore calculation.
 
@@ -267,7 +263,7 @@ class ParentDivision:
         self.physical_directory = Path(physical_directory)
         self.checkpoints = checkpoints
         self.timing = timing
-        self.files = checkpoints.files if checkpoints is not None else RunFilePins()
+        self.files = checkpoints.files
         self.input_pins = list(input_pins)
         self.resources = ExitStack()
         self.lock = threading.RLock()
@@ -365,11 +361,10 @@ class ParentDivision:
         Returns:
             Calculated or verified saved stage result.
         """
-        return execute_stage(
+        return self.checkpoints.run_function(
             f"parent-{self.parent_id}-{name}",
             "division",
             operation,
-            checkpoints=self.checkpoints,
             timing=self.timing,
             inputs=inputs,
             outputs=outputs,

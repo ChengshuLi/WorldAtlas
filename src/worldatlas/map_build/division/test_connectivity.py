@@ -12,6 +12,8 @@ from worldatlas.map_build.core.layers import patch_rows, write_layer
 from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.division.contracts import RuleIndex
 from worldatlas.map_build.division.engine import ParentDivision, execute_rule
+from worldatlas.map_build.execution.runtime import Checkpoints
+from worldatlas.map_build.execution.timing import Timing
 from worldatlas.map_build.test_support import selection
 
 
@@ -70,6 +72,8 @@ class ConnectedScopes(unittest.TestCase):
         if parent is not None:
             parent_directory = root / "parent"
             write_layer(parent_directory, grid, patch_rows(parent, grid.bounds, grid))
+        timing = Timing(root / "timing-events.jsonl")
+        stack.callback(timing.close)
         context = ParentDivision(
             geo,
             0,
@@ -78,6 +82,8 @@ class ConnectedScopes(unittest.TestCase):
             root / "calculation",
             {},
             compiled=RuleIndex(geo).compile(0),
+            checkpoints=Checkpoints(root / "checkpoints", "test"),
+            timing=timing,
             parent_directory=parent_directory,
         )
         stack.callback(context.close)

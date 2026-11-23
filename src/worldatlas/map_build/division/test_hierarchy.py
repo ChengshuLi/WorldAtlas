@@ -35,6 +35,15 @@ def compile_divisions(geography, requested=None):
 
 
 class HierarchyTests(unittest.TestCase):
+    def checkpoint_arguments(self, directory):
+        directory.mkdir()
+        timing = Timing(directory / "timing-events.jsonl")
+        self.addCleanup(timing.close)
+        return dict(
+            checkpoints=Checkpoints(directory / "checkpoints", "test"),
+            timing=timing,
+        )
+
     def test_failed_rule_skips_queued_rules(self):
         calculate = Mock(side_effect=ValueError("invalid geography"))
         context = SimpleNamespace(
@@ -111,7 +120,13 @@ class HierarchyTests(unittest.TestCase):
             )
             configuration = {"coastal_band_metres": 22224}
             built = HierarchyDivision(
-                geography, grid, root / "physical", root / "division", configuration, compiled_divisions=compile_divisions(geography),
+                geography,
+                grid,
+                root / "physical",
+                root / "division",
+                configuration,
+                compiled_divisions=compile_divisions(geography),
+                **self.checkpoint_arguments(root / "division"),
             ).run()
             with open_grid(built["directory"], grid) as owners:
                 ends, ids = row(owners, 0, grid.width)
@@ -123,7 +138,13 @@ class HierarchyTests(unittest.TestCase):
                 ((y, [(0, grid.width, 17)]) for y in range(grid.height)),
             )
             all_land = HierarchyDivision(
-                geography, grid, root / "all-land", root / "all-land-division", configuration, compiled_divisions=compile_divisions(geography),
+                geography,
+                grid,
+                root / "all-land",
+                root / "all-land-division",
+                configuration,
+                compiled_divisions=compile_divisions(geography),
+                **self.checkpoint_arguments(root / "all-land-division"),
             ).run()
             with open_grid(all_land["directory"], grid) as owners:
                 self.assertEqual(row(owners, 0, grid.width)[1].tolist(), [101])
@@ -133,7 +154,13 @@ class HierarchyTests(unittest.TestCase):
             geography["rule_targets"].pop()
             with self.assertRaisesRegex(ValueError, "no eligible reference shores"):
                 HierarchyDivision(
-                    geography, grid, root / "physical", root / "unbounded", configuration, compiled_divisions=compile_divisions(geography),
+                    geography,
+                    grid,
+                    root / "physical",
+                    root / "unbounded",
+                    configuration,
+                    compiled_divisions=compile_divisions(geography),
+                    **self.checkpoint_arguments(root / "unbounded"),
                 ).run()
 
     def test_finished_division_rejects_unassigned_parent_water(self):
@@ -165,7 +192,13 @@ class HierarchyTests(unittest.TestCase):
             )
             with self.assertRaisesRegex(ValueError, "unassigned geographic cell 1,0"):
                 HierarchyDivision(
-                    geo, grid, root / "physical", root / "division", {}, compiled_divisions=compile_divisions(geo),
+                    geo,
+                    grid,
+                    root / "physical",
+                    root / "division",
+                    {},
+                    compiled_divisions=compile_divisions(geo),
+                    **self.checkpoint_arguments(root / "division"),
                 ).run()
 
     def test_water_edit_reuses_verified_land_and_a_land_edit_invalidates_it(self):
@@ -207,7 +240,13 @@ class HierarchyTests(unittest.TestCase):
                 root / "physical", grid, patch_rows(physical, grid.bounds, grid)
             )
             first = HierarchyDivision(
-                geo, grid, root / "physical", root / "first", {}, compiled_divisions=compile_divisions(geo),
+                geo,
+                grid,
+                root / "physical",
+                root / "first",
+                {},
+                compiled_divisions=compile_divisions(geo),
+                **self.checkpoint_arguments(root / "first"),
             ).run()
             geo["rule_features"].append(
                 dict(rule_id="water", feature_id="reference", role="connected_to")
@@ -222,8 +261,10 @@ class HierarchyTests(unittest.TestCase):
                     grid,
                     root / "physical",
                     root / "second",
-                    {}, compiled_divisions=compile_divisions(geo),
+                    {},
+                    compiled_divisions=compile_divisions(geo),
                     reuse=root / "first",
+                    **self.checkpoint_arguments(root / "second"),
                 ).run()
             self.assertFalse(second["parents"]["0"]["reused"])
             self.assertTrue(second["parents"]["0"]["land"]["reused"])
@@ -234,7 +275,14 @@ class HierarchyTests(unittest.TestCase):
                 )
             geo["rules"][0]["unassigned_only"] = True
             third = HierarchyDivision(
-                geo, grid, root / "physical", root / "third", {}, compiled_divisions=compile_divisions(geo), reuse=root / "second"
+                geo,
+                grid,
+                root / "physical",
+                root / "third",
+                {},
+                compiled_divisions=compile_divisions(geo),
+                reuse=root / "second",
+                **self.checkpoint_arguments(root / "third"),
             ).run()
             self.assertFalse(third["parents"]["0"]["land"]["reused"])
 
@@ -338,6 +386,7 @@ class HierarchyTests(unittest.TestCase):
                     root / "no-membership",
                     {},
                     compiled=RuleIndex(geography).compile(101),
+                    **self.checkpoint_arguments(root / "no-membership"),
                 )
             parent = ParentDivision(
                 geography,
@@ -347,6 +396,7 @@ class HierarchyTests(unittest.TestCase):
                 root / "parent",
                 {},
                 compiled=RuleIndex(geography).compile(0),
+                **self.checkpoint_arguments(root / "parent"),
             )
             try:
                 with self.assertRaisesRegex(
@@ -360,53 +410,42 @@ class HierarchyTests(unittest.TestCase):
                 self.assertEqual(parent.current, previous)
             finally:
                 parent.close()
-            direct = HierarchyDivision(
+            build = HierarchyDivision(
                 geography,
                 grid,
                 root / "physical",
-                root / "direct",
-                {}, compiled_divisions=compile_divisions(geography, [101]),
+                root / "division",
+                {},
+                compiled_divisions=compile_divisions(geography, [101]),
+                **self.checkpoint_arguments(root / "division"),
             )
-            self.assertIs(direct.shores(), direct.shores())
-            completed = direct.run()
-            timing = Timing(root / "timing-events.jsonl")
-            try:
-                build = HierarchyDivision(
-                    geography,
-                    grid,
-                    root / "physical",
-                    root / "division",
-                    {}, compiled_divisions=compile_divisions(geography, [101]),
-                    checkpoints=Checkpoints(root / "checkpoints", "attempt"),
-                    timing=timing,
-                )
-                result = build.run()
-                for name in ("rows.u32le", "runs.u32le"):
-                    self.assertEqual(
-                        sha256_file(Path(completed["directory"]) / name),
-                        sha256_file(Path(result["directory"]) / name),
-                    )
-                with open_grid(result["directory"], grid) as owners:
-                    ends, ids = row(owners, 3, grid.width)
-                    self.assertEqual(ends.tolist(), [10, 12, 14, 24])
-                    self.assertEqual(ids.tolist(), [202, 303, 404, 202])
-                    self.assertEqual(row(owners, 0, grid.width)[1].tolist(), [202])
-                resumed = build.run()
-                self.assertEqual(resumed["directory"], result["directory"])
-                self.assertTrue(all(p["reused"] for p in resumed["parents"].values()))
-                geography["features"][0]["geometry"]["coordinates"] = [[1, 55], [1, 5]]
-                with self.assertRaisesRegex(ValueError, "parent definition changed"):
-                    build.run()
-            finally:
-                timing.close()
+            self.assertIs(build.shores(), build.shores())
+            result = build.run()
+            with open_grid(result["directory"], grid) as owners:
+                ends, ids = row(owners, 3, grid.width)
+                self.assertEqual(ends.tolist(), [10, 12, 14, 24])
+                self.assertEqual(ids.tolist(), [202, 303, 404, 202])
+                self.assertEqual(row(owners, 0, grid.width)[1].tolist(), [202])
+            resumed = build.run()
+            self.assertEqual(resumed["directory"], result["directory"])
+            self.assertTrue(all(p["reused"] for p in resumed["parents"].values()))
+            geography["features"][0]["geometry"]["coordinates"] = [[1, 55], [1, 5]]
+            with self.assertRaisesRegex(ValueError, "parent definition changed"):
+                build.run()
 
     def test_division_without_selected_rules_fails(self):
+        geography = selection()["geography"]
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             with self.assertRaisesRegex(ValueError, "no geographic division selected"):
                 HierarchyDivision(
-                    selection()["geography"], Grid(24, 12, 15), root / "physical",
-                    root / "division", {}, compiled_divisions=compile_divisions(selection()['geography']),
+                    geography,
+                    Grid(24, 12, 15),
+                    root / "physical",
+                    root / "division",
+                    {},
+                    compiled_divisions=compile_divisions(geography),
+                    **self.checkpoint_arguments(root / "division"),
                 ).run()
 
     def test_reuse_ignores_display_and_notes_but_tracks_operative_rules(self):
