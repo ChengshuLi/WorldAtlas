@@ -9,7 +9,7 @@ from zipfile import ZipFile
 
 import osmium
 from osmium.filter import IdFilter
-from osmium.osm import Node
+from osmium.osm import NODE, Node
 from pydantic import Field
 from shapely.geometry import LineString
 from typing_extensions import TypedDict
@@ -91,6 +91,34 @@ class IntersectionPoint(TypedDict, closed=True):
 type SourcePoint = CoordinatePoint | OsmNodePoint | IntersectionPoint
 
 
+def _read_pbf_node(path: Path, node_id: int) -> tuple[float, float]:
+    """Read one node from a PBF file, including a node that no way uses.
+
+    Args:
+        path: Local OSM PBF file.
+        node_id: Numeric OSM ID of the point to read.
+
+    Returns:
+        Longitude and latitude in WGS84 degrees.
+
+    Raises:
+        ValueError: The file has no matching node, has duplicates, or has
+            invalid coordinates for the node.
+    """
+    reader = osmium.FileProcessor(path, NODE).with_filter(IdFilter([node_id]))
+    selected = []
+    for entry in reader:
+        # Only nodes were requested. Copy the coordinates before the reader
+        # advances because the OSM object is valid only during this iteration.
+        location = cast(Node, entry).location
+        if not location.valid():
+            raise ValueError('invalid OSM node coordinates')
+        selected.append((location.lon, location.lat))
+    if len(selected) != 1:
+        raise ValueError('selected OSM node is missing or duplicated')
+    return selected[0]
+
+
 class Sources:
     """Look up the local files and map features a recipe names.
 
@@ -110,12 +138,12 @@ class Sources:
         self.networks = {}
         self.points = {}
 
-    def resolve_raster_path(self, specification: FileSelection) -> str | Path:
+    def resolve_raster_path(self, specification: str | FileSelection) -> str | Path:
         """Tell GDAL where to open an elevation file.
 
         Args:
-            specification: The recipe's file name in ``source``. If it is
-                stored inside a ZIP, give its name there in ``member``.
+            specification: A recipe file name, or a ``source`` and ``member``
+                selecting one file inside a ZIP.
 
         Returns:
             The local path or an address GDAL uses to open a file inside a ZIP.
@@ -125,6 +153,8 @@ class Sources:
         Raises:
             ValueError: The selected file inside the archive is invalid or missing.
         """
+        if isinstance(specification, str):
+            return self.files[specification]
         path = self.files[specification['source']]
         return (
             gdal_dataset_path(path, specification['member'])
@@ -225,31 +255,7 @@ class Sources:
                 return self.read_osm_network([source]).nodes[node]
             key = source, node
             if key not in self.points:
-                # Filter by node ID so we can also find points that belong to no way.
-                selected = []
-
-                class Coordinates(osmium.SimpleHandler):
-                    """Read one selected node from a large OSM file."""
-
-                    def node(self, value: Node) -> None:
-                        # Osmium raises when reading lon or lat from an invalid location.
-                        """Copy the node's coordinates before the reader advances.
-
-                        Args:
-                            value: OSM node selected by ID.
-
-                        Raises:
-                            ValueError: The node's coordinates are invalid.
-                        """
-                        location = value.location
-                        if not location.valid():
-                            raise ValueError('invalid OSM node coordinates')
-                        selected.append((location.lon, location.lat))
-
-                Coordinates().apply_file(str(path), filters=[IdFilter([int(node)])])
-                if len(selected) != 1:
-                    raise ValueError('selected OSM node is missing or duplicated')
-                self.points[key] = selected[0]
+                self.points[key] = _read_pbf_node(path, int(node))
             return self.points[key]
         if 'intersection' in specification:
             first, second = specification['intersection']

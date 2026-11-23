@@ -9,7 +9,7 @@ from worldatlas.source_imports.watersheds.drainage import (
     cells_draining_to, compute_cell_flow, neighbor_distances_metres, trace_cell_group_labels,
     trace_destination_masks, unique_destination_labels,
 )
-from worldatlas.source_imports.watersheds.terrain import Grid
+from worldatlas.source_imports.watersheds.terrain import TerrainGrid
 
 
 class DrainageTests(unittest.TestCase):
@@ -72,7 +72,7 @@ class DrainageTests(unittest.TestCase):
         Returns:
             The test terrain grid.
         """
-        return Grid(np.array(values, dtype=float), transform, crs)
+        return TerrainGrid(np.array(values, dtype=float), transform, crs)
 
     def test_edge_can_flow_toward_a_lower_interior_cell(self):
         grid = self.grid([[4, 3, 4], [3, 2, 3], [2, 1, 2]])

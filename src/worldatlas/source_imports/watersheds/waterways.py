@@ -34,7 +34,10 @@ from shapely.strtree import STRtree
 from worldatlas.geodesy.ogr import geometry_layer
 from worldatlas.source_assets.archives import archive_member
 from worldatlas.source_imports.watersheds.basins import Basins
-from worldatlas.source_imports.watersheds.terrain import Grid, wrap_array_as_raster
+from worldatlas.source_imports.watersheds.terrain import (
+    TerrainGrid,
+    wrap_array_as_raster,
+)
 
 
 def _stage_osm_files(
@@ -226,6 +229,57 @@ def _boundary_side(
     return 1 if arm < end else -1
 
 
+type BoundaryContact = str | tuple[str, int, tuple[float, ...]]
+
+
+def _follow_shared_stretches(
+    points: Mapping[BoundaryContact, tuple[float, ...]],
+    downstream: defaultdict[BoundaryContact, set[BoundaryContact]],
+    arrivals: Mapping[BoundaryContact, set[tuple[int, str]]],
+    departures: Mapping[BoundaryContact, set[tuple[int, str]]],
+    endpoints: Collection[tuple[float, ...]],
+) -> defaultdict[tuple[float, ...], set[str]]:
+    """Find stream routes that enter on one side and leave on the other.
+
+    For A → B → C → D, B → C runs along the boundary. If A and D
+    are on different sides, report the crossing at C on the departing way.
+
+    Args:
+        points: Coordinates by contact ID.
+        downstream: Next contacts along shared stretches.
+        arrivals: (side, OSM way ID) pairs arriving at each contact.
+        departures: (side, OSM way ID) pairs leaving each contact.
+        endpoints: Coordinates at the ends of the whole boundary.
+
+    Returns:
+        The crossing coordinates and OSM way IDs that leave there.
+    """
+    crossings = defaultdict(set)
+    # Follow water arriving from each side. For water that joined from
+    # above, an exit below counts as crossing and an exit above is fine.
+    for entry_side in (-1, 1):
+        # Take at least one shared stretch. Crossings that occur at a
+        # single point are handled by the normal junction check.
+        reached = {
+            neighbor
+            for node, branches in arrivals.items()
+            if any(side == entry_side for side, _ in branches)
+            for neighbor in downstream[node]
+        }
+        pending = list(reached)
+        while pending:
+            node = pending.pop()
+            if points[node] in endpoints:
+                continue
+            for side, way in departures.get(node, ()):
+                if side == -entry_side:
+                    crossings[points[node]].add(way)
+            for neighbor in downstream[node] - reached:
+                reached.add(neighbor)
+                pending.append(neighbor)
+    return crossings
+
+
 @dataclass
 class Way:
     """Keep the values needed after Pyosmium advances beyond a way.
@@ -271,26 +325,7 @@ class Waterways:
         self.nodes, self.ways, self.relations = {}, {}, {}
         self.rivers_and_streams_only = rivers_and_streams_only
         self._node_versions, self._way_versions = {}, {}
-        with TemporaryDirectory(prefix='watershed-osm-') as directory:
-            files = list(_stage_osm_files(paths, Path(directory)))
-            # For drainage, first find the rivers and streams. Then read only
-            # the points they use. Reading a source line can need all object types.
-            entities = WAY if rivers_and_streams_only else NODE | WAY | RELATION
-            for file in files:
-                self._merge_osm_objects(osmium.FileProcessor(file, entities))
-            if rivers_and_streams_only:
-                # Merge all way versions before deciding which nodes to read.
-                # A selected way can reference nodes in a different extract.
-                wanted = {int(node) for way in self.ways.values() for node in way.nodes}
-                if wanted:
-                    node_filter = IdFilter(wanted)
-                    for file in files:
-                        reader = osmium.FileProcessor(file, NODE).with_filter(
-                            node_filter
-                        )
-                        self._merge_osm_objects(reader)
-        # Version tracking is only needed while merging the input files.
-        del self._node_versions, self._way_versions
+        self._read_osm_files(paths)
         # The recipe can correct a mapped flow direction. Wait until we know
         # which version of the way we kept.
         for ident in sorted(set(map(str, reverse))):
@@ -312,6 +347,45 @@ class Waterways:
             if len(self.ways[ident].nodes) < 2
             or any(n not in self.nodes for n in self.ways[ident].nodes)
         }
+        self._connect_streams()
+        self._lines, self._waterway_index = {}, None
+
+    def _read_osm_files(
+        self, paths: Iterable[Path | str | tuple[Path | str, str]]
+    ) -> None:
+        """Load and merge the OSM objects needed for this network.
+
+        Args:
+            paths: Local OSM files or (ZIP path, member name) selections.
+        """
+        with TemporaryDirectory(prefix='watershed-osm-') as directory:
+            files = list(_stage_osm_files(paths, Path(directory)))
+            # For drainage, first find the rivers and streams. Then read only
+            # the points they use. Reading a source line can need all object types.
+            entities = WAY if self.rivers_and_streams_only else NODE | WAY | RELATION
+            for file in files:
+                self._merge_osm_objects(osmium.FileProcessor(file, entities))
+            if self.rivers_and_streams_only:
+                # Merge all way versions before deciding which nodes to read.
+                # A selected way can reference nodes in a different extract.
+                wanted = {int(node) for way in self.ways.values() for node in way.nodes}
+                if wanted:
+                    node_filter = IdFilter(wanted)
+                    for file in files:
+                        reader = osmium.FileProcessor(file, NODE).with_filter(
+                            node_filter
+                        )
+                        self._merge_osm_objects(reader)
+        # Version tracking is only needed while merging the input files.
+        del self._node_versions, self._way_versions
+
+    def _connect_streams(self) -> None:
+        """Join streams at shared OSM nodes and retain the points between them.
+
+        For A → B → C, the routing graph needs only A → C if B just draws
+        a bend. An edge keeps the source way and positions of A and C so
+        the renderer can still draw all three points.
+        """
         self.upstream, self.downstream = defaultdict(set), defaultdict(set)
         self.edge_sources = defaultdict(list)
         complete_way_ids = sorted(self.river_and_stream_ids - self.incomplete)
@@ -339,7 +413,6 @@ class Waterways:
                 # Keep the source positions so we can draw A → B → C when
                 # the flow lookup only stores A → C.
                 self.edge_sources[first, second].append((ident, start, end))
-        self._lines, self._waterway_index = {}, None
 
     def _merge_node(self, ident: str, version: int, point: tuple[float, float]) -> None:
         """Keep the latest saved version of an OSM node.
@@ -492,7 +565,7 @@ class Waterways:
         )
         return self._lines[key]
 
-    def way_ids_intersecting_grid_bounds(self, grid: Grid) -> list[str]:
+    def way_ids_intersecting_grid_bounds(self, grid: TerrainGrid) -> list[str]:
         """Find complete rivers and streams that intersect the grid's bounding rectangle.
 
         Args:
@@ -662,8 +735,54 @@ class Waterways:
         """
         shared_forks = shared_forks or {}
         coordinates = np.asarray(geometry.coords)
-        endpoints = {tuple(coordinates[0]), tuple(coordinates[-1])}
         ways = self._way_ids_intersecting_shapes((geometry,))
+        point_hits, overlaps = self._boundary_intersections(geometry, coordinates, ways)
+        crossings, along_boundary_arms = self._crossings_along_boundary(
+            geometry, ways, overlaps, followed_source_line
+        )
+
+        junctions, river_ends, shared = self._crossings_at_contacts(
+            geometry,
+            coordinates,
+            ways,
+            point_hits,
+            along_boundary_arms,
+            shared_forks,
+            crossings,
+        )
+        result = {
+            'indexed_river_and_stream_ways': len(self._indexed_way_ids),
+            'junction_contacts': sorted(junctions),
+            'river_endpoint_contacts': sorted(river_ends),
+            'shared_drainage_contacts': [
+                {'node': node, 'groups': shared[node]} for node in sorted(shared)
+            ],
+            'crossings': [
+                {'point': list(cast(tuple[float, ...], point)), 'ways': sorted(ways)}
+                for point, ways in sorted(crossings.items())
+            ],
+        }
+        if crossings:
+            first = result['crossings'][0]
+            raise ValueError(
+                f'boundary crosses a river or stream {first["ways"]} at {first["point"]}'
+            )
+        return result
+
+    def _boundary_intersections(
+        self, geometry: LineString, coordinates: np.ndarray, ways: Collection[str]
+    ) -> tuple[dict[tuple[float, ...], set[str]], dict[str, list[LineString]]]:
+        """Separate individual meeting points from stretches shared with the boundary.
+
+        Args:
+            geometry: Finished boundary line.
+            coordinates: Longitude and latitude pairs of the boundary vertices.
+            ways: OSM way IDs whose lines meet the boundary.
+
+        Returns:
+            Ways by isolated contact coordinate and shared stretches by way ID.
+        """
+        endpoints = {tuple(coordinates[0]), tuple(coordinates[-1])}
         # Keep isolated meeting points in point_hits and shared lines in overlaps.
         # A stream can change sides at one spot or after following the boundary.
         # At a boundary endpoint, water can go around the end.
@@ -680,10 +799,27 @@ class Waterways:
                     if point not in endpoints:
                         point_hits[point].add(ident)
 
-        crossings, along_boundary_arms = self._crossings_along_boundary(
-            geometry, ways, overlaps, followed_source_line
-        )
+        return point_hits, overlaps
 
+    def _branches_at_contacts(
+        self,
+        ways: Collection[str],
+        point_hits: Mapping[tuple[float, ...], set[str]],
+    ) -> tuple[
+        Mapping[tuple[float, ...], Mapping[str, set[tuple[str, str, bool]]]],
+        dict[tuple[float, ...], set[str]],
+    ]:
+        """Find which branches meet at each OSM node on the boundary.
+
+        Args:
+            ways: OSM way IDs whose lines meet the boundary.
+            point_hits: Ways by contact coordinate.
+
+        Returns:
+            Branches by contact coordinate and node ID. Each branch is
+            (way ID, neighboring node ID, whether water leaves the contact).
+            Also returns which ways have a saved node at each contact.
+        """
         # For 1 → 2 → 3 with node 2 on the boundary, record the branch toward
         # node 1 as incoming (False) and the branch toward node 3 as outgoing
         # (True). Ways that share node 2 are part of the same junction.
@@ -700,6 +836,39 @@ class Waterways:
                     arms[point][node].add((ident, nodes[index - 1], False))
                 if index + 1 < len(nodes):
                     arms[point][node].add((ident, nodes[index + 1], True))
+
+        return arms, ways_with_saved_points
+
+    def _crossings_at_contacts(
+        self,
+        geometry: LineString,
+        coordinates: np.ndarray,
+        ways: Collection[str],
+        point_hits: Mapping[tuple[float, ...], set[str]],
+        along_boundary_arms: set[tuple[str, str, str, bool]],
+        shared_forks: Mapping[str, dict[str, int]],
+        crossings: dict[tuple[float, ...], set[str]],
+    ) -> tuple[set[str], set[str], dict[str, list[int]]]:
+        """Check whether water changes sides at an individual contact point.
+
+        An OSM segment can cross between its saved nodes. At a saved node,
+        follow the actual incoming and outgoing branches to see which way
+        the water moves. The reviewed fork exception is checked here.
+
+        Args:
+            geometry: Finished boundary in WGS84.
+            coordinates: Boundary vertices in line order.
+            ways: IDs of all intersecting OSM ways.
+            point_hits: Way IDs by point where they meet the boundary.
+            along_boundary_arms: Branches covered by the shared-stretch check.
+            shared_forks: Reviewed outgoing destinations keyed by fork node ID.
+            crossings: Crossings by coordinate, updated in place.
+
+        Returns:
+            Junction node IDs, stream-end node IDs, and accepted fork node
+            IDs with their sorted destination group IDs.
+        """
+        arms, ways_with_saved_points = self._branches_at_contacts(ways, point_hits)
 
         junctions, river_ends, shared = set(), set(), {}
         for point, hit_ways in sorted(point_hits.items()):
@@ -781,24 +950,7 @@ class Waterways:
                     junctions.add(node)
                 elif len(neighbors) == 1:
                     river_ends.add(node)
-        result = {
-            'indexed_river_and_stream_ways': len(self._indexed_way_ids),
-            'junction_contacts': sorted(junctions),
-            'river_endpoint_contacts': sorted(river_ends),
-            'shared_drainage_contacts': [
-                {'node': node, 'groups': shared[node]} for node in sorted(shared)
-            ],
-            'crossings': [
-                {'point': list(cast(tuple[float, ...], point)), 'ways': sorted(ways)}
-                for point, ways in sorted(crossings.items())
-            ],
-        }
-        if crossings:
-            first = result['crossings'][0]
-            raise ValueError(
-                f'boundary crosses a river or stream {first["ways"]} at {first["point"]}'
-            )
-        return result
+        return junctions, river_ends, shared
 
     def _crossings_along_boundary(
         self,
@@ -834,8 +986,8 @@ class Waterways:
         boundary_neighbors = {}
 
         def record_branch(
-            branches: dict[Any, set[tuple[int, str]]],
-            contact: str | tuple[str, int, tuple[float, ...]],
+            branches: dict[BoundaryContact, set[tuple[int, str]]],
+            contact: BoundaryContact,
             neighbor: Sequence[float],
             way: str,
         ) -> None:
@@ -909,28 +1061,9 @@ class Waterways:
                 ):
                     record_branch(arrivals, downstream_node, start, way)
 
-        # Follow water arriving from each side. For water that joined from
-        # above, an exit below counts as crossing and an exit above is fine.
-        for entry_side in (-1, 1):
-            # Take at least one shared stretch. Crossings that occur at a
-            # single point are handled by the normal junction check.
-            reached = {
-                neighbor
-                for node, branches in arrivals.items()
-                if any(side == entry_side for side, _ in branches)
-                for neighbor in downstream[node]
-            }
-            pending = list(reached)
-            while pending:
-                node = pending.pop()
-                if points[node] in endpoints:
-                    continue
-                for side, way in departures.get(node, ()):
-                    if side == -entry_side:
-                        crossings[points[node]].add(way)
-                for neighbor in downstream[node] - reached:
-                    reached.add(neighbor)
-                    pending.append(neighbor)
+        crossings = _follow_shared_stretches(
+            points, downstream, arrivals, departures, endpoints
+        )
         return crossings, shared_arms
 
     def trace_destinations_from_ways(
@@ -1121,7 +1254,9 @@ class Waterways:
         }
 
 
-def rasterize_waterway_lines(lines: Sequence[LineString], grid: Grid) -> np.ndarray:
+def rasterize_waterway_lines(
+    lines: Sequence[LineString], grid: TerrainGrid
+) -> np.ndarray:
     """Mark the elevation cells that a stream line touches.
 
     Args:
@@ -1148,7 +1283,9 @@ def rasterize_waterway_lines(lines: Sequence[LineString], grid: Grid) -> np.ndar
 
 
 def rasterize_waterway_destinations(
-    network: Waterways, assigned: Mapping[tuple[str, str], tuple[int, ...]], grid: Grid
+    network: Waterways,
+    assigned: Mapping[tuple[str, str], tuple[int, ...]],
+    grid: TerrainGrid,
 ) -> tuple[dict[int, np.ndarray], dict[str, Any], list[str]]:
     """Mark terrain cells touched by mapped rivers with known destinations.
 

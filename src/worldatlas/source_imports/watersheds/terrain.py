@@ -13,7 +13,7 @@ gdal.UseExceptions()
 
 
 @dataclass
-class Grid:
+class TerrainGrid:
     """Keep the heights and map positions of a rectangular piece of terrain.
 
     Args:
@@ -69,7 +69,7 @@ def read_native_elevation_crop(
     bounds: tuple[float, float, float, float],
     *,
     bounds_crs: int | str | CRS = 4326,
-) -> Grid:
+) -> TerrainGrid:
     """Crop aligned source tiles without changing their cell positions or values.
 
     If the crop limits already use the source grid's coordinates, use
@@ -129,41 +129,64 @@ def read_native_elevation_crop(
     )
     elevation = np.full((row1 - row0, col1 - col0), np.nan, dtype='float64')
     for dataset in datasets:
-        actual = dataset.GetGeoTransform()
-        if (
-            CRS.from_user_input(dataset.GetProjection()) != reference
-            or actual[1:3] != origin[1:3]
-            or actual[4:] != origin[4:]
-        ):
-            raise ValueError('primary tiles must share one native grid and CRS')
-        native_column = round((actual[0] - origin[0]) / origin[1])
-        native_row = round((actual[3] - origin[3]) / origin[5])
-        # A tile may start 20 cells over. A shift of 20.5 would put its
-        # cell centers between the primary grid's centers.
-        if (actual[0], actual[3]) != (
-            origin[0] + native_column * origin[1],
-            origin[3] + native_row * origin[5],
-        ):
-            raise ValueError('primary tile origins are not aligned')
-        column, row = native_column - col0, native_row - row0
-        x0, y0 = max(0, column), max(0, row)
-        x1 = min(elevation.shape[1], column + dataset.RasterXSize)
-        y1 = min(elevation.shape[0], row + dataset.RasterYSize)
-        if x1 <= x0 or y1 <= y0:
-            continue
-        band = dataset.GetRasterBand(1)
-        values = band.ReadAsArray(x0 - column, y0 - row, x1 - x0, y1 - y0)
-        usable = (
-            band.GetMaskBand().ReadAsArray(x0 - column, y0 - row, x1 - x0, y1 - y0) != 0
-        )
-        usable &= np.isfinite(values)
-        elevation[y0:y1, x0:x1][usable] = values[usable]
-    return Grid(
+        _copy_native_tile(dataset, reference, origin, (row0, col0), elevation)
+    return TerrainGrid(
         elevation, transform, crs, native_origin=origin, window_offset=(row0, col0)
     )
 
 
-def wrap_array_as_raster(values: np.ndarray, grid: Grid) -> gdal.Dataset:
+def _copy_native_tile(
+    dataset: gdal.Dataset,
+    reference: CRS,
+    origin: tuple[float, float, float, float, float, float],
+    crop_offset: tuple[int, int],
+    elevation: np.ndarray,
+) -> None:
+    """Copy valid heights from one tile into the part of the crop it covers.
+
+    Args:
+        dataset: GDAL elevation raster with its original grid metadata.
+        reference: Coordinate reference of the crop's native grid.
+        origin: GDAL transform of the tile that defines that grid.
+        crop_offset: Row and column of the crop's first cell on that grid.
+        elevation: Two-dimensional crop array to update in place.
+
+    Raises:
+        ValueError: The tile cannot be placed exactly on the crop's grid.
+    """
+    row0, col0 = crop_offset
+    actual = dataset.GetGeoTransform()
+    if (
+        CRS.from_user_input(dataset.GetProjection()) != reference
+        or actual[1:3] != origin[1:3]
+        or actual[4:] != origin[4:]
+    ):
+        raise ValueError('primary tiles must share one native grid and CRS')
+    native_column = round((actual[0] - origin[0]) / origin[1])
+    native_row = round((actual[3] - origin[3]) / origin[5])
+    # A tile may start 20 cells over. A shift of 20.5 would put its
+    # cell centers between the primary grid's centers.
+    if (actual[0], actual[3]) != (
+        origin[0] + native_column * origin[1],
+        origin[3] + native_row * origin[5],
+    ):
+        raise ValueError('primary tile origins are not aligned')
+    column, row = native_column - col0, native_row - row0
+    x0, y0 = max(0, column), max(0, row)
+    x1 = min(elevation.shape[1], column + dataset.RasterXSize)
+    y1 = min(elevation.shape[0], row + dataset.RasterYSize)
+    if x1 <= x0 or y1 <= y0:
+        return
+    band = dataset.GetRasterBand(1)
+    values = band.ReadAsArray(x0 - column, y0 - row, x1 - x0, y1 - y0)
+    usable = (
+        band.GetMaskBand().ReadAsArray(x0 - column, y0 - row, x1 - x0, y1 - y0) != 0
+    )
+    usable &= np.isfinite(values)
+    elevation[y0:y1, x0:x1][usable] = values[usable]
+
+
+def wrap_array_as_raster(values: np.ndarray, grid: TerrainGrid) -> gdal.Dataset:
     """Let GDAL write into an existing NumPy array at known map positions.
 
     Args:
@@ -182,7 +205,7 @@ def wrap_array_as_raster(values: np.ndarray, grid: Grid) -> gdal.Dataset:
 
 
 def align_raster_to_grid(
-    paths: Sequence[str | Path], grid: Grid, *, resampling: str = 'bilinear'
+    paths: Sequence[str | Path], grid: TerrainGrid, *, resampling: str = 'bilinear'
 ) -> np.ndarray:
     """Read a second map using the primary grid's cell positions.
 
@@ -215,7 +238,7 @@ def prepare_elevation_grid(
     height_offset: str | Path | None = None,
     *,
     bounds_crs: int | str | CRS = 4326,
-) -> Grid:
+) -> TerrainGrid:
     """Read primary terrain and fill gaps from secondary terrain.
 
     Two maps can measure height from different zero levels. If the second

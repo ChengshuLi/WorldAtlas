@@ -9,7 +9,7 @@ import numpy as np
 import osmium
 from shapely.geometry import LineString
 
-from worldatlas.source_imports.watersheds.terrain import Grid
+from worldatlas.source_imports.watersheds.terrain import TerrainGrid
 from worldatlas.source_imports.watersheds.drainage import unique_destination_labels
 from worldatlas.source_imports.watersheds.waterways import (
     Waterways, rasterize_waterway_destinations, rasterize_waterway_lines,
@@ -462,14 +462,14 @@ class WaterwayTests(unittest.TestCase):
                 Waterways([]).trace_destinations_from_ways(groups)
 
     def test_empty_waterway_raster_has_no_seed_cells(self):
-        grid = Grid(np.zeros((1, 2)), (0., 1., 0., 1., 0., -1.), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((1, 2)), (0., 1., 0., 1., 0., -1.), 'EPSG:4326')
         np.testing.assert_array_equal(rasterize_waterway_lines([], grid), [[False, False]])
 
     def test_seed_raster_uses_actual_ids_and_native_cell_positions(self):
         path = self.write('network.osm', self.node(1, .1, 1.5) + self.node(2, 1.9, 1.5) +
                           self.node(3, .1, .5) + self.node(4, 1.9, .5) +
                           self.way(10, [1, 2]) + self.way(20, [3, 4]))
-        grid = Grid(np.zeros((2, 2)), (0., 1., 0., 2., 0., -1.), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((2, 2)), (0., 1., 0., 2., 0., -1.), 'EPSG:4326')
         network = Waterways([path])
         assigned, _ = network.trace_destinations_from_ways({3: ['10'], 9876543210: ['20']})
         seeds, report, way_ids = rasterize_waterway_destinations(network, assigned, grid)

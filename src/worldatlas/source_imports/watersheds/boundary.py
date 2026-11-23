@@ -4,7 +4,7 @@ import math
 from collections.abc import Collection, Mapping, Sequence
 from dataclasses import dataclass, field
 from itertools import pairwise
-from typing import Any, cast
+from typing import Any, TypedDict, cast
 
 import numpy as np
 from pyproj import CRS, Transformer
@@ -19,7 +19,7 @@ from shapely.strtree import STRtree
 
 from worldatlas.geodesy.wgs84 import geodesic, geodesic_distance, geodesic_distances
 from worldatlas.source_imports.watersheds.drainage import cells_draining_to
-from worldatlas.source_imports.watersheds.terrain import Grid
+from worldatlas.source_imports.watersheds.terrain import TerrainGrid
 
 
 @dataclass
@@ -38,6 +38,50 @@ class Join:
     edges: dict = field(default_factory=dict)
 
 
+def _catchment_edge_mask(
+    labels: Mapping[int, np.ndarray],
+    group_pairs: Sequence[tuple[int, ...]],
+    missing: np.ndarray,
+    dr: int,
+    dc: int,
+) -> np.ndarray:
+    """Select where two adjacent cells drain to different groups.
+
+    Args:
+        labels: Boolean grid for each group, with multiple groups allowed.
+        group_pairs: Pairs of groups to separate.
+        missing: All-false grid used when a group has no cells in this crop.
+        dr: Row step to the neighbor, 1 for the neighbor below.
+        dc: Column step to the neighbor, 1 for the neighbor to the right.
+
+    Returns:
+        Boolean grid of shape (height - dr, width - dc). True at (r, c)
+        means the edge between (r, c) and (r + dr, c + dc) is eligible.
+    """
+    height, width = missing.shape
+    selected_edges = np.zeros((height - dr, width - dc), dtype=bool)
+    for a, b in group_pairs:
+        group_a_cells, group_b_cells = (
+            labels.get(a, missing),
+            labels.get(b, missing),
+        )
+        a_here, a_next = (
+            group_a_cells[: height - dr, : width - dc],
+            group_a_cells[dr:, dc:],
+        )
+        b_here, b_next = (
+            group_b_cells[: height - dr, : width - dc],
+            group_b_cells[dr:, dc:],
+        )
+        # A cell that drains only to 3 can share an edge with a cell
+        # draining to both 3 and 7. Two cells draining to both have
+        # the same destinations, so leave their shared edge out.
+        selected_edges |= ((a_here & b_next) | (b_here & a_next)) & (
+            (a_here != a_next) | (b_here != b_next)
+        )
+    return selected_edges
+
+
 class Divide:
     """Keep the cell edges that the boundary can follow."""
 
@@ -50,7 +94,7 @@ class Divide:
 
     def add_catchment_edges(
         self,
-        grid: Grid,
+        grid: TerrainGrid,
         labels: Mapping[int, np.ndarray],
         pairs: Collection[tuple[int | str, int | str]],
         output_bounds: tuple[float, float, float, float] | None = None,
@@ -93,7 +137,6 @@ class Divide:
         self.origin, self.crs = origin, crs
         to_geo = Transformer.from_crs(crs, 4326, always_xy=True)
         to_output = Transformer.from_crs(crs, bounds_crs, always_xy=True)
-        height, width = grid.elevation.shape
         missing = np.zeros(grid.elevation.shape, dtype=bool)
         if output_bounds is not None:
             if (
@@ -129,26 +172,7 @@ class Divide:
             return key
 
         for dr, dc in ((0, 1), (1, 0)):
-            selected_edges = np.zeros((height - dr, width - dc), dtype=bool)
-            for a, b in group_pairs:
-                group_a_cells, group_b_cells = (
-                    labels.get(a, missing),
-                    labels.get(b, missing),
-                )
-                a_here, a_next = (
-                    group_a_cells[: height - dr, : width - dc],
-                    group_a_cells[dr:, dc:],
-                )
-                b_here, b_next = (
-                    group_b_cells[: height - dr, : width - dc],
-                    group_b_cells[dr:, dc:],
-                )
-                # A cell that drains only to 3 can share an edge with a cell
-                # draining to both 3 and 7. Two cells draining to both have
-                # the same destinations, so leave their shared edge out.
-                selected_edges |= ((a_here & b_next) | (b_here & a_next)) & (
-                    (a_here != a_next) | (b_here != b_next)
-                )
+            selected_edges = _catchment_edge_mask(labels, group_pairs, missing, dr, dc)
             for rr, cc in np.argwhere(selected_edges):
                 row, column = int(rr), int(cc)
                 if output_bounds is not None:
@@ -352,31 +376,31 @@ def choose_intersection_join(
     )
 
 
-def route_line_through_waypoints(
-    line: LineString, points: Sequence[Sequence[float]], max_step_m: float
-) -> tuple[LineString, list[dict[str, Any]]]:
-    """Make the divide pass through the points named in the recipe.
+class _WaypointAttachments(TypedDict):
+    """Record the part of the old divide replaced by an ordered set of points."""
 
-    Say the divide runs A–B–C–D and we want to pass through P near B.
-    Choose two points on the divide and draw a new stretch through P.
-    If that stretch cuts the old divide farther away, move the
-    attachments outward until the cut falls inside the part being replaced.
+    first: int
+    last: int
+    points: list[tuple[float, ...]]
+
+
+def _nearest_waypoint_attachments(
+    coordinates: np.ndarray, points: Sequence[Sequence[float]]
+) -> list[_WaypointAttachments]:
+    """Find the initial span of the divide to replace for each waypoint.
 
     Args:
-        line: The ordered divide line to modify.
-        points: WGS84 waypoints in their intended order along the divide.
-        max_step_m: Maximum spacing between samples on the added geodesics.
+        coordinates: Original (longitude, latitude) pairs in line order.
+        points: Reviewed points in their intended order along that line.
 
     Returns:
-        The connected line and a report of chosen attachments and connector lengths.
+        One span per waypoint, with inclusive indices into the original
+        coordinate array. A waypoint on a vertex can use that vertex twice.
 
     Raises:
-        ValueError: The waypoints are invalid, out of order, or produce a self-crossing line.
+        ValueError: A waypoint is invalid or goes backward along the line.
     """
-    if not math.isfinite(max_step_m) or max_step_m <= 0:
-        raise ValueError('positive geodesic spacing is required')
-    coordinates = np.asarray(line.coords)
-    groups = []
+    groups: list[_WaypointAttachments] = []
     previous = -1
     for point in points:
         point = tuple(map(float, point))
@@ -402,12 +426,40 @@ def route_line_through_waypoints(
             else (max(0, index - 1), min(len(coordinates) - 1, index + 1))
         )
         groups.append({'first': first, 'last': last, 'points': [point]})
+    return groups
+
+
+def route_line_through_waypoints(
+    line: LineString, points: Sequence[Sequence[float]], max_step_m: float
+) -> tuple[LineString, list[dict[str, Any]]]:
+    """Make the divide pass through the points named in the recipe.
+
+    Say the divide runs A–B–C–D and we want to pass through P near B.
+    Choose two points on the divide and draw a new stretch through P.
+    If that stretch cuts the old divide farther away, move the
+    attachments outward until the cut falls inside the part being replaced.
+
+    Args:
+        line: The ordered divide line to modify.
+        points: WGS84 waypoints in their intended order along the divide.
+        max_step_m: Maximum spacing between samples on the added geodesics.
+
+    Returns:
+        The connected line and a report of chosen attachments and connector lengths.
+
+    Raises:
+        ValueError: The waypoints are invalid, out of order, or produce a self-crossing line.
+    """
+    if not math.isfinite(max_step_m) or max_step_m <= 0:
+        raise ValueError('positive geodesic spacing is required')
+    coordinates = np.asarray(line.coords)
+    groups = _nearest_waypoint_attachments(coordinates, points)
     edges = cast(
         np.ndarray, linestrings(np.stack((coordinates[:-1], coordinates[1:]), axis=1))
     )
     tree = STRtree(edges)
 
-    def connector(group: dict[str, Any]) -> list[tuple[float, ...]]:
+    def connector(group: _WaypointAttachments) -> list[tuple[float, ...]]:
         """Join a group of waypoints to their attachments on the divide.
 
         Args:
@@ -562,7 +614,7 @@ def assemble_boundary_line(
 
 
 def cell_containing_point(
-    grid: Grid, point: Sequence[float], *, required: bool = True
+    grid: TerrainGrid, point: Sequence[float], *, required: bool = True
 ) -> tuple[int, int] | None:
     """Find the grid cell containing a geographic point.
 
@@ -592,8 +644,64 @@ def cell_containing_point(
     return row, column
 
 
+def _cells_reachable_from_divide(
+    flow: np.ndarray,
+    labels: np.ndarray,
+    inside_group: int,
+    outside_groups: Sequence[int],
+) -> np.ndarray:
+    """List cells reached by flowing downhill from the inside edge of the divide.
+
+    Args:
+        flow: Two-dimensional array of downstream cell indices.
+        labels: Same-sized array with a group ID at every cell (-1 if unknown).
+        inside_group: Only visit cells with this label.
+        outside_groups: Labels across an edge that can start the path.
+
+    Returns:
+        Flat row-major cell indices in ascending order, including the starts.
+
+    Raises:
+        ValueError: No inside cell touches the chosen opposing groups.
+    """
+    height, width = labels.shape
+    interface = np.zeros(labels.shape, dtype=bool)
+    for dr, dc in ((-1, 0), (0, -1), (0, 1), (1, 0)):
+        source = (
+            slice(max(0, -dr), min(height, height - dr)),
+            slice(max(0, -dc), min(width, width - dc)),
+        )
+        neighbor = (
+            slice(max(0, dr), min(height, height + dr)),
+            slice(max(0, dc), min(width, width + dc)),
+        )
+        interface[source] |= (labels[source] == inside_group) & np.isin(
+            labels[neighbor], outside_groups
+        )
+    # This mask is local, so grow it in place to include the cells it reaches.
+    reached = interface.ravel()
+    downstream = flow.ravel()
+    groups = labels.ravel()
+    # Start on the inside cells touching the divide, then follow their water
+    # downhill. Only reached cells are candidates near the mapped point.
+    todo = list(map(int, np.flatnonzero(reached)))
+    while todo:
+        following = int(downstream[todo.pop()])
+        if (
+            following >= 0
+            and not reached[following]
+            and groups[following] == inside_group
+        ):
+            reached[following] = True
+            todo.append(following)
+    eligible = np.flatnonzero(reached)
+    if not len(eligible):
+        raise ValueError('no source-backed divide flows to the selected drainage group')
+    return eligible
+
+
 def connect_divide_to_stream_head(
-    grid: Grid,
+    grid: TerrainGrid,
     flow: np.ndarray,
     labels: np.ndarray,
     point: Sequence[float],
@@ -644,37 +752,8 @@ def connect_divide_to_stream_head(
         rr, cc = divmod(int(index), width)
         return tuple(to_geo.transform(*grid.cell_coordinates(rr, cc), errcheck=True))
 
-    interface = np.zeros(labels.shape, dtype=bool)
-    for dr, dc in ((-1, 0), (0, -1), (0, 1), (1, 0)):
-        source = (
-            slice(max(0, -dr), min(height, height - dr)),
-            slice(max(0, -dc), min(width, width - dc)),
-        )
-        neighbor = (
-            slice(max(0, dr), min(height, height + dr)),
-            slice(max(0, dc), min(width, width + dc)),
-        )
-        interface[source] |= (labels[source] == inside_group) & np.isin(
-            labels[neighbor], outside_groups
-        )
-    reached = interface.ravel().copy()
-    downstream = flow.ravel()
-    groups = labels.ravel()
-    # Start on the inside cells touching the divide, then follow their water
-    # downhill. Only reached cells are candidates near the mapped point.
-    todo = list(map(int, np.flatnonzero(reached)))
-    while todo:
-        following = int(downstream[todo.pop()])
-        if (
-            following >= 0
-            and not reached[following]
-            and groups[following] == inside_group
-        ):
-            reached[following] = True
-            todo.append(following)
-    eligible = np.flatnonzero(reached)
-    if not len(eligible):
-        raise ValueError('no source-backed divide flows to the selected drainage group')
+    eligible = _cells_reachable_from_divide(flow, labels, inside_group, outside_groups)
+    downstream, groups = flow.ravel(), labels.ravel()
     rows, columns = np.divmod(eligible, width)
     lon, lat = to_geo.transform(*grid.cell_coordinates(rows, columns), errcheck=True)
     lengths_to_point = geodesic_distances(lon, lat, point[0], point[1])

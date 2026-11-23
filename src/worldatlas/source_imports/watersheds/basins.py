@@ -5,7 +5,7 @@ basin covering that point can identify the water's destination.
 """
 
 from collections import defaultdict
-from collections.abc import Collection, Iterable, Mapping, Sequence
+from collections.abc import Callable, Collection, Iterable, Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -18,7 +18,7 @@ from shapely.geometry import LineString, Point
 from shapely.strtree import STRtree
 
 from worldatlas.source_imports.watersheds.drainage import index_incoming_flow
-from worldatlas.source_imports.watersheds.terrain import Grid
+from worldatlas.source_imports.watersheds.terrain import TerrainGrid
 
 
 class Basins:
@@ -181,7 +181,7 @@ class Basins:
         )
 
     def _groups_at_cell_centers(
-        self, grid: Grid, rows: np.ndarray, columns: np.ndarray
+        self, grid: TerrainGrid, rows: np.ndarray, columns: np.ndarray
     ) -> np.ndarray:
         """Look up drainage groups at terrain cell centres in one spatial query.
 
@@ -210,7 +210,7 @@ class Basins:
             groups[location] = self.group_for_basin_ids(values)
         return groups
 
-    def classify_crop_exits(self, grid: Grid, flow: np.ndarray) -> np.ndarray:
+    def classify_crop_exits(self, grid: TerrainGrid, flow: np.ndarray) -> np.ndarray:
         """Find the basin groups of cells where flow stops at the crop edge.
 
         Args:
@@ -233,7 +233,7 @@ class Basins:
         return result
 
     def classify_coastal_outlets(
-        self, grid: Grid, ocean: np.ndarray
+        self, grid: TerrainGrid, ocean: np.ndarray
     ) -> tuple[np.ndarray, np.ndarray]:
         """Mark the ocean and the land cells touching it as places flow stops.
 
@@ -276,7 +276,7 @@ class Basins:
 
     def classify_uncovered_outlets(
         self,
-        grid: Grid,
+        grid: TerrainGrid,
         flow: np.ndarray,
         exits: np.ndarray,
         labels: np.ndarray,
@@ -338,28 +338,9 @@ class Basins:
             )
 
         for terminal in unresolved:
-            todo = [int(terminal)]
-            groups, basin_values, references = set(), set(), {}
-            while todo:
-                index = todo.pop()
-                seed_groups = {
-                    group for group, cells in seeds.items() if cells.ravel()[index]
-                }
-                group = next(iter(seed_groups)) if len(seed_groups) == 1 else -1
-                location = point(index)
-                values = set() if seed_groups else self.basin_ids_at_point(location)
-                if seed_groups or values:
-                    group = group if group >= 0 else self.group_for_basin_ids(values)
-                    groups.update(seed_groups or {group})
-                    basin_values.update(values)
-                    references.setdefault(group, location)
-                    # Even a basin with an unknown group is the first basin
-                    # on this branch. Looking farther back could pick the wrong one.
-                    continue
-                child = heads[index]
-                while child >= 0:
-                    todo.append(int(child))
-                    child = following[child]
+            groups, basin_values, references = self._upstream_outlet_evidence(
+                int(terminal), heads, following, seeds, point
+            )
             if len(groups) == 1 and min(groups) >= 0:
                 (group,) = groups
                 result.ravel()[terminal] = group
@@ -382,3 +363,48 @@ class Basins:
             else:
                 report['unreferenced'] += 1
         return result, report
+
+    def _upstream_outlet_evidence(
+        self,
+        terminal: int,
+        heads: np.ndarray,
+        following: np.ndarray,
+        seeds: Mapping[int, np.ndarray],
+        point: Callable[[int], tuple[float, ...]],
+    ) -> tuple[set[int], set[str | int], dict[int, tuple[float, ...]]]:
+        """Find the first mapped river or basin on each path into the outlet.
+
+        Args:
+            terminal: Flat index of the unlabeled outlet cell.
+            heads: First incoming cell for each flat cell, or -1.
+            following: Next incoming cell for each cell sharing the same destination.
+            seeds: Known stream cells as a Boolean grid per group.
+            point: Function that gives the WGS84 center of a flat cell index.
+
+        Returns:
+            Groups encountered (-1 for unknown basin coverage), raw basin
+            IDs, and the first reference coordinates seen for each group.
+        """
+        todo = [terminal]
+        groups, basin_values, references = set(), set(), {}
+        while todo:
+            index = todo.pop()
+            seed_groups = {
+                group for group, cells in seeds.items() if cells.ravel()[index]
+            }
+            group = next(iter(seed_groups)) if len(seed_groups) == 1 else -1
+            location = point(index)
+            values = set() if seed_groups else self.basin_ids_at_point(location)
+            if seed_groups or values:
+                group = group if group >= 0 else self.group_for_basin_ids(values)
+                groups.update(seed_groups or {group})
+                basin_values.update(values)
+                references.setdefault(group, location)
+                # Even a basin with an unknown group is the first basin
+                # on this branch. Looking farther back could pick the wrong one.
+                continue
+            child = heads[index]
+            while child >= 0:
+                todo.append(int(child))
+                child = following[child]
+        return groups, basin_values, references

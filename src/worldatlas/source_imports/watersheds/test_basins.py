@@ -9,7 +9,7 @@ import numpy as np
 from osgeo import gdal
 from shapely.geometry import LineString, box
 
-from worldatlas.source_imports.watersheds.terrain import Grid
+from worldatlas.source_imports.watersheds.terrain import TerrainGrid
 from worldatlas.source_imports.watersheds.basins import Basins
 from worldatlas.source_imports.watersheds.waterways import Waterways, rasterize_waterway_destinations
 
@@ -140,18 +140,18 @@ class BasinTests(unittest.TestCase):
         self.assertEqual(basins.river_exit_group_and_point(LineString([(1., 1.), (1., 3.)]))[0], -1)
 
     def test_only_domain_exits_receive_basin_fallback(self):
-        grid = Grid(np.zeros((3, 3)), (0., .5, 0., 1.5, 0., -.5), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((3, 3)), (0., .5, 0., 1.5, 0., -.5), 'EPSG:4326')
         terminals = self.basins().classify_crop_exits(grid, np.full((3, 3), -1))
         self.assertEqual(terminals[0, 0], 3)
         self.assertEqual(terminals[1, 1], -1)
 
     def test_batched_outlet_lookup_keeps_a_shared_edge_with_an_unselected_basin_unknown(self):
-        grid = Grid(np.zeros((1, 3)), (.25, .5, 0., 1.5, 0., -1.), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((1, 3)), (.25, .5, 0., 1.5, 0., -1.), 'EPSG:4326')
         labels = self.basins({3: [100]}).classify_crop_exits(grid, np.full((1, 3), -1))
         np.testing.assert_array_equal(labels, [[3, -1, -1]])
 
     def test_observed_ocean_creates_land_outlets_without_classifying_the_sea(self):
-        grid = Grid(np.zeros((4, 4)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((4, 4)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
         ocean = np.zeros((4, 4), dtype=bool)
         ocean[0] = True
         outlets, labels = self.basins().classify_coastal_outlets(grid, ocean)
@@ -163,7 +163,7 @@ class BasinTests(unittest.TestCase):
         np.testing.assert_array_equal(labels[2:], np.full((2, 4), -1))
 
     def test_corner_ocean_reaches_diagonal_shore_without_wrapping(self):
-        grid = Grid(np.zeros((4, 4)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((4, 4)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
         ocean = np.zeros((4, 4), dtype=bool)
         ocean[0, 0] = True
         outlets, labels = self.basins().classify_coastal_outlets(grid, ocean)
@@ -174,7 +174,7 @@ class BasinTests(unittest.TestCase):
         self.assertEqual(labels[0, 0], -1)
 
     def test_coastal_outlet_without_source_basin_coverage_stays_unknown(self):
-        grid = Grid(np.zeros((3, 3)), (3., .5, 0., 2., 0., -.5), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((3, 3)), (3., .5, 0., 2., 0., -.5), 'EPSG:4326')
         ocean = np.zeros((3, 3), dtype=bool)
         ocean[0] = True
         _, labels = self.basins().classify_coastal_outlets(grid, ocean)
@@ -182,7 +182,7 @@ class BasinTests(unittest.TestCase):
 
     def test_coastal_outlet_inputs_must_match_the_terrain_and_flow(self):
         basins = self.basins()
-        grid = Grid(np.zeros((1, 2)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((1, 2)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
         with self.assertRaisesRegex(ValueError, 'ocean mask and terrain grid must match'):
             basins.classify_coastal_outlets(grid, [[True]])
         flow, labels = np.array([[1, -1]]), np.array([[-1, -1]])
@@ -192,7 +192,7 @@ class BasinTests(unittest.TestCase):
             basins.classify_uncovered_outlets(grid, flow, [[True, False]], labels, {})
 
     def test_uncovered_outlet_uses_the_first_basin_reached_along_its_upstream_flow(self):
-        grid = Grid(np.zeros((1, 5)), (0., 1., 0., 1.5, 0., -1.), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((1, 5)), (0., 1., 0., 1.5, 0., -1.), 'EPSG:4326')
         flow = np.array([[1, 2, 3, 4, -1]])
         exits = np.array([[False, False, False, False, True]])
         labels = np.full(flow.shape, -1)
@@ -203,7 +203,7 @@ class BasinTests(unittest.TestCase):
         np.testing.assert_array_equal(labels, np.full(flow.shape, -1))
 
     def test_conflicting_upstream_source_destinations_leave_the_outlet_unknown(self):
-        grid = Grid(np.zeros((2, 3)), (0., 1., 0., 2., 0., -1.), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((2, 3)), (0., 1., 0., 2., 0., -1.), 'EPSG:4326')
         # Water reaches this outlet from basins 100 and 200, which belong
         # to different groups. The outlet should stay unknown.
         flow = np.array([[2, -1, -1], [-1, 5, 2]])
@@ -215,7 +215,7 @@ class BasinTests(unittest.TestCase):
         self.assertEqual(report['conflicting'][0]['groups'], [3, 7])
 
     def test_an_unselected_basin_at_the_coverage_frontier_is_not_skipped(self):
-        grid = Grid(np.zeros((1, 4)), (0., 1., 0., 1.5, 0., -1.), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((1, 4)), (0., 1., 0., 1.5, 0., -1.), 'EPSG:4326')
         flow = np.array([[1, 2, 3, -1]])
         exits = np.array([[False, False, False, True]])
         labels = np.full(flow.shape, -1)
@@ -224,7 +224,7 @@ class BasinTests(unittest.TestCase):
         self.assertEqual(report['conflicting'][0]['basin_values'], [200])
 
     def test_an_unconnected_nearby_basin_does_not_classify_an_outlet(self):
-        grid = Grid(np.zeros((1, 4)), (0., 1., 0., 1.5, 0., -1.), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((1, 4)), (0., 1., 0., 1.5, 0., -1.), 'EPSG:4326')
         flow = np.full((1, 4), -1)
         exits = np.array([[False, False, False, True]])
         labels = np.full(flow.shape, -1)
@@ -233,7 +233,7 @@ class BasinTests(unittest.TestCase):
         self.assertEqual(report['unreferenced'], 1)
 
     def test_a_connected_mapped_river_identifies_an_uncovered_exit(self):
-        grid = Grid(np.zeros((1, 3)), (3., 1., 0., 1.5, 0., -1.), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((1, 3)), (3., 1., 0., 1.5, 0., -1.), 'EPSG:4326')
         flow = np.array([[1, 2, -1]])
         labels = np.full(flow.shape, -1)
         seeds = {12345: np.array([[True, False, False]])}
@@ -243,7 +243,7 @@ class BasinTests(unittest.TestCase):
         self.assertEqual(report['resolved'][0]['basin_values'], [])
 
     def test_a_shared_river_reference_does_not_become_a_single_outlet_group(self):
-        grid = Grid(np.zeros((1, 3)), (3., 1., 0., 1.5, 0., -1.), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((1, 3)), (3., 1., 0., 1.5, 0., -1.), 'EPSG:4326')
         flow = np.array([[1, 2, -1]])
         labels = np.full(flow.shape, -1)
         seeds = {g: np.array([[True, False, False]]) for g in (3, 7)}
@@ -276,7 +276,7 @@ class BasinTests(unittest.TestCase):
             return (f'<way id="{ident}">' + ''.join(f'<nd ref="{n}"/>' for n in members) +
                     '<tag k="waterway" v="stream"/></way>')
 
-        grid = Grid(np.zeros((4, 4)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((4, 4)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
         seeds = []
         for name, parts in [('unsplit', [way(10, [1, 2, 3]), way(20, [2, 4])]),
                             ('split', [way(10, [1, 2]), way(11, [2, 3]), way(20, [2, 4])])]:
@@ -298,7 +298,7 @@ class BasinTests(unittest.TestCase):
         nodes = ('<node id="1" lon="0.25" lat="1.75"/>'
                  '<node id="2" lon="0.25" lat="1"/>'
                  '<node id="3" lon="0.25" lat="0.25"/>')
-        grid = Grid(np.zeros((4, 4)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((4, 4)), (0., .5, 0., 2., 0., -.5), 'EPSG:4326')
         results = []
         for name, members in [('unsplit', [(1, 2, 3)]), ('split', [(1, 2), (2, 3)])]:
             body = ''.join('<way id="' + str(i) + '">' +

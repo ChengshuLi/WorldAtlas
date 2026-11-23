@@ -15,12 +15,12 @@ from numpy.typing import ArrayLike
 from pyproj import CRS, Transformer
 
 from worldatlas.geodesy.wgs84 import geodesic_distances
-from worldatlas.source_imports.watersheds.terrain import Grid
+from worldatlas.source_imports.watersheds.terrain import TerrainGrid
 
 UNKNOWN = -1
 
 
-def neighbor_distances_metres(grid: Grid) -> np.ndarray:
+def neighbor_distances_metres(grid: TerrainGrid) -> np.ndarray:
     """Measure distances between all horizontally, vertically, or diagonally adjacent cells.
 
     Args:
@@ -79,19 +79,22 @@ def neighbor_distances_metres(grid: Grid) -> np.ndarray:
 
 
 @njit(cache=True)
-def _fill_depressions_and_route_flow(
-    elevation: np.ndarray, distances: np.ndarray, closed: np.ndarray
+def _fill_depressions(
+    elevation: np.ndarray, closed: np.ndarray
 ) -> tuple[np.ndarray, np.ndarray]:
-    """Raise pits to their spill height in a copy, then route each cell downhill.
+    """Raise pits to their lowest outlet height and remember the way out.
+
+    Start at crop edges and known stopping points and visit cells in order
+    of the lowest water level that can reach them. For a 3 m pit whose
+    lowest outlet is 5 m, the working height becomes 5 m.
 
     Args:
         elevation: Two-dimensional grid of original heights in metres.
-        distances: Distance to each of eight neighbours, in metres.
-        closed: Bool grid marking where flow must stop.
+        closed: Boolean grid marking where water must stop.
 
     Returns:
-        (working_heights, flow). Both arrays have the shape of elevation.
-        Flow stores the flat next-cell index, or -1 at a stopping cell.
+        Working heights in metres and a flat array of next-cell indices
+        that lead back to a starting cell. Starting cells use -1.
     """
     height, width = elevation.shape
     working = np.full(elevation.shape, np.inf)
@@ -127,7 +130,30 @@ def _fill_depressions_and_route_flow(
                         parent[other] = index
                         working[rr, cc] = max(value, elevation[rr, cc])
                         heapq.heappush(heap, (float(working[rr, cc]), other))
-    flow = parent.copy().reshape(elevation.shape)
+    return working, parent
+
+
+@njit(cache=True)
+def _route_cell_flow(
+    working: np.ndarray,
+    distances: np.ndarray,
+    closed: np.ndarray,
+    routes_out: np.ndarray,
+) -> np.ndarray:
+    """Pick the steepest downhill neighbor, or follow the known way off a flat.
+
+    Args:
+        working: Two-dimensional grid of heights after filling pits, in metres.
+        distances: Neighbor distances in metres, indexed by direction, row, column.
+        closed: Boolean grid marking where water must stop.
+        routes_out: Flat next-cell indices from the pit-filling search,
+            updated in place wherever a neighbor has a steeper downhill route.
+
+    Returns:
+        A two-dimensional array of flat next-cell indices, with -1 at stops.
+    """
+    height, width = working.shape
+    flow = routes_out.reshape(working.shape)
     # On flat ground, use the way out found above. If a neighbor is lower,
     # choose the steepest drop per metre. Edge cells can drain back inward.
     for row in range(height):
@@ -161,11 +187,11 @@ def _fill_depressions_and_route_flow(
                         if slope > best:
                             best = slope
                             flow[row, column] = rr * width + cc
-    return working, flow
+    return flow
 
 
 def compute_cell_flow(
-    grid: Grid,
+    grid: TerrainGrid,
     closed_sinks: Iterable[tuple[int, int]] = (),
     *,
     outlets: np.ndarray | None = None,
@@ -197,9 +223,9 @@ def compute_cell_flow(
         if not (0 <= row < elevation.shape[0] and 0 <= column < elevation.shape[1]):
             raise ValueError('closed sink is outside the elevation grid')
         closed[row, column] = True
-    return _fill_depressions_and_route_flow(
-        elevation, neighbor_distances_metres(grid), closed
-    )
+    distances = neighbor_distances_metres(grid)
+    working, routes_out = _fill_depressions(elevation, closed)
+    return working, _route_cell_flow(working, distances, closed, routes_out)
 
 
 @njit(cache=True)

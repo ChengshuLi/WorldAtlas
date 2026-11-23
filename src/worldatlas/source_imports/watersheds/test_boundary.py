@@ -15,21 +15,21 @@ from worldatlas.source_imports.watersheds.boundary import (
     connect_divide_to_stream_head,
     route_line_through_waypoints,
 )
-from worldatlas.source_imports.watersheds.terrain import Grid
+from worldatlas.source_imports.watersheds.terrain import TerrainGrid
 
 
 class BoundaryTests(unittest.TestCase):
     """Check that joins and routes preserve the selected source geometry."""
 
     def test_a_shared_catchment_has_no_invented_divide_inside_it(self):
-        grid = Grid(np.zeros((3, 3)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((3, 3)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
         graph = Divide()
         graph.add_catchment_edges(grid, {3: np.ones((3, 3), dtype=bool),
                               100: np.ones((3, 3), dtype=bool)}, [(3, 100)])
         self.assertEqual(graph.edges, set())
 
     def test_shared_catchment_edges_remain_possible_boundary_routes(self):
-        grid = Grid(np.zeros((3, 3)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((3, 3)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
         # The middle column drains to both groups. Either side of it can
         # supply an edge for the finished boundary.
         first = np.tile([True, True, False], (3, 1))
@@ -40,7 +40,7 @@ class BoundaryTests(unittest.TestCase):
         self.assertTrue(all(a[1] == b[1] for a, b in graph.edges))
 
     def test_a_third_destination_does_not_invent_an_interface_for_an_unchanged_pair(self):
-        grid = Grid(np.zeros((3, 3)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((3, 3)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
         graph = Divide()
         graph.add_catchment_edges(grid, {3: np.ones((3, 3), dtype=bool),
                               100: np.ones((3, 3), dtype=bool),
@@ -154,7 +154,7 @@ class BoundaryTests(unittest.TestCase):
         self.assertIn((1, 1), join.edges[graph])
 
     def test_divide_requires_matching_labels_distinct_groups_and_valid_bounds(self):
-        grid = Grid(np.zeros((1, 2)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((1, 2)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
         labels = {3: np.array([[True, False]]), 7: np.array([[False, True]])}
         for memberships, groups, bounds, error in (
             ({3: np.ones((2, 2), dtype=bool)}, [(3, 7)], None, 'labels and terrain grid'),
@@ -165,10 +165,10 @@ class BoundaryTests(unittest.TestCase):
                 Divide().add_catchment_edges(grid, memberships, groups, bounds)
         divide = Divide()
         divide.add_catchment_edges(grid, labels, [(3, 7)])
-        shifted = Grid(grid.elevation, (.01, .01, 0., .03, 0., -.01), grid.crs)
+        shifted = TerrainGrid(grid.elevation, (.01, .01, 0., .03, 0., -.01), grid.crs)
         with self.assertRaisesRegex(ValueError, 'share one native grid'):
             divide.add_catchment_edges(shifted, labels, [(3, 7)])
-        outside_wgs84 = Grid(grid.elevation, (0., .01, 0., 92., 0., -.01), grid.crs)
+        outside_wgs84 = TerrainGrid(grid.elevation, (0., .01, 0., 92., 0., -.01), grid.crs)
         with self.assertRaisesRegex(ValueError, 'invalid divide coordinates'):
             Divide().add_catchment_edges(outside_wgs84, labels, [(3, 7)])
 
@@ -191,8 +191,8 @@ class BoundaryTests(unittest.TestCase):
 
     def test_native_overlapping_domains_share_the_same_grid_edges(self):
         origin = (0., .01, 0., .03, 0., -.01)
-        first = Grid(np.zeros((2, 2)), origin, 'EPSG:4326', native_origin=origin)
-        second = Grid(np.zeros((2, 2)), (0., .01, 0., .02, 0., -.01),
+        first = TerrainGrid(np.zeros((2, 2)), origin, 'EPSG:4326', native_origin=origin)
+        second = TerrainGrid(np.zeros((2, 2)), (0., .01, 0., .02, 0., -.01),
                       'EPSG:4326', native_origin=origin, window_offset=(1, 0))
         graph = Divide()
         for grid in (first, second):
@@ -201,13 +201,13 @@ class BoundaryTests(unittest.TestCase):
         self.assertEqual(len(graph.coordinates), 4)
 
     def test_unknown_is_not_used_as_an_opposing_basin(self):
-        grid = Grid(np.zeros((2, 2)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((2, 2)), (0., .01, 0., .03, 0., -.01), 'EPSG:4326')
         graph = Divide()
         graph.add_catchment_edges(grid, {1: np.tile([True, False], (2, 1))}, [(1, 3)])
         self.assertEqual(graph.edges, set())
 
     def test_context_cells_influence_flow_but_do_not_add_overlapping_output_edges(self):
-        grid = Grid(np.zeros((4, 2)), (0., .01, 0., .04, 0., -.01), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((4, 2)), (0., .01, 0., .04, 0., -.01), 'EPSG:4326')
         labels = np.tile([1, 3], (4, 1))
         graph = Divide()
         graph.add_catchment_edges(grid, {group: labels == group for group in (1, 3)}, [(1, 3)], output_bounds=[0., .01, .02, .03])
@@ -216,7 +216,7 @@ class BoundaryTests(unittest.TestCase):
                                    [(.01, .01), (.01, .02), (.01, .03)])
 
     def test_projected_output_areas_partition_one_connected_native_divide(self):
-        grid = Grid(np.zeros((4, 2)), (2249900., 2., 0., 900100., 0., -2.), 'EPSG:3413')
+        grid = TerrainGrid(np.zeros((4, 2)), (2249900., 2., 0., 900100., 0., -2.), 'EPSG:3413')
         labels = np.tile([1, 3], (4, 1))
         complete, partitioned = Divide(), Divide()
         complete.add_catchment_edges(grid, {group: labels == group for group in (1, 3)}, [(1, 3)])
@@ -290,7 +290,7 @@ class BoundaryTests(unittest.TestCase):
         self.assertIn(point, geometry['coordinates'])
 
     def test_required_stream_head_must_be_inside_its_grid_and_group(self):
-        grid = Grid(np.zeros((1, 2)), (0., .01, 0., .01, 0., -.01), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((1, 2)), (0., .01, 0., .01, 0., -.01), 'EPSG:4326')
         with self.assertRaisesRegex(ValueError, 'outside the terrain domain'):
             cell_containing_point(grid, (.1, 0.))
         with self.assertRaisesRegex(ValueError, 'not assigned to its declared drainage group'):
@@ -298,14 +298,14 @@ class BoundaryTests(unittest.TestCase):
                                           (.005, .005), 2, [1], 20.)
 
     def test_upstream_cells_of_another_group_are_not_stream_head_candidates(self):
-        grid = Grid(np.zeros((1, 3)), (0., .01, 0., .01, 0., -.01), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((1, 3)), (0., .01, 0., .01, 0., -.01), 'EPSG:4326')
         curve, report = connect_divide_to_stream_head(grid, np.array([[1, -1, 1]]), np.array([[1, 2, 3]]),
                                                       (.015, .005), 2, [1], 20.)
         self.assertEqual(report['interface_cells'], [[0, 1], [0, 0]])
         self.assertEqual(tuple(curve.coords[-1]), (.015, .005))
 
     def test_stream_head_route_cannot_leave_and_reenter_its_group(self):
-        grid = Grid(np.zeros((2, 4)), (0.0, 0.01, 0.0, 0.02, 0.0, -0.01), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((2, 4)), (0.0, 0.01, 0.0, 0.02, 0.0, -0.01), 'EPSG:4326')
         groups = np.array([[1, 2, 3, 2], [1, 2, 2, 2]])
         flow = np.array([[-1, 2, 3, -1], [-1, 6, 7, 3]])
         line, report = connect_divide_to_stream_head(
@@ -315,7 +315,7 @@ class BoundaryTests(unittest.TestCase):
         self.assertNotIn(grid.cell_coordinates(0, 2), line.coords)
 
     def test_stream_head_connection_is_built_directly_from_flow_and_exact_source_point(self):
-        grid = Grid(np.zeros((3, 3)), (44., .001, 0., 43., 0., -.001), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((3, 3)), (44., .001, 0., 43., 0., -.001), 'EPSG:4326')
         labels = np.array([[1, 2, 2], [1, 2, 2], [1, 2, 2]])
         flow = np.full((3, 3), -1)
         flow.ravel()[[1, 4, 7]] = [4, 7, 8]
@@ -330,13 +330,13 @@ class BoundaryTests(unittest.TestCase):
         self.assertAlmostEqual(join.point[0], 44.001)
 
     def test_head_connection_does_not_guess_a_route_when_no_upstream_divide_exists(self):
-        grid = Grid(np.zeros((3, 3)), (44., .001, 0., 43., 0., -.001), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((3, 3)), (44., .001, 0., 43., 0., -.001), 'EPSG:4326')
         labels = np.full((3, 3), 2)
         with self.assertRaisesRegex(ValueError, 'no source-backed divide'):
             connect_divide_to_stream_head(grid, np.full((3, 3), -1), labels, (44.0015, 42.9985), 2, [1], 1.)
 
     def test_source_point_cell_need_not_be_traversed_by_raster_flow(self):
-        grid = Grid(np.zeros((3, 3)), (44., .001, 0., 43., 0., -.001), 'EPSG:4326')
+        grid = TerrainGrid(np.zeros((3, 3)), (44., .001, 0., 43., 0., -.001), 'EPSG:4326')
         labels = np.array([[1, 2, 2], [1, 2, 2], [1, 2, 2]])
         flow = np.full((3, 3), -1)
         flow.ravel()[[1, 4]] = [4, 7]

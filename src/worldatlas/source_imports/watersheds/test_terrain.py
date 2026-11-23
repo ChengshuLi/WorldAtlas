@@ -23,7 +23,7 @@ class TerrainTests(unittest.TestCase):
 
     def test_failed_array_wrapper_reports_the_terrain_error(self):
         cells = np.zeros((2, 2), dtype=np.float32)
-        grid = terrain.Grid(cells, (0, 1, 0, 2, 0, -1), "EPSG:4326")
+        grid = terrain.TerrainGrid(cells, (0, 1, 0, 2, 0, -1), "EPSG:4326")
         with patch.object(terrain.gdal_array, 'OpenArray', return_value=None):
             with self.assertRaisesRegex(ValueError, 'could not open the terrain array'):
                 terrain.wrap_array_as_raster(cells, grid)
