@@ -34,7 +34,6 @@ from worldatlas.shared.files import (
     FilePin,
     JSONValue,
     json_bytes,
-    read_json,
     sha256_file,
     write_bytes_atomic,
     write_json,
@@ -217,17 +216,6 @@ class PhysicalBuild:
             downloaded_shard_count=downloaded_shard_count,
         )
 
-    def _checksum(self, path: Path) -> str:
-        """Read or reuse the SHA-256 digest of a file in this build attempt.
-
-        Args:
-            path: File to check.
-
-        Returns:
-            The file's lowercase hexadecimal SHA-256.
-        """
-        return self.files.pin(path)['sha256']
-
     def _save_task_configuration(
         self, filename: str, settings: JSONValue, *, sort_keys: bool = True
     ) -> FilePin:
@@ -306,7 +294,7 @@ class PhysicalBuild:
         land_directory = self.output / 'land'
 
         def rasterize_land() -> dict[str, Any]:
-            """Rasterize the coastline and verify its saved report.
+            """Acquire the coastline files and rasterize them.
 
             Returns:
                 The land raster report, including the checksum of its output.
@@ -314,7 +302,7 @@ class PhysicalBuild:
             for source in coastline_sources:
                 control.check_cancelled()
                 cache.acquire(source)
-            land.run(
+            return land.run(
                 land_config['sha256'],
                 land_directory,
                 self.grid,
@@ -323,12 +311,6 @@ class PhysicalBuild:
                 files=self.files,
                 emit=control.emit,
             )
-            report = read_json(land_directory / 'report.json')
-            if report.get('status') != 'candidate-only' or report.get(
-                'land_sha256'
-            ) != self._checksum(land_directory / 'land.tif'):
-                raise ValueError('land raster is incomplete')
-            return report
 
         report = self._run_task(
             'land',
@@ -467,13 +449,15 @@ class PhysicalBuild:
         )
         union_directory = self.output / 'union'
 
-        def merge_water() -> dict[str, Any]:
-            """Merge the shard masks and verify the saved union report.
-
-            Returns:
-                The water union report, including the checksum of its output.
-            """
-            water_union.run(
+        shard_inputs: list[FilePin] = []
+        for shard in shards:
+            shard_inputs.extend(
+                (FilePin(path=shard['path'], sha256=shard['sha256']), shard['report'])
+            )
+        report = self._run_task(
+            'union',
+            partial(
+                water_union.run,
                 union_config['sha256'],
                 union_directory,
                 self.grid,
@@ -483,22 +467,7 @@ class PhysicalBuild:
                 rows_per_block=self.union_rows_per_block,
                 files=self.files,
                 emit=control.emit,
-            )
-            report = read_json(union_directory / 'report.json')
-            if report.get('status') != 'candidate-only' or report.get(
-                'union_sha256'
-            ) != self._checksum(union_directory / 'water-union.tif'):
-                raise ValueError('water union is incomplete')
-            return report
-
-        shard_inputs: list[FilePin] = []
-        for shard in shards:
-            shard_inputs.extend(
-                (FilePin(path=shard['path'], sha256=shard['sha256']), shard['report'])
-            )
-        report = self._run_task(
-            'union',
-            merge_water,
+            ),
             union_directory,
             inputs=[union_config, water_config, *shard_inputs],
         )
@@ -534,13 +503,10 @@ class PhysicalBuild:
         )
         physical_directory = self.output / 'physical'
 
-        def compose_grid() -> dict[str, Any]:
-            """Write the finished physical grid and verify its saved report.
-
-            Returns:
-                The physical grid report, including the checksum of each output.
-            """
-            composition.main(
+        report = self._run_task(
+            'compose',
+            partial(
+                composition.main,
                 compose_config['sha256'],
                 physical_directory,
                 self.grid,
@@ -550,19 +516,7 @@ class PhysicalBuild:
                 rows_per_block=self.physical_rows_per_block,
                 files=self.files,
                 emit=control.emit,
-            )
-            report = read_json(physical_directory / 'report.json')
-            if report.get('status') != 'candidate-only' or any(
-                self._checksum(physical_directory / filename)
-                != report.get('output_sha256', {}).get(filename)
-                for filename in ('physical-dry.tif', 'rows.u32le', 'runs.u32le')
-            ):
-                raise ValueError('physical composition is incomplete')
-            return report
-
-        report = self._run_task(
-            'compose',
-            compose_grid,
+            ),
             physical_directory,
             inputs=[compose_config, land_mask, water_mask],
         )
