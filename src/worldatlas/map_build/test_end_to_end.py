@@ -187,7 +187,6 @@ class EndToEndTests(unittest.TestCase):
                     schema="land-raster-candidate-v1",
                     selection_notes="Fixture coast",
                     strip_rows=4,
-                    feature_index="row-fids",
                     land=[
                         dict(
                             dataset="__e2e_raw",

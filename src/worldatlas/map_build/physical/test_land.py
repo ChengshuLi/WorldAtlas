@@ -106,7 +106,6 @@ class RasterizeLandTests(unittest.TestCase):
             ({'land': []}, 'nonempty explicitly pinned land inputs'),
             ({'strip_rows': False}, 'strip_rows'),
             ({'minimum_free_bytes': -1}, 'minimum_free_bytes'),
-            ({'feature_index': 'scan'}, 'feature_index'),
             ({'land': land * 2}, 'input paths must be unique'),
         ):
             with self.subTest(changes=changes):
