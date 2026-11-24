@@ -35,7 +35,7 @@ R2 uses the normal boto3 credential chain, with credentials outside the code. Th
 | `water_batch.py` | Validate and rasterize ordinary batches through GDAL's Python API. |
 | `union.py` | Combine all water shards into one water mask. |
 | `composition.py` | Subtract inland water from land and write the physical grid. |
-| `build.py` | Connect the functions, stage missing R2 files, retain checkpoints and record timing. |
+| `build.py` | `PhysicalBuild.run()` shows the order of the raster tasks. Each task uses the shared cache, checkpoints and timing tools. |
 
 Tests beside the code exercise real small GeoJSON and Parquet inputs, equivalent rasterization paths, land/water composition, source integrity, checkpoint reuse, interruption and timing. The physical calculation uses Python APIs throughout.
 

@@ -6,12 +6,12 @@ import hashlib
 import json
 import re
 import shutil
-import sys
 import threading
 from collections.abc import Callable, Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from contextlib import closing, nullcontext
 from contextvars import copy_context
+from functools import partial
 from pathlib import Path
 from typing import Any
 
@@ -144,104 +144,131 @@ def build(
             ),
         )
     ) as cache:
-        return _build(
-            cfg,
-            grid,
-            request,
-            output,
-            checkpoints=checkpoints,
-            timing=timing,
-            cache=cache,
+        return PhysicalBuild(
+            cfg, grid, request, output, checkpoints, timing, cache
+        ).run()
+
+
+class PhysicalBuild:
+    """Coordinate the checkpointed tasks that produce one physical grid."""
+
+    def __init__(
+        self,
+        configuration: PhysicalConfiguration,
+        grid: Grid,
+        request: FilePin,
+        output: Path,
+        checkpoints: Checkpoints,
+        timing: Timing,
+        cache: SourceCache,
+    ) -> None:
+        """Keep the inputs and services shared by the physical tasks.
+
+        Args:
+            configuration: Resolved raster settings and R2 source pins.
+            grid: Grid shared with later map stages.
+            request: Path and SHA-256 of the saved physical configuration.
+            output: Directory for physical task outputs and reports.
+            checkpoints: Shared task runner and checkpoint store.
+            timing: Shared timer for rasterization and downloads.
+            cache: Open R2 source cache for this build.
+        """
+        self.configuration = configuration
+        self.grid = grid
+        self.request = request
+        self.output = output.resolve()
+        self.config_directory = self.output / 'configs'
+        self.checkpoints = checkpoints
+        self.files = checkpoints.files
+        self.timing = timing
+        self.cache = cache
+        self.minimum_free_bytes = configuration.get('minimum_free_bytes', 2 * (1 << 30))
+        self.water_workers = configuration.get('max_parallel_shards', 2)
+        self.water_batch_size = configuration['inland_water'].get('batch_size', 8192)
+        self.union_rows_per_block = configuration.get('union_rows_per_block', 128)
+        self.physical_rows_per_block = configuration.get('physical_rows_per_block', 128)
+
+    def run(self) -> dict[str, Any]:
+        """Build land, draw and merge inland water, then save the physical grid.
+
+        Returns:
+            Physical build report with output paths and checksums.
+        """
+        land_settings, coastline_sources = plan_land_inputs(
+            self.configuration['land_config'], self.cache
+        )
+        water_sources = self.configuration['inland_water']['files']
+        if len({source['sha256'] for source in water_sources}) != len(water_sources):
+            raise ValueError('inland-water source hashes must be unique')
+        script_checksums = _physical_script_checksums()
+        if shutil.disk_usage(self.output.parent).free < self.minimum_free_bytes:
+            raise ValueError('free disk below pipeline reserve')
+
+        self.config_directory.mkdir(parents=True, exist_ok=True)
+        (self.output / 'shards').mkdir(exist_ok=True)
+        land_config = self._save_task_configuration(
+            'land.json',
+            dict(
+                land_settings,
+                schema='land-raster-candidate-v1',
+                minimum_free_bytes=self.minimum_free_bytes,
+            ),
+        )
+        water_config = self._save_task_configuration(
+            'inland-water.json',
+            dict(
+                self.configuration['inland_water'],
+                schema='water-shard-candidate-v2',
+                minimum_free_bytes=self.minimum_free_bytes,
+            ),
         )
 
+        land_mask = self._rasterize_land(land_settings, coastline_sources, land_config)
+        water_download_start = len(self.cache.downloads)
+        shards = self._rasterize_water_shards(water_config, water_sources)
+        union_config, water_mask = self._merge_water(water_config, shards)
+        compose_config, output_checksums = self._compose_grid(land_mask, water_mask)
 
-def _build(
-    cfg: PhysicalConfiguration,
-    grid: Grid,
-    request: FilePin,
-    output: Path,
-    *,
-    checkpoints: Checkpoints,
-    timing: Timing,
-    cache: SourceCache,
-) -> dict[str, Any]:
-    """Run physical tasks with one source cache for all of their inputs.
-
-    Args:
-        cfg: Resolved raster settings and source pins.
-        grid: Grid shared with later map stages.
-        request: Path and SHA-256 of the saved physical configuration.
-        output: Directory for physical tasks and their reports.
-        checkpoints: Saved work that can be verified and reused.
-        timing: Run timer for rasterization and downloads.
-        cache: Open R2 source cache for this build.
-
-    Returns:
-        The physical output report with verified grid files.
-    """
-    grid_settings = vars(grid)
-    reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
-    workers = cfg.get('max_parallel_shards', 2)
-    land_cfg, coastline_sources = plan_land_inputs(cfg['land_config'], cache)
-    land_document = dict(
-        land_cfg, schema='land-raster-candidate-v1', minimum_free_bytes=reserve
-    )
-    water_cfg: dict[str, Any] = dict(
-        cfg['inland_water'],
-        schema='water-shard-candidate-v2',
-        minimum_free_bytes=reserve,
-    )
-    batch_size = water_cfg.get('batch_size', 8192)
-    union_rows_per_block = cfg.get('union_rows_per_block', 128)
-    physical_rows_per_block = cfg.get('physical_rows_per_block', 128)
-    water_sources = cfg['inland_water']['files']
-    if len({source['sha256'] for source in water_sources}) != len(water_sources):
-        raise ValueError('inland-water source hashes must be unique')
-    scripts = {
-        name: sha256_file(HERE / name)
-        for name in (
-            'build.py',
-            'sources.py',
-            'land.py',
-            'water.py',
-            'water_batch.py',
-            'union.py',
-            'composition.py',
+        self.files.verify(
+            [self.request, land_config, water_config, union_config, compose_config]
         )
-    }
-    scripts['geodesy/ogr.py'] = sha256_file(geometry_io.__file__)
-    scripts['source_assets/cache.py'] = sha256_file(source_cache.__file__)
-    scripts['shared/r2.py'] = sha256_file(r2.__file__)
-    files = checkpoints.files
+        return self._write_report(
+            land_config,
+            water_config,
+            output_checksums,
+            script_checksums,
+            water_download_start=water_download_start,
+        )
 
-    def checksum(path: Path | str) -> str:
-        """Read or reuse a verified file digest within this physical attempt.
+    def _checksum(self, path: Path) -> str:
+        """Read or reuse the SHA-256 digest of a file in this build attempt.
 
         Args:
             path: File to check.
 
         Returns:
-            The lowercase SHA-256 for its current bytes.
+            The file's lowercase hexadecimal SHA-256.
         """
-        return files.pin(path)['sha256']
+        return self.files.pin(path)['sha256']
 
-    output = Path(output).resolve()
-    if shutil.disk_usage(output.parent).free < reserve:
-        raise ValueError('free disk below pipeline reserve')
-
-    def bind_config(path: Path, data: bytes) -> FilePin:
-        """Save the generated settings or check they match the previous attempt.
+    def _save_task_configuration(
+        self, filename: str, settings: JSONValue, *, sort_keys: bool = True
+    ) -> FilePin:
+        """Save a task's settings or check the settings already saved for resume.
 
         Args:
-            path: Configuration file in the current run.
-            data: Expected JSON bytes.
+            filename: JSON filename under this build's configs directory.
+            settings: JSON-compatible settings used by the task.
+            sort_keys: Whether to sort object keys when writing.
 
         Returns:
-            File pin for the saved stage settings.
+            Path and SHA-256 of the settings file.
 
         Raises:
-            ValueError: An existing settings file differs.
+            ValueError: The existing settings differ from the current settings.
         """
+        path = self.config_directory / filename
+        data = json_bytes(settings, sort_keys=sort_keys)
         if path.exists():
             if path.read_bytes() != data:
                 raise ValueError('resumed stage config mismatch')
@@ -249,18 +276,8 @@ def _build(
             write_bytes_atomic(path, data)
         return FilePin(path=str(path), sha256=hashlib.sha256(data).hexdigest())
 
-    config_dir = output / 'configs'
-    stage_documents = {
-        'land_config': (config_dir / 'land.json', json_bytes(land_document)),
-        'inland_water': (config_dir / 'inland-water.json', json_bytes(water_cfg)),
-    }
-    config_dir.mkdir(parents=True, exist_ok=True)
-    (output / 'shards').mkdir(exist_ok=True)
-    stage_pins = {
-        key: bind_config(path, data) for key, (path, data) in stage_documents.items()
-    }
-
-    def task[Result: JSONValue](
+    def _run_task[Result: JSONValue](
+        self,
         name: str,
         operation: Callable[[], Result],
         destination: Path,
@@ -268,34 +285,199 @@ def _build(
         inputs: Sequence[FilePin],
         includes_downloads: bool = False,
     ) -> Result:
-        """Run one physical operation through the shared checkpoint runner.
+        """Run a physical task through the shared checkpoint and timing tools.
 
         Args:
-            name: Name of the work within the physical stage.
-            operation: Function with its arguments supplied.
+            name: Task name, prefixed with 'physical-' in the checkpoint store.
+            operation: Function that produces the task's output and result.
             destination: File or directory written by the operation.
-            inputs: Pinned settings and input files.
-            includes_downloads: Whether this span includes a separate download.
+            inputs: Task-specific settings and input file pins.
+            includes_downloads: Whether this span includes separately timed downloads.
 
         Returns:
             The new result, or the verified saved result on resume.
         """
-        return checkpoints.run_function(
+        return self.checkpoints.run_function(
             f'physical-{name}',
             'physical',
             operation,
-            timing=timing,
-            inputs=[request, *inputs],
+            timing=self.timing,
+            inputs=[self.request, *inputs],
             outputs=[destination],
             timing_kind='wall' if includes_downloads else 'processing',
         )
 
-    def verify_shard(
-        index: int, source_digest: str
+    def _rasterize_land(
+        self,
+        land_settings: LandSettings[FilePin],
+        coastline_sources: Sequence[RemoteFile],
+        land_config: FilePin,
+    ) -> FilePin:
+        """Acquire the coastline inputs and build the land mask.
+
+        Args:
+            land_settings: Rasterization settings with cache paths.
+            coastline_sources: R2 objects and ZIP members needed by the rasterizer.
+            land_config: Path and checksum of the saved coastline settings.
+
+        Returns:
+            Path and SHA-256 of the completed land mask.
+        """
+        land_directory = self.output / 'land'
+
+        def rasterize_land() -> dict[str, Any]:
+            """Rasterize the coastline and verify its saved report.
+
+            Returns:
+                The land raster report, including the checksum of its output.
+            """
+            for source in coastline_sources:
+                control.check_cancelled()
+                self.cache.acquire(source)
+            land.run(
+                land_config['sha256'],
+                land_directory,
+                self.grid,
+                settings=land_settings,
+                minimum_free_bytes=self.minimum_free_bytes,
+                files=self.files,
+                emit=control.emit,
+            )
+            report = read_json(land_directory / 'report.json')
+            if report.get('status') != 'candidate-only' or report.get(
+                'land_sha256'
+            ) != self._checksum(land_directory / 'land.tif'):
+                raise ValueError('land raster is incomplete')
+            return report
+
+        report = self._run_task(
+            'land',
+            rasterize_land,
+            land_directory,
+            inputs=[land_config],
+            includes_downloads=True,
+        )
+        return FilePin(
+            path=str(land_directory / 'land.tif'), sha256=report['land_sha256']
+        )
+
+    def _rasterize_water_shards(
+        self, water_config: FilePin, water_sources: Sequence[R2ObjectPin]
+    ) -> list[ShardMask]:
+        """Rasterize the water files in parallel and return masks in source order.
+
+        Args:
+            water_config: Path and checksum of the saved water settings.
+            water_sources: R2 pins for all inland-water files.
+
+        Returns:
+            Verified mask and report pins in the order of the input files.
+        """
+        download_slot = threading.Lock()
+        # Overlap one R2 download with one rasterization when files are missing.
+        # When the cache is warm, workers can rasterize concurrently.
+        cold_cache = any(
+            not self.cache.path(source).is_file() for source in water_sources
+        )
+        raster_slot = threading.Lock() if cold_cache else nullcontext()
+
+        rasterize_shard = partial(
+            self._rasterize_water_shard,
+            water_config=water_config,
+            download_slot=download_slot,
+            raster_slot=raster_slot,
+        )
+        completed_shards: dict[int, tuple[ShardMask, tuple[str, ...]]] = {}
+        with (
+            control.stage() as cancelled,
+            ThreadPoolExecutor(
+                max_workers=min(self.water_workers, len(water_sources))
+            ) as pool,
+        ):
+            futures = {
+                pool.submit(copy_context().run, rasterize_shard, index, source): index
+                for index, source in enumerate(water_sources)
+            }
+            try:
+                for future in as_completed(futures):
+                    completed_shards[futures[future]] = future.result()
+            except BaseException:
+                cancelled.set()
+                for future in futures:
+                    future.cancel()
+                raise
+        if len({rasterizer for _, rasterizer in completed_shards.values()}) != 1:
+            raise ValueError('inconsistent water shard rasterizers or kernels')
+        return [completed_shards[index][0] for index in range(len(water_sources))]
+
+    def _rasterize_water_shard(
+        self,
+        index: int,
+        source: R2ObjectPin,
+        *,
+        water_config: FilePin,
+        download_slot: threading.Lock,
+        raster_slot: threading.Lock | nullcontext[None],
+    ) -> tuple[ShardMask, tuple[str, ...]]:
+        """Run one water file through the cache, rasterizer and checkpoint store.
+
+        Args:
+            index: Zero-based position of the file in the source list.
+            source: Pinned inland-water GeoParquet file in R2.
+            water_config: Path and SHA-256 of the shared water settings.
+            download_slot: Lock shared by workers acquiring files.
+            raster_slot: Lock for a cold cache, or an empty context for a warm cache.
+
+        Returns:
+            The verified mask and report pins, followed by the rasterizer identity.
+        """
+        control.check_cancelled()
+        directory = self.output / 'shards' / f'{index:05d}'
+        name = f'shard-{index:05d}'
+
+        def rasterize_shard() -> tuple[ShardMask, tuple[str, ...]]:
+            """Download if needed, rasterize, then check the saved shard report.
+
+            Returns:
+                The verified mask and report pins, and the rasterizer identity.
+            """
+            with download_slot:
+                source_path = self.cache.acquire(source)
+            with raster_slot:
+                control.check_cancelled()
+                with self.timing.measure('physical', f'rasterize-{name}'):
+                    water.run(
+                        source_path,
+                        source['sha256'],
+                        directory,
+                        water_config['sha256'],
+                        self.grid,
+                        settings=self.configuration['inland_water'],
+                        minimum_free_bytes=self.minimum_free_bytes,
+                        files=self.files,
+                        emit=control.emit,
+                    )
+                    return self._verify_water_shard(
+                        directory, water_config, index, source['sha256']
+                    )
+
+        receipt, rasterizer = self._run_task(
+            name,
+            rasterize_shard,
+            directory,
+            includes_downloads=True,
+            inputs=[water_config],
+        )
+        return receipt, tuple(rasterizer)
+
+    def _verify_water_shard(
+        self, directory: Path, water_config: FilePin, index: int, source_digest: str
     ) -> tuple[ShardMask, tuple[str, ...]]:
         """Read one shard's verified output pins and validate its reported inputs.
 
         Args:
+            directory: Directory containing this shard's mask and report.
+            water_config: Pin of the settings used to rasterize the shard.
             index: Zero-based position in the pinned source list.
             source_digest: Expected SHA-256 of the source GeoParquet file.
 
@@ -305,14 +487,13 @@ def _build(
         Raises:
             ValueError: The saved pins, actual bytes, or report disagree.
         """
-        directory = output / 'shards' / f'{index:05d}'
         report_path = directory / 'report.json'
         mask_path = directory / 'water.tif'
         receipt = ShardMask(
             path=str(mask_path),
-            sha256=checksum(mask_path),
+            sha256=self._checksum(mask_path),
             status='candidate-only',
-            report=FilePin(path=str(report_path), sha256=checksum(report_path)),
+            report=FilePin(path=str(report_path), sha256=self._checksum(report_path)),
         )
         item = read_json(report_path)
         row_count = item.get('rows_in_source')
@@ -321,9 +502,9 @@ def _build(
         if (
             item.get('status') != 'candidate-only'
             or item.get('source_sha256') != source_digest
-            or item.get('configuration_sha256') != stage_pins['inland_water']['sha256']
-            or item.get('grid') != grid_settings
-            or item.get('batch_size') != batch_size
+            or item.get('configuration_sha256') != water_config['sha256']
+            or item.get('grid') != vars(self.grid)
+            or item.get('batch_size') != self.water_batch_size
             or item.get('output_sha256') != receipt['sha256']
             or item.get('invalid_feature_ids')
             or counts.get('missing_classification', 0)
@@ -357,288 +538,241 @@ def _build(
             kernel['gdal'],
         )
 
-    land_dir = output / 'land'
-
-    def rasterize_land() -> dict[str, Any]:
-        """Acquire coastline inputs and return the verified land raster report.
-
-        Returns:
-            Coastline raster report, including the checksum of its output.
-        """
-        for spec in coastline_sources:
-            control.check_cancelled()
-            cache.acquire(spec)
-        land.run(
-            stage_pins['land_config']['sha256'],
-            land_dir,
-            grid,
-            settings=land_cfg,
-            minimum_free_bytes=reserve,
-            files=files,
-            emit=control.emit,
-        )
-        land_report = read_json(land_dir / 'report.json')
-        if land_report.get('status') != 'candidate-only' or land_report.get(
-            'land_sha256'
-        ) != checksum(land_dir / 'land.tif'):
-            raise ValueError('land raster is incomplete')
-        return land_report
-
-    land_report = task(
-        'land',
-        rasterize_land,
-        land_dir,
-        includes_downloads=True,
-        inputs=[stage_pins['land_config']],
-    )
-    land_transfer_count = len(cache.downloads)
-
-    download_slot = threading.Lock()
-    cold_cache = any(not cache.path(source).is_file() for source in water_sources)
-    raster_slot = threading.Lock() if cold_cache else nullcontext()
-
-    def build_shard(
-        indexed_source: tuple[int, R2ObjectPin],
-    ) -> tuple[ShardMask, tuple[str, ...]]:
-        """Validate or build a single water shard's raster.
+    def _merge_water(
+        self, water_config: FilePin, shards: Sequence[ShardMask]
+    ) -> tuple[FilePin, FilePin]:
+        """Combine all inland-water masks into one mask.
 
         Args:
-            indexed_source: Shard index and its pinned R2 object.
+            water_config: Pin of the saved water source list and settings.
+            shards: Verified water shard masks in source order.
 
         Returns:
-            Verified mask and report pins, followed by the rasterizer identity.
+            File pins for the union settings and the combined water mask, in that order.
         """
-        control.check_cancelled()
-        shard_index, source = indexed_source
-        digest = source['sha256']
-        destination = output / 'shards' / f'{shard_index:05d}'
-        name = f'shard-{shard_index:05d}'
+        union_config = self._save_task_configuration(
+            'union.json',
+            {
+                'schema': 'water-union-v1',
+                'grid': vars(self.grid),
+                **self._selection_notes(),
+                'minimum_free_bytes': self.minimum_free_bytes,
+                'source_manifest': water_config,
+                'shard_count': len(shards),
+                'rows_per_block': self.union_rows_per_block,
+                'shards': list(shards),
+            },
+            sort_keys=False,
+        )
+        union_directory = self.output / 'union'
 
-        def rasterize_shard() -> tuple[ShardMask, tuple[str, ...]]:
-            """Read one water source and produce a verified mask for it.
+        def merge_water() -> dict[str, Any]:
+            """Merge the shard masks and verify the saved union report.
 
             Returns:
-                Mask and report pins, followed by the rasterizer identity.
+                The water union report, including the checksum of its output.
             """
-            with download_slot:
-                source_path = cache.acquire(source)
-            with raster_slot:
-                control.check_cancelled()
-                with timing.measure('physical', f'rasterize-{name}'):
-                    water.run(
-                        source_path,
-                        digest,
-                        destination,
-                        stage_pins['inland_water']['sha256'],
-                        grid,
-                        settings=cfg['inland_water'],
-                        minimum_free_bytes=reserve,
-                        files=files,
-                        emit=control.emit,
-                    )
-                    return verify_shard(shard_index, digest)
+            water_union.run(
+                union_config['sha256'],
+                union_directory,
+                self.grid,
+                source_manifest=water_config,
+                shards=shards,
+                minimum_free_bytes=self.minimum_free_bytes,
+                rows_per_block=self.union_rows_per_block,
+                files=self.files,
+                emit=control.emit,
+            )
+            report = read_json(union_directory / 'report.json')
+            if report.get('status') != 'candidate-only' or report.get(
+                'union_sha256'
+            ) != self._checksum(union_directory / 'water-union.tif'):
+                raise ValueError('water union is incomplete')
+            return report
 
-        receipt, rasterizer = task(
-            name,
-            rasterize_shard,
-            destination,
-            includes_downloads=True,
-            inputs=[stage_pins['inland_water']],
+        shard_inputs: list[FilePin] = []
+        for shard in shards:
+            shard_inputs.extend(
+                (FilePin(path=shard['path'], sha256=shard['sha256']), shard['report'])
+            )
+        report = self._run_task(
+            'union',
+            merge_water,
+            union_directory,
+            inputs=[union_config, water_config, *shard_inputs],
         )
-        return receipt, tuple(rasterizer)
+        mask = FilePin(
+            path=str(union_directory / 'water-union.tif'), sha256=report['union_sha256']
+        )
+        return union_config, mask
 
-    # With an empty cache, overlap one R2 download with one rasterization.
-    # When all files are local, workers can rasterize concurrently.
-    # Keep masks in manifest order regardless of when each worker finishes.
-    completed_shards: dict[int, tuple[ShardMask, tuple[str, ...]]] = {}
-    with (
-        control.stage() as cancelled,
-        ThreadPoolExecutor(max_workers=min(workers, len(water_sources))) as pool,
-    ):
-        futures = {
-            pool.submit(copy_context().run, build_shard, item): item[0]
-            for item in enumerate(water_sources)
+    def _compose_grid(
+        self, land_mask: FilePin, water_mask: FilePin
+    ) -> tuple[FilePin, dict[str, str]]:
+        """Subtract the inland-water mask from the land mask.
+
+        Args:
+            land_mask: Path and SHA-256 of the coastline raster.
+            water_mask: Path and SHA-256 of the combined inland-water raster.
+
+        Returns:
+            The composition settings pin and the grid checksums by filename.
+        """
+        compose_config = self._save_task_configuration(
+            'compose.json',
+            {
+                'schema': 'candidate-physical-composition-v1',
+                'grid': vars(self.grid),
+                **self._selection_notes(),
+                'minimum_free_bytes': self.minimum_free_bytes,
+                'rows_per_block': self.physical_rows_per_block,
+                'land': land_mask,
+                'water': water_mask,
+            },
+            sort_keys=False,
+        )
+        physical_directory = self.output / 'physical'
+
+        def compose_grid() -> dict[str, Any]:
+            """Write the finished physical grid and verify its saved report.
+
+            Returns:
+                The physical grid report, including the checksum of each output.
+            """
+            composition.main(
+                compose_config['sha256'],
+                physical_directory,
+                self.grid,
+                land=land_mask,
+                water=water_mask,
+                minimum_free_bytes=self.minimum_free_bytes,
+                rows_per_block=self.physical_rows_per_block,
+                files=self.files,
+                emit=control.emit,
+            )
+            report = read_json(physical_directory / 'report.json')
+            if report.get('status') != 'candidate-only' or any(
+                self._checksum(physical_directory / filename)
+                != report.get('output_sha256', {}).get(filename)
+                for filename in ('physical-dry.tif', 'rows.u32le', 'runs.u32le')
+            ):
+                raise ValueError('physical composition is incomplete')
+            return report
+
+        report = self._run_task(
+            'compose',
+            compose_grid,
+            physical_directory,
+            inputs=[compose_config, land_mask, water_mask],
+        )
+        return compose_config, report['output_sha256']
+
+    def _selection_notes(self) -> dict[str, str]:
+        """Return the optional selection notes to include in task settings.
+
+        Returns:
+            An empty dictionary or the configured notes under 'selection_notes'.
+        """
+        if 'selection_notes' in self.configuration:
+            return {'selection_notes': self.configuration['selection_notes']}
+        return {}
+
+    def _write_report(
+        self,
+        land_config: FilePin,
+        water_config: FilePin,
+        output_checksums: dict[str, str],
+        script_checksums: dict[str, str],
+        *,
+        water_download_start: int,
+    ) -> dict[str, Any]:
+        """Write the physical stage report with the verified grid files.
+
+        Args:
+            land_config: Path and SHA-256 of the saved coastline settings.
+            water_config: Path and SHA-256 of the saved inland-water settings.
+            output_checksums: SHA-256 by output filename for the finished grid.
+            script_checksums: SHA-256 of the implementation files, by relative path.
+            water_download_start: Index of the first inland-water transfer, used
+                to exclude the preceding coastline downloads.
+
+        Returns:
+            The saved physical build report.
+        """
+        physical_directory = self.output / 'physical'
+        stage_reports = {
+            stage: self.files.pin(self.output / stage / 'report.json')
+            for stage in ('land', 'union', 'physical')
         }
-        try:
-            for future in as_completed(futures):
-                completed_shards[futures[future]] = future.result()
-        except BaseException:
-            cancelled.set()
-            for future in futures:
-                future.cancel()
-            raise
-    if len({producer for _, producer in completed_shards.values()}) != 1:
-        raise ValueError('inconsistent water shard rasterizers or kernels')
-    shards = [completed_shards[i][0] for i in range(len(water_sources))]
-    water_manifest: FilePin = stage_pins['inland_water']
-    union_cfg: dict[str, Any] = {
-        'schema': 'water-union-v1',
-        'grid': grid_settings,
-        **(
-            {'selection_notes': cfg['selection_notes']}
-            if 'selection_notes' in cfg
-            else {}
-        ),
-        'minimum_free_bytes': reserve,
-        'source_manifest': water_manifest,
-        'shard_count': len(shards),
-        'rows_per_block': union_rows_per_block,
-        'shards': shards,
-    }
+        report_path = self.output / 'report.json'
 
-    union_config = bind_config(
-        config_dir / 'union.json', json_bytes(union_cfg, sort_keys=False)
-    )
-    union_dir = output / 'union'
+        def save_report() -> dict[str, Any]:
+            """Save the report after the checkpoint runner verifies its inputs.
 
-    def merge_water() -> dict[str, Any]:
-        """Merge the verified water masks in manifest order.
-
-        Returns:
-            Water union report, including its output checksum.
-        """
-        water_union.run(
-            union_config['sha256'],
-            union_dir,
-            grid,
-            source_manifest=water_manifest,
-            shards=shards,
-            minimum_free_bytes=reserve,
-            rows_per_block=union_rows_per_block,
-            files=files,
-            emit=control.emit,
-        )
-        union_report = read_json(union_dir / 'report.json')
-        if union_report.get('status') != 'candidate-only' or union_report.get(
-            'union_sha256'
-        ) != checksum(union_dir / 'water-union.tif'):
-            raise ValueError('water union is incomplete')
-        return union_report
-
-    union_report = task(
-        'union',
-        merge_water,
-        union_dir,
-        inputs=[
-            union_config,
-            water_manifest,
-            *(
-                pin
-                for shard in shards
-                for pin in (
-                    FilePin(path=shard['path'], sha256=shard['sha256']),
-                    shard['report'],
-                )
-            ),
-        ],
-    )
-    land_mask = FilePin(
-        path=str(land_dir / 'land.tif'), sha256=land_report['land_sha256']
-    )
-    water_mask = FilePin(
-        path=str(union_dir / 'water-union.tif'), sha256=union_report['union_sha256']
-    )
-    compose_cfg = {
-        'schema': 'candidate-physical-composition-v1',
-        'grid': grid_settings,
-        **(
-            {'selection_notes': cfg['selection_notes']}
-            if 'selection_notes' in cfg
-            else {}
-        ),
-        'minimum_free_bytes': reserve,
-        'rows_per_block': physical_rows_per_block,
-        'land': land_mask,
-        'water': water_mask,
-    }
-    compose_config = bind_config(
-        config_dir / 'compose.json', json_bytes(compose_cfg, sort_keys=False)
-    )
-    physical_dir = output / 'physical'
-
-    def compose_grid() -> dict[str, Any]:
-        """Combine the land and water masks into the finished physical grid.
-
-        Returns:
-            Physical grid report with checksums of the TIFF and row-run files.
-        """
-        composition.main(
-            compose_config['sha256'],
-            physical_dir,
-            grid,
-            land=land_mask,
-            water=water_mask,
-            minimum_free_bytes=reserve,
-            rows_per_block=physical_rows_per_block,
-            files=files,
-            emit=control.emit,
-        )
-        physical = read_json(physical_dir / 'report.json')
-        if physical.get('status') != 'candidate-only' or any(
-            checksum(physical_dir / name) != physical.get('output_sha256', {}).get(name)
-            for name in ('physical-dry.tif', 'rows.u32le', 'runs.u32le')
-        ):
-            raise ValueError('physical composition is incomplete')
-        return physical
-
-    physical = task(
-        'compose',
-        compose_grid,
-        physical_dir,
-        inputs=[compose_config, land_mask, water_mask],
-    )
-    files.verify([request, *stage_pins.values(), union_config, compose_config])
-    report = {
-        'status': 'candidate-only',
-        'directory': str(physical_dir),
-        'configuration': request,
-        'grid': grid_settings,
-        **stage_pins,
-        'water_batch_size': batch_size,
-        'union_rows_per_block': union_rows_per_block,
-        'physical_rows_per_block': physical_rows_per_block,
-        'shard_count': len(shards),
-        'max_parallel_shards': workers,
-        'script_sha256': scripts,
-        'stage_reports': {
-            key: {
-                'path': str(output / key / 'report.json'),
-                'sha256': checksum(output / key / 'report.json'),
+            Returns:
+                The saved physical build report.
+            """
+            report = {
+                'status': 'candidate-only',
+                'directory': str(physical_directory),
+                'configuration': self.request,
+                'grid': vars(self.grid),
+                'land_config': land_config,
+                'inland_water': water_config,
+                'water_batch_size': self.water_batch_size,
+                'union_rows_per_block': self.union_rows_per_block,
+                'physical_rows_per_block': self.physical_rows_per_block,
+                'shard_count': len(self.configuration['inland_water']['files']),
+                'max_parallel_shards': self.water_workers,
+                'script_sha256': script_checksums,
+                'stage_reports': stage_reports,
+                'physical_output_sha256': output_checksums,
+                'limitations': 'Candidate physical land/water only; not historical source reproduction or continent labels.',
+                'downloaded_shard_count': sum(
+                    transfer.completed
+                    for transfer in self.cache.downloads[water_download_start:]
+                ),
+                'downloaded_shard_count_scope': 'current invocation',
             }
-            for key in ('land', 'union', 'physical')
-        },
-        'physical_output_sha256': physical['output_sha256'],
-        'limitations': 'Candidate physical land/water only; not historical source reproduction or continent labels.',
-    }
-    report_path = output / 'report.json'
+            write_json(report_path, report, sort_keys=False)
+            return report
 
-    def save_report() -> dict[str, Any]:
-        """Write the stage report after the physical files are verified.
-
-        Returns:
-            The saved physical output report.
-        """
-        report['downloaded_shard_count'] = sum(
-            transfer.completed for transfer in cache.downloads[land_transfer_count:]
+        saved_report = self._run_task(
+            'report',
+            save_report,
+            report_path,
+            inputs=[
+                land_config,
+                water_config,
+                *stage_reports.values(),
+                *self.files.row_streams(physical_directory),
+            ],
         )
-        report['downloaded_shard_count_scope'] = 'current invocation'
-        write_json(report_path, report, sort_keys=False)
-        return report
+        return {**saved_report, 'directory': str(physical_directory)}
 
-    saved_report = task(
-        'report',
-        save_report,
-        report_path,
-        inputs=[
-            *stage_pins.values(),
-            *(
-                files.pin(output / name / 'report.json')
-                for name in ('land', 'union', 'physical')
-            ),
-            *files.row_streams(physical_dir),
-        ],
-    )
-    return {**saved_report, 'directory': report['directory']}
+
+def _physical_script_checksums() -> dict[str, str]:
+    """Record the physical builder implementation used for this attempt.
+
+    Returns:
+        SHA-256 digests keyed by the implementation files' relative names.
+    """
+    scripts = {
+        name: sha256_file(HERE / name)
+        for name in (
+            'build.py',
+            'sources.py',
+            'land.py',
+            'water.py',
+            'water_batch.py',
+            'union.py',
+            'composition.py',
+        )
+    }
+    scripts['geodesy/ogr.py'] = sha256_file(geometry_io.__file__)
+    scripts['source_assets/cache.py'] = sha256_file(source_cache.__file__)
+    scripts['shared/r2.py'] = sha256_file(r2.__file__)
+    return scripts
 
 
 def main(
@@ -664,7 +798,4 @@ def main(
 
 
 if __name__ == '__main__':
-    try:
-        main()
-    except (ValueError, OSError) as e:
-        sys.exit(f'failed: {e}')
+    main()
