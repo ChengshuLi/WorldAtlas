@@ -461,7 +461,7 @@ def divide_regions(
         for y in range(grid.height):
             check_cancelled()
             if y not in rows:
-                offsets.append(len(dsu.parent))
+                offsets.append(len(dsu))
                 previous = []
                 continue
             raw = list(eligible_rows(y))
@@ -502,13 +502,11 @@ def divide_regions(
                 if y not in cuts.wrap:
                     dsu.union(current[0][2], current[-1][2])
             np.asarray(current, dtype="<u4").tofile(output)
-            offsets.append(len(dsu.parent))
+            offsets.append(len(dsu))
             previous = current
     if len(label_nodes) != len(labels):
         raise ValueError("a divided-face label lies outside the computational scope")
-    initial_roots = np.fromiter(
-        (dsu.find(i) for i in range(len(dsu.parent))), dtype=np.uint32
-    )
+    initial_roots = np.fromiter((dsu.find(i) for i in range(len(dsu))), dtype=np.uint32)
     distinct, inverse = np.unique(initial_roots, return_inverse=True)
     # Join pieces in the same geometric face before checking its labels.
     if len(distinct) > 1 and uncut is not None:

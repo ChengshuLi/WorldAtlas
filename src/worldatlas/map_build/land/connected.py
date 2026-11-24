@@ -137,12 +137,12 @@ def build(
                 j += 1
         if current and current[0][0] == 0 and current[-1][1] == width:
             connected.union(current[0][2], current[-1][2])
-        outrows.append(len(connected.parent))
+        outrows.append(len(connected))
         previous = current
     # A later row can join two pieces that looked separate earlier. Find each
     # run’s final component after connecting every row and the longitude seam.
     components = 0
-    for node in range(len(connected.parent)):
+    for node in range(len(connected)):
         if node % 65536 == 0:
             guard()
         root = connected.find(node)
@@ -151,7 +151,7 @@ def build(
     _write(output_rows, outrows)
     _write(output_runs, spans)
     return {
-        "runs": len(connected.parent),
+        "runs": len(connected),
         "components": components,
         "selected_cells": cells,
     }
