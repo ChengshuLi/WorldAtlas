@@ -616,7 +616,6 @@ class Fixture(unittest.TestCase):
                     {
                         "path": "raw/water.parquet",
                         "sha256": sha256_file(shard),
-                        "size_bytes": shard.stat().st_size,
                     }
                 ],
             ),
@@ -780,6 +779,8 @@ class Fixture(unittest.TestCase):
             self.assertEqual(calls, [])
             self.assertFalse((other / "inputs").exists())
             physical = runner.physical()
+        land_settings = read_json(runner.out / "physical/configs/land.json")
+        self.assertEqual(set(land_settings["land"][0]["files"][0]), {"path", "sha256"})
         report = read_json(runner.out / "physical/report.json")
         self.assertEqual(report["downloaded_shard_count"], 1)
         self.assertGreater(runner.timing.summary()["physical"]["source_download_elapsed_seconds"], 0)

@@ -24,7 +24,6 @@ from worldatlas.map_build.inputs.configuration import (
     PHYSICAL_CONFIGURATION,
     LandLayer,
     LandSettings,
-    LocalFile,
     PhysicalConfiguration,
     ResolvedLandFile,
     land_dataset_index,
@@ -53,7 +52,7 @@ HERE = Path(__file__).resolve().parent
 
 def plan_land_inputs(
     settings: LandSettings[ResolvedLandFile], cache: SourceCache
-) -> tuple[LandSettings[LocalFile], list[RemoteFile]]:
+) -> tuple[LandSettings[FilePin], list[RemoteFile]]:
     """Prepare local coastline paths without acquiring any R2 files.
 
     Args:
@@ -66,7 +65,7 @@ def plan_land_inputs(
     """
     requests: list[RemoteFile] = []
 
-    def local_file(spec: ResolvedLandFile) -> LocalFile:
+    def local_file(spec: ResolvedLandFile) -> FilePin:
         """Turn a pinned file specification into a pin with a local path.
 
         Args:
@@ -81,10 +80,9 @@ def plan_land_inputs(
         return {
             "path": str(cache.path(spec)),
             "sha256": spec["sha256"],
-            "size_bytes": spec["size_bytes"],
         }
 
-    layers: list[LandLayer[LocalFile]] = []
+    layers: list[LandLayer[FilePin]] = []
     for layer in settings["land"]:
         dataset_index = land_dataset_index(layer)
         files = [local_file(spec) for spec in layer["files"]]
@@ -215,7 +213,7 @@ def _build(
     physical_rows_per_block = cfg.get('physical_rows_per_block', 128)
     raw: list[tuple[Path, str, RemoteFile | None]] = []
     for entry in cfg['inland_water']['files']:
-        if 'r2_bucket' in entry:
+        if 'path' not in entry:
             raw.append((cache.path(entry), entry['sha256'], entry))
             continue
         relative = Path(entry['path'])

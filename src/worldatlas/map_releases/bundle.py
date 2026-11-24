@@ -25,6 +25,7 @@ from worldatlas.map_releases.inputs import (
     write_inputs,
 )
 from worldatlas.shared.files import (
+    FilePin,
     JSONValue,
     compact_json_bytes,
     json_bytes,
@@ -113,7 +114,7 @@ def _read_build(
 
 
 def _read_final_grid(
-    final: Path, pins: Mapping[str, Mapping[str, str]], geography: GeographicSelection
+    final: Path, pins: Mapping[str, FilePin], geography: GeographicSelection
 ) -> tuple[Grid, dict[str, Any]]:
     """Check the final grid files and the counts that will go into the legend.
 
@@ -223,7 +224,7 @@ def _copy_viewer(viewer: Path, bundle: Path, prefix: str) -> None:
 def _compress_grid(
     final: Path,
     bundle: Path,
-    pins: Mapping[str, Mapping[str, str]],
+    pins: Mapping[str, FilePin],
     height: int,
     run_count: int,
 ) -> tuple[str, dict[str, str]]:

@@ -14,8 +14,9 @@ from osgeo import gdal, ogr
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.execution.runtime import RunFilePins
-from worldatlas.map_build.inputs.configuration import LandSettings, LocalFile
+from worldatlas.map_build.inputs.configuration import LandSettings
 from worldatlas.map_build.physical.sources import checked_files, create_mask, open_layer
+from worldatlas.shared.files import FilePin
 
 gdal.UseExceptions()
 
@@ -25,7 +26,7 @@ def run(
     output: Path | str,
     grid: Grid,
     *,
-    settings: LandSettings[LocalFile],
+    settings: LandSettings[FilePin],
     minimum_free_bytes: int,
     files: RunFilePins,
     emit: Callable[..., None] = print,

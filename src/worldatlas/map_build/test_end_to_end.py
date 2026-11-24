@@ -190,9 +190,7 @@ class EndToEndTests(unittest.TestCase):
                             dataset=str(coast),
                             layer=None,
                             where="kind = 'land'",
-                            files=[
-                                dict(pin_file(coast), size_bytes=coast.stat().st_size)
-                            ],
+                            files=[pin_file(coast)],
                         )
                     ],
                 )

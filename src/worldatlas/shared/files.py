@@ -8,7 +8,7 @@ from collections.abc import Iterable, Mapping
 from pathlib import Path
 from typing import Annotated, Any
 
-from pydantic import Field, StringConstraints
+from pydantic import Field, StringConstraints, with_config
 from typing_extensions import TypedDict
 
 from worldatlas.shared.text import NonEmptyText
@@ -24,6 +24,7 @@ type Sha256Digest = Annotated[str, StringConstraints(pattern=SHA256_PATTERN)]
 type ByteCount = Annotated[int, Field(ge=0)]
 
 
+@with_config(extra="forbid")
 class FilePin(TypedDict):
     """Identify a local file by its path and expected SHA-256."""
 

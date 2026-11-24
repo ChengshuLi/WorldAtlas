@@ -1071,6 +1071,11 @@ b.run(sys.argv[1], sys.argv[2])
             ),
             (
                 'water',
+                {'files': [dict(shard, size_bytes=1)]},
+                r'FilePin\.size_bytes',
+            ),
+            (
+                'water',
                 {
                     'file_count': 2,
                     'files': [shard, dict(shard, path='another.parquet')],

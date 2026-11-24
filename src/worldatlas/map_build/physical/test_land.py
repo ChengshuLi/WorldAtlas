@@ -8,11 +8,11 @@ import numpy as np
 from osgeo import gdal, ogr, osr
 from pydantic import TypeAdapter
 from worldatlas.map_build.execution.runtime import RunFilePins
-from worldatlas.map_build.inputs.configuration import LandSettings, LocalFile, PhysicalControls
+from worldatlas.map_build.inputs.configuration import LandSettings, PhysicalControls
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.physical import land as b
 from worldatlas.map_build.physical.sources import checked_files
-from worldatlas.shared.files import sha256_file
+from worldatlas.shared.files import FilePin, sha256_file
 
 
 class RasterizeLandTests(unittest.TestCase):
@@ -68,7 +68,7 @@ class RasterizeLandTests(unittest.TestCase):
         )
         return b.run(
             sha256_file(config), output, grid,
-            settings=TypeAdapter(LandSettings[LocalFile]).validate_python(settings, strict=True),
+            settings=TypeAdapter(LandSettings[FilePin]).validate_python(settings, strict=True),
             minimum_free_bytes=controls['minimum_free_bytes'], files=RunFilePins(), **kwargs,
         )
 

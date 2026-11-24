@@ -21,22 +21,16 @@ from worldatlas.source_assets.pins import ArchiveMember, R2ObjectPin
 type PositiveInt = Annotated[int, Field(gt=0)]
 
 
-class LocalFile(FilePin, closed=True):
-    """Pin a local source without requiring access to R2."""
-
-    size_bytes: NotRequired[ByteCount]
-
-
 class CatalogFile(TypedDict, closed=True):
     """Select a raw source by its ID in the frozen catalog."""
 
     r2_source: NonEmptyText
 
 
-type WaterFile = LocalFile | CatalogFile | R2ObjectPin
+type WaterFile = FilePin | CatalogFile | R2ObjectPin
 type LandFile = WaterFile | ArchiveMember[CatalogFile | R2ObjectPin]
-type ResolvedLandFile = LocalFile | R2ObjectPin | ArchiveMember[R2ObjectPin]
-type ResolvedWaterFile = LocalFile | R2ObjectPin
+type ResolvedLandFile = FilePin | R2ObjectPin | ArchiveMember[R2ObjectPin]
+type ResolvedWaterFile = FilePin | R2ObjectPin
 
 
 @with_config(extra="forbid")
@@ -250,6 +244,8 @@ def source_file(spec: LandFile) -> WaterFile:
     Returns:
         The direct file specification used to obtain source bytes.
     """
+    if "path" in spec:
+        return spec
     return spec["archive"] if "archive" in spec else spec
 
 
@@ -265,7 +261,7 @@ def catalog_source_ids(sources: BuildSources) -> set[str]:
     return {
         entry["r2_source"]
         for selection in file_requests(sources)
-        if "r2_source" in (entry := source_file(selection))
+        if "path" not in (entry := source_file(selection)) and "r2_source" in entry
     }
 
 
@@ -301,9 +297,11 @@ def resolve_land_file(
     Returns:
         A file pin or ZIP member with its archive pinned in R2.
     """
+    if "path" in file:
+        return file
     if "archive" in file:
         return {**file, "archive": resolve_object(file["archive"], catalog)}
-    return file if "path" in file else resolve_object(file, catalog)
+    return resolve_object(file, catalog)
 
 
 def physical_configuration(

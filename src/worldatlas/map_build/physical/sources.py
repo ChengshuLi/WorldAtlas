@@ -7,11 +7,11 @@ from osgeo import gdal, ogr, osr
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.runtime import RunFilePins
-from worldatlas.map_build.inputs.configuration import LandLayer, LocalFile
+from worldatlas.map_build.inputs.configuration import LandLayer
 from worldatlas.shared.files import FilePin
 
 
-def checked_files(spec: LandLayer[LocalFile], pins: RunFilePins) -> dict[str, str]:
+def checked_files(spec: LandLayer[FilePin], pins: RunFilePins) -> dict[str, str]:
     """Verify all files that can affect the selected vector dataset.
 
     Args:
@@ -45,7 +45,7 @@ def checked_files(spec: LandLayer[LocalFile], pins: RunFilePins) -> dict[str, st
 
 
 def open_layer(
-    spec: LandLayer[LocalFile],
+    spec: LandLayer[FilePin],
     *,
     feature_callback: Callable[[ogr.Feature, ogr.Geometry], None] | None = None,
 ) -> tuple[gdal.Dataset, ogr.Layer, int]:
