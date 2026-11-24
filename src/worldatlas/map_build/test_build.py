@@ -695,7 +695,7 @@ class Fixture(unittest.TestCase):
         )
         config_path.write_bytes(b"{}")
         with self.assertRaisesRegex(
-            ValueError, "saved physical build configuration changed"
+            ValueError, r"saved build settings differ: .*physical-build-config\.json"
         ):
             runner.physical()
         config_path.write_bytes(original_config)

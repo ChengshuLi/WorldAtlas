@@ -20,7 +20,7 @@ from worldatlas.map_build.physical.sources import (
     create_mask,
     open_coastline_layer,
 )
-from worldatlas.shared.files import FilePin
+from worldatlas.shared.files import FilePin, write_json
 
 gdal.UseExceptions()
 
@@ -189,7 +189,5 @@ def run(
         'land_sha256': files.pin(output / 'land.tif')['sha256'],
         'gdal': gdal.VersionInfo('--version'),
     }
-    with (output / 'report.json').open('x') as f:
-        json.dump(report, f, indent=2)
-        f.write('\n')
+    write_json(output / 'report.json', report, sort_keys=False)
     return report

@@ -15,7 +15,11 @@ from typing import Any
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution import control
-from worldatlas.map_build.execution.runtime import Checkpoints, open_stage_workspace
+from worldatlas.map_build.execution.runtime import (
+    Checkpoints,
+    open_stage_workspace,
+    save_or_verify_settings,
+)
 from worldatlas.map_build.execution.timing import Timing
 from worldatlas.map_build.inputs.configuration import (
     PHYSICAL_CONFIGURATION,
@@ -31,8 +35,6 @@ from worldatlas.map_build.physical.sources import ShardMask
 from worldatlas.shared.files import (
     FilePin,
     JSONValue,
-    json_bytes,
-    write_bytes_atomic,
     write_json,
 )
 from worldatlas.source_assets.cache import SourceCache
@@ -166,16 +168,16 @@ class PhysicalBuild:
             )
             self.config_directory.mkdir(parents=True, exist_ok=True)
             (self.output / 'shards').mkdir(exist_ok=True)
-            land_config = self._save_task_configuration(
-                'land.json',
+            land_config = save_or_verify_settings(
+                self.config_directory / 'land.json',
                 dict(
                     land_settings,
                     schema='land-raster-candidate-v1',
                     minimum_free_bytes=self.minimum_free_bytes,
                 ),
             )
-            water_config = self._save_task_configuration(
-                'inland-water.json',
+            water_config = save_or_verify_settings(
+                self.config_directory / 'inland-water.json',
                 dict(
                     self.configuration['inland_water'],
                     schema='water-shard-candidate-v2',
@@ -207,31 +209,6 @@ class PhysicalBuild:
             output_checksums,
             downloaded_shard_count=downloaded_shard_count,
         )
-
-    def _save_task_configuration(
-        self, filename: str, settings: JSONValue, *, sort_keys: bool = True
-    ) -> FilePin:
-        """Save a task's settings or check the settings already saved for resume.
-
-        Args:
-            filename: JSON filename under this build's configs directory.
-            settings: JSON-compatible settings used by the task.
-            sort_keys: Whether to sort object keys when writing.
-
-        Returns:
-            Path and SHA-256 of the settings file.
-
-        Raises:
-            ValueError: The existing settings differ from the current settings.
-        """
-        path = self.config_directory / filename
-        data = json_bytes(settings, sort_keys=sort_keys)
-        if path.exists():
-            if path.read_bytes() != data:
-                raise ValueError('resumed stage config mismatch')
-        else:
-            write_bytes_atomic(path, data)
-        return FilePin(path=str(path), sha256=hashlib.sha256(data).hexdigest())
 
     def _run_task[Result: JSONValue](
         self,
@@ -425,8 +402,8 @@ class PhysicalBuild:
         Returns:
             File pins for the union settings and the combined water mask, in that order.
         """
-        union_config = self._save_task_configuration(
-            'union.json',
+        union_config = save_or_verify_settings(
+            self.config_directory / 'union.json',
             {
                 'schema': 'water-union-v1',
                 'grid': vars(self.grid),
@@ -479,8 +456,8 @@ class PhysicalBuild:
         Returns:
             The composition settings pin and the grid checksums by filename.
         """
-        compose_config = self._save_task_configuration(
-            'compose.json',
+        compose_config = save_or_verify_settings(
+            self.config_directory / 'compose.json',
             {
                 'schema': 'candidate-physical-composition-v1',
                 'grid': vars(self.grid),
@@ -563,7 +540,7 @@ class PhysicalBuild:
             write_json(report_path, report, sort_keys=False)
             return report
 
-        saved_report = self._run_task(
+        return self._run_task(
             'report',
             save_report,
             report_path,
@@ -574,7 +551,6 @@ class PhysicalBuild:
                 *self.files.row_streams(physical_directory),
             ],
         )
-        return {**saved_report, 'directory': str(physical_directory)}
 
 
 def main(

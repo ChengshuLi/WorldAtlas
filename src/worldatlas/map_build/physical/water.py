@@ -24,6 +24,7 @@ from worldatlas.map_build.execution.runtime import RunFilePins
 from worldatlas.map_build.inputs.configuration import WaterSettings
 from worldatlas.map_build.physical.sources import ShardMask, create_mask
 from worldatlas.map_build.physical.water_batch import GeometryStatus, WaterBatch
+from worldatlas.shared.files import write_json
 from worldatlas.shared.text import UNICODE_WHITESPACE
 
 gdal.UseExceptions()
@@ -231,8 +232,7 @@ def run(
     invalid_rows_filename = None
     if invalid_rows:
         invalid_rows_filename = 'invalid-feature-rows.json'
-        with (out / invalid_rows_filename).open('x') as f:
-            f.write(json.dumps(invalid_rows, indent=2) + '\n')
+        write_json(out / invalid_rows_filename, invalid_rows)
     source_row_count = pf.metadata.num_rows
     complete = (
         counts.get('rows') == source_row_count
@@ -275,8 +275,7 @@ def run(
         'output_sha256': mask['sha256'],
     }
     report_path = out / 'report.json'
-    with report_path.open('x') as f:
-        f.write(json.dumps(report, indent=2) + '\n')
+    write_json(report_path, report, sort_keys=False)
     if not complete:
         raise ValueError(f'incomplete water shard: see {report_path}')
 

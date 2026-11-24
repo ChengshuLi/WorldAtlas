@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import fcntl
+import hashlib
 import os
 import subprocess
 import sys
@@ -33,15 +34,42 @@ from worldatlas.map_build.execution.timing import (
 from worldatlas.shared.files import (
     FilePin,
     JSONValue,
+    json_bytes,
     pin_file,
     read_json,
     sha256_file,
     sync_directory,
+    write_bytes_atomic,
     write_json,
 )
 
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
 TASK_CHECKPOINT_SCHEMA = "worldatlas-task-checkpoint-v2"
+
+
+def save_or_verify_settings(
+    path: Path, settings: JSONValue, *, sort_keys: bool = True
+) -> FilePin:
+    """Save build settings once and return a pin for their exact JSON bytes.
+
+    Args:
+        path: Absolute path to the saved settings in the run directory.
+        settings: Settings to encode as JSON.
+        sort_keys: Whether to sort object keys when encoding.
+
+    Returns:
+        The settings file's absolute path and SHA-256 checksum.
+
+    Raises:
+        ValueError: An existing settings file differs from the current settings.
+    """
+    data = json_bytes(settings, sort_keys=sort_keys)
+    if path.exists():
+        if path.read_bytes() != data:
+            raise ValueError(f"saved build settings differ: {path}")
+    else:
+        write_bytes_atomic(path, data)
+    return FilePin(path=str(path), sha256=hashlib.sha256(data).hexdigest())
 
 
 class RunFilePins:

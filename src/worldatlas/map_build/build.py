@@ -19,6 +19,7 @@ from worldatlas.map_build.execution.control import stage as stage_context
 from worldatlas.map_build.execution.runtime import (
     RunLock,
     prepare_run_attempt,
+    save_or_verify_settings,
 )
 from worldatlas.map_build.execution.timing import SetupStart, Timing
 from worldatlas.map_build.inputs.configuration import (
@@ -40,7 +41,6 @@ from worldatlas.shared.database import connect_neon, neon_connection_url
 from worldatlas.shared.files import (
     FilePin,
     compact_json_bytes,
-    json_bytes,
     pin_file,
     read_json,
     sha256_file,
@@ -394,15 +394,8 @@ class Pipeline:
         Returns:
             Directory containing the physical row-run files and report.
         """
-        request = self.out / "physical-build-config.json"
-        data = json_bytes(self.physical_config)
-        if request.exists():
-            if request.read_bytes() != data:
-                raise ValueError("saved physical build configuration changed")
-        else:
-            write_bytes_atomic(request, data)
-        request_pin = FilePin(
-            path=str(request), sha256=hashlib.sha256(data).hexdigest()
+        request_pin = save_or_verify_settings(
+            self.out / "physical-build-config.json", self.physical_config
         )
         if self.physical_reuse is not None:
             self.checkpoints.files.verify(self.physical_reuse["pins"])

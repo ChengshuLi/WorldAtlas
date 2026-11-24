@@ -420,7 +420,9 @@ b.run(sys.argv[1], sys.argv[2])
         out = self.root / 'union-settings'
         self.interrupt_before_union(out)
         (out / 'configs/union.json').write_bytes(b'{}')
-        with self.assertRaisesRegex(ValueError, 'resumed stage config mismatch'):
+        with self.assertRaisesRegex(
+            ValueError, r'saved build settings differ: .*union\.json'
+        ):
             b.run(self.config, out, resume=True)
 
     def test_resume_after_report_write_failure_reuses_composition(self):

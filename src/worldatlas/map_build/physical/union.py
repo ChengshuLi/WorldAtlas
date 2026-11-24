@@ -15,7 +15,7 @@ from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.execution.runtime import RunFilePins
 from worldatlas.map_build.physical.sources import ShardMask, create_mask, open_mask
-from worldatlas.shared.files import FilePin
+from worldatlas.shared.files import FilePin, write_json
 
 gdal.UseExceptions()
 
@@ -131,7 +131,5 @@ def run(
         'candidate_water_cells': candidate,
         'union_sha256': files.pin(output / 'water-union.tif')['sha256'],
     }
-    with (output / 'report.json').open('x') as f:
-        json.dump(report, f, indent=2)
-        f.write('\n')
+    write_json(output / 'report.json', report, sort_keys=False)
     return report
