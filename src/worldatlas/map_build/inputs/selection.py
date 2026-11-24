@@ -22,6 +22,7 @@ from worldatlas.map_build.inputs.selection_types import (
     GeographicSelection,
     SourceAsset,
 )
+from worldatlas.shared.files import read_json
 
 HERE = Path(__file__).resolve().parent
 
@@ -219,7 +220,7 @@ def read_saved_build_selection(selection_path: Path | str) -> BuildSelection:
     Raises:
         ValueError: The file has an incompatible schema.
     """
-    saved_selection: BuildSelection = json.loads(Path(selection_path).read_bytes())
+    saved_selection: BuildSelection = read_json(selection_path)
     if saved_selection.get("schema") != "worldatlas-input-selection-v4":
         raise ValueError(
             "this selection requires its release archive's captured implementation"

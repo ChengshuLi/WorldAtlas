@@ -1,7 +1,6 @@
 """Index complete reference intervals; real sampled cells supply upper bounds."""
 
 import hashlib
-import json
 import time
 from collections.abc import Iterable
 from pathlib import Path
@@ -10,7 +9,7 @@ from typing import Any
 import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.shared.files import sha256_file
+from worldatlas.shared.files import sha256_file, write_json
 
 
 def build_reference_index(
@@ -145,5 +144,5 @@ def build_reference_index(
         representatives_sha256=sha256_file(directory / "representatives.u32le"),
         processing_seconds=time.monotonic() - started,
     )
-    (directory / "report.json").write_text(json.dumps(result, indent=2) + "\n")
+    write_json(directory / "report.json", result, sort_keys=False)
     return result

@@ -1,6 +1,5 @@
 """Assemble boundary geometry from individual OpenStreetMap way responses."""
 
-import json
 from collections.abc import Iterable
 from pathlib import Path
 from typing import Any
@@ -8,6 +7,7 @@ from typing import Any
 from shapely import line_merge
 from shapely.geometry import MultiLineString
 
+from worldatlas.shared.files import read_json
 from worldatlas.shared.text import NonEmptyText
 from worldatlas.source_imports.shared.recipe_types import SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
@@ -32,8 +32,7 @@ def _read_way_sources(
     """
     nodes, ways = {}, {}
     for path in paths:
-        with path.open(encoding='utf-8') as source:
-            elements = json.load(source)['elements']
+        elements = read_json(path)['elements']
         source_ways = [element for element in elements if element['type'] == 'way']
         if len(source_ways) != 1:
             raise ValueError('each source must contain exactly one OSM way')

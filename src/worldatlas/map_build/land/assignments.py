@@ -1,6 +1,5 @@
 """Assign non-mainland components by complete WGS84 minimum-distance search."""
 
-import json
 import time
 from collections.abc import Collection, Sequence
 from pathlib import Path
@@ -17,7 +16,7 @@ from worldatlas.map_build.land.certificates import CertificateIndex
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.exact_search import ExactIndex
 from worldatlas.map_build.land.hints import wgs84_nearest_categories
-from worldatlas.shared.files import sha256_file
+from worldatlas.shared.files import read_json, sha256_file, write_json
 
 
 def assign_components(
@@ -50,7 +49,7 @@ def assign_components(
         Path(index_directory),
         Path(directory),
     )
-    metadata = json.loads((index_directory / "report.json").read_text())
+    metadata = read_json(index_directory / "report.json")
     if metadata["grid"] != vars(grid):
         raise ValueError("seed index grid differs")
     representatives_path = index_directory / "representatives.u32le"
@@ -186,5 +185,5 @@ def assign_components(
             for name in ("roots.u32le", "entities.i64le")
         },
     )
-    (directory / "report.json").write_text(json.dumps(result, indent=2) + "\n")
+    write_json(directory / "report.json", result, sort_keys=False)
     return result, roots, codes

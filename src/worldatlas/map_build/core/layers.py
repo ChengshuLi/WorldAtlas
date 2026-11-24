@@ -2,7 +2,6 @@
 
 import heapq
 import itertools
-import json
 from collections import Counter
 from collections.abc import Iterable, Iterator
 from pathlib import Path
@@ -11,6 +10,7 @@ from typing import Any
 import numpy as np
 
 from worldatlas.map_build.core.grid import Grid, column_windows
+from worldatlas.shared.files import write_json
 
 
 def merge_rows(
@@ -24,19 +24,13 @@ def merge_rows(
 
     Yields:
         (row, spans) in row order, with each row's spans sorted by column.
-
-    Raises:
-        ValueError: Spans from different tiles overlap.
     """
     if len(streams) == 1:
         yield from streams[0]
         return
     merged = heapq.merge(*streams, key=lambda item: item[0])
     for y, records in itertools.groupby(merged, key=lambda item: item[0]):
-        spans = sorted(span for _, values in records for span in values)
-        if any(a[1] > b[0] for a, b in zip(spans, spans[1:])):
-            raise ValueError("assignment tiles overlap")
-        yield y, spans
+        yield y, sorted(span for _, values in records for span in values)
 
 
 def write_layer(
@@ -193,7 +187,7 @@ def write_run_rows(
         "counts": dict(counts),
         "run_count": offsets[-1],
     }
-    (directory / "report.json").write_text(json.dumps(report, indent=2) + "\n")
+    write_json(directory / "report.json", report, sort_keys=False)
     return report
 
 

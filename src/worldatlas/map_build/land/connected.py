@@ -5,7 +5,6 @@ builder, including equal-size ties. Component IDs are generation-local, but
 preserving them allows byte-for-byte comparison with existing evidence.
 """
 
-import json
 import os
 import sys
 import time
@@ -17,7 +16,7 @@ from typing import Any
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.run_components import RunComponents
 from worldatlas.map_build.execution.control import check_cancelled
-from worldatlas.shared.files import sha256_file
+from worldatlas.shared.files import sha256_file, write_json
 
 
 def _read(path: Path | str) -> array:
@@ -197,5 +196,5 @@ def build_components(
         },
         processing_seconds=time.monotonic() - started,
     )
-    (directory / "report.json").write_text(json.dumps(report, indent=2) + "\n")
+    write_json(directory / "report.json", report, sort_keys=False)
     return report

@@ -12,6 +12,7 @@ from shapely.geometry import MultiPolygon, Polygon
 from shapely.geometry.base import BaseGeometry
 
 from worldatlas.geodesy.geojson import validate_geometry
+from worldatlas.shared.files import read_json
 from worldatlas.shared.text import NonEmptyText
 from worldatlas.source_assets.archives import archive_member
 from worldatlas.source_imports.shared.recipe_types import FeatureIdentity, SourceId
@@ -55,7 +56,7 @@ def native_geojson_geometry(
     if member is not None:
         with ZipFile(path) as archive:
             return json.loads(archive.read(archive_member(archive, member)))
-    return json.loads(path.read_bytes())
+    return read_json(path)
 
 
 def polygon_containing(

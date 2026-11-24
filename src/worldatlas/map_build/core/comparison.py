@@ -1,6 +1,5 @@
 """Compare complete grids and retain the exact locations of changed cells."""
 
-import json
 import time
 from collections import Counter
 from collections.abc import Iterable
@@ -13,7 +12,7 @@ import numpy as np
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.inputs.selection_types import MapCodeBinding
-from worldatlas.shared.files import sha256_file
+from worldatlas.shared.files import sha256_file, write_json
 
 
 def reference_lookup(
@@ -182,5 +181,5 @@ def compare(
         "elapsed_seconds": time.monotonic() - start,
         "change_record_fields": ["row", "start", "end", "before_code", "after_code"],
     }
-    (directory / "report.json").write_text(json.dumps(result, indent=2) + "\n")
+    write_json(directory / "report.json", result, sort_keys=False)
     return result

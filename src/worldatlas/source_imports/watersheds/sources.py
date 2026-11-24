@@ -15,6 +15,7 @@ from shapely.geometry import LineString
 from typing_extensions import TypedDict
 
 from worldatlas.geodesy.geojson import Position, validate_geometry
+from worldatlas.shared.files import read_json
 from worldatlas.shared.text import NonEmptyText
 from worldatlas.source_assets.archives import archive_member
 from worldatlas.source_imports.shared.sources import gdal_dataset_path
@@ -296,8 +297,7 @@ class Sources:
                 ):
                     document = json.load(stream)
             else:
-                with path.open('rb') as stream:
-                    document = json.load(stream)
+                document = read_json(path)
             index = part['geojson_feature']
             if not 0 <= index < len(document['features']):
                 raise ValueError('GeoJSON feature position is outside the source')

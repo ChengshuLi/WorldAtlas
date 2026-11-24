@@ -151,9 +151,14 @@ class LayersTests(unittest.TestCase):
                 self.assertTrue(np.array_equal(crop(*data, 9, 35, 38, 36), values[1]))
                 self.assertFalse(crop(*data, 0, 0, 36, 36).any())
 
-    def test_window_merge_rejects_overlaps(self):
-        with self.assertRaisesRegex(ValueError, "overlap"):
-            list(merge_rows([iter([(3, [(1, 4, 7)])]), iter([(3, [(3, 5, 8)])])]))
+    def test_writer_rejects_overlaps_in_merged_windows(self):
+        streams = [[(3, [(3, 5, 8)])], [(3, [(1, 4, 7)])]]
+        self.assertEqual(list(merge_rows(streams)), [(3, [(1, 4, 7), (3, 5, 8)])])
+        with (
+            tempfile.TemporaryDirectory() as directory,
+            self.assertRaisesRegex(ValueError, "invalid output span"),
+        ):
+            write_layer(Path(directory) / "layer", Grid(8, 4, 45), merge_rows(streams))
 
     def test_duplicate_output_rows_are_rejected(self):
         grid = Grid(36, 18, 10.0)
