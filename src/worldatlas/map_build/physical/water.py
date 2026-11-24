@@ -30,36 +30,51 @@ gdal.UseExceptions()
 ogr.UseExceptions()
 
 INLAND_WATER_SUBTYPE_POLICY = 'overture-inland-subtype-v1'
+EXCLUDED_WATER_SUBTYPES = (
+    'ocean',  # The coastline already defines the open ocean.
+    'physical',  # Overture's named features, such as bays, can overlap water polygons.
+)
 
 
 def classify_water_subtypes(subtypes: pyarrow.Array) -> tuple[np.ndarray, int, int]:
-    """Classify a batch of water subtypes with Arrow.
+    """Select rows by Overture subtype before checking their geometry.
+
+    Skip the exact values ``ocean`` and ``physical``. Null, blank, and non-text
+    values count as missing and make the shard incomplete. Other text values
+    pass this check. Trim whitespace only when checking for blank text.
 
     Args:
         subtypes: Array of Overture subtype values.
 
     Returns:
-        (eligible_mask, missing_count, excluded_count). The 1-D mask has a
-        true value for each row eligible for inland-water rasterization.
+        A 1-D Boolean array marking rows that pass the subtype check, the
+        number of missing values, and the number of excluded values.
+
+        For example, ["lake", "ocean", "physical", None] gives
+        ([True, False, False, False], 1, 2).
     """
     # Arrow registers these compute kernels dynamically when the module loads.
     if pyarrow.types.is_dictionary(subtypes.type):
         subtypes = pc.dictionary_decode(subtypes)  # pyright: ignore[reportAttributeAccessIssue]
-    if not (
-        pyarrow.types.is_string(subtypes.type)
-        or pyarrow.types.is_large_string(subtypes.type)
-    ):
+    if subtypes.type not in (pyarrow.string(), pyarrow.large_string()):
+        # The whole column has the wrong type, so none of its rows has usable text.
         return np.zeros(len(subtypes), dtype=bool), len(subtypes), 0
-    trimmed = pc.utf8_trim(subtypes, characters=UNICODE_WHITESPACE)  # pyright: ignore[reportAttributeAccessIssue]
-    missing = pc.or_(pc.is_null(subtypes), pc.fill_null(pc.equal(trimmed, ''), False))  # pyright: ignore[reportAttributeAccessIssue]
-    excluded = pc.is_in(  # pyright: ignore[reportAttributeAccessIssue]
-        subtypes, value_set=pyarrow.array(['ocean', 'physical'], type=subtypes.type)
+
+    # Trim only to detect blank values. Compare excluded subtypes as stored.
+    trimmed_subtypes = pc.utf8_trim(  # pyright: ignore[reportAttributeAccessIssue]
+        subtypes, characters=UNICODE_WHITESPACE
     )
-    eligible = pc.invert(pc.or_(missing, excluded)).to_numpy(zero_copy_only=False)  # pyright: ignore[reportAttributeAccessIssue]
+    missing_rows = pc.is_in(  # pyright: ignore[reportAttributeAccessIssue]
+        trimmed_subtypes, value_set=pyarrow.array(('', None), type=subtypes.type)
+    )
+    excluded_rows = pc.is_in(  # pyright: ignore[reportAttributeAccessIssue]
+        subtypes, value_set=pyarrow.array(EXCLUDED_WATER_SUBTYPES, type=subtypes.type)
+    )
+    eligible_rows = pc.invert(pc.or_(missing_rows, excluded_rows))  # pyright: ignore[reportAttributeAccessIssue]
     return (
-        eligible,
-        int(pc.sum(missing).as_py() or 0),  # pyright: ignore[reportAttributeAccessIssue]
-        int(pc.sum(excluded).as_py() or 0),  # pyright: ignore[reportAttributeAccessIssue]
+        eligible_rows.to_numpy(zero_copy_only=False),
+        int(pc.sum(missing_rows).as_py() or 0),  # pyright: ignore[reportAttributeAccessIssue]
+        int(pc.sum(excluded_rows).as_py() or 0),  # pyright: ignore[reportAttributeAccessIssue]
     )
 
 

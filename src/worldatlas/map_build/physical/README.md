@@ -19,6 +19,8 @@ The standalone command gets coastline and inland-water files through `SourceCach
 
 The coastline rasterizer lists the polygon IDs that could touch each strip of map rows. GDAL fetches those polygons by ID when it draws the strip. Coastline sources must support direct lookup by feature ID.
 
+For inland water, the builder skips the `ocean` and `physical` subtypes. The ocean is already represented by the coastline. Overture's `physical` records name features such as bays and straits, and can overlap the polygons used to fill water. A missing, blank, or non-text subtype leaves the shard incomplete. The builder draws valid polygons and multipolygons from the rows that pass this check. [Overture water guide](https://docs.overturemaps.org/guides/base/#water)
+
 The physical build saves one settings file per step under `configs/`. The coastline, water-shard, union and composition reports record the checksum of the settings they used. Each water task checks that it processed all rows. It identifies geometry problems by their zero-based row numbers in the original Parquet file. Invalid polygon rows are saved to `invalid-feature-rows.json` beside the shard report. Before merging the masks, the builder checks that every shard used the same rasterizer. After the merge, it verifies that the input files still match their checksums.
 
 Each completed task has a receipt in the shared `checkpoints/` directory. Its receipt pins the task's inputs and outputs. The shared `timing-events.jsonl` records work and downloads. In a full build, both live at the run root alongside the receipts and timings for the other stages. In a standalone build, they live in its output directory. The standalone command prints timing with the grid report.
