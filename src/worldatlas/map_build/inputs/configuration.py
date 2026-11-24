@@ -7,7 +7,6 @@ from typing import Annotated, Literal, NotRequired
 from pydantic import (
     AfterValidator,
     Field,
-    StringConstraints,
     TypeAdapter,
     with_config,
 )
@@ -15,19 +14,11 @@ from typing_extensions import TypedDict
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.inputs.selection_types import SourceAsset
+from worldatlas.shared.files import ByteCount, FilePin
+from worldatlas.shared.text import NonEmptyText
+from worldatlas.source_assets.pins import ArchiveMember, R2ObjectPin
 
 type PositiveInt = Annotated[int, Field(gt=0)]
-type ByteCount = Annotated[int, Field(ge=0)]
-type NonemptyString = Annotated[str, StringConstraints(min_length=1)]
-type Digest = Annotated[str, StringConstraints(pattern=r"^[0-9a-f]{64}$")]
-type SourceName = Annotated[str, StringConstraints(pattern=r"\S")]
-
-
-class FilePin(TypedDict):
-    """Identify a local file by path and expected SHA-256."""
-
-    path: NonemptyString
-    sha256: Digest
 
 
 class LocalFile(FilePin, closed=True):
@@ -39,32 +30,13 @@ class LocalFile(FilePin, closed=True):
 class CatalogFile(TypedDict, closed=True):
     """Select a raw source by its ID in the frozen catalog."""
 
-    r2_source: SourceName
+    r2_source: NonEmptyText
 
 
-class ObjectFile(TypedDict, closed=True):
-    """Pin a complete R2 object's identity and transfer location."""
-
-    r2_bucket: NonemptyString
-    r2_key: NonemptyString
-    sha256: Digest
-    size_bytes: ByteCount
-    source_id: NotRequired[SourceName]
-
-
-class ArchiveMember[Archive](TypedDict, closed=True):
-    """Pin a local extraction of one member of a remote ZIP file."""
-
-    archive: Archive
-    member: NonemptyString
-    sha256: Digest
-    size_bytes: ByteCount
-
-
-type WaterFile = LocalFile | CatalogFile | ObjectFile
-type LandFile = WaterFile | ArchiveMember[CatalogFile | ObjectFile]
-type ResolvedLandFile = LocalFile | ObjectFile | ArchiveMember[ObjectFile]
-type ResolvedWaterFile = LocalFile | ObjectFile
+type WaterFile = LocalFile | CatalogFile | R2ObjectPin
+type LandFile = WaterFile | ArchiveMember[CatalogFile | R2ObjectPin]
+type ResolvedLandFile = LocalFile | R2ObjectPin | ArchiveMember[R2ObjectPin]
+type ResolvedWaterFile = LocalFile | R2ObjectPin
 
 
 @with_config(extra="forbid")
@@ -86,9 +58,9 @@ class LandLayer[File](TypedDict):
     the .shp, and ``files`` also lists its companions such as .shx, .dbf, and .prj.
     """
 
-    dataset: NonemptyString
+    dataset: NonEmptyText
     files: list[File]
-    layer: NotRequired[NonemptyString | None]
+    layer: NotRequired[NonEmptyText | None]
     where: NotRequired[str | None]
 
 
@@ -98,7 +70,7 @@ class LandSettings[File](TypedDict):
 
     land: list[LandLayer[File]]
     schema: NotRequired[Literal["land-raster-candidate-v1"]]
-    selection_notes: NotRequired[NonemptyString]
+    selection_notes: NotRequired[NonEmptyText]
     strip_rows: NotRequired[PositiveInt]
     feature_index: NotRequired[Literal["row-fids", "scan"]]
 
@@ -118,7 +90,7 @@ class WaterSettings(TypedDict):
     batch_size: NotRequired[PositiveInt]
     tile_size: NotRequired[Annotated[int, Field(ge=1, le=4096)]]
     batch_method: NotRequired[Literal["hybrid", "tiled"]]
-    selection_notes: NotRequired[NonemptyString]
+    selection_notes: NotRequired[NonEmptyText]
     schema: NotRequired[Literal["water-shard-candidate-v2"]]
     policy: NotRequired[WaterPolicy]
 
@@ -129,10 +101,10 @@ class InlandWaterSettings[File](WaterSettings):
 
     files: Annotated[list[File], Field(min_length=1)]
     file_count: PositiveInt
-    source: NotRequired[NonemptyString]
-    release: NotRequired[NonemptyString]
-    theme: NotRequired[NonemptyString]
-    type: NotRequired[NonemptyString]
+    source: NotRequired[NonEmptyText]
+    release: NotRequired[NonEmptyText]
+    theme: NotRequired[NonEmptyText]
+    type: NotRequired[NonEmptyText]
     total_bytes: NotRequired[ByteCount]
 
 
@@ -182,7 +154,7 @@ class BuildConfiguration(TypedDict):
     schema: Literal["worldatlas-end-to-end-pipeline-v3"]
     grid: GridSettings
     sources: BuildSources
-    selection_notes: NotRequired[NonemptyString]
+    selection_notes: NotRequired[NonEmptyText]
     physical_controls: NotRequired[PhysicalControls]
     coastal_band_metres: NotRequired[Annotated[float, Field(ge=0, allow_inf_nan=False)]]
     division_workers: NotRequired[PositiveInt]
@@ -193,8 +165,8 @@ class PhysicalConfiguration(PhysicalControls):
     """Describe the saved request consumed by the standalone physical runner."""
 
     schema: Literal["raw-physical-pipeline-v3"]
-    selection_notes: NotRequired[NonemptyString]
-    source_directory: NonemptyString
+    selection_notes: NotRequired[NonEmptyText]
+    source_directory: NonEmptyText
     grid: GridSettings
     land_config: LandSettings[ResolvedLandFile]
     inland_water: Annotated[
@@ -298,8 +270,8 @@ def catalog_source_ids(sources: BuildSources) -> set[str]:
 
 
 def resolve_object(
-    file: CatalogFile | ObjectFile, catalog: Mapping[str, ObjectFile]
-) -> ObjectFile:
+    file: CatalogFile | R2ObjectPin, catalog: Mapping[str, R2ObjectPin]
+) -> R2ObjectPin:
     """Replace a catalog selection with its R2 location and byte identity.
 
     Args:
@@ -318,7 +290,7 @@ def resolve_object(
 
 
 def resolve_land_file(
-    file: LandFile, catalog: Mapping[str, ObjectFile]
+    file: LandFile, catalog: Mapping[str, R2ObjectPin]
 ) -> ResolvedLandFile:
     """Resolve a coastline file or the R2 archive containing it.
 
@@ -351,7 +323,7 @@ def physical_configuration(
     Returns:
         A JSON-ready physical request. The original settings are left intact.
     """
-    catalog: dict[str, ObjectFile] = {
+    catalog: dict[str, R2ObjectPin] = {
         row["source_id"]: {
             "source_id": row["source_id"],
             "r2_bucket": row["r2_bucket"],

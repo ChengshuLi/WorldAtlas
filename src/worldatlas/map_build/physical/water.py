@@ -27,31 +27,12 @@ from worldatlas.map_build.execution.runtime import RunFilePins
 from worldatlas.map_build.inputs.configuration import WaterSettings
 from worldatlas.map_build.physical.sources import create_mask
 from worldatlas.map_build.physical.water_batch import GeometryStatus, WaterBatch
+from worldatlas.shared.text import UNICODE_WHITESPACE, is_nonblank
 
 gdal.UseExceptions()
 ogr.UseExceptions()
 
 POLYGON = (ogr.wkbPolygon, ogr.wkbMultiPolygon)
-# The complete whitespace set used by Python str.strip(), including its four
-# C0 separators. Pass it explicitly so Arrow follows exactly the same policy.
-PYTHON_WHITESPACE = ''.join(
-    map(
-        chr,
-        [
-            *range(9, 14),
-            *range(28, 33),
-            0x85,
-            0xA0,
-            0x1680,
-            *range(0x2000, 0x200B),
-            0x2028,
-            0x2029,
-            0x202F,
-            0x205F,
-            0x3000,
-        ],
-    )
-)
 
 
 def selected(subtype: str | None) -> str | None:
@@ -63,7 +44,7 @@ def selected(subtype: str | None) -> str | None:
     Returns:
         None for eligible rows, or a count key for missing or excluded subtypes.
     """
-    if not isinstance(subtype, str) or not subtype.strip():
+    if not isinstance(subtype, str) or not is_nonblank(subtype):
         return 'missing_classification'
     if subtype in ('ocean', 'physical'):
         return 'excluded_classification'
@@ -161,7 +142,7 @@ def classifications(subtypes: pyarrow.Array) -> tuple[np.ndarray, int, int]:
         or pyarrow.types.is_large_string(subtypes.type)
     ):
         return np.zeros(len(subtypes), dtype=bool), len(subtypes), 0
-    trimmed = pc.utf8_trim(subtypes, characters=PYTHON_WHITESPACE)  # pyright: ignore[reportAttributeAccessIssue]
+    trimmed = pc.utf8_trim(subtypes, characters=UNICODE_WHITESPACE)  # pyright: ignore[reportAttributeAccessIssue]
     missing = pc.or_(pc.is_null(subtypes), pc.fill_null(pc.equal(trimmed, ''), False))  # pyright: ignore[reportAttributeAccessIssue]
     excluded = pc.is_in(  # pyright: ignore[reportAttributeAccessIssue]
         subtypes, value_set=pyarrow.array(['ocean', 'physical'], type=subtypes.type)

@@ -7,7 +7,9 @@ from typing import Any
 
 from psycopg import Connection
 
+from worldatlas.shared.files import SHA256_PATTERN
 from worldatlas.shared.r2 import R2Client
+from worldatlas.shared.text import is_nonblank
 
 RELEASE_BUCKET = "worldatlas"
 HOMEPAGE = "index.html"
@@ -137,10 +139,10 @@ def validate_manifest(manifest: dict[str, Any], release_id: str) -> dict[str, An
         if type(size_bytes) is not int or size_bytes < 0:
             raise ValueError(f"invalid byte count for release asset {name!r}")
         sha256 = asset.get("sha256")
-        if not isinstance(sha256, str) or not re.fullmatch("[0-9a-f]{64}", sha256):
+        if not isinstance(sha256, str) or not re.fullmatch(SHA256_PATTERN, sha256):
             raise ValueError(f"invalid SHA-256 for release asset {name!r}")
         content_type = asset.get("content_type")
-        if not isinstance(content_type, str) or not content_type.strip():
+        if not isinstance(content_type, str) or not is_nonblank(content_type):
             raise ValueError(f"missing content type for release asset {name!r}")
     if not {"rows.u32le.gz", "runs.u32le.gz"} <= manifest["objects"].keys():
         raise ValueError("release manifest lacks map streams")

@@ -21,7 +21,8 @@ from typing_extensions import TypedDict
 
 from worldatlas.geodesy.geojson import Position
 from worldatlas.geodesy.wgs84 import geodesic, geodesic_distance
-from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
+from worldatlas.shared.text import NonEmptyText
+from worldatlas.source_imports.shared.recipe_types import SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources
 from worldatlas.source_imports.shared.storage import save_features

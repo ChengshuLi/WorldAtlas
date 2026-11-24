@@ -12,12 +12,9 @@ from shapely.geometry import MultiPolygon, Polygon
 from shapely.geometry.base import BaseGeometry
 
 from worldatlas.geodesy.geojson import validate_geometry
+from worldatlas.shared.text import NonEmptyText
 from worldatlas.source_assets.archives import archive_member
-from worldatlas.source_imports.shared.recipe_types import (
-    FeatureIdentity,
-    NonEmptyText,
-    SourceId,
-)
+from worldatlas.source_imports.shared.recipe_types import FeatureIdentity, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources, gdal_dataset_path
 from worldatlas.source_imports.shared.storage import (

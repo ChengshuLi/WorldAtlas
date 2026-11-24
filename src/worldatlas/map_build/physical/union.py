@@ -14,8 +14,8 @@ from osgeo import gdal
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.execution.runtime import RunFilePins
-from worldatlas.map_build.inputs.configuration import FilePin
 from worldatlas.map_build.physical.sources import create_mask, open_mask
+from worldatlas.shared.files import FilePin
 
 gdal.UseExceptions()
 

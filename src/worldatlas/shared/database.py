@@ -5,6 +5,8 @@ import os
 import psycopg
 from psycopg.conninfo import conninfo_to_dict
 
+from worldatlas.shared.text import is_nonblank
+
 
 def neon_connection_url(*, direct: bool = False) -> str:
     """Read the database connection string from the environment.
@@ -20,7 +22,7 @@ def neon_connection_url(*, direct: bool = False) -> str:
             is required.
     """
     connection = os.environ.get("NEON_DATABASE_URL")
-    if not connection:
+    if connection is None or not is_nonblank(connection):
         raise ValueError("set NEON_DATABASE_URL to the WorldAtlas database")
     if direct and "-pooler." in str(conninfo_to_dict(connection).get("host", "")):
         raise ValueError("use a direct Neon connection for session-level locks")

@@ -51,6 +51,13 @@ class ReleaseLookupTests(unittest.TestCase):
             size_bytes=50,
             content_type="application/json",
         )
+        pins = {
+            name: dict(
+                r2_bucket="test", r2_key=asset["r2_key"],
+                sha256=asset["sha256"], size_bytes=asset["size_bytes"],
+            )
+            for name, asset in objects.items()
+        }
         raw = json.dumps(
             dict(objects=objects, decoded_sha256=dict(rows="b" * 64, runs="c" * 64))
         ).encode()
@@ -79,18 +86,18 @@ class ReleaseLookupTests(unittest.TestCase):
                         [
                             (
                                 "rows",
-                                dict(objects["rows.u32le.gz"], r2_bucket="test"),
+                                pins["rows.u32le.gz"],
                                 "b" * 64,
                             ),
                             (
                                 "runs",
-                                dict(objects["runs.u32le.gz"], r2_bucket="test"),
+                                pins["runs.u32le.gz"],
                                 "c" * 64,
                             ),
                         ],
                     )
                     self.assertEqual(
-                        config, dict(objects["config.json"], r2_bucket="test")
+                        config, pins["config.json"]
                     )
                     self.assertEqual(storage.key, folder + "manifest.json")
                     without_config = json.loads(raw)

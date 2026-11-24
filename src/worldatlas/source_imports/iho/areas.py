@@ -16,12 +16,9 @@ from shapely.affinity import translate
 from shapely.geometry import GeometryCollection, MultiPolygon, Polygon, box, mapping
 from shapely.geometry.base import BaseGeometry
 
+from worldatlas.shared.text import NonEmptyText
 from worldatlas.source_assets.archives import archive_member
-from worldatlas.source_imports.shared.recipe_types import (
-    FeatureIdentity,
-    NonEmptyText,
-    SourceId,
-)
+from worldatlas.source_imports.shared.recipe_types import FeatureIdentity, SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources
 from worldatlas.source_imports.shared.storage import (

@@ -1051,6 +1051,7 @@ b.run(sys.argv[1], sys.argv[2])
         shard = valid_water['files'][0]
         cases = [
             ('pipeline', {'selection_notes': ''}, 'selection_notes'),
+            ('pipeline', {'selection_notes': '\t\u00a0\u3000'}, 'selection_notes'),
             ('pipeline', {'minimum_free_bytes': True}, 'minimum_free_bytes'),
             ('pipeline', {'union_rows_per_block': 0}, 'rows_per_block'),
             ('water', {'rasterizer': 'unknown'}, 'inland_water.rasterizer'),

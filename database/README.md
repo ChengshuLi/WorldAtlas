@@ -35,7 +35,7 @@ For an existing database, back up its data, rehearse the transition locally, the
 
 These twelve tables have distinct purposes. A feature stores geometry; its construction describes how raw sources produce it. A rule explains how geometry assigns parent cells to children. Category bindings encode the resulting owner and physical class; display colors do not determine ownership.
 
-Required nonblank text must contain at least one character outside Unicode's `White_Space` set, which includes tabs, nonbreaking spaces and ideographic spaces. Ordinary text columns and typed construction arguments use the same pattern from [`shared/contracts.py`](../src/worldatlas/source_imports/shared/contracts.py).
+Required nonblank text must contain at least one character outside Unicode's `White_Space` set, which includes tabs, nonbreaking spaces and ideographic spaces. The shared [text validation module](../src/worldatlas/shared/text.py) defines the rule used for build settings, typed construction arguments, and SQL text columns.
 
 `source_features` has three required columns: `id`, `geometry`, `construction_id`. Geometry is GeoJSON using WGS84 longitude first, latitude second, in degrees. Database checks validate types, nesting, coordinate ranges and polygon closure. Importers also check geometric validity. Provider feature selectors remain in construction settings rather than being copied into output rows.
 

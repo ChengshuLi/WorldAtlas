@@ -20,6 +20,7 @@ from worldatlas.map_build.execution.runtime import Checkpoints, RunFilePins
 from worldatlas.map_build.execution.timing import Timing
 from worldatlas.map_build.inputs.selection_types import GeographicSelection
 from worldatlas.shared.files import (
+    FilePin,
     JSONValue,
     json_bytes,
     read_json,
@@ -252,7 +253,7 @@ class HierarchyDivision:
         self,
         name: str,
         operation: Callable[[], Result],
-        inputs: list[dict[str, str]],
+        inputs: list[FilePin],
         outputs: list[Path],
     ) -> Result:
         """Run a hierarchy stage and return its calculated or saved result.
@@ -313,7 +314,10 @@ class HierarchyDivision:
                     raise ValueError("parent definition changed on resume")
             else:
                 write_bytes_atomic(selected, data)
-            definition_pin = {"path": str(selected.resolve()), "sha256": identity}
+            definition_pin: FilePin = {
+                "path": str(selected.resolve()),
+                "sha256": identity,
+            }
             receipt_path = directory / "result.json"
             saved = (
                 read_json(receipt_path)

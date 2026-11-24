@@ -6,6 +6,7 @@ import re
 import shutil
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from typing import Any
 
 import psycopg
 from typing_extensions import TypedDict
@@ -15,32 +16,32 @@ from worldatlas.map_releases.catalog import (
     read_manifest,
 )
 from worldatlas.shared.database import connect_neon
-from worldatlas.shared.files import json_bytes, sha256_file, verify_pins
+from worldatlas.shared.files import (
+    SHA256_PATTERN,
+    FilePin,
+    json_bytes,
+    sha256_file,
+    verify_pins,
+)
 from worldatlas.shared.r2 import R2Client
-from worldatlas.source_assets.cache import FileSpec, SourceCache
-
-
-class StreamPin(TypedDict, closed=True):
-    """A local comparison file with checksummed, decoded bytes."""
-
-    path: str
-    sha256: str
+from worldatlas.source_assets.cache import SourceCache
+from worldatlas.source_assets.pins import R2ObjectPin
 
 
 class ComparisonPins(TypedDict):
     """Verified map streams and category mapping for the reference release."""
 
-    reference_rows: StreamPin
-    reference_runs: StreamPin
+    reference_rows: FilePin
+    reference_runs: FilePin
     reference_config: Path
 
 
-type ReleaseStream = tuple[str, FileSpec, str]
+type ReleaseStream = tuple[str, R2ObjectPin, str]
 
 
 def read_release_assets(
     identity: str, storage: R2Client
-) -> tuple[list[ReleaseStream], FileSpec]:
+) -> tuple[list[ReleaseStream], R2ObjectPin]:
     """Read the map stream locations from a verified release manifest.
 
     Args:
@@ -70,19 +71,36 @@ def read_release_assets(
     hashes = manifest.get("decoded_sha256", {})
     if not isinstance(hashes, dict) or any(
         not isinstance(hashes.get(name), str)
-        or not re.fullmatch("[0-9a-f]{64}", hashes[name])
+        or not re.fullmatch(SHA256_PATTERN, hashes[name])
         for name in ("rows", "runs")
     ):
         raise ValueError("comparison release requires both decoded stream checksums")
+
+    def object_pin(asset: dict[str, Any]) -> R2ObjectPin:
+        """Pair a checked manifest asset with its release bucket.
+
+        Args:
+            asset: Manifest entry with the object's key, checksum, and size.
+
+        Returns:
+            The fields the source cache needs to obtain the object.
+        """
+        return {
+            "r2_bucket": bucket,
+            "r2_key": asset["r2_key"],
+            "sha256": asset["sha256"],
+            "size_bytes": asset["size_bytes"],
+        }
+
     streams: list[ReleaseStream] = [
         (
             name,
-            dict(objects[f"{name}.u32le.gz"], r2_bucket=bucket),
+            object_pin(objects[f"{name}.u32le.gz"]),
             hashes[name],
         )
         for name in ("rows", "runs")
     ]
-    return streams, dict(config, r2_bucket=bucket)
+    return streams, object_pin(config)
 
 
 def cache_release_reference(version: str, cache: SourceCache) -> ComparisonPins:
@@ -105,10 +123,10 @@ def cache_release_reference(version: str, cache: SourceCache) -> ComparisonPins:
     digest = hashlib.sha256(json_bytes(decoded_hashes)).hexdigest()
     directory = cache.directory / ("release-" + digest)
     directory.mkdir(parents=True, exist_ok=True)
-    reference: dict[str, StreamPin] = {}
+    reference: dict[str, FilePin] = {}
     for name, source, decoded_hash in streams:
         path = directory / f"{name}.u32le"
-        pin: StreamPin = {"path": str(path), "sha256": decoded_hash}
+        pin: FilePin = {"path": str(path), "sha256": decoded_hash}
         if path.exists():
             verify_pins([pin])
         else:

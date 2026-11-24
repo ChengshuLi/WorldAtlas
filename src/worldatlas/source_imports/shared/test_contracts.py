@@ -20,7 +20,8 @@ from worldatlas.source_imports.shared.contracts import (
     recipe_schema,
     source_paths,
 )
-from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
+from worldatlas.shared.text import NonEmptyText
+from worldatlas.source_imports.shared.recipe_types import SourceId
 from worldatlas.source_imports.run_import import IMPORTERS
 from worldatlas.source_imports.test_run_import import ARGUMENTS
 

@@ -7,7 +7,8 @@ from osgeo import gdal, ogr, osr
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.runtime import RunFilePins
-from worldatlas.map_build.inputs.configuration import FilePin, LandLayer, LocalFile
+from worldatlas.map_build.inputs.configuration import LandLayer, LocalFile
+from worldatlas.shared.files import FilePin
 
 
 def checked_files(spec: LandLayer[LocalFile], pins: RunFilePins) -> dict[str, str]:

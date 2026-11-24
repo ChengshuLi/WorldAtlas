@@ -10,7 +10,8 @@ from osmium.geom import GeoJSONFactory
 from osmium.osm import Area, Changeset, Node, Relation, Way
 
 from worldatlas.geodesy.geojson import validate_geometry
-from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
+from worldatlas.shared.text import NonEmptyText
+from worldatlas.source_imports.shared.recipe_types import SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.sources import acquire_sources
 from worldatlas.source_imports.shared.storage import (

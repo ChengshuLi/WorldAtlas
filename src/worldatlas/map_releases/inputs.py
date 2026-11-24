@@ -13,7 +13,7 @@ from worldatlas.map_build.inputs.configuration import (
     source_file,
 )
 from worldatlas.map_build.inputs.selection_types import BuildSelection
-from worldatlas.shared.files import JSONValue, json_bytes
+from worldatlas.shared.files import SHA256_PATTERN, JSONValue, json_bytes
 
 FILENAME = "inputs.json.gz"
 SCHEMA = "worldatlas-release-inputs-v1"
@@ -144,7 +144,7 @@ def restore_inputs(content: ReleaseInputs, output: Path | str) -> None:
     # Check the code paths before creating any output files.
     snapshots = {}
     for checksum, code in content["source_code"].items():
-        if not re.fullmatch("[0-9a-f]{64}", checksum):
+        if not re.fullmatch(SHA256_PATTERN, checksum):
             raise ValueError("invalid source archive identity")
         snapshots[checksum] = source_files(code)
 

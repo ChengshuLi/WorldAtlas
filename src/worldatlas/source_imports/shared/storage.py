@@ -1,6 +1,5 @@
 """Validate and save constructed features in Neon."""
 
-import re
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import NotRequired, TypedDict
@@ -9,7 +8,7 @@ from psycopg.types.json import Jsonb
 
 from worldatlas.geodesy.geojson import validate_geometry
 from worldatlas.shared.files import JSONValue
-from worldatlas.source_imports.shared.recipe_types import NONBLANK_PATTERN
+from worldatlas.shared.text import is_nonblank
 from worldatlas.source_imports.shared.runtime import Runtime
 
 
@@ -55,7 +54,7 @@ def save_features(runtime: Runtime, features: Sequence[Feature]) -> list[str]:
     identifiers = [feature["feature_id"] for feature in features]
     if (
         not identifiers
-        or any(not re.search(NONBLANK_PATTERN, ident) for ident in identifiers)
+        or any(not is_nonblank(ident) for ident in identifiers)
         or len(set(identifiers)) != len(identifiers)
     ):
         raise ValueError("feature IDs must be nonempty and unique")

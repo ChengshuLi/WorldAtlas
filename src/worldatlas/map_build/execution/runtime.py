@@ -7,7 +7,7 @@ import os
 import subprocess
 import traceback
 import uuid
-from collections.abc import Callable, Generator, Iterable, Mapping
+from collections.abc import Callable, Generator, Iterable
 from contextlib import closing, contextmanager
 from functools import partial
 from pathlib import Path
@@ -21,8 +21,8 @@ from worldatlas.map_build.execution.timing import (
     Timing,
     verify_setup_timing,
 )
-from worldatlas.map_build.inputs.configuration import FilePin
 from worldatlas.shared.files import (
+    FilePin,
     JSONValue,
     read_json,
     sha256_file,
@@ -59,7 +59,7 @@ class RunFilePins:
             stat.st_ctime_ns,
         )
 
-    def pin(self, path: Path | str) -> dict[str, str]:
+    def pin(self, path: Path | str) -> FilePin:
         """Record a file's checksum, rehashing it whenever it changes.
 
         Args:
@@ -84,7 +84,7 @@ class RunFilePins:
         self.digests[path] = (before, checksum)
         return {"path": str(path), "sha256": checksum}
 
-    def verify(self, pins: Iterable[Mapping[str, str] | FilePin]) -> None:
+    def verify(self, pins: Iterable[FilePin]) -> None:
         """Check the file identity and checksum of every supplied pin.
 
         Args:
@@ -97,7 +97,7 @@ class RunFilePins:
             if self.pin(expected["path"])["sha256"] != expected["sha256"]:
                 raise ValueError("checkpoint/input hash mismatch: " + expected["path"])
 
-    def row_streams(self, directory: Path | str) -> list[dict[str, str]]:
+    def row_streams(self, directory: Path | str) -> list[FilePin]:
         """Record checksums for both files in a row-run layer.
 
         Args:
@@ -110,7 +110,7 @@ class RunFilePins:
             self.pin(Path(directory) / name) for name in ("rows.u32le", "runs.u32le")
         ]
 
-    def inventory(self, paths: Iterable[Path | str]) -> list[dict[str, str]]:
+    def inventory(self, paths: Iterable[Path | str]) -> list[FilePin]:
         """List and hash the regular files in the supplied outputs.
 
         Args:
@@ -414,7 +414,7 @@ class Checkpoints:
         operation: Callable[[], Result],
         *,
         timing: Timing,
-        inputs: Iterable[Mapping[str, str] | FilePin],
+        inputs: Iterable[FilePin],
         outputs: Iterable[Path | str],
         timing_kind: str = "processing",
     ) -> Result:
@@ -438,7 +438,7 @@ class Checkpoints:
         Raises:
             ValueError: An output path escapes the run or saved data no longer matches.
         """
-        input_pins = [{"path": pin["path"], "sha256": pin["sha256"]} for pin in inputs]
+        input_pins = [FilePin(path=pin["path"], sha256=pin["sha256"]) for pin in inputs]
         outputs = [Path(path).absolute() for path in outputs]
         run = self.root.parent
         if any(

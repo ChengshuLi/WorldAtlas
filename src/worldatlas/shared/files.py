@@ -6,12 +6,29 @@ import os
 import uuid
 from collections.abc import Iterable, Mapping
 from pathlib import Path
-from typing import Any
+from typing import Annotated, Any
+
+from pydantic import Field, StringConstraints
+from typing_extensions import TypedDict
+
+from worldatlas.shared.text import NonEmptyText
 
 # JSON arrays are accepted as lists or tuples when writing.
 type JSONValue = (
     Mapping[str, Any] | list[Any] | tuple[Any, ...] | str | int | float | bool | None
 )
+
+
+SHA256_PATTERN = r"^[0-9a-f]{64}$"
+type Sha256Digest = Annotated[str, StringConstraints(pattern=SHA256_PATTERN)]
+type ByteCount = Annotated[int, Field(ge=0)]
+
+
+class FilePin(TypedDict):
+    """Identify a local file by its path and expected SHA-256."""
+
+    path: NonEmptyText
+    sha256: Sha256Digest
 
 
 def read_json(path: Path | str) -> Any:
@@ -47,7 +64,7 @@ def sha256_file(path: Path | str) -> str:
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
-def pin_file(path: Path | str) -> dict[str, str]:
+def pin_file(path: Path | str) -> FilePin:
     """Record a file's current location and contents.
 
     Args:
@@ -66,7 +83,7 @@ def pin_file(path: Path | str) -> dict[str, str]:
     return {"path": str(path), "sha256": sha256_file(path)}
 
 
-def verify_pins(pins: Iterable[Mapping[str, str]]) -> None:
+def verify_pins(pins: Iterable[FilePin]) -> None:
     """Check that every file still matches its recorded digest.
 
     Args:

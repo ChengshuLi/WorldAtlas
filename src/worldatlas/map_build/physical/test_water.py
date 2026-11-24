@@ -18,13 +18,14 @@ from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.inputs.configuration import WaterSettings
 from worldatlas.map_build.execution.runtime import RunFilePins
 from worldatlas.map_build.physical import water as build
+from worldatlas.shared.text import UNICODE_WHITESPACE
 from worldatlas.map_build.physical import water_batch
 from worldatlas.map_build.physical.water_batch import WaterBatch
 from worldatlas.shared.files import sha256_file
 
 
 class WaterShardTests(unittest.TestCase):
-    def test_arrow_policy_matches_python_for_whitespace_and_dictionary_strings(self):
+    def test_arrow_policy_matches_scalar_for_whitespace_and_dictionary_strings(self):
         values = [
             'ocean',
             'physical',
@@ -32,7 +33,7 @@ class WaterShardTests(unittest.TestCase):
             ' ocean ',
             '',
             None,
-            *build.PYTHON_WHITESPACE,
+            *UNICODE_WHITESPACE,
             '\x1c\x1d\x1e\x1f',
             '\u2000\u3000',
             '\u200blake',

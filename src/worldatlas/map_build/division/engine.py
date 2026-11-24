@@ -36,7 +36,7 @@ from worldatlas.map_build.execution.timing import Timing
 from worldatlas.map_build.inputs.selection_types import GeographicSelection
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.connected import build_components
-from worldatlas.shared.files import JSONValue
+from worldatlas.shared.files import FilePin, JSONValue
 
 
 def rule_directory(calculation: Path | str, rule_id: str) -> Path:
@@ -226,7 +226,7 @@ class ParentDivision:
         checkpoints: Checkpoints,
         timing: Timing,
         parent_directory: Path | str | None = None,
-        input_pins: Iterable[dict[str, str]] = (),
+        input_pins: Iterable[FilePin] = (),
         shore_provider: Callable[[], ShoreGeometry] | None = None,
     ) -> None:
         """Open the physical grid and prepare the parent's initial ownership.
@@ -331,7 +331,7 @@ class ParentDivision:
         """Close the division's open maps and other resources."""
         self.resources.close()
 
-    def pins(self, directory: Path | str) -> list[dict[str, str]]:
+    def pins(self, directory: Path | str) -> list[FilePin]:
         """Hash a layer's two row-run files.
 
         Args:
@@ -348,7 +348,7 @@ class ParentDivision:
         operation: Callable[[], Result],
         outputs: Iterable[Path | str],
         *,
-        inputs: list[dict[str, str]],
+        inputs: list[FilePin],
     ) -> Result:
         """Run one calculation inside the parent's checkpoint namespace.
 

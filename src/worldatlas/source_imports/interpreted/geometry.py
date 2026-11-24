@@ -4,7 +4,8 @@ import time
 from typing import TypedDict
 
 from worldatlas.geodesy.geojson import Point, Polygon
-from worldatlas.source_imports.shared.recipe_types import NonEmptyText, SourceId
+from worldatlas.shared.text import NonEmptyText
+from worldatlas.source_imports.shared.recipe_types import SourceId
 from worldatlas.source_imports.shared.runtime import Runtime
 from worldatlas.source_imports.shared.storage import (
     Feature,

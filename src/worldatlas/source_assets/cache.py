@@ -2,20 +2,21 @@
 
 import hashlib
 import os
+import re
 import shutil
 import time
 import zipfile
-from collections.abc import Callable, Mapping
+from collections.abc import Callable
 from contextlib import AbstractContextManager, nullcontext
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 from typing import IO, NamedTuple
 
 from worldatlas.shared import r2
-from worldatlas.shared.files import JSONValue
+from worldatlas.shared.files import SHA256_PATTERN
+from worldatlas.shared.text import is_nonblank
 from worldatlas.source_assets.archives import archive_member
-
-type FileSpec = Mapping[str, JSONValue]
+from worldatlas.source_assets.pins import ArchiveMember, R2ObjectPin, RemoteFile
 
 
 class Download(NamedTuple):
@@ -26,7 +27,7 @@ class Download(NamedTuple):
     completed: bool
 
 
-def _fingerprint(spec: FileSpec) -> tuple[str, int]:
+def _fingerprint(spec: RemoteFile) -> tuple[str, int]:
     """Read a file's expected byte count and SHA-256.
 
     Args:
@@ -41,8 +42,7 @@ def _fingerprint(spec: FileSpec) -> tuple[str, int]:
     digest, size = spec.get("sha256"), spec.get("size_bytes")
     if (
         not isinstance(digest, str)
-        or len(digest) != 64
-        or any(c not in "0123456789abcdef" for c in digest)
+        or not re.fullmatch(SHA256_PATTERN, digest)
         or type(size) is not int
         or size < 0
     ):
@@ -50,7 +50,7 @@ def _fingerprint(spec: FileSpec) -> tuple[str, int]:
     return digest, size
 
 
-def _location(spec: FileSpec) -> tuple[str, str]:
+def _location(spec: R2ObjectPin) -> tuple[str, str]:
     """Read the bucket and key of a pinned R2 object.
 
     Args:
@@ -65,9 +65,9 @@ def _location(spec: FileSpec) -> tuple[str, str]:
     bucket, key = spec.get("r2_bucket"), spec.get("r2_key")
     if (
         not isinstance(bucket, str)
-        or not bucket
+        or not is_nonblank(bucket)
         or not isinstance(key, str)
-        or not key
+        or not is_nonblank(key)
         or "\\" in key
         or any(part in ("", ".", "..") for part in key.split("/"))
     ):
@@ -75,7 +75,7 @@ def _location(spec: FileSpec) -> tuple[str, str]:
     return bucket, key
 
 
-def _zip_member(spec: FileSpec) -> tuple[FileSpec, str]:
+def _zip_member(spec: ArchiveMember[R2ObjectPin]) -> tuple[R2ObjectPin, str]:
     """Read the direct archive pin and safe relative member name.
 
     Args:
@@ -92,6 +92,7 @@ def _zip_member(spec: FileSpec) -> tuple[FileSpec, str]:
         raise ValueError("ZIP archive must be a pinned R2 object")
     if (
         not isinstance(member, str)
+        or not is_nonblank(member)
         or "\\" in member
         or any(part in ("", ".", "..") for part in member.split("/"))
     ):
@@ -154,7 +155,7 @@ class SourceCache:
         """Close the R2 client."""
         self.client.close()
 
-    def path(self, spec: FileSpec) -> Path:
+    def path(self, spec: RemoteFile) -> Path:
         """Find where a pinned R2 object or ZIP member belongs locally.
 
         A whole R2 object uses its own SHA-256 as the directory name and the
@@ -176,7 +177,7 @@ class SourceCache:
         path, _, _ = self._entry(spec)
         return path
 
-    def _entry(self, spec: FileSpec) -> tuple[Path, str, int]:
+    def _entry(self, spec: RemoteFile) -> tuple[Path, str, int]:
         """Locate a pinned object or member without preparing a download.
 
         Args:
@@ -196,7 +197,7 @@ class SourceCache:
             path = self.directory / digest / Path(key).name
         return path, digest, size
 
-    def _write(self, spec: FileSpec, size: int, output: IO[bytes]) -> None:
+    def _write(self, spec: RemoteFile, size: int, output: IO[bytes]) -> None:
         """Write a whole R2 object or extract one member of a verified ZIP.
 
         Args:
@@ -214,7 +215,7 @@ class SourceCache:
             with packed.open(archive_member(packed, member)) as source:
                 shutil.copyfileobj(source, output, 1 << 20)
 
-    def acquire(self, spec: FileSpec) -> Path:
+    def acquire(self, spec: RemoteFile) -> Path:
         """Reuse or fetch one complete R2 object or requested ZIP member.
 
         Publish a new file only after its size and checksum pass verification.

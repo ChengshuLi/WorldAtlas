@@ -40,7 +40,6 @@ from worldatlas.map_build.execution.timing import (
 )
 from worldatlas.map_build.inputs.configuration import (
     BUILD_CONFIGURATION,
-    FilePin,
     PhysicalConfiguration,
     catalog_source_ids,
     physical_configuration,
@@ -55,6 +54,7 @@ from worldatlas.map_build.inputs.selection_types import BuildSelection
 from worldatlas.map_build.physical import build as physical_build
 from worldatlas.shared.database import connect_neon, neon_connection_url
 from worldatlas.shared.files import (
+    FilePin,
     compact_json_bytes,
     json_bytes,
     pin_file,
@@ -70,7 +70,7 @@ PACKAGE_ROOT = HERE.parent
 RUN_IDENTITY_SCHEMA = "worldatlas-end-to-end-run-identity-v2"
 
 
-type RuntimeIdentity = dict[str, str | dict[str, str]]
+type RuntimeIdentity = dict[str, str | FilePin]
 
 
 class PhysicalReuse(TypedDict):
@@ -79,14 +79,14 @@ class PhysicalReuse(TypedDict):
     schema: str
     status: str
     source_run: str
-    pins: list[dict[str, str]]
+    pins: list[FilePin]
 
 
 class RunIdentity(TypedDict):
     """Store the pinned inputs and options required to resume a build."""
 
     schema: str
-    request: dict[str, str]
+    request: FilePin
     output: str
     divide: list[int] | None
     reuse_from: str | None
@@ -212,7 +212,7 @@ class Pipeline:
         setup_started = SetupStart.now()
         config_path = Path(config).resolve(strict=True)
         config_bytes = config_path.read_bytes()
-        self.config_pin = {
+        self.config_pin: FilePin = {
             "path": str(config_path),
             "sha256": hashlib.sha256(config_bytes).hexdigest(),
         }

@@ -36,8 +36,8 @@ from pydantic_core.core_schema import DictSchema, TypedDictSchema
 from typing_extensions import TypeForm
 
 from worldatlas.shared.files import JSONValue
+from worldatlas.shared.text import NONBLANK_PATTERN
 from worldatlas.source_imports.run_import import IMPORTERS
-from worldatlas.source_imports.shared.recipe_types import NONBLANK_PATTERN
 
 
 def parameters(

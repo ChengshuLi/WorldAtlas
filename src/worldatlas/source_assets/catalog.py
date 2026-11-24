@@ -1,14 +1,15 @@
 """Resolve the R2 locations and checksums of raw sources registered in Neon."""
 
 from collections.abc import Iterable
-from typing import Any
 
 from psycopg import Connection
+
+from worldatlas.source_assets.pins import R2ObjectPin
 
 
 def catalog_sources(
     database: Connection, source_ids: Iterable[str]
-) -> dict[str, dict[str, Any]]:
+) -> dict[str, R2ObjectPin]:
     """Resolve raw source IDs in one catalog query.
 
     Args:
@@ -28,8 +29,8 @@ def catalog_sources(
         "WHERE id=ANY(%s)",
         (ids,),
     )
-    sources = {
-        ident: dict(
+    sources: dict[str, R2ObjectPin] = {
+        ident: R2ObjectPin(
             source_id=ident,
             r2_bucket=bucket,
             r2_key=key,
