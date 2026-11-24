@@ -597,6 +597,7 @@ b.run(sys.argv[1], sys.argv[2])
         with mock.patch.object(r2, 'make_r2_client', return_value=R2Client(client)):
             with self.assertRaisesRegex(ValueError, 'size or hash mismatch'):
                 b.run(self.config, out)
+        client.close.assert_called_once_with()
         cached = self.cached_water
         self.assertFalse(cached.exists())
         self.assertEqual(list(self.cache.rglob('download-*')), [])

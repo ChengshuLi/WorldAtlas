@@ -681,8 +681,8 @@ class Fixture(unittest.TestCase):
         self.addCleanup(reused.close)
         producer_report = (physical / "report.json").read_bytes()
         with patch.object(
-            physical_build,
-            "run",
+            pipeline,
+            "PhysicalBuild",
             side_effect=AssertionError("physical outputs must be reused"),
         ):
             self.assertEqual(reused.physical(), physical)

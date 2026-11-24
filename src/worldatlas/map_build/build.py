@@ -51,7 +51,7 @@ from worldatlas.map_build.inputs.selection import (
     read_selection,
 )
 from worldatlas.map_build.inputs.selection_types import BuildSelection
-from worldatlas.map_build.physical import build as physical_build
+from worldatlas.map_build.physical.build import PhysicalBuild
 from worldatlas.map_build.physical.water import INLAND_WATER_SUBTYPE_POLICY
 from worldatlas.shared.database import connect_neon, neon_connection_url
 from worldatlas.shared.files import (
@@ -468,7 +468,7 @@ class Pipeline:
         if self.physical_reuse is not None:
             self.checkpoints.files.verify(self.physical_reuse["pins"])
             return Path(self.physical_reuse["source_run"]) / "physical" / "physical"
-        result = physical_build.build(
+        operation = PhysicalBuild(
             self.physical_config,
             self.grid,
             request_pin,
@@ -476,7 +476,7 @@ class Pipeline:
             checkpoints=self.checkpoints,
             timing=self.timing,
         )
-        return Path(result["directory"])
+        return Path(operation.run()["directory"])
 
     def divide(self, physical: Path) -> Path:
         """Assign cells to geographic entities using the saved rules.

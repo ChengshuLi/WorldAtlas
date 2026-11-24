@@ -101,7 +101,7 @@ def run(
         raise ValueError('physical output must not contain its configuration')
     with open_stage_workspace(output, request, resume=resume) as (checkpoints, timing):
         with control.stage(), timing.stage('physical'):
-            report = build(
+            operation = PhysicalBuild(
                 settings,
                 Grid(**settings['grid']),
                 request,
@@ -109,44 +109,8 @@ def run(
                 checkpoints=checkpoints,
                 timing=timing,
             )
+            report = operation.run()
         return {**report, **timing.summary()['physical']}
-
-
-def build(
-    cfg: PhysicalConfiguration,
-    grid: Grid,
-    request: FilePin,
-    output: Path,
-    *,
-    checkpoints: Checkpoints,
-    timing: Timing,
-) -> dict[str, Any]:
-    """Rasterize land and water through the shared run's checkpoints.
-
-    Args:
-        cfg: Resolved raster settings and source pins.
-        grid: Grid shared with later map stages.
-        request: Path and SHA-256 of the saved physical configuration.
-        output: Directory for physical tasks and their reports.
-        checkpoints: Saved work that can be verified and reused.
-        timing: Run timer shared with other stages.
-
-    Returns:
-        Report with the finished grid's directory and verified file checksums.
-    """
-    source_directory = Path(cfg['source_directory']).resolve()
-    with closing(
-        SourceCache(
-            source_directory,
-            check_cancelled=control.check_cancelled,
-            measure_download=lambda key: timing.measure(
-                'physical', f'download/{key}', kind='download'
-            ),
-        )
-    ) as cache:
-        return PhysicalBuild(
-            cfg, grid, request, output, checkpoints, timing, cache
-        ).run()
 
 
 class PhysicalBuild:
@@ -158,9 +122,9 @@ class PhysicalBuild:
         grid: Grid,
         request: FilePin,
         output: Path,
+        *,
         checkpoints: Checkpoints,
         timing: Timing,
-        cache: SourceCache,
     ) -> None:
         """Keep the inputs and services shared by the physical tasks.
 
@@ -171,7 +135,6 @@ class PhysicalBuild:
             output: Directory for physical task outputs and reports.
             checkpoints: Shared task runner and checkpoint store.
             timing: Shared timer for rasterization and downloads.
-            cache: Open R2 source cache for this build.
         """
         self.configuration = configuration
         self.grid = grid
@@ -181,7 +144,6 @@ class PhysicalBuild:
         self.checkpoints = checkpoints
         self.files = checkpoints.files
         self.timing = timing
-        self.cache = cache
         self.minimum_free_bytes = configuration.get('minimum_free_bytes', 2 * (1 << 30))
         self.water_workers = configuration.get('max_parallel_shards', 2)
         self.water_batch_size = configuration['inland_water'].get('batch_size', 8192)
@@ -194,9 +156,6 @@ class PhysicalBuild:
         Returns:
             Physical build report with output paths and checksums.
         """
-        land_settings, coastline_sources = plan_land_inputs(
-            self.configuration['land_config'], self.cache
-        )
         water_sources = self.configuration['inland_water']['files']
         if len({source['sha256'] for source in water_sources}) != len(water_sources):
             raise ValueError('inland-water source hashes must be unique')
@@ -204,28 +163,49 @@ class PhysicalBuild:
         if shutil.disk_usage(self.output.parent).free < self.minimum_free_bytes:
             raise ValueError('free disk below pipeline reserve')
 
-        self.config_directory.mkdir(parents=True, exist_ok=True)
-        (self.output / 'shards').mkdir(exist_ok=True)
-        land_config = self._save_task_configuration(
-            'land.json',
-            dict(
-                land_settings,
-                schema='land-raster-candidate-v1',
-                minimum_free_bytes=self.minimum_free_bytes,
-            ),
-        )
-        water_config = self._save_task_configuration(
-            'inland-water.json',
-            dict(
-                self.configuration['inland_water'],
-                schema='water-shard-candidate-v2',
-                minimum_free_bytes=self.minimum_free_bytes,
-            ),
-        )
+        with closing(
+            SourceCache(
+                Path(self.configuration['source_directory']),
+                check_cancelled=control.check_cancelled,
+                measure_download=lambda key: self.timing.measure(
+                    'physical', f'download/{key}', kind='download'
+                ),
+            )
+        ) as cache:
+            land_settings, coastline_sources = plan_land_inputs(
+                self.configuration['land_config'], cache
+            )
+            self.config_directory.mkdir(parents=True, exist_ok=True)
+            (self.output / 'shards').mkdir(exist_ok=True)
+            land_config = self._save_task_configuration(
+                'land.json',
+                dict(
+                    land_settings,
+                    schema='land-raster-candidate-v1',
+                    minimum_free_bytes=self.minimum_free_bytes,
+                ),
+            )
+            water_config = self._save_task_configuration(
+                'inland-water.json',
+                dict(
+                    self.configuration['inland_water'],
+                    schema='water-shard-candidate-v2',
+                    minimum_free_bytes=self.minimum_free_bytes,
+                ),
+            )
 
-        land_mask = self._rasterize_land(land_settings, coastline_sources, land_config)
-        water_download_start = len(self.cache.downloads)
-        shards = self._rasterize_water_shards(water_config, water_sources)
+            land_mask = self._rasterize_land(
+                land_settings, coastline_sources, land_config, cache=cache
+            )
+            water_download_start = len(cache.downloads)
+            shards = self._rasterize_water_shards(
+                water_config, water_sources, cache=cache
+            )
+            downloaded_shard_count = sum(
+                transfer.completed
+                for transfer in cache.downloads[water_download_start:]
+            )
+
         union_config, water_mask = self._merge_water(water_config, shards)
         compose_config, output_checksums = self._compose_grid(land_mask, water_mask)
 
@@ -237,7 +217,7 @@ class PhysicalBuild:
             water_config,
             output_checksums,
             script_checksums,
-            water_download_start=water_download_start,
+            downloaded_shard_count=downloaded_shard_count,
         )
 
     def _checksum(self, path: Path) -> str:
@@ -312,6 +292,8 @@ class PhysicalBuild:
         land_settings: LandSettings[FilePin],
         coastline_sources: Sequence[RemoteFile],
         land_config: FilePin,
+        *,
+        cache: SourceCache,
     ) -> FilePin:
         """Acquire the coastline inputs and build the land mask.
 
@@ -319,6 +301,7 @@ class PhysicalBuild:
             land_settings: Rasterization settings with cache paths.
             coastline_sources: R2 objects and ZIP members needed by the rasterizer.
             land_config: Path and checksum of the saved coastline settings.
+            cache: Shared cache for coastline and inland-water inputs.
 
         Returns:
             Path and SHA-256 of the completed land mask.
@@ -333,7 +316,7 @@ class PhysicalBuild:
             """
             for source in coastline_sources:
                 control.check_cancelled()
-                self.cache.acquire(source)
+                cache.acquire(source)
             land.run(
                 land_config['sha256'],
                 land_directory,
@@ -362,13 +345,18 @@ class PhysicalBuild:
         )
 
     def _rasterize_water_shards(
-        self, water_config: FilePin, water_sources: Sequence[R2ObjectPin]
+        self,
+        water_config: FilePin,
+        water_sources: Sequence[R2ObjectPin],
+        *,
+        cache: SourceCache,
     ) -> list[ShardMask]:
         """Rasterize the water files in parallel and return masks in source order.
 
         Args:
             water_config: Path and checksum of the saved water settings.
             water_sources: R2 pins for all inland-water files.
+            cache: Shared cache for coastline and inland-water inputs.
 
         Returns:
             Verified mask and report pins in the order of the input files.
@@ -376,14 +364,13 @@ class PhysicalBuild:
         download_slot = threading.Lock()
         # Overlap one R2 download with one rasterization when files are missing.
         # When the cache is warm, workers can rasterize concurrently.
-        cold_cache = any(
-            not self.cache.path(source).is_file() for source in water_sources
-        )
+        cold_cache = any(not cache.path(source).is_file() for source in water_sources)
         raster_slot = threading.Lock() if cold_cache else nullcontext()
 
         rasterize_shard = partial(
             self._rasterize_water_shard,
             water_config=water_config,
+            cache=cache,
             download_slot=download_slot,
             raster_slot=raster_slot,
         )
@@ -416,6 +403,7 @@ class PhysicalBuild:
         source: R2ObjectPin,
         *,
         water_config: FilePin,
+        cache: SourceCache,
         download_slot: threading.Lock,
         raster_slot: threading.Lock | nullcontext[None],
     ) -> tuple[ShardMask, tuple[str, ...]]:
@@ -425,6 +413,7 @@ class PhysicalBuild:
             index: Zero-based position of the file in the source list.
             source: Pinned inland-water GeoParquet file in R2.
             water_config: Path and SHA-256 of the shared water settings.
+            cache: Open source cache shared by the raster workers.
             download_slot: Lock shared by workers acquiring files.
             raster_slot: Lock for a cold cache, or an empty context for a warm cache.
 
@@ -442,7 +431,7 @@ class PhysicalBuild:
                 The verified mask and report pins, and the rasterizer identity.
             """
             with download_slot:
-                source_path = self.cache.acquire(source)
+                source_path = cache.acquire(source)
             with raster_slot:
                 control.check_cancelled()
                 with self.timing.measure('physical', f'rasterize-{name}'):
@@ -684,7 +673,7 @@ class PhysicalBuild:
         output_checksums: dict[str, str],
         script_checksums: dict[str, str],
         *,
-        water_download_start: int,
+        downloaded_shard_count: int,
     ) -> dict[str, Any]:
         """Write the physical stage report with the verified grid files.
 
@@ -693,8 +682,7 @@ class PhysicalBuild:
             water_config: Path and SHA-256 of the saved inland-water settings.
             output_checksums: SHA-256 by output filename for the finished grid.
             script_checksums: SHA-256 of the implementation files, by relative path.
-            water_download_start: Index of the first inland-water transfer, used
-                to exclude the preceding coastline downloads.
+            downloaded_shard_count: Number of water files downloaded in this attempt.
 
         Returns:
             The saved physical build report.
@@ -728,10 +716,7 @@ class PhysicalBuild:
                 'stage_reports': stage_reports,
                 'physical_output_sha256': output_checksums,
                 'limitations': 'Candidate physical land/water only; not historical source reproduction or continent labels.',
-                'downloaded_shard_count': sum(
-                    transfer.completed
-                    for transfer in self.cache.downloads[water_download_start:]
-                ),
+                'downloaded_shard_count': downloaded_shard_count,
                 'downloaded_shard_count_scope': 'current invocation',
             }
             write_json(report_path, report, sort_keys=False)
