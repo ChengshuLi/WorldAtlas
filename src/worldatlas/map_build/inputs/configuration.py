@@ -178,14 +178,12 @@ def require_separate_cache_and_output(cache: Path, output: Path) -> None:
         raise ValueError("output and the input cache must use separate directories")
 
 
-def land_dataset_index[File: LandFile | ResolvedLandFile](
-    layer: LandLayer[File],
-) -> int:
+def land_dataset_index(layer: LandLayer[ResolvedLandFile]) -> int:
     """Find which pinned coastline file GDAL should open.
 
     Args:
-        layer: Coastline file pins and the dataset's member path, local path,
-            R2 key, or Neon source ID.
+        layer: Resolved coastline file pins and the dataset's member path,
+            local path, R2 key, or saved Neon source ID.
 
     Returns:
         Index of the matching entry in the layer's ``files`` list.
@@ -202,7 +200,6 @@ def land_dataset_index[File: LandFile | ResolvedLandFile](
             file.get("member"),
             file.get("path"),
             file.get("r2_key"),
-            file.get("r2_source"),
             file.get("source_id"),
         )
     ]
@@ -213,36 +210,27 @@ def land_dataset_index[File: LandFile | ResolvedLandFile](
     return matches[0]
 
 
-def file_requests(sources: BuildSources) -> Iterator[LandFile]:
-    """Visit the file specifications in a map build request.
+def iter_physical_source_files(sources: BuildSources) -> Iterator[WaterFile]:
+    """Yield the raw files needed to build the physical grid.
 
     Args:
         sources: Validated coastline and inland-water settings.
 
     Yields:
-        Each water file followed by each coastline file in layer order.
+        Water inputs followed by coastline inputs in layer order. A ZIP
+        member yields its archive's specification because that is the raw file.
     """
     yield from sources["inland_water"]["files"]
     for layer in sources["land_config"]["land"]:
-        yield from layer["files"]
+        for spec in layer["files"]:
+            if "path" not in spec and "archive" in spec:
+                yield spec["archive"]
+            else:
+                yield spec
 
 
-def source_file(spec: LandFile) -> WaterFile:
-    """Get the source file selected directly or containing a selected ZIP member.
-
-    Args:
-        spec: A direct file pin, catalog ID or ZIP member.
-
-    Returns:
-        The direct file specification used to obtain source bytes.
-    """
-    if "path" in spec:
-        return spec
-    return spec["archive"] if "archive" in spec else spec
-
-
-def catalog_source_ids(sources: BuildSources) -> set[str]:
-    """Collect the raw catalog IDs needed to resolve a request.
+def physical_catalog_source_ids(sources: BuildSources) -> set[str]:
+    """Collect the physical source IDs needed in the saved catalog snapshot.
 
     Args:
         sources: Coastline and inland-water selections.
@@ -251,13 +239,13 @@ def catalog_source_ids(sources: BuildSources) -> set[str]:
         Distinct source IDs, including ZIP containers selected by catalog ID.
     """
     return {
-        entry["r2_source"]
-        for selection in file_requests(sources)
-        if "path" not in (entry := source_file(selection)) and "r2_source" in entry
+        spec["r2_source"]
+        for spec in iter_physical_source_files(sources)
+        if "path" not in spec and "r2_source" in spec
     }
 
 
-def resolve_object(
+def _resolve_r2_pin(
     file: CatalogFile | R2ObjectPin, catalog: Mapping[str, R2ObjectPin]
 ) -> R2ObjectPin:
     """Replace a catalog selection with its R2 location and byte identity.
@@ -277,7 +265,7 @@ def resolve_object(
     return catalog[source_id]
 
 
-def resolve_land_file(
+def _resolve_coastline_file(
     file: LandFile, catalog: Mapping[str, R2ObjectPin]
 ) -> ResolvedLandFile:
     """Resolve a coastline file or the R2 archive containing it.
@@ -292,8 +280,8 @@ def resolve_land_file(
     if "path" in file:
         return file
     if "archive" in file:
-        return {**file, "archive": resolve_object(file["archive"], catalog)}
-    return resolve_object(file, catalog)
+        return {**file, "archive": _resolve_r2_pin(file["archive"], catalog)}
+    return _resolve_r2_pin(file, catalog)
 
 
 def physical_configuration(
@@ -328,12 +316,14 @@ def physical_configuration(
     layers: list[LandLayer[ResolvedLandFile]] = [
         {
             **layer,
-            "files": [resolve_land_file(file, catalog) for file in layer["files"]],
+            "files": [
+                _resolve_coastline_file(file, catalog) for file in layer["files"]
+            ],
         }
         for layer in land["land"]
     ]
     shards: list[ResolvedWaterFile] = [
-        file if "path" in file else resolve_object(file, catalog)
+        file if "path" in file else _resolve_r2_pin(file, catalog)
         for file in water["files"]
     ]
     controls: PhysicalControls = configuration.get("physical_controls", {})

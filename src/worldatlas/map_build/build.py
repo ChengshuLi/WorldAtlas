@@ -41,7 +41,7 @@ from worldatlas.map_build.execution.timing import (
 from worldatlas.map_build.inputs.configuration import (
     BUILD_CONFIGURATION,
     PhysicalConfiguration,
-    catalog_source_ids,
+    physical_catalog_source_ids,
     physical_configuration,
     require_separate_cache_and_output,
 )
@@ -235,7 +235,7 @@ class Pipeline:
         )
 
         self.selection = self._load_selection(
-            catalog_source_ids(self.cfg["sources"]), selection
+            physical_catalog_source_ids(self.cfg["sources"]), selection
         )
         self.compiled_divisions = prepare_geography(
             self.selection["geography"],

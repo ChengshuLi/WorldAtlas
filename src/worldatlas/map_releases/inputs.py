@@ -9,8 +9,7 @@ from typing import TypedDict, cast
 from worldatlas.map_build.execution.code_archive import restore_source, source_files
 from worldatlas.map_build.inputs.configuration import (
     BuildConfiguration,
-    file_requests,
-    source_file,
+    iter_physical_source_files,
 )
 from worldatlas.map_build.inputs.selection_types import BuildSelection
 from worldatlas.shared.files import SHA256_PATTERN, JSONValue, json_bytes
@@ -47,8 +46,7 @@ def validate_replay_sources(
         ValueError: A source is a local file or its catalog entry is missing.
     """
     source_ids = {row["source_id"] for row in selection["raw_sources"]}
-    for request in file_requests(configuration["sources"]):
-        source = source_file(request)
+    for source in iter_physical_source_files(configuration["sources"]):
         if "path" in source:
             raise ValueError(
                 f"release replay requires an R2 source for {source['path']}"

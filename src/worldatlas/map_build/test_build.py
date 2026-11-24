@@ -378,7 +378,9 @@ class Fixture(unittest.TestCase):
         with (
             self.fake_r2({}, []) as download,
             patch.object(
-                pipeline, "catalog_source_ids", wraps=pipeline.catalog_source_ids
+                pipeline,
+                "physical_catalog_source_ids",
+                wraps=pipeline.physical_catalog_source_ids,
             ) as scan,
         ):
             runner = self.make()
