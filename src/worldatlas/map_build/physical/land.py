@@ -151,9 +151,6 @@ def run(
         raise ValueError('nonempty explicitly pinned land inputs required')
     strip_rows = settings.get('strip_rows', 512)
     output = Path(output).resolve()
-    paths = [Path(f['path']).resolve() for spec in specs for f in spec['files']]
-    if len(set(paths)) != len(paths):
-        raise ValueError('input paths must be unique')
     # Check the input files and index the selected polygons before creating outputs.
     for spec in specs:
         checked_files(spec, files)

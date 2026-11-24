@@ -29,9 +29,12 @@ def checked_files(spec: LandLayer[FilePin], pins: RunFilePins) -> dict[str, str]
         Absolute path strings mapped to SHA-256 digests.
 
     Raises:
-        ValueError: A required file or Shapefile companion is unpinned or changed.
+        ValueError: A file path is repeated within the layer, or a required file
+            or Shapefile companion is unpinned or changed.
     """
     files = {str(Path(f['path']).resolve()): f['sha256'] for f in spec['files']}
+    if len(files) != len(spec['files']):
+        raise ValueError('coastline file paths must be unique within each layer')
     dataset = str(Path(spec['dataset']).resolve())
     if dataset not in files:
         raise ValueError('dataset must be among hash-pinned files')

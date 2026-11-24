@@ -99,20 +99,54 @@ class RasterizeLandTests(unittest.TestCase):
                 self.assertFalse(out.exists())
 
     def test_invalid_rasterization_settings_leave_no_output(self):
-        land = self.cfg['land']
+        layer = self.cfg['land'][0]
         out = self.d / 'invalid'
         for changes, error in (
             ({'schema': 'unknown'}, 'schema'),
             ({'land': []}, 'nonempty explicitly pinned land inputs'),
             ({'strip_rows': False}, 'strip_rows'),
             ({'minimum_free_bytes': -1}, 'minimum_free_bytes'),
-            ({'land': land * 2}, 'input paths must be unique'),
+            (
+                {'land': [dict(layer, files=layer['files'] * 2)]},
+                'file paths must be unique within each layer',
+            ),
         ):
             with self.subTest(changes=changes):
                 self.config.write_text(json.dumps(dict(self.cfg, **changes)))
                 with self.assertRaisesRegex(ValueError, error):
                     self.rasterize(self.config, out, self.grid)
                 self.assertFalse(out.exists())
+
+    def test_two_coastline_layers_can_share_one_geopackage(self):
+        path = self.inputs / 'coastline.gpkg'
+        srs = osr.SpatialReference()
+        srs.ImportFromEPSG(4326)
+        polygons = {
+            'west': 'POLYGON ((-180 90,-45 90,-45 0,-180 0,-180 90))',
+            'east': 'POLYGON ((0 0,90 0,90 -45,0 -45,0 0))',
+        }
+        with ogr.GetDriverByName('GPKG').CreateDataSource(str(path)) as dataset:
+            for name, polygon in polygons.items():
+                layer = dataset.CreateLayer(name, srs, ogr.wkbPolygon)
+                feature = ogr.Feature(layer.GetLayerDefn())
+                feature.SetGeometry(ogr.CreateGeometryFromWkt(polygon))
+                self.assertEqual(layer.CreateFeature(feature), 0)
+        file = {'path': str(path), 'sha256': sha256_file(path)}
+        self.cfg['land'] = [
+            dict(dataset=str(path), files=[file], layer=name, where=None)
+            for name in polygons
+        ]
+        self.config.write_text(json.dumps(self.cfg))
+
+        output = self.d / 'shared-geopackage'
+        report = self.rasterize(self.config, output, self.grid)
+        self.assertEqual(report['feature_counts'], [1, 1])
+        expected = np.zeros((4, 8), dtype=np.uint8)
+        expected[:2, :3] = 1
+        expected[2, 4:6] = 1
+        np.testing.assert_array_equal(
+            gdal.Open(str(output / 'land.tif')).ReadAsArray(), expected
+        )
 
     def test_layer_requires_explicit_polygon_selection(self):
         source = json.loads(self.p.read_text())
