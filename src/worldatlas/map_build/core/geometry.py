@@ -12,7 +12,6 @@ from shapely import bounds, get_parts
 from shapely.geometry import MultiPolygon, Polygon
 from shapely.geometry.base import BaseGeometry
 
-from worldatlas.geodesy.geojson import validate_geometry
 from worldatlas.map_build.core.grid import Grid, column_windows
 
 
@@ -158,24 +157,6 @@ class PolygonRasterizer:
                 offset = (first - x0) % grid.width
                 mask[:, offset : offset + last - first] = raster.ReadAsArray() != 0
         return bounds, mask
-
-
-def rasterize(
-    geometry: dict[str, Any],
-    grid: Grid,
-    bounds: tuple[int, int, int, int] | None = None,
-) -> tuple[tuple[int, int, int, int], np.ndarray]:
-    """Mark cells covered by a polygon in a single grid window.
-
-    Args:
-        geometry: GeoJSON Polygon or MultiPolygon in WGS84.
-        grid: Grid on which to rasterize it.
-        bounds: Optional window with exclusive end column and row.
-
-    Returns:
-        (bounds, mask), where mask is a 2-D bool array marking covered cells.
-    """
-    return PolygonRasterizer(validate_geometry(geometry), grid).rasterize(bounds)
 
 
 def _ceil(n: int, d: int) -> int:

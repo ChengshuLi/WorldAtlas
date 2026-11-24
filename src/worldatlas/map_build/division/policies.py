@@ -13,7 +13,8 @@ from worldatlas.map_build.division.scope import Scope
 if TYPE_CHECKING:
     from worldatlas.map_build.division.engine import ParentDivision
 
-from worldatlas.map_build.core.geometry import rasterize
+from worldatlas.geodesy.geojson import validate_geometry
+from worldatlas.map_build.core.geometry import PolygonRasterizer
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.division.nearest import (
     cell_queries,
@@ -91,7 +92,8 @@ def nearest_basin_water(
         cell counts and bordering shore-edge counts by owner.
     """
     feature = scope.rule["features"]["scope_area"][0]
-    bounds, mask = rasterize(dict(feature["geometry"]), scope.grid)
+    polygon = validate_geometry(feature["geometry"])
+    bounds, mask = PolygonRasterizer(polygon, scope.grid).rasterize()
     water = physical_water(mask, bounds, context.parent_physical, scope.grid)
     scope.set_eligible_area(water, bounds)
     if not scope.has_output():

@@ -9,7 +9,6 @@ from shapely.geometry import Point, Polygon, box, shape
 from worldatlas.map_build.core.geometry import (
     PolygonRasterizer,
     polygon_grid_bounds,
-    rasterize,
     reject_boundary_centers,
 )
 from worldatlas.map_build.core.grid import Grid
@@ -63,11 +62,8 @@ class PreparedRasterization(unittest.TestCase):
         self.assertEqual(mask.shape, (0, 1))
         self.assertEqual(prepared.rasterize()[0], bounds)
 
-    def test_degenerate_rings_and_invalid_windows_are_rejected(self):
+    def test_rasterization_rejects_invalid_windows_and_propagates_gdal_errors(self):
         grid = Grid(36, 18, 10)
-        crossed = [[0, 0], [20, 20], [0, 20], [20, 0], [0, 0]]
-        with self.assertRaisesRegex(ValueError, "expected valid geometry"):
-            rasterize(dict(type="Polygon", coordinates=[crossed]), grid)
         prepared = PolygonRasterizer(box(0, 0, 20, 20), grid)
         with self.assertRaisesRegex(ValueError, "invalid rasterization window"):
             prepared.rasterize((0, 37, 0, 18))
