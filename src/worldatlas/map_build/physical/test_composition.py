@@ -55,36 +55,24 @@ class ComposeTests(unittest.TestCase):
         for height, width in [(1, 1), (4, 8), (17, 31), (3, 128)]:
             for mode in ('zero', 'one', 'random'):
                 if mode == 'zero':
-                    codes = np.ones((height, width), dtype=np.uint8)
+                    dry_land = np.zeros((height, width), dtype=np.uint8)
                 elif mode == 'one':
-                    codes = np.full((height, width), 17, dtype=np.uint8)
+                    dry_land = np.ones((height, width), dtype=np.uint8)
                 else:
-                    codes = np.where(rng.integers(0, 2, (height, width)), 17, 1).astype(np.uint8)
+                    dry_land = rng.integers(0, 2, (height, width), dtype=np.uint8)
                 path = self.d / 'runs-test'
                 offsets = [0]
                 with path.open('wb') as stream:
                     for start in range(0, height, 3):
-                        b.write_run_block(codes[start : start + 3], stream, offsets, width)
+                        b.write_run_block(dry_land[start : start + 3], stream, offsets)
                 pairs = np.fromfile(path, dtype='<u4').reshape(-1, 2).tolist()
                 expected = []
                 expected_offsets = [0]
-                for row in codes:
+                for row in dry_land:
                     ends = np.flatnonzero(np.r_[row[1:] != row[:-1], True])
-                    expected.extend((int(end + 1), int(row[end])) for end in ends)
+                    expected.extend([int(end + 1), 17 if row[end] else 1] for end in ends)
                     expected_offsets.append(len(expected))
-                self.assertEqual(pairs, [list(pair) for pair in expected])
-                self.assertEqual(offsets, expected_offsets)
-                offsets = [0]
-                with path.open('wb') as stream:
-                    for start in range(0, height, 3):
-                        b.write_run_block(
-                            (codes[start : start + 3] == 17).astype(np.uint8),
-                            stream,
-                            offsets,
-                            width,
-                            binary=True,
-                        )
-                self.assertEqual(np.fromfile(path, dtype='<u4').reshape(-1, 2).tolist(), pairs)
+                self.assertEqual(pairs, expected)
                 self.assertEqual(offsets, expected_offsets)
 
     def test_composition_writes_raster_and_run_streams(self):
@@ -117,7 +105,7 @@ class ComposeTests(unittest.TestCase):
         offsets = [2**32 - 1]
         with path.open('wb') as stream:
             with self.assertRaisesRegex(ValueError, 'too many runs for u32 offsets'):
-                b.write_run_block(np.array([[17]], dtype=np.uint8), stream, offsets, 1)
+                b.write_run_block(np.array([[1]], dtype=np.uint8), stream, offsets)
         self.assertEqual(offsets, [2**32 - 1])
         self.assertEqual(path.read_bytes(), b'')
 
@@ -154,11 +142,11 @@ class ComposeTests(unittest.TestCase):
                 self.build(unreadable)
         self.assertFalse((unreadable / 'report.json').exists())
 
-    def test_binary_float_and_signed_masks_keep_original_support(self):
+    def test_rejects_float_and_signed_masks_before_creating_output(self):
         for name, kind in [('land', gdal.GDT_Float32), ('water', gdal.GDT_Int16)]:
-            old = gdal.Open(self.cfg[name]['path'])
-            values = old.ReadAsArray()
-            old = None
+            original = self.cfg[name]
+            with gdal.Open(original['path']) as old:
+                values = old.ReadAsArray()
             p = self.inputs / (name + '-typed.tif')
             ds = gdal.GetDriverByName('GTiff').Create(str(p), 8, 4, 1, kind)
             ds.SetGeoTransform((-180, 45, 0, 90, 0, -45))
@@ -168,30 +156,20 @@ class ComposeTests(unittest.TestCase):
             ds.GetRasterBand(1).WriteArray(values)
             ds = None
             self.cfg[name] = {'path': str(p), 'sha256': sha256_file(p)}
-        self.p.write_text(json.dumps(self.cfg))
-        out = self.d / 'typed'
-        self.build(out)
-        self.assertEqual(
-            json.loads((out / 'report.json').read_text())['candidate_dry_cells'], 5
-        )
-        self.assertEqual(
-            np.fromfile(out / 'runs.u32le', dtype='<u4').reshape(-1, 2).tolist(),
-            [[1, 1], [3, 17], [8, 1], [3, 17], [8, 1], [8, 1], [8, 1]],
-        )
+            self.p.write_text(json.dumps(self.cfg))
+            out = self.d / ('typed-' + name)
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, 'one uint8 band'):
+                self.build(out)
+            self.assertFalse(out.exists())
+            self.cfg[name] = original
 
-    def test_rejects_negative_in_every_mask(self):
+    def test_rejects_values_above_one_in_either_mask(self):
         for name in ('land', 'water'):
             original = self.cfg[name]
-            p = self.inputs / (name + '-negative.tif')
-            ds = gdal.GetDriverByName('GTiff').Create(str(p), 8, 4, 1, gdal.GDT_Int16)
-            ds.SetGeoTransform((-180, 45, 0, 90, 0, -45))
-            sr = osr.SpatialReference()
-            sr.ImportFromEPSG(4326)
-            ds.SetSpatialRef(sr)
-            a = np.zeros((4, 8), dtype=np.int16)
-            a[0, 0] = -1
-            ds.GetRasterBand(1).WriteArray(a)
-            ds = None
+            p = self.inputs / (name + '-nonbinary.tif')
+            with gdal.Open(original['path']) as source:
+                with gdal.GetDriverByName('GTiff').CreateCopy(str(p), source) as mask:
+                    mask.GetRasterBand(1).WriteArray(np.array([[2]], dtype=np.uint8), 0, 0)
             self.cfg[name] = {'path': str(p), 'sha256': sha256_file(p)}
             self.p.write_text(json.dumps(self.cfg))
             with self.assertRaisesRegex(ValueError, 'nonbinary'):

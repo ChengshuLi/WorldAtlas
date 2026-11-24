@@ -21,7 +21,7 @@ The coastline rasterizer lists the polygon IDs that could touch each strip of ma
 
 For inland water, the builder skips the `ocean` and `physical` subtypes. The ocean is already represented by the coastline. Overture's `physical` records name features such as bays and straits, and can overlap the polygons used to fill water. A missing, blank, or non-text subtype leaves the shard incomplete. The builder draws valid polygons and multipolygons from the rows that pass this check. [Overture water guide](https://docs.overturemaps.org/guides/base/#water)
 
-Both rasterizers use GDAL's default polygon fill, which selects cells by their centres. The water rasterizer combines polygons in batches, and its report records the tile width in cells as `tile_size`.
+Both rasterizers use GDAL's default polygon fill, which selects cells by their centres. The water rasterizer combines polygons in batches, and its report records the tile width in cells as `tile_size`. The merge and composition steps read masks with one unsigned-byte band containing only 0 and 1.
 
 For each water batch, the rasterizer reads and checks the selected shapes before drawing. It lists which shapes can reach each tile and keeps the original edges needed to draw that tile. It then updates the water mask one tile at a time.
 

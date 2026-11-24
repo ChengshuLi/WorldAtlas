@@ -129,7 +129,7 @@ def create_mask(path: Path, grid: Grid) -> gdal.Dataset:
 
 
 def open_mask(entry: FilePin, grid: Grid, files: RunFilePins) -> gdal.Dataset:
-    """Open a physical mask after checking its grid and file contents.
+    """Open a verified single-band uint8 mask on the physical grid.
 
     Args:
         entry: File path and expected SHA-256.
@@ -140,7 +140,7 @@ def open_mask(entry: FilePin, grid: Grid, files: RunFilePins) -> gdal.Dataset:
         GDAL dataset for the aligned WGS84 raster.
 
     Raises:
-        ValueError: The hash, grid or coordinate reference differs.
+        ValueError: The hash, grid, coordinate reference, or band format differs.
     """
     path = Path(entry['path']).resolve()
     if files.pin(path)['sha256'] != entry['sha256']:
@@ -153,6 +153,8 @@ def open_mask(entry: FilePin, grid: Grid, files: RunFilePins) -> gdal.Dataset:
         or ds.GetGeoTransform() != (grid.west, grid.step, 0, grid.north, 0, -grid.step)
     ):
         raise ValueError(f'grid mismatch: {path}')
+    if ds.RasterCount != 1 or ds.GetRasterBand(1).DataType != gdal.GDT_Byte:
+        raise ValueError(f'physical mask must have one uint8 band: {path}')
     actual = ds.GetSpatialRef()
     expected = osr.SpatialReference()
     expected.ImportFromEPSG(4326)

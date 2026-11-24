@@ -6,7 +6,7 @@ import os
 import shutil
 from collections.abc import Callable
 from pathlib import Path
-from typing import Any, BinaryIO, cast
+from typing import Any, BinaryIO
 
 import numpy as np
 from osgeo import gdal
@@ -21,27 +21,22 @@ gdal.UseExceptions()
 
 
 def write_run_block(
-    codes: np.ndarray,
+    dry_land: np.ndarray,
     runs: BinaryIO,
     offsets: list[int],
-    width: int,
-    *,
-    binary: bool = False,
 ) -> None:
-    """Append a batch of physical rows as little-endian uint32 runs.
+    """Encode a binary land mask as little-endian uint32 physical runs.
 
     Args:
-        codes: Two-dimensional array of physical codes or binary land values.
+        dry_land: Full-width rows of uint8 cells, with 0 for water and 1 for land.
         runs: Open binary stream for (end_column, code) records.
         offsets: Existing row offsets to extend.
-        width: Number of columns in each row.
-        binary: Convert binary water and land values to codes 1 and 17.
 
     Raises:
         ValueError: The final run offset is too large for uint32.
     """
-    row_count = codes.shape[0]
-    row_index, left_column = np.nonzero(codes[:, 1:] != codes[:, :-1])
+    row_count, width = dry_land.shape
+    row_index, left_column = np.nonzero(dry_land[:, 1:] != dry_land[:, :-1])
     transitions = np.bincount(row_index, minlength=row_count).astype(
         np.int64, copy=False
     )
@@ -53,14 +48,13 @@ def write_run_block(
         np.arange(row_count, dtype=np.int64), transitions
     )
     pairs[transition_slots, 0] = left_column + 1
-    pairs[transition_slots, 1] = codes[row_index, left_column]
+    pairs[transition_slots, 1] = dry_land[row_index, left_column]
     terminal_slots = np.cumsum(run_counts, dtype=np.int64) - 1
     pairs[terminal_slots, 0] = width
-    pairs[terminal_slots, 1] = codes[:, -1]
-    if binary:
-        # Convert only emitted run values, not every cell of the full raster.
-        pairs[:, 1] *= 16
-        pairs[:, 1] += 1
+    pairs[terminal_slots, 1] = dry_land[:, -1]
+    # Encode each run once. Physical streams use 1 for water and 17 for land.
+    pairs[:, 1] *= 16
+    pairs[:, 1] += 1
     next_offsets = np.cumsum(run_counts, dtype=np.uint64) + offsets[-1]
     if next_offsets[-1] > np.iinfo(np.uint32).max:
         raise ValueError('too many runs for u32 offsets')
@@ -102,7 +96,8 @@ def run(
     inputs = [Path(pin['path']).resolve() for pin in source_masks.values()]
     if len(set(inputs)) != len(inputs):
         raise ValueError('inputs must be distinct')
-    masks = [open_mask(pin, grid, files) for pin in source_masks.values()]
+    land_mask = open_mask(land, grid, files)
+    water_mask = open_mask(water, grid, files)
     os.mkdir(output)
     out = Path(output)
     tif = create_mask(out / 'physical-dry.tif', grid)
@@ -116,28 +111,18 @@ def run(
                     'free disk below configured reserve; partial output preserved'
                 )
             n = min(rows_per_block, h - y)
-            arrays = [ds.ReadAsArray(0, y, w, n) for ds in masks]
-            if any(array is None for array in arrays):
+            land_values = land_mask.ReadAsArray(0, y, w, n)
+            water_values = water_mask.ReadAsArray(0, y, w, n)
+            if land_values is None or water_values is None:
                 raise ValueError('GDAL could not read a physical mask')
-            arrays = cast(list[np.ndarray], arrays)
-            land_values, water_values = arrays
-            if any(
-                (np.max(x) > 1 if x.dtype == np.uint8 else np.any((x != 0) & (x != 1)))
-                for x in arrays
-            ):
+            if np.max(land_values) > 1 or np.max(water_values) > 1:
                 raise ValueError('nonbinary mask')
-            if land_values.dtype == water_values.dtype == np.uint8:
-                np.subtract(1, water_values, out=water_values)
-                np.bitwise_and(land_values, water_values, out=land_values)
-                dry = land_values
-            else:
-                # Binary masks from other GDAL types are supported as before.
-                dry = np.logical_and(land_values == 1, water_values == 0).astype(
-                    np.uint8
-                )
-            tif.GetRasterBand(1).WriteArray(dry, 0, y)
-            candidate_count += int(np.count_nonzero(dry))
-            write_run_block(dry, runs, offsets, w, binary=True)
+            # Flip the water bits so the AND keeps only land outside inland water.
+            np.subtract(1, water_values, out=water_values)
+            np.bitwise_and(land_values, water_values, out=land_values)
+            tif.GetRasterBand(1).WriteArray(land_values, 0, y)
+            candidate_count += int(np.count_nonzero(land_values))
+            write_run_block(land_values, runs, offsets)
             if emit is not None:
                 emit(
                     json.dumps(
@@ -148,7 +133,8 @@ def run(
     check_cancelled()
     tif.FlushCache()
     tif = None
-    masks = []
+    land_mask.Close()
+    water_mask.Close()
     with (out / 'rows.u32le').open('xb') as f:
         np.asarray(offsets, dtype='<u4').tofile(f)
     for key, pin in source_masks.items():

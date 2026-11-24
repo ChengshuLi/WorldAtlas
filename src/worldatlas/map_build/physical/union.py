@@ -24,22 +24,19 @@ def union_mask(ds: gdal.Dataset, water: np.ndarray, y: int) -> None:
     """Combine the raster's water cells into a batch in place.
 
     Args:
-        ds: Single-band water raster with zero or one per cell.
+        ds: Verified single-band uint8 water raster with zero or one per cell.
         water: Two-dimensional output block to update.
         y: First row of the output block in the full raster.
 
     Raises:
-        ValueError: The dataset has multiple bands or nonbinary values.
+        ValueError: The block contains a value above 1.
     """
     width = water.shape[1]
     rows = water.shape[0]
     band = ds.GetRasterBand(1)
     nodata = band.GetNoDataValue()
-    if ds.RasterCount != 1:
-        raise ValueError('candidate mask must have one band')
     if (
         ds.GetDriver().ShortName != 'GTiff'
-        or band.DataType != gdal.GDT_Byte
         or nodata not in (None, 0)
         or not hasattr(band, 'GetDataCoverageStatus')
     ):
@@ -54,10 +51,10 @@ def union_mask(ds: gdal.Dataset, water: np.ndarray, y: int) -> None:
                 windows.append((x, n))
     for x, n in windows:
         arr = band.ReadAsArray(x, y, n, rows)
-        if np.any((arr != 0) & (arr != 1)):
+        if np.max(arr) > 1:
             raise ValueError('nonbinary candidate input')
         view = water[:, x : x + n]
-        np.bitwise_or(view, arr.astype(np.uint8, copy=False), out=view)
+        np.bitwise_or(view, arr, out=view)
 
 
 def run(

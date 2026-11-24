@@ -145,10 +145,13 @@ class AggregateTests(unittest.TestCase):
         self.assertEqual(r['grid'], self.cfg['grid'])
         self.assertEqual(r['shard_count'], 2)
 
-    def test_multiband_mask_is_not_a_candidate_water_grid(self):
-        ds = gdal.GetDriverByName('MEM').Create('', 8, 4, 2, gdal.GDT_Byte)
-        with self.assertRaisesRegex(ValueError, 'must have one band'):
-            c.union_mask(ds, np.zeros((4, 8), dtype=np.uint8), 0)
+    def test_mask_reader_rejects_a_raster_with_two_bands(self):
+        path = self.inputs / 'two-bands.tif'
+        with gdal.GetDriverByName('GTiff').Create(str(path), 8, 4, 2, gdal.GDT_Byte) as mask:
+            mask.SetGeoTransform((-180, 45, 0, 90, 0, -45))
+        pin = dict(path=str(path), sha256=sha256_file(path))
+        with self.assertRaisesRegex(ValueError, 'must have one uint8 band'):
+            open_mask(pin, Grid(**self.cfg['grid']), RunFilePins())
 
     def test_union_keeps_partial_output_when_disk_space_drops_mid_run(self):
         self.cfg["minimum_free_bytes"] = 1
@@ -238,16 +241,3 @@ class AggregateTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-    def test_union_checks_binary_values_before_converting_other_dtypes(self):
-        for kind in (gdal.GDT_Byte, gdal.GDT_Int16, gdal.GDT_Float32):
-            with self.subTest(kind=kind):
-                raster = gdal.GetDriverByName('MEM').Create('', 2, 1, 1, kind)
-                raster.GetRasterBand(1).WriteArray(np.array([[0, 1]]))
-                result = np.array([[1, 0]], dtype=np.uint8)
-                c.union_mask(raster, result, 0)
-                np.testing.assert_array_equal(result, [[1, 1]])
-                if kind != gdal.GDT_Byte:
-                    raster.GetRasterBand(1).WriteArray(np.array([[1, -1]]))
-                    with self.assertRaisesRegex(ValueError, 'nonbinary'):
-                        c.union_mask(raster, result, 0)
