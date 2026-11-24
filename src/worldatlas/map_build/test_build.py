@@ -718,7 +718,7 @@ class Fixture(unittest.TestCase):
         current = runner.physical_config
         for section, changes in (
             ("land_config", {"selection_notes": "Same coastline"}),
-            ("inland_water", {"rasterizer": "python"}),
+            ("inland_water", {"batch_size": 7}),
         ):
             with self.subTest(section=section):
                 changed = dict(current, **{section: dict(current[section], **changes)})

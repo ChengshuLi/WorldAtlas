@@ -13,7 +13,6 @@ from functools import partial
 from pathlib import Path
 from typing import Any
 
-import worldatlas.geodesy.ogr as geometry_io
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution import control
 from worldatlas.map_build.execution.runtime import Checkpoints, open_stage_workspace
@@ -29,20 +28,15 @@ from worldatlas.map_build.inputs.configuration import (
 from worldatlas.map_build.physical import composition, land, water
 from worldatlas.map_build.physical import union as water_union
 from worldatlas.map_build.physical.sources import ShardMask
-from worldatlas.shared import r2
 from worldatlas.shared.files import (
     FilePin,
     JSONValue,
     json_bytes,
-    sha256_file,
     write_bytes_atomic,
     write_json,
 )
-from worldatlas.source_assets import cache as source_cache
 from worldatlas.source_assets.cache import SourceCache
 from worldatlas.source_assets.pins import R2ObjectPin, RemoteFile
-
-HERE = Path(__file__).resolve().parent
 
 
 def plan_land_inputs(
@@ -155,7 +149,6 @@ class PhysicalBuild:
         water_sources = self.configuration['inland_water']['files']
         if len({source['sha256'] for source in water_sources}) != len(water_sources):
             raise ValueError('inland-water source hashes must be unique')
-        script_checksums = _physical_script_checksums()
         if shutil.disk_usage(self.output.parent).free < self.minimum_free_bytes:
             raise ValueError('free disk below pipeline reserve')
 
@@ -212,7 +205,6 @@ class PhysicalBuild:
             land_config,
             water_config,
             output_checksums,
-            script_checksums,
             downloaded_shard_count=downloaded_shard_count,
         )
 
@@ -438,7 +430,6 @@ class PhysicalBuild:
             {
                 'schema': 'water-union-v1',
                 'grid': vars(self.grid),
-                **self._selection_notes(),
                 'minimum_free_bytes': self.minimum_free_bytes,
                 'source_manifest': water_config,
                 'shard_count': len(shards),
@@ -493,7 +484,6 @@ class PhysicalBuild:
             {
                 'schema': 'candidate-physical-composition-v1',
                 'grid': vars(self.grid),
-                **self._selection_notes(),
                 'minimum_free_bytes': self.minimum_free_bytes,
                 'rows_per_block': self.physical_rows_per_block,
                 'land': land_mask,
@@ -522,22 +512,11 @@ class PhysicalBuild:
         )
         return compose_config, report['output_sha256']
 
-    def _selection_notes(self) -> dict[str, str]:
-        """Return the optional selection notes to include in task settings.
-
-        Returns:
-            An empty dictionary or the configured notes under 'selection_notes'.
-        """
-        if 'selection_notes' in self.configuration:
-            return {'selection_notes': self.configuration['selection_notes']}
-        return {}
-
     def _write_report(
         self,
         land_config: FilePin,
         water_config: FilePin,
         output_checksums: dict[str, str],
-        script_checksums: dict[str, str],
         *,
         downloaded_shard_count: int,
     ) -> dict[str, Any]:
@@ -547,7 +526,6 @@ class PhysicalBuild:
             land_config: Path and SHA-256 of the saved coastline settings.
             water_config: Path and SHA-256 of the saved inland-water settings.
             output_checksums: SHA-256 by output filename for the finished grid.
-            script_checksums: SHA-256 of the implementation files, by relative path.
             downloaded_shard_count: Number of water files downloaded in this attempt.
 
         Returns:
@@ -578,7 +556,6 @@ class PhysicalBuild:
                 'physical_rows_per_block': self.physical_rows_per_block,
                 'shard_count': len(self.configuration['inland_water']['files']),
                 'max_parallel_shards': self.water_workers,
-                'script_sha256': script_checksums,
                 'stage_reports': stage_reports,
                 'physical_output_sha256': output_checksums,
                 'limitations': 'Candidate physical land/water only; not historical source reproduction or continent labels.',
@@ -600,30 +577,6 @@ class PhysicalBuild:
             ],
         )
         return {**saved_report, 'directory': str(physical_directory)}
-
-
-def _physical_script_checksums() -> dict[str, str]:
-    """Record the physical builder implementation used for this attempt.
-
-    Returns:
-        SHA-256 digests keyed by the implementation files' relative names.
-    """
-    scripts = {
-        name: sha256_file(HERE / name)
-        for name in (
-            'build.py',
-            'sources.py',
-            'land.py',
-            'water.py',
-            'water_batch.py',
-            'union.py',
-            'composition.py',
-        )
-    }
-    scripts['geodesy/ogr.py'] = sha256_file(geometry_io.__file__)
-    scripts['source_assets/cache.py'] = sha256_file(source_cache.__file__)
-    scripts['shared/r2.py'] = sha256_file(r2.__file__)
-    return scripts
 
 
 def main(

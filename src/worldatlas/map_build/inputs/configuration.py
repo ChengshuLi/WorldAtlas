@@ -71,7 +71,7 @@ class LandSettings[File](TypedDict):
 class WaterSettings(TypedDict):
     """Specify how to rasterize each inland-water file."""
 
-    rasterizer: NotRequired[Literal["gdal", "python"]]
+    rasterizer: NotRequired[Literal["gdal"]]
     batch_size: NotRequired[PositiveInt]
     tile_size: NotRequired[Annotated[int, Field(ge=1, le=4096)]]
     batch_method: NotRequired[Literal["hybrid", "tiled"]]
@@ -149,7 +149,6 @@ class PhysicalConfiguration(PhysicalControls):
     """Describe the saved request consumed by the standalone physical runner."""
 
     schema: Literal["raw-physical-pipeline-v3"]
-    selection_notes: NotRequired[NonEmptyText]
     source_directory: NonEmptyText
     grid: GridSettings
     land_config: LandSettings[RemoteFile]
@@ -319,7 +318,7 @@ def physical_configuration(
     ]
     shards = [_resolve_r2_pin(file, catalog) for file in water["files"]]
     controls: PhysicalControls = configuration.get("physical_controls", {})
-    result: PhysicalConfiguration = {
+    return {
         **controls,
         "schema": "raw-physical-pipeline-v3",
         "source_directory": str(cache),
@@ -333,6 +332,3 @@ def physical_configuration(
         "land_config": {**land, "land": layers},
         "inland_water": {**water, "files": shards},
     }
-    if "selection_notes" in configuration:
-        result["selection_notes"] = configuration["selection_notes"]
-    return result

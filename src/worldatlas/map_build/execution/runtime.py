@@ -5,6 +5,7 @@ from __future__ import annotations
 import fcntl
 import os
 import subprocess
+import sys
 import traceback
 import uuid
 from collections.abc import Callable, Generator, Iterable
@@ -14,6 +15,14 @@ from pathlib import Path
 from stat import S_ISREG
 from typing import Any, TypedDict, cast
 
+import numpy
+import pyarrow
+import pyproj
+import scipy
+from osgeo import gdal
+from pyproj import datadir
+
+from worldatlas.map_build.execution.code_archive import capture_source, write_source
 from worldatlas.map_build.execution.journal import verify_anchor
 from worldatlas.map_build.execution.timing import (
     TIMING_LOG,
@@ -24,12 +33,14 @@ from worldatlas.map_build.execution.timing import (
 from worldatlas.shared.files import (
     FilePin,
     JSONValue,
+    pin_file,
     read_json,
     sha256_file,
     sync_directory,
     write_json,
 )
 
+PACKAGE_ROOT = Path(__file__).resolve().parents[2]
 TASK_CHECKPOINT_SCHEMA = "worldatlas-task-checkpoint-v2"
 
 
@@ -145,6 +156,30 @@ class RunFilePins:
         for value in paths:
             visit(Path(value))
         return result
+
+
+type RuntimeIdentity = dict[str, str | FilePin]
+
+
+def runtime_identity() -> RuntimeIdentity:
+    """Record the Python and geographic libraries used by this run.
+
+    Returns:
+        Dictionary with version strings, the Python executable's SHA-256,
+        and the PROJ database path and SHA-256.
+    """
+    return {
+        "executable": sys.executable,
+        "version": sys.version,
+        "binary_sha256": sha256_file(Path(sys.executable).resolve()),
+        "numpy": numpy.__version__,
+        "scipy": scipy.__version__,
+        "pyproj": pyproj.__version__,
+        "proj": pyproj.proj_version_str,
+        "proj_database": pin_file(Path(datadir.get_data_dir()) / "proj.db"),
+        "gdal": gdal.VersionInfo("RELEASE_NAME"),
+        "pyarrow": pyarrow.__version__,
+    }
 
 
 def code_identity(scripts: Path | str) -> dict[str, str]:
@@ -483,7 +518,7 @@ class Checkpoints:
 
 
 def prepare_run_attempt(root: Path, *, resume: bool) -> tuple[Path, Checkpoints]:
-    """Verify prior work and create a directory for the new build attempt.
+    """Verify prior work and save the code used by the new build attempt.
 
     Args:
         root: Run directory whose lock the caller holds.
@@ -500,6 +535,18 @@ def prepare_run_attempt(root: Path, *, resume: bool) -> tuple[Path, Checkpoints]
     attempts.mkdir(mode=0o700, exist_ok=resume)
     attempt_directory = attempts / attempt_id
     attempt_directory.mkdir()
+    source_archive = attempt_directory / "source-code.json.gz"
+    write_source(source_archive, capture_source(PACKAGE_ROOT))
+    write_json(
+        attempt_directory / "producer.json",
+        {
+            "code": code_identity(PACKAGE_ROOT),
+            "repository": repository_identity(PACKAGE_ROOT),
+            "runtime": runtime_identity(),
+            "scripts_root": str(PACKAGE_ROOT),
+            "source_archive": pin_file(source_archive),
+        },
+    )
     return attempt_directory, checkpoints
 
 

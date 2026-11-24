@@ -6,30 +6,19 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import sys
 import threading
 from functools import partial
 from pathlib import Path
 from typing import Any, NotRequired, TypedDict
 
-import numpy
-import pyarrow
-import pyproj
-import scipy
-from osgeo import gdal
-from pyproj import datadir
-
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.division.encoding import encode
 from worldatlas.map_build.division.hierarchy import HierarchyDivision
-from worldatlas.map_build.execution.code_archive import capture_source, write_source
 from worldatlas.map_build.execution.control import install_build_stop_handlers
 from worldatlas.map_build.execution.control import stage as stage_context
 from worldatlas.map_build.execution.runtime import (
     RunLock,
-    code_identity,
     prepare_run_attempt,
-    repository_identity,
 )
 from worldatlas.map_build.execution.timing import SetupStart, Timing
 from worldatlas.map_build.inputs.configuration import (
@@ -60,12 +49,7 @@ from worldatlas.shared.files import (
     write_json,
 )
 
-HERE = Path(__file__).resolve().parent
-PACKAGE_ROOT = HERE.parent
 RUN_IDENTITY_SCHEMA = "worldatlas-end-to-end-run-identity-v2"
-
-
-type RuntimeIdentity = dict[str, str | FilePin]
 
 
 class PhysicalReuse(TypedDict):
@@ -88,27 +72,6 @@ class RunIdentity(TypedDict):
     recompute_division: bool
     input_selection_sha256: str
     physical_reuse: NotRequired[PhysicalReuse]
-
-
-def runtime_identity() -> RuntimeIdentity:
-    """Record the Python and geographic libraries used by this run.
-
-    Returns:
-        Dictionary with version strings, the Python executable's SHA-256,
-        and the PROJ database path and SHA-256.
-    """
-    return {
-        "executable": sys.executable,
-        "version": sys.version,
-        "binary_sha256": sha256_file(Path(sys.executable).resolve()),
-        "numpy": numpy.__version__,
-        "scipy": scipy.__version__,
-        "pyproj": pyproj.__version__,
-        "proj": pyproj.proj_version_str,
-        "proj_database": pin_file(Path(datadir.get_data_dir()) / "proj.db"),
-        "gdal": gdal.VersionInfo("RELEASE_NAME"),
-        "pyarrow": pyarrow.__version__,
-    }
 
 
 def physical_reference(
@@ -414,18 +377,6 @@ class Pipeline:
             write_bytes_atomic(self.saved_config, config_bytes)
         self.attempt_dir, self.checkpoints = prepare_run_attempt(
             self.out, resume=self.resume
-        )
-        source_archive = self.attempt_dir / "source-code.json.gz"
-        write_source(source_archive, capture_source(PACKAGE_ROOT))
-        write_json(
-            self.attempt_dir / "producer.json",
-            {
-                "code": code_identity(PACKAGE_ROOT),
-                "repository": repository_identity(PACKAGE_ROOT),
-                "runtime": runtime_identity(),
-                "scripts_root": str(PACKAGE_ROOT),
-                "source_archive": pin_file(source_archive),
-            },
         )
 
     def close(self) -> None:

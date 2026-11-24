@@ -14,6 +14,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 from pydantic import TypeAdapter
 from osgeo import gdal, ogr
+from shapely import contains_xy, from_wkb
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.inputs.configuration import WaterSettings
 from worldatlas.map_build.execution.runtime import RunFilePins
@@ -25,7 +26,7 @@ from worldatlas.shared.files import sha256_file
 
 
 class WaterShardTests(unittest.TestCase):
-    def test_arrow_policy_matches_scalar_for_whitespace_and_dictionary_strings(self):
+    def test_arrow_policy_handles_whitespace_and_dictionary_strings(self):
         values = [
             'ocean',
             'physical',
@@ -39,12 +40,16 @@ class WaterShardTests(unittest.TestCase):
             '\u200blake',
             '\u200b',
         ]
-        expected = [build.selected(v) for v in values]
+        expected = [
+            False, False, True, True, False, False,
+            *([False] * len(UNICODE_WHITESPACE)),
+            True, False, True, True,
+        ]
         for array in (pa.array(values), pa.array(values).dictionary_encode()):
             eligible, missing, excluded = build.classifications(array)
-            self.assertEqual(eligible.tolist(), [reason is None for reason in expected])
-            self.assertEqual(missing, expected.count('missing_classification'))
-            self.assertEqual(excluded, expected.count('excluded_classification'))
+            self.assertEqual(eligible.tolist(), expected)
+            self.assertEqual(missing, len(UNICODE_WHITESPACE) + 3)
+            self.assertEqual(excluded, 2)
         self.assertEqual(build.classifications(pa.array([1, 2, None]))[0].tolist(), [0, 0, 0])
 
     def test_diagnostic_ids_cross_row_groups_and_preserve_requested_order(self):
@@ -72,13 +77,11 @@ class WaterShardTests(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
-    def rasterize(self, source, digest, output, config, grid, batch_size=None, engine=None, **kwargs):
+    def rasterize(self, source, digest, output, config, grid, batch_size=None, **kwargs):
         settings = json.loads(config.read_bytes())
         reserve = settings.pop('minimum_free_bytes', 0)
         if batch_size is not None:
             settings['batch_size'] = batch_size
-        if engine is not None:
-            settings['rasterizer'] = engine
         return build.run(
             source, digest, output, sha256_file(config), grid,
             settings=TypeAdapter(WaterSettings).validate_python(settings, strict=True),
@@ -168,7 +171,7 @@ class WaterShardTests(unittest.TestCase):
         gdal.RasterizeLayer(target, [1], layer, burn_values=[1])
         np.testing.assert_array_equal(a, target.ReadAsArray())
 
-    def test_gdal_matches_reference_with_holes_edges_and_nonpolygons(self):
+    def test_water_mask_with_holes_edges_and_nonpolygons(self):
         p, _ = self.fixture()
         table = pq.read_table(p)
         rows = table.to_pylist()
@@ -204,17 +207,35 @@ class WaterShardTests(unittest.TestCase):
         table = pa.Table.from_pylist(rows).replace_schema_metadata(table.schema.metadata)
         pq.write_table(table, p)
         digest = sha256_file(p)
-        reports = []
-        for engine in ('python', 'gdal'):
-            out = self.path / engine
-            self.rasterize(p, digest, out, self.config, self.grid, 17, engine)
-            reports.append(json.loads((out / 'report.json').read_text()))
-        self.assertEqual(reports[0]['counts'], reports[1]['counts'])
+        out = self.path / 'water'
+        self.rasterize(p, digest, out, self.config, self.grid, 17)
+        report = json.loads((out / 'report.json').read_text())
+        self.assertEqual(report['counts'], {
+            'rows': 115, 'polygons': 109, 'excluded_classification': 2, 'non_polygon': 4,
+        })
+        # The expected wet column ranges are half-open and ordered by grid row.
+        wet_columns_by_row = [
+            [(0, 18), (20, 27)],
+            [(0, 29), (31, 32)],
+            [(0, 19), (20, 29)],
+            [(0, 29)],
+            [(0, 4), (5, 6), (8, 31)],
+            [(0, 6), (8, 32)],
+            [(0, 7), (8, 32)],
+            [(0, 7), (8, 32)],
+            *([[(0, 32)]] * 4),
+            [(0, 4), (6, 11), (12, 21), (22, 23), (26, 32)],
+            [(0, 4), (6, 32)],
+            [(0, 4), (6, 21), (24, 32)],
+            [(0, 1), (3, 4), (7, 16), (17, 18), (26, 27)],
+        ]
+        expected = np.zeros((self.grid.height, self.grid.width), dtype=np.uint8)
+        for row, wet_columns in enumerate(wet_columns_by_row):
+            for start, stop in wet_columns:
+                expected[row, start:stop] = 1
         np.testing.assert_array_equal(
-            gdal.Open(str(self.path / 'python/water.tif')).ReadAsArray(),
-            gdal.Open(str(self.path / 'gdal/water.tif')).ReadAsArray(),
+            gdal.Open(str(out / 'water.tif')).ReadAsArray(), expected
         )
-        self.assertEqual(reports[0]['output_sha256'], reports[1]['output_sha256'])
 
     def test_gdal_arrow_slices_large_offsets_and_validity_bitmap(self):
         out = self.path / 'kernel'
@@ -290,10 +311,16 @@ class WaterShardTests(unittest.TestCase):
                 rows.append({'id': str(len(rows)), 'subtype': 'lake', 'geometry': value})
             rows.append({'id': str(len(rows)), 'subtype': 'lake', 'geometry': value + b'extra'})
         pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata), p)
-        for engine in ('python', 'gdal'):
-            self.rasterize(p, sha256_file(p), self.path / engine, self.config, self.grid, engine=engine)
-        self.assertEqual(
-            sha256_file(self.path / 'python/water.tif'), sha256_file(self.path / 'gdal/water.tif')
+        out = self.path / 'water'
+        self.rasterize(p, sha256_file(p), out, self.config, self.grid)
+        report = json.loads((out / 'report.json').read_text())
+        self.assertEqual(report['counts']['polygons'], 9)
+        expected = np.zeros((self.grid.height, self.grid.width), dtype=np.uint8)
+        expected[1:10, 1:5] = 1
+        expected[1:10, 7:12] = 1
+        expected[1:10, 18:25] = 1
+        np.testing.assert_array_equal(
+            gdal.Open(str(out / 'water.tif')).ReadAsArray(), expected
         )
 
     def test_point_shortcut_matches_ogr_for_endianness_dimensions_and_nonfinite_values(
@@ -485,11 +512,12 @@ class WaterShardTests(unittest.TestCase):
                         }
                     )
         pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata), p)
-        for engine in ('python', 'gdal'):
-            self.rasterize(p, sha256_file(p), self.path / engine, self.config, self.grid, 19, engine)
+        for method in ('hybrid', 'tiled'):
+            self.config.write_text(json.dumps(dict(cfg, batch_method=method)))
+            self.rasterize(p, sha256_file(p), self.path / method, self.config, self.grid, 19)
         np.testing.assert_array_equal(
-            gdal.Open(str(self.path / 'python/water.tif')).ReadAsArray(),
-            gdal.Open(str(self.path / 'gdal/water.tif')).ReadAsArray(),
+            gdal.Open(str(self.path / 'tiled/water.tif')).ReadAsArray(),
+            gdal.Open(str(self.path / 'hybrid/water.tif')).ReadAsArray(),
         )
 
     def test_gdal_rejects_bad_and_empty_wkb_without_burning_batch(self):
@@ -589,15 +617,11 @@ class WaterShardTests(unittest.TestCase):
         self.grid = Grid(131072, 54614, 360 / 131072)
         cfg['tile_size'] = 1024
         self.config.write_text(json.dumps(cfg))
-        reports = []
-        for engine in ('python', 'gdal'):
-            out = self.path / engine
-            self.rasterize(p, sha256_file(p), out, self.config, self.grid, engine=engine)
-            reports.append(json.loads((out / 'report.json').read_text()))
-            raster = gdal.Open(str(out / 'water.tif'))
-            self.assertEqual(int(raster.ReadAsArray(75722, 8650, 1, 1)[0, 0]), 1)
-            self.assertEqual(int(raster.ReadAsArray(97581, 7890, 1, 1)[0, 0]), 0)
-        self.assertEqual(reports[0]['output_sha256'], reports[1]['output_sha256'])
+        out = self.path / 'water'
+        self.rasterize(p, sha256_file(p), out, self.config, self.grid)
+        raster = gdal.Open(str(out / 'water.tif'))
+        self.assertEqual(int(raster.ReadAsArray(75722, 8650, 1, 1)[0, 0]), 1)
+        self.assertEqual(int(raster.ReadAsArray(97581, 7890, 1, 1)[0, 0]), 0)
 
     def test_strip_pruning_preserves_dense_rings_holes_multipart_and_z(self):
         p, _ = self.fixture()
@@ -635,12 +659,18 @@ class WaterShardTests(unittest.TestCase):
         self.grid = Grid(64, 32, 5.625)
         cfg['tile_size'] = 4
         self.config.write_text(json.dumps(cfg))
-        reports = []
-        for engine in ('python', 'gdal'):
-            out = self.path / engine
-            self.rasterize(p, sha256_file(p), out, self.config, self.grid, engine=engine)
-            reports.append(json.loads((out / 'report.json').read_text()))
-        self.assertEqual(reports[0]['output_sha256'], reports[1]['output_sha256'])
+        out = self.path / 'water'
+        self.rasterize(p, sha256_file(p), out, self.config, self.grid)
+        grid = self.grid
+        longitudes = grid.west + (np.arange(grid.width) + 0.5) * grid.step
+        latitudes = grid.north - (np.arange(grid.height) + 0.5) * grid.step
+        # The two-dimensional multipolygon contains all parts burned by this fixture.
+        expected = contains_xy(
+            from_wkb(bytes(multi.ExportToWkb())), longitudes[None, :], latitudes[:, None]
+        )
+        np.testing.assert_array_equal(
+            gdal.Open(str(out / 'water.tif')).ReadAsArray(), expected
+        )
 
     def test_batch_size_comes_from_settings(self):
         p, digest = self.fixture()
@@ -676,9 +706,6 @@ class WaterShardTests(unittest.TestCase):
         report = json.loads((out / 'report.json').read_text())
         self.assertEqual(report['counts']['polygons'], 1)
         self.assertEqual(report['counts']['excluded_classification'], 2)
-        self.assertEqual(build.selected('lake'), None)
-        self.assertEqual(build.selected(None), 'missing_classification')
-        self.assertEqual(build.selected(''), 'missing_classification')
 
     def test_unsupported_water_settings_schema_is_rejected(self):
         p, digest = self.fixture()
@@ -690,15 +717,16 @@ class WaterShardTests(unittest.TestCase):
             self.rasterize(p, digest, out, self.config, self.grid)
         self.assertFalse(out.exists())
 
-    def test_compiled_engine_configuration_is_rejected_before_output(self):
+    def test_retired_rasterizers_are_rejected_before_output(self):
         p, digest = self.fixture()
         cfg = json.loads(self.config.read_bytes())
-        cfg['rasterizer'] = 'native'
-        self.config.write_text(json.dumps(cfg))
-        out = self.path / 'retired-engine'
-        with self.assertRaisesRegex(ValueError, 'rasterizer'):
-            self.rasterize(p, digest, out, self.config, self.grid)
-        self.assertFalse(out.exists())
+        for rasterizer in ('native', 'python'):
+            with self.subTest(rasterizer=rasterizer):
+                self.config.write_text(json.dumps(dict(cfg, rasterizer=rasterizer)))
+                out = self.path / rasterizer
+                with self.assertRaisesRegex(ValueError, 'rasterizer'):
+                    self.rasterize(p, digest, out, self.config, self.grid)
+                self.assertFalse(out.exists())
 
     def test_free_space_guard(self):
         p, digest = self.fixture()
@@ -770,14 +798,13 @@ class WaterShardTests(unittest.TestCase):
             rows = table.to_pylist()
             rows[0]['geometry'] = replacement
             pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), source)
-            for engine in ('gdal', 'python'):
-                with self.subTest(engine=engine, message=message):
-                    out = self.path / f'{engine}-{replacement is None}'
-                    with self.assertRaisesRegex(ValueError, message):
-                        self.rasterize(source, sha256_file(source), out, self.config, self.grid, engine=engine)
-                    self.assertFalse((out / 'report.json').exists())
+            with self.subTest(message=message):
+                out = self.path / f'invalid-{replacement is None}'
+                with self.assertRaisesRegex(ValueError, message):
+                    self.rasterize(source, sha256_file(source), out, self.config, self.grid)
+                self.assertFalse((out / 'report.json').exists())
 
-    def test_python_rasterizer_reports_invalid_polygon_with_same_id_as_gdal(self):
+    def test_invalid_polygon_reports_its_source_id(self):
         source, _ = self.fixture()
         table = pq.read_table(source)
         rows = table.to_pylist()
@@ -787,15 +814,13 @@ class WaterShardTests(unittest.TestCase):
             ).ExportToWkb()
         )
         pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), source)
-        reports = []
-        for engine in ('gdal', 'python'):
-            out = self.path / engine
-            with self.assertRaisesRegex(ValueError, 'incomplete water shard'):
-                self.rasterize(source, sha256_file(source), out, self.config, self.grid, engine=engine)
-            reports.append(json.loads((out / 'report.json').read_text()))
-            self.assertEqual(json.loads((out / 'invalid-feature-ids.json').read_text()), ['lake'])
-        self.assertEqual(reports[0]['counts'], reports[1]['counts'])
-        self.assertTrue(all(r['status'] == 'incomplete-input-issues' for r in reports))
+        out = self.path / 'invalid'
+        with self.assertRaisesRegex(ValueError, 'incomplete water shard'):
+            self.rasterize(source, sha256_file(source), out, self.config, self.grid)
+        self.assertEqual(json.loads((out / 'invalid-feature-ids.json').read_text()), ['lake'])
+        report = json.loads((out / 'report.json').read_text())
+        self.assertEqual(report['counts']['invalid_polygon'], 1)
+        self.assertEqual(report['status'], 'incomplete-input-issues')
 
     def test_unprocessed_rows_leave_an_incomplete_report(self):
         source, digest = self.fixture()

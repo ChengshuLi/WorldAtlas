@@ -1,3 +1,4 @@
+from base64 import b64encode
 from functools import wraps
 from contextlib import contextmanager, ExitStack
 import fcntl
@@ -18,6 +19,8 @@ import pyarrow.parquet as pq
 from osgeo import gdal, ogr
 from worldatlas.shared import r2
 from worldatlas.shared.r2 import R2Client
+from worldatlas.map_build.execution import runtime
+from worldatlas.map_build.execution.code_archive import read_source, source_files
 from worldatlas.map_build.execution.runtime import RunFilePins
 from worldatlas.map_build.physical import build as b
 from worldatlas.map_build.test_support import cache_fixture_file, r2_file_pin
@@ -138,7 +141,6 @@ class PipelineTests(unittest.TestCase):
         self.cached_water = cache_fixture_file(self.cache, shard, water_source)
         self.cfg = {
             'schema': 'raw-physical-pipeline-v3',
-            'selection_notes': 'synthetic',
             'minimum_free_bytes': 0,
             'source_directory': str(self.cache),
             'land_config': land_cfg,
@@ -244,7 +246,7 @@ b.run(sys.argv[1], sys.argv[2])
         (out / 'shards/00000/water.tif').write_bytes(b'tampered')
         with self.assertRaisesRegex(ValueError, 'completed stage output changed: physical-shard-00000'):
             b.run(self.config, out, resume=True)
-        self.cfg['selection_notes'] = 'changed'
+        self.cfg['union_rows_per_block'] = 4
         self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'saved stage request changed'):
             b.run(self.config, out, resume=True)
@@ -252,24 +254,31 @@ b.run(sys.argv[1], sys.argv[2])
     def test_resume_trusts_changed_code_and_retains_completed_data(self):
         out = self.root / 'changed-code'
         self.interrupt_before_union(out)
-        original = sha256_file
+        first_attempt, = (out / 'attempts').iterdir()
+        shard_path = out / 'shards/00000/water.tif'
+        initial_shard = pin_file(shard_path)
+        marker = b'\n# Example code change between attempts.\n'
+        source_path = 'src/worldatlas/map_build/physical/union.py'
+        capture_source = runtime.capture_source
 
-        def changed(path):
-            path = Path(path)
-            if path == Path(b.geometry_io.__file__):
-                return 'd' * 64
-            return (
-                'c' * 64
-                if path in {Path(r2.__file__), Path(b.source_cache.__file__)} or (path.is_relative_to(b.HERE.parent) and path.suffix == '.py')
-                else original(path)
-            )
+        def capture_with_edit(package):
+            snapshot = capture_source(package)
+            content = source_files(snapshot)[source_path]
+            snapshot['files'][source_path] = b64encode(content + marker).decode('ascii')
+            return snapshot
 
-        with mock.patch.object(b, 'sha256_file', side_effect=changed):
+        with mock.patch.object(runtime, 'capture_source', side_effect=capture_with_edit):
             report = b.run(self.config, out, resume=True)
         self.assertEqual(report['status'], 'candidate-only')
-        scripts = report['script_sha256']
-        self.assertEqual(scripts['geodesy/ogr.py'], 'd' * 64)
-        self.assertTrue(all(value == 'c' * 64 for name, value in scripts.items() if name != 'geodesy/ogr.py'))
+        self.assertEqual(pin_file(shard_path), initial_shard)
+        second_attempt, = set((out / 'attempts').iterdir()) - {first_attempt}
+        archived = []
+        for attempt in (first_attempt, second_attempt):
+            archive = attempt / 'source-code.json.gz'
+            producer = json.loads((attempt / 'producer.json').read_text())
+            self.assertEqual(producer['source_archive'], pin_file(archive))
+            archived.append(source_files(read_source(archive))[source_path])
+        self.assertEqual(archived[1], archived[0] + marker)
 
     def test_completed_resume_revalidates_shard_inventory(self):
         out = self.root / 'finished'
@@ -357,8 +366,11 @@ b.run(sys.argv[1], sys.argv[2])
             b.run(self.config, out, resume=True)
 
     def test_complete_physical_stage_does_not_start_processes(self):
-        with mock.patch.object(
-            subprocess, 'Popen', side_effect=AssertionError('unexpected subprocess')
+        with (
+            mock.patch.object(runtime, 'repository_identity', return_value=None),
+            mock.patch.object(
+                subprocess, 'Popen', side_effect=AssertionError('unexpected subprocess')
+            ),
         ):
             report = b.run(self.config, self.root / 'in-process')
         self.assertEqual(report['status'], 'candidate-only')
@@ -956,8 +968,8 @@ b.run(sys.argv[1], sys.argv[2])
         valid_water = self.cfg['inland_water']
         shard = valid_water['files'][0]
         cases = [
-            ('pipeline', {'selection_notes': ''}, 'selection_notes'),
-            ('pipeline', {'selection_notes': '\t\u00a0\u3000'}, 'selection_notes'),
+            ('pipeline', {'selection_notes': 'Retired duplicate'}, 'selection_notes'),
+            ('water', {'selection_notes': '\t\u00a0\u3000'}, 'selection_notes'),
             ('pipeline', {'minimum_free_bytes': True}, 'minimum_free_bytes'),
             ('pipeline', {'union_rows_per_block': 0}, 'rows_per_block'),
             ('water', {'rasterizer': 'unknown'}, 'inland_water.rasterizer'),

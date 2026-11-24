@@ -5,7 +5,7 @@ import shutil
 import unittest
 from unittest.mock import patch
 
-from worldatlas.map_build import build as pipeline
+from worldatlas.map_build.execution.runtime import runtime_identity
 
 
 class RuntimePrerequisiteTests(unittest.TestCase):
@@ -13,7 +13,7 @@ class RuntimePrerequisiteTests(unittest.TestCase):
         with patch.dict(os.environ, {'PATH': ''}), patch.object(
             shutil, 'which', side_effect=AssertionError('no external tool lookup')
         ):
-            identity = pipeline.runtime_identity()
+            identity = runtime_identity()
         self.assertNotIn('tools', identity)
         for field in (
             'numpy',

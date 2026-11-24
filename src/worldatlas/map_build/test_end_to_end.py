@@ -287,6 +287,16 @@ class EndToEndTests(unittest.TestCase):
                 compile_parent.assert_called_once()
                 self.assertEqual(compile_parent.call_args.args[1], 0)
                 self.assertEqual(report["status"], "complete")
+                self.assertEqual(
+                    read_json(root / "run/build-config.json")["selection_notes"],
+                    "Input-contract fixture",
+                )
+                for filename in (
+                    "physical-build-config.json",
+                    "physical/configs/union.json",
+                    "physical/configs/compose.json",
+                ):
+                    self.assertNotIn("selection_notes", read_json(root / "run" / filename))
                 self.assertTrue(
                     all(r["outputs_complete"] for r in report["stages"].values())
                 )

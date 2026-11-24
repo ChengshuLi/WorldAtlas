@@ -45,7 +45,7 @@ class AggregateTests(unittest.TestCase):
                 'grid': self.cfg['grid'],
                 'policy': 'synthetic',
                 'script_sha256': 'c' * 64,
-                'rasterizer': 'python',
+                'rasterizer': 'gdal',
                 'rows_in_source': 10,
                 'counts': {'rows': 10},
                 'invalid_feature_ids': None,

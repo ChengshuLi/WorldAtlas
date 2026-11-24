@@ -4,22 +4,19 @@
 The output directory must not already exist.
 """
 
-import gc
 import json
-import math
 import os
 import shutil
 import sys
 from collections import Counter
 from collections.abc import Callable, Sequence
 from pathlib import Path
-from typing import cast
 
 import numpy as np
 import pyarrow
 import pyarrow.compute as pc
 import pyarrow.parquet as pq
-from osgeo import gdal, ogr, osr
+from osgeo import gdal, ogr
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.control import check_cancelled
@@ -27,102 +24,12 @@ from worldatlas.map_build.execution.runtime import RunFilePins
 from worldatlas.map_build.inputs.configuration import WaterSettings
 from worldatlas.map_build.physical.sources import ShardMask, create_mask
 from worldatlas.map_build.physical.water_batch import GeometryStatus, WaterBatch
-from worldatlas.shared.text import UNICODE_WHITESPACE, is_nonblank
+from worldatlas.shared.text import UNICODE_WHITESPACE
 
 gdal.UseExceptions()
 ogr.UseExceptions()
 
-POLYGON = (ogr.wkbPolygon, ogr.wkbMultiPolygon)
 INLAND_WATER_SUBTYPE_POLICY = 'overture-inland-subtype-v1'
-
-
-def selected(subtype: str | None) -> str | None:
-    """Decide whether an Overture subtype belongs in the inland-water mask.
-
-    Args:
-        subtype: Value in the source's subtype column.
-
-    Returns:
-        None for eligible rows, or a count key for missing or excluded subtypes.
-    """
-    if not isinstance(subtype, str) or not is_nonblank(subtype):
-        return 'missing_classification'
-    if subtype in ('ocean', 'physical'):
-        return 'excluded_classification'
-    return None
-
-
-def python_batch(
-    raster: gdal.Dataset,
-    batch: pyarrow.RecordBatch,
-    counts: Counter[str],
-    invalid: list[str],
-    grid: tuple[int, int, float, float, float],
-    tile: int,
-    srs: osr.SpatialReference,
-) -> None:
-    """Rasterize one batch using a GDAL feature per source polygon.
-
-    Args:
-        raster: Output water mask to update in place.
-        batch: Source rows containing IDs, subtypes and WKB.
-        counts: Selection counts to update.
-        invalid: Invalid polygon IDs to append.
-        grid: (width, height, west, north, step) in grid cells and degrees.
-        tile: Number of cells along one side of each tile.
-        srs: Geographic coordinate reference for the features.
-
-    Raises:
-        ValueError: A selected geometry is missing, malformed or empty.
-    """
-    width, height, west, north, step = grid
-    tiles = {}
-    for item in batch.to_pylist():
-        counts['rows'] += 1
-        reason = selected(item['subtype'])
-        if reason:
-            counts[reason] += 1
-            continue
-        if item['geometry'] is None:
-            raise ValueError(f"missing geometry: {item['id']}")
-        geom = ogr.CreateGeometryFromWkb(item['geometry'])
-        if geom is None or geom.IsEmpty():
-            raise ValueError(f"invalid or empty WKB geometry: {item['id']}")
-        if ogr.GT_Flatten(geom.GetGeometryType()) not in POLYGON:
-            counts['non_polygon'] += 1
-            continue
-        if not geom.IsValid():
-            invalid.append(item['id'])
-            counts['invalid_polygon'] += 1
-            continue
-        xmin, xmax, ymin, ymax = geom.GetEnvelope()
-        x0 = max(0, math.floor((xmin - west) / step))
-        x1 = min(width - 1, math.floor((xmax - west) / step))
-        y0 = max(0, math.floor((north - ymax) / step))
-        y1 = min(height - 1, math.floor((north - ymin) / step))
-        if x0 <= x1 and y0 <= y1:
-            for ty in range(y0 // tile, y1 // tile + 1):
-                for tx in range(x0 // tile, x1 // tile + 1):
-                    tiles.setdefault((tx, ty), []).append(geom)
-        counts['polygons'] += 1
-    driver = ogr.GetDriverByName('Memory')
-    for (tx, ty), geometries in tiles.items():
-        x, y = tx * tile, ty * tile
-        w, h = min(tile, width - x), min(tile, height - y)
-        target = gdal.GetDriverByName('MEM').Create('', w, h, 1, gdal.GDT_Byte)
-        target.SetGeoTransform((west + x * step, step, 0, north - y * step, 0, -step))
-        target.GetRasterBand(1).WriteArray(
-            raster.GetRasterBand(1).ReadAsArray(x, y, w, h)
-        )
-        ds = driver.CreateDataSource('')
-        layer = ds.CreateLayer('water', srs, ogr.wkbUnknown)
-        definition = layer.GetLayerDefn()
-        for geometry in geometries:
-            feat = ogr.Feature(definition)
-            feat.SetGeometry(geometry)
-            layer.CreateFeature(feat)
-        gdal.RasterizeLayer(target, [1], layer, burn_values=[1])
-        raster.GetRasterBand(1).WriteArray(target.ReadAsArray(), x, y)
 
 
 def classifications(subtypes: pyarrow.Array) -> tuple[np.ndarray, int, int]:
@@ -280,8 +187,8 @@ def run(
 
     Returns:
         Mask and report file pins, followed by the rasterizer identity. The
-        identity contains the script checksum and engine name. For GDAL it
-        also includes the method, kernel checksum, and GDAL version.
+        identity contains the script checksum, engine name, method, kernel
+        checksum, and GDAL version.
 
     Raises:
         ValueError: Input validation fails, the input changes, or the mask is incomplete.
@@ -290,12 +197,10 @@ def run(
     """
     source = Path(source).resolve()
     output = Path(output).resolve()
-    width, height = grid.width, grid.height
-    west, north, step = grid.west, grid.north, grid.step
+    dimensions = (grid.width, grid.height, grid.west, grid.north, grid.step)
     tile = settings.get('tile_size', 1024)
     reserve = minimum_free_bytes
     batch_size = settings.get('batch_size', 8192)
-    engine = settings.get('rasterizer', 'gdal')
     if len(expected) != 64 or files.pin(source)['sha256'] != expected.lower():
         raise ValueError('source SHA-256 does not match expected digest')
     pf = pq.ParquetFile(source, pre_buffer=False)
@@ -316,20 +221,16 @@ def run(
         raise ValueError('free disk below configured reserve')
     os.mkdir(output)
     out = Path(output)
-    kernel = None
-    if engine == 'gdal':
-        kernel = WaterBatch(settings.get('batch_method', 'hybrid'))
+    kernel = WaterBatch(settings.get('batch_method', 'hybrid'))
     raster = create_mask(out / 'water.tif', grid)
-    srs = raster.GetSpatialRef()
-    srs.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
     counts = Counter()
     invalid = []
-    ids = SourceIds(pf) if kernel else None
+    ids = SourceIds(pf)
     # A feature's raster burn is identical across batches because the operation
     # is a monotone union (the mask is initialized to zero and burns only 1).
     for batch in pf.iter_batches(
         batch_size=batch_size,
-        columns=['subtype', 'geometry'] if kernel else ['id', 'subtype', 'geometry'],
+        columns=['subtype', 'geometry'],
         use_threads=False,
     ):
         check_cancelled()
@@ -337,26 +238,9 @@ def run(
             raise ValueError(
                 'free disk below configured reserve; partial output preserved'
             )
-        dimensions = (width, height, west, north, step)
-        if kernel:
-            gdal_batch(
-                kernel,
-                raster,
-                batch,
-                counts,
-                invalid,
-                dimensions,
-                tile,
-                cast(SourceIds, ids),
-            )
-        else:
-            python_batch(raster, batch, counts, invalid, dimensions, tile, srs)
-        # The reference path creates Python feature objects. GDAL batches own
-        # and release their geometries directly and do not require cyclic GC.
-        batch = None
-        if kernel is None:
-            gc.collect()
-            pyarrow.default_memory_pool().release_unused()
+        gdal_batch(kernel, raster, batch, counts, invalid, dimensions, tile, ids)
+        # Release this batch before Arrow reads the next one.
+        del batch
         rss = 'unavailable'
         try:
             rss = next(
@@ -397,16 +281,16 @@ def run(
     )
     script_sha256 = files.pin(__file__)['sha256']
     mask = files.pin(out / 'water.tif')
-    kernel_provenance = kernel.provenance if kernel else None
+    kernel_provenance = kernel.provenance
     report = {
         'status': 'candidate-only' if complete else 'incomplete-input-issues',
         'source': str(source),
         'source_sha256': expected.lower(),
         'rows_in_source': source_row_count,
         'script_sha256': script_sha256,
-        'rasterizer': engine,
+        'rasterizer': 'gdal',
         'gdal_kernel': kernel_provenance,
-        'batch_timings': kernel.timings if kernel else None,
+        'batch_timings': kernel.timings,
         'counts': dict(counts),
         'batch_size': batch_size,
         'invalid_feature_ids': 'invalid-feature-ids.json' if invalid else None,
@@ -438,13 +322,13 @@ def run(
     if not complete:
         raise ValueError(f'incomplete water shard: see {report_path}')
 
-    rasterizer_identity: tuple[str, ...] = (script_sha256, engine)
-    if kernel_provenance is not None:
-        rasterizer_identity += (
-            kernel_provenance['method'],
-            kernel_provenance['binding_sha256'],
-            kernel_provenance['gdal'],
-        )
+    rasterizer_identity = (
+        script_sha256,
+        'gdal',
+        kernel_provenance['method'],
+        kernel_provenance['binding_sha256'],
+        kernel_provenance['gdal'],
+    )
     return (
         ShardMask(**mask, status='candidate-only', report=files.pin(report_path)),
         rasterizer_identity,

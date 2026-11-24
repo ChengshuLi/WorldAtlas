@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 from worldatlas.map_build import build as pipeline
-from worldatlas.map_build.execution import timing
+from worldatlas.map_build.execution import runtime, timing
 from worldatlas.map_build.test_support import r2_file_pin, selection
 from worldatlas.shared.files import json_bytes, pin_file, read_json, write_json
 
@@ -87,10 +87,10 @@ class ExecutorResumeTests(unittest.TestCase):
         original = pin_file(identity_path)
         with (
             patch.object(
-                pipeline, "code_identity", return_value={"changed.py": "0" * 64}
+                runtime, "code_identity", return_value={"changed.py": "0" * 64}
             ),
             patch.object(
-                pipeline, "repository_identity", return_value={"commit": "changed"}
+                runtime, "repository_identity", return_value={"commit": "changed"}
             ),
         ):
             resumed = self.runner(resume=True)
