@@ -32,8 +32,8 @@ class LayersTests(unittest.TestCase):
     def test_writer_rejects_invalid_spans_and_extra_rows(self):
         grid = Grid(4, 1, 90)
         cases = (
-            ("invalid output span", [(0, [(1, 5, 7)])]),
-            ("invalid output span", [(0, [(1, 2, 0)])]),
+            ("invalid row span", [(0, [(1, 5, 7)])]),
+            ("invalid row span", [(0, [(1, 2, 0)])]),
             ("assignment row outside", [(0, [(0, 4, 7)]), (1, [(0, 4, 7)])]),
         )
         with tempfile.TemporaryDirectory() as directory:
@@ -156,7 +156,7 @@ class LayersTests(unittest.TestCase):
         self.assertEqual(list(merge_rows(streams)), [(3, [(1, 4, 7), (3, 5, 8)])])
         with (
             tempfile.TemporaryDirectory() as directory,
-            self.assertRaisesRegex(ValueError, "invalid output span"),
+            self.assertRaisesRegex(ValueError, "invalid row span"),
         ):
             write_layer(Path(directory) / "layer", Grid(8, 4, 45), merge_rows(streams))
 

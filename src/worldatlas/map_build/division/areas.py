@@ -10,10 +10,10 @@ import numpy as np
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.core.partition import divide_regions, geographic_cuts
-from worldatlas.map_build.core.rle import open_mapped_array, overlay
+from worldatlas.map_build.core.rle import complete_row, open_mapped_array, overlay
 from worldatlas.map_build.division.contracts import CompiledTarget, point_coordinates
 from worldatlas.map_build.division.intervals import spans
-from worldatlas.map_build.division.scope import Scope, complete_row, selected
+from worldatlas.map_build.division.scope import Scope, selected
 from worldatlas.map_build.inputs.selection_types import GeographicFeature
 
 

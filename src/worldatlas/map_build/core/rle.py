@@ -1,6 +1,6 @@
-"""Read and align rows from complete, little-endian row-run grids."""
+"""Read, complete and align rows in little-endian row-run grids."""
 
-from collections.abc import Generator
+from collections.abc import Generator, Sequence
 from contextlib import contextmanager
 from mmap import ACCESS_READ, ACCESS_WRITE, mmap
 from os import fstat
@@ -10,6 +10,80 @@ from typing import Literal
 import numpy as np
 
 from worldatlas.map_build.core.grid import Grid, column_windows
+
+
+def merge_adjacent_runs(
+    ends: np.ndarray, codes: np.ndarray
+) -> tuple[np.ndarray, np.ndarray]:
+    """Represent adjacent runs with the same code as one run.
+
+    Args:
+        ends: One-dimensional uint32 array of exclusive run end columns.
+        codes: Matching uint32 array of codes. The row has at least one run.
+
+    Returns:
+        Two uint32 arrays with only the last end for each consecutive code.
+    """
+    last_in_run = np.empty(len(codes), dtype=bool)
+    last_in_run[:-1] = codes[:-1] != codes[1:]
+    last_in_run[-1] = True
+    return ends[last_in_run], codes[last_in_run]
+
+
+def complete_row(
+    width: int,
+    spans: Sequence[tuple[int, int, int]] | np.ndarray,
+    *,
+    minimum_code: Literal[0, 1] = 0,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Fill uncovered columns with zero and merge adjacent equal codes.
+
+    Args:
+        width: Number of columns in the row.
+        spans: Ordered (first_column, exclusive_end_column, code) records.
+        minimum_code: Use 0 when spans can carry code zero or 1 when
+            each supplied span must claim cells. Gaps always get code zero.
+
+    Returns:
+        Two one-dimensional uint32 arrays of exclusive run ends and codes.
+        For width 6, spans (1, 3, 7) and (3, 5, 7) give ends [1, 5, 6]
+        with codes [0, 7, 0].
+
+    Raises:
+        ValueError: Spans are malformed, overlap, are out of order, extend past
+            the row, or contain a code outside the permitted uint32 range.
+    """
+    if not len(spans):
+        return np.array([width], dtype=np.uint32), np.array([0], dtype=np.uint32)
+    records = np.asarray(spans)
+    if (
+        records.ndim != 2
+        or records.shape[1] != 3
+        or not np.issubdtype(records.dtype, np.integer)
+    ):
+        raise ValueError("row spans require integer start, end and code")
+    starts, ends, codes = records.T
+    if np.any(
+        (starts < 0)
+        | (starts >= ends)
+        | (ends > width)
+        | (codes < minimum_code)
+        | (codes >= 2**32)
+    ) or np.any(starts[1:] < ends[:-1]):
+        raise ValueError("invalid row span order, column bounds or code")
+
+    # Put a zero run before every span plus one at the end, then drop the
+    # zero-length gaps where the supplied spans touch.
+    run_ends = np.empty(2 * len(records) + 1, dtype=np.uint32)
+    run_codes = np.zeros_like(run_ends)
+    run_ends[:-1:2] = starts
+    run_ends[1::2] = ends
+    run_ends[-1] = width
+    run_codes[1::2] = codes
+    nonempty = np.empty(len(run_ends), dtype=bool)
+    nonempty[0] = run_ends[0] != 0
+    nonempty[1:] = run_ends[1:] > run_ends[:-1]
+    return merge_adjacent_runs(run_ends[nonempty], run_codes[nonempty])
 
 
 def row(

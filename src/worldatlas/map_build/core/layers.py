@@ -10,6 +10,7 @@ from typing import Any
 import numpy as np
 
 from worldatlas.map_build.core.grid import Grid, column_windows
+from worldatlas.map_build.core.rle import complete_row, merge_adjacent_runs
 from worldatlas.shared.files import write_json
 
 
@@ -44,7 +45,7 @@ def write_layer(
         directory: Path for the layer files. The directory must not exist.
         grid: Dimensions of the complete output.
         rows: Ordered (row, spans) records. Each span is (first_column,
-            end_column, code). Write zero where there is no span.
+            end_column, positive_code). Write zero where there is no span.
 
     Returns:
         Report dictionary with the path, grid dimensions, run count, bounds of
@@ -53,44 +54,11 @@ def write_layer(
     Raises:
         ValueError: A row or span is invalid, or the run offsets exceed uint32.
     """
-    return write_run_rows(directory, grid, _complete_rows(rows, grid.width))
-
-
-def _complete_rows(
-    rows: Iterable[tuple[int, list[tuple[int, int, int]]]], width: int
-) -> Iterator[tuple[int, np.ndarray, np.ndarray]]:
-    """Fill the gaps in sparse spans with zero-valued runs.
-
-    Args:
-        rows: Ordered row indices and (start, end, code) spans.
-        width: Number of columns to cover.
-
-    Yields:
-        (row, ends, codes) with a uint32 array for each run field.
-
-    Raises:
-        ValueError: A span is outside the row, overlaps, or has an invalid code.
-    """
-    for y, spans in rows:
-        ends, codes = [], []
-        stop = 0
-        for a, b, code in spans:
-            if (
-                any(type(v) is not int for v in (a, b, code))
-                or not stop <= a < b <= width
-                or not 0 < code < 2**32
-            ):
-                raise ValueError("invalid output span")
-            if a > stop:
-                ends.append(a)
-                codes.append(0)
-            ends.append(b)
-            codes.append(code)
-            stop = b
-        if stop < width:
-            ends.append(width)
-            codes.append(0)
-        yield y, np.asarray(ends, dtype=np.uint32), np.asarray(codes, dtype=np.uint32)
+    return write_run_rows(
+        directory,
+        grid,
+        ((y, *complete_row(grid.width, spans, minimum_code=1)) for y, spans in rows),
+    )
 
 
 def write_run_rows(
@@ -149,11 +117,7 @@ def write_run_rows(
                 or np.any(ends[1:] <= ends[:-1])
             ):
                 raise ValueError("invalid complete output row")
-            # A repeated code needs only the exclusive end of its last run.
-            stops = np.empty(ends.size, dtype=bool)
-            stops[:-1] = codes[1:] != codes[:-1]
-            stops[-1] = True
-            ends, codes = ends[stops], codes[stops]
+            ends, codes = merge_adjacent_runs(ends, codes)
             np.column_stack((ends, codes)).astype("<u4", copy=False).tofile(output)
             assigned = np.flatnonzero(codes)
             if assigned.size:

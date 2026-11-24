@@ -9,7 +9,7 @@ from shapely.geometry import shape
 from worldatlas.map_build.core.geometry import PolygonRasterizer, polygon_grid_bounds
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import column_spans
-from worldatlas.map_build.core.rle import crop, overlay, row
+from worldatlas.map_build.core.rle import complete_row, crop, overlay, row
 from worldatlas.map_build.division.contracts import CompiledRule, point_coordinates
 from worldatlas.map_build.division.intervals import prepare
 from worldatlas.map_build.execution.control import check_cancelled
@@ -32,51 +32,6 @@ def selected(values: np.ndarray, identifiers: Sequence[int] | np.ndarray) -> np.
     positions = np.searchsorted(identifiers, values)
     safe = np.minimum(positions, len(identifiers) - 1)
     return (positions < len(identifiers)) & (identifiers[safe] == values)
-
-
-def complete_row(
-    width: int, records: Sequence[tuple[int, int, int]] | np.ndarray
-) -> tuple[np.ndarray, np.ndarray]:
-    """Fill the gaps between sparse intervals with zero.
-
-    Args:
-        width: Number of cells in the row.
-        records: Ordered (first_column, end_column, code) records.
-
-    Returns:
-        Two uint32 arrays of exclusive end columns and codes. Adjacent
-        runs with the same code share one entry.
-
-    Raises:
-        ValueError: Records are malformed, overlap, or extend past the row.
-    """
-    if not len(records):
-        return np.array([width], dtype=np.uint32), np.array([0], dtype=np.uint32)
-    items = np.asarray(records)
-    if (
-        items.ndim != 2
-        or items.shape[1] != 3
-        or not np.issubdtype(items.dtype, np.integer)
-    ):
-        raise ValueError("scope intervals require integer start, end and value")
-    starts, ends, values = items.T
-    if (
-        np.any(starts < 0)
-        or np.any(starts >= ends)
-        or np.any(ends > width)
-        or np.any(starts[1:] < ends[:-1])
-        or np.any(values < 0)
-        or np.any(values > np.iinfo(np.uint32).max)
-    ):
-        raise ValueError("scope intervals overlap or escape the grid")
-    stops = np.r_[np.column_stack((starts, ends)).ravel(), width]
-    codes = np.r_[
-        np.column_stack((np.zeros(len(items), dtype=np.uint32), values)).ravel(), 0
-    ]
-    nonempty = stops > np.r_[0, stops[:-1]]
-    stops, codes = stops[nonempty], codes[nonempty]
-    last = np.r_[codes[:-1] != codes[1:], True]
-    return stops[last].astype(np.uint32), codes[last].astype(np.uint32)
 
 
 class Scope:

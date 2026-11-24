@@ -3,9 +3,9 @@
 import unittest
 import numpy as np
 
-from worldatlas.map_build.core.rle import overlay
+from worldatlas.map_build.core.rle import complete_row, overlay
 from worldatlas.map_build.division.intervals import Eligibility, combine, prepare, spans
-from worldatlas.map_build.division.scope import complete_row, selected
+from worldatlas.map_build.division.scope import selected
 
 
 def rle(ends, values):

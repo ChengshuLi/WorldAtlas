@@ -7,10 +7,10 @@ from typing import Any
 import numpy as np
 
 from worldatlas.map_build.core.layers import merge_rows, patch_rows, write_layer
-from worldatlas.map_build.core.rle import overlay
+from worldatlas.map_build.core.rle import complete_row, overlay
 from worldatlas.map_build.division.areas import assign_area
 from worldatlas.map_build.division.intervals import spans
-from worldatlas.map_build.division.scope import Scope, complete_row, selected
+from worldatlas.map_build.division.scope import Scope, selected
 from worldatlas.map_build.division.shores import ReferenceCells, ReferenceSubset
 from worldatlas.map_build.land.assignments import assign_components
 from worldatlas.map_build.land.reference_index import build_reference_index
