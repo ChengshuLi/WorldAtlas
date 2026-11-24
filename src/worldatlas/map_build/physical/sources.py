@@ -1,6 +1,5 @@
 """Verify and open selected physical raster and vector inputs."""
 
-from collections.abc import Callable
 from pathlib import Path
 from typing import Literal
 
@@ -52,23 +51,17 @@ def checked_files(spec: LandLayer[FilePin], pins: RunFilePins) -> dict[str, str]
     return files
 
 
-def open_layer(
-    spec: LandLayer[FilePin],
-    *,
-    feature_callback: Callable[[ogr.Feature, ogr.Geometry], None] | None = None,
-) -> tuple[gdal.Dataset, ogr.Layer, int]:
-    """Read and validate a selected polygon layer.
+def open_coastline_layer(spec: LandLayer[FilePin]) -> tuple[gdal.Dataset, ogr.Layer]:
+    """Open a coastline layer in longitude and latitude and apply its selection.
 
     Args:
         spec: Dataset path, optional layer name, and explicit filter.
-        feature_callback: Optional function called with each selected feature
-            and polygon.
 
     Returns:
-        (dataset, layer, feature_count). Keep dataset alive while reading layer.
+        The dataset and selected layer. Keep the dataset alive while reading the layer.
 
     Raises:
-        ValueError: The layer, CRS, filter or selected polygon is invalid.
+        ValueError: The layer, coordinate reference, filter, or ID lookup is unavailable.
     """
     ds = ogr.Open(spec['dataset'], 0)
     if ds is None:
@@ -77,6 +70,10 @@ def open_layer(
     layer = ds.GetLayerByName(layer_name) if layer_name else ds.GetLayer(0)
     if layer is None:
         raise ValueError('layer not found')
+    if not layer.TestCapability(ogr.OLCRandomRead):
+        raise ValueError(
+            f"coastline layer must support lookup by feature ID: {spec['dataset']}"
+        )
     srs = layer.GetSpatialRef()
     expected = osr.SpatialReference()
     expected.ImportFromEPSG(4326)
@@ -94,27 +91,7 @@ def open_layer(
     if spec['where'] is not None:
         if layer.SetAttributeFilter(spec['where']) != ogr.OGRERR_NONE:
             raise ValueError('invalid source selection predicate')
-    count = 0
-    for feat in layer:
-        geom = feat.GetGeometryRef()
-        if geom is None or geom.IsEmpty():
-            raise ValueError(f'empty geometry at feature {feat.GetFID()}')
-        if ogr.GT_Flatten(geom.GetGeometryType()) not in (
-            ogr.wkbPolygon,
-            ogr.wkbMultiPolygon,
-        ):
-            raise ValueError(f'nonpolygon geometry at feature {feat.GetFID()}')
-        if not geom.IsValid():
-            raise ValueError(
-                f'invalid geometry at feature {feat.GetFID()} (no repair performed)'
-            )
-        if feature_callback is not None:
-            feature_callback(feat, geom)
-        count += 1
-    layer.ResetReading()
-    if not count:
-        raise ValueError('selection yielded no features')
-    return ds, layer, count
+    return ds, layer
 
 
 def create_mask(path: Path, grid: Grid) -> gdal.Dataset:

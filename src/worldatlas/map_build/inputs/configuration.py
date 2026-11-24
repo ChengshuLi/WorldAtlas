@@ -64,7 +64,8 @@ class LandSettings[File](TypedDict):
     schema: NotRequired[Literal["land-raster-candidate-v1"]]
     selection_notes: NotRequired[NonEmptyText]
     strip_rows: NotRequired[PositiveInt]
-    feature_index: NotRequired[Literal["row-fids", "scan"]]
+    # Keep the saved index name so completed physical grids can still be reused.
+    feature_index: NotRequired[Literal["row-fids"]]
 
 
 @with_config(extra="forbid")

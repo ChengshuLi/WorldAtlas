@@ -86,18 +86,17 @@ class RasterizeLandTests(unittest.TestCase):
         out = self.d / 'all-rows'
         self.rasterize(self.config, out, self.grid)
         np.testing.assert_array_equal(gdal.Open(str(out / 'land.tif')).ReadAsArray(), expected)
-        self.cfg['strip_rows'] = 1
-        self.cfg['feature_index'] = 'scan'
-        self.config.write_text(json.dumps(self.cfg))
-        out = self.d / 'scan'
-        self.rasterize(self.config, out, self.grid)
-        self.assertEqual(sha256_file(a / 'land.tif'), sha256_file(out / 'land.tif'))
-        self.cfg['feature_index'] = 'row-fids'
-        self.config.write_text(json.dumps(self.cfg))
-        fallback = self.d / 'no-feature-ids'
-        with patch.object(ogr.Feature, 'GetFID', return_value=-1):
-            self.rasterize(self.config, fallback, self.grid)
-        self.assertEqual(sha256_file(a / 'land.tif'), sha256_file(fallback / 'land.tif'))
+
+    def test_coastline_requires_lookup_by_feature_id(self):
+        out = self.d / 'unsupported-coastline'
+        for binding, method, result, error in (
+            (ogr.Layer, 'TestCapability', False, 'must support lookup by feature ID'),
+            (ogr.Feature, 'GetFID', -1, 'is missing a feature ID'),
+        ):
+            with self.subTest(method=method), patch.object(binding, method, return_value=result):
+                with self.assertRaisesRegex(ValueError, error):
+                    self.rasterize(self.config, out, self.grid)
+                self.assertFalse(out.exists())
 
     def test_invalid_rasterization_settings_leave_no_output(self):
         land = self.cfg['land']
@@ -107,7 +106,7 @@ class RasterizeLandTests(unittest.TestCase):
             ({'land': []}, 'nonempty explicitly pinned land inputs'),
             ({'strip_rows': False}, 'strip_rows'),
             ({'minimum_free_bytes': -1}, 'minimum_free_bytes'),
-            ({'feature_index': 'unsupported'}, 'feature_index'),
+            ({'feature_index': 'scan'}, 'feature_index'),
             ({'land': land * 2}, 'input paths must be unique'),
         ):
             with self.subTest(changes=changes):
@@ -266,14 +265,15 @@ class RasterizeLandTests(unittest.TestCase):
             {'where': 'keep = 0', 'files': [{'path': str(self.p), 'sha256': sha256_file(self.p)}]}
         )
         self.grid = Grid(8, 3, 45)
-        masks = []
-        for engine in ('scan', 'row-fids'):
-            self.cfg['feature_index'] = engine
-            self.config.write_text(json.dumps(self.cfg))
-            out = self.d / engine
-            self.rasterize(self.config, out, self.grid)
-            masks.append(gdal.Open(str(out / 'land.tif')).ReadAsArray())
-        np.testing.assert_array_equal(*masks)
+        self.config.write_text(json.dumps(self.cfg))
+        out = self.d / 'indexed'
+        self.rasterize(self.config, out, self.grid)
+        # The filter leaves the large polygon and its hole, plus polygons off the grid.
+        expected = np.zeros((3, 8), dtype=np.uint8)
+        expected[2, :2] = 1
+        np.testing.assert_array_equal(
+            gdal.Open(str(out / 'land.tif')).ReadAsArray(), expected
+        )
 
     def test_rejects_bad_digest_and_output_collision(self):
         self.cfg['land'][0]['files'][0]['sha256'] = '0' * 64

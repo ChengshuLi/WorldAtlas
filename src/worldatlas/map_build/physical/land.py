@@ -6,6 +6,7 @@ import math
 import os
 import shutil
 from collections.abc import Callable
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -14,11 +15,109 @@ from osgeo import gdal, ogr
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.execution.runtime import RunFilePins
-from worldatlas.map_build.inputs.configuration import LandSettings
-from worldatlas.map_build.physical.sources import checked_files, create_mask, open_layer
+from worldatlas.map_build.inputs.configuration import LandLayer, LandSettings
+from worldatlas.map_build.physical.sources import (
+    checked_files,
+    create_mask,
+    open_coastline_layer,
+)
 from worldatlas.shared.files import FilePin
 
 gdal.UseExceptions()
+
+
+@dataclass
+class _IndexedLandLayer:
+    """Keep an open coastline layer and its polygon IDs for each strip."""
+
+    dataset: gdal.Dataset  # The layer depends on this dataset staying open.
+    layer: ogr.Layer
+    feature_count: int
+    feature_ids_by_strip: list[list[int]]
+
+
+def _index_land_layer(
+    spec: LandLayer[FilePin], grid: Grid, strip_rows: int
+) -> _IndexedLandLayer:
+    """List which coastline polygons could touch each horizontal strip.
+
+    Args:
+        spec: Coastline dataset and selection to index.
+        grid: Shared physical build grid.
+        strip_rows: Maximum number of map rows per strip.
+
+    Returns:
+        The open source layer and ordered lists of polygon IDs, one per strip.
+
+    Raises:
+        ValueError: The selection is empty or contains a missing ID or invalid polygon.
+    """
+    strip_count = (grid.height + strip_rows - 1) // strip_rows
+    feature_ids_by_strip: list[list[int]] = [[] for _ in range(strip_count)]
+    west = grid.west
+    east = west + grid.width * grid.step
+    dataset, layer = open_coastline_layer(spec)
+    feature_count = 0
+    for feature in layer:
+        feature_id = feature.GetFID()
+        if feature_id < 0:
+            raise ValueError(
+                f"coastline polygon is missing a feature ID: {spec['dataset']}"
+            )
+        geometry = feature.GetGeometryRef()
+        if geometry is None or geometry.IsEmpty():
+            raise ValueError(f'empty geometry at feature {feature_id}')
+        if ogr.GT_Flatten(geometry.GetGeometryType()) not in (
+            ogr.wkbPolygon,
+            ogr.wkbMultiPolygon,
+        ):
+            raise ValueError(f'nonpolygon geometry at feature {feature_id}')
+        if not geometry.IsValid():
+            raise ValueError(f'invalid geometry at feature {feature_id}')
+        feature_count += 1
+
+        # Index bounds so GDAL only fetches polygons that might touch the strip.
+        xmin, xmax, ymin, ymax = geometry.GetEnvelope()
+        if xmax < west or xmin > east:
+            continue
+        first_row = max(0, math.floor((grid.north - ymax) / grid.step))
+        last_row = min(grid.height - 1, math.floor((grid.north - ymin) / grid.step))
+        if first_row <= last_row:
+            for strip in range(first_row // strip_rows, last_row // strip_rows + 1):
+                feature_ids_by_strip[strip].append(feature_id)
+
+    if not feature_count:
+        raise ValueError('selection yielded no features')
+    return _IndexedLandLayer(dataset, layer, feature_count, feature_ids_by_strip)
+
+
+def _rasterize_strip(
+    target: gdal.Dataset, source: _IndexedLandLayer, strip: int
+) -> None:
+    """Draw the candidate coastline polygons for one strip.
+
+    Args:
+        target: Writable raster for this strip. Land cells are set to 1 in place.
+        source: Coastline layer and its lists of polygon IDs.
+        strip: Zero-based strip index.
+
+    Raises:
+        ValueError: A polygon ID from the index cannot be read from the layer.
+    """
+    with ogr.GetDriverByName('Memory').CreateDataSource('') as vector:
+        selected = vector.CreateLayer(
+            'land', source.layer.GetSpatialRef(), ogr.wkbUnknown
+        )
+        definition = selected.GetLayerDefn()
+        # Retain the original order and coordinates. GDAL clips each polygon to the strip.
+        for feature_id in source.feature_ids_by_strip[strip]:
+            polygon = source.layer.GetFeature(feature_id)
+            if polygon is None:
+                raise ValueError(f'indexed land feature missing: {feature_id}')
+            feature = ogr.Feature(definition)
+            feature.SetGeometry(polygon.GetGeometryRef())
+            selected.CreateFeature(feature)
+        gdal.RasterizeLayer(target, [1], selected, burn_values=[1])
 
 
 def run(
@@ -50,102 +149,42 @@ def run(
     specs = settings['land']
     if not specs:
         raise ValueError('nonempty explicitly pinned land inputs required')
-    strip = settings.get('strip_rows', 512)
-    reserve = minimum_free_bytes
-    feature_index = settings.get('feature_index', 'row-fids')
+    strip_rows = settings.get('strip_rows', 512)
     output = Path(output).resolve()
     paths = [Path(f['path']).resolve() for spec in specs for f in spec['files']]
     if len(set(paths)) != len(paths):
         raise ValueError('input paths must be unique')
-    # Validate all files, CRS, selection and geometries before creating outputs.
+    # Check the input files and index the selected polygons before creating outputs.
     for spec in specs:
         checked_files(spec, files)
-    opened = []
-    indexes = []
-    for spec in specs:
-        rows = (
-            [[] for _ in range((height + strip - 1) // strip)]
-            if feature_index == 'row-fids'
-            else None
-        )
-        usable = True
-
-        def index_feature(feat: ogr.Feature, geometry: ogr.Geometry) -> None:
-            """Index a selected polygon in the tiles it can affect.
-
-            Args:
-                feat: Feature from the source vector layer.
-                geometry: Polygon or multipolygon attached to the feature.
-            """
-            nonlocal usable
-            fid = feat.GetFID()
-            assert rows is not None
-            if fid < 0:
-                usable = False
-                return
-            xmin, xmax, ymin, ymax = geometry.GetEnvelope()
-            if xmax < west or xmin > west + width * step:
-                return
-            first = max(0, math.floor((north - ymax) / step))
-            last = min(height - 1, math.floor((north - ymin) / step))
-            if first <= last:
-                for row in range(first // strip, last // strip + 1):
-                    rows[row].append(fid)
-
-        item = open_layer(
-            spec, feature_callback=index_feature if rows is not None else None
-        )
-        opened.append(item)
-        indexes.append(
-            rows if usable and item[1].TestCapability(ogr.OLCRandomRead) else None
-        )
-    feature_counts = [item[2] for item in opened]
+    layers = [_index_land_layer(spec, grid, strip_rows) for spec in specs]
+    feature_counts = [source.feature_count for source in layers]
     os.mkdir(output)
-    ds = create_mask(output / 'land.tif', grid)
+    land_mask = create_mask(output / 'land.tif', grid)
     land_cells = 0
-    east = grid.extent(grid.bounds)[2]
-    for y in range(0, height, strip):
+    for strip, first_row in enumerate(range(0, height, strip_rows)):
         check_cancelled()
-        if shutil.disk_usage(output).free < reserve:
+        if shutil.disk_usage(output).free < minimum_free_bytes:
             raise ValueError(
                 'free disk below configured reserve; partial output preserved'
             )
-        n = min(strip, height - y)
-        top = north - y * step
-        mem = gdal.GetDriverByName('MEM').Create('', width, n, 1, gdal.GDT_Byte)
-        mem.SetGeoTransform((west, step, 0, top, 0, -step))
-        for (_, layer, _), index in zip(opened, indexes):
-            if index is None:
-                layer.SetSpatialFilterRect(west, top - n * step, east, top)
-                layer.ResetReading()
-                gdal.RasterizeLayer(mem, [1], layer, burn_values=[1])
-                layer.SetSpatialFilter(None)
-            else:
-                # Preserve source order and coordinates. Envelope candidates may
-                # include a polygon that burns no pixels; GDAL clips it exactly.
-                vector = ogr.GetDriverByName('Memory').CreateDataSource('')
-                selected_layer = vector.CreateLayer(
-                    'land', layer.GetSpatialRef(), ogr.wkbUnknown
-                )
-                definition = selected_layer.GetLayerDefn()
-                for fid in index[y // strip]:
-                    source = layer.GetFeature(fid)
-                    if source is None:
-                        raise ValueError(f'indexed land feature missing: {fid}')
-                    feature = ogr.Feature(definition)
-                    feature.SetGeometry(source.GetGeometryRef())
-                    selected_layer.CreateFeature(feature)
-                gdal.RasterizeLayer(mem, [1], selected_layer, burn_values=[1])
-                selected_layer = None
-                vector = None
-        values = mem.ReadAsArray()
+        row_count = min(strip_rows, height - first_row)
+        top = north - first_row * step
+        strip_raster = gdal.GetDriverByName('MEM').Create(
+            '', width, row_count, 1, gdal.GDT_Byte
+        )
+        strip_raster.SetGeoTransform((west, step, 0, top, 0, -step))
+        for source in layers:
+            _rasterize_strip(strip_raster, source, strip)
+        values = strip_raster.ReadAsArray()
         land_cells += int(values.sum())
-        ds.GetRasterBand(1).WriteArray(values, 0, y)
-        emit(json.dumps({'rows_done': y + n, 'land_cells': land_cells}), flush=True)
+        land_mask.GetRasterBand(1).WriteArray(values, 0, first_row)
+        emit(
+            json.dumps({'rows_done': first_row + row_count, 'land_cells': land_cells}),
+            flush=True,
+        )
     check_cancelled()
-    ds.FlushCache()
-    ds = None
-    opened = []
+    land_mask.Close()
     for spec in specs:
         checked_files(spec, files)
     report = {
@@ -153,8 +192,6 @@ def run(
         'configuration_sha256': configuration_sha256,
         'grid': vars(grid),
         'feature_counts': feature_counts,
-        'feature_index': feature_index,
-        'indexed_layers': [index is not None for index in indexes],
         'land_cells': land_cells,
         'land_sha256': files.pin(output / 'land.tif')['sha256'],
         'gdal': gdal.VersionInfo('--version'),
