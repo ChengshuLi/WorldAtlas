@@ -486,7 +486,6 @@ class Timing:
                 "last_recorded_event": None,
                 "recorded_elapsed_seconds": None,
                 "unrecorded_tail_seconds": None,
-                "reason": "initialization has no durable start/end interval",
             }
             for record in incomplete
         ]
@@ -508,7 +507,6 @@ class Timing:
                         else "start",
                         "recorded_elapsed_seconds": b - a,
                         "unrecorded_tail_seconds": None,
-                        "reason": "no durable completion or failure endpoint",
                     }
                 )
             if b < a:
@@ -564,5 +562,4 @@ class Timing:
             "unmeasured_interrupted_attempts": missing,
             "interrupted_interval_details": interrupted,
             "unrecorded_interruption_tail_seconds": None if not complete else 0.0,
-            "semantics": "sum of attempt-local active interval unions; no restart gap is counted",
         }

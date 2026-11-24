@@ -192,8 +192,6 @@ def run(
         'land_cells': land_cells,
         'land_sha256': files.pin(output / 'land.tif')['sha256'],
         'gdal': gdal.VersionInfo('--version'),
-        'rasterization': 'GDAL default polygon rasterization, ALL_TOUCHED off',
-        'limitations': 'Candidate mask only; source decisions and geographic correctness require review.',
     }
     with (output / 'report.json').open('x') as f:
         json.dump(report, f, indent=2)

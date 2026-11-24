@@ -142,6 +142,7 @@ class WaterShardTests(unittest.TestCase):
             self.assertEqual(mask['report']['sha256'], sha256_file(report_path))
             self.assertEqual(rasterizer[:2], (report['script_sha256'], report['rasterizer']))
             self.assertEqual(report['policy'], {'method': 'overture-inland-subtype-v1'})
+            self.assertEqual(report['tile_size'], 4)
             self.assertEqual(report['counts']['polygons'], 3)
             self.assertEqual(report['counts']['excluded_classification'], 2)
             self.assertEqual(report['counts']['non_polygon'], 1)

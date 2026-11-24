@@ -254,13 +254,12 @@ def run(
         'batch_timings': kernel.timings,
         'counts': dict(counts),
         'batch_size': batch_size,
+        'tile_size': tile,
         'invalid_feature_rows': invalid_rows_filename,
         'policy': {'method': INLAND_WATER_SUBTYPE_POLICY},
         'selection_notes': settings.get('selection_notes'),
         'configuration_sha256': configuration_sha256,
-        'geometry_policy': 'GEOS checks polygon validity and reports invalid polygons by zero-based source row.',
         'grid': vars(grid),
-        'rasterization': f'GDAL default polygon rasterization, ALL_TOUCHED off; values unioned per batch on {tile}-cell tiles',
         'runtime': {
             'python': sys.version,
             'pyarrow': pyarrow.__version__,
@@ -275,7 +274,6 @@ def run(
             ),
         },
         'output_sha256': mask['sha256'],
-        'limitations': 'Candidate water mask only, not a historical or complete physical mask. Review invalid features and compare against preserved references before use.',
     }
     report_path = out / 'report.json'
     with report_path.open('x') as f:

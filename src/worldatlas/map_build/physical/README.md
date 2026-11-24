@@ -21,6 +21,8 @@ The coastline rasterizer lists the polygon IDs that could touch each strip of ma
 
 For inland water, the builder skips the `ocean` and `physical` subtypes. The ocean is already represented by the coastline. Overture's `physical` records name features such as bays and straits, and can overlap the polygons used to fill water. A missing, blank, or non-text subtype leaves the shard incomplete. The builder draws valid polygons and multipolygons from the rows that pass this check. [Overture water guide](https://docs.overturemaps.org/guides/base/#water)
 
+Both rasterizers use GDAL's default polygon fill, which selects cells by their centres. The water rasterizer combines polygons in batches, and its report records the tile width in cells as `tile_size`.
+
 The physical build saves one settings file per step under `configs/`. The coastline, water-shard, union and composition reports record the checksum of the settings they used. Each water task checks that it processed all rows. It identifies geometry problems by their zero-based row numbers in the original Parquet file. Invalid polygon rows are saved to `invalid-feature-rows.json` beside the shard report. Before merging the masks, the builder checks that every shard used the same rasterizer. After the merge, it verifies that the input files still match their checksums.
 
 Each completed task has a receipt in the shared `checkpoints/` directory. Its receipt pins the task's inputs and outputs. The shared `timing-events.jsonl` records work and downloads. In a full build, both live at the run root alongside the receipts and timings for the other stages. In a standalone build, they live in its output directory. The standalone command prints timing with the grid report.
@@ -29,7 +31,7 @@ Both commands save the project code and setup files for each attempt in `attempt
 
 The physical build report's `directory` field points to the finished grid. That directory contains `physical-dry.tif`, `rows.u32le`, `runs.u32le` and `report.json`. Physical streams use code 17 for land and code 1 for water. Entity assignments are calculated later using registry bindings.
 
-R2 uses the normal boto3 credential chain, with credentials outside the code. The physical stage caches the coastline ZIP and extracts its required files before drawing land. It can download the next water file while rasterizing the current file. Verified water files stay in the shared input cache for the next build. The current 32 files take about 29 GB. The timing report includes both kinds of downloads and counts overlapping rasterization as processing. A build that reuses a completed physical grid skips both downloads.
+R2 uses the normal boto3 credential chain, with credentials outside the code. The physical stage caches the coastline ZIP and extracts its required files before drawing land. It can download the next water file while rasterizing the current file. Verified water files stay in the shared input cache for the next build. The current 32 files take about 29 GB. The physical report's `downloaded_shard_count` counts the water files downloaded during the attempt that saved the report. The timing report includes both kinds of downloads and counts overlapping rasterization as processing. A build that reuses a completed physical grid skips both downloads.
 
 ## Code and tests
 

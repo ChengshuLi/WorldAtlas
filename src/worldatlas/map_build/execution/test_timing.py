@@ -107,7 +107,6 @@ class ActiveTimingTests(unittest.TestCase):
                         "last_recorded_event": "heartbeat",
                         "recorded_elapsed_seconds": 2,
                         "unrecorded_tail_seconds": None,
-                        "reason": "no durable completion or failure endpoint",
                     }
                 ],
             )

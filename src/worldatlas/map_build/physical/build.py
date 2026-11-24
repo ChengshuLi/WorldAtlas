@@ -558,9 +558,7 @@ class PhysicalBuild:
                 'max_parallel_shards': self.water_workers,
                 'stage_reports': stage_reports,
                 'physical_output_sha256': output_checksums,
-                'limitations': 'Candidate physical land/water only; not historical source reproduction or continent labels.',
                 'downloaded_shard_count': downloaded_shard_count,
-                'downloaded_shard_count_scope': 'current invocation',
             }
             write_json(report_path, report, sort_keys=False)
             return report
