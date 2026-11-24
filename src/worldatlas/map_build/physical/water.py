@@ -33,6 +33,7 @@ gdal.UseExceptions()
 ogr.UseExceptions()
 
 POLYGON = (ogr.wkbPolygon, ogr.wkbMultiPolygon)
+INLAND_WATER_SUBTYPE_POLICY = 'overture-inland-subtype-v1'
 
 
 def selected(subtype: str | None) -> str | None:
@@ -286,7 +287,6 @@ def run(
         raise ValueError(
             'output must be outside input directories and must not contain inputs'
         )
-    policy = settings.get('policy', {'method': 'overture-inland-subtype-v1'})
     width, height = grid.width, grid.height
     west, north, step = grid.west, grid.north, grid.step
     tile = settings.get('tile_size', 1024)
@@ -402,7 +402,7 @@ def run(
         'counts': dict(counts),
         'batch_size': batch_size,
         'invalid_feature_ids': 'invalid-feature-ids.json' if invalid else None,
-        'policy': policy,
+        'policy': {'method': INLAND_WATER_SUBTYPE_POLICY},
         'selection_notes': settings.get('selection_notes'),
         'configuration_sha256': configuration_sha256,
         'geometry_policy': 'GEOS validity checked; invalid geometries excluded and IDs reported; no repair',

@@ -70,13 +70,6 @@ class LandSettings[File](TypedDict):
 
 
 @with_config(extra="forbid")
-class WaterPolicy(TypedDict):
-    """Select the supported Overture inland-water subtype policy."""
-
-    method: Literal["overture-inland-subtype-v1"]
-
-
-@with_config(extra="forbid")
 class WaterSettings(TypedDict):
     """Specify how to rasterize each inland-water file."""
 
@@ -86,7 +79,6 @@ class WaterSettings(TypedDict):
     batch_method: NotRequired[Literal["hybrid", "tiled"]]
     selection_notes: NotRequired[NonEmptyText]
     schema: NotRequired[Literal["water-shard-candidate-v2"]]
-    policy: NotRequired[WaterPolicy]
 
 
 @with_config(extra="forbid")

@@ -19,7 +19,7 @@ Supply `--work-dir` and an output directory for every build. The builder creates
 | Option | When to use it |
 | --- | --- |
 | `--divide PARENT_ID` | Optional. By default, divide every parent with rules in the saved selection. Supply a parent entity ID to run only its division and the ancestor divisions it needs. For example, `--divide 0` divides World into continents. Repeat the option to select several parents. |
-| `--reuse-from PREVIOUS_RUN` | Use an earlier physical grid whose report points to its saved settings. The grid and the saved `land_config` and `inland_water` sections must match exactly. The builder verifies the row-run files and their report. It also reuses compatible divisions. An edit confined to the later water stages can reuse the earlier assignments, including any water claimed by an explicit area or boundary rule in those earlier stages. |
+| `--reuse-from PREVIOUS_RUN` | Use an earlier physical grid whose report points to its saved settings. The grid and physical input settings must match. The builder verifies the row-run files and their report. It also reuses compatible divisions. An edit confined to the later water stages can reuse the earlier assignments, including any water claimed by an explicit area or boundary rule in those earlier stages. |
 | `--recompute-division` | Off by default. Use with `--reuse-from` to reuse only the physical grid and recalculate the requested land and water assignments. |
 | `--resume` | Continue an interrupted build using its saved selection and options. Pass the original config, output directory, and `--work-dir`. Omit `--selection`, `--divide`, `--reuse-from`, and `--recompute-division`. |
 | `--selection INPUT_SELECTION.json` | Start a fresh build with a saved geographic selection. To rebuild a release, use its restored configuration, selection and captured code. |
@@ -47,7 +47,7 @@ The command looks up the release in Neon and reuses its files from the workspace
 The build configuration sets the grid, physical inputs, coastal distance and processing options. The checked-in grid has 131,072 columns and 54,613 rows. The east and west edges meet at the antimeridian. [Build configuration](config.json)
 
 - Each layer in `sources.land_config.land` lists all required coastline files once in `files`. Set `dataset` to the member path, local path, R2 key, or Neon source ID of the entry GDAL opens. For a Shapefile, select the `.shp` and include its companion files in the list.
-- `sources.inland_water` holds the water policy, rasterizer settings, and raw file list together. A local file uses `path` and `sha256`. Catalog references supply `size_bytes` from Neon. Direct R2 references supply the size alongside the bucket, key, and SHA-256.
+- `sources.inland_water` holds the rasterizer settings and raw water file list. A local file uses `path` and `sha256`. Catalog references supply `size_bytes` from Neon. Direct R2 references supply the size alongside the bucket, key, and SHA-256.
 
 All physical stages use the same `Grid`. The builder saves its dimensions and source pins in `physical-build-config.json` so the [standalone physical command](physical/README.md#use) can repeat that part of the build. `physical_controls.minimum_free_bytes` sets one disk reserve for the physical stages.
 

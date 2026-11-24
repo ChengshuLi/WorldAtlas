@@ -576,7 +576,6 @@ class Fixture(unittest.TestCase):
             "schema": "water-shard-candidate-v2",
             "tile_size": 4,
             "selection_notes": "synthetic",
-            "policy": {"method": "overture-inland-subtype-v1"},
         }
         geometry = bytes(
             ogr.CreateGeometryFromWkt(

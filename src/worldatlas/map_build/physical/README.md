@@ -29,7 +29,7 @@ R2 uses the normal boto3 credential chain, with credentials outside the code. Th
 | --- | --- |
 | `sources.py` | Check source files and coordinate references; open selected polygons. |
 | `land.py` | Rasterize global coastline polygons. |
-| `water.py` | Read GeoParquet water records and apply the selected inland-water policy. |
+| `water.py` | Read GeoParquet water records, apply the Overture subtype rules, and record the policy name in each report. |
 | `water_batch.py` | Validate and rasterize ordinary batches through GDAL's Python API. |
 | `union.py` | Combine all water shards into one water mask. |
 | `composition.py` | Subtract inland water from land and write the physical grid. |

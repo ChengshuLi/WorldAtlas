@@ -52,6 +52,7 @@ from worldatlas.map_build.inputs.selection import (
 )
 from worldatlas.map_build.inputs.selection_types import BuildSelection
 from worldatlas.map_build.physical import build as physical_build
+from worldatlas.map_build.physical.water import INLAND_WATER_SUBTYPE_POLICY
 from worldatlas.shared.database import connect_neon, neon_connection_url
 from worldatlas.shared.files import (
     FilePin,
@@ -151,9 +152,16 @@ def physical_reference(
     if hashlib.sha256(data).hexdigest() != config_pin["sha256"]:
         raise ValueError("physical source configuration changed: " + str(request))
     previous = json.loads(data)
-    for section in ("land_config", "inland_water"):
-        if previous[section] != configuration[section]:
-            raise ValueError("physical input differs from the source run: " + section)
+    if previous["land_config"] != configuration["land_config"]:
+        raise ValueError("physical input differs from the source run: land_config")
+    water_settings = configuration["inland_water"]
+    # Earlier builds stored the rasterizer's fixed policy as a setting.
+    old_water_settings = {
+        **water_settings,
+        "policy": {"method": INLAND_WATER_SUBTYPE_POLICY},
+    }
+    if previous["inland_water"] not in (water_settings, old_water_settings):
+        raise ValueError("physical input differs from the source run: inland_water")
 
     checksums = report["physical_output_sha256"]
     files = {

@@ -62,9 +62,6 @@
       "tile_size": 1024,
       "rasterizer": "gdal",
       "selection_notes": "Overture inland water: exclude ocean and physical subtypes; use polygon geometries.",
-      "policy": {
-        "method": "overture-inland-subtype-v1"
-      },
       "batch_size": 32768,
       "source": "Overture Maps Foundation",
       "release": "2026-10-21.0",

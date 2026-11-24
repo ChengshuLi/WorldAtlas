@@ -198,7 +198,6 @@ class EndToEndTests(unittest.TestCase):
                     schema="water-shard-candidate-v2",
                     selection_notes="Fixture water",
                     tile_size=4,
-                    policy=dict(method="overture-inland-subtype-v1"),
                 )
                 cfg = write_json(
                     raw / "build.json",

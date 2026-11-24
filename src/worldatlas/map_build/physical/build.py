@@ -207,7 +207,6 @@ def _build(
         schema='water-shard-candidate-v2',
         minimum_free_bytes=reserve,
     )
-    water_cfg.setdefault('policy', {'method': 'overture-inland-subtype-v1'})
     batch_size = water_cfg.get('batch_size', 8192)
     union_rows_per_block = cfg.get('union_rows_per_block', 128)
     physical_rows_per_block = cfg.get('physical_rows_per_block', 128)
@@ -371,7 +370,6 @@ def _build(
             or item.get('source_sha256') != source_digest
             or item.get('configuration_sha256') != stage_pins['inland_water']['sha256']
             or item.get('grid') != grid_settings
-            or item.get('policy') != water_cfg['policy']
             or item.get('batch_size') != batch_size
             or item.get('output_sha256') != receipt['sha256']
             or item.get('invalid_feature_ids')

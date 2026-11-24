@@ -96,7 +96,6 @@ class PipelineTests(unittest.TestCase):
             'schema': 'water-shard-candidate-v2',
             'tile_size': 4,
             'selection_notes': 'synthetic',
-            'policy': {'method': 'overture-inland-subtype-v1'},
         }
         geom = bytes(
             ogr.CreateGeometryFromWkt(
@@ -1055,6 +1054,11 @@ b.run(sys.argv[1], sys.argv[2])
             ('pipeline', {'minimum_free_bytes': True}, 'minimum_free_bytes'),
             ('pipeline', {'union_rows_per_block': 0}, 'rows_per_block'),
             ('water', {'rasterizer': 'unknown'}, 'inland_water.rasterizer'),
+            (
+                'water',
+                {'policy': {'method': b.water.INLAND_WATER_SUBTYPE_POLICY}},
+                r'inland_water\.policy',
+            ),
             ('water', {'native_method': 'old'}, 'native_method'),
             (
                 'pipeline',

@@ -65,7 +65,6 @@ class WaterShardTests(unittest.TestCase):
             'schema': 'water-shard-candidate-v2',
             'tile_size': 4,
             'selection_notes': 'synthetic test',
-            'policy': {'method': 'overture-inland-subtype-v1'},
         }
         self.config = self.inputs / 'config.json'
         self.config.write_text(json.dumps(cfg))
@@ -142,6 +141,7 @@ class WaterShardTests(unittest.TestCase):
             out = self.path / f'o{n}'
             self.rasterize(p, digest, out, self.config, self.grid, n)
             report = json.loads((out / 'report.json').read_text())
+            self.assertEqual(report['policy'], {'method': 'overture-inland-subtype-v1'})
             self.assertEqual(report['counts']['polygons'], 3)
             self.assertEqual(report['counts']['excluded_classification'], 2)
             self.assertEqual(report['counts']['non_polygon'], 1)
@@ -676,12 +676,12 @@ class WaterShardTests(unittest.TestCase):
         self.assertEqual(build.selected(None), 'missing_classification')
         self.assertEqual(build.selected(''), 'missing_classification')
 
-    def test_old_policy_rejected_instead_of_silently_reinterpreted(self):
+    def test_unsupported_water_settings_schema_is_rejected(self):
         p, digest = self.fixture()
         cfg = json.loads(self.config.read_text())
         cfg['schema'] = 'water-shard-candidate-v1'
         self.config.write_text(json.dumps(cfg))
-        out = self.path / 'old-policy'
+        out = self.path / 'old-schema'
         with self.assertRaisesRegex(ValueError, 'schema'):
             self.rasterize(p, digest, out, self.config, self.grid)
         self.assertFalse(out.exists())
