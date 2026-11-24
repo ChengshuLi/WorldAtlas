@@ -126,13 +126,11 @@ class CommandTests(unittest.TestCase):
     def test_stop_signals_cancel_the_active_builder(self):
         for signum in (signal.SIGTERM, signal.SIGINT):
             with self.subTest(signum=signum):
-                previous_handler = signal.getsignal(signum)
+                handlers = {}
                 runner = Mock()
 
                 def interrupt_running_build():
-                    handler = signal.getsignal(signum)
-                    self.assertIsNot(handler, previous_handler)
-                    handler(signum, None)
+                    handlers[signum](signum, None)
 
                 runner.run.side_effect = interrupt_running_build
                 with (
@@ -141,30 +139,30 @@ class CommandTests(unittest.TestCase):
                         ["worldatlas-build", "config.json", "run", "--work-dir", "workspace"],
                     ),
                     patch.object(pipeline, "Pipeline", return_value=runner),
+                    patch.object(signal, "signal", side_effect=handlers.__setitem__),
                 ):
                     with self.assertRaisesRegex(KeyboardInterrupt, str(signum)):
                         pipeline.main()
                 runner.cancel.assert_called_once_with()
-                self.assertIs(signal.getsignal(signum), previous_handler)
 
     def test_stop_signals_cancel_the_standalone_physical_build(self):
         for signum in (signal.SIGTERM, signal.SIGINT):
             with self.subTest(signum=signum):
-                previous_handler = signal.getsignal(signum)
+                handlers = {}
 
                 def interrupt_running_build(*args, **kwargs):
-                    handler = signal.getsignal(signum)
-                    self.assertIsNot(handler, previous_handler)
                     try:
-                        handler(signum, None)
+                        handlers[signum](signum, None)
                     finally:
                         with self.assertRaises(InterruptedError):
                             check_cancelled()
 
-                with patch.object(physical_build, "run", side_effect=interrupt_running_build):
+                with (
+                    patch.object(physical_build, "run", side_effect=interrupt_running_build),
+                    patch.object(signal, "signal", side_effect=handlers.__setitem__),
+                ):
                     with self.assertRaisesRegex(KeyboardInterrupt, str(signum)):
                         physical_build.main(["physical-config.json", "output"])
-                self.assertIs(signal.getsignal(signum), previous_handler)
 
 
 class Fixture(unittest.TestCase):

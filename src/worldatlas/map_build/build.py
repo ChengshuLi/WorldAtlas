@@ -23,7 +23,7 @@ from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.division.encoding import encode
 from worldatlas.map_build.division.hierarchy import HierarchyDivision
 from worldatlas.map_build.execution.code_archive import capture_source, write_source
-from worldatlas.map_build.execution.control import cancel_on_stop_signals
+from worldatlas.map_build.execution.control import install_build_stop_handlers
 from worldatlas.map_build.execution.control import stage as stage_context
 from worldatlas.map_build.execution.runtime import (
     RunLock,
@@ -663,8 +663,8 @@ def main() -> None:
         selection=a.selection,
     )
 
-    with cancel_on_stop_signals(pipeline.cancel):
-        print(json.dumps(pipeline.run(), indent=2))
+    install_build_stop_handlers(pipeline.cancel)
+    print(json.dumps(pipeline.run(), indent=2))
 
 
 if __name__ == "__main__":

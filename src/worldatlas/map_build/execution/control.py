@@ -3,7 +3,7 @@
 import signal
 import threading
 from collections.abc import Callable, Generator
-from contextlib import ExitStack, contextmanager
+from contextlib import contextmanager
 from contextvars import ContextVar
 from types import FrameType
 from typing import TextIO
@@ -13,17 +13,13 @@ _current: ContextVar[tuple[threading.Event, TextIO | None, threading.Lock] | Non
 )
 
 
-@contextmanager
-def cancel_on_stop_signals(request_cancel: Callable[[], None]) -> Generator[None]:
-    """Request cancellation on Ctrl+C or SIGTERM while a CLI command runs.
+def install_build_stop_handlers(request_cancel: Callable[[], None]) -> None:
+    """Install the build command's Ctrl+C and SIGTERM handlers.
 
-    Use this in the main thread. Restore the previous handlers when the command ends.
+    Call from the main thread of the command-line process.
 
     Args:
         request_cancel: Callback that tells the workers to stop at their next check.
-
-    Yields:
-        Control to the command with both stop handlers installed.
     """
 
     def stop(signum: int, frame: FrameType | None) -> None:
@@ -39,13 +35,8 @@ def cancel_on_stop_signals(request_cancel: Callable[[], None]) -> Generator[None
         request_cancel()
         raise KeyboardInterrupt(f'interrupted by signal {signum}')
 
-    with ExitStack() as restore_handlers:
-        for signum in (signal.SIGINT, signal.SIGTERM):
-            previous_handler = signal.signal(signum, stop)
-            restore_handlers.callback(
-                signal.signal, signum, previous_handler or signal.SIG_DFL
-            )
-        yield
+    signal.signal(signal.SIGINT, stop)
+    signal.signal(signal.SIGTERM, stop)
 
 
 @contextmanager

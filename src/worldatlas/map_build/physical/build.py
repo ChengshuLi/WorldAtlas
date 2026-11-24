@@ -774,7 +774,8 @@ def main(
     parser.add_argument('output')
     parser.add_argument('--resume', action='store_true')
     args = parser.parse_args(argv)
-    with control.stage() as cancelled, control.cancel_on_stop_signals(cancelled.set):
+    with control.stage() as cancelled:
+        control.install_build_stop_handlers(cancelled.set)
         report = run(args.physical_config, args.output, resume=args.resume)
     emit(json.dumps(report, indent=2), flush=True)
 
