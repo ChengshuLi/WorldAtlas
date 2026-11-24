@@ -174,8 +174,10 @@ def run(
     if len(expected) != 64 or files.pin(source)['sha256'] != expected.lower():
         raise ValueError('source SHA-256 does not match expected digest')
     pf = pq.ParquetFile(source, pre_buffer=False)
-    md = pf.schema_arrow.metadata or {}
-    geo = json.loads(md[b'geo'])
+    geometry_metadata = (pf.schema_arrow.metadata or {}).get(b'geo')
+    if geometry_metadata is None:
+        raise ValueError(f'{source}: missing GeoParquet metadata')
+    geo = json.loads(geometry_metadata)
     if (
         geo['primary_column'] != 'geometry'
         or geo['columns']['geometry'].get('encoding') != 'WKB'

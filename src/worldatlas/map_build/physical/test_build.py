@@ -30,7 +30,7 @@ from worldatlas.shared.files import pin_file, sha256_file, write_json
 LAND = b.land.run
 WATER = b.water.run
 UNION = b.water_union.run
-COMPOSE = b.composition.main
+COMPOSE = b.composition.run
 
 
 @contextmanager
@@ -48,7 +48,7 @@ def intercept_stages(effect):
     with ExitStack() as stack:
         for module, name, original in (
             (b.land, 'run', LAND), (b.water, 'run', WATER),
-            (b.water_union, 'run', UNION), (b.composition, 'main', COMPOSE),
+            (b.water_union, 'run', UNION), (b.composition, 'run', COMPOSE),
         ):
             stack.enter_context(mock.patch.object(module, name, wrap_stage(original)))
         yield

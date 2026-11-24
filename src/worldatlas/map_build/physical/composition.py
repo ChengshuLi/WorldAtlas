@@ -68,7 +68,7 @@ def write_run_block(
     offsets.extend(next_offsets.tolist())
 
 
-def main(
+def run(
     configuration_sha256: str,
     output: Path | str,
     grid: Grid,

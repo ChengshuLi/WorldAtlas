@@ -41,7 +41,7 @@ class ComposeTests(unittest.TestCase):
 
     def build(self, output, **options):
         settings = json.loads(self.p.read_bytes())
-        return b.main(
+        return b.run(
             sha256_file(self.p), output, Grid(**settings['grid']), land=settings['land'], water=settings['water'],
             minimum_free_bytes=settings['minimum_free_bytes'],
             rows_per_block=settings.get('rows_per_block', 128), files=RunFilePins(), **options,

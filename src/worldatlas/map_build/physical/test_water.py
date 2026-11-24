@@ -804,6 +804,17 @@ class WaterShardTests(unittest.TestCase):
         self.assertEqual(report['rows_in_source'], 6)
         self.assertEqual(report['counts'].get('rows', 0), 0)
 
+    def test_missing_geoparquet_metadata_names_the_input_file(self):
+        source, _ = self.fixture()
+        table = pq.read_table(source).replace_schema_metadata(None)
+        pq.write_table(table, source)
+        out = self.path / 'missing-metadata'
+        with self.assertRaisesRegex(
+            ValueError, r'water\.parquet: missing GeoParquet metadata'
+        ):
+            self.rasterize(source, sha256_file(source), out, self.config, self.grid)
+        self.assertFalse(out.exists())
+
     def test_shard_input_declares_expected_grid_policy_and_geometry_format(self):
         source, digest = self.fixture()
         cfg = json.loads(self.config.read_text())

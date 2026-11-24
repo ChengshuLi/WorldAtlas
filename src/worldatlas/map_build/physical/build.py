@@ -496,7 +496,7 @@ class PhysicalBuild:
         report = self._run_task(
             'compose',
             partial(
-                composition.main,
+                composition.run,
                 compose_config['sha256'],
                 physical_directory,
                 self.grid,
