@@ -26,7 +26,11 @@ class ExecutorResumeTests(unittest.TestCase):
             "sources": {
                 "land_config": {
                     "land": [
-                        {"dataset": source["r2_key"], "files": [source]}
+                        {
+                            "dataset": source["r2_key"],
+                            "files": [source],
+                            "where": None,
+                        }
                     ]
                 },
                 "inland_water": {

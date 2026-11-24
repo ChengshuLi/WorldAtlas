@@ -87,13 +87,11 @@ def open_coastline_layer(spec: LandLayer[FilePin]) -> tuple[gdal.Dataset, ogr.La
         raise ValueError(
             'layer must explicitly declare EPSG:4326; reprojection is not implicit'
         )
-    if 'where' not in spec:
-        raise ValueError(
-            'selection predicate must be explicit; null means all features'
-        )
-    if spec['where'] is not None:
-        if layer.SetAttributeFilter(spec['where']) != ogr.OGRERR_NONE:
-            raise ValueError('invalid source selection predicate')
+    feature_filter = spec['where']
+    if feature_filter is not None and (
+        layer.SetAttributeFilter(feature_filter) != ogr.OGRERR_NONE
+    ):
+        raise ValueError('invalid source selection predicate')
     return ds, layer
 
 

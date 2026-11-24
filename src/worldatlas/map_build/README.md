@@ -46,7 +46,7 @@ The command looks up the release in Neon and reuses its files from the workspace
 
 The build configuration sets the grid, physical inputs, coastal distance and processing options. The checked-in grid has 131,072 columns and 54,613 rows. The east and west edges meet at the antimeridian. [Build configuration](config.json)
 
-- Each layer in `sources.land_config.land` lists all required coastline files once in `files`. Set `dataset` to the ZIP member path, R2 key, or Neon source ID of the entry GDAL opens. For a Shapefile, select the `.shp` and include its companion files in the list.
+- Each layer in `sources.land_config.land` lists all required coastline files once in `files`. Set `dataset` to the ZIP member path, R2 key, or Neon source ID of the entry GDAL opens. For a Shapefile, select the `.shp` and include its companion files in the list. Set `where` to a filter expression on the layer’s fields, or use `"where": null` to select every polygon in the layer.
 - `sources.inland_water` holds the rasterizer settings and raw water file list.
 
 Every raw file has an R2 reference. A catalog reference gets its location, size and checksum from Neon. A direct R2 reference supplies the bucket, key, size and checksum in the configuration. `SourceCache` verifies the files and gives the rasterizers their local paths.

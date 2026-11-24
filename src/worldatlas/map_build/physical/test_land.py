@@ -152,8 +152,8 @@ class RasterizeLandTests(unittest.TestCase):
         source = json.loads(self.p.read_text())
         first = source['features'][0]
         for item, options, error in (
-            (first, {'layer': 'absent'}, 'layer not found'),
-            (first, {}, 'selection predicate must be explicit'),
+            (first, {'layer': 'absent', 'where': None}, 'layer not found'),
+            (first, {}, r'land\.0\.where'),
             (first, {'where': 'FID < 0'}, 'selection yielded no features'),
             (dict(first, geometry=None), {'where': None}, 'empty geometry'),
             (
@@ -201,11 +201,12 @@ class RasterizeLandTests(unittest.TestCase):
         spec = dict(
             dataset=str(path),
             files=[dict(path=str(file), sha256=sha256_file(file)) for file in files],
+            where=None,
         )
         self.assertEqual(
             set(checked_files(spec, RunFilePins())), {str(file.resolve()) for file in files}
         )
-        self.cfg['land'] = [dict(spec, where=None)]
+        self.cfg['land'] = [spec]
         self.config.write_text(json.dumps(self.cfg))
         self.assertEqual(
             self.rasterize(self.config, self.d / 'dotted', self.grid)['land_cells'], 6

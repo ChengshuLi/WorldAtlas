@@ -222,7 +222,15 @@ class Fixture(unittest.TestCase):
         for section, settings in (
             (
                 "land_config",
-                {"land": [{"dataset": local_file["path"], "files": [local_file]}]},
+                {
+                    "land": [
+                        {
+                            "dataset": local_file["path"],
+                            "files": [local_file],
+                            "where": None,
+                        }
+                    ]
+                },
             ),
             ("inland_water", {"file_count": 1, "files": [local_file]}),
         ):
@@ -390,7 +398,7 @@ class Fixture(unittest.TestCase):
 
     def select_coastline(self, dataset, files):
         self.cfg["sources"]["land_config"]["land"] = [
-            {"dataset": dataset, "files": files}
+            {"dataset": dataset, "files": files, "where": None}
         ]
 
     @contextmanager

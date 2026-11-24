@@ -48,12 +48,13 @@ class LandLayer[File](TypedDict):
 
     The ``dataset`` names an entry in ``files``. For a Shapefile, it identifies
     the .shp, and ``files`` also lists its companions such as .shx, .dbf, and .prj.
+    Set ``where`` to a filter string or to null to select the whole layer.
     """
 
     dataset: NonEmptyText
     files: list[File]
+    where: str | None
     layer: NotRequired[NonEmptyText | None]
-    where: NotRequired[str | None]
 
 
 @with_config(extra="forbid")
