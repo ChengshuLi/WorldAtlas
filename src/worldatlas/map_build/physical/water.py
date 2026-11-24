@@ -13,7 +13,7 @@ import sys
 from collections import Counter
 from collections.abc import Callable, Sequence
 from pathlib import Path
-from typing import Any, cast
+from typing import cast
 
 import numpy as np
 import pyarrow
@@ -25,7 +25,7 @@ from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.execution.runtime import RunFilePins
 from worldatlas.map_build.inputs.configuration import WaterSettings
-from worldatlas.map_build.physical.sources import create_mask
+from worldatlas.map_build.physical.sources import ShardMask, create_mask
 from worldatlas.map_build.physical.water_batch import GeometryStatus, WaterBatch
 from worldatlas.shared.text import UNICODE_WHITESPACE, is_nonblank
 
@@ -264,8 +264,8 @@ def run(
     minimum_free_bytes: int,
     files: RunFilePins,
     emit: Callable[..., None] = print,
-) -> dict[str, Any]:
-    """Verify one water shard and rasterize its eligible polygons.
+) -> tuple[ShardMask, tuple[str, ...]]:
+    """Write one complete water mask and its report.
 
     Args:
         source: Local source GeoParquet file.
@@ -279,7 +279,14 @@ def run(
         emit: Progress callback.
 
     Returns:
-        Shard report with counts, input and output digests, and timing.
+        Mask and report file pins, followed by the rasterizer identity. The
+        identity contains the script checksum and engine name. For GDAL it
+        also includes the method, kernel checksum, and GDAL version.
+
+    Raises:
+        ValueError: Input validation fails, the input changes, or the mask is incomplete.
+            A completed raster pass with input issues writes a diagnostic report
+            before raising.
     """
     source = Path(source).resolve()
     output = Path(output).resolve()
@@ -382,18 +389,23 @@ def run(
     if invalid:
         with (out / 'invalid-feature-ids.json').open('x') as f:
             f.write(json.dumps(invalid, indent=2) + '\n')
+    source_row_count = pf.metadata.num_rows
+    complete = (
+        counts.get('rows') == source_row_count
+        and not invalid
+        and not counts['missing_classification']
+    )
+    script_sha256 = files.pin(__file__)['sha256']
+    mask = files.pin(out / 'water.tif')
+    kernel_provenance = kernel.provenance if kernel else None
     report = {
-        'status': (
-            'incomplete-input-issues'
-            if invalid or counts['missing_classification']
-            else 'candidate-only'
-        ),
+        'status': 'candidate-only' if complete else 'incomplete-input-issues',
         'source': str(source),
         'source_sha256': expected.lower(),
-        'rows_in_source': pf.metadata.num_rows,
-        'script_sha256': files.pin(__file__)['sha256'],
+        'rows_in_source': source_row_count,
+        'script_sha256': script_sha256,
         'rasterizer': engine,
-        'gdal_kernel': kernel.provenance if kernel else None,
+        'gdal_kernel': kernel_provenance,
         'batch_timings': kernel.timings if kernel else None,
         'counts': dict(counts),
         'batch_size': batch_size,
@@ -417,9 +429,23 @@ def run(
                 )
             ),
         },
-        'output_sha256': files.pin(out / 'water.tif')['sha256'],
+        'output_sha256': mask['sha256'],
         'limitations': 'Candidate water mask only, not a historical or complete physical mask. Review invalid features and compare against preserved references before use.',
     }
-    with (out / 'report.json').open('x') as f:
+    report_path = out / 'report.json'
+    with report_path.open('x') as f:
         f.write(json.dumps(report, indent=2) + '\n')
-    return report
+    if not complete:
+        raise ValueError(f'incomplete water shard: see {report_path}')
+
+    rasterizer_identity: tuple[str, ...] = (script_sha256, engine)
+    if kernel_provenance is not None:
+        rasterizer_identity += (
+            kernel_provenance['method'],
+            kernel_provenance['binding_sha256'],
+            kernel_provenance['gdal'],
+        )
+    return (
+        ShardMask(**mask, status='candidate-only', report=files.pin(report_path)),
+        rasterizer_identity,
+    )

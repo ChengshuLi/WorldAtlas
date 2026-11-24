@@ -139,8 +139,12 @@ class WaterShardTests(unittest.TestCase):
         p, digest = self.fixture()
         for n in (1, 10):
             out = self.path / f'o{n}'
-            self.rasterize(p, digest, out, self.config, self.grid, n)
-            report = json.loads((out / 'report.json').read_text())
+            mask, rasterizer = self.rasterize(p, digest, out, self.config, self.grid, n)
+            report_path = out / 'report.json'
+            report = json.loads(report_path.read_text())
+            self.assertEqual(mask['sha256'], report['output_sha256'])
+            self.assertEqual(mask['report']['sha256'], sha256_file(report_path))
+            self.assertEqual(rasterizer[:2], (report['script_sha256'], report['rasterizer']))
             self.assertEqual(report['policy'], {'method': 'overture-inland-subtype-v1'})
             self.assertEqual(report['counts']['polygons'], 3)
             self.assertEqual(report['counts']['excluded_classification'], 2)
@@ -786,10 +790,23 @@ class WaterShardTests(unittest.TestCase):
         reports = []
         for engine in ('gdal', 'python'):
             out = self.path / engine
-            reports.append(self.rasterize(source, sha256_file(source), out, self.config, self.grid, engine=engine))
+            with self.assertRaisesRegex(ValueError, 'incomplete water shard'):
+                self.rasterize(source, sha256_file(source), out, self.config, self.grid, engine=engine)
+            reports.append(json.loads((out / 'report.json').read_text()))
             self.assertEqual(json.loads((out / 'invalid-feature-ids.json').read_text()), ['lake'])
         self.assertEqual(reports[0]['counts'], reports[1]['counts'])
         self.assertTrue(all(r['status'] == 'incomplete-input-issues' for r in reports))
+
+    def test_unprocessed_rows_leave_an_incomplete_report(self):
+        source, digest = self.fixture()
+        out = self.path / 'incomplete-rows'
+        with mock.patch.object(build, 'gdal_batch'):
+            with self.assertRaisesRegex(ValueError, 'incomplete water shard'):
+                self.rasterize(source, digest, out, self.config, self.grid)
+        report = json.loads((out / 'report.json').read_text())
+        self.assertEqual(report['status'], 'incomplete-input-issues')
+        self.assertEqual(report['rows_in_source'], 6)
+        self.assertEqual(report['counts'].get('rows', 0), 0)
 
     def test_shard_input_declares_expected_grid_policy_and_geometry_format(self):
         source, digest = self.fixture()

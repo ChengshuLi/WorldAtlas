@@ -2,6 +2,7 @@
 
 from collections.abc import Callable
 from pathlib import Path
+from typing import Literal
 
 from osgeo import gdal, ogr, osr
 
@@ -9,6 +10,13 @@ from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.runtime import RunFilePins
 from worldatlas.map_build.inputs.configuration import LandLayer
 from worldatlas.shared.files import FilePin
+
+
+class ShardMask(FilePin):
+    """Pin one completed water mask and its report."""
+
+    status: Literal['candidate-only']
+    report: FilePin
 
 
 def checked_files(spec: LandLayer[FilePin], pins: RunFilePins) -> dict[str, str]:

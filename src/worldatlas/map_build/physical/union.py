@@ -6,7 +6,7 @@ import os
 import shutil
 from collections.abc import Callable, Sequence
 from pathlib import Path
-from typing import Any, Literal
+from typing import Any
 
 import numpy as np
 from osgeo import gdal
@@ -14,7 +14,7 @@ from osgeo import gdal
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.execution.runtime import RunFilePins
-from worldatlas.map_build.physical.sources import create_mask, open_mask
+from worldatlas.map_build.physical.sources import ShardMask, create_mask, open_mask
 from worldatlas.shared.files import FilePin
 
 gdal.UseExceptions()
@@ -60,13 +60,6 @@ def union_mask(ds: gdal.Dataset, water: np.ndarray, y: int) -> None:
         np.bitwise_or(view, arr.astype(np.uint8, copy=False), out=view)
 
 
-class ShardMask(FilePin):
-    """Pin one completed water shard mask and its report."""
-
-    status: Literal['candidate-only']
-    report: FilePin
-
-
 def run(
     configuration_sha256: str,
     output: Path | str,
@@ -86,7 +79,7 @@ def run(
         output: New directory for the combined mask and report.
         grid: Shared, validated physical grid.
         source_manifest: Saved list of raw water shards, pinned by checksum.
-        shards: Masks and report pins validated by the physical coordinator.
+        shards: Complete masks and report pins returned by the water rasterizer.
         minimum_free_bytes: Shared disk reserve in bytes.
         rows_per_block: Number of grid rows to union at a time.
         files: Attempt-local file checksum verifier.
@@ -128,8 +121,7 @@ def run(
     tif.FlushCache()
     tif = None
     masks = []
-    # The coordinator checked the report contents before the union. Check the
-    # same bytes are still present without parsing the reports again.
+    # Check that the mask and report bytes stayed fixed during the merge.
     files.verify([*shards, *(shard['report'] for shard in shards)])
     report = {
         'status': 'candidate-only',

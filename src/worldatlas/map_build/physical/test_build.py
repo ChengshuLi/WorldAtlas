@@ -18,6 +18,7 @@ import pyarrow.parquet as pq
 from osgeo import gdal, ogr
 from worldatlas.shared import r2
 from worldatlas.shared.r2 import R2Client
+from worldatlas.map_build.execution.runtime import RunFilePins
 from worldatlas.map_build.physical import build as b
 from worldatlas.map_build.test_support import cache_fixture_file, r2_file_pin
 from worldatlas.shared.files import pin_file, sha256_file, write_json
@@ -193,7 +194,8 @@ class PipelineTests(unittest.TestCase):
     def test_actual_kill_preserves_units_and_marks_timing_incomplete(self):
         out = self.root / 'actual-kill'
         marker = self.root / 'waiting'
-        code = """from worldatlas.map_build.physical import build as b
+        code = """from worldatlas.map_build.execution.runtime import RunFilePins
+from worldatlas.map_build.physical import build as b
 import pathlib, sys, time
 original = b.water_union.run
 def stage(*args, **options):
@@ -289,7 +291,7 @@ b.run(sys.argv[1], sys.argv[2])
         resumed = b.run(self.config, out, resume=True)
         self.assertEqual(resumed['physical_output_sha256'], original['physical_output_sha256'])
 
-    def test_shard_rasterizers_must_match_before_union_and_on_resume(self):
+    def test_resume_rejects_shards_from_different_rasterizer_versions(self):
         first = self.raw / 'water.parquet'
         second = self.raw / 'second.parquet'
         table = pq.read_table(first).replace_schema_metadata(
@@ -297,29 +299,44 @@ b.run(sys.argv[1], sys.argv[2])
         )
         pq.write_table(table, second)
         _, cached_second = self.set_water_sources(first, second)
-        self.cfg['inland_water']['rasterizer'] = 'python'
+        self.cfg['max_parallel_shards'] = 1
         self.config.write_text(json.dumps(self.cfg))
+        output = self.root / 'mixed'
+
+        def interrupt_second_shard(function, *args, **kwargs):
+            if function is WATER and args[0] == cached_second:
+                raise InterruptedError('second shard interrupted')
+            return function(*args, **kwargs)
+
+        with intercept_stages(interrupt_second_shard):
+            with self.assertRaisesRegex(InterruptedError, 'second shard interrupted'):
+                b.run(self.config, output)
+        checkpoints = output / 'checkpoints'
+        first_checkpoint = checkpoints / 'physical-shard-00000/complete.json'
+        first_receipt = first_checkpoint.read_bytes()
+        second_checkpoint = checkpoints / 'physical-shard-00001/complete.json'
+        self.assertFalse(second_checkpoint.exists())
+
+        previous_pin = RunFilePins.pin
+        rasterizer_path = Path(b.water.__file__).resolve()
+
+        def pin_new_rasterizer(files, path):
+            pin = previous_pin(files, path)
+            if Path(pin['path']) == rasterizer_path:
+                return dict(pin, sha256='f' * 64)
+            return pin
+
         message = 'inconsistent water shard rasterizers or kernels'
-
-        def change_producer(path):
-            doc = json.loads(path.read_bytes())
-            path.write_text(json.dumps(dict(doc, script_sha256='f' * 64)))
-
-        def run_mixed(function, *args, **kwargs):
-            result = function(*args, **kwargs)
-            if function is WATER and Path(args[0]) == cached_second:
-                change_producer(Path(args[2]) / 'report.json')
-            return result
-
-        mixed = self.root / 'mixed'
-        with intercept_stages(run_mixed):
+        with mock.patch.object(RunFilePins, 'pin', pin_new_rasterizer):
             with self.assertRaisesRegex(ValueError, message):
-                b.run(self.config, mixed)
-        self.assertFalse((mixed / 'union').exists())
+                b.run(self.config, output, resume=True)
+        self.assertEqual(first_checkpoint.read_bytes(), first_receipt)
+        self.assertTrue(second_checkpoint.exists())
+        self.assertFalse((output / 'union').exists())
 
         with intercept_stages(AssertionError('unexpected rebuild')):
             with self.assertRaisesRegex(ValueError, message):
-                b.run(self.config, mixed, resume=True)
+                b.run(self.config, output, resume=True)
 
     def test_completed_resume_revalidates_gdal_kernel_report(self):
         out = self.root / 'finished-gdal'
@@ -330,26 +347,6 @@ b.run(sys.argv[1], sys.argv[2])
         path.write_text(json.dumps(report))
         with self.assertRaisesRegex(ValueError, 'completed stage output changed: physical-shard-00000|checkpoint/input hash mismatch: .*shards/00000/report.json'):
             b.run(self.config, out, resume=True)
-
-    def test_invalid_rasterizer_reports_cannot_complete_a_shard(self):
-        for i, (changes, message) in enumerate((
-            ({'rasterizer': 'unknown'}, 'unknown water rasterizer'),
-            ({'gdal_kernel': {}}, 'invalid in-process GDAL water kernel'),
-        )):
-            with self.subTest(changes=changes):
-                out = self.root / f'bad-rasterizer-{i}'
-
-                def change_report(function, *args, **kwargs):
-                    result = function(*args, **kwargs)
-                    if function is WATER:
-                        report_path = Path(args[2]) / 'report.json'
-                        report = json.loads(report_path.read_bytes())
-                        report_path.write_text(json.dumps(report | changes))
-                    return result
-
-                with intercept_stages(change_report), self.assertRaisesRegex(ValueError, message):
-                    b.run(self.config, out)
-                self.assertFalse((out / 'checkpoints/physical-shard-00000/complete.json').exists())
 
     def test_complete_physical_stage_does_not_start_processes(self):
         with mock.patch.object(
@@ -816,7 +813,10 @@ b.run(sys.argv[1], sys.argv[2])
         out = self.root / 'incomplete'
         with self.assertRaisesRegex(ValueError, 'incomplete water shard'):
             b.run(self.config, out)
-        self.assertTrue((out / 'shards/00000/report.json').exists())
+        report = json.loads((out / 'shards/00000/report.json').read_text())
+        self.assertEqual(report['status'], 'incomplete-input-issues')
+        self.assertEqual(report['counts']['missing_classification'], 1)
+        self.assertFalse((out / 'checkpoints/physical-shard-00000/complete.json').exists())
         self.assertFalse((out / 'report.json').exists())
         self.assertFalse((out / 'physical').exists())
 

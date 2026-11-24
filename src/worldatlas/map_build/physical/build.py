@@ -4,7 +4,6 @@
 import argparse
 import hashlib
 import json
-import re
 import shutil
 from collections.abc import Callable, Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -29,10 +28,9 @@ from worldatlas.map_build.inputs.configuration import (
 )
 from worldatlas.map_build.physical import composition, land, water
 from worldatlas.map_build.physical import union as water_union
-from worldatlas.map_build.physical.union import ShardMask
+from worldatlas.map_build.physical.sources import ShardMask
 from worldatlas.shared import r2
 from worldatlas.shared.files import (
-    SHA256_PATTERN,
     FilePin,
     JSONValue,
     json_bytes,
@@ -412,7 +410,7 @@ class PhysicalBuild:
         name = f'shard-{index:05d}'
 
         def rasterize_shard() -> tuple[ShardMask, tuple[str, ...]]:
-            """Download if needed, rasterize, then check the saved shard report.
+            """Acquire the source and rasterize one complete water mask.
 
             Returns:
                 The verified mask and report pins, and the rasterizer identity.
@@ -420,7 +418,7 @@ class PhysicalBuild:
             source_path = cache.acquire(source)
             control.check_cancelled()
             with self.timing.measure('physical', f'rasterize-{name}'):
-                water.run(
+                return water.run(
                     source_path,
                     source['sha256'],
                     directory,
@@ -431,9 +429,6 @@ class PhysicalBuild:
                     files=self.files,
                     emit=control.emit,
                 )
-                return self._verify_water_shard(
-                    directory, water_config, index, source['sha256']
-                )
 
         receipt, rasterizer = self._run_task(
             name,
@@ -443,74 +438,6 @@ class PhysicalBuild:
             inputs=[water_config],
         )
         return receipt, tuple(rasterizer)
-
-    def _verify_water_shard(
-        self, directory: Path, water_config: FilePin, index: int, source_digest: str
-    ) -> tuple[ShardMask, tuple[str, ...]]:
-        """Read one shard's verified output pins and validate its reported inputs.
-
-        Args:
-            directory: Directory containing this shard's mask and report.
-            water_config: Pin of the settings used to rasterize the shard.
-            index: Zero-based position in the pinned source list.
-            source_digest: Expected SHA-256 of the source GeoParquet file.
-
-        Returns:
-            Verified mask and report pins, followed by the rasterizer identity.
-
-        Raises:
-            ValueError: The saved pins, actual bytes, or report disagree.
-        """
-        report_path = directory / 'report.json'
-        mask_path = directory / 'water.tif'
-        receipt = ShardMask(
-            path=str(mask_path),
-            sha256=self._checksum(mask_path),
-            status='candidate-only',
-            report=FilePin(path=str(report_path), sha256=self._checksum(report_path)),
-        )
-        item = read_json(report_path)
-        row_count = item.get('rows_in_source')
-        counts = item.get('counts', {})
-        script = item.get('script_sha256')
-        if (
-            item.get('status') != 'candidate-only'
-            or item.get('source_sha256') != source_digest
-            or item.get('configuration_sha256') != water_config['sha256']
-            or item.get('grid') != vars(self.grid)
-            or item.get('batch_size') != self.water_batch_size
-            or item.get('output_sha256') != receipt['sha256']
-            or item.get('invalid_feature_ids')
-            or counts.get('missing_classification', 0)
-            or counts.get('invalid_polygon', 0)
-            or type(row_count) is not int
-            or row_count < 0
-            or row_count != counts.get('rows')
-            or not isinstance(script, str)
-            or not re.fullmatch(SHA256_PATTERN, script)
-        ):
-            raise ValueError(f'incomplete water shard or mismatched report: {index}')
-        rasterizer = item.get('rasterizer')
-        if rasterizer == 'python':
-            return receipt, (script, rasterizer)
-        if rasterizer != 'gdal':
-            raise ValueError(f'unknown water rasterizer for shard: {index}')
-        kernel = item.get('gdal_kernel')
-        if (
-            not isinstance(kernel, dict)
-            or kernel.get('implementation') != 'python-gdal-api-v2'
-            or kernel.get('method') not in ('hybrid', 'tiled')
-            or not isinstance(kernel.get('binding_sha256'), str)
-            or not re.fullmatch(SHA256_PATTERN, kernel['binding_sha256'])
-        ):
-            raise ValueError(f'invalid in-process GDAL water kernel for shard: {index}')
-        return receipt, (
-            script,
-            rasterizer,
-            kernel['method'],
-            kernel['binding_sha256'],
-            kernel['gdal'],
-        )
 
     def _merge_water(
         self, water_config: FilePin, shards: Sequence[ShardMask]

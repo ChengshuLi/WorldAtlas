@@ -17,7 +17,7 @@ The standalone command gets coastline and inland-water files through `SourceCach
 
 ## How it works
 
-The physical build saves one settings file per step under `configs/`. The coastline, water-shard, union and composition reports record the checksum of the settings they used. Before combining water masks, the builder checks each shard report against the expected source, settings and grid. After combining them, it verifies that the input files still match their checksums.
+The physical build saves one settings file per step under `configs/`. The coastline, water-shard, union and composition reports record the checksum of the settings they used. Each water task checks that it processed all rows and saves a diagnostic report if input problems leave the mask incomplete. Before merging the masks, the builder checks that every shard used the same rasterizer. After the merge, it verifies that the input files still match their checksums.
 
 Each completed task has a receipt in the shared `checkpoints/` directory. Its receipt pins the task's inputs and outputs. The shared `timing-events.jsonl` records work and downloads. In a full build, both live at the run root alongside the receipts and timings for the other stages. In a standalone build, they live in its output directory. The standalone command prints timing with the grid report.
 
