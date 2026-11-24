@@ -32,7 +32,7 @@ ogr.UseExceptions()
 INLAND_WATER_SUBTYPE_POLICY = 'overture-inland-subtype-v1'
 
 
-def classifications(subtypes: pyarrow.Array) -> tuple[np.ndarray, int, int]:
+def classify_water_subtypes(subtypes: pyarrow.Array) -> tuple[np.ndarray, int, int]:
     """Classify a batch of water subtypes with Arrow.
 
     Args:
@@ -89,7 +89,7 @@ def gdal_batch(
         ValueError: A selected geometry is missing or malformed.
     """
     first_row = counts['rows']
-    eligible, missing, excluded = classifications(batch.column('subtype'))
+    eligible, missing, excluded = classify_water_subtypes(batch.column('subtype'))
     counts['rows'] += len(batch)
     if missing:
         counts['missing_classification'] += missing
@@ -198,25 +198,12 @@ def run(
         )
         # Release this batch before Arrow reads the next one.
         del batch
-        rss = 'unavailable'
-        try:
-            rss = next(
-                (
-                    line
-                    for line in Path('/proc/self/status').read_text().splitlines()
-                    if line.startswith('VmRSS:')
-                ),
-                'unavailable',
-            )
-        except OSError:
-            pass
         emit(
             json.dumps(
                 {
                     'rows': counts['rows'],
                     'polygons': counts['polygons'],
                     'invalid_polygon': counts['invalid_polygon'],
-                    'rss': rss,
                     'gdal_cache_used_bytes': gdal.GetCacheUsed(),
                 }
             ),

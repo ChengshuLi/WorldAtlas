@@ -46,11 +46,12 @@ class WaterShardTests(unittest.TestCase):
             True, False, True, True,
         ]
         for array in (pa.array(values), pa.array(values).dictionary_encode()):
-            eligible, missing, excluded = build.classifications(array)
+            eligible, missing, excluded = build.classify_water_subtypes(array)
             self.assertEqual(eligible.tolist(), expected)
             self.assertEqual(missing, len(UNICODE_WHITESPACE) + 3)
             self.assertEqual(excluded, 2)
-        self.assertEqual(build.classifications(pa.array([1, 2, None]))[0].tolist(), [0, 0, 0])
+        eligible, _, _ = build.classify_water_subtypes(pa.array([1, 2, None]))
+        self.assertEqual(eligible.tolist(), [0, 0, 0])
 
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
@@ -729,30 +730,6 @@ class WaterShardTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'free disk below configured reserve'):
             self.rasterize(p, digest, out, self.config, self.grid)
         self.assertFalse(out.exists())
-
-    def test_progress_can_report_rss_on_platforms_with_or_without_proc(self):
-        source, digest = self.fixture()
-        proc = Path('/proc/self/status')
-        normal_read = Path.read_text
-        for available in (False, True):
-            with self.subTest(available=available):
-                progress = []
-
-                def read(path, *args, **kwargs):
-                    if path != proc:
-                        return normal_read(path, *args, **kwargs)
-                    if not available:
-                        raise FileNotFoundError(proc)
-                    return 'Name:\tpython\nVmRSS:\t128 kB\n'
-
-                with mock.patch.object(Path, 'read_text', new=read):
-                    self.rasterize(
-                        source, digest, self.path / f'proc-{available}', self.config, self.grid,
-                        emit=lambda line, **_: progress.append(json.loads(line)),
-                    )
-                expected = 'VmRSS:\t128 kB' if available else 'unavailable'
-                self.assertTrue(progress)
-                self.assertTrue(all(item['rss'] == expected for item in progress))
 
     def test_water_shard_leaves_no_report_when_disk_space_drops_during_rasterization(self):
         source, digest = self.fixture()
