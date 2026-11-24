@@ -23,6 +23,8 @@ For inland water, the builder skips the `ocean` and `physical` subtypes. The oce
 
 Both rasterizers use GDAL's default polygon fill, which selects cells by their centres. The water rasterizer combines polygons in batches, and its report records the tile width in cells as `tile_size`.
 
+For each water batch, the rasterizer reads and checks the selected shapes before drawing. It lists which shapes can reach each tile and keeps the original edges needed to draw that tile. It then updates the water mask one tile at a time.
+
 The physical build saves one settings file per step under `configs/`. The coastline, water-shard, union and composition reports record the checksum of the settings they used. Each water task checks that it processed all rows. It identifies geometry problems by their zero-based row numbers in the original Parquet file. Invalid polygon rows are saved to `invalid-feature-rows.json` beside the shard report. Before merging the masks, the builder checks that every shard used the same rasterizer. After the merge, it verifies that the input files still match their checksums.
 
 Each completed task has a receipt in the shared `checkpoints/` directory. Its receipt pins the task's inputs and outputs. The shared `timing-events.jsonl` records work and downloads. In a full build, both live at the run root alongside the receipts and timings for the other stages. In a standalone build, they live in its output directory. The standalone command prints timing with the grid report.

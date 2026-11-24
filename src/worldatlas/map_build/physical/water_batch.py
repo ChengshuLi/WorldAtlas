@@ -8,6 +8,7 @@ import hashlib
 import math
 import struct
 import time
+from collections.abc import Iterable
 from enum import IntEnum
 from pathlib import Path
 from typing import cast
@@ -18,6 +19,7 @@ import pyarrow.compute as pc
 from osgeo import gdal, gdal_array, ogr
 
 import worldatlas.geodesy.ogr as geometry_io
+from worldatlas.map_build.core.grid import Grid
 
 
 def finite_points(
@@ -143,27 +145,233 @@ class GeometryStatus(IntEnum):
     NONFINITE = 6
 
 
+type ParsedPolygon = tuple[int, ogr.Geometry, int, tuple[float, float, float, float]]
+type TileGeometryRows = dict[tuple[int, int], list[int]]
+
+
+def _read_polygons(
+    geometry: pa.Array, selected: np.ndarray
+) -> tuple[list[ParsedPolygon], np.ndarray, int | None]:
+    """Read the polygons in one batch and record each row's status.
+
+    Args:
+        geometry: Arrow binary array of WKB shapes.
+        selected: Boolean array indicating which rows passed the subtype check.
+
+    Returns:
+        A list of (row index, shape, GDAL geometry type, extent), an array of
+        uint8 status codes, and the index of the first fatal error or None.
+        Extents are in (west, south, east, north) order, in degrees. A fatal
+        error returns an empty polygon list and marks later rows as skipped.
+    """
+    valid_bits, byte_offsets, geometry_bytes = geometry.buffers()
+    count = len(geometry)
+    status = np.zeros(count, dtype=np.uint8)
+    offsets = np.frombuffer(
+        byte_offsets,
+        dtype=np.int64 if pa.types.is_large_binary(geometry.type) else np.int32,
+    )
+    # An Arrow slice shares its buffers with the original array.
+    start, end = geometry.offset, geometry.offset + count
+    starts = offsets[start:end]
+    lengths = offsets[start + 1 : end + 1] - starts
+    data = (
+        np.frombuffer(geometry_bytes, dtype=np.uint8)
+        if geometry_bytes is not None
+        else np.empty(0, dtype=np.uint8)
+    )
+    selected = np.asarray(selected, dtype=np.bool_)
+    has_geometry = np.ones(count, dtype=np.bool_)
+    if valid_bits is not None:
+        bits = np.frombuffer(valid_bits, dtype=np.uint8)
+        positions = np.arange(start, end)
+        has_geometry = (bits[positions // 8] & (1 << (positions % 8))) != 0
+
+    # A finite point needs no GDAL object because it cannot fill an area.
+    points = finite_points(data, starts, lengths, selected & has_geometry)
+    status[points] = GeometryStatus.NON_POLYGON
+    polygons: list[ParsedPolygon] = []
+    max_wkb_size = np.iinfo(np.int32).max
+    for index in np.flatnonzero(selected & ~points):
+        if not has_geometry[index]:
+            failure = GeometryStatus.MISSING
+            break
+        if not 0 < lengths[index] <= max_wkb_size:
+            failure = GeometryStatus.MALFORMED
+            break
+        try:
+            shape = ogr.CreateGeometryFromWkb(geometry[index].as_py())
+        except RuntimeError:
+            failure = GeometryStatus.MALFORMED
+            break
+        if shape is None or shape.IsEmpty():
+            failure = GeometryStatus.MALFORMED
+            break
+        kind = ogr.GT_Flatten(shape.GetGeometryType())
+        if kind not in (ogr.wkbPolygon, ogr.wkbMultiPolygon):
+            status[index] = GeometryStatus.NON_POLYGON
+            continue
+        if not shape.IsValid():
+            status[index] = GeometryStatus.INVALID_POLYGON
+            continue
+        west, east, south, north = shape.GetEnvelope()
+        extent = (west, south, east, north)
+        if not all(map(math.isfinite, extent)):
+            failure = GeometryStatus.NONFINITE
+            break
+        status[index] = GeometryStatus.POLYGON
+        polygons.append((int(index), shape, kind, extent))
+    else:
+        return polygons, status, None
+
+    # The point scan ran in advance. Clear any results beyond the first failure.
+    status[index] = failure
+    status[index + 1 :] = GeometryStatus.SKIPPED
+    return [], status, int(index)
+
+
+def _index_water_tiles(
+    geometry: pa.Array, polygons: list[ParsedPolygon], grid: Grid, tile: int
+) -> tuple[pa.Array, TileGeometryRows]:
+    """List the geometry rows to draw for each tile.
+
+    Args:
+        geometry: Arrow binary array of the original WKB shapes.
+        polygons: Valid polygon rows, in source order.
+        grid: Shared physical build grid.
+        tile: Tile width and height in cells before clipping to the grid.
+
+    Returns:
+        An Arrow array with reduced shapes appended, and a mapping from
+        (tile column, tile row) to indices into that array.
+        For example, if there are three original rows, the first reduced
+        shape is at row index 3.
+    """
+    tiles: TileGeometryRows = {}
+    strip_shapes = []
+    for index, shape, kind, extent in polygons:
+        window = grid.window_for_extent(extent)
+        if window is None:
+            continue
+        first_column, end_column, first_row, end_row = window
+        first_tile_row = first_row // tile
+        last_tile_row = (end_row - 1) // tile
+        candidate_tiles: Iterable[tuple[int, int]]
+        if kind == ogr.wkbMultiPolygon:
+            # Index each piece separately so gaps between pieces add no tiles.
+            part_tiles = set()
+            for part in range(shape.GetGeometryCount()):
+                component = cast(ogr.Geometry, shape.GetGeometryRef(part))
+                if component.IsEmpty():
+                    continue
+                west, east, south, north = component.GetEnvelope()
+                part_window = grid.window_for_extent((west, south, east, north))
+                if part_window is not None:
+                    left, right, top, bottom = part_window
+                    part_tiles.update(
+                        (tile_row, tile_column)
+                        for tile_row in range(top // tile, (bottom - 1) // tile + 1)
+                        for tile_column in range(left // tile, (right - 1) // tile + 1)
+                    )
+            candidate_tiles = sorted(part_tiles)
+        else:
+            candidate_tiles = (
+                (tile_row, tile_column)
+                for tile_row in range(first_tile_row, last_tile_row + 1)
+                for tile_column in range(
+                    first_column // tile, (end_column - 1) // tile + 1
+                )
+            )
+
+        # Tiles in the same row share one reduced shape for this polygon.
+        strip_indices: dict[int, int | None] = {}
+        ring_coordinates = {}
+        for tile_row, tile_column in candidate_tiles:
+            geometry_row: int | None = index
+            if first_tile_row != last_tile_row:
+                if tile_row not in strip_indices:
+                    wkb = strip_wkb(
+                        shape,
+                        grid.north - tile_row * tile * grid.step,
+                        grid.north
+                        - min(grid.height, (tile_row + 1) * tile) * grid.step,
+                        grid.step,
+                        ring_coordinates,
+                        (),
+                    )
+                    strip_indices[tile_row] = (
+                        len(geometry) + len(strip_shapes) if wkb is not None else None
+                    )
+                    if wkb is not None:
+                        strip_shapes.append(wkb)
+                geometry_row = strip_indices[tile_row]
+            if geometry_row is not None:
+                tiles.setdefault((tile_column, tile_row), []).append(geometry_row)
+    if strip_shapes:
+        geometry = pa.concat_arrays(
+            [geometry, pa.array(strip_shapes, type=geometry.type)]
+        )
+    return geometry, tiles
+
+
+def _draw_water_tiles(
+    raster: gdal.Dataset,
+    geometry: pa.Array,
+    tiles: TileGeometryRows,
+    grid: Grid,
+    tile: int,
+) -> None:
+    """Draw each tile's polygons over the water already present in that tile.
+
+    Args:
+        raster: Target water mask updated in place.
+        geometry: Arrow binary array of shapes referenced by the tiles.
+        tiles: Tile coordinates mapped to rows in the geometry array.
+        grid: Shared physical build grid.
+        tile: Tile width and height in cells before clipping to the grid.
+
+    Raises:
+        ValueError: GDAL cannot position or draw a tile.
+    """
+    srs = raster.GetSpatialRef()
+    band = raster.GetRasterBand(1)
+    for (tile_column, tile_row), indices in tiles.items():
+        x, y = tile_column * tile, tile_row * tile
+        width = min(tile, grid.width - x)
+        height = min(tile, grid.height - y)
+        values = band.ReadAsArray(x, y, width, height, buf_type=gdal.GDT_Byte)
+        target = gdal_array.OpenArray(values)
+        if target is None or target.SetGeoTransform(
+            (
+                grid.west + x * grid.step,
+                grid.step,
+                0,
+                grid.north - y * grid.step,
+                0,
+                -grid.step,
+            )
+        ):
+            raise ValueError('GDAL tile transform failed')
+        if srs is not None:
+            target.SetSpatialRef(srs)
+        dataset, layer = geometry_io.geometry_layer(
+            pc.take(geometry, pa.array(indices, type=pa.int64())), srs
+        )
+        # The dataset owns the temporary layer while GDAL draws it.
+        with dataset:
+            if gdal.RasterizeLayer(target, [1], layer, burn_values=[1]):
+                raise ValueError('GDAL water geometry rasterization failed')
+        target.FlushCache()
+        band.WriteArray(values, x, y)
+
+
 class WaterBatch:
     """Mark water from Arrow geometry batches using GDAL and NumPy tiles."""
 
-    def __init__(self, method: str = 'hybrid') -> None:
-        """Prepare the batch rasterizer and its timing counters.
-
-        Args:
-            method: "hybrid" to batch polygon burns or "tiled" to limit them to
-                individual tiles.
-
-        Raises:
-            ValueError: The rasterization method is unsupported.
-        """
-        if method not in ('hybrid', 'tiled'):
-            raise ValueError(
-                'method must be hybrid or tiled; global vector mode does not preserve tile-local pixel-center ties'
-            )
-        self.method = method
+    def __init__(self) -> None:
+        """Prepare the batch rasterizer and its timing counters."""
         self.provenance = {
             'implementation': 'python-gdal-api-v2',
-            'method': method,
             'binding_sha256': hashlib.sha256(
                 Path(__file__).read_bytes() + Path(geometry_io.__file__).read_bytes()
             ).hexdigest(),
@@ -176,7 +384,7 @@ class WaterBatch:
         raster: gdal.Dataset,
         geometry: pa.Array,
         selected: np.ndarray,
-        grid: tuple[int, int, float, float, float],
+        grid: Grid,
         tile: int,
     ) -> tuple[np.ndarray, int | None]:
         """Mark selected polygon cells in the output raster.
@@ -184,14 +392,17 @@ class WaterBatch:
         Args:
             raster: Target raster updated in place.
             geometry: Arrow column of WKB geometry byte strings.
-            selected: Array marking which rows to inspect.
-            grid: (width, height, west, north, step).
-            tile: Tile size in cells.
+            selected: Boolean array indicating which rows to inspect.
+            grid: Shared physical build grid.
+            tile: Tile width and height in cells before clipping to the grid.
 
         Returns:
-            (status, failed_index), with a uint8 status per source row. A
-            missing or unreadable geometry sets failed_index to its row.
-            None means processing reached the end of the batch.
+            (status, failed_row), with a uint8 status per source row. If a
+            geometry cannot be read, failed_row is its index and no tiles are
+            drawn. None means the whole batch was processed.
+
+        Raises:
+            ValueError: The Arrow column has the wrong type or GDAL fails to draw.
         """
         if isinstance(geometry, pa.ExtensionArray) and geometry.type.extension_name in (
             'geoarrow.wkb',
@@ -202,165 +413,15 @@ class WaterBatch:
             pa.types.is_binary(geometry.type) or pa.types.is_large_binary(geometry.type)
         ):
             raise ValueError('GeoParquet geometry must be a binary WKB array')
+
         started = time.perf_counter()
-        width, height, west, north, step = grid
-        width = int(width)
-        height = int(height)
-        buffers = geometry.buffers()
-        count = len(geometry)
-        status = np.zeros(count, dtype=np.uint8)
-        offsets = np.frombuffer(
-            buffers[1],
-            dtype=np.int64 if pa.types.is_large_binary(geometry.type) else np.int32,
-        )
-        starts = offsets[geometry.offset : geometry.offset + count]
-        lengths = offsets[geometry.offset + 1 : geometry.offset + count + 1] - starts
-        data = (
-            np.frombuffer(buffers[2], dtype=np.uint8)
-            if buffers[2] is not None
-            else np.empty(0, dtype=np.uint8)
-        )
-        selected = np.asarray(selected, dtype=np.bool_)
-        valid = np.ones(count, dtype=np.bool_)
-        if buffers[0] is not None:
-            bits = np.frombuffer(buffers[0], dtype=np.uint8)
-            positions = np.arange(count) + geometry.offset
-            valid = (bits[positions // 8] & (1 << (positions % 8))) != 0
-        points = finite_points(data, starts, lengths, selected & valid)
-        status[points] = GeometryStatus.NON_POLYGON
-        tiles = {}
-        coordinates = {}
-        views = []
-        parsed = []
-
-        def fail(index: int | np.integer, code: int) -> tuple[np.ndarray, int]:
-            """Stop the batch and record the first fatal geometry error.
-
-            Args:
-                index: Index of the failed geometry.
-                code: Status to record for this error.
-
-            Returns:
-                Status array with later rows cleared, and the failed index.
-            """
-            status[index] = code
-            status[index + 1 :] = GeometryStatus.SKIPPED
-            return status, int(index)
-
-        def extent(
-            bounds: tuple[float, float, float, float],
-        ) -> tuple[int, int, int, int]:
-            """Convert a polygon's bounding box to a clipped grid window.
-
-            Args:
-                bounds: GDAL envelope as (west, east, south, north).
-
-            Returns:
-                Inclusive (first_column, last_column, first_row, last_row).
-            """
-            xmin, xmax, ymin, ymax = bounds
-            return (
-                max(0, math.floor((xmin - west) / step)),
-                min(width - 1, math.floor((xmax - west) / step)),
-                max(0, math.floor((north - ymax) / step)),
-                min(height - 1, math.floor((north - ymin) / step)),
-            )
-
-        for i in np.flatnonzero(selected & ~points):
-            if not valid[i]:
-                return fail(i, GeometryStatus.MISSING)
-            length = int(lengths[i])
-            if length <= 0 or length > np.iinfo(np.int32).max:
-                return fail(i, GeometryStatus.MALFORMED)
-            try:
-                raw = ogr.CreateGeometryFromWkb(geometry[i].as_py())
-            except RuntimeError:
-                return fail(i, GeometryStatus.MALFORMED)
-            if raw is None or raw.IsEmpty():
-                return fail(i, GeometryStatus.MALFORMED)
-            kind = ogr.GT_Flatten(raw.GetGeometryType())
-            if kind not in (ogr.wkbPolygon, ogr.wkbMultiPolygon):
-                status[i] = GeometryStatus.NON_POLYGON
-                continue
-            if not raw.IsValid():
-                status[i] = GeometryStatus.INVALID_POLYGON
-                continue
-            bounds = raw.GetEnvelope()
-            if not all(map(math.isfinite, bounds)):
-                return fail(i, GeometryStatus.NONFINITE)
-            status[i] = GeometryStatus.POLYGON
-            parsed.append((int(i), raw, kind, bounds))
-        for i, raw, kind, bounds in parsed:
-            x0, x1, y0, y1 = extent(bounds)
-            if x0 > x1 or y0 > y1:
-                continue
-            spans_rows = y0 // tile != y1 // tile
-            strips = {}
-            if self.method == 'hybrid' and kind == ogr.wkbMultiPolygon:
-                candidates = set()
-                for part in range(raw.GetGeometryCount()):
-                    component = raw.GetGeometryRef(part)
-                    if component.IsEmpty():
-                        continue
-                    p, q, r, s = extent(component.GetEnvelope())
-                    if p <= q and r <= s:
-                        candidates.update(
-                            (ty, tx)
-                            for ty in range(r // tile, s // tile + 1)
-                            for tx in range(p // tile, q // tile + 1)
-                        )
-                candidates = sorted(candidates)
-            else:
-                candidates = (
-                    (ty, tx)
-                    for ty in range(y0 // tile, y1 // tile + 1)
-                    for tx in range(x0 // tile, x1 // tile + 1)
-                )
-            for ty, tx in candidates:
-                view = i
-                if self.method == 'hybrid' and spans_rows:
-                    if ty not in strips:
-                        wkb = strip_wkb(
-                            raw,
-                            north - ty * tile * step,
-                            north - min(height, (ty + 1) * tile) * step,
-                            step,
-                            coordinates,
-                            (i,),
-                        )
-                        strips[ty] = count + len(views) if wkb is not None else None
-                        if wkb is not None:
-                            views.append(wkb)
-                    view = strips[ty]
-                if view is not None:
-                    tiles.setdefault((tx, ty), []).append(view)
-        validated = time.perf_counter()
-        self.timings['parse_validate_index_seconds'] += validated - started
-        if views:
-            geometry = pa.concat_arrays([geometry, pa.array(views, type=geometry.type)])
-        srs = raster.GetSpatialRef()
-        for (tx, ty), indices in tiles.items():
-            x, y = tx * tile, ty * tile
-            w, h = min(tile, width - x), min(tile, height - y)
-            values = raster.GetRasterBand(1).ReadAsArray(
-                x, y, w, h, buf_type=gdal.GDT_Byte
-            )
-            target = gdal_array.OpenArray(values)
-            if target is None or target.SetGeoTransform(
-                (west + x * step, step, 0, north - y * step, 0, -step)
-            ):
-                raise ValueError('GDAL tile transform failed')
-            if srs is not None:
-                target.SetSpatialRef(srs)
-            dataset, layer = geometry_io.geometry_layer(
-                pc.take(geometry, pa.array(indices, type=pa.int64())), srs
-            )
-            if gdal.RasterizeLayer(target, [1], layer, burn_values=[1]):
-                raise ValueError('GDAL water geometry rasterization failed')
-            layer = None
-            dataset = None
-            target.FlushCache()
-            target = None
-            raster.GetRasterBand(1).WriteArray(values, x, y)
-        self.timings['tile_burn_seconds'] += time.perf_counter() - validated
+        polygons, status, failed_row = _read_polygons(geometry, selected)
+        if failed_row is not None:
+            return status, failed_row
+        geometry, tiles = _index_water_tiles(geometry, polygons, grid, tile)
+        del polygons
+        ready_to_draw = time.perf_counter()
+        self.timings['parse_validate_index_seconds'] += ready_to_draw - started
+        _draw_water_tiles(raster, geometry, tiles, grid, tile)
+        self.timings['tile_burn_seconds'] += time.perf_counter() - ready_to_draw
         return status, None

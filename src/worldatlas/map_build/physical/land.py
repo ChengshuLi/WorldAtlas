@@ -2,7 +2,6 @@
 """Rasterize hash-pinned EPSG:4326 polygon land into a one-bit candidate mask."""
 
 import json
-import math
 import os
 import shutil
 from collections.abc import Callable
@@ -54,8 +53,6 @@ def _index_land_layer(
     """
     strip_count = (grid.height + strip_rows - 1) // strip_rows
     feature_ids_by_strip: list[list[int]] = [[] for _ in range(strip_count)]
-    west = grid.west
-    east = west + grid.width * grid.step
     dataset, layer = open_coastline_layer(spec)
     feature_count = 0
     for feature in layer:
@@ -77,14 +74,13 @@ def _index_land_layer(
         feature_count += 1
 
         # Index bounds so GDAL only fetches polygons that might touch the strip.
-        xmin, xmax, ymin, ymax = geometry.GetEnvelope()
-        if xmax < west or xmin > east:
+        west, east, south, north = geometry.GetEnvelope()
+        window = grid.window_for_extent((west, south, east, north))
+        if window is None:
             continue
-        first_row = max(0, math.floor((grid.north - ymax) / grid.step))
-        last_row = min(grid.height - 1, math.floor((grid.north - ymin) / grid.step))
-        if first_row <= last_row:
-            for strip in range(first_row // strip_rows, last_row // strip_rows + 1):
-                feature_ids_by_strip[strip].append(feature_id)
+        _, _, first_row, end_row = window
+        for strip in range(first_row // strip_rows, (end_row - 1) // strip_rows + 1):
+            feature_ids_by_strip[strip].append(feature_id)
 
     if not feature_count:
         raise ValueError('selection yielded no features')

@@ -39,3 +39,9 @@ class GridTests(unittest.TestCase):
                 self.assertEqual(grid.cell_at(math.nextafter(-180, 0), 90), (0, 0))
                 self.assertIsNone(grid.cell_at(math.nextafter(180, math.inf), 90))
                 self.assertEqual(grid.extent(grid.bounds)[2], 180)
+
+    def test_window_for_extent_clips_to_the_grid_without_wrapping(self):
+        grid = Grid(8, 3, 45)
+        self.assertEqual(grid.window_for_extent((-200, 0, -135, 100)), (0, 2, 0, 3))
+        self.assertIsNone(grid.window_for_extent((180, 0, 185, 45)))
+        self.assertIsNone(grid.window_for_extent((0, -80, 20, -50)))

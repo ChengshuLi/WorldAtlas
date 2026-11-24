@@ -74,7 +74,6 @@ class WaterSettings(TypedDict):
     rasterizer: NotRequired[Literal["gdal"]]
     batch_size: NotRequired[PositiveInt]
     tile_size: NotRequired[Annotated[int, Field(ge=1, le=4096)]]
-    batch_method: NotRequired[Literal["hybrid", "tiled"]]
     selection_notes: NotRequired[NonEmptyText]
     schema: NotRequired[Literal["water-shard-candidate-v2"]]
 

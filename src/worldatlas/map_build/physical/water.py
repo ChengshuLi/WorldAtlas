@@ -84,7 +84,7 @@ def gdal_batch(
     batch: pyarrow.RecordBatch,
     counts: Counter[str],
     invalid_rows: list[int],
-    grid: tuple[int, int, float, float, float],
+    grid: Grid,
     tile: int,
     source: Path,
 ) -> None:
@@ -96,7 +96,7 @@ def gdal_batch(
         batch: Source rows containing subtypes and WKB.
         counts: Row and classification counts to update.
         invalid_rows: Zero-based file row numbers to append for invalid polygons.
-        grid: (width, height, west, north, step).
+        grid: Shared physical build grid.
         tile: Tile size in cells.
         source: Path to the Parquet file, used in errors.
 
@@ -158,7 +158,7 @@ def run(
 
     Returns:
         Mask and report file pins, followed by the rasterizer identity. The
-        identity contains the script checksum, engine name, method, kernel
+        identity contains the script checksum, engine name, kernel
         checksum, and GDAL version.
 
     Raises:
@@ -168,7 +168,6 @@ def run(
     """
     source = Path(source).resolve()
     output = Path(output).resolve()
-    dimensions = (grid.width, grid.height, grid.west, grid.north, grid.step)
     tile = settings.get('tile_size', 1024)
     reserve = minimum_free_bytes
     batch_size = settings.get('batch_size', 8192)
@@ -192,7 +191,7 @@ def run(
         raise ValueError('free disk below configured reserve')
     os.mkdir(output)
     out = Path(output)
-    kernel = WaterBatch(settings.get('batch_method', 'hybrid'))
+    kernel = WaterBatch()
     raster = create_mask(out / 'water.tif', grid)
     counts = Counter()
     invalid_rows: list[int] = []
@@ -208,9 +207,7 @@ def run(
             raise ValueError(
                 'free disk below configured reserve; partial output preserved'
             )
-        gdal_batch(
-            kernel, raster, batch, counts, invalid_rows, dimensions, tile, source
-        )
+        gdal_batch(kernel, raster, batch, counts, invalid_rows, grid, tile, source)
         # Release this batch before Arrow reads the next one.
         del batch
         emit(
@@ -284,7 +281,6 @@ def run(
     rasterizer_identity = (
         script_sha256,
         'gdal',
-        kernel_provenance['method'],
         kernel_provenance['binding_sha256'],
         kernel_provenance['gdal'],
     )

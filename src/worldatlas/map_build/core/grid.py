@@ -140,3 +140,27 @@ class Grid:
             180.0 if x1 == self.width else self.west + x1 * self.step,
             self.north - y0 * self.step,
         )
+
+    def window_for_extent(
+        self, extent: tuple[float, float, float, float]
+    ) -> tuple[int, int, int, int] | None:
+        """Find the grid rows and columns a geographic extent could touch.
+
+        The last row or column can be included when the extent ends exactly
+        at its edge. The rasterizer determines which cells are covered.
+
+        Args:
+            extent: (west, south, east, north) in degrees, without wrapping.
+
+        Returns:
+            (first_column, end_column, first_row, end_row) with exclusive ends,
+            clipped to the grid. None means the extent covers no grid cells.
+        """
+        west, south, east, north = extent
+        first_column = max(0, math.floor((west - self.west) / self.step))
+        end_column = min(self.width, math.floor((east - self.west) / self.step) + 1)
+        first_row = max(0, math.floor((self.north - north) / self.step))
+        end_row = min(self.height, math.floor((self.north - south) / self.step) + 1)
+        if first_column >= end_column or first_row >= end_row:
+            return None
+        return first_column, end_column, first_row, end_row

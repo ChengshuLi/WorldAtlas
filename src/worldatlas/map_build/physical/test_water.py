@@ -247,13 +247,13 @@ class WaterShardTests(unittest.TestCase):
             raster = gdal.GetDriverByName('MEM').Create('', 8, 4, 1, gdal.GDT_Byte)
             raster.SetGeoTransform((-180, 45, 0, 90, 0, -45))
             status, failed = kernel.burn(
-                raster, geometry, [1, 0, 1], [8, 4, -180, 90, 45], 4
+                raster, geometry, [1, 0, 1], Grid(8, 4, 45), 4
             )
             self.assertIsNone(failed)
             self.assertEqual(status.tolist(), [1, 0, 1])
             self.assertEqual(int(raster.ReadAsArray().sum()), 1)
             status, failed = kernel.burn(
-                raster, geometry, [1, 1, 1], [8, 4, -180, 90, 45], 4
+                raster, geometry, [1, 1, 1], Grid(8, 4, 45), 4
             )
             self.assertEqual(failed, 1)
             self.assertEqual(status.tolist(), [1, 5, 0])
@@ -283,7 +283,7 @@ class WaterShardTests(unittest.TestCase):
         ):
             raster = gdal.GetDriverByName('MEM').Create('', 8, 4, 1, gdal.GDT_Byte)
             status, failed = kernel.burn(
-                raster, pa.array(values), selected, [8, 4, -180, 90, 45], 4
+                raster, pa.array(values), selected, Grid(8, 4, 45), 4
             )
             self.assertEqual(status.tolist(), expected)
             self.assertEqual(failed, 1 if expected == [3, 5, 0] else None)
@@ -350,7 +350,7 @@ class WaterShardTests(unittest.TestCase):
                 raster = gdal.GetDriverByName('MEM').Create('', 8, 4, 1, gdal.GDT_Byte)
                 raster.SetGeoTransform((-180, 45, 0, 90, 0, -45))
                 status, failed = kernel.burn(
-                    raster, pa.array([value]), [1], [8, 4, -180, 90, 45], 4
+                    raster, pa.array([value]), [1], Grid(8, 4, 45), 4
                 )
                 self.assertEqual(status.tolist(), [expected])
                 self.assertEqual(failed, 0 if expected == 2 else None)
@@ -364,7 +364,9 @@ class WaterShardTests(unittest.TestCase):
         with mock.patch.object(
             ogr, 'CreateGeometryFromWkb', side_effect=AssertionError('finite point was parsed')
         ):
-            status, failed = kernel.burn(raster, pa.array(points), [1, 1], [8, 4, -180, 90, 45], 4)
+            status, failed = kernel.burn(
+                raster, pa.array(points), [1, 1], Grid(8, 4, 45), 4
+            )
         self.assertEqual(status.tolist(), [3, 3])
         self.assertIsNone(failed)
         polygon = bytes(
@@ -382,7 +384,7 @@ class WaterShardTests(unittest.TestCase):
 
         with mock.patch.object(ogr, 'CreateGeometryFromWkb', side_effect=tracked):
             status, failed = kernel.burn(
-                raster, pa.array([polygon, None, polygon]), [1, 1, 1], [8, 4, -180, 90, 45], 4
+                raster, pa.array([polygon, None, polygon]), [1, 1, 1], Grid(8, 4, 45), 4
             )
         self.assertEqual(status.tolist(), [1, 5, 0])
         self.assertEqual(failed, 1)
@@ -394,22 +396,23 @@ class WaterShardTests(unittest.TestCase):
         out = self.path / 'edge-kernel'
         out.mkdir()
         kernel = WaterBatch()
-        raster = gdal.GetDriverByName('MEM').Create('', 7, 3, 1, gdal.GDT_Byte)
+        grid = Grid(8, 4, 45)
+        raster = gdal.GetDriverByName('MEM').Create('', 8, 4, 1, gdal.GDT_Byte)
         raster.SetGeoTransform((-180, 45, 0, 90, 0, -45))
-        initial = np.zeros((3, 7), dtype=np.uint8)
+        initial = np.zeros((4, 8), dtype=np.uint8)
         initial[0, 0] = 1
         raster.GetRasterBand(1).WriteArray(initial)
         polygon = bytes(
             ogr.CreateGeometryFromWkt(
-                'POLYGON ((45 0,135 0,135 -45,45 -45,45 0))'
+                'POLYGON ((90 -45,180 -45,180 -90,90 -90,90 -45))'
             ).ExportToWkb()
         )
         status, failed = kernel.burn(
-            raster, pa.array([polygon]), [1], [7, 3, -180, 90, 45], 4
+            raster, pa.array([polygon]), [1], grid, 3
         )
         self.assertIsNone(failed)
         self.assertEqual(status.tolist(), [1])
-        initial[2, 5:7] = 1
+        initial[3, 6:8] = 1
         np.testing.assert_array_equal(raster.ReadAsArray(), initial)
 
     def test_water_kernel_accepts_tagged_wkb_and_rejects_other_arrow_arrays(self):
@@ -421,7 +424,7 @@ class WaterShardTests(unittest.TestCase):
                 return b''
 
         kernel = WaterBatch()
-        grid = (8, 4, -180, 90, 45)
+        grid = Grid(8, 4, 45)
         raster = gdal.GetDriverByName('MEM').Create('', 8, 4, 1, gdal.GDT_Byte)
         raster.SetGeoTransform((-180, 45, 0, 90, 0, -45))
         point = ogr.CreateGeometryFromWkt('POINT (12 34)')
@@ -436,7 +439,7 @@ class WaterShardTests(unittest.TestCase):
 
     def test_tile_setup_and_rasterization_errors_do_not_write_water(self):
         kernel = WaterBatch()
-        grid = (8, 4, -180, 90, 45)
+        grid = Grid(8, 4, 45)
         raster = gdal.GetDriverByName('MEM').Create('', 8, 4, 1, gdal.GDT_Byte)
         raster.SetGeoTransform((-180, 45, 0, 90, 0, -45))
         polygon = ogr.CreateGeometryFromWkt(
@@ -454,7 +457,7 @@ class WaterShardTests(unittest.TestCase):
 
     def test_multipart_water_skips_empty_and_outside_parts(self):
         kernel = WaterBatch()
-        grid = (8, 4, -180, 90, 45)
+        grid = Grid(8, 4, 45)
         raster = gdal.GetDriverByName('MEM').Create('', 8, 4, 1, gdal.GDT_Byte)
         raster.SetGeoTransform((-180, 45, 0, 90, 0, -45))
         polygon = ogr.CreateGeometryFromWkt(
@@ -479,11 +482,13 @@ class WaterShardTests(unittest.TestCase):
         )
         geometry = pa.array([bytes(polygon.ExportToWkb())])
         with mock.patch.object(ogr.Geometry, 'GetEnvelope', return_value=(np.nan, 0, 0, 0)):
-            status, failure = WaterBatch().burn(raster, geometry, [1], (8, 4, -180, 90, 45), 1)
+            status, failure = WaterBatch().burn(
+                raster, geometry, [1], Grid(8, 4, 45), 1
+            )
         self.assertEqual((status.tolist(), failure), ([6], 0))
         self.assertFalse(raster.ReadAsArray().any())
 
-    def test_hybrid_global_burn_matches_local_tiles_at_pixel_centers(self):
+    def test_water_mask_at_pixel_centres_across_tile_edges(self):
         p, _ = self.fixture()
         metadata = pq.read_schema(p).metadata
         cfg = json.loads(self.config.read_text())
@@ -506,12 +511,13 @@ class WaterShardTests(unittest.TestCase):
                         }
                     )
         pq.write_table(pa.Table.from_pylist(rows).replace_schema_metadata(metadata), p)
-        for method in ('hybrid', 'tiled'):
-            self.config.write_text(json.dumps(dict(cfg, batch_method=method)))
-            self.rasterize(p, sha256_file(p), self.path / method, self.config, self.grid, 19)
+        out = self.path / 'tile-edges'
+        self.rasterize(p, sha256_file(p), out, self.config, self.grid, 19)
+        expected = np.zeros((self.grid.height, self.grid.width), dtype=np.uint8)
+        for first, end in ((0, 17), (31, 40), (60, 69)):
+            expected[:20, first:end] = 1
         np.testing.assert_array_equal(
-            gdal.Open(str(self.path / 'tiled/water.tif')).ReadAsArray(),
-            gdal.Open(str(self.path / 'hybrid/water.tif')).ReadAsArray(),
+            gdal.Open(str(out / 'water.tif')).ReadAsArray(), expected
         )
 
     def test_gdal_rejects_bad_and_empty_wkb_without_burning_batch(self):
@@ -531,13 +537,13 @@ class WaterShardTests(unittest.TestCase):
             raster = gdal.GetDriverByName('MEM').Create('', 8, 4, 1, gdal.GDT_Byte)
             raster.SetGeoTransform((-180, 45, 0, 90, 0, -45))
             status, failed = kernel.burn(
-                raster, pa.array([polygon, bad]), [1, 1], [8, 4, -180, 90, 45], 4
+                raster, pa.array([polygon, bad]), [1, 1], Grid(8, 4, 45), 4
             )
             self.assertEqual(failed, 1)
             self.assertEqual(status.tolist(), [1, 2])
             self.assertEqual(int(raster.ReadAsArray().sum()), 0)
 
-    def test_gdal_methods_and_first_error_preserve_source_order(self):
+    def test_first_bad_row_prevents_any_water_from_being_drawn(self):
         polygon = bytes(
             ogr.CreateGeometryFromWkt(
                 'POLYGON ((-180 90,0 90,0 -45,-180 -45,-180 90))'
@@ -548,42 +554,28 @@ class WaterShardTests(unittest.TestCase):
                 'MULTIPOLYGON (((-180 90,-135 90,-135 45,-180 45,-180 90)),((135 0,180 0,180 -45,135 -45,135 0)))'
             ).ExportToWkb()
         )
-        results = []
-        for method in ('hybrid', 'tiled'):
-            out = self.path / method
-            out.mkdir()
-            kernel = WaterBatch(method)
-            raster = gdal.GetDriverByName('MEM').Create('', 8, 4, 1, gdal.GDT_Byte)
-            raster.SetGeoTransform((-180, 45, 0, 90, 0, -45))
-            status, failed = kernel.burn(
-                raster,
-                pa.array([polygon, multipart] * 25),
-                [1] * 50,
-                [8, 4, -180, 90, 45],
-                2,
-            )
-            self.assertIsNone(failed)
-            self.assertEqual(status.tolist(), [1] * 50)
-            results.append(raster.ReadAsArray())
-            # A later malformed row can finish earlier than a broad polygon.
-            # Diagnostics still report the first failure and nothing is burned.
-            raster.GetRasterBand(1).Fill(0)
-            status, failed = kernel.burn(
-                raster,
-                pa.array([polygon, None, polygon, b'bad', polygon]),
-                [1] * 5,
-                [8, 4, -180, 90, 45],
-                2,
-            )
-            self.assertEqual(failed, 1)
-            self.assertEqual(status.tolist(), [1, 5, 0, 0, 0])
-            self.assertEqual(int(raster.ReadAsArray().sum()), 0)
-        for result in results[1:]:
-            np.testing.assert_array_equal(result, results[0])
-        out = self.path / 'vector'
-        out.mkdir()
-        with self.assertRaisesRegex(ValueError, 'global vector mode does not preserve'):
-            WaterBatch('vector')
+        grid = Grid(8, 4, 45)
+        kernel = WaterBatch()
+        raster = gdal.GetDriverByName('MEM').Create('', 8, 4, 1, gdal.GDT_Byte)
+        raster.SetGeoTransform((-180, 45, 0, 90, 0, -45))
+        status, failed = kernel.burn(
+            raster, pa.array([polygon, multipart] * 25), [1] * 50, grid, 2
+        )
+        self.assertIsNone(failed)
+        self.assertEqual(status.tolist(), [1] * 50)
+        expected = np.zeros((4, 8), dtype=np.uint8)
+        expected[:3, :4] = 1
+        expected[2, 7] = 1
+        np.testing.assert_array_equal(raster.ReadAsArray(), expected)
+
+        # A missing row wins over a later malformed row, and nothing is drawn.
+        raster.GetRasterBand(1).Fill(0)
+        status, failed = kernel.burn(
+            raster, pa.array([polygon, None, polygon, b'bad', polygon]), [1] * 5, grid, 2
+        )
+        self.assertEqual(failed, 1)
+        self.assertEqual(status.tolist(), [1, 5, 0, 0, 0])
+        self.assertEqual(int(raster.ReadAsArray().sum()), 0)
 
     def test_production_grid_center_tie_edges_keep_reference_values(self):
         p, _ = self.fixture()
