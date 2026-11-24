@@ -57,10 +57,6 @@ def run(
     paths = [Path(f['path']).resolve() for spec in specs for f in spec['files']]
     if len(set(paths)) != len(paths):
         raise ValueError('input paths must be unique')
-    if any(p.is_relative_to(output) or output.is_relative_to(p.parent) for p in paths):
-        raise ValueError(
-            'output must be outside input directories and must not contain inputs'
-        )
     # Validate all files, CRS, selection and geometries before creating outputs.
     for spec in specs:
         checked_files(spec, files)

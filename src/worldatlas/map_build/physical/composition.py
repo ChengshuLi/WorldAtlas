@@ -102,10 +102,6 @@ def main(
     inputs = [Path(pin['path']).resolve() for pin in source_masks.values()]
     if len(set(inputs)) != len(inputs):
         raise ValueError('inputs must be distinct')
-    if any(p.is_relative_to(output) or output.is_relative_to(p.parent) for p in inputs):
-        raise ValueError(
-            'output must be outside input directories and must not contain inputs'
-        )
     masks = [open_mask(pin, grid, files) for pin in source_masks.values()]
     os.mkdir(output)
     out = Path(output)

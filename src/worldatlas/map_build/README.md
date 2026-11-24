@@ -47,7 +47,9 @@ The command looks up the release in Neon and reuses its files from the workspace
 The build configuration sets the grid, physical inputs, coastal distance and processing options. The checked-in grid has 131,072 columns and 54,613 rows. The east and west edges meet at the antimeridian. [Build configuration](config.json)
 
 - Each layer in `sources.land_config.land` lists all required coastline files once in `files`. Set `dataset` to the member path, local path, R2 key, or Neon source ID of the entry GDAL opens. For a Shapefile, select the `.shp` and include its companion files in the list.
-- `sources.inland_water` holds the rasterizer settings and raw water file list. A local file uses `path` and `sha256`. Catalog references supply `size_bytes` from Neon. Direct R2 references supply the size alongside the bucket, key, and SHA-256.
+- `sources.inland_water` holds the rasterizer settings and raw water file list.
+
+For either coastline or inland water, a local file uses `path` and `sha256`. An absolute path names the file directly. A relative path starts in the workspace’s `inputs/` directory. Catalog references get their size and checksum from Neon. Direct R2 references supply the size and checksum alongside the bucket and key.
 
 All physical stages use the same `Grid`. The builder saves its dimensions and source pins in `physical-build-config.json` so the [standalone physical command](physical/README.md#use) can repeat that part of the build. `physical_controls.minimum_free_bytes` sets one disk reserve for the physical stages.
 

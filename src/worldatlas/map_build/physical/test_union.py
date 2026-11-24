@@ -142,9 +142,6 @@ class AggregateTests(unittest.TestCase):
         )
         with self.assertRaises(FileExistsError):
             self.build(out)
-        for path in (self.inputs / 'nested', self.d):
-            with self.assertRaisesRegex(ValueError, 'outside input directories'):
-                self.build(path)
         self.assertEqual(r['grid'], self.cfg['grid'])
         self.assertEqual(r['shard_count'], 2)
 

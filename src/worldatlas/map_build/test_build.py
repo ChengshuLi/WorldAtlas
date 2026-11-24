@@ -395,10 +395,11 @@ class Fixture(unittest.TestCase):
         self.assertEqual(land["dataset"], source_id)
         self.assertEqual(land["files"], [resolved])
         source_cache = self.make_cache()
-        planned, requests = physical_build.plan_land_inputs(
+        planned, local_inputs, requests = physical_build.plan_land_inputs(
             runner.physical_config["land_config"], source_cache
         )
         self.assertEqual(requests, [resolved])
+        self.assertEqual(local_inputs, [])
         self.assertEqual(
             planned["land"][0]["dataset"], str(source_cache.path(resolved))
         )
@@ -420,7 +421,7 @@ class Fixture(unittest.TestCase):
                 try:
                     self.assertEqual(runner.out, root / "run")
                     source_cache = self.make_cache(root / "inputs")
-                    planned, (pin,) = physical_build.plan_land_inputs(
+                    planned, _, (pin,) = physical_build.plan_land_inputs(
                         runner.physical_config["land_config"], source_cache
                     )
                     source = source_cache.acquire(pin)
@@ -455,7 +456,7 @@ class Fixture(unittest.TestCase):
         with self.fake_r2({"sources/land.zip": buffer.getvalue()}, calls):
             runner = self.make()
             source_cache = self.make_cache()
-            planned, requests = physical_build.plan_land_inputs(
+            planned, _, requests = physical_build.plan_land_inputs(
                 runner.physical_config["land_config"], source_cache
             )
             self.assertEqual(calls, [])

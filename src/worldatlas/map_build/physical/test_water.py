@@ -819,10 +819,8 @@ class WaterShardTests(unittest.TestCase):
         existing.mkdir()
         with self.assertRaises(FileExistsError):
             self.rasterize(p, digest, existing, self.config, self.grid)
-        with self.assertRaises(ValueError):
+        with self.assertRaises(FileExistsError):
             self.rasterize(p, digest, self.path, self.config, self.grid)
-        with self.assertRaises(ValueError):
-            self.rasterize(p, digest, self.inputs / 'nested-output', self.config, self.grid)
 
 
 if __name__ == '__main__':

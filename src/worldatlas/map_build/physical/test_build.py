@@ -894,25 +894,25 @@ b.run(sys.argv[1], sys.argv[2])
         self.assertFalse((out / 'report.json').exists())
         self.assertFalse((out / 'physical').exists())
 
-    def test_rejects_source_path_traversal_before_output(self):
-        source = self.source_manifest
-        source.write_text(
-            json.dumps({'file_count': 1, 'files': [{'path': '../bad.parquet', 'sha256': '1' * 64}]})
-        )
-        self.cfg['inland_water'].update(json.loads(source.read_text()))
+    def test_coastline_and_water_accept_the_same_local_path_forms(self):
+        baseline = b.run(self.config, self.root / 'baseline')
+        coastline = self.cfg['land_config']['land'][0]
+        relative_coastline = os.path.relpath(coastline['dataset'], self.raw)
+        coastline['dataset'] = coastline['files'][0]['path'] = relative_coastline
+        self.cfg['inland_water']['files'][0]['path'] = str(self.raw / 'water.parquet')
         self.config.write_text(json.dumps(self.cfg))
-        out = self.root / 'traversal'
-        with self.assertRaisesRegex(ValueError, 'relative to the source directory'):
-            b.run(self.config, out)
-        self.assertFalse((out / 'land').exists())
+        revised = b.run(self.config, self.land_dir / 'output')
+        self.assertEqual(
+            revised['physical_output_sha256'], baseline['physical_output_sha256']
+        )
 
-    def test_rejects_a_raw_file_symlink_to_outside_the_manifest_directory(self):
-        source = self.raw / 'water.parquet'
-        relocated = self.root / source.name
-        source.rename(relocated)
-        source.symlink_to(relocated)
-        out = self.root / 'escaped-source'
-        with self.assertRaisesRegex(ValueError, 'raw source escapes the source directory'):
+    def test_physical_output_cannot_contain_a_raw_input(self):
+        out = self.root / 'overlap'
+        self.cfg['inland_water']['files'][0]['path'] = str(out / 'water.parquet')
+        self.config.write_text(json.dumps(self.cfg))
+        with self.assertRaisesRegex(
+            ValueError, 'physical output must not contain input files'
+        ):
             b.run(self.config, out)
         self.assertFalse((out / 'land').exists())
 
@@ -923,8 +923,6 @@ b.run(sys.argv[1], sys.argv[2])
             with self.subTest(output=output):
                 with self.assertRaisesRegex(ValueError, 'input cache must use separate directories'):
                     b.run(self.config, output)
-        with self.assertRaisesRegex(ValueError, 'output must be outside all input directories'):
-            b.run(self.config, self.land_dir / 'output')
         land = Path(json.loads(self.land_cfg.read_text())['land'][0]['dataset'])
         land.write_text('{}')
         out = self.root / 'changed-input'

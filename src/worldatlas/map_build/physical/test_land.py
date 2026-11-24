@@ -283,8 +283,6 @@ class RasterizeLandTests(unittest.TestCase):
         self.assertFalse((self.d / 'bad').exists())
         self.cfg['land'][0]['files'][0]['sha256'] = sha256_file(self.p)
         self.config.write_text(json.dumps(self.cfg))
-        with self.assertRaisesRegex(ValueError, 'outside input'):
-            self.rasterize(self.config, self.inputs / 'bad', self.grid)
         (self.d / 'exists').mkdir()
         with self.assertRaises(FileExistsError):
             self.rasterize(self.config, self.d / 'exists', self.grid)

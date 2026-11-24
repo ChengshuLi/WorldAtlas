@@ -13,6 +13,8 @@ python3 -m worldatlas.map_build.physical.build \
 
 Use `--resume` after interruption. Completed land, water shards, union and composition are checked against their actual inputs and output hashes. Partial calculation outputs go to `preserved/` for inspection. The cache discards incomplete downloads.
 
+The standalone command uses the same file rules for coastline and inland water. Absolute paths identify local sources directly. Relative paths start in the recorded `source_directory`, which also holds the R2 cache.
+
 ## How it works
 
 The physical build saves one settings file per step under `configs/`. The coastline, water-shard, union and composition reports record the checksum of the settings they used. Before combining water masks, the builder checks each shard report against the expected source, settings and grid. After combining them, it verifies that the input files still match their checksums.

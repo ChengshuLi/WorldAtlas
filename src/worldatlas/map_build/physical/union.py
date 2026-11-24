@@ -104,10 +104,6 @@ def run(
     )
     if len(set(inputs)) != len(inputs):
         raise ValueError('input paths must be unique')
-    if any(p.is_relative_to(output) or output.is_relative_to(p.parent) for p in inputs):
-        raise ValueError(
-            'output must be outside input directories and must not contain inputs'
-        )
     masks = [open_mask(s, grid, files) for s in shards]
     os.mkdir(output)
     tif = create_mask(output / 'water-union.tif', grid)

@@ -95,9 +95,6 @@ class ComposeTests(unittest.TestCase):
         self.assertFalse((out / 'mismatch-spans.jsonl').exists())
         with self.assertRaises(FileExistsError):
             self.build(out)
-        for path in (self.inputs / 'nested', self.d):
-            with self.assertRaisesRegex(ValueError, 'outside input directories'):
-                self.build(path)
         self.assertNotIn('historic_dry_cells', r)
         self.assertEqual(r['grid'], self.cfg['grid'])
         self.assertEqual(r['inputs']['land'], self.cfg['land'])

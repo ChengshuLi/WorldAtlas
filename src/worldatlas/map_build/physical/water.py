@@ -283,10 +283,6 @@ def run(
     """
     source = Path(source).resolve()
     output = Path(output).resolve()
-    if source.is_relative_to(output) or output.is_relative_to(source.parent):
-        raise ValueError(
-            'output must be outside input directories and must not contain inputs'
-        )
     width, height = grid.width, grid.height
     west, north, step = grid.west, grid.north, grid.step
     tile = settings.get('tile_size', 1024)
