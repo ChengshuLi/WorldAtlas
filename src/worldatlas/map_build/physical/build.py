@@ -146,7 +146,7 @@ def build(
         timing: Run timer shared with other stages.
 
     Returns:
-        The physical output report with verified grid files.
+        Report with the finished grid's directory and verified file checksums.
     """
     source_directory = Path(cfg['source_directory']).resolve()
     with closing(
@@ -652,6 +652,7 @@ def _build(
         raise ValueError('land source changed during processing')
     report = {
         'status': 'candidate-only',
+        'directory': str(physical_dir),
         'configuration': request,
         'grid': grid_settings,
         **stage_pins,
@@ -686,7 +687,7 @@ def _build(
         write_json(report_path, report, sort_keys=False)
         return report
 
-    return task(
+    saved_report = task(
         'report',
         save_report,
         report_path,
@@ -699,6 +700,7 @@ def _build(
             *files.row_streams(physical_dir),
         ],
     )
+    return {**saved_report, 'directory': report['directory']}
 
 
 def main(

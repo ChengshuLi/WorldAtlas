@@ -175,6 +175,7 @@ class PipelineTests(unittest.TestCase):
         self.assertNotIn(LAND, seen)
         self.assertNotIn(WATER, seen)
         resumed = b.run(self.config, out, resume=True)
+        self.assertEqual(resumed['directory'], str(out / 'physical'))
         self.assertEqual(resumed['physical_output_sha256'], report['physical_output_sha256'])
 
     def test_concurrent_attempt_is_rejected(self):
@@ -668,6 +669,11 @@ b.run(sys.argv[1], sys.argv[2])
         lines = result.stdout.splitlines()
         report = json.loads("\n".join(lines[lines.index("{") :]))
         self.assertEqual(report['status'], 'candidate-only')
+        self.assertEqual(report['directory'], str(out / 'physical'))
+        self.assertEqual(
+            json.loads((out / 'report.json').read_text())['directory'],
+            report['directory'],
+        )
         self.assertEqual(report['shard_count'], 1)
         self.assertGreaterEqual(report['processing_elapsed_seconds'], 0)
         self.assertEqual(

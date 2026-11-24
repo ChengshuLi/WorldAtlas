@@ -460,7 +460,7 @@ class Pipeline:
         if self.physical_reuse is not None:
             self.checkpoints.files.verify(self.physical_reuse["pins"])
             return Path(self.physical_reuse["source_run"]) / "physical" / "physical"
-        physical_build.build(
+        result = physical_build.build(
             self.physical_config,
             self.grid,
             request_pin,
@@ -468,7 +468,7 @@ class Pipeline:
             checkpoints=self.checkpoints,
             timing=self.timing,
         )
-        return self.out / "physical" / "physical"
+        return Path(result["directory"])
 
     def divide(self, physical: Path) -> Path:
         """Assign cells to geographic entities using the saved rules.
