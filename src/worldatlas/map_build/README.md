@@ -55,7 +55,7 @@ All physical stages use the same `Grid`. The builder saves its dimensions and so
 
 Set `r2_source` to the raw file’s Neon catalog ID, such as `"r2_source": "osm-land-polygons-split-4326"`. For a ZIP member, put the source ID inside its `archive` entry. The catalog gives the builder the R2 location, expected size and checksum. The builder keeps verified downloads under the workspace’s `inputs/` directory for future builds.
 
-`physical_controls.max_parallel_shards` sets how many water files can be in progress at once. With R2, two workers let one download run while the other file rasterizes. `division_workers` sets how many independent rules within a group can run at once.
+`physical_controls.max_parallel_shards` sets how many water files can be in progress at once. Each worker acquires and verifies a file before rasterizing it. Workers can download or rasterize different files at the same time. `division_workers` sets how many independent rules within a group can run at once.
 
 #### Geographic assignments
 

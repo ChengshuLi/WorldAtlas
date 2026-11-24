@@ -507,7 +507,7 @@ b.run(sys.argv[1], sys.argv[2])
             sha256_file(out / 'physical/runs.u32le'),
         )
 
-    def test_r2_overlaps_download_and_rasterization_and_matches_serial(self):
+    def test_cold_cache_allows_parallel_downloads_and_rasterization(self):
         first = self.raw / 'water.parquet'
         second = self.raw / 'other' / first.name
         second.parent.mkdir()
@@ -538,26 +538,25 @@ b.run(sys.argv[1], sys.argv[2])
 
         self.cfg['max_parallel_shards'] = 2
         self.config.write_text(json.dumps(self.cfg))
-        first_downloading = threading.Event()
-        second_downloading = threading.Event()
-        first_rasterized = threading.Event()
+        downloads_started = threading.Barrier(2)
+        rasterizations_started = threading.Barrier(2)
+        first_rasterization_started = threading.Event()
 
         def get_object(*, Bucket, Key):
             self.assertEqual(Bucket, 'test-bucket')
-            if first_downloading.is_set():
-                second_downloading.set()
-                self.assertTrue(first_rasterized.wait(timeout=10))
-            else:
-                first_downloading.set()
+            downloads_started.wait(timeout=10)
+            if Key == files[1]['r2_key']:
+                self.assertTrue(first_rasterization_started.wait(timeout=10))
             data = payloads[Key]
             return dict(Body=io.BytesIO(data), ContentLength=len(data))
 
-        def notify_after_first_raster(function, *args, **kwargs):
-            if function is WATER and not first_rasterized.is_set():
-                self.assertTrue(second_downloading.wait(timeout=10))
-                result = function(*args, **kwargs)
-                first_rasterized.set()
-                return result
+        def verify_rasterization_order(function, *args, **kwargs):
+            if function is WATER:
+                shard_index = int(Path(args[2]).name)
+                self.assertEqual(args[0].read_bytes(), payloads[files[shard_index]['r2_key']])
+                if shard_index == 0:
+                    first_rasterization_started.set()
+                rasterizations_started.wait(timeout=10)
             return function(*args, **kwargs)
 
         client = mock.Mock()
@@ -567,7 +566,7 @@ b.run(sys.argv[1], sys.argv[2])
             mock.patch.object(
                 r2, 'make_r2_client', return_value=R2Client(client)
             ) as make_client,
-            intercept_stages(notify_after_first_raster),
+            intercept_stages(verify_rasterization_order),
         ):
             parallel = b.run(self.config, output)
         make_client.assert_called_once_with()

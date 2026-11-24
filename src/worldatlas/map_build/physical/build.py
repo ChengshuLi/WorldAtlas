@@ -6,10 +6,9 @@ import hashlib
 import json
 import re
 import shutil
-import threading
 from collections.abc import Callable, Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from contextlib import closing, nullcontext
+from contextlib import closing
 from contextvars import copy_context
 from functools import partial
 from pathlib import Path
@@ -361,18 +360,10 @@ class PhysicalBuild:
         Returns:
             Verified mask and report pins in the order of the input files.
         """
-        download_slot = threading.Lock()
-        # Overlap one R2 download with one rasterization when files are missing.
-        # When the cache is warm, workers can rasterize concurrently.
-        cold_cache = any(not cache.path(source).is_file() for source in water_sources)
-        raster_slot = threading.Lock() if cold_cache else nullcontext()
-
         rasterize_shard = partial(
             self._rasterize_water_shard,
             water_config=water_config,
             cache=cache,
-            download_slot=download_slot,
-            raster_slot=raster_slot,
         )
         completed_shards: dict[int, tuple[ShardMask, tuple[str, ...]]] = {}
         with (
@@ -404,8 +395,6 @@ class PhysicalBuild:
         *,
         water_config: FilePin,
         cache: SourceCache,
-        download_slot: threading.Lock,
-        raster_slot: threading.Lock | nullcontext[None],
     ) -> tuple[ShardMask, tuple[str, ...]]:
         """Run one water file through the cache, rasterizer and checkpoint store.
 
@@ -414,8 +403,6 @@ class PhysicalBuild:
             source: Pinned inland-water GeoParquet file in R2.
             water_config: Path and SHA-256 of the shared water settings.
             cache: Open source cache shared by the raster workers.
-            download_slot: Lock shared by workers acquiring files.
-            raster_slot: Lock for a cold cache, or an empty context for a warm cache.
 
         Returns:
             The verified mask and report pins, followed by the rasterizer identity.
@@ -430,25 +417,23 @@ class PhysicalBuild:
             Returns:
                 The verified mask and report pins, and the rasterizer identity.
             """
-            with download_slot:
-                source_path = cache.acquire(source)
-            with raster_slot:
-                control.check_cancelled()
-                with self.timing.measure('physical', f'rasterize-{name}'):
-                    water.run(
-                        source_path,
-                        source['sha256'],
-                        directory,
-                        water_config['sha256'],
-                        self.grid,
-                        settings=self.configuration['inland_water'],
-                        minimum_free_bytes=self.minimum_free_bytes,
-                        files=self.files,
-                        emit=control.emit,
-                    )
-                    return self._verify_water_shard(
-                        directory, water_config, index, source['sha256']
-                    )
+            source_path = cache.acquire(source)
+            control.check_cancelled()
+            with self.timing.measure('physical', f'rasterize-{name}'):
+                water.run(
+                    source_path,
+                    source['sha256'],
+                    directory,
+                    water_config['sha256'],
+                    self.grid,
+                    settings=self.configuration['inland_water'],
+                    minimum_free_bytes=self.minimum_free_bytes,
+                    files=self.files,
+                    emit=control.emit,
+                )
+                return self._verify_water_shard(
+                    directory, water_config, index, source['sha256']
+                )
 
         receipt, rasterizer = self._run_task(
             name,
