@@ -121,6 +121,9 @@ class Grid:
     ) -> tuple[float, float, float, float]:
         """Find the outside edges of a grid window in degrees.
 
+        The caller is asking for the edges of existing cells. The window must
+        contain at least one cell and stay within the grid.
+
         Args:
             bounds: (first_column, end_column, first_row, end_row), with exclusive
                 ends.
@@ -129,7 +132,7 @@ class Grid:
             (west, south, east, north) in WGS84 degrees.
 
         Raises:
-            ValueError: The window is empty or falls outside the grid.
+            ValueError: The requested window is empty or extends outside the grid.
         """
         x0, x1, y0, y1 = bounds
         if not (0 <= x0 < x1 <= self.width and 0 <= y0 < y1 <= self.height):
@@ -149,12 +152,15 @@ class Grid:
         The last row or column can be included when the extent ends exactly
         at its edge. The rasterizer determines which cells are covered.
 
+        A valid extent can lie outside the grid. For example, a polygon south
+        of the last retained row has no candidate cells to rasterize.
+
         Args:
             extent: (west, south, east, north) in degrees, without wrapping.
 
         Returns:
             (first_column, end_column, first_row, end_row) with exclusive ends,
-            clipped to the grid. None means the extent covers no grid cells.
+            clipped to the grid. Return None for an extent with no candidate cells.
         """
         west, south, east, north = extent
         first_column = max(0, math.floor((west - self.west) / self.step))
