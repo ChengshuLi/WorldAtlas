@@ -15,7 +15,7 @@ from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.execution.runtime import RunFilePins
 from worldatlas.map_build.physical.sources import create_mask, open_mask
-from worldatlas.shared.files import FilePin
+from worldatlas.shared.files import FilePin, write_json
 
 gdal.UseExceptions()
 
@@ -37,29 +37,27 @@ def write_run_block(
     """
     row_count, width = dry_land.shape
     row_index, left_column = np.nonzero(dry_land[:, 1:] != dry_land[:, :-1])
-    transitions = np.bincount(row_index, minlength=row_count).astype(
-        np.int64, copy=False
+    run_ends = np.cumsum(
+        np.bincount(row_index, minlength=row_count) + 1, dtype=np.int64
     )
-    run_counts = transitions + 1
-    pairs = np.empty((int(run_counts.sum()), 2), dtype='<u4')
-    # np.nonzero returns transitions in row-major order. Each preceding row adds
-    # one terminal run, so its flattened transition index is the output slot + row.
-    transition_slots = np.arange(len(row_index), dtype=np.int64) + np.repeat(
-        np.arange(row_count, dtype=np.int64), transitions
-    )
+    total_runs = int(run_ends[-1])
+    previous_end = offsets[-1]
+    if previous_end + total_runs > np.iinfo(np.uint32).max:
+        raise ValueError('too many runs for u32 offsets')
+
+    pairs = np.empty((total_runs, 2), dtype='<u4')
+    # Each earlier row adds one final run. Transition 7 in row 2 goes in slot 9.
+    transition_slots = np.arange(len(row_index), dtype=np.int64) + row_index
     pairs[transition_slots, 0] = left_column + 1
     pairs[transition_slots, 1] = dry_land[row_index, left_column]
-    terminal_slots = np.cumsum(run_counts, dtype=np.int64) - 1
+    terminal_slots = run_ends - 1
     pairs[terminal_slots, 0] = width
     pairs[terminal_slots, 1] = dry_land[:, -1]
     # Encode each run once. Physical streams use 1 for water and 17 for land.
     pairs[:, 1] *= 16
     pairs[:, 1] += 1
-    next_offsets = np.cumsum(run_counts, dtype=np.uint64) + offsets[-1]
-    if next_offsets[-1] > np.iinfo(np.uint32).max:
-        raise ValueError('too many runs for u32 offsets')
     pairs.tofile(runs)
-    offsets.extend(next_offsets.tolist())
+    offsets.extend((run_ends + previous_end).tolist())
 
 
 def run(
@@ -137,9 +135,7 @@ def run(
     water_mask.Close()
     with (out / 'rows.u32le').open('xb') as f:
         np.asarray(offsets, dtype='<u4').tofile(f)
-    for key, pin in source_masks.items():
-        if files.pin(pin['path'])['sha256'] != pin['sha256']:
-            raise ValueError(f'{key} changed during processing')
+    files.verify(source_masks.values())
     report = {
         'status': 'candidate-only',
         'configuration_sha256': configuration_sha256,
@@ -152,7 +148,5 @@ def run(
             for name in ('physical-dry.tif', 'rows.u32le', 'runs.u32le')
         },
     }
-    with (out / 'report.json').open('x') as f:
-        json.dump(report, f, indent=2)
-        f.write('\n')
+    write_json(out / 'report.json', report, sort_keys=False)
     return report

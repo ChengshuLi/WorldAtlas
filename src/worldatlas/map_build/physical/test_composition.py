@@ -117,7 +117,9 @@ class ComposeTests(unittest.TestCase):
         def change(*_, **__):
             path.write_bytes(original + b'\n')
 
-        with self.assertRaisesRegex(ValueError, 'land changed during processing'):
+        with self.assertRaisesRegex(
+            ValueError, r'checkpoint/input hash mismatch: .*land\.tif'
+        ):
             self.build(output, emit=change)
         self.assertFalse((output / 'report.json').exists())
 
