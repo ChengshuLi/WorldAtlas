@@ -14,7 +14,7 @@ from psycopg.types.json import Jsonb
 
 from worldatlas.map_build.inputs.selection import (
     prepare_geography,
-    read_saved,
+    read_saved_build_selection,
     read_selection,
     validate_map_code_bindings,
 )
@@ -104,11 +104,11 @@ class BindingTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / "selection.json"
             path.write_bytes(compact_json_bytes(self.frozen))
-            self.assertEqual(read_saved(path), self.frozen)
+            self.assertEqual(read_saved_build_selection(path), self.frozen)
             self.frozen["schema"] = "worldatlas-input-selection-v1"
             path.write_text(json.dumps(self.frozen))
             with self.assertRaisesRegex(ValueError, "captured implementation"):
-                read_saved(path)
+                read_saved_build_selection(path)
 
     def test_preparing_geography_rejects_an_unsupported_schema(self):
         geography = dict(self.geography, schema="obsolete")

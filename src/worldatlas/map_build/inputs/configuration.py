@@ -223,7 +223,7 @@ def iter_physical_source_files(sources: BuildSources) -> Iterator[WaterFile]:
     yield from sources["inland_water"]["files"]
     for layer in sources["land_config"]["land"]:
         for spec in layer["files"]:
-            if "path" not in spec and "archive" in spec:
+            if "archive" in spec:
                 yield spec["archive"]
             else:
                 yield spec
@@ -241,7 +241,7 @@ def physical_catalog_source_ids(sources: BuildSources) -> set[str]:
     return {
         spec["r2_source"]
         for spec in iter_physical_source_files(sources)
-        if "path" not in spec and "r2_source" in spec
+        if "r2_source" in spec
     }
 
 

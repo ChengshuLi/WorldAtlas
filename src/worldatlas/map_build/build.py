@@ -47,7 +47,7 @@ from worldatlas.map_build.inputs.configuration import (
 )
 from worldatlas.map_build.inputs.selection import (
     prepare_geography,
-    read_saved,
+    read_saved_build_selection,
     read_selection,
 )
 from worldatlas.map_build.inputs.selection_types import BuildSelection
@@ -365,9 +365,9 @@ class Pipeline:
         if self.resume:
             if selection is not None:
                 raise ValueError("--resume uses the saved selection. Omit --selection.")
-            return read_saved(self.out / "input-selection.json")
+            return read_saved_build_selection(self.out / "input-selection.json")
         if selection is not None:
-            return read_saved(selection)
+            return read_saved_build_selection(selection)
         try:
             url = neon_connection_url()
         except ValueError as exc:

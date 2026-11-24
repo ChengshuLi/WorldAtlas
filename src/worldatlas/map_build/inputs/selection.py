@@ -207,21 +207,21 @@ def prepare_geography(
     return compiled
 
 
-def read_saved(path: Path | str) -> BuildSelection:
-    """Load an earlier frozen selection from disk.
+def read_saved_build_selection(selection_path: Path | str) -> BuildSelection:
+    """Read a frozen map build selection from disk.
 
     Args:
-        path: Path to the selection JSON file.
+        selection_path: Path to the selection JSON file.
 
     Returns:
-        Selection dictionary containing the saved coordinates and rules.
+        Saved geography, construction records, and raw source catalog entries.
 
     Raises:
         ValueError: The file has an incompatible schema.
     """
-    result: BuildSelection = json.loads(Path(path).read_bytes())
-    if result.get("schema") != "worldatlas-input-selection-v4":
+    saved_selection: BuildSelection = json.loads(Path(selection_path).read_bytes())
+    if saved_selection.get("schema") != "worldatlas-input-selection-v4":
         raise ValueError(
             "this selection requires its release archive's captured implementation"
         )
-    return result
+    return saved_selection
