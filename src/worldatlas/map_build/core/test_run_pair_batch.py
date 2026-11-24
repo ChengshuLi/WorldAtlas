@@ -1,7 +1,10 @@
 import math, random, unittest
 import numpy as np
 from worldatlas.geodesy.wgs84 import MIN_RADIUS, geodesic_distances
-from worldatlas.map_build.core.distances import CUSHION_M, run_pairs_batch
+from worldatlas.map_build.core.distances import (
+    DISTANCE_BOUND_ROUNDING_METRES,
+    run_pairs_batch,
+)
 
 
 def reference_run_pair(y, a, b, yy, c, d, width, incumbent):
@@ -19,7 +22,9 @@ def reference_run_pair(y, a, b, yy, c, d, width, incumbent):
     yy0 = math.cos(p1) * math.sin(p2) - math.sin(p1) * math.cos(p2) * np.cos(dl)
     dot = math.sin(p1) * math.sin(p2) + math.cos(p1) * math.cos(p2) * np.cos(dl)
     angles = np.arctan2(np.hypot(xx, yy0), dot)
-    keep = np.flatnonzero(angles * MIN_RADIUS <= incumbent + CUSHION_M)
+    keep = np.flatnonzero(
+        angles * MIN_RADIUS <= incumbent + DISTANCE_BOUND_ROUNDING_METRES
+    )
     if not len(keep):
         return None
     return float(geodesic_distances(0.0, lat1, gaps[keep] * step, lat2).min())
@@ -42,6 +47,30 @@ class RunPairBatchTests(unittest.TestCase):
         self.assertEqual(
             run_pairs_batch(0, 0, 1, [(100, 0, 1, 17)], 360, incumbent=0),
             ({}, 1),
+        )
+
+    def test_bound_prunes_a_candidate_hundreds_of_metres_past_the_best(self):
+        y, width = 32768, 131072
+        records = [(y, 0, 1, 17), (y, 1, 2, 18)]
+        self.assertEqual(
+            run_pairs_batch(y, 0, 1, records, width, incumbent=0),
+            ({17: 0.0}, 2),
+        )
+
+    def test_bound_keeps_a_tied_candidate_when_a_near_equator_bound_rounds_up(self):
+        width = 2**32 - 1
+        source_row, reference_row = 1073741799, 1073741804
+        step = 360 / width
+        distance = float(geodesic_distances(
+            0, 90 - (source_row + 0.5) * step,
+            0, 90 - (reference_row + 0.5) * step,
+        ))
+        self.assertEqual(
+            run_pairs_batch(
+                source_row, 0, 1, [(reference_row, 0, 1, 17)], width,
+                incumbent=distance,
+            ),
+            ({17: distance}, 1),
         )
 
     def test_matches_individual_wgs84_results_random_and_seams(self):

@@ -117,9 +117,9 @@ class Cert(unittest.TestCase):
                 runs.append((y, x, min(w, x + int(rng.integers(1, 4)))))
             self.check(seeds, runs, 17 + i % 6, w)
 
-    def test_bad_guard_fails_closed(self):
-        with self.assertRaises(ValueError):
-            CertificateIndex(360, 180, 1, 90, [], [], tile_cells=1, numerical_guard_m=0)
+    def test_tile_size_must_be_a_positive_integer(self):
+        with self.assertRaisesRegex(ValueError, 'tile size must be a positive integer'):
+            CertificateIndex(360, 180, 1, 90, [], [], tile_cells=0)
 
     def test_reference_index_rejects_missing_or_misaligned_reference_tiles(self):
         samples = [(0, 0, 17)]

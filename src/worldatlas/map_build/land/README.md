@@ -10,6 +10,8 @@ The map builder calls these calculations when a parent has rules that assign lan
 
 Reference cells are the selected components' actual physical shores. Distances are between cell centres; a source point only identifies a component. Whole query-component context remains available even when the emitted query scope contains only unassigned cells. Strictly smaller distances win; exact equality uses the supplied category order. Sample witnesses and pruning bounds never replace a complete search when the answer is unproved.
 
+Distance bounds keep an extra millimetre of candidates to cover rounding in the coordinate and distance calculations. Spatial indexes also round their search radius outward in unit-sphere coordinates. The final comparison uses the measured WGS84 distances and exact ties.
+
 ## Code and tests
 
 | Files | Responsibility |

@@ -13,6 +13,10 @@ from scipy.spatial import cKDTree  # pyright: ignore[reportAttributeAccessIssue]
 
 from worldatlas.geodesy.wgs84 import MIN_RADIUS as M_MIN
 from worldatlas.geodesy.wgs84 import geodesic_distances, unit_sphere
+from worldatlas.map_build.core.distances import (
+    CHORD_BOUND_ROUNDING,
+    DISTANCE_BOUND_ROUNDING_METRES,
+)
 
 
 class CertificateIndex:
@@ -27,7 +31,6 @@ class CertificateIndex:
         tiles: Sequence[tuple[int, int, Collection[int]]],
         reps: ArrayLike,
         tile_cells: int = 1024,
-        numerical_guard_m: float = 1000.0,
         refinement: CertificateIndex | None = None,
     ) -> None:
         """Prepare per-category indexes over occupied shore tiles and sampled cells.
@@ -40,8 +43,6 @@ class CertificateIndex:
             tiles: (tile_row, tile_column, codes) for each occupied tile.
             reps: N-by-3 records of (row, column, code) for actual shore cells.
             tile_cells: Side length of a tile in cells.
-            numerical_guard_m: Distance margin in metres for keeping candidates in
-                the search.
             refinement: Optional finer index for cases the coarse one cannot
                 resolve.
         """
@@ -57,19 +58,13 @@ class CertificateIndex:
             or north - height * step < -90
         ):
             raise ValueError('invalid global grid')
-        if (
-            type(tile_cells) is not int
-            or tile_cells < 1
-            or not math.isfinite(numerical_guard_m)
-            or numerical_guard_m < 1000
-        ):
-            raise ValueError('insufficient numerical guard')
+        if type(tile_cells) is not int or tile_cells < 1:
+            raise ValueError('tile size must be a positive integer')
         self.w = width
         self.h = height
         self.step = step
         self.north = north
         self.C = tile_cells
-        self.guard = numerical_guard_m
         self.refinement = refinement
         if refinement is not None and (
             not isinstance(refinement, CertificateIndex)
@@ -262,12 +257,13 @@ class CertificateIndex:
                 continue
             chord, _ = self.trees[code].query(xyz[selected], k=1, workers=1)
             limit = (
-                (uppers[selected] + self.guard) / M_MIN
+                (uppers[selected] + DISTANCE_BOUND_ROUNDING_METRES) / M_MIN
                 + self.radii[code]
                 + qr[selected]
             )
             danger[selected, column] = (limit >= math.pi) | (
-                chord <= 2 * np.sin(np.minimum(math.pi, limit) / 2)
+                chord
+                <= 2 * np.sin(np.minimum(math.pi, limit) / 2) + CHORD_BOUND_ROUNDING
             )
         good = ~danger.any(axis=1)
         if self.refinement is not None:

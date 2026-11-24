@@ -11,8 +11,16 @@ from numpy.typing import ArrayLike
 
 from worldatlas.geodesy.wgs84 import MIN_RADIUS, geodesic_distances
 
-# Keep more candidates for the exact calculation when pruning by lower bounds.
-CUSHION_M = 1000.0
+# At 20,000 km, one float64 step is about 4 nm. PROJ documents geodesic
+# errors under 15 nm (https://proj.org/en/stable/geodesic.html#background).
+# One millimetre also leaves room for rounding in the coordinate and
+# spherical-bound calculations. This margin only widens the search.
+DISTANCE_BOUND_ROUNDING_METRES = 0.001
+
+# Near antipodal points, increasing an arc barely increases its chord.
+# Give the chord limit a few dozen rounding steps at its maximum length
+# of 2, covering the trigonometry, coordinate differences and norm.
+CHORD_BOUND_ROUNDING = 32 * math.ulp(2.0)
 
 
 def run_pairs_batch(
@@ -94,7 +102,9 @@ def run_pairs_batch(
     z = math.cos(p1) * np.sin(p2) - math.sin(p1) * np.cos(p2) * np.cos(dl)
     dot = math.sin(p1) * np.sin(p2) + math.cos(p1) * np.cos(p2) * np.cos(dl)
     angles = np.arctan2(np.hypot(x, z), dot)
-    keep = np.flatnonzero(angles * MIN_RADIUS <= incumbent + CUSHION_M)
+    keep = np.flatnonzero(
+        angles * MIN_RADIUS <= incumbent + DISTANCE_BOUND_ROUNDING_METRES
+    )
     if not len(keep):
         return {}, len(r)
     ds = geodesic_distances(0.0, lat1, gap[keep] * step, lat2[keep])

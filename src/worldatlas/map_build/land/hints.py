@@ -10,8 +10,11 @@ from scipy.spatial import cKDTree  # pyright: ignore[reportAttributeAccessIssue]
 
 from worldatlas.geodesy.wgs84 import MIN_RADIUS as MIN_CURVATURE_RADIUS
 from worldatlas.geodesy.wgs84 import geodesic_distances, unit_sphere
+from worldatlas.map_build.core.distances import (
+    CHORD_BOUND_ROUNDING,
+    DISTANCE_BOUND_ROUNDING_METRES,
+)
 
-BOUND_CUSHION_M = 0.001
 DISTANCE_BATCH = 65536
 
 
@@ -65,8 +68,10 @@ def wgs84_nearest_categories(
     upper = geodesic_distances(qlon, qlat, lon[first], lat[first])
     if np.any(~np.isfinite(upper)) or np.any(upper < 0):
         raise ValueError('invalid WGS84 upper bound')
-    angle = np.minimum(math.pi, (upper + BOUND_CUSHION_M) / MIN_CURVATURE_RADIUS)
-    radii = np.nextafter(2 * np.sin(angle / 2), math.inf)
+    angle = np.minimum(
+        math.pi, (upper + DISTANCE_BOUND_ROUNDING_METRES) / MIN_CURVATURE_RADIUS
+    )
+    radii = 2 * np.sin(angle / 2) + CHORD_BOUND_ROUNDING
     # Ordinary candidate batches keep large valid neighborhoods streaming;
     # neither the number of samples nor the number of candidates is limited.
     best = np.full(len(qlat), math.inf)

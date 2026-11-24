@@ -26,7 +26,6 @@ def assign_components(
     *,
     roots: Collection[int],
     priority_codes: Sequence[int] | None = None,
-    guard_metres: float = 1000.0,
     chunk_columns: int = 1024,
 ) -> tuple[dict[str, Any], np.ndarray, np.ndarray]:
     """Assign each selected component to the owner of its nearest shore.
@@ -37,7 +36,6 @@ def assign_components(
         directory: New directory for assignments and search statistics.
         roots: Component IDs to assign.
         priority_codes: Optional order for exact distance ties.
-        guard_metres: Conservative margin when excluding search candidates.
         chunk_columns: Group size when evaluating long query runs.
 
     Returns:
@@ -65,7 +63,6 @@ def assign_components(
         grid.north,
         tiles,
         tile_cells=metadata["tile_cells"],
-        guard_m=guard_metres,
     )
     fine = CertificateIndex(
         grid.width,
@@ -75,7 +72,6 @@ def assign_components(
         exact.certificate_tiles,
         representatives,
         tile_cells=exact.leaf_cells,
-        numerical_guard_m=guard_metres,
     )
     certificate = CertificateIndex(
         grid.width,
@@ -85,7 +81,6 @@ def assign_components(
         [(ty, tx, codes) for ty, tx, codes, count, sha in tiles],
         representatives,
         tile_cells=metadata["tile_cells"],
-        numerical_guard_m=guard_metres,
         refinement=fine,
     )
     roots = np.asarray(sorted(roots), dtype=np.uint32)

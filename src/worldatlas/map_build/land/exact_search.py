@@ -12,7 +12,11 @@ from scipy.spatial import cKDTree  # pyright: ignore[reportAttributeAccessIssue]
 
 from worldatlas.geodesy.wgs84 import MIN_RADIUS as M_MIN
 from worldatlas.geodesy.wgs84 import unit_sphere
-from worldatlas.map_build.core.distances import run_pairs_batch
+from worldatlas.map_build.core.distances import (
+    CHORD_BOUND_ROUNDING,
+    DISTANCE_BOUND_ROUNDING_METRES,
+    run_pairs_batch,
+)
 
 
 class ExactIndex:
@@ -27,7 +31,6 @@ class ExactIndex:
         north: float,
         tiles: Sequence[tuple[int, int, Collection[int], int, str]],
         tile_cells: int = 1024,
-        guard_m: float = 1000.0,
     ) -> None:
         """Index the position and extent of every occupied tile.
 
@@ -39,7 +42,6 @@ class ExactIndex:
             north: Latitude of the northern edge in degrees.
             tiles: Records of (tile_row, tile_column, codes, run_count, sha256).
             tile_cells: Side length of a tile in cells.
-            guard_m: Margin in metres for keeping distance candidates.
 
         Raises:
             ValueError: Grid settings or the tile manifest are invalid.
@@ -50,19 +52,12 @@ class ExactIndex:
         self.step = step
         self.north = north
         self.C = tile_cells
-        self.guard = guard_m
         self.cache = {}
         # A fine tile must fit exactly into a source tile for both indexes.
         self.leaf_cells = math.gcd(tile_cells, 128)
         self.leaves: list[tuple[tuple[int, int], int, int, int, int, np.ndarray]] = []
         self.leaf_cache = {}
-        if (
-            width < 2
-            or height < 1
-            or step != 360 / width
-            or tile_cells < 1
-            or guard_m < 1000
-        ):
+        if width < 2 or height < 1 or step != 360 / width or tile_cells < 1:
             raise ValueError('invalid config')
         self.records = {}
         self.ids = []
@@ -249,13 +244,16 @@ class ExactIndex:
         point = unit_sphere(np.array([lat]), np.array([lon]))[0]
         qr = (b - a - 1) * self.step * math.pi / 360
         self.prepare_leaves()
-        limit = (upper + self.guard) / M_MIN + self.leaf_maxrad + qr
+        limit = (upper + DISTANCE_BOUND_ROUNDING_METRES) / M_MIN + self.leaf_maxrad + qr
         indices = (
             np.arange(len(self.leaves), dtype=np.int64)
             if limit >= math.pi
             else np.asarray(
                 self.leaf_tree.query_ball_point(
-                    point, 2 * math.sin(limit / 2), eps=0, workers=1
+                    point,
+                    2 * math.sin(limit / 2) + CHORD_BOUND_ROUNDING,
+                    eps=0,
+                    workers=1,
                 ),
                 dtype=np.int64,
             )
@@ -284,8 +282,12 @@ class ExactIndex:
             # or tie. Since M_MIN is a conservative WGS84 lower-bound radius, this
             # tighter test only removes tiles that cannot affect the final label.
             incumbent = min(upper, min(out.values(), default=upper))
-            lim = (incumbent + self.guard) / M_MIN + self.leaf_radii[i] + qr
-            if lim < math.pi and c > 2 * math.sin(lim / 2):
+            lim = (
+                (incumbent + DISTANCE_BOUND_ROUNDING_METRES) / M_MIN
+                + self.leaf_radii[i]
+                + qr
+            )
+            if lim < math.pi and c > 2 * math.sin(lim / 2) + CHORD_BOUND_ROUNDING:
                 continue
             data = self._load_leaf(int(i))
             seen += len(data)
