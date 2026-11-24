@@ -96,49 +96,59 @@ def _scan_crossings(
     row_count: int,
     first_edge: int,
     last_edge: int,
-) -> Iterator[tuple[int, int, bool]]:
-    """Find where a segment cuts between cell centres on each row.
+    *,
+    scan_rows: bool,
+) -> Iterator[tuple[int, int]]:
+    """Find which centre-to-centre edges a segment crosses.
 
-    If a segment lies along a row, it blocks only the partially covered
-    connections at its ends. Connections fully on the line stay open.
+    Resolve exact hits as if each centre moved south by t and west by t²
+    as t tends to zero from above. The scan uses integers, including the
+    exact sign of the segment's slope. It never moves the coordinates.
 
     Args:
-        x0: Scaled first endpoint column.
-        y0: Scaled first endpoint row.
-        x1: Scaled last endpoint column.
-        y1: Scaled last endpoint row.
+        x0: Scaled first endpoint along the scanline.
+        y0: Scaled first endpoint across scanlines.
+        x1: Scaled last endpoint along the scanline.
+        y1: Scaled last endpoint across scanlines.
         scale: Integer units in one cell.
-        row_count: Number of grid rows.
+        row_count: Number of scanlines.
         first_edge: Smallest edge index to consider.
         last_edge: Largest edge index to consider.
+        scan_rows: True for east-west edges, false for north-south edges
+            with the input axes swapped.
 
     Yields:
-        (row, edge, hits_centre). Edge is the column on the left of the cut.
+        (scanline index, edge index). An edge index is the column to its
+        west on a row scan or the row to its north on a column scan.
     """
-    half = scale // 2
     if y0 == y1:
-        row, remainder = divmod(y0 - half, scale)
-        if remainder == 0 and 0 <= row < row_count:
-            for endpoint in sorted({x0, x1}):
-                edge, remainder = divmod(endpoint - half, scale)
-                if remainder and first_edge <= edge <= last_edge:
-                    yield row, edge, False
+        # A parallel segment cannot intersect the shifted scanline.
         return
     if y0 > y1:
         x0, y0, x1, y1 = x1, y1, x0, y0
 
-    # Scan only rows whose centres lie between the segment endpoints.
-    first_row = max(0, (y0 + half - 1) // scale)
-    last_row = min(row_count - 1, (y1 - half) // scale)
+    # At an endpoint exactly on a scanline, looking south includes the
+    # northern end. Looking west includes the eastern end instead.
+    half = scale // 2
+    endpoint_adjustment = int(scan_rows)
+    first_row = max(0, (y0 + half - endpoint_adjustment) // scale)
+    last_row = min(row_count - 1, (y1 - half - endpoint_adjustment) // scale)
     dx, dy = x1 - x0, y1 - y0
     denominator = scale * dy
+    # When the crossing is exactly at a centre, the south step dominates.
+    # On a row scan the crossing moves west only if the line slopes west as
+    # it goes south. On a column scan the shifted centre is always farther
+    # south than an exact centre crossing.
+    use_previous_edge = not scan_rows or dx < 0
     for row in range(first_row, last_row + 1):
         # x at the crossing is (x0 * dy + offset * dx) / dy.
         # Subtract half a cell before division to index centre-to-centre edges.
         offset = row * scale + half - y0
         edge, remainder = divmod((x0 - half) * dy + offset * dx, denominator)
+        if remainder == 0 and use_previous_edge:
+            edge -= 1
         if first_edge <= edge <= last_edge:
-            yield row, edge, remainder == 0
+            yield row, edge
 
 
 def rasterize_barriers(
@@ -155,26 +165,10 @@ def rasterize_barriers(
         height: Number of grid rows.
 
     Returns:
-        Horizontal, vertical and seam cuts. When a line hits a centre
-        exactly, its canonical direction makes the result independent of
-        the order of the supplied points.
+        Horizontal, vertical and seam cuts using the south-then-west
+        convention for exact hits.
     """
     cuts = CutEdges()
-    tangents: defaultdict[tuple[int, int], tuple[Fraction | int, Fraction | int]] = (
-        defaultdict(lambda: (0, 0))
-    )
-
-    def horizontal(row: int, edge: int) -> None:
-        """Record a horizontal cut or a cut across the date line.
-
-        Args:
-            row: Row of the cut.
-            edge: Column left of the cut. -1 marks the date-line seam.
-        """
-        if edge == -1:
-            cuts.add_wrap(row)
-        elif edge < width - 1:
-            cuts.add_h(row, edge)
 
     for path in paths:
         check_cancelled()
@@ -185,47 +179,24 @@ def rasterize_barriers(
         )
         if len(points) < 2:
             continue
+        # Keep the path passed to the geometric face builder in a stable order.
         points = min(points, points[::-1])
         cuts.paths.append(points)
         for first, last in pairwise(points):
             x0, y0, x1, y1, scale = _scaled_segment(first, last)
-            dx, dy = x1 - x0, y1 - y0
             # Crossings on a row block moves between columns. Swap the axes
             # to find crossings on a column that block moves between rows.
-            for y, x, on_centre in _scan_crossings(
-                x0, y0, x1, y1, scale, height, -1, width - 1
+            for y, x in _scan_crossings(
+                x0, y0, x1, y1, scale, height, -1, width - 2, scan_rows=True
             ):
-                if on_centre:
-                    if x >= 0:
-                        vx, vy = tangents[x, y]
-                        tangents[x, y] = (
-                            vx + Fraction(dx, scale),
-                            vy + Fraction(dy, scale),
-                        )
+                if x == -1:
+                    cuts.add_wrap(y)
                 else:
-                    horizontal(y, x)
-            for x, y, on_centre in _scan_crossings(
-                y0, x0, y1, x1, scale, width, 0, height - 1
+                    cuts.add_h(y, x)
+            for x, y in _scan_crossings(
+                y0, x0, y1, x1, scale, width, 0, height - 2, scan_rows=False
             ):
-                if on_centre:
-                    # A sloping segment has already supplied this tangent.
-                    if dy == 0:
-                        vx, vy = tangents[x, y]
-                        tangents[x, y] = (vx + Fraction(dx, scale), vy)
-                elif y < height - 1:
-                    cuts.add_v(y, x)
-
-    # Choose the blocked edges at each exact centre hit using the combined
-    # direction of the segments that met at that centre.
-    for (x, y), (dx, dy) in tangents.items():
-        if dy > 0:
-            horizontal(y, x if x < width - 1 else -1)
-        elif dy < 0:
-            horizontal(y, x - 1)
-        if dx < 0 and y < height - 1:
-            cuts.add_v(y, x)
-        elif dx > 0 and y > 0:
-            cuts.add_v(y - 1, x)
+                cuts.add_v(y, x)
     return cuts
 
 

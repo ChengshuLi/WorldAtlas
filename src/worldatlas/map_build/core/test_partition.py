@@ -44,6 +44,13 @@ class ExactCrossings(unittest.TestCase):
         cuts = geographic_cuts([line], self.grid)
         self.assertEqual(cuts.wrap, {3, 4, 5})
 
+    def test_vertical_boundary_through_last_column_centres_cuts_the_seam(self):
+        line = dict(type="LineString", coordinates=[(172.5, 67.5), (172.5, 22.5)])
+        cuts = geographic_cuts([line], self.grid)
+        self.assertEqual(cuts.wrap, {1, 2, 3})
+        self.assertFalse(cuts.horizontal)
+        self.assertFalse(cuts.vertical)
+
     def test_split_boundary_preserves_labels_when_the_join_hits_a_cell_centre(self):
         grid = Grid(8, 4, 45)
         line = [(-90, 90), (-157.5, 22.5), (-90, -90)]
@@ -71,6 +78,50 @@ class ExactCrossings(unittest.TestCase):
                     [(start, end, owners[node]) for start, end, node in records]
                 )
         self.assertEqual(*streams)
+
+    def test_bend_at_a_centre_uses_the_same_side_with_extra_or_split_points(self):
+        grid = Grid(12, 6, 30)
+        original = [(-75, 90), (-75, -45), (-45, 15), (120, -90)]
+        with_midpoint = [*original[:3], (37.5, -37.5), original[-1]]
+        representations = (
+            [original],
+            [with_midpoint],
+            [original[::-1]],
+            [with_midpoint[2:][::-1], original[:3]],
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            streams = []
+            for index, lines in enumerate(representations):
+                cuts = geographic_cuts(
+                    [dict(type="LineString", coordinates=line) for line in lines],
+                    grid,
+                )
+                # The centre at column 4, row 2 joins the side below the bend.
+                self.assertIn(4, cuts.horizontal[2])
+                self.assertIn(4, cuts.vertical[1])
+                self.assertNotIn(4, cuts.vertical[2])
+                output = Path(temp) / str(index)
+                owners = divide_regions(
+                    lambda _: [(1, 12)],
+                    grid,
+                    cuts,
+                    [(11, 2, 0), (22, 10, 0)],
+                    output,
+                )
+                self.assertEqual(sorted(owners.values()), [11, 22])
+                offsets = np.fromfile(output / "rows.u64le", dtype="<u8")
+                records = np.fromfile(output / "nodes.u32le", dtype="<u4").reshape(
+                    -1, 3
+                )
+                self.assertIn(
+                    (4, 5, 11),
+                    [
+                        (start, end, owners[node])
+                        for start, end, node in records[offsets[2] : offsets[3]]
+                    ],
+                )
+                streams.append((owners, offsets.tobytes(), records.tobytes()))
+        self.assertEqual(streams, [streams[0]] * len(representations))
 
     def test_horizontal_centre_hits_are_independent_of_path_direction(self):
         line = [(2, 4.5), (5, 4.5), (5, 4.5), (8, 4.5)]
@@ -125,13 +176,13 @@ class ExactCrossings(unittest.TestCase):
         reverse = rasterize_barriers([line[::-1]], self.grid.width, self.grid.height)
         self.assertEqual(forward.horizontal, reverse.horizontal)
         self.assertEqual(forward.vertical, reverse.vertical)
-        self.assertIn(4, forward.vertical[4])
-        self.assertIn(3, forward.horizontal[4])
+        self.assertIn(4, forward.vertical[3])
+        self.assertIn(4, forward.horizontal[4])
 
     def test_off_grid_line_copies_do_not_cut_visible_cells(self):
         outside = [
             [(-4, 2.5), (-2, 2.5)],
-            [(-0.5, 1.5), (-0.5, 4.5)],
+            [(-0.75, 1.5), (-0.75, 4.5)],
             [(3.5, 12), (7.5, 13)],
         ]
         cuts = rasterize_barriers(outside, self.grid.width, self.grid.height)
@@ -353,17 +404,17 @@ class ContinuousFaces(unittest.TestCase):
         centre = Fraction(3, 2)
         delta = Fraction(1, 2**100)
         cuts = rasterize_barriers(
-            [[(centre - delta, 1.5), (centre + delta, 1.5)]],
+            [[(1.5, centre - delta), (1.5, centre + delta)]],
             self.grid.width,
             self.grid.height,
         )
-        self.assertEqual(cuts.horizontal[1], {0, 1})
+        self.assertEqual(cuts.horizontal[1], {1})
         with tempfile.TemporaryDirectory() as temp:
             owners = divide_regions(
                 lambda y: [(0, 3)] if y == 1 else [],
                 self.grid,
                 cuts,
-                [(11, 0, 1), (22, 1, 1), (33, 2, 1)],
+                [(11, 1, 1), (22, 2, 1)],
                 Path(temp) / "faces",
             )
-        self.assertEqual(sorted(owners.values()), [11, 22, 33])
+        self.assertEqual(sorted(owners.values()), [11, 22])
