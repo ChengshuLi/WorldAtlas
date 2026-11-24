@@ -13,7 +13,7 @@ python3 -m worldatlas.map_build.physical.build \
 
 Use `--resume` after interruption. Completed land, water shards, union and composition are checked against their actual inputs and output hashes. Partial calculation outputs go to `preserved/` for inspection. The cache discards incomplete downloads.
 
-The standalone command uses the same file rules for coastline and inland water. Absolute paths identify local sources directly. Relative paths start in the recorded `source_directory`, which also holds the R2 cache.
+The standalone command gets coastline and inland-water files through `SourceCache`. The saved configuration contains the R2 references and the cache location. A warm cache lets both builds reuse the files already on disk.
 
 ## How it works
 

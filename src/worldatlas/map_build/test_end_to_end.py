@@ -26,6 +26,7 @@ from worldatlas.map_build.inputs import selection as selection_inputs
 from worldatlas.map_build.inputs.selection import read_selection
 from worldatlas.map_build.physical import water as physical_water
 from worldatlas.map_build.physical.build import run as build_physical
+from worldatlas.map_build.test_support import cache_fixture_file, r2_file_pin
 from worldatlas.shared.files import compact_json_bytes, pin_file, read_json, sha256_file, write_json
 
 
@@ -102,8 +103,10 @@ class EndToEndTests(unittest.TestCase):
             )
             inputs = root / "inputs"
             inputs.mkdir()
-            shard = inputs / "water.parquet"
+            shard = raw / "water.parquet"
             pq.write_table(table, shard)
+            water_source = r2_file_pin(shard)
+            cache_fixture_file(inputs, shard, water_source)
             with psycopg.connect(url) as db:
                 db.execute(
                     "INSERT INTO atlas.geographic_levels VALUES ('world',NULL),('continent','world')"
@@ -187,10 +190,10 @@ class EndToEndTests(unittest.TestCase):
                     feature_index="row-fids",
                     land=[
                         dict(
-                            dataset=str(coast),
+                            dataset="__e2e_raw",
                             layer=None,
                             where="kind = 'land'",
-                            files=[pin_file(coast)],
+                            files=[{"r2_source": "__e2e_raw"}],
                         )
                     ],
                 )
@@ -215,12 +218,7 @@ class EndToEndTests(unittest.TestCase):
                             inland_water=dict(
                                 **water_config,
                                 file_count=1,
-                                files=[
-                                    dict(
-                                        path=shard.name,
-                                        sha256=pin_file(shard)["sha256"],
-                                    )
-                                ],
+                                files=[water_source],
                             ),
                         ),
                     ),

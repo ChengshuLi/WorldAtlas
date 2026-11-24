@@ -19,7 +19,8 @@ from osgeo import gdal, ogr
 from worldatlas.shared import r2
 from worldatlas.shared.r2 import R2Client
 from worldatlas.map_build.physical import build as b
-from worldatlas.shared.files import sha256_file, write_json
+from worldatlas.map_build.test_support import cache_fixture_file, r2_file_pin
+from worldatlas.shared.files import pin_file, sha256_file, write_json
 
 
 LAND = b.land.run
@@ -51,6 +52,7 @@ class PipelineTests(unittest.TestCase):
         self.land_dir.mkdir()
         self.raw = self.root / 'raw'
         self.raw.mkdir()
+        self.cache = self.root / 'inputs'
         self.grid = {'width': 8, 'height': 4, 'west': -180, 'north': 90, 'step': 45}
         land = self.land_dir / 'land.geojson'
         land.write_text(
@@ -78,20 +80,20 @@ class PipelineTests(unittest.TestCase):
                 }
             )
         )
+        coastline_source = r2_file_pin(land)
+        self.cached_coastline = cache_fixture_file(self.cache, land, coastline_source)
         land_cfg = {
             'schema': 'land-raster-candidate-v1',
             'selection_notes': 'synthetic',
             'strip_rows': 2,
             'land': [
                 {
-                    'dataset': str(land),
+                    'dataset': coastline_source['r2_key'],
                     'where': None,
-                    'files': [{'path': str(land), 'sha256': sha256_file(land)}],
+                    'files': [coastline_source],
                 }
             ],
         }
-        self.land_cfg = self.config_dir / 'land.json'
-        self.land_cfg.write_text(json.dumps(land_cfg))
         water_cfg = {
             'schema': 'water-shard-candidate-v2',
             'tile_size': 4,
@@ -123,29 +125,31 @@ class PipelineTests(unittest.TestCase):
         )
         shard = self.raw / 'water.parquet'
         pq.write_table(table, shard)
-        source = self.source_manifest = self.raw / 'manifest.json'
-        source.write_text(
-            json.dumps(
-                {
-                    'file_count': 1,
-                    'files': [{'path': 'water.parquet', 'sha256': sha256_file(shard)}],
-                }
-            )
-        )
+        water_source = r2_file_pin(shard)
+        self.cached_water = cache_fixture_file(self.cache, shard, water_source)
         self.cfg = {
             'schema': 'raw-physical-pipeline-v3',
             'selection_notes': 'synthetic',
             'minimum_free_bytes': 0,
-            'source_directory': str(self.raw),
+            'source_directory': str(self.cache),
             'land_config': land_cfg,
             'grid': self.grid,
-            'inland_water': {**water_cfg, **json.loads(source.read_text())},
+            'inland_water': {**water_cfg, 'file_count': 1, 'files': [water_source]},
         }
         self.config = self.config_dir / 'pipeline.json'
         self.config.write_text(json.dumps(self.cfg))
 
     def tearDown(self):
         self.tmp.cleanup()
+
+    def set_water_sources(self, *paths):
+        sources = [r2_file_pin(path) for path in paths]
+        cached_paths = [
+            cache_fixture_file(self.cache, path, source)
+            for path, source in zip(paths, sources, strict=True)
+        ]
+        self.cfg['inland_water'].update(files=sources, file_count=len(sources))
+        return cached_paths
 
     def interrupt_before_union(self, out):
 
@@ -292,10 +296,8 @@ b.run(sys.argv[1], sys.argv[2])
             pq.read_schema(first).metadata | {b'edition': b'second'}
         )
         pq.write_table(table, second)
-        self.cfg['inland_water'].update(file_count=2, rasterizer='python')
-        self.cfg['inland_water']['files'].append(
-            dict(path=second.name, sha256=sha256_file(second))
-        )
+        _, cached_second = self.set_water_sources(first, second)
+        self.cfg['inland_water']['rasterizer'] = 'python'
         self.config.write_text(json.dumps(self.cfg))
         message = 'inconsistent water shard rasterizers or kernels'
 
@@ -305,7 +307,7 @@ b.run(sys.argv[1], sys.argv[2])
 
         def run_mixed(function, *args, **kwargs):
             result = function(*args, **kwargs)
-            if function is WATER and Path(args[0]) == second:
+            if function is WATER and Path(args[0]) == cached_second:
                 change_producer(Path(args[2]) / 'report.json')
             return result
 
@@ -433,12 +435,10 @@ b.run(sys.argv[1], sys.argv[2])
             b.run(self.config, out, resume=True)
         self.assertTrue((out / 'report.json').is_file())
 
-    def test_config_or_coastline_changes_during_processing_leave_run_incomplete(self):
-        coast = Path(json.loads(self.land_cfg.read_text())['land'][0]['dataset'])
+    def test_config_changes_during_processing_leave_run_incomplete(self):
         for path, message in (
             (self.config, 'checkpoint/input hash mismatch'),
             (Path('configs/land.json'), 'checkpoint/input hash mismatch'),
-            (coast, 'land source changed during processing'),
         ):
             with self.subTest(path=path):
                 output = self.root / ('changed-' + path.name)
@@ -460,33 +460,16 @@ b.run(sys.argv[1], sys.argv[2])
     def test_r2_download_is_verified_timed_and_reused_by_next_build(self):
         shard = self.raw / 'water.parquet'
         content = shard.read_bytes()
-        digest = sha256_file(shard)
-        source = self.source_manifest
-        source.write_text(
-            json.dumps(
-                {
-                    'file_count': 1,
-                    'files': [
-                        {
-                            'sha256': digest,
-                            'size_bytes': len(content),
-                            'r2_bucket': 'test-bucket',
-                            'r2_key': 'source/water.parquet',
-                        }
-                    ],
-                }
-            )
-        )
-        self.cfg['inland_water'].update(json.loads(source.read_text()))
         self.cfg['max_parallel_shards'] = 1
         self.config.write_text(json.dumps(self.cfg))
+        self.cached_water.unlink()
         shard.unlink()
         out = self.root / 'staged'
         client = mock.Mock()
 
         def download(**kwargs):
             self.assertEqual(
-                kwargs, {'Bucket': 'test-bucket', 'Key': 'source/water.parquet'}
+                kwargs, {'Bucket': 'test-bucket', 'Key': 'water.parquet'}
             )
             time.sleep(0.05)
             return {'Body': io.BytesIO(content), 'ContentLength': len(content)}
@@ -508,7 +491,7 @@ b.run(sys.argv[1], sys.argv[2])
             report['physical_output_sha256']['runs.u32le'],
             sha256_file(out / 'physical/runs.u32le'),
         )
-        cached = self.raw / digest / shard.name
+        cached = self.cached_water
         self.assertEqual(cached.read_bytes(), content)
         local = self.root / 'warm-cache'
         with mock.patch.object(r2, 'make_r2_client', return_value=R2Client(client)):
@@ -534,31 +517,23 @@ b.run(sys.argv[1], sys.argv[2])
             pa.Table.from_pylist([row]).replace_schema_metadata(table.schema.metadata),
             second,
         )
-        payloads = {
-            p.relative_to(self.raw).as_posix(): p.read_bytes() for p in (first, second)
-        }
         files = [
-            dict(
-                sha256=sha256_file(self.raw / key),
-                size_bytes=len(data),
-                r2_bucket='atlas',
-                r2_key=key,
-            )
-            for key, data in payloads.items()
+            r2_file_pin(path, key=path.relative_to(self.raw).as_posix())
+            for path in (first, second)
         ]
-        source = self.source_manifest
-        source.write_text(json.dumps(dict(file_count=len(files), files=files)))
-        self.cfg['inland_water'].update(
-            file_count=len(files),
-            files=[
-                dict(path=key, sha256=sha256_file(self.raw / key)) for key in payloads
-            ],
-        )
+        payloads = {
+            source['r2_key']: path.read_bytes()
+            for source, path in zip(files, (first, second), strict=True)
+        }
+        cached_paths = [
+            cache_fixture_file(self.cache, path, source)
+            for path, source in zip((first, second), files, strict=True)
+        ]
+        self.cfg['inland_water'].update(file_count=len(files), files=files)
         self.cfg['max_parallel_shards'] = 1
         self.config.write_text(json.dumps(self.cfg))
         serial = b.run(self.config, self.root / 'serial')
-        self.cfg['inland_water'].update(json.loads(source.read_text()))
-        for path in (first, second):
+        for path in cached_paths:
             path.unlink()
 
         self.cfg['max_parallel_shards'] = 2
@@ -568,7 +543,7 @@ b.run(sys.argv[1], sys.argv[2])
         first_rasterized = threading.Event()
 
         def get_object(*, Bucket, Key):
-            self.assertEqual(Bucket, 'atlas')
+            self.assertEqual(Bucket, 'test-bucket')
             if first_downloading.is_set():
                 second_downloading.set()
                 self.assertTrue(first_rasterized.wait(timeout=10))
@@ -601,35 +576,18 @@ b.run(sys.argv[1], sys.argv[2])
         self.assertEqual(
             parallel['physical_output_sha256'], serial['physical_output_sha256']
         )
-        for entry in files:
+        for entry, cached_path in zip(files, cached_paths, strict=True):
             self.assertEqual(
-                (self.raw / entry['sha256'] / Path(entry['r2_key']).name).read_bytes(),
+                cached_path.read_bytes(),
                 payloads[entry['r2_key']],
             )
 
     def test_r2_bad_hash_is_discarded_and_retry_can_resume(self):
         shard = self.raw / 'water.parquet'
         content = shard.read_bytes()
-        source = self.source_manifest
-        source.write_text(
-            json.dumps(
-                {
-                    'file_count': 1,
-                    'files': [
-                        {
-                            'sha256': sha256_file(shard),
-                            'size_bytes': len(content),
-                            'r2_bucket': 'test-bucket',
-                            'r2_key': 'source/water.parquet',
-                        }
-                    ],
-                }
-            )
-        )
-        self.cfg['inland_water'].update(json.loads(source.read_text()))
         self.cfg['max_parallel_shards'] = 1
         self.config.write_text(json.dumps(self.cfg))
-        shard.unlink()
+        self.cached_water.unlink()
         out = self.root / 'bad-staged'
         client = mock.Mock()
         client.get_object.return_value = {
@@ -639,9 +597,9 @@ b.run(sys.argv[1], sys.argv[2])
         with mock.patch.object(r2, 'make_r2_client', return_value=R2Client(client)):
             with self.assertRaisesRegex(ValueError, 'size or hash mismatch'):
                 b.run(self.config, out)
-        cached = self.raw / self.cfg['inland_water']['files'][0]['sha256'] / shard.name
+        cached = self.cached_water
         self.assertFalse(cached.exists())
-        self.assertEqual(list(self.raw.rglob('download-*')), [])
+        self.assertEqual(list(self.cache.rglob('download-*')), [])
         self.assertFalse((out / 'report.json').exists())
         client.get_object.return_value = {
             'Body': io.BytesIO(content),
@@ -706,19 +664,7 @@ b.run(sys.argv[1], sys.argv[2])
         pq.write_table(
             pa.Table.from_pylist([row]).replace_schema_metadata(table.schema.metadata), second
         )
-        source = self.source_manifest
-        source.write_text(
-            json.dumps(
-                {
-                    'file_count': 2,
-                    'files': [
-                        {'path': first.name, 'sha256': sha256_file(first)},
-                        {'path': second.name, 'sha256': sha256_file(second)},
-                    ],
-                }
-            )
-        )
-        self.cfg['inland_water'].update(json.loads(source.read_text()))
+        self.set_water_sources(first, second)
         self.cfg['max_parallel_shards'] = 0
         self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'max_parallel_shards'):
@@ -801,19 +747,7 @@ b.run(sys.argv[1], sys.argv[2])
         pq.write_table(
             pa.Table.from_pylist([row]).replace_schema_metadata(table.schema.metadata), bad
         )
-        source = self.source_manifest
-        source.write_text(
-            json.dumps(
-                {
-                    'file_count': 2,
-                    'files': [
-                        {'path': first.name, 'sha256': sha256_file(first)},
-                        {'path': bad.name, 'sha256': sha256_file(bad)},
-                    ],
-                }
-            )
-        )
-        self.cfg['inland_water'].update(json.loads(source.read_text()))
+        self.set_water_sources(first, bad)
         self.cfg['max_parallel_shards'] = 2
         self.config.write_text(json.dumps(self.cfg))
         out = self.root / 'parallel-incomplete'
@@ -828,10 +762,8 @@ b.run(sys.argv[1], sys.argv[2])
         pq.write_table(pa.concat_tables([table] * 3), shard)
         second = self.raw / 'second.parquet'
         pq.write_table(table, second)
-        self.cfg['inland_water'].update(
-            files=[dict(path=file.name, sha256=sha256_file(file)) for file in (shard, second)],
-            file_count=2, batch_size=1,
-        )
+        _, cached_second = self.set_water_sources(shard, second)
+        self.cfg['inland_water']['batch_size'] = 1
         self.cfg['max_parallel_shards'] = 2
         self.config.write_text(json.dumps(self.cfg))
         out = self.root / 'cancelled'
@@ -846,7 +778,7 @@ b.run(sys.argv[1], sys.argv[2])
 
             def fail_second_worker(function, *args, **kwargs):
                 if function is WATER:
-                    if args[0] == second:
+                    if args[0] == cached_second:
                         self.assertTrue(first_batch.wait(timeout=10))
                         raise ValueError('second water worker failed')
                     kwargs['emit'] = hold_at_first_batch
@@ -879,13 +811,7 @@ b.run(sys.argv[1], sys.argv[2])
         rows.append(item)
         revised = pa.Table.from_pylist(rows).replace_schema_metadata(table.schema.metadata)
         pq.write_table(revised, shard)
-        source = self.source_manifest
-        source.write_text(
-            json.dumps(
-                {'file_count': 1, 'files': [{'path': 'water.parquet', 'sha256': sha256_file(shard)}]}
-            )
-        )
-        self.cfg['inland_water'].update(json.loads(source.read_text()))
+        self.set_water_sources(shard)
         self.config.write_text(json.dumps(self.cfg))
         out = self.root / 'incomplete'
         with self.assertRaisesRegex(ValueError, 'incomplete water shard'):
@@ -894,39 +820,43 @@ b.run(sys.argv[1], sys.argv[2])
         self.assertFalse((out / 'report.json').exists())
         self.assertFalse((out / 'physical').exists())
 
-    def test_coastline_and_water_accept_the_same_local_path_forms(self):
-        baseline = b.run(self.config, self.root / 'baseline')
+    def test_standalone_configuration_rejects_direct_local_inputs(self):
         coastline = self.cfg['land_config']['land'][0]
-        relative_coastline = os.path.relpath(coastline['dataset'], self.raw)
-        coastline['dataset'] = coastline['files'][0]['path'] = relative_coastline
-        self.cfg['inland_water']['files'][0]['path'] = str(self.raw / 'water.parquet')
-        self.config.write_text(json.dumps(self.cfg))
-        revised = b.run(self.config, self.land_dir / 'output')
-        self.assertEqual(
-            revised['physical_output_sha256'], baseline['physical_output_sha256']
-        )
-
-    def test_physical_output_cannot_contain_a_raw_input(self):
-        out = self.root / 'overlap'
-        self.cfg['inland_water']['files'][0]['path'] = str(out / 'water.parquet')
-        self.config.write_text(json.dumps(self.cfg))
-        with self.assertRaisesRegex(
-            ValueError, 'physical output must not contain input files'
+        inland_water = self.cfg['inland_water']
+        for settings, cached_path, section in (
+            (coastline, self.cached_coastline, 'land_config.land.0'),
+            (inland_water, self.cached_water, 'inland_water'),
         ):
-            b.run(self.config, out)
+            with self.subTest(section=section):
+                original = settings['files']
+                settings['files'] = [pin_file(cached_path)]
+                self.config.write_text(json.dumps(self.cfg))
+                out = self.root / 'direct-input'
+                with self.assertRaisesRegex(ValueError, f'{section}.files.0'):
+                    b.run(self.config, out)
+                self.assertFalse(out.exists())
+                settings['files'] = original
+
+    def test_physical_output_cannot_contain_its_configuration(self):
+        out = self.root / 'overlap'
+        out.mkdir()
+        config = write_json(out / 'config.json', self.cfg)
+        with self.assertRaisesRegex(
+            ValueError, 'physical output must not contain its configuration'
+        ):
+            b.run(config, out, resume=True)
         self.assertFalse((out / 'land').exists())
 
     def test_requires_a_valid_output_location_and_current_land_input(self):
         with self.assertRaisesRegex(ValueError, 'output must have an existing parent'):
             b.run(self.config, self.root / 'missing' / 'output')
-        for output in (self.raw / 'output', self.root):
+        for output in (self.cache / 'output', self.root):
             with self.subTest(output=output):
                 with self.assertRaisesRegex(ValueError, 'input cache must use separate directories'):
                     b.run(self.config, output)
-        land = Path(json.loads(self.land_cfg.read_text())['land'][0]['dataset'])
-        land.write_text('{}')
+        self.cached_coastline.write_text('{}')
         out = self.root / 'changed-input'
-        with self.assertRaisesRegex(ValueError, 'land source hash mismatch'):
+        with self.assertRaisesRegex(ValueError, 'source file size or hash mismatch'):
             b.run(self.config, out)
         self.assertFalse((out / 'land').exists())
 
@@ -1001,13 +931,9 @@ b.run(sys.argv[1], sys.argv[2])
     def test_resume_reuses_the_verified_cache_after_interruption(self):
         shard = self.raw / 'water.parquet'
         payload = shard.read_bytes()
-        entry = self.cfg['inland_water']['files'][0]
-        del entry['path']
-        entry.update(r2_bucket='atlas', r2_key=shard.name, size_bytes=len(payload))
-        self.config.write_text(json.dumps(self.cfg))
-        shard.unlink()
         out = self.root / 'restart-r2'
-        cached = self.raw / entry['sha256'] / shard.name
+        cached = self.cached_water
+        cached.unlink()
         client = mock.Mock()
         client.get_object.return_value = {'Body': io.BytesIO(payload)}
 
@@ -1034,10 +960,7 @@ b.run(sys.argv[1], sys.argv[2])
 
     def test_preflight_rejects_retired_comparison_fields(self):
         out = self.root / 'bad'
-        self.cfg['physical_reference_mask'] = {
-            'path': str(self.land_cfg),
-            'sha256': sha256_file(self.land_cfg),
-        }
+        self.cfg['physical_reference_mask'] = pin_file(self.cached_coastline)
         self.config.write_text(json.dumps(self.cfg))
         with self.assertRaisesRegex(ValueError, 'physical_reference_mask'):
             b.run(self.config, out)
@@ -1073,16 +996,16 @@ b.run(sys.argv[1], sys.argv[2])
             ),
             (
                 'water',
-                {'files': [dict(shard, size_bytes=1)]},
-                r'FilePin\.size_bytes',
+                {'files': [dict(shard, size_bytes=-1)]},
+                r'inland_water.files.0.size_bytes',
             ),
             (
                 'water',
                 {
                     'file_count': 2,
-                    'files': [shard, dict(shard, path='another.parquet')],
+                    'files': [shard, dict(shard, r2_key='another.parquet')],
                 },
-                'paths and hashes must be unique',
+                'source hashes must be unique',
             ),
         ]
         for i, (section, changes, error) in enumerate(cases):

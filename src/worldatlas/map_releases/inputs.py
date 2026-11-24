@@ -6,9 +6,12 @@ import re
 from pathlib import Path
 from typing import TypedDict, cast
 
+from pydantic import TypeAdapter
+
 from worldatlas.map_build.execution.code_archive import restore_source, source_files
 from worldatlas.map_build.inputs.configuration import (
     BuildConfiguration,
+    RawFileReference,
     iter_physical_source_files,
 )
 from worldatlas.map_build.inputs.selection_types import BuildSelection
@@ -17,6 +20,7 @@ from worldatlas.shared.files import SHA256_PATTERN, JSONValue, json_bytes
 FILENAME = "inputs.json.gz"
 SCHEMA = "worldatlas-release-inputs-v1"
 REPLAY_FILES = ("configuration", "selection", "run", "report")
+RAW_FILE_REFERENCE = TypeAdapter(RawFileReference)
 
 
 class ReleaseInputs(TypedDict):
@@ -43,14 +47,12 @@ def validate_replay_sources(
         selection: Frozen geographic records, including the raw source catalog.
 
     Raises:
-        ValueError: A source is a local file or its catalog entry is missing.
+        ValueError: A reference is invalid or its catalog entry is missing.
     """
     source_ids = {row["source_id"] for row in selection["raw_sources"]}
-    for source in iter_physical_source_files(configuration["sources"]):
-        if "path" in source:
-            raise ValueError(
-                f"release replay requires an R2 source for {source['path']}"
-            )
+    for saved_source in iter_physical_source_files(configuration["sources"]):
+        # A saved build may have used an earlier version of the input schema.
+        source = RAW_FILE_REFERENCE.validate_python(saved_source, strict=True)
         if "r2_source" in source and source["r2_source"] not in source_ids:
             raise ValueError(
                 f"release replay is missing catalog source {source['r2_source']!r}"

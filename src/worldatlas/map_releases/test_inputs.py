@@ -48,15 +48,10 @@ class ReplaySourcesTests(unittest.TestCase):
     def test_cataloged_zip_and_direct_water_pin_are_portable(self):
         validate_replay_sources(self.configuration, self.selection)
 
-    def test_local_coastline_and_water_files_are_rejected(self):
-        local = {"path": "/old-machine/file", "sha256": "a" * 64}
-        for settings in (self.land, self.water):
-            with self.subTest(settings=settings):
-                original = settings["files"]
-                settings["files"] = [local]
-                with self.assertRaisesRegex(ValueError, "requires an R2 source for /old-machine/file"):
-                    validate_replay_sources(self.configuration, self.selection)
-                settings["files"] = original
+    def test_saved_build_with_a_local_raw_file_is_not_replayable(self):
+        self.water["files"] = [{"path": "/old-machine/water.parquet", "sha256": "a" * 64}]
+        with self.assertRaisesRegex(ValueError, "r2_bucket"):
+            validate_replay_sources(self.configuration, self.selection)
 
     def test_a_cataloged_zip_requires_a_saved_source_row(self):
         self.selection["raw_sources"].clear()

@@ -25,7 +25,6 @@ from worldatlas.map_build.inputs.configuration import (
     LandLayer,
     LandSettings,
     PhysicalConfiguration,
-    ResolvedLandFile,
     land_dataset_index,
     require_separate_cache_and_output,
 )
@@ -45,62 +44,36 @@ from worldatlas.shared.files import (
 )
 from worldatlas.source_assets import cache as source_cache
 from worldatlas.source_assets.cache import SourceCache
-from worldatlas.source_assets.pins import RemoteFile
+from worldatlas.source_assets.pins import R2ObjectPin, RemoteFile
 
 HERE = Path(__file__).resolve().parent
 
 
-def _plan_source_file(
-    source_file: FilePin | RemoteFile, cache: SourceCache
-) -> tuple[FilePin, RemoteFile | None]:
-    """Resolve a raw input's local path before acquiring any R2 files.
-
-    Args:
-        source_file: Local file pin, R2 object, or ZIP member.
-        cache: Base directory for relative paths and cached R2 files.
-
-    Returns:
-        A pin with an absolute path and, for R2 inputs, the acquisition request.
-    """
-    if 'path' in source_file:
-        local_path = (cache.directory / source_file['path']).resolve()
-        return FilePin(path=str(local_path), sha256=source_file['sha256']), None
-    cached_pin = FilePin(
-        path=str(cache.path(source_file)), sha256=source_file['sha256']
-    )
-    return cached_pin, source_file
-
-
 def plan_land_inputs(
-    settings: LandSettings[ResolvedLandFile], cache: SourceCache
-) -> tuple[LandSettings[FilePin], list[FilePin], list[RemoteFile]]:
+    settings: LandSettings[RemoteFile], cache: SourceCache
+) -> tuple[LandSettings[FilePin], list[RemoteFile]]:
     """Prepare local coastline paths without acquiring any R2 files.
 
     Args:
-        settings: Land rasterization settings with local and R2 file pins.
+        settings: Land rasterization settings with R2 file pins.
         cache: Shared cache used to derive each R2 destination.
 
     Returns:
-        Land settings with absolute file paths, pins for direct local inputs,
-        and R2 requests to acquire before rasterization.
+        Land settings with absolute cache paths and the corresponding R2 requests.
     """
-    local_inputs: list[FilePin] = []
-    downloads: list[RemoteFile] = []
+    requests: list[RemoteFile] = []
     layers: list[LandLayer[FilePin]] = []
     for layer in settings["land"]:
         dataset_index = land_dataset_index(layer)
-        files: list[FilePin] = []
-        for source_file in layer['files']:
-            local_pin, download = _plan_source_file(source_file, cache)
-            files.append(local_pin)
-            if download is None:
-                local_inputs.append(local_pin)
-            else:
-                downloads.append(download)
+        requests.extend(layer['files'])
+        files = [
+            FilePin(path=str(cache.path(source)), sha256=source['sha256'])
+            for source in layer['files']
+        ]
         layers.append(
             {**layer, "dataset": files[dataset_index]["path"], "files": files}
         )
-    return {**settings, "land": layers}, local_inputs, downloads
+    return {**settings, "land": layers}, requests
 
 
 def run(
@@ -124,6 +97,8 @@ def run(
     require_separate_cache_and_output(
         Path(settings['source_directory']).resolve(), output
     )
+    if path.is_relative_to(output):
+        raise ValueError('physical output must not contain its configuration')
     with open_stage_workspace(output, request, resume=resume) as (checkpoints, timing):
         with control.stage(), timing.stage('physical'):
             report = build(
@@ -204,13 +179,10 @@ def _build(
     Returns:
         The physical output report with verified grid files.
     """
-    config_path = Path(request['path'])
     grid_settings = vars(grid)
     reserve = cfg.get('minimum_free_bytes', 2 * (1 << 30))
     workers = cfg.get('max_parallel_shards', 2)
-    land_cfg, local_land_inputs, land_downloads = plan_land_inputs(
-        cfg['land_config'], cache
-    )
+    land_cfg, coastline_sources = plan_land_inputs(cfg['land_config'], cache)
     land_document = dict(
         land_cfg, schema='land-raster-candidate-v1', minimum_free_bytes=reserve
     )
@@ -222,13 +194,9 @@ def _build(
     batch_size = water_cfg.get('batch_size', 8192)
     union_rows_per_block = cfg.get('union_rows_per_block', 128)
     physical_rows_per_block = cfg.get('physical_rows_per_block', 128)
-    water_inputs = [
-        _plan_source_file(file, cache) for file in cfg['inland_water']['files']
-    ]
-    water_paths = {pin['path'] for pin, _ in water_inputs}
-    water_digests = {pin['sha256'] for pin, _ in water_inputs}
-    if len(water_paths) != len(water_inputs) or len(water_digests) != len(water_inputs):
-        raise ValueError('raw source paths and hashes must be unique')
+    water_sources = cfg['inland_water']['files']
+    if len({source['sha256'] for source in water_sources}) != len(water_sources):
+        raise ValueError('inland-water source hashes must be unique')
     scripts = {
         name: sha256_file(HERE / name)
         for name in (
@@ -258,20 +226,8 @@ def _build(
         return files.pin(path)['sha256']
 
     output = Path(output).resolve()
-    coastline_paths = {
-        pin['path'] for layer in land_cfg['land'] for pin in layer['files']
-    }
-    input_paths = [
-        config_path,
-        *(Path(path).resolve() for path in water_paths | coastline_paths),
-    ]
-    # Checkpoint cleanup can move directories under this output on resume.
-    if any(path.is_relative_to(output) for path in input_paths):
-        raise ValueError('physical output must not contain input files')
     if shutil.disk_usage(output.parent).free < reserve:
         raise ValueError('free disk below pipeline reserve')
-    if any(checksum(pin['path']) != pin['sha256'] for pin in local_land_inputs):
-        raise ValueError('land source hash mismatch')
 
     def bind_config(path: Path, data: bytes) -> FilePin:
         """Save the generated settings or check they match the previous attempt.
@@ -409,7 +365,7 @@ def _build(
         Returns:
             Coastline raster report, including the checksum of its output.
         """
-        for spec in land_downloads:
+        for spec in coastline_sources:
             control.check_cancelled()
             cache.acquire(spec)
         land.run(
@@ -432,32 +388,29 @@ def _build(
         'land',
         rasterize_land,
         land_dir,
-        includes_downloads=bool(land_downloads),
-        inputs=[stage_pins['land_config'], *local_land_inputs],
+        includes_downloads=True,
+        inputs=[stage_pins['land_config']],
     )
     land_transfer_count = len(cache.downloads)
 
     download_slot = threading.Lock()
-    cold_cache = any(
-        download is not None and not Path(pin['path']).is_file()
-        for pin, download in water_inputs
-    )
+    cold_cache = any(not cache.path(source).is_file() for source in water_sources)
     raster_slot = threading.Lock() if cold_cache else nullcontext()
 
     def build_shard(
-        indexed_source: tuple[int, tuple[FilePin, RemoteFile | None]],
+        indexed_source: tuple[int, R2ObjectPin],
     ) -> tuple[ShardMask, tuple[str, ...]]:
         """Validate or build a single water shard's raster.
 
         Args:
-            indexed_source: Shard index, paired with its local pin and optional R2 request.
+            indexed_source: Shard index and its pinned R2 object.
 
         Returns:
             Verified mask and report pins, followed by the rasterizer identity.
         """
         control.check_cancelled()
-        shard_index, (local_pin, download) = indexed_source
-        digest = local_pin['sha256']
+        shard_index, source = indexed_source
+        digest = source['sha256']
         destination = output / 'shards' / f'{shard_index:05d}'
         name = f'shard-{shard_index:05d}'
 
@@ -467,10 +420,8 @@ def _build(
             Returns:
                 Mask and report pins, followed by the rasterizer identity.
             """
-            source_path = Path(local_pin['path'])
-            if download is not None:
-                with download_slot:
-                    source_path = cache.acquire(download)
+            with download_slot:
+                source_path = cache.acquire(source)
             with raster_slot:
                 control.check_cancelled()
                 with timing.measure('physical', f'rasterize-{name}'):
@@ -487,13 +438,12 @@ def _build(
                     )
                     return verify_shard(shard_index, digest)
 
-        source_pins = [local_pin] if download is None else []
         receipt, rasterizer = task(
             name,
             rasterize_shard,
             destination,
             includes_downloads=True,
-            inputs=[stage_pins['inland_water'], *source_pins],
+            inputs=[stage_pins['inland_water']],
         )
         return receipt, tuple(rasterizer)
 
@@ -503,11 +453,11 @@ def _build(
     completed_shards: dict[int, tuple[ShardMask, tuple[str, ...]]] = {}
     with (
         control.stage() as cancelled,
-        ThreadPoolExecutor(max_workers=min(workers, len(water_inputs))) as pool,
+        ThreadPoolExecutor(max_workers=min(workers, len(water_sources))) as pool,
     ):
         futures = {
             pool.submit(copy_context().run, build_shard, item): item[0]
-            for item in enumerate(water_inputs)
+            for item in enumerate(water_sources)
         }
         try:
             for future in as_completed(futures):
@@ -519,7 +469,7 @@ def _build(
             raise
     if len({producer for _, producer in completed_shards.values()}) != 1:
         raise ValueError('inconsistent water shard rasterizers or kernels')
-    shards = [completed_shards[i][0] for i in range(len(water_inputs))]
+    shards = [completed_shards[i][0] for i in range(len(water_sources))]
     water_manifest: FilePin = stage_pins['inland_water']
     union_cfg: dict[str, Any] = {
         'schema': 'water-union-v1',
@@ -638,8 +588,6 @@ def _build(
         inputs=[compose_config, land_mask, water_mask],
     )
     files.verify([request, *stage_pins.values(), union_config, compose_config])
-    if any(checksum(pin['path']) != pin['sha256'] for pin in local_land_inputs):
-        raise ValueError('land source changed during processing')
     report = {
         'status': 'candidate-only',
         'directory': str(physical_dir),

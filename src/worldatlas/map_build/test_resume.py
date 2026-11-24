@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import patch
 from worldatlas.map_build import build as pipeline
 from worldatlas.map_build.execution import timing
-from worldatlas.map_build.test_support import selection
+from worldatlas.map_build.test_support import r2_file_pin, selection
 from worldatlas.shared.files import json_bytes, pin_file, read_json, write_json
 
 
@@ -19,18 +19,19 @@ class ExecutorResumeTests(unittest.TestCase):
         inputs.mkdir()
         self.source = inputs / "source.bin"
         self.source.write_bytes(b"final-output\x00\x01\x02")
+        source = r2_file_pin(self.source)
         cfg = {
             "schema": "worldatlas-end-to-end-pipeline-v3",
             "grid": dict(width=36, height=18, step=10),
             "sources": {
                 "land_config": {
                     "land": [
-                        {"dataset": str(self.source), "files": [pin_file(self.source)]}
+                        {"dataset": source["r2_key"], "files": [source]}
                     ]
                 },
                 "inland_water": {
                     "file_count": 1,
-                    "files": [{"path": "water.parquet", "sha256": "a" * 64}],
+                    "files": [dict(source, r2_key="water.parquet")],
                 },
             },
         }

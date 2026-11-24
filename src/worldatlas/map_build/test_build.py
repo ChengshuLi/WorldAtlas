@@ -28,7 +28,7 @@ from worldatlas.shared.r2 import R2Client
 from worldatlas.source_assets.cache import SourceCache
 from worldatlas.map_build.land.connected import build_components
 from worldatlas.map_build.physical import build as physical_build
-from worldatlas.map_build.test_support import selection
+from worldatlas.map_build.test_support import cache_fixture_file, r2_file_pin, selection
 from worldatlas.shared.files import (
     json_bytes,
     pin_file,
@@ -181,7 +181,7 @@ class Fixture(unittest.TestCase):
                 "land_config": {"land": []},
                 "inland_water": {
                     "file_count": 1,
-                    "files": [{"path": "water.parquet", "sha256": "a" * 64}],
+                    "files": [self.cloud(b"water fixture", "water.parquet")],
                 },
             },
             "grid": dict(width=36, height=18, step=10),
@@ -197,6 +197,26 @@ class Fixture(unittest.TestCase):
         cache = SourceCache(self.inputs if directory is None else directory)
         self.addCleanup(cache.close)
         return cache
+
+    def test_build_configuration_rejects_direct_local_inputs(self):
+        local_file = pin_file(write_json(self.inputs / "local.geojson", {}))
+        for section, settings in (
+            (
+                "land_config",
+                {"land": [{"dataset": local_file["path"], "files": [local_file]}]},
+            ),
+            ("inland_water", {"file_count": 1, "files": [local_file]}),
+        ):
+            with self.subTest(section=section):
+                sources = {**self.cfg["sources"], section: settings}
+                configuration = write_json(
+                    self.inputs / f"{section}.json", {**self.cfg, "sources": sources}
+                )
+                with self.assertRaisesRegex(ValueError, rf"sources\.{section}\."):
+                    pipeline.Pipeline(
+                        configuration, self.root / "run", work_dir=self.root
+                    )
+                self.assertFalse((self.root / "run").exists())
 
     def test_physical_settings_require_inline_values(self):
         path = write_json(self.inputs / "settings.json", {})
@@ -395,11 +415,10 @@ class Fixture(unittest.TestCase):
         self.assertEqual(land["dataset"], source_id)
         self.assertEqual(land["files"], [resolved])
         source_cache = self.make_cache()
-        planned, local_inputs, requests = physical_build.plan_land_inputs(
+        planned, requests = physical_build.plan_land_inputs(
             runner.physical_config["land_config"], source_cache
         )
         self.assertEqual(requests, [resolved])
-        self.assertEqual(local_inputs, [])
         self.assertEqual(
             planned["land"][0]["dataset"], str(source_cache.path(resolved))
         )
@@ -421,7 +440,7 @@ class Fixture(unittest.TestCase):
                 try:
                     self.assertEqual(runner.out, root / "run")
                     source_cache = self.make_cache(root / "inputs")
-                    planned, _, (pin,) = physical_build.plan_land_inputs(
+                    planned, (pin,) = physical_build.plan_land_inputs(
                         runner.physical_config["land_config"], source_cache
                     )
                     source = source_cache.acquire(pin)
@@ -456,7 +475,7 @@ class Fixture(unittest.TestCase):
         with self.fake_r2({"sources/land.zip": buffer.getvalue()}, calls):
             runner = self.make()
             source_cache = self.make_cache()
-            planned, _, requests = physical_build.plan_land_inputs(
+            planned, requests = physical_build.plan_land_inputs(
                 runner.physical_config["land_config"], source_cache
             )
             self.assertEqual(calls, [])
@@ -563,15 +582,17 @@ class Fixture(unittest.TestCase):
                 ],
             },
         )
+        coastline_source = r2_file_pin(land_file)
+        cache_fixture_file(self.inputs, land_file, coastline_source)
         land = {
             "schema": "land-raster-candidate-v1",
             "selection_notes": "synthetic",
             "strip_rows": 2,
             "land": [
                 {
-                    "dataset": str(land_file),
+                    "dataset": coastline_source["r2_key"],
                     "where": None,
-                    "files": [pin_file(land_file)],
+                    "files": [coastline_source],
                 }
             ],
         }
@@ -608,18 +629,15 @@ class Fixture(unittest.TestCase):
         )
         shard = raw / "water.parquet"
         pq.write_table(table, shard)
+        water_source = r2_file_pin(shard)
+        cache_fixture_file(self.inputs, shard, water_source)
         self.cfg["grid"] = grid
         self.cfg["sources"] = dict(
             land_config=land,
             inland_water=dict(
                 **water,
                 file_count=1,
-                files=[
-                    {
-                        "path": "raw/water.parquet",
-                        "sha256": sha256_file(shard),
-                    }
-                ],
+                files=[water_source],
             ),
         )
         self.cfg["physical_controls"] = {
@@ -722,7 +740,7 @@ class Fixture(unittest.TestCase):
         with self.assertRaisesRegex(FileNotFoundError, r"physical-build-config\.json"):
             pipeline.physical_reference(runner.out, runner.physical_config)
 
-    def test_single_cloud_configuration_matches_local_raw_and_component_streams_in_another_root(
+    def test_cold_zip_cache_matches_warm_direct_objects_in_another_root(
         self,
     ):
         self.prepare_raw_sources()

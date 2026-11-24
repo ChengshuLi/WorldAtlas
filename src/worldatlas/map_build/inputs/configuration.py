@@ -14,9 +14,9 @@ from typing_extensions import TypedDict
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.inputs.selection_types import SourceAsset
-from worldatlas.shared.files import ByteCount, FilePin
+from worldatlas.shared.files import ByteCount
 from worldatlas.shared.text import NonEmptyText
-from worldatlas.source_assets.pins import ArchiveMember, R2ObjectPin
+from worldatlas.source_assets.pins import ArchiveMember, R2ObjectPin, RemoteFile
 
 type PositiveInt = Annotated[int, Field(gt=0)]
 
@@ -27,10 +27,8 @@ class CatalogFile(TypedDict, closed=True):
     r2_source: NonEmptyText
 
 
-type WaterFile = FilePin | CatalogFile | R2ObjectPin
-type LandFile = WaterFile | ArchiveMember[CatalogFile | R2ObjectPin]
-type ResolvedLandFile = FilePin | R2ObjectPin | ArchiveMember[R2ObjectPin]
-type ResolvedWaterFile = FilePin | R2ObjectPin
+type RawFileReference = CatalogFile | R2ObjectPin
+type CoastlineFileReference = RawFileReference | ArchiveMember[RawFileReference]
 
 
 @with_config(extra="forbid")
@@ -117,9 +115,9 @@ def check_shard_count[File](
 class BuildSources(TypedDict):
     """Select the physical coastline and inland-water inputs."""
 
-    land_config: LandSettings[LandFile]
+    land_config: LandSettings[CoastlineFileReference]
     inland_water: Annotated[
-        InlandWaterSettings[WaterFile], AfterValidator(check_shard_count)
+        InlandWaterSettings[RawFileReference], AfterValidator(check_shard_count)
     ]
 
 
@@ -154,9 +152,9 @@ class PhysicalConfiguration(PhysicalControls):
     selection_notes: NotRequired[NonEmptyText]
     source_directory: NonEmptyText
     grid: GridSettings
-    land_config: LandSettings[ResolvedLandFile]
+    land_config: LandSettings[RemoteFile]
     inland_water: Annotated[
-        InlandWaterSettings[ResolvedWaterFile], AfterValidator(check_shard_count)
+        InlandWaterSettings[R2ObjectPin], AfterValidator(check_shard_count)
     ]
 
 
@@ -178,12 +176,12 @@ def require_separate_cache_and_output(cache: Path, output: Path) -> None:
         raise ValueError("output and the input cache must use separate directories")
 
 
-def land_dataset_index(layer: LandLayer[ResolvedLandFile]) -> int:
+def land_dataset_index(layer: LandLayer[RemoteFile]) -> int:
     """Find which pinned coastline file GDAL should open.
 
     Args:
-        layer: Resolved coastline file pins and the dataset's member path,
-            local path, R2 key, or saved Neon source ID.
+        layer: Resolved coastline file pins and the dataset's ZIP member path,
+            R2 key, or saved Neon source ID.
 
     Returns:
         Index of the matching entry in the layer's ``files`` list.
@@ -198,7 +196,6 @@ def land_dataset_index(layer: LandLayer[ResolvedLandFile]) -> int:
         if dataset
         in (
             file.get("member"),
-            file.get("path"),
             file.get("r2_key"),
             file.get("source_id"),
         )
@@ -210,7 +207,7 @@ def land_dataset_index(layer: LandLayer[ResolvedLandFile]) -> int:
     return matches[0]
 
 
-def iter_physical_source_files(sources: BuildSources) -> Iterator[WaterFile]:
+def iter_physical_source_files(sources: BuildSources) -> Iterator[RawFileReference]:
     """Yield the raw files needed to build the physical grid.
 
     Args:
@@ -246,7 +243,7 @@ def physical_catalog_source_ids(sources: BuildSources) -> set[str]:
 
 
 def _resolve_r2_pin(
-    file: CatalogFile | R2ObjectPin, catalog: Mapping[str, R2ObjectPin]
+    file: RawFileReference, catalog: Mapping[str, R2ObjectPin]
 ) -> R2ObjectPin:
     """Replace a catalog selection with its R2 location and byte identity.
 
@@ -266,8 +263,8 @@ def _resolve_r2_pin(
 
 
 def _resolve_coastline_file(
-    file: LandFile, catalog: Mapping[str, R2ObjectPin]
-) -> ResolvedLandFile:
+    file: CoastlineFileReference, catalog: Mapping[str, R2ObjectPin]
+) -> RemoteFile:
     """Resolve a coastline file or the R2 archive containing it.
 
     Args:
@@ -275,10 +272,8 @@ def _resolve_coastline_file(
         catalog: Object pins by ID from the frozen selection.
 
     Returns:
-        A file pin or ZIP member with its archive pinned in R2.
+        A direct R2 pin or a ZIP member with its archive pinned in R2.
     """
-    if "path" in file:
-        return file
     if "archive" in file:
         return {**file, "archive": _resolve_r2_pin(file["archive"], catalog)}
     return _resolve_r2_pin(file, catalog)
@@ -313,7 +308,7 @@ def physical_configuration(
     }
     land = configuration["sources"]["land_config"]
     water = configuration["sources"]["inland_water"]
-    layers: list[LandLayer[ResolvedLandFile]] = [
+    layers: list[LandLayer[RemoteFile]] = [
         {
             **layer,
             "files": [
@@ -322,10 +317,7 @@ def physical_configuration(
         }
         for layer in land["land"]
     ]
-    shards: list[ResolvedWaterFile] = [
-        file if "path" in file else _resolve_r2_pin(file, catalog)
-        for file in water["files"]
-    ]
+    shards = [_resolve_r2_pin(file, catalog) for file in water["files"]]
     controls: PhysicalControls = configuration.get("physical_controls", {})
     result: PhysicalConfiguration = {
         **controls,

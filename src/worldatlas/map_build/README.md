@@ -46,10 +46,10 @@ The command looks up the release in Neon and reuses its files from the workspace
 
 The build configuration sets the grid, physical inputs, coastal distance and processing options. The checked-in grid has 131,072 columns and 54,613 rows. The east and west edges meet at the antimeridian. [Build configuration](config.json)
 
-- Each layer in `sources.land_config.land` lists all required coastline files once in `files`. Set `dataset` to the member path, local path, R2 key, or Neon source ID of the entry GDAL opens. For a Shapefile, select the `.shp` and include its companion files in the list.
+- Each layer in `sources.land_config.land` lists all required coastline files once in `files`. Set `dataset` to the ZIP member path, R2 key, or Neon source ID of the entry GDAL opens. For a Shapefile, select the `.shp` and include its companion files in the list.
 - `sources.inland_water` holds the rasterizer settings and raw water file list.
 
-For either coastline or inland water, a local file uses `path` and `sha256`. An absolute path names the file directly. A relative path starts in the workspace’s `inputs/` directory. Catalog references get their size and checksum from Neon. Direct R2 references supply the size and checksum alongside the bucket and key.
+Every raw file has an R2 reference. A catalog reference gets its location, size and checksum from Neon. A direct R2 reference supplies the bucket, key, size and checksum in the configuration. `SourceCache` verifies the files and gives the rasterizers their local paths.
 
 All physical stages use the same `Grid`. The builder saves its dimensions and source pins in `physical-build-config.json` so the [standalone physical command](physical/README.md#use) can repeat that part of the build. `physical_controls.minimum_free_bytes` sets one disk reserve for the physical stages.
 
@@ -180,7 +180,7 @@ Set up the PostgreSQL tools and the `pg_jsonschema` extension once. Then run thi
 python .github/scripts/run_tests.py --suite map_build
 ```
 
-The runner starts and stops its own temporary PostgreSQL server. The tests use small local files and need no cloud credentials.
+The runner starts and stops its own temporary PostgreSQL server. Build tests use small fixtures in temporary source caches and fake R2 responses. They need no cloud credentials.
 
 - The end-to-end test builds a small map from source files and checks the final assignments. [`test_end_to_end.py`](test_end_to_end.py)
 - The resume tests verify that the builder reuses completed work and rejects changed inputs or outputs. [`test_resume.py`](test_resume.py)
