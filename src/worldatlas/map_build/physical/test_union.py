@@ -48,7 +48,7 @@ class AggregateTests(unittest.TestCase):
                 'rasterizer': 'gdal',
                 'rows_in_source': 10,
                 'counts': {'rows': 10},
-                'invalid_feature_ids': None,
+                'invalid_feature_rows': None,
             }
             rp = self.inputs / ('report' + str(i) + '.json')
             rp.write_text(json.dumps(doc))

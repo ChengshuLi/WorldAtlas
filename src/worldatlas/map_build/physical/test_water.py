@@ -52,14 +52,6 @@ class WaterShardTests(unittest.TestCase):
             self.assertEqual(excluded, 2)
         self.assertEqual(build.classifications(pa.array([1, 2, None]))[0].tolist(), [0, 0, 0])
 
-    def test_diagnostic_ids_cross_row_groups_and_preserve_requested_order(self):
-        p, _ = self.fixture()
-        table = pq.read_table(p)
-        pq.write_table(table, p, row_group_size=2)
-        ids = build.SourceIds(pq.ParquetFile(p))
-        self.assertEqual(ids.get([5, 0, 2, 5]), ['pool', 'lake', 'label', 'pool'])
-        self.assertEqual(ids.get([]), [])
-
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.path = Path(self.tmp.name)
@@ -787,39 +779,48 @@ class WaterShardTests(unittest.TestCase):
             self.rasterize(source, digest, out, self.config, self.grid, emit=change)
         self.assertFalse((out / 'report.json').exists())
 
-    def test_reports_source_id_for_missing_and_empty_selected_geometry(self):
+    def test_reports_file_row_for_missing_and_empty_selected_geometry(self):
         source, _ = self.fixture()
         table = pq.read_table(source)
         empty_polygon = bytes(ogr.CreateGeometryFromWkt('POLYGON EMPTY').ExportToWkb())
         for replacement, message in (
-            (None, 'missing geometry: lake'),
-            (empty_polygon, 'invalid or empty WKB geometry: lake'),
+            (None, 'missing geometry'),
+            (empty_polygon, 'invalid or empty WKB geometry'),
         ):
             rows = table.to_pylist()
-            rows[0]['geometry'] = replacement
+            rows[3]['geometry'] = replacement
             pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), source)
             with self.subTest(message=message):
                 out = self.path / f'invalid-{replacement is None}'
-                with self.assertRaisesRegex(ValueError, message):
-                    self.rasterize(source, sha256_file(source), out, self.config, self.grid)
+                with self.assertRaisesRegex(
+                    ValueError, rf'water\.parquet, row 3: {message}'
+                ):
+                    self.rasterize(source, sha256_file(source), out, self.config, self.grid, 2)
                 self.assertFalse((out / 'report.json').exists())
 
-    def test_invalid_polygon_reports_its_source_id(self):
+    def test_invalid_polygons_report_file_rows_across_batches(self):
         source, _ = self.fixture()
         table = pq.read_table(source)
         rows = table.to_pylist()
-        rows[0]['geometry'] = bytes(
+        invalid_polygon = bytes(
             ogr.CreateGeometryFromWkt(
                 'POLYGON ((-170 80,-120 40,-170 40,-120 80,-170 80))'
             ).ExportToWkb()
         )
-        pq.write_table(pa.Table.from_pylist(rows, schema=table.schema), source)
+        rows[0]['geometry'] = rows[5]['geometry'] = invalid_polygon
+        pq.write_table(
+            pa.Table.from_pylist(rows, schema=table.schema).drop_columns(['id']),
+            source,
+            row_group_size=2,
+        )
         out = self.path / 'invalid'
         with self.assertRaisesRegex(ValueError, 'incomplete water shard'):
-            self.rasterize(source, sha256_file(source), out, self.config, self.grid)
-        self.assertEqual(json.loads((out / 'invalid-feature-ids.json').read_text()), ['lake'])
+            self.rasterize(source, sha256_file(source), out, self.config, self.grid, 2)
+        filename = 'invalid-feature-rows.json'
+        self.assertEqual(json.loads((out / filename).read_text()), [0, 5])
         report = json.loads((out / 'report.json').read_text())
-        self.assertEqual(report['counts']['invalid_polygon'], 1)
+        self.assertEqual(report['invalid_feature_rows'], filename)
+        self.assertEqual(report['counts']['invalid_polygon'], 2)
         self.assertEqual(report['status'], 'incomplete-input-issues')
 
     def test_unprocessed_rows_leave_an_incomplete_report(self):

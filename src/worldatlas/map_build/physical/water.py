@@ -9,7 +9,7 @@ import os
 import shutil
 import sys
 from collections import Counter
-from collections.abc import Callable, Sequence
+from collections.abc import Callable
 from pathlib import Path
 
 import numpy as np
@@ -63,58 +63,15 @@ def classifications(subtypes: pyarrow.Array) -> tuple[np.ndarray, int, int]:
     )
 
 
-class SourceIds:
-    """Read source feature IDs only for rows needed in diagnostics."""
-
-    def __init__(self, parquet: pq.ParquetFile) -> None:
-        """Index the row groups in the source file.
-
-        Args:
-            parquet: Open water shard with an "id" column.
-        """
-        self.parquet = parquet
-        self.ends = np.cumsum(
-            [
-                parquet.metadata.row_group(i).num_rows
-                for i in range(parquet.metadata.num_row_groups)
-            ],
-            dtype=np.int64,
-        )
-
-    def get(self, indices: Sequence[int] | np.ndarray) -> list[str | None]:
-        """Read selected feature IDs without opening unrelated row groups.
-
-        Args:
-            indices: Global zero-based row numbers with a known length.
-
-        Returns:
-            Feature IDs in input order, with None for a null ID.
-        """
-        groups = {}
-        result: list[str | None] = [None] * len(indices)
-        for output, row in enumerate(indices):
-            group = int(np.searchsorted(self.ends, row, side='right'))
-            start = int(self.ends[group - 1]) if group else 0
-            groups.setdefault(group, []).append((output, int(row) - start))
-        for group, requests in groups.items():
-            ids = self.parquet.read_row_group(
-                group, columns=['id'], use_threads=False
-            ).column('id')
-            values = ids.take([row for _, row in requests]).to_pylist()
-            for (output, _), value in zip(requests, values):
-                result[output] = value
-        return result
-
-
 def gdal_batch(
     kernel: WaterBatch,
     raster: gdal.Dataset,
     batch: pyarrow.RecordBatch,
     counts: Counter[str],
-    invalid: list[str | None],
+    invalid_rows: list[int],
     grid: tuple[int, int, float, float, float],
     tile: int,
-    ids: SourceIds,
+    source: Path,
 ) -> None:
     """Rasterize one selected batch and update its statistics.
 
@@ -123,15 +80,15 @@ def gdal_batch(
         raster: Output raster to update.
         batch: Source rows containing subtypes and WKB.
         counts: Row and classification counts to update.
-        invalid: Feature IDs for invalid polygons to append.
+        invalid_rows: Zero-based file row numbers to append for invalid polygons.
         grid: (width, height, west, north, step).
         tile: Tile size in cells.
-        ids: Lookup for feature IDs used in diagnostics.
+        source: Path to the Parquet file, used in errors.
 
     Raises:
         ValueError: A selected geometry is missing or malformed.
     """
-    first = counts['rows']
+    first_row = counts['rows']
     eligible, missing, excluded = classifications(batch.column('subtype'))
     counts['rows'] += len(batch)
     if missing:
@@ -140,13 +97,12 @@ def gdal_batch(
         counts['excluded_classification'] += excluded
     status, failed = kernel.burn(raster, batch.column('geometry'), eligible, grid, tile)
     if failed is not None:
-        feature_id = ids.get([first + failed])[0]
         message = (
             'missing geometry'
             if status[failed] == GeometryStatus.MISSING
             else 'invalid or empty WKB geometry'
         )
-        raise ValueError(f'{message}: {feature_id}')
+        raise ValueError(f'{source}, row {first_row + failed}: {message}')
     for code, name in (
         (GeometryStatus.POLYGON, 'polygons'),
         (GeometryStatus.NON_POLYGON, 'non_polygon'),
@@ -155,8 +111,8 @@ def gdal_batch(
         count = int(np.count_nonzero(status == code))
         if count:
             counts[name] += count
-    invalid.extend(
-        ids.get(first + np.flatnonzero(status == GeometryStatus.INVALID_POLYGON))
+    invalid_rows.extend(
+        (first_row + np.flatnonzero(status == GeometryStatus.INVALID_POLYGON)).tolist()
     )
 
 
@@ -224,8 +180,7 @@ def run(
     kernel = WaterBatch(settings.get('batch_method', 'hybrid'))
     raster = create_mask(out / 'water.tif', grid)
     counts = Counter()
-    invalid = []
-    ids = SourceIds(pf)
+    invalid_rows: list[int] = []
     # A feature's raster burn is identical across batches because the operation
     # is a monotone union (the mask is initialized to zero and burns only 1).
     for batch in pf.iter_batches(
@@ -238,7 +193,9 @@ def run(
             raise ValueError(
                 'free disk below configured reserve; partial output preserved'
             )
-        gdal_batch(kernel, raster, batch, counts, invalid, dimensions, tile, ids)
+        gdal_batch(
+            kernel, raster, batch, counts, invalid_rows, dimensions, tile, source
+        )
         # Release this batch before Arrow reads the next one.
         del batch
         rss = 'unavailable'
@@ -270,13 +227,15 @@ def run(
     raster = None
     if files.pin(source)['sha256'] != expected.lower():
         raise ValueError('source changed during processing')
-    if invalid:
-        with (out / 'invalid-feature-ids.json').open('x') as f:
-            f.write(json.dumps(invalid, indent=2) + '\n')
+    invalid_rows_filename = None
+    if invalid_rows:
+        invalid_rows_filename = 'invalid-feature-rows.json'
+        with (out / invalid_rows_filename).open('x') as f:
+            f.write(json.dumps(invalid_rows, indent=2) + '\n')
     source_row_count = pf.metadata.num_rows
     complete = (
         counts.get('rows') == source_row_count
-        and not invalid
+        and not invalid_rows
         and not counts['missing_classification']
     )
     script_sha256 = files.pin(__file__)['sha256']
@@ -293,11 +252,11 @@ def run(
         'batch_timings': kernel.timings,
         'counts': dict(counts),
         'batch_size': batch_size,
-        'invalid_feature_ids': 'invalid-feature-ids.json' if invalid else None,
+        'invalid_feature_rows': invalid_rows_filename,
         'policy': {'method': INLAND_WATER_SUBTYPE_POLICY},
         'selection_notes': settings.get('selection_notes'),
         'configuration_sha256': configuration_sha256,
-        'geometry_policy': 'GEOS validity checked; invalid geometries excluded and IDs reported; no repair',
+        'geometry_policy': 'GEOS checks polygon validity and reports invalid polygons by zero-based source row.',
         'grid': vars(grid),
         'rasterization': f'GDAL default polygon rasterization, ALL_TOUCHED off; values unioned per batch on {tile}-cell tiles',
         'runtime': {
