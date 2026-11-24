@@ -5,7 +5,7 @@ from tempfile import TemporaryDirectory
 import unittest
 
 import numpy as np
-from shapely.geometry import shape
+from shapely.geometry import box, shape
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import patch_rows, write_layer
@@ -79,6 +79,18 @@ class ComponentFiles(unittest.TestCase):
                 opened.profile(shape(geometry), rows_per_batch=0)
             with self.assertRaisesRegex(ValueError, "component row outside grid"):
                 opened.row(grid.height)
+
+    def test_polygon_profile_follows_gdal_for_cell_centers_on_an_edge(self):
+        grid = Grid(24, 12, 15)
+        physical, components = self.root / "physical", self.root / "components"
+        write_layer(physical, grid, [(5, [(0, 12, 1), (12, 13, 17), (13, 24, 1)])])
+        connected.build_components(grid, physical, components)
+        with ComponentGrid(physical, components, grid) as opened:
+            (root,) = opened.totals()
+            # The cell at 7.5°E is on the east edge of the first box and
+            # the west edge of the second. GDAL counts it in the first box.
+            self.assertEqual(opened.profile(box(-30, 0, 7.5, 15)), {root: 1})
+            self.assertEqual(opened.profile(box(7.5, 0, 30, 15)), {})
 
     def test_component_files_must_match_the_physical_grid(self):
         grid, physical, components = self.fixture()

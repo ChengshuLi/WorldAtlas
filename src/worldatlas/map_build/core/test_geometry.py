@@ -9,7 +9,6 @@ from shapely.geometry import Point, Polygon, box, shape
 from worldatlas.map_build.core.geometry import (
     PolygonRasterizer,
     polygon_grid_bounds,
-    reject_boundary_centers,
 )
 from worldatlas.map_build.core.grid import Grid
 
@@ -100,62 +99,3 @@ class PolygonBounds(unittest.TestCase):
         # the coordinates are measured from the grid's western edge.
         with self.assertRaisesRegex(ValueError, "invalid polygon grid bounds"):
             polygon_grid_bounds(box(0, 0, math.ulp(1.0), 30), grid)
-
-
-class PolygonCentreHits(unittest.TestCase):
-    grid = Grid(24, 10, 15)
-
-    def test_horizontal_edge_checks_only_centres_selected_by_caller(self):
-        polygon = dict(type="Polygon", coordinates=[ring(0, 30, 30, 37.5)])
-        with self.assertRaisesRegex(ValueError, "crosses grid cell center"):
-            reject_boundary_centers(polygon, self.grid)
-        reject_boundary_centers(polygon, self.grid, selected=lambda x, y: x < 12)
-        with self.assertRaisesRegex(ValueError, "crosses grid cell center"):
-            reject_boundary_centers(
-                polygon, self.grid, selected=lambda x, y: (x, y) == (13, 3)
-            )
-
-    def test_sloping_edge_centres_follow_the_exact_line_in_either_direction(self):
-        for ring, expected in (
-            ([[0, 0], [45, 45], [45, 0], [0, 0]], {(12, 5), (13, 4), (14, 3)}),
-            ([[0, 45], [45, 0], [0, 0], [0, 45]], {(12, 3), (13, 4), (14, 5)}),
-        ):
-            for points in (ring, ring[::-1]):
-                with self.subTest(points=points):
-                    geometry = dict(type="Polygon", coordinates=[points])
-                    for selected in (None, lambda x, y: (x, y) == (13, 4)):
-                        with self.assertRaisesRegex(ValueError, "crosses grid cell center"):
-                            reject_boundary_centers(geometry, self.grid, selected=selected)
-                    hits = set()
-
-                    def record(x, y):
-                        hits.add((x, y))
-                        return False
-
-                    reject_boundary_centers(geometry, self.grid, selected=record)
-                    self.assertEqual(hits, expected)
-
-    def test_row_limited_grid_ignores_edges_south_of_its_cells(self):
-        geometry = dict(
-            type="MultiPolygon",
-            coordinates=[[ring(-30, -80, 30, -67.5)], [ring(-180, 20, -170, 30)]],
-        )
-        reject_boundary_centers(geometry, self.grid)
-
-    def test_full_height_grid_works_when_the_stored_step_rounds_up(self):
-        grid = Grid(14, 7, 360 / 14)
-        geometry = dict(type="Polygon", coordinates=[ring(-30, -80, 30, -60)])
-        reject_boundary_centers(geometry, grid)
-
-    def test_slanted_edges_without_centres_do_not_trigger_the_boundary_check(self):
-        for points in (
-            [[-180, 45], [-177, 0], [-180, 0], [-180, 45]],
-            [[-153.75, 90], [-146.25, 75], [-140, 90], [-153.75, 90]],
-        ):
-            with self.subTest(points=points):
-                reject_boundary_centers(dict(type="Polygon", coordinates=[points]), self.grid)
-
-    def test_empty_coordinate_ring_has_no_segments_to_check(self):
-        self.assertEqual(
-            reject_boundary_centers(dict(type="Polygon", coordinates=[[]]), self.grid), 0
-        )

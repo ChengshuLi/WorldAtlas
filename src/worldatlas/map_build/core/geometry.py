@@ -1,10 +1,7 @@
-"""Native-grid polygon rasterization and exact boundary incidence."""
+"""Rasterize polygons on the native map grid."""
 
 import math
-from collections.abc import Callable
-from fractions import Fraction
 from functools import cached_property
-from typing import Any
 
 import numpy as np
 from osgeo import gdal, ogr, osr
@@ -107,7 +104,7 @@ class PolygonRasterizer:
     def rasterize(
         self, bounds: tuple[int, int, int, int] | None = None
     ) -> tuple[tuple[int, int, int, int], np.ndarray]:
-        """Mark the cell centres covered by a polygon, including any holes.
+        """Mark covered cell centres using GDAL's polygon fill.
 
         Args:
             bounds: (first_column, end_column, first_row, end_row), or None to
@@ -115,7 +112,7 @@ class PolygonRasterizer:
 
         Returns:
             (bounds, mask). The 2-D bool mask has one entry for each cell in the
-            window, with True for the cells covered by the polygon.
+            window, with True for the cells GDAL marks as covered.
 
         Raises:
             ValueError: The window is invalid or GDAL cannot rasterize the polygon.
@@ -157,143 +154,3 @@ class PolygonRasterizer:
                 offset = (first - x0) % grid.width
                 mask[:, offset : offset + last - first] = raster.ReadAsArray() != 0
         return bounds, mask
-
-
-def _ceil(n: int, d: int) -> int:
-    """Round the quotient up using exact integer division.
-
-    Args:
-        n: Numerator.
-        d: Nonzero denominator.
-
-    Returns:
-        Smallest integer greater than or equal to n / d.
-    """
-    return -((-n) // d)
-
-
-def reject_boundary_centers(
-    geometry: dict[str, Any],
-    grid: Grid,
-    *,
-    selected: Callable[[int, int], bool] | None = None,
-) -> int:
-    """Reject selected cell centres that fall exactly on a polygon edge.
-
-    Express the stored coordinates exactly as fractions. A common denominator
-    lets the edge check use integers, so a centre close to an edge still
-    counts as distinct from the edge.
-
-    Args:
-        geometry: GeoJSON Polygon or MultiPolygon in WGS84.
-        grid: Grid of cell centres to check.
-        selected: Optional (column, row) test to ignore cells outside the
-            calculation.
-
-    Returns:
-        Number of candidate grid rows inspected across all polygon edges.
-
-    Raises:
-        ValueError: An included cell centre lies on an edge.
-    """
-    step = Fraction(grid.step)
-    w, h = grid.width, grid.height
-    sn, sd = step.numerator, step.denominator
-
-    def pixel(point: list[float] | tuple[float, float]) -> list[int]:
-        """Express one coordinate in exact cell-centre units.
-
-        Args:
-            point: Longitude and latitude in degrees.
-
-        Returns:
-            [x_numerator, x_denominator, y_numerator, y_denominator]. The
-            centre of the first cell is (0, 0) on this scale.
-        """
-        values = []
-        for value, origin, sign in ((point[0], 180, 1), (point[1], 90, -1)):
-            n, d = (
-                value.as_integer_ratio()
-                if hasattr(value, "as_integer_ratio")
-                else Fraction(value).as_integer_ratio()
-            )
-            numerator, denominator = (
-                2 * (sign * n + origin * d) * sd - sn * d,
-                2 * d * sn,
-            )
-            g = math.gcd(numerator, denominator)
-            values.extend((numerator // g, denominator // g))
-        return values
-
-    visits = 0
-    polygons = (
-        [geometry["coordinates"]]
-        if geometry["type"] == "Polygon"
-        else geometry["coordinates"]
-    )
-    for polygon in polygons:
-        for ring in polygon:
-            if len(ring) < 2:
-                continue
-            previous = pixel(ring[0])
-            for point in ring[1:]:
-                current = pixel(point)
-                d = math.lcm(previous[1], previous[3], current[1], current[3])
-                x0, y0 = (
-                    previous[0] * (d // previous[1]),
-                    previous[2] * (d // previous[3]),
-                )
-                x1, y1 = current[0] * (d // current[1]), current[2] * (d // current[3])
-                previous = current
-                if y0 == y1:
-                    if y0 % d == 0 and 0 <= y0 // d < h:
-                        first, last = (
-                            max(0, _ceil(min(x0, x1), d)),
-                            min(w - 1, max(x0, x1) // d),
-                        )
-                        if first <= last and (
-                            selected is None
-                            or any(selected(x, y0 // d) for x in range(first, last + 1))
-                        ):
-                            raise ValueError(
-                                "polygon boundary crosses grid cell center"
-                            )
-                    continue
-                lo, hi = max(0, _ceil(min(y0, y1), d)), min(h - 1, max(y0, y1) // d)
-                visits += max(0, hi - lo + 1)
-                if lo > hi:
-                    continue
-                dx, dy = x1 - x0, y1 - y0
-                a, b, denominator = dx * d, x0 * dy - dx * y0, d * dy
-                if denominator < 0:
-                    a, b, denominator = -a, -b, -denominator
-                if a > 0:
-                    lo, hi = (
-                        max(lo, _ceil(-b, a)),
-                        min(hi, (denominator * w - 1 - b) // a),
-                    )
-                elif a < 0:
-                    lo, hi = (
-                        max(lo, _ceil(b - (denominator * w - 1), -a)),
-                        min(hi, b // (-a)),
-                    )
-                elif not 0 <= b < denominator * w:
-                    continue
-                if lo > hi:
-                    continue
-                g = math.gcd(a, denominator)
-                if b % g:
-                    continue
-                period = denominator // g
-                residue = (-b // g * pow(a // g, -1, period)) % period
-                hit = residue + _ceil(lo - residue, period) * period
-                if hit <= hi:
-                    if selected is None:
-                        raise ValueError("polygon boundary crosses grid cell center")
-                    for y in range(hit, hi + 1, period):
-                        x = (a * y + b) // denominator
-                        if selected(x, y):
-                            raise ValueError(
-                                "polygon boundary crosses grid cell center"
-                            )
-    return visits
