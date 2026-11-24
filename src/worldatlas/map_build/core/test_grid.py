@@ -28,6 +28,12 @@ class GridTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "invalid grid window"):
             grid.extent((0, 2, 0, 2))
 
+    def test_full_world_grid_fits_by_row_count(self):
+        grid = Grid(338, 169, 360 / 338)
+        self.assertEqual(grid.bounds, (0, 338, 0, 169))
+        with self.assertRaisesRegex(ValueError, "aligned"):
+            Grid(338, 170, 360 / 338)
+
     def test_longitude_turn_covers_both_edges_for_nonbinary_steps(self):
         for width in (19, 39, 169):
             with self.subTest(width=width):

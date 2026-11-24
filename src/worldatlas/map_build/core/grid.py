@@ -44,6 +44,9 @@ class Grid:
     def __post_init__(self) -> None:
         """Require full longitude coverage and aligned rows starting at 90°N.
 
+        Latitude spans half as many degrees as longitude, so twice the number
+        of rows must fit within the number of columns.
+
         Raises:
             ValueError: The origin, dimensions, or cell step is invalid.
         """
@@ -55,7 +58,7 @@ class Grid:
             or not math.isfinite(self.step)
             or self.step <= 0
             or self.step != 360 / self.width
-            or self.height * self.step > 180
+            or 2 * self.height > self.width
             or self.west != -180
             or self.north != 90
         ):
