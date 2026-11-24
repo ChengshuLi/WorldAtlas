@@ -1,14 +1,51 @@
 """Share progress output and cancellation with a stage's worker threads."""
 
+import signal
 import threading
-from collections.abc import Generator
-from contextlib import contextmanager
+from collections.abc import Callable, Generator
+from contextlib import ExitStack, contextmanager
 from contextvars import ContextVar
+from types import FrameType
 from typing import TextIO
 
 _current: ContextVar[tuple[threading.Event, TextIO | None, threading.Lock] | None] = (
     ContextVar('map_build_stage', default=None)
 )
+
+
+@contextmanager
+def cancel_on_stop_signals(request_cancel: Callable[[], None]) -> Generator[None]:
+    """Request cancellation on Ctrl+C or SIGTERM while a CLI command runs.
+
+    Use this in the main thread. Restore the previous handlers when the command ends.
+
+    Args:
+        request_cancel: Callback that tells the workers to stop at their next check.
+
+    Yields:
+        Control to the command with both stop handlers installed.
+    """
+
+    def stop(signum: int, frame: FrameType | None) -> None:
+        """Ask workers to stop and interrupt the command's main thread.
+
+        Args:
+            signum: Signal number received by the command.
+            frame: Python frame supplied by the signal handler.
+
+        Raises:
+            KeyboardInterrupt: Exit the command through its cleanup code.
+        """
+        request_cancel()
+        raise KeyboardInterrupt(f'interrupted by signal {signum}')
+
+    with ExitStack() as restore_handlers:
+        for signum in (signal.SIGINT, signal.SIGTERM):
+            previous_handler = signal.signal(signum, stop)
+            restore_handlers.callback(
+                signal.signal, signum, previous_handler or signal.SIG_DFL
+            )
+        yield
 
 
 @contextmanager

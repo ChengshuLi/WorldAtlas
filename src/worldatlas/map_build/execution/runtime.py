@@ -482,6 +482,27 @@ class Checkpoints:
         return cast(Result, read_json(completion_path)["result"])
 
 
+def prepare_run_attempt(root: Path, *, resume: bool) -> tuple[Path, Checkpoints]:
+    """Verify prior work and create a directory for the new build attempt.
+
+    Args:
+        root: Run directory whose lock the caller holds.
+        resume: Whether to reuse the run's existing attempts directory.
+
+    Returns:
+        The new attempt directory and its checkpoint store.
+    """
+    attempt_id = uuid.uuid4().hex
+    checkpoints = Checkpoints(root / "checkpoints", attempt_id)
+    checkpoints.verify_all()
+    verify_setup_timing(root)
+    attempts = root / "attempts"
+    attempts.mkdir(mode=0o700, exist_ok=resume)
+    attempt_directory = attempts / attempt_id
+    attempt_directory.mkdir()
+    return attempt_directory, checkpoints
+
+
 @contextmanager
 def open_stage_workspace(
     root: Path, request: FilePin, *, resume: bool
@@ -511,12 +532,7 @@ def open_stage_workspace(
                 raise ValueError("saved stage request changed or is missing")
         else:
             write_json(saved, request)
-        attempt = uuid.uuid4().hex
-        checkpoints = Checkpoints(root / "checkpoints", attempt)
-        checkpoints.verify_all()
-        verify_setup_timing(root)
-        attempt_dir = root / "attempts" / attempt
-        attempt_dir.mkdir(parents=True)
+        attempt_dir, checkpoints = prepare_run_attempt(root, resume=resume)
         with closing(
             Timing.open_run(attempt_dir, setup_started, resume=resume)
         ) as timing:

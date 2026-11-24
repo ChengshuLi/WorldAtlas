@@ -22,6 +22,7 @@ import pyarrow.parquet as pq
 
 from worldatlas.map_build import build as pipeline
 from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.execution.timing import Timing, elapsed_union
 from worldatlas.shared import r2
 from worldatlas.shared.r2 import R2Client
@@ -125,12 +126,13 @@ class CommandTests(unittest.TestCase):
     def test_stop_signals_cancel_the_active_builder(self):
         for signum in (signal.SIGTERM, signal.SIGINT):
             with self.subTest(signum=signum):
-                install = Mock()
+                previous_handler = signal.getsignal(signum)
                 runner = Mock()
 
                 def interrupt_running_build():
-                    handlers = dict(call.args for call in install.call_args_list)
-                    handlers[signum](signum, None)
+                    handler = signal.getsignal(signum)
+                    self.assertIsNot(handler, previous_handler)
+                    handler(signum, None)
 
                 runner.run.side_effect = interrupt_running_build
                 with (
@@ -139,11 +141,30 @@ class CommandTests(unittest.TestCase):
                         ["worldatlas-build", "config.json", "run", "--work-dir", "workspace"],
                     ),
                     patch.object(pipeline, "Pipeline", return_value=runner),
-                    patch.object(pipeline.signal, "signal", install),
                 ):
                     with self.assertRaisesRegex(KeyboardInterrupt, str(signum)):
                         pipeline.main()
                 runner.cancel.assert_called_once_with()
+                self.assertIs(signal.getsignal(signum), previous_handler)
+
+    def test_stop_signals_cancel_the_standalone_physical_build(self):
+        for signum in (signal.SIGTERM, signal.SIGINT):
+            with self.subTest(signum=signum):
+                previous_handler = signal.getsignal(signum)
+
+                def interrupt_running_build(*args, **kwargs):
+                    handler = signal.getsignal(signum)
+                    self.assertIsNot(handler, previous_handler)
+                    try:
+                        handler(signum, None)
+                    finally:
+                        with self.assertRaises(InterruptedError):
+                            check_cancelled()
+
+                with patch.object(physical_build, "run", side_effect=interrupt_running_build):
+                    with self.assertRaisesRegex(KeyboardInterrupt, str(signum)):
+                        physical_build.main(["physical-config.json", "output"])
+                self.assertIs(signal.getsignal(signum), previous_handler)
 
 
 class Fixture(unittest.TestCase):

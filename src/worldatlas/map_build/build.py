@@ -6,13 +6,10 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import signal
 import sys
 import threading
-import uuid
 from functools import partial
 from pathlib import Path
-from types import FrameType
 from typing import Any, NotRequired, TypedDict
 
 import numpy
@@ -26,18 +23,15 @@ from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.division.encoding import encode
 from worldatlas.map_build.division.hierarchy import HierarchyDivision
 from worldatlas.map_build.execution.code_archive import capture_source, write_source
+from worldatlas.map_build.execution.control import cancel_on_stop_signals
 from worldatlas.map_build.execution.control import stage as stage_context
 from worldatlas.map_build.execution.runtime import (
-    Checkpoints,
     RunLock,
     code_identity,
+    prepare_run_attempt,
     repository_identity,
 )
-from worldatlas.map_build.execution.timing import (
-    SetupStart,
-    Timing,
-    verify_setup_timing,
-)
+from worldatlas.map_build.execution.timing import SetupStart, Timing
 from worldatlas.map_build.inputs.configuration import (
     BUILD_CONFIGURATION,
     PhysicalConfiguration,
@@ -418,15 +412,9 @@ class Pipeline:
         else:
             write_json(self.out / "run-identity.json", self.identity)
             write_bytes_atomic(self.saved_config, config_bytes)
-        attempts = self.out / "attempts"
-        self.attempt = uuid.uuid4().hex
-        self.checkpoints = Checkpoints(self.out / "checkpoints", self.attempt)
-        self.checkpoints.verify_all()
-        verify_setup_timing(self.out)
-
-        attempts.mkdir(mode=0o700, exist_ok=self.resume)
-        self.attempt_dir = attempts / self.attempt
-        self.attempt_dir.mkdir()
+        self.attempt_dir, self.checkpoints = prepare_run_attempt(
+            self.out, resume=self.resume
+        )
         source_archive = self.attempt_dir / "source-code.json.gz"
         write_source(source_archive, capture_source(PACKAGE_ROOT))
         write_json(
@@ -675,22 +663,8 @@ def main() -> None:
         selection=a.selection,
     )
 
-    def stop(signum: int, frame: FrameType | None) -> None:
-        """Request cancellation when the process receives a stop signal.
-
-        Args:
-            signum: Number of the received signal.
-            frame: Python frame supplied by the signal handler.
-
-        Raises:
-            KeyboardInterrupt: Unwind the running build so it can save failure details.
-        """
-        pipeline.cancel()
-        raise KeyboardInterrupt(f"interrupted by signal {signum}")
-
-    signal.signal(signal.SIGTERM, stop)
-    signal.signal(signal.SIGINT, stop)
-    print(json.dumps(pipeline.run(), indent=2))
+    with cancel_on_stop_signals(pipeline.cancel):
+        print(json.dumps(pipeline.run(), indent=2))
 
 
 if __name__ == "__main__":

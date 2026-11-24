@@ -11,7 +11,7 @@ python3 -m worldatlas.map_build.physical.build \
   RUN/physical-build-config.json /absolute/path/to/new-physical-output
 ```
 
-Use `--resume` after interruption. Completed land, water shards, union and composition are checked against their actual inputs and output hashes. Partial calculation outputs go to `preserved/` for inspection. The cache discards incomplete downloads.
+Press Ctrl+C to stop the standalone build. Its workers check for cancellation at safe points, just as they do in a full build. Use `--resume` after interruption. Completed land, water shards, union and composition are checked against their actual inputs and output hashes. Partial calculation outputs go to `preserved/` for inspection. The cache discards incomplete downloads.
 
 The standalone command gets coastline and inland-water files through `SourceCache`. The saved configuration contains the R2 references and the cache location. A warm cache lets both builds reuse the files already on disk.
 
