@@ -5,11 +5,20 @@ from bisect import bisect_left
 from collections import defaultdict
 from collections.abc import Callable, Collection, Iterable, Iterator, Sequence
 from fractions import Fraction
+from itertools import groupby, pairwise
 from pathlib import Path
 
 import numpy as np
-from shapely import contains_xy, get_parts, line_merge, polygonize, union_all
-from shapely.geometry import LineString, MultiLineString, Point
+from shapely import (
+    contains_xy,
+    get_parts,
+    line_merge,
+    polygonize,
+    remove_repeated_points,
+    union_all,
+)
+from shapely.geometry import LineString, MultiLineString, Point, Polygon
+from shapely.geometry.base import BaseGeometry
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.rle import open_mapped_array
@@ -118,6 +127,7 @@ def _scan_crossings(
     if y0 > y1:
         x0, y0, x1, y1 = x1, y1, x0, y0
 
+    # Scan only rows whose centres lie between the segment endpoints.
     first_row = max(0, (y0 + half - 1) // scale)
     last_row = min(row_count - 1, (y1 - half) // scale)
     dx, dy = x1 - x0, y1 - y0
@@ -168,14 +178,20 @@ def rasterize_barriers(
 
     for path in paths:
         check_cancelled()
-        points = tuple((Fraction(x), Fraction(y)) for x, y in path)
+        # Keep the intersection math exact, including when two points would
+        # round to the same float. Only consecutive identical points disappear.
+        points = tuple(
+            point for point, _ in groupby((Fraction(x), Fraction(y)) for x, y in path)
+        )
+        if len(points) < 2:
+            continue
         points = min(points, points[::-1])
         cuts.paths.append(points)
-        for first, last in zip(points, points[1:]):
-            if first == last:
-                continue
+        for first, last in pairwise(points):
             x0, y0, x1, y1, scale = _scaled_segment(first, last)
             dx, dy = x1 - x0, y1 - y0
+            # Crossings on a row block moves between columns. Swap the axes
+            # to find crossings on a column that block moves between rows.
             for y, x, on_centre in _scan_crossings(
                 x0, y0, x1, y1, scale, height, -1, width - 1
             ):
@@ -199,6 +215,8 @@ def rasterize_barriers(
                 elif y < height - 1:
                     cuts.add_v(y, x)
 
+    # Choose the blocked edges at each exact centre hit using the combined
+    # direction of the segments that met at that centre.
     for (x, y), (dx, dy) in tangents.items():
         if dy > 0:
             horizontal(y, x if x < width - 1 else -1)
@@ -278,7 +296,7 @@ def geographic_cuts(geometries: Iterable[dict], grid: Grid) -> CutEdges:
         joined = line_merge(MultiLineString(lines))
         lines = [part.coords for part in get_parts(joined)]
 
-    paths = []
+    copies = []
     west, north, step = map(Fraction, (grid.west, grid.north, grid.step))
     for line in lines:
         coordinates = tuple(map(tuple, line))
@@ -301,15 +319,93 @@ def geographic_cuts(geometries: Iterable[dict], grid: Grid) -> CutEdges:
                 )
             )
             previous = longitude
-        paths.append(path)
-    copies = [
-        [(x + shift, y) for x, y in path]
-        for path in paths
-        for shift in (-grid.width, 0, grid.width)
-        if min(x for x, _ in path) + shift <= grid.width + 1
-        and max(x for x, _ in path) + shift >= -1
-    ]
+        # A path can wrap around the globe more than once. Keep every copy
+        # that reaches the grid or its one-column margin at the longitude seam.
+        west_column = min(x for x, _ in path)
+        east_column = max(x for x, _ in path)
+        first_turn = math.ceil((-1 - east_column) / grid.width)
+        last_turn = math.floor((grid.width + 1 - west_column) / grid.width)
+        for turn in range(first_turn, last_turn + 1):
+            shift = turn * grid.width
+            copies.append([(x + shift, y) for x, y in path])
     return rasterize_barriers(copies, grid.width, grid.height)
+
+
+def _extend_past_corridor(
+    endpoint: np.ndarray,
+    outward: np.ndarray,
+    corridor: BaseGeometry,
+    ray_length: float,
+) -> np.ndarray:
+    """Find a point beyond the first corridor exit from a line endpoint.
+
+    Args:
+        endpoint: Length-two array of endpoint grid coordinates.
+        outward: Length-two array pointing away from the adjacent vertex.
+        corridor: Area around the original boundary lines.
+        ray_length: Length in cells sufficient to cross the whole corridor.
+
+    Returns:
+        Length-two array of grid coordinates one cell past the exit.
+    """
+    length = np.linalg.norm(outward)
+    ray = LineString([endpoint, endpoint + ray_length * outward / length])
+    endpoint_point = Point(endpoint)
+    for part in get_parts(ray.intersection(corridor)):
+        if part.geom_type == "LineString" and part.distance(endpoint_point) == 0:
+            # The ray can re-enter the corridor. Use the part that starts at
+            # the boundary endpoint and runs to the first exit.
+            exit_point = max(
+                part.coords,
+                key=lambda point: np.linalg.norm(np.asarray(point) - endpoint),
+            )
+            return np.asarray(exit_point) + outward / length
+    # The endpoint is already at the edge when the ray leaves immediately.
+    return endpoint + outward / length
+
+
+def _boundary_corridor_faces(
+    paths: Iterable[Sequence[tuple[Fraction, Fraction]]],
+) -> list[Polygon]:
+    """Build the continuous faces near the boundary lines.
+
+    Args:
+        paths: Lines in grid coordinates, with consecutive duplicates removed.
+
+    Returns:
+        Shapely polygons inside the corridor on each side of the source lines.
+    """
+    # Shapely uses floats. Distinct fractions can become identical upon
+    # conversion. Drop exact duplicates in this representation as well.
+    lines = [remove_repeated_points(LineString(path), tolerance=0) for path in paths]
+    lines = [line for line in lines if line.length > 0]
+    if not lines:
+        return []
+    # Simplify only the shape used to find nearby cells. Draw the actual
+    # divisions inside that shape using the full source lines.
+    corridor = union_all(
+        [line.simplify(0.25).buffer(2, cap_style="flat", quad_segs=1) for line in lines]
+    )
+    west, north, east, south = corridor.bounds
+    ray_length = 2 * math.hypot(east - west, south - north)
+    # Close faces against the corridor edge so a line that stops within
+    # the corridor can still separate the cells on its two sides.
+    extended = []
+    for line in lines:
+        points = np.asarray(line.coords)
+        first = _extend_past_corridor(
+            points[0], points[0] - points[1], corridor, ray_length
+        )
+        last = _extend_past_corridor(
+            points[-1], points[-1] - points[-2], corridor, ray_length
+        )
+        extended.append(LineString([first, *points, last]))
+    network = union_all([corridor.boundary, *extended])
+    return [
+        face
+        for face in get_parts(polygonize(get_parts(network)))
+        if corridor.covers(face.representative_point())
+    ]
 
 
 def continuous_face_links(
@@ -320,80 +416,26 @@ def continuous_face_links(
     uncut: RunComponents,
     grid: Grid,
 ) -> None:
-    """Join parts of the same geometric face separated by a narrow grid gap.
+    """Rejoin pieces of the same geometric face through a narrow passage.
 
-    A narrow passage can contain too few cell centres to link two pieces.
-    Only runs connected within the scope before the boundary cuts can be
-    repaired. The source lines determine which face they share.
+    A passage may be too narrow to contain a path through neighbouring cell
+    centres. Rejoin runs that touch the same face and belonged to the same
+    connected part of the scope before applying the boundary.
 
     Args:
         path: Binary file of (first_column, end_column, node_id) records.
-        offsets: Run-record offsets for each row.
+        offsets: Run-record offsets for each row, with an ending offset.
         paths: Boundary paths in grid coordinates.
         dsu: Sets of connected runs to update.
         uncut: Sets of connected scope runs before applying the boundary.
         grid: Grid occupied by the runs.
     """
-    lines = [LineString(p) for p in paths if len(p) > 1]
-    # Douglas-Peucker changes only the supporting envelope by <= .25 grid cells;
-    # the two-cell buffer contains the original line and neighbouring centres.
-    envelope = union_all(
-        [line.simplify(0.25).buffer(2, cap_style="flat", quad_segs=1) for line in lines]
-    )
-    extended = []
-    for line in lines:
-        points = np.asarray(line.coords)
-        first = points[0] - points[1]
-        last = points[-1] - points[-2]
-        if not np.linalg.norm(first) or not np.linalg.norm(last):
-            raise ValueError("boundary endpoint has a repeated coordinate")
-
-        def cap(endpoint: np.ndarray, direction: np.ndarray) -> np.ndarray:
-            """Extend a line endpoint past the first edge of the local envelope.
-
-            Args:
-                endpoint: Two coordinates for the endpoint.
-                direction: Two components of the outward direction.
-
-            Returns:
-                Length-two array of grid coordinates outside the first envelope edge.
-            """
-            x0, y0, x1, y1 = envelope.bounds
-            extent = 2 * math.hypot(x1 - x0, y1 - y0)
-            ray = LineString(
-                [endpoint, endpoint + extent * direction / np.linalg.norm(direction)]
-            )
-            clipped = ray.intersection(envelope)
-            for part in get_parts(clipped):
-                if (
-                    part.geom_type == "LineString"
-                    and part.distance(Point(endpoint)) == 0
-                ):
-                    # This is the first interval from the source endpoint, not
-                    # another part of the corridor farther along the same ray.
-                    exit_point = max(
-                        part.coords,
-                        key=lambda q: np.linalg.norm(np.asarray(q) - endpoint),
-                    )
-                    return np.asarray(exit_point) + direction / np.linalg.norm(
-                        direction
-                    )
-            return endpoint + direction / np.linalg.norm(direction)
-
-        extended.append(
-            LineString([cap(points[0], first), *points, cap(points[-1], last)])
-        )
-    network = union_all([envelope.boundary, *extended])
-    faces = [
-        face
-        for face in get_parts(polygonize(get_parts(network)))
-        if envelope.covers(face.representative_point())
-    ]
+    faces = _boundary_corridor_faces(paths)
     with open_mapped_array(path, "<u4") as node_values:
         nodes = node_values.reshape(-1, 3)
         for face in faces:
             xmin, ymin, xmax, ymax = face.bounds
-            roots = {}
+            scope_nodes = {}
             for y in range(
                 max(0, math.floor(ymin)), min(grid.height, math.floor(ymax) + 1)
             ):
@@ -406,11 +448,11 @@ def continuous_face_links(
                         max(int(left), math.floor(xmin)),
                         min(int(right), math.floor(xmax) + 1),
                     )
-                    centers = np.arange(left, right, dtype=float) + 0.5
-                    if contains_xy(face, centers, np.full(len(centers), y + 0.5)).any():
+                    centre_columns = np.arange(left, right, dtype=float) + 0.5
+                    if contains_xy(face, centre_columns, y + 0.5).any():
                         node = int(node)
                         scope_root = uncut.find(node)
-                        dsu.union(roots.setdefault(scope_root, node), node)
+                        dsu.union(scope_nodes.setdefault(scope_root, node), node)
 
 
 def divide_regions(
@@ -468,14 +510,19 @@ def divide_regions(
             if raw != sorted(raw) or any(a[1] > b[0] for a, b in zip(raw, raw[1:])):
                 raise ValueError("partition scope intervals overlap or are unordered")
             current = []
-            for a, b in split_eligible(
-                raw, sorted(cuts.horizontal.get(y, ())), grid.width
-            ):
+            horizontal_cuts = cuts.horizontal.get(y, ())
+            for a, b in split_eligible(raw, sorted(horizontal_cuts), grid.width):
                 node = dsu.add()
                 if uncut is not None:
                     uncut.add()
-                    if current and current[-1][1] == a:
-                        uncut.union(current[-1][2], node)
+                # Adjacent input spans can share a face even when supplied
+                # separately. A cut between them is the only barrier here.
+                if current and current[-1][1] == a:
+                    left_node = current[-1][2]
+                    if uncut is not None:
+                        uncut.union(left_node, node)
+                    if a - 1 not in horizontal_cuts:
+                        dsu.union(left_node, node)
                 current.append((a, b, node))
                 for index, entity, x in labels_by_row.get(y, ()):
                     if a <= x < b:

@@ -1,6 +1,7 @@
 """Continuous line-face identity and missing-label behavior on a numerical grid."""
 
 import math
+from fractions import Fraction
 from pathlib import Path
 import tempfile
 import unittest
@@ -94,6 +95,29 @@ class ExactCrossings(unittest.TestCase):
         self.assertTrue(
             all(x in (0, 23) for xs in forward.vertical.values() for x in xs)
         )
+
+    def test_boundary_can_make_more_than_one_turn_around_the_globe(self):
+        line = [
+            (-170, 85),
+            (-50, 79),
+            (70, 73),
+            (170, 67),
+            (-170, 61),
+            (-50, 55),
+            (70, 49),
+            (170, 43),
+            (-170, 37),
+            (-50, 31),
+        ]
+        tail = geographic_cuts(
+            [dict(type="LineString", coordinates=line[-2:])], self.grid
+        )
+        self.assertEqual(tail.vertical[3], set(range(1, 9)))
+        for coordinates in (line, line[::-1]):
+            cuts = geographic_cuts(
+                [dict(type="LineString", coordinates=coordinates)], self.grid
+            )
+            self.assertEqual(cuts.vertical[3], tail.vertical[3])
 
     def test_backtracking_segment_at_exact_centres_is_direction_independent(self):
         line = [(2, 8), (8, 8), (4, 4)]
@@ -277,18 +301,69 @@ class ContinuousFaces(unittest.TestCase):
             )
             self.assertEqual(list(roots.values()), [101])
 
-    def test_repeated_boundary_endpoint_fails_before_face_assignment(self):
+    def test_touching_input_spans_join_only_when_the_common_edge_is_open(self):
+        grid = Grid(8, 4, 45)
+
+        def intervals(y):
+            return [(1, 3), (3, 5)] if y == 1 else []
+
         with tempfile.TemporaryDirectory() as temp:
-            cuts = rasterize_barriers(
-                [[(0, 6), (0, 6), (24, 6)]], self.grid.width, self.grid.height
+            open_directory = Path(temp) / "open"
+            owners = divide_regions(
+                intervals,
+                grid,
+                geographic_cuts([], grid),
+                [(11, 1, 1)],
+                open_directory,
             )
-            with self.assertRaisesRegex(
-                ValueError, "endpoint has a repeated coordinate"
-            ):
-                divide_regions(
-                    self.intervals,
+            nodes = np.fromfile(open_directory / "nodes.u32le", dtype="<u4")
+            self.assertEqual([owners[root] for root in nodes[2::3]], [11, 11])
+
+            cuts = rasterize_barriers([[(3, 0), (3, 4)]], grid.width, grid.height)
+            divided_directory = Path(temp) / "divided"
+            owners = divide_regions(
+                intervals, grid, cuts, [(11, 1, 1), (22, 3, 1)], divided_directory
+            )
+            nodes = np.fromfile(divided_directory / "nodes.u32le", dtype="<u4")
+            self.assertEqual([owners[root] for root in nodes[2::3]], [11, 22])
+
+    def test_repeated_boundary_vertices_do_not_change_face_assignment(self):
+        clean = [(0, 6), (12, 6), (24, 6)]
+        repeats = [(0, 6), (0, 6), (12, 6), (12, 6), (24, 6), (24, 6)]
+        results = []
+        with tempfile.TemporaryDirectory() as temp:
+            for index, path in enumerate((clean, repeats, repeats[::-1])):
+                cuts = rasterize_barriers(
+                    [path, [(3, 6), (3, 6)]], self.grid.width, self.grid.height
+                )
+                directory = Path(temp) / str(index)
+                owners = divide_regions(
+                    lambda _: [(0, 24)],
                     self.grid,
                     cuts,
                     [(101, 1, 2), (807, 1, 10)],
-                    Path(temp) / "faces",
+                    directory,
                 )
+                self.assertEqual(sorted(owners.values()), [101, 807])
+                results.append((owners, (directory / "nodes.u32le").read_bytes()))
+        self.assertEqual(results[0], results[1])
+        self.assertEqual(results[0], results[2])
+
+    def test_a_cut_can_survive_even_if_its_endpoints_round_to_one_float(self):
+        centre = Fraction(3, 2)
+        delta = Fraction(1, 2**100)
+        cuts = rasterize_barriers(
+            [[(centre - delta, 1.5), (centre + delta, 1.5)]],
+            self.grid.width,
+            self.grid.height,
+        )
+        self.assertEqual(cuts.horizontal[1], {0, 1})
+        with tempfile.TemporaryDirectory() as temp:
+            owners = divide_regions(
+                lambda y: [(0, 3)] if y == 1 else [],
+                self.grid,
+                cuts,
+                [(11, 0, 1), (22, 1, 1), (33, 2, 1)],
+                Path(temp) / "faces",
+            )
+        self.assertEqual(sorted(owners.values()), [11, 22, 33])
