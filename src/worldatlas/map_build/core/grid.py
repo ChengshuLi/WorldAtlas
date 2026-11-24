@@ -104,48 +104,24 @@ class Grid:
         Args:
             longitude: WGS84 longitude in degrees. Both -180 and 180 select column
                 zero.
-            latitude: WGS84 latitude in degrees.
+            latitude: WGS84 latitude in degrees. The north edge is included and
+                the south edge of the grid is excluded.
 
         Returns:
             (column, row), or None if the point is outside the retained grid.
         """
-        if not (-180 <= longitude <= 180 and -90 <= latitude <= 90):
+        if not (-180 <= longitude <= 180 and -90 < latitude <= 90):
             return None
         step = Fraction(self.step)
-        # The raster step can round down. A longitude inside the declared
-        # turn still belongs to the grid even if division gives width.
         column = (Fraction(longitude) - Fraction(self.west)) // step
         row = (Fraction(self.north) - Fraction(latitude)) // step
+        if 2 * self.height == self.width:
+            # A rounded step can leave a gap before the exact southern edge
+            # of a full-world grid. These points belong to its last row.
+            row = min(row, self.height - 1)
         if 0 <= row < self.height:
+            # The rounded step can also leave a gap just west of 180°E.
             return (0 if longitude == 180 else min(column, self.width - 1)), row
-
-    def extent(
-        self, bounds: tuple[int, int, int, int]
-    ) -> tuple[float, float, float, float]:
-        """Find the outside edges of a grid window in degrees.
-
-        The caller is asking for the edges of existing cells. The window must
-        contain at least one cell and stay within the grid.
-
-        Args:
-            bounds: (first_column, end_column, first_row, end_row), with exclusive
-                ends.
-
-        Returns:
-            (west, south, east, north) in WGS84 degrees.
-
-        Raises:
-            ValueError: The requested window is empty or extends outside the grid.
-        """
-        x0, x1, y0, y1 = bounds
-        if not (0 <= x0 < x1 <= self.width and 0 <= y0 < y1 <= self.height):
-            raise ValueError('invalid grid window')
-        return (
-            self.west + x0 * self.step,
-            self.north - y1 * self.step,
-            180.0 if x1 == self.width else self.west + x1 * self.step,
-            self.north - y0 * self.step,
-        )
 
     def window_for_extent(
         self, extent: tuple[float, float, float, float]
