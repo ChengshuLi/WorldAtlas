@@ -189,5 +189,5 @@ def run(
         'land_sha256': files.pin(output / 'land.tif')['sha256'],
         'gdal': gdal.VersionInfo('--version'),
     }
-    write_json(output / 'report.json', report, sort_keys=False)
+    write_json(output / 'report.json', report)
     return report

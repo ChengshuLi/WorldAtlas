@@ -47,15 +47,12 @@ PACKAGE_ROOT = Path(__file__).resolve().parents[2]
 TASK_CHECKPOINT_SCHEMA = "worldatlas-task-checkpoint-v2"
 
 
-def save_or_verify_settings(
-    path: Path, settings: JSONValue, *, sort_keys: bool = True
-) -> FilePin:
+def save_or_verify_settings(path: Path, settings: JSONValue) -> FilePin:
     """Save build settings once and return a pin for their exact JSON bytes.
 
     Args:
         path: Absolute path to the saved settings in the run directory.
         settings: Settings to encode as JSON.
-        sort_keys: Whether to sort object keys when encoding.
 
     Returns:
         The settings file's absolute path and SHA-256 checksum.
@@ -63,7 +60,7 @@ def save_or_verify_settings(
     Raises:
         ValueError: An existing settings file differs from the current settings.
     """
-    data = json_bytes(settings, sort_keys=sort_keys)
+    data = json_bytes(settings)
     if path.exists():
         if path.read_bytes() != data:
             raise ValueError(f"saved build settings differ: {path}")

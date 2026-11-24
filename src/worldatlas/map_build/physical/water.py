@@ -275,7 +275,7 @@ def run(
         'output_sha256': mask['sha256'],
     }
     report_path = out / 'report.json'
-    write_json(report_path, report, sort_keys=False)
+    write_json(report_path, report)
     if not complete:
         raise ValueError(f'incomplete water shard: see {report_path}')
 

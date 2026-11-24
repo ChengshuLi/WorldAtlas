@@ -196,5 +196,5 @@ def build_components(
         },
         processing_seconds=time.monotonic() - started,
     )
-    write_json(directory / "report.json", report, sort_keys=False)
+    write_json(directory / "report.json", report)
     return report

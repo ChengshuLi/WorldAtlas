@@ -144,5 +144,5 @@ def build_reference_index(
         representatives_sha256=sha256_file(directory / "representatives.u32le"),
         processing_seconds=time.monotonic() - started,
     )
-    write_json(directory / "report.json", result, sort_keys=False)
+    write_json(directory / "report.json", result)
     return result

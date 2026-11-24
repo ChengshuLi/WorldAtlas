@@ -428,10 +428,10 @@ b.run(sys.argv[1], sys.argv[2])
     def test_resume_after_report_write_failure_reuses_composition(self):
         out = self.root / 'report-resume'
 
-        def fail_report(path, value, *, sort_keys):
+        def fail_report(path, value):
             if Path(path) == out / 'report.json':
                 raise ValueError('report interrupted')
-            return write_json(path, value, sort_keys=sort_keys)
+            return write_json(path, value)
 
         with mock.patch.object(b, 'write_json', side_effect=fail_report):
             with self.assertRaisesRegex(ValueError, 'report interrupted'):

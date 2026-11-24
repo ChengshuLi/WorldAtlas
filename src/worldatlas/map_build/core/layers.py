@@ -187,7 +187,7 @@ def write_run_rows(
         "counts": dict(counts),
         "run_count": offsets[-1],
     }
-    write_json(directory / "report.json", report, sort_keys=False)
+    write_json(directory / "report.json", report)
     return report
 
 

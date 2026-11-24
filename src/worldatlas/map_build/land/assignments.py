@@ -185,5 +185,5 @@ def assign_components(
             for name in ("roots.u32le", "entities.i64le")
         },
     )
-    write_json(directory / "report.json", result, sort_keys=False)
+    write_json(directory / "report.json", result)
     return result, roots, codes

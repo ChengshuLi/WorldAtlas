@@ -148,5 +148,5 @@ def run(
             for name in ('physical-dry.tif', 'rows.u32le', 'runs.u32le')
         },
     }
-    write_json(out / 'report.json', report, sort_keys=False)
+    write_json(out / 'report.json', report)
     return report

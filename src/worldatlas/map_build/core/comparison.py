@@ -181,5 +181,5 @@ def compare(
         "elapsed_seconds": time.monotonic() - start,
         "change_record_fields": ["row", "start", "end", "before_code", "after_code"],
     }
-    write_json(directory / "report.json", result, sort_keys=False)
+    write_json(directory / "report.json", result)
     return result

@@ -413,7 +413,6 @@ class PhysicalBuild:
                 'rows_per_block': self.union_rows_per_block,
                 'shards': list(shards),
             },
-            sort_keys=False,
         )
         union_directory = self.output / 'union'
 
@@ -466,7 +465,6 @@ class PhysicalBuild:
                 'land': land_mask,
                 'water': water_mask,
             },
-            sort_keys=False,
         )
         physical_directory = self.output / 'physical'
 
@@ -537,7 +535,7 @@ class PhysicalBuild:
                 'physical_output_sha256': output_checksums,
                 'downloaded_shard_count': downloaded_shard_count,
             }
-            write_json(report_path, report, sort_keys=False)
+            write_json(report_path, report)
             return report
 
         return self._run_task(

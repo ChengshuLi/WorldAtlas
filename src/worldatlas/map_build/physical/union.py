@@ -131,5 +131,5 @@ def run(
         'candidate_water_cells': candidate,
         'union_sha256': files.pin(output / 'water-union.tif')['sha256'],
     }
-    write_json(output / 'report.json', report, sort_keys=False)
+    write_json(output / 'report.json', report)
     return report

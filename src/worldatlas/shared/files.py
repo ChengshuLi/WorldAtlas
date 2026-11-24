@@ -99,13 +99,11 @@ def verify_pins(pins: Iterable[FilePin]) -> None:
             raise ValueError("checkpoint/input hash mismatch: " + expected["path"])
 
 
-def json_bytes(value: JSONValue, *, sort_keys: bool = True) -> bytes:
-    """Encode JSON with two-space indentation and a final newline.
+def json_bytes(value: JSONValue) -> bytes:
+    """Encode JSON with sorted keys, two-space indentation and a final newline.
 
     Args:
         value: JSON-compatible value to encode.
-        sort_keys: Whether to sort object keys or preserve their insertion
-            order.
 
     Returns:
         The UTF-8 encoded JSON.
@@ -114,7 +112,7 @@ def json_bytes(value: JSONValue, *, sort_keys: bool = True) -> bytes:
         TypeError: A value cannot be represented as JSON.
         ValueError: A number is nonfinite or a container refers to itself.
     """
-    text = json.dumps(value, sort_keys=sort_keys, indent=2, allow_nan=False)
+    text = json.dumps(value, sort_keys=True, indent=2, allow_nan=False)
     return (text + "\n").encode("utf-8")
 
 
@@ -188,14 +186,12 @@ def write_bytes_atomic(path: Path | str, data: bytes) -> Path:
     return path
 
 
-def write_json(path: Path | str, value: JSONValue, *, sort_keys: bool = True) -> Path:
-    """Encode JSON and write it to a new file atomically.
+def write_json(path: Path | str, value: JSONValue) -> Path:
+    """Write sorted JSON to a new file atomically.
 
     Args:
         path: Destination file path.
         value: JSON-compatible value to write.
-        sort_keys: Whether to sort object keys or preserve their insertion
-            order.
 
     Returns:
         The destination path.
@@ -205,4 +201,4 @@ def write_json(path: Path | str, value: JSONValue, *, sort_keys: bool = True) ->
         TypeError: A value cannot be represented as JSON.
         ValueError: A number is nonfinite or a container refers to itself.
     """
-    return write_bytes_atomic(path, json_bytes(value, sort_keys=sort_keys))
+    return write_bytes_atomic(path, json_bytes(value))
