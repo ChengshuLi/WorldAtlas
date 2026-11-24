@@ -98,7 +98,7 @@ class ComponentFiles(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "invalid component stream offsets"):
             ComponentGrid(physical, components, grid)
         runs.write_bytes(b"\0")
-        with self.assertRaisesRegex(ValueError, "incomplete component u32 stream"):
+        with self.assertRaisesRegex(ValueError, "incomplete integer stream"):
             ComponentGrid(physical, components, grid)
 
     def test_saved_physical_grid_cannot_contain_unrecognized_map_codes(self):

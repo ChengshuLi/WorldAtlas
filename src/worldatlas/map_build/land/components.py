@@ -15,7 +15,7 @@ from worldatlas.map_build.core.geometry import (
     reject_boundary_centers,
 )
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.core.rle import close_memmap, open_grid, row
+from worldatlas.map_build.core.rle import open_grid, open_mapped_array, row
 from worldatlas.map_build.core.wrapping import wrapped_grid_bounds
 from worldatlas.map_build.execution.control import check_cancelled
 
@@ -58,8 +58,12 @@ class ComponentGrid:
                 open_grid(physical_directory, grid)
             )
             directory = self.directory
-            self.offsets = self._map(directory / "rows.u32le")
-            self.runs = self._map(directory / "runs.u32le")
+            self.offsets = self.resources.enter_context(
+                open_mapped_array(directory / "rows.u32le", "<u4")
+            )
+            self.runs = self.resources.enter_context(
+                open_mapped_array(directory / "runs.u32le", "<u4")
+            )
             if (
                 len(self.offsets) != grid.height + 1
                 or len(self.runs) % 3
@@ -72,26 +76,6 @@ class ComponentGrid:
         except BaseException:
             self.close()
             raise
-
-    def _map(self, path: Path) -> np.ndarray:
-        """Open a component stream as a read-only map.
-
-        Args:
-            path: Little-endian uint32 file.
-
-        Returns:
-            1-D uint32 array. An empty stream produces an empty array.
-
-        Raises:
-            ValueError: The file ends partway through a value.
-        """
-        if path.stat().st_size % 4:
-            raise ValueError("incomplete component u32 stream")
-        if not path.stat().st_size:
-            return np.empty(0, dtype="<u4")
-        values = np.memmap(path, dtype="<u4", mode="r")
-        self.resources.callback(close_memmap, values)
-        return values
 
     def __enter__(self) -> Self:
         """Use the open component grid inside a context.

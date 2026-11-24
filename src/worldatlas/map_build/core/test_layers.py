@@ -11,7 +11,7 @@ from worldatlas.map_build.core.layers import (
     write_layer,
     write_run_rows,
 )
-from worldatlas.map_build.core.rle import open_grid, row
+from worldatlas.map_build.core.rle import open_grid, open_mapped_array, row
 from worldatlas.map_build.core.rle import crop
 
 
@@ -118,9 +118,27 @@ class LayersTests(unittest.TestCase):
                 with open_grid(path, grid):
                     self.fail("Unordered offsets were accepted")
             (path / "runs.u32le").write_bytes(b"short")
-            with self.assertRaisesRegex(ValueError, "incomplete u32 stream"):
+            with self.assertRaisesRegex(ValueError, "incomplete integer stream"):
                 with open_grid(path, grid):
                     self.fail("Incomplete run was accepted")
+
+    def test_mapped_arrays_close_and_persist_edits(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "values.u32le"
+            path.write_bytes(b"\x01\x00\x00\x00")
+            with open_mapped_array(path, "<u4", writable=True) as values:
+                mapping = values.base
+                values[0] = 513
+            self.assertTrue(mapping.closed)
+            self.assertEqual(path.read_bytes(), b"\x01\x02\x00\x00")
+
+            with self.assertRaisesRegex(RuntimeError, "stop reading"):
+                with open_mapped_array(path, "<u4") as values:
+                    mapping = values.base
+                    self.assertFalse(values.flags.writeable)
+                    self.assertEqual(values[0], 513)
+                    raise RuntimeError("stop reading")
+            self.assertTrue(mapping.closed)
 
     def test_wrapped_patch_roundtrip_preserves_unrelated_zero_cells(self):
         grid = Grid(36, 18, 10.0)

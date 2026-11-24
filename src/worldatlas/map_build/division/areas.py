@@ -10,7 +10,7 @@ import numpy as np
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.core.partition import divide_regions, geographic_cuts
-from worldatlas.map_build.core.rle import close_memmap
+from worldatlas.map_build.core.rle import open_mapped_array
 from worldatlas.map_build.division.contracts import CompiledTarget, point_coordinates
 from worldatlas.map_build.division.intervals import overlay, spans
 from worldatlas.map_build.division.scope import Scope, complete_row, selected
@@ -50,30 +50,23 @@ class Faces:
     """Read the regions and owner labels produced by cutting a scope."""
 
     def __init__(
-        self, directory: Path | str, owners: dict[int, int], grid: Grid
+        self, offsets: np.ndarray, nodes: np.ndarray, owners: dict[int, int], grid: Grid
     ) -> None:
-        """Open the division's region files and index their labels.
+        """Index the owner labels for the supplied region runs.
 
         Args:
-            directory: Directory with node runs and row offsets.
+            offsets: 1-D uint64 array of row offsets into the runs.
+            nodes: Flat uint32 array of (first column, end column, region ID) runs.
             owners: Region root IDs mapped to child entity IDs.
             grid: Dimensions of the grid.
         """
         self.grid = grid
-        self.offsets = np.memmap(Path(directory) / "rows.u64le", dtype="<u8", mode="r")
-        self._node_map = np.memmap(
-            Path(directory) / "nodes.u32le", dtype="<u4", mode="r"
-        )
-        self.nodes = self._node_map.reshape(-1, 3)
+        self.offsets = offsets
+        self.nodes = nodes.reshape(-1, 3)
         self.roots = np.asarray(sorted(owners), dtype=np.uint32)
         self.owners = np.asarray(
             [owners[int(root)] for root in self.roots], dtype=np.uint32
         )
-
-    def close(self) -> None:
-        """Close the memory maps for the region files."""
-        close_memmap(self.offsets)
-        close_memmap(self._node_map)
 
     def row(self, y: int, *, by_face: bool = False) -> tuple[np.ndarray, np.ndarray]:
         """Read one row of labelled regions.
@@ -193,16 +186,20 @@ def divide_area(
             raise ValueError("divided-face label is outside the grid")
         labels.append((target["entity_id"], *cell))
     cuts = geographic_cuts([dict(f["geometry"]) for f in boundaries], grid)
+    faces_directory = directory / "faces"
     owners = divide_regions(
         scope.context_intervals,
         grid,
         cuts,
         labels,
-        directory / "faces",
+        faces_directory,
         rows=context_rows,
     )
-    faces = Faces(directory / "faces", owners, grid)
-    try:
+    with (
+        open_mapped_array(faces_directory / "rows.u64le", "<u8") as offsets,
+        open_mapped_array(faces_directory / "nodes.u32le", "<u4") as nodes,
+    ):
+        faces = Faces(offsets, nodes, owners, grid)
         by_component = (
             component_owners(scope, faces)
             if scope.rule["unit"] == "component"
@@ -253,5 +250,3 @@ def divide_area(
         report = write_layer(directory / "claims", grid, rows())
         report["faces"] = len(owners)
         return report
-    finally:
-        faces.close()

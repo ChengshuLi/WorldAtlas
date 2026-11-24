@@ -2,7 +2,10 @@
 
 from collections.abc import Generator
 from contextlib import contextmanager
+from mmap import ACCESS_READ, ACCESS_WRITE, mmap
+from os import fstat
 from pathlib import Path
+from typing import Literal
 
 import numpy as np
 
@@ -78,14 +81,41 @@ def crop(
     return result
 
 
-def close_memmap(array: np.memmap) -> None:
-    """Release the file mapping after its readers finish.
+@contextmanager
+def open_mapped_array(
+    path: Path, dtype: Literal["<u4", "<u8"], *, writable: bool = False
+) -> Generator[np.ndarray]:
+    """Open a file as an array of little-endian unsigned integers.
 
     Args:
-        array: The owning NumPy map. Its views must no longer be in use.
+        path: File containing the integers.
+        dtype: NumPy format for 4-byte or 8-byte integers.
+        writable: Allow edits and flush them to the file on successful exit.
+
+    Yields:
+        A 1-D NumPy array backed by the file, or an empty array for an empty
+        file. Use the array and any slices only within the context.
+
+    Raises:
+        ValueError: The file ends partway through an integer.
     """
-    # NumPy exposes flush() but provides no public close operation.
-    array._mmap.close()  # pyright: ignore[reportAttributeAccessIssue]
+    with path.open("r+b" if writable else "rb") as stream:
+        size = fstat(stream.fileno()).st_size
+        count, remainder = divmod(size, np.dtype(dtype).itemsize)
+        if remainder:
+            raise ValueError(f"incomplete integer stream: {path}")
+        if not count:
+            # The operating system cannot map a zero-length file.
+            empty = np.empty(0, dtype=dtype)
+            empty.setflags(write=writable)
+            yield empty
+            return
+        with mmap(
+            stream.fileno(), size, access=ACCESS_WRITE if writable else ACCESS_READ
+        ) as mapping:
+            yield np.ndarray((count,), dtype=dtype, buffer=mapping)
+            if writable:
+                mapping.flush()
 
 
 @contextmanager
@@ -106,14 +136,10 @@ def open_grid(
         ValueError: The streams have incomplete values or invalid offsets.
     """
     directory = Path(directory)
-    arrays = []
-    try:
-        for name in ('rows', 'runs'):
-            path = directory / (name + '.u32le')
-            if path.stat().st_size % 4:
-                raise ValueError('incomplete u32 stream')
-            arrays.append(np.memmap(path, dtype='<u4', mode='r'))
-        rows, runs = arrays
+    with (
+        open_mapped_array(directory / "rows.u32le", "<u4") as rows,
+        open_mapped_array(directory / "runs.u32le", "<u4") as runs,
+    ):
         if len(rows) != grid.height + 1:
             raise ValueError('row-run stream row count does not match the grid')
         if (
@@ -123,9 +149,4 @@ def open_grid(
             or np.any(rows[1:] <= rows[:-1])
         ):
             raise ValueError('invalid row-run stream offsets')
-        # Keep the mappings open here. Plain views share their read-only bytes
-        # without carrying the memmap subclass through each slice and operation.
-        yield np.asarray(rows), np.asarray(runs)
-    finally:
-        for array in arrays:
-            close_memmap(array)
+        yield rows, runs

@@ -12,7 +12,7 @@ from shapely import contains_xy, get_parts, line_merge, polygonize, union_all
 from shapely.geometry import LineString, MultiLineString, Point
 
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.core.rle import close_memmap
+from worldatlas.map_build.core.rle import open_mapped_array
 from worldatlas.map_build.core.run_components import RunComponents
 from worldatlas.map_build.execution.control import check_cancelled
 
@@ -389,34 +389,28 @@ def continuous_face_links(
         for face in get_parts(polygonize(get_parts(network)))
         if envelope.covers(face.representative_point())
     ]
-    with path.open("rb") as stream:
-        mapping = np.memmap(stream, dtype="<u4", mode="r")
-        nodes = mapping.reshape(-1, 3)
-        try:
-            for face in faces:
-                xmin, ymin, xmax, ymax = face.bounds
-                roots = {}
-                for y in range(
-                    max(0, math.floor(ymin)), min(grid.height, math.floor(ymax) + 1)
-                ):
-                    check_cancelled()
-                    current = nodes[offsets[y] : offsets[y + 1]]
-                    first = np.searchsorted(current[:, 1], xmin, side="right")
-                    last = np.searchsorted(current[:, 0], xmax, side="left")
-                    for left, right, node in current[first:last]:
-                        left, right = (
-                            max(int(left), math.floor(xmin)),
-                            min(int(right), math.floor(xmax) + 1),
-                        )
-                        centers = np.arange(left, right, dtype=float) + 0.5
-                        if contains_xy(
-                            face, centers, np.full(len(centers), y + 0.5)
-                        ).any():
-                            node = int(node)
-                            scope_root = uncut.find(node)
-                            dsu.union(roots.setdefault(scope_root, node), node)
-        finally:
-            close_memmap(mapping)
+    with open_mapped_array(path, "<u4") as node_values:
+        nodes = node_values.reshape(-1, 3)
+        for face in faces:
+            xmin, ymin, xmax, ymax = face.bounds
+            roots = {}
+            for y in range(
+                max(0, math.floor(ymin)), min(grid.height, math.floor(ymax) + 1)
+            ):
+                check_cancelled()
+                current = nodes[offsets[y] : offsets[y + 1]]
+                first = np.searchsorted(current[:, 1], xmin, side="right")
+                last = np.searchsorted(current[:, 0], xmax, side="left")
+                for left, right, node in current[first:last]:
+                    left, right = (
+                        max(int(left), math.floor(xmin)),
+                        min(int(right), math.floor(xmax) + 1),
+                    )
+                    centers = np.arange(left, right, dtype=float) + 0.5
+                    if contains_xy(face, centers, np.full(len(centers), y + 0.5)).any():
+                        node = int(node)
+                        scope_root = uncut.find(node)
+                        dsu.union(roots.setdefault(scope_root, node), node)
 
 
 def divide_regions(
@@ -534,10 +528,7 @@ def divide_regions(
         owners[root] = entity
     np.asarray(offsets, dtype="<u8").tofile(directory / "rows.u64le")
     # Save the final component ID in each run so readers can use it directly.
-    with (directory / "nodes.u32le").open("r+b") as stream:
-        mapping = np.memmap(stream, dtype="<u4", mode="r+")
-        records = mapping.reshape(-1, 3)
+    with open_mapped_array(directory / "nodes.u32le", "<u4", writable=True) as nodes:
+        records = nodes.reshape(-1, 3)
         records[:, 2] = roots[records[:, 2]]
-        mapping.flush()
-        close_memmap(mapping)
     return owners
