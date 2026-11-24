@@ -86,15 +86,15 @@ class PolygonRasterizer:
         self.geometry = geometry
         with ogr.ExceptionMgr():
             self.source = ogr.GetDriverByName("Memory").CreateDataSource("")
-            self.reference = osr.SpatialReference()
-            self.reference.SetFromUserInput("OGC:CRS84")
+            spatial_reference = osr.SpatialReference()
+            spatial_reference.SetFromUserInput("OGC:CRS84")
             self.layer = self.source.CreateLayer(
-                "area", self.reference, geom_type=ogr.wkbUnknown
+                "area", spatial_reference, geom_type=ogr.wkbUnknown
             )
             feature = ogr.Feature(self.layer.GetLayerDefn())
             feature.SetGeometry(ogr.CreateGeometryFromWkb(geometry.wkb))
             self.layer.CreateFeature(feature)
-            self.projection = self.reference.ExportToWkt()
+            self.projection = spatial_reference.ExportToWkt()
 
     @cached_property
     def bounds(self) -> tuple[int, int, int, int]:
@@ -147,8 +147,6 @@ class PolygonRasterizer:
                     )
                 )
                 raster.SetProjection(self.projection)
-                # OGR readers retain iteration state between rasterizations.
-                self.layer.ResetReading()
                 if gdal.RasterizeLayer(raster, [1], self.layer, burn_values=[1]) != 0:
                     raise ValueError("polygon rasterization failed")
                 offset = (first - x0) % grid.width
