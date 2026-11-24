@@ -5,9 +5,14 @@ from unittest.mock import patch
 import unittest
 import numpy as np
 from osgeo import gdal, ogr
-from worldatlas.map_build.core.geometry import PolygonRasterizer, reject_boundary_centers
+from shapely.geometry import Point, Polygon, box, shape
+from worldatlas.map_build.core.geometry import (
+    PolygonRasterizer,
+    polygon_grid_bounds,
+    rasterize,
+    reject_boundary_centers,
+)
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.core.wrapping import wrapped_grid_bounds
 
 
 def ring(west, south, east, north):
@@ -33,10 +38,10 @@ class PreparedRasterization(unittest.TestCase):
             ],
         )
         with patch(
-            "worldatlas.map_build.core.geometry.ogr.CreateGeometryFromJson",
-            wraps=ogr.CreateGeometryFromJson,
+            "worldatlas.map_build.core.geometry.ogr.CreateGeometryFromWkb",
+            wraps=ogr.CreateGeometryFromWkb,
         ) as parse:
-            prepared = PolygonRasterizer(geometry, grid)
+            prepared = PolygonRasterizer(shape(geometry), grid)
             expected = np.zeros((18, 36), dtype=bool)
             expected[7:11, 16:20] = True
             expected[8:10, 17:19] = False
@@ -51,9 +56,7 @@ class PreparedRasterization(unittest.TestCase):
 
     def test_explicit_window_can_be_outside_the_source_polygon(self):
         grid = Grid(36, 10, 10)
-        prepared = PolygonRasterizer(
-            dict(type="Polygon", coordinates=[ring(0, -80, 10, -70)]), grid
-        )
+        prepared = PolygonRasterizer(box(0, -80, 10, -70), grid)
         self.assertFalse(prepared.rasterize((0, 36, 0, 10))[1].any())
         bounds, mask = prepared.rasterize()
         self.assertEqual(bounds, (18, 19, 10, 10))
@@ -63,11 +66,9 @@ class PreparedRasterization(unittest.TestCase):
     def test_degenerate_rings_and_invalid_windows_are_rejected(self):
         grid = Grid(36, 18, 10)
         crossed = [[0, 0], [20, 20], [0, 20], [20, 0], [0, 0]]
-        with self.assertRaisesRegex(ValueError, "invalid polygon geometry"):
-            PolygonRasterizer(dict(type="Polygon", coordinates=[crossed]), grid)
-        prepared = PolygonRasterizer(
-            dict(type="Polygon", coordinates=[ring(0, 0, 20, 20)]), grid
-        )
+        with self.assertRaisesRegex(ValueError, "expected valid geometry"):
+            rasterize(dict(type="Polygon", coordinates=[crossed]), grid)
+        prepared = PolygonRasterizer(box(0, 0, 20, 20), grid)
         with self.assertRaisesRegex(ValueError, "invalid rasterization window"):
             prepared.rasterize((0, 37, 0, 18))
         with patch.object(gdal, "RasterizeLayer", return_value=1):
@@ -82,31 +83,27 @@ class PolygonBounds(unittest.TestCase):
             coordinates=[[ring(-180, 0, 0, 30)], [ring(0, -30, 180, 0)]],
         )
         self.assertEqual(
-            wrapped_grid_bounds(geometry, 24, 12, 15),
-            ((0, 24, 4, 8), ((0, 24),)),
+            polygon_grid_bounds(shape(geometry), Grid(24, 12, 15)),
+            (0, 24, 4, 8),
         )
 
     def test_window_rounded_outwards_can_cover_entire_width(self):
-        geometry = dict(type="Polygon", coordinates=[ring(-179, 0, 179, 30)])
         self.assertEqual(
-            wrapped_grid_bounds(geometry, 24, 12, 15),
-            ((0, 24, 4, 6), ((0, 24),)),
+            polygon_grid_bounds(box(-179, 0, 179, 30), Grid(24, 12, 15)),
+            (0, 24, 4, 6),
         )
 
-    def test_rejects_malformed_geometry_and_inconsistent_grid(self):
-        polygon = dict(type="Polygon", coordinates=[ring(-30, -30, 30, 30)])
-        with self.assertRaisesRegex(ValueError, "invalid grid"):
-            wrapped_grid_bounds(polygon, 24, 12, 14)
-        for geometry, message in (
-            (dict(type="Point", coordinates=[0, 0]), "expected Polygon"),
-            (dict(type="MultiPolygon", coordinates=[]), "empty geometry"),
-            (dict(type="Polygon", coordinates=[]), "empty polygon"),
-            (dict(type="Polygon", coordinates=[ring(-181, 0, 0, 30)]), "invalid coordinates"),
-            (dict(type="Polygon", coordinates=["bad"]), "invalid coordinates"),
-            (dict(type="Polygon", coordinates=[ring(0, 0, 0, 30)]), "invalid polygon grid bounds"),
-        ):
-            with self.subTest(message=message), self.assertRaisesRegex(ValueError, message):
-                wrapped_grid_bounds(geometry, 24, 12, 15)
+    def test_requires_a_nonempty_polygon_with_a_longitude_span(self):
+        grid = Grid(24, 12, 15)
+        for geometry in (Point(0, 0), Polygon()):
+            with self.subTest(geometry=geometry), self.assertRaisesRegex(
+                ValueError, "nonempty Polygon"
+            ):
+                polygon_grid_bounds(geometry, grid)
+        # The shape has area, but its tiny longitude span collapses when
+        # the coordinates are measured from the grid's western edge.
+        with self.assertRaisesRegex(ValueError, "invalid polygon grid bounds"):
+            polygon_grid_bounds(box(0, 0, math.ulp(1.0), 30), grid)
 
 
 class PolygonCentreHits(unittest.TestCase):

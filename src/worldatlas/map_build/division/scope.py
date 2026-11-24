@@ -4,13 +4,12 @@ from collections.abc import Callable, Iterator, Sequence
 
 import numpy as np
 from shapely import union_all
-from shapely.geometry import mapping, shape
+from shapely.geometry import shape
 
-from worldatlas.map_build.core.geometry import PolygonRasterizer
+from worldatlas.map_build.core.geometry import PolygonRasterizer, polygon_grid_bounds
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import column_spans
 from worldatlas.map_build.core.rle import crop, row
-from worldatlas.map_build.core.wrapping import wrapped_grid_bounds
 from worldatlas.map_build.division.contracts import CompiledRule, point_coordinates
 from worldatlas.map_build.division.intervals import overlay, prepare
 from worldatlas.map_build.execution.control import check_cancelled
@@ -127,9 +126,9 @@ class Scope:
             inputs.get("scope_area") or inputs.get("scope_component")
         )
         areas = [shape(dict(f["geometry"])) for f in inputs.get("scope_area", ())]
-        self.geometry = mapping(union_all(areas)) if areas else None
+        self.geometry = union_all(areas) if areas else None
         self.bounds = (
-            wrapped_grid_bounds(self.geometry, grid.width, grid.height, grid.step)[0]
+            polygon_grid_bounds(self.geometry, grid)
             if self.geometry is not None
             else None
         )
@@ -359,7 +358,11 @@ class Scope:
             if not self.restricted:
                 roots = set(totals)
             else:
-                counts = components.profile(self.geometry) if self.geometry else {}
+                counts = (
+                    components.profile(self.geometry)
+                    if self.geometry is not None
+                    else {}
+                )
                 roots = set(map(int, self.points[kind])) | {
                     root for root, n in counts.items() if 2 * n > totals[root]
                 }

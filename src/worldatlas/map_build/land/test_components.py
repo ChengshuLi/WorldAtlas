@@ -5,6 +5,7 @@ from tempfile import TemporaryDirectory
 import unittest
 
 import numpy as np
+from shapely.geometry import shape
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import patch_rows, write_layer
@@ -68,14 +69,14 @@ class ComponentFiles(unittest.TestCase):
         with ComponentGrid(physical, components, grid) as opened:
             roots = opened.totals()
             self.assertEqual(list(roots.values()), [2])
-            self.assertEqual(opened.profile(geometry), roots)
+            self.assertEqual(opened.profile(shape(geometry)), roots)
             partial = dict(type="Polygon", coordinates=[
                 [[-180, 0], [-173, 0], [-173, 15], [-180, 15], [-180, 0]]
             ])
-            self.assertEqual(opened.profile(partial), {})
+            self.assertEqual(opened.profile(shape(partial)), {})
             self.assertEqual(opened.row_bounds([]), (0, 0))
             with self.assertRaisesRegex(ValueError, "row batch must be positive"):
-                opened.profile(geometry, rows_per_batch=0)
+                opened.profile(shape(geometry), rows_per_batch=0)
             with self.assertRaisesRegex(ValueError, "component row outside grid"):
                 opened.row(grid.height)
 

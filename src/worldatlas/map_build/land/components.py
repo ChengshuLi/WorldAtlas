@@ -5,18 +5,19 @@ from __future__ import annotations
 from contextlib import ExitStack
 from pathlib import Path
 from types import TracebackType
-from typing import Any, Self
+from typing import Self
 
 import numpy as np
 from numpy.typing import ArrayLike
+from shapely.geometry import mapping
+from shapely.geometry.base import BaseGeometry
 
 from worldatlas.map_build.core.geometry import (
     PolygonRasterizer,
     reject_boundary_centers,
 )
-from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.core.grid import Grid, column_windows
 from worldatlas.map_build.core.rle import open_grid, open_mapped_array, row
-from worldatlas.map_build.core.wrapping import wrapped_grid_bounds
 from worldatlas.map_build.execution.control import check_cancelled
 
 
@@ -221,12 +222,12 @@ class ComponentGrid:
         return int(spans[index, 2])
 
     def profile(
-        self, geometry: dict[str, Any], *, rows_per_batch: int = 64
+        self, geometry: BaseGeometry, *, rows_per_batch: int = 64
     ) -> dict[int, int]:
         """Count component cells whose centres fall inside a polygon.
 
         Args:
-            geometry: WGS84 GeoJSON Polygon or MultiPolygon.
+            geometry: Validated WGS84 polygon or multipolygon.
             rows_per_batch: Number of rows to rasterize together.
 
         Returns:
@@ -236,18 +237,14 @@ class ComponentGrid:
         if type(rows_per_batch) is not int or rows_per_batch <= 0:
             raise ValueError("row batch must be positive")
         reject_boundary_centers(
-            geometry,
+            mapping(geometry),
             self.grid,
             selected=lambda x, y: self._at_cell(x % self.grid.width, y) is not None,
         )
-        (x0, x1, y0, y1), _ = wrapped_grid_bounds(
-            geometry, self.grid.width, self.grid.height, self.grid.step
-        )
-        counts = {}
-        windows = [(x0, min(x1, self.grid.width))]
-        if x1 > self.grid.width:
-            windows.append((0, x1 - self.grid.width))
         rasterizer = PolygonRasterizer(geometry, self.grid)
+        x0, x1, y0, y1 = rasterizer.bounds
+        counts = {}
+        windows = column_windows(x0, x1, self.grid.width)
         for first in range(y0, y1, rows_per_batch):
             check_cancelled()
             last = min(first + rows_per_batch, y1)
