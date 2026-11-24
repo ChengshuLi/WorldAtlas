@@ -592,7 +592,6 @@ class Pipeline:
                     "schema": "worldatlas-end-to-end-failure-v1",
                     "status": "incomplete",
                     "stages": self.timing.summary(),
-                    "limitations": "Resume validates source and output pins. Code changes are recorded as provenance. Missing interrupted endpoints remain timing-incomplete; no downtime is added.",
                 },
             )
             raise
