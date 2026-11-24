@@ -11,10 +11,10 @@ import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
-from worldatlas.map_build.core.rle import open_grid, row
+from worldatlas.map_build.core.rle import open_grid, overlay, row
 from worldatlas.map_build.division.contracts import CompiledDivision
 from worldatlas.map_build.division.engine import ParentDivision, land_groups
-from worldatlas.map_build.division.intervals import overlay, spans
+from worldatlas.map_build.division.intervals import spans
 from worldatlas.map_build.division.shores import ShoreGeometry, land_owner_order
 from worldatlas.map_build.execution.runtime import Checkpoints, RunFilePins
 from worldatlas.map_build.execution.timing import Timing

@@ -1,4 +1,4 @@
-"""Read complete, little-endian row-run grids."""
+"""Read and align rows from complete, little-endian row-run grids."""
 
 from collections.abc import Generator
 from contextlib import contextmanager
@@ -41,6 +41,37 @@ def row(
     ):
         raise ValueError('invalid row-run row')
     return ends, codes
+
+
+def overlay(
+    *rows: tuple[np.ndarray, np.ndarray],
+) -> tuple[np.ndarray, np.ndarray, list[np.ndarray]]:
+    """Split rows wherever any input changes value.
+
+    Args:
+        rows: One or more rows as (exclusive_end_columns, values) arrays.
+
+    Returns:
+        (starts, ends, aligned_values). Each input gets a value per shared
+        interval. For example, runs ending at [2, 5] and [3, 5] produce
+        [0, 2), [2, 3), and [3, 5).
+
+    Raises:
+        ValueError: There are no input rows or their widths differ.
+    """
+    if not rows:
+        raise ValueError("an overlay needs at least one row")
+    if not len(rows[0][0]):
+        raise ValueError("overlay rows must cover at least one column")
+    width = int(rows[0][0][-1])
+    if any(not len(ends) or int(ends[-1]) != width for ends, _ in rows):
+        raise ValueError("overlay rows have different widths")
+    cuts = np.unique(np.concatenate(([0], *(ends for ends, _ in rows))))
+    starts, ends = cuts[:-1], cuts[1:]
+    values = [
+        codes[np.searchsorted(stops, starts, side="right")] for stops, codes in rows
+    ]
+    return starts, ends, values
 
 
 def crop(

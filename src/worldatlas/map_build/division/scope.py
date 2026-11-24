@@ -9,9 +9,9 @@ from shapely.geometry import shape
 from worldatlas.map_build.core.geometry import PolygonRasterizer, polygon_grid_bounds
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import column_spans
-from worldatlas.map_build.core.rle import crop, row
+from worldatlas.map_build.core.rle import crop, overlay, row
 from worldatlas.map_build.division.contracts import CompiledRule, point_coordinates
-from worldatlas.map_build.division.intervals import overlay, prepare
+from worldatlas.map_build.division.intervals import prepare
 from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.land.components import ComponentGrid
 

@@ -18,12 +18,12 @@ import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
-from worldatlas.map_build.core.rle import open_grid, row
+from worldatlas.map_build.core.rle import open_grid, overlay, row
 from worldatlas.map_build.division import policies
 from worldatlas.map_build.division.areas import assign_area, divide_area
 from worldatlas.map_build.division.connectivity import build_domain
 from worldatlas.map_build.division.contracts import CompiledDivision, CompiledRule
-from worldatlas.map_build.division.intervals import Eligibility, combine, overlay, spans
+from worldatlas.map_build.division.intervals import Eligibility, combine, spans
 from worldatlas.map_build.division.scope import Scope
 from worldatlas.map_build.division.shores import (
     ReferenceCells,

@@ -9,8 +9,7 @@ import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_run_rows
-from worldatlas.map_build.core.rle import open_grid, row
-from worldatlas.map_build.division.intervals import overlay
+from worldatlas.map_build.core.rle import open_grid, overlay, row
 from worldatlas.map_build.inputs.selection_types import MapCodeBinding
 
 

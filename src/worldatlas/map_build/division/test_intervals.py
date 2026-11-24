@@ -3,7 +3,8 @@
 import unittest
 import numpy as np
 
-from worldatlas.map_build.division.intervals import Eligibility, combine, overlay, prepare, spans
+from worldatlas.map_build.core.rle import overlay
+from worldatlas.map_build.division.intervals import Eligibility, combine, prepare, spans
 from worldatlas.map_build.division.scope import complete_row, selected
 
 

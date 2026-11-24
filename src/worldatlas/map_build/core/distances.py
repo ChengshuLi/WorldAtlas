@@ -79,12 +79,14 @@ def run_pairs_batch(
     lat2 = north - (yy.astype(float) + 0.5) * step
     if abs(lat1) > 90 or np.any(np.abs(lat2) > 90):
         raise ValueError("invalid latitude")
-    gap = np.full(len(r), width, dtype=np.int64)
-    for shift in (-width, 0, width):
-        gap = np.minimum(
-            gap,
-            np.maximum(0, np.maximum(left + shift - (b - 1), a - (right - 1 + shift))),
-        )
+    # Use the first and last cell in each run. Overlapping runs have zero
+    # direct gap. Going around the seam turns the largest separation into
+    # the shortest wrapped gap.
+    reference_after_query = left - (b - 1)
+    query_after_reference = a - (right - 1)
+    direct_gap = np.maximum(0, np.maximum(reference_after_query, query_after_reference))
+    wrapped_gap = width + np.minimum(reference_after_query, query_after_reference)
+    gap = np.minimum(direct_gap, wrapped_gap)
     dl = np.deg2rad(gap * step)
     p1 = math.radians(lat1)
     p2 = np.deg2rad(lat2)

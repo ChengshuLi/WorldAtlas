@@ -10,7 +10,7 @@ from typing import Any
 import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.core.rle import open_grid, row
+from worldatlas.map_build.core.rle import open_grid, overlay, row
 from worldatlas.map_build.inputs.selection_types import MapCodeBinding
 from worldatlas.shared.files import sha256_file, write_json
 
@@ -133,18 +133,23 @@ def compare(
         directory.mkdir()
         stream = files.enter_context((directory / "changes.u32le").open("xb"))
         for y in range(grid.height):
-            a, b = row(old, y, grid.width), row(new, y, grid.width)
-            translated = comparable_codes(a[1], lookup)
+            reference_row = row(old, y, grid.width)
+            candidate_row = row(new, y, grid.width)
             records = []
-            if not (np.array_equal(a[0], b[0]) and np.array_equal(translated, b[1])):
-                ends = np.union1d(a[0], b[0])
-                starts = np.r_[np.uint32(0), ends[:-1]]
-                ai = np.searchsorted(a[0], starts, side="right")
-                av = a[1][ai]
-                bv = b[1][np.searchsorted(b[0], starts, side="right")]
-                for i in np.flatnonzero(translated[ai] != bv):
+            if not (
+                np.array_equal(reference_row[0], candidate_row[0])
+                and np.array_equal(
+                    comparable_codes(reference_row[1], lookup), candidate_row[1]
+                )
+            ):
+                starts, ends, (old_codes, new_codes) = overlay(
+                    reference_row, candidate_row
+                )
+                # Compare the code meanings but report the original codes.
+                changed_spans = comparable_codes(old_codes, lookup) != new_codes
+                for i in np.flatnonzero(changed_spans):
                     left, right, prior, after = map(
-                        int, (starts[i], ends[i], av[i], bv[i])
+                        int, (starts[i], ends[i], old_codes[i], new_codes[i])
                     )
                     count = right - left
                     changed += count
