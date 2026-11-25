@@ -11,7 +11,7 @@ from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.test_support import selection
 from worldatlas.map_releases.colors import (
-    choose_muted_land_color,
+    LandColorPicker,
     color_land,
     muted_color_samples,
     oklab,
@@ -26,12 +26,37 @@ RESERVED = set(FILL_COLORS)
 class PaletteTests(TestCase):
     def test_choice_maximizes_the_separation_from_its_closest_color(self):
         neighbor = (201, 111, 98)
-        chosen = choose_muted_land_color({neighbor}, RESERVED)
+        picked = LandColorPicker(RESERVED, ())
+        chosen = picked.choose_muted_land_color({neighbor})
         candidates, lab = muted_color_samples()
         possible = [i for i, color in enumerate(candidates) if color not in (neighbor, *FILL_COLORS)]
         references = oklab([neighbor])
         distances = np.linalg.norm(lab[:, None] - references, axis=2).min(axis=1)
         self.assertEqual(chosen, candidates[max(possible, key=lambda i: distances[i])])
+
+    def test_view_variety_keeps_at_least_85_percent_of_nearby_contrast(self):
+        water = FILL_COLORS[0]
+        original = LandColorPicker(RESERVED, ()).choose_muted_land_color({water})
+        picked = LandColorPicker(RESERVED, (original,))
+        chosen = picked.choose_muted_land_color({water})
+
+        candidates, lab = muted_color_samples()
+        local = np.linalg.norm(lab - oklab([water])[0], axis=1)
+        view = np.linalg.norm(lab - oklab([original])[0], axis=1)
+        eligible = [i for i, color in enumerate(candidates) if color not in RESERVED]
+        best_local = max(local[i] for i in eligible)
+        shortlist = [i for i in eligible if local[i] >= 0.85 * best_local]
+        expected = candidates[max(shortlist, key=lambda i: (view[i], local[i]))]
+        self.assertEqual(chosen, expected)
+        self.assertNotEqual(chosen, original)
+
+    def test_distant_entities_can_reuse_colors_after_the_palette_is_used(self):
+        swatches = ((80, 140, 60), (210, 150, 100), (200, 100, 110))
+        with patch("worldatlas.map_releases.colors.muted_color_samples",
+                   return_value=(swatches, oklab(swatches))):
+            picked = LandColorPicker({swatches[0]}, ())
+            first, second, third = (picked.choose_muted_land_color(set()) for _ in range(3))
+        self.assertEqual((first, second, third), (swatches[1], swatches[2], swatches[1]))
 
     def test_coloring_preserves_authored_colors_and_rejects_conflicting_borders(self):
         fixed = (201, 111, 98)
@@ -39,7 +64,7 @@ class PaletteTests(TestCase):
         colors = color_land(graph, set(), {1: fixed}, FILL_COLORS)
         self.assertEqual(colors[1], fixed)
         self.assertNotEqual(colors[2], fixed)
-        self.assertEqual(colors[3], choose_muted_land_color(set(), RESERVED))
+        self.assertEqual(len(set(colors.values())), 3)
         with self.assertRaisesRegex(ValueError, "entities 1 and 2 share"):
             color_land(graph, set(), {1: fixed, 2: fixed}, FILL_COLORS)
 
@@ -70,7 +95,7 @@ class PaletteTests(TestCase):
         with patch("worldatlas.map_releases.colors.muted_color_samples",
                    return_value=((color,), oklab([color]))):
             with self.assertRaisesRegex(ValueError, "ran out of distinct muted land colors"):
-                choose_muted_land_color({color}, RESERVED)
+                LandColorPicker(RESERVED, ()).choose_muted_land_color({color})
 
 
 class ModeTests(TestCase):
@@ -177,9 +202,10 @@ class ModeTests(TestCase):
                     modes = build_map_modes(path, grid, geography, bindings, report["counts"], FILL_COLORS)
                     colors = {row["id"]: tuple(row["color"]) for row in modes[1]["legend"]}
                     # Land entity 2 sees water, including when it owns the water.
-                    self.assertEqual(colors[2], choose_muted_land_color({water}, {water, gray}))
+                    picked = LandColorPicker({water, gray}, ())
+                    self.assertEqual(colors[2], picked.choose_muted_land_color({water}))
                     # Entity 3 sees only land without a subcontinent assignment.
-                    self.assertEqual(colors[3], choose_muted_land_color(set(), {water, gray}))
+                    self.assertEqual(colors[3], picked.choose_muted_land_color(set()))
                     self.assertNotEqual(colors[2], colors[3])
 
     def test_nested_modes_count_every_cell_once_and_merge_dissolved_borders(self):

@@ -9,6 +9,8 @@ from scipy.spatial import cKDTree  # pyright: ignore[reportAttributeAccessIssue]
 
 type RGB = tuple[int, int, int]
 
+_MIN_NEARBY_CONTRAST_FRACTION = 0.85
+
 # The OKLab matrices convert linear sRGB via cone responses. See CSS Color 4.
 _RGB_TO_LMS = np.array(
     [
@@ -76,37 +78,74 @@ def muted_color_samples() -> tuple[tuple[RGB, ...], np.ndarray]:
     return colors, oklab(colors)
 
 
-def choose_muted_land_color(
-    neighbor_colors: set[RGB],
-    reserved_colors: set[RGB],
-) -> RGB:
-    """Choose the muted color most distinct from the colors visible nearby.
+class LandColorPicker:
+    """Keep each candidate’s distance from the closest land color in this view."""
 
-    Args:
-        neighbor_colors: Colors of nearby assigned land and any nearby water.
-        reserved_colors: Exact water and unassigned land RGBs kept for those roles.
+    def __init__(
+        self, reserved_colors: set[RGB], authored_colors: Iterable[RGB]
+    ) -> None:
+        """Prepare the candidate colors and account for saved land colors.
 
-    Returns:
-        8-bit sRGB triple. Among eligible choices, maximize the OKLab distance
-        to the nearest comparison color. With no comparisons or an exact tie,
-        pick the first eligible RGB in sorted order.
+        Args:
+            reserved_colors: Exact RGBs for water and unassigned land.
+            authored_colors: Colors already assigned to land by the input catalog.
+        """
+        self._colors, self._lab = muted_color_samples()
+        self._index_by_color = {color: i for i, color in enumerate(self._colors)}
+        self._available = np.array(
+            [color not in reserved_colors for color in self._colors], dtype=bool
+        )
+        self._used = set(authored_colors)
+        self._closest_view_distance = np.full(len(self._colors), np.inf)
+        if self._used:
+            self._closest_view_distance, _ = cKDTree(oklab(sorted(self._used))).query(
+                self._lab
+            )
 
-    Raises:
-        ValueError: Every sample is already used nearby or is reserved.
-    """
-    colors, lab = muted_color_samples()
-    excluded = neighbor_colors | reserved_colors
-    available = np.fromiter(
-        (color not in excluded for color in colors), dtype=bool, count=len(colors)
-    )
-    if not available.any():
-        raise ValueError("ran out of distinct muted land colors")
-    if not neighbor_colors:
-        return colors[int(available.argmax())]
-    comparisons = oklab(sorted(neighbor_colors))
-    nearest, _ = cKDTree(comparisons).query(lab)
-    nearest[~available] = -np.inf
-    return colors[int(nearest.argmax())]
+    def choose_muted_land_color(self, neighbor_colors: set[RGB]) -> RGB:
+        """Pick a land color and record it for future choices in this view.
+
+        Args:
+            neighbor_colors: Colors of nearby assigned land and any nearby water.
+
+        Returns:
+            An 8-bit RGB triple. Keep candidates with at least 85% of the best
+            nearby contrast. Among those, maximize the distance to the closest
+            land color used anywhere in the view. Break ties by nearby contrast
+            and then RGB order.
+
+        Raises:
+            ValueError: Every candidate color is already used nearby or reserved.
+        """
+        available = self._available.copy()
+        for color in neighbor_colors:
+            if (index := self._index_by_color.get(color)) is not None:
+                available[index] = False
+        if not available.any():
+            raise ValueError("ran out of distinct muted land colors")
+
+        if neighbor_colors:
+            nearby, _ = cKDTree(oklab(sorted(neighbor_colors))).query(self._lab)
+            best_nearby = nearby[available].max()
+            available &= nearby >= _MIN_NEARBY_CONTRAST_FRACTION * best_nearby
+        else:
+            # With no nearby comparison, every eligible color has the same score.
+            nearby = np.full(len(self._colors), np.inf)
+
+        best_view = self._closest_view_distance[available].max()
+        available &= self._closest_view_distance == best_view
+        winner = int(np.where(available, nearby, -np.inf).argmax())
+        color = self._colors[winner]
+        if color not in self._used:
+            self._used.add(color)
+            # A new color can only decrease each candidate’s closest distance.
+            distance_to_color = np.linalg.norm(self._lab - self._lab[winner], axis=1)
+            np.minimum(
+                self._closest_view_distance,
+                distance_to_color,
+                out=self._closest_view_distance,
+            )
+        return color
 
 
 def color_land(
@@ -154,11 +193,12 @@ def color_land(
         (-len(seen), -len(neighbors[entity]), entity) for entity, seen in used.items()
     ]
     heapq.heapify(queue)
+    picker = LandColorPicker(reserved, colors.values())
     while queue:
         saturation, _, entity = heapq.heappop(queue)
         if entity in colors or -saturation != len(used[entity]):
             continue
-        color = choose_muted_land_color(used[entity], reserved)
+        color = picker.choose_muted_land_color(used[entity])
         colors[entity] = color
         for neighbor in neighbors[entity]:
             if neighbor not in colors and color not in used[neighbor]:
