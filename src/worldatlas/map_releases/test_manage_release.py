@@ -22,6 +22,7 @@ from worldatlas.map_build.execution.code_archive import SCHEMA as SOURCE_SCHEMA
 from worldatlas.map_build.execution.code_archive import capture_source, write_source
 from worldatlas.map_build.test_support import selection
 from worldatlas.map_releases.bundle import build_bundle
+from worldatlas.map_releases.colors import choose_muted_land_color
 from worldatlas.map_releases.catalog import (
     RELEASE_BUCKET,
     lookup_release,
@@ -117,6 +118,9 @@ class BundleTests(unittest.TestCase):
         )
         (self.viewer / "index.html").write_text(
             "<html><head></head><body></body></html>"
+        )
+        (self.viewer / "config.json").write_text(
+            '{"water_rgb":[60,98,120],"unbuilt_land_rgb":[227,222,210]}'
         )
         # The only row contains one water cell and one land cell, both in Africa.
         self.rows = struct.pack("<2I", 0, 2)
@@ -449,7 +453,8 @@ class BundleTests(unittest.TestCase):
         self.report.write_text(json.dumps(report))
         build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
         mode = json.loads((self.output / "config.json").read_bytes())["modes"][0]
-        self.assertEqual(mode["legend"][0]["color"], [201, 111, 98])
+        fills = (60, 98, 120), (227, 222, 210)
+        self.assertEqual(mode["legend"][0]["color"], list(choose_muted_land_color(set(), set(), fills)))
 
     def test_candidate_name_identifies_the_release(self):
         self.assertEqual(version("v9.0-rc.2"), "v9.0")

@@ -1,27 +1,13 @@
 """Choose reproducible land colors that distinguish neighboring entities."""
 
 import heapq
-from collections import Counter
 from collections.abc import Iterable
 from functools import cache
 
 import numpy as np
+from scipy.spatial import cKDTree  # pyright: ignore[reportAttributeAccessIssue]
 
 type RGB = tuple[int, int, int]
-
-MUTED_ATLAS: tuple[RGB, ...] = (
-    (201, 111, 98),
-    (214, 163, 74),
-    (135, 150, 85),
-    (85, 153, 135),
-    (137, 121, 172),
-    (185, 119, 146),
-)
-# Fill colors belong to the same scheme. Use a darker slate blue for water
-# and a light warm gray for land with no owner at this level.
-WATER: RGB = (60, 98, 120)
-UNBUILT_LAND: RGB = (227, 222, 210)
-_RESERVED_FILLS = frozenset((WATER, UNBUILT_LAND))
 
 # The OKLab matrices convert linear sRGB via cone responses. See CSS Color 4.
 _RGB_TO_LMS = np.array(
@@ -55,15 +41,17 @@ def oklab(colors: Iterable[RGB]) -> np.ndarray:
 
 
 @cache
-def extra_muted_shades() -> tuple[RGB, ...]:
-    """Sample the same muted range at more lightnesses and hues.
+def muted_color_samples() -> tuple[tuple[RGB, ...], np.ndarray]:
+    """Sample muted colors from continuous ranges of lightness, chroma, and hue.
 
     Returns:
-        Sorted unique 8-bit sRGB triples. Colors outside sRGB are discarded
-        before rounding, so clipping cannot shift their hue.
+        (Sorted unique 8-bit sRGB triples, matching OKLab coordinates).
+        Colors outside sRGB are discarded before rounding to protect their hue.
     """
     lightness, chroma, hue = np.meshgrid(
-        [0.56, 0.64, 0.72, 0.80], [0.07, 0.11, 0.15], np.deg2rad(np.arange(0, 360, 5))
+        np.linspace(0.56, 0.80, 7),
+        np.linspace(0.045, 0.10, 5),
+        np.deg2rad(np.arange(0, 360, 5)),
     )
     lab = np.column_stack(
         (
@@ -77,21 +65,55 @@ def extra_muted_shades() -> tuple[RGB, ...]:
     rgb = np.where(
         linear <= 0.0031308, 12.92 * linear, 1.055 * linear ** (1 / 2.4) - 0.055
     )
-    return tuple(
+    colors = tuple(
         sorted(
             {
                 (int(red), int(green), int(blue))
                 for red, green, blue in np.rint(rgb * 255)
             }
-            - {UNBUILT_LAND}
         )
     )
+    return colors, oklab(colors)
+
+
+def choose_muted_land_color(
+    neighbor_colors: set[RGB],
+    border_colors: set[RGB],
+    fill_colors: tuple[RGB, RGB],
+) -> RGB:
+    """Choose the muted color most distinct from nearby land and the fixed fills.
+
+    Args:
+        neighbor_colors: Colors of already colored land with a shared edge or
+            close on the overview map.
+        border_colors: Colors of land that shares an edge, which cannot be reused.
+        fill_colors: Fixed RGB colors in (water, unassigned land) order.
+
+    Returns:
+        8-bit sRGB triple. Among eligible choices, maximize the OKLab distance
+        to the nearest comparison color. Exact ties use RGB order.
+
+    Raises:
+        ValueError: Every sample is already used by bordering land or as a fill.
+    """
+    colors, lab = muted_color_samples()
+    excluded = border_colors.union(fill_colors)
+    available = np.fromiter(
+        (color not in excluded for color in colors), dtype=bool, count=len(colors)
+    )
+    if not available.any():
+        raise ValueError("ran out of distinct muted land colors")
+    comparisons = oklab(sorted(neighbor_colors.union(fill_colors)))
+    nearest, _ = cKDTree(comparisons).query(lab)
+    nearest[~available] = -np.inf
+    return colors[int(nearest.argmax())]
 
 
 def color_land(
     neighbors: dict[int, set[int]],
     nearby: dict[int, set[int]],
     authored: dict[int, RGB],
+    fill_colors: tuple[RGB, RGB],
 ) -> dict[int, RGB]:
     """Choose land colors in order of how constrained each entity is.
 
@@ -100,6 +122,7 @@ def color_land(
             entities with an empty set.
         nearby: Land IDs that look close on the overview, including across water.
         authored: Fixed colors keyed by land entity ID.
+        fill_colors: Fixed RGB colors in (water, unassigned land) order.
 
     Returns:
         Land entity ID to 8-bit sRGB triple.
@@ -108,7 +131,6 @@ def color_land(
         ValueError: Adjacent authored colors conflict or no swatch is available.
     """
     colors = authored.copy()
-    usage = Counter(colors.values())
     for entity, color in authored.items():
         for neighbor in neighbors[entity]:
             if neighbor > entity and authored.get(neighbor) == color:
@@ -132,30 +154,11 @@ def color_land(
         saturation, _, entity = heapq.heappop(queue)
         if entity in colors or -saturation != len(used[entity]):
             continue
-        # Close land across water affects the contrast score. Only a true
-        # border makes a duplicate color a hard conflict.
-        excluded = _RESERVED_FILLS | {
+        border_colors = {
             colors[neighbor] for neighbor in neighbors[entity] if neighbor in colors
         }
-        candidates = [color for color in MUTED_ATLAS if color not in excluded]
-        if not candidates:
-            candidates = [
-                color for color in extra_muted_shades() if color not in excluded
-            ]
-        if not candidates:
-            raise ValueError(f"ran out of distinct land colors at entity {entity}")
-        if used[entity]:
-            # The closest neighbor determines how easy a choice is to distinguish.
-            delta = (
-                oklab(candidates)[:, None, :] - oklab(sorted(used[entity]))[None, :, :]
-            )
-            distance_sq = np.sum(delta * delta, axis=2)
-            color = candidates[int(distance_sq.min(axis=1).argmax())]
-        else:
-            # With no colored neighbors, introduce unused swatches first.
-            color = min(candidates, key=usage.__getitem__)
+        color = choose_muted_land_color(used[entity], border_colors, fill_colors)
         colors[entity] = color
-        usage[color] += 1
         for neighbor in visible[entity]:
             if neighbor not in colors and color not in used[neighbor]:
                 used[neighbor].add(color)

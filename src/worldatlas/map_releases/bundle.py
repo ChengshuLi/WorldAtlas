@@ -19,7 +19,6 @@ from worldatlas.map_build.inputs.selection_types import (
     GeographicSelection,
 )
 from worldatlas.map_releases.catalog import HOMEPAGE, release_prefix, version
-from worldatlas.map_releases.colors import UNBUILT_LAND, WATER
 from worldatlas.map_releases.inputs import (
     FILENAME,
     validate_replay_sources,
@@ -300,7 +299,18 @@ def _write_viewer_data(
     bindings = sorted(
         geography["category_bindings"], key=lambda binding: binding["code"]
     )
-    modes = build_map_modes(final, grid, geography, bindings, summary["counts"])
+    config = bundle / "config.json"
+    viewer = read_json(config)
+    red, green, blue = viewer["water_rgb"]
+    gray_red, gray_green, gray_blue = viewer["unbuilt_land_rgb"]
+    modes = build_map_modes(
+        final,
+        grid,
+        geography,
+        bindings,
+        summary["counts"],
+        ((red, green, blue), (gray_red, gray_green, gray_blue)),
+    )
     categories = [
         {
             "id": binding["code"],
@@ -313,7 +323,7 @@ def _write_viewer_data(
     for stream, filename in STREAM_FILES.items():
         streams[stream] = f"{filename}.gz"
         streams[f"{stream}_sha256"] = decoded[stream]
-    viewer = dict(
+    viewer.update(
         width=grid.width,
         height=grid.height,
         step=grid.step,
@@ -322,13 +332,11 @@ def _write_viewer_data(
         combined_sha256=combined,
         modes=modes,
         default_mode=modes[0]["level_id"],
-        water_rgb=list(WATER),
-        unbuilt_land_rgb=list(UNBUILT_LAND),
         categories=categories,
     )
     if water_edition:
         viewer["inland_water_release"] = water_edition
-    (bundle / "config.json").write_bytes(json_bytes(viewer))
+    config.write_bytes(json_bytes(viewer))
 
 
 def _file_manifest(bundle: Path, prefix: str) -> dict[str, dict[str, JSONValue]]:

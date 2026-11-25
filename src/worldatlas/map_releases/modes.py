@@ -13,7 +13,7 @@ from worldatlas.map_build.inputs.selection_types import (
     GeographicSelection,
     MapCodeBinding,
 )
-from worldatlas.map_releases.colors import RGB, WATER, color_land
+from worldatlas.map_releases.colors import RGB, color_land
 
 
 class LegendEntry(TypedDict):
@@ -135,6 +135,7 @@ def build_map_modes(
     geography: GeographicSelection,
     bindings: list[MapCodeBinding],
     counts: dict[str, int],
+    fill_colors: tuple[RGB, RGB],
 ) -> list[MapMode]:
     """Build the projected code lookup, legend, and unbuilt count for each mode.
 
@@ -144,6 +145,7 @@ def build_map_modes(
         geography: Frozen hierarchy and authored colors from the build.
         bindings: Canonical bindings in the order used by the viewer config.
         counts: Cell counts keyed by map code as a string.
+        fill_colors: Fixed RGB colors in (water, unassigned land) order.
 
     Returns:
         Mode descriptors ordered from shallowest to deepest geographic level.
@@ -201,7 +203,7 @@ def build_map_modes(
             if (color := entities[entity_id]["color_rgb"]) is not None:
                 red, green, blue = bytes.fromhex(color[1:])
                 authored[entity_id] = (red, green, blue)
-        colors = color_land(neighbors, nearby_neighbors, authored)
+        colors = color_land(neighbors, nearby_neighbors, authored, fill_colors)
         modes.append(
             {
                 "level_id": level,
@@ -213,7 +215,7 @@ def build_map_modes(
                     {
                         "id": entity_id,
                         "name": entities[entity_id]["name"],
-                        "color": list(colors.get(entity_id, WATER)),
+                        "color": list(colors.get(entity_id, fill_colors[0])),
                         "count": count,
                     }
                     for entity_id, count in sorted(totals.items())

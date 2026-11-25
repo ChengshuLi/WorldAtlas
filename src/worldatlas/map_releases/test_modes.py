@@ -1,54 +1,75 @@
 """Verify edge adjacency, color choices, and the lookup for each actual level."""
 
-from itertools import combinations
-
-import numpy as np
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest import TestCase
 from unittest.mock import patch
 
+import numpy as np
+
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.test_support import selection
-from worldatlas.map_releases.colors import MUTED_ATLAS, color_land
+from worldatlas.map_releases.colors import (
+    choose_muted_land_color,
+    color_land,
+    muted_color_samples,
+    oklab,
+)
 from worldatlas.map_releases.modes import build_map_modes, land_code_relationships, nearby_land_pairs
 
 
+FILL_COLORS = (60, 98, 120), (227, 222, 210)
+
+
 class PaletteTests(TestCase):
-    def test_coloring_uses_the_muted_palette_and_preserves_fixed_colors(self):
-        fixed = MUTED_ATLAS[0]
+    def test_choice_maximizes_the_separation_from_its_closest_color(self):
+        neighbor = (201, 111, 98)
+        chosen = choose_muted_land_color({neighbor}, {neighbor}, FILL_COLORS)
+        candidates, lab = muted_color_samples()
+        possible = [i for i, color in enumerate(candidates) if color not in (neighbor, *FILL_COLORS)]
+        references = oklab([neighbor, *FILL_COLORS])
+        distances = np.linalg.norm(lab[:, None] - references, axis=2).min(axis=1)
+        self.assertEqual(chosen, candidates[max(possible, key=lambda i: distances[i])])
+
+    def test_coloring_preserves_authored_colors_and_rejects_conflicting_borders(self):
+        fixed = (201, 111, 98)
         graph = {1: {2}, 2: {1}, 3: set()}
-        colors = color_land(graph, {entity: set() for entity in graph}, {1: fixed})
-        self.assertEqual(colors, {1: fixed, 2: MUTED_ATLAS[3], 3: MUTED_ATLAS[1]})
+        nearby = {entity: set() for entity in graph}
+        colors = color_land(graph, nearby, {1: fixed}, FILL_COLORS)
+        self.assertEqual(colors[1], fixed)
+        self.assertNotEqual(colors[2], fixed)
+        self.assertEqual(colors[3], choose_muted_land_color(set(), set(), FILL_COLORS))
         with self.assertRaisesRegex(ValueError, "entities 1 and 2 share"):
-            color_land(graph, {entity: set() for entity in graph}, {1: fixed, 2: fixed})
+            color_land(graph, nearby, {1: fixed, 2: fixed}, FILL_COLORS)
 
     def test_across_water_prefers_visibly_different_colors(self):
-        fixed = MUTED_ATLAS[0]
+        fixed = choose_muted_land_color(set(), set(), FILL_COLORS)
         borders = {1: set(), 2: set()}
         nearby = {1: {2}, 2: {1}}
-        colors = color_land(borders, nearby, {1: fixed})
-        self.assertEqual(colors[2], MUTED_ATLAS[3])
-        self.assertEqual(color_land(borders, nearby, {1: fixed, 2: fixed}), {1: fixed, 2: fixed})
+        colors = color_land(borders, nearby, {1: fixed}, FILL_COLORS)
+        self.assertNotEqual(colors[2], fixed)
+        self.assertEqual(
+            color_land(borders, nearby, {1: fixed, 2: fixed}, FILL_COLORS),
+            {1: fixed, 2: fixed},
+        )
 
-    def test_high_adjacency_uses_more_muted_shades_deterministically(self):
+    def test_many_adjacent_entities_use_distinct_generated_colors(self):
         ids = set(range(10))
         graph = {entity: ids - {entity} for entity in ids}
-        colors = color_land(graph, {entity: set() for entity in graph}, {})
+        nearby = {entity: set() for entity in graph}
+        colors = color_land(graph, nearby, {}, FILL_COLORS)
         self.assertEqual(len(set(colors.values())), len(graph))
-        self.assertTrue(set(colors.values()) - set(MUTED_ATLAS))
+        self.assertFalse(set(colors.values()).intersection(FILL_COLORS))
         reverse = dict(reversed(list(graph.items())))
-        self.assertEqual(color_land(reverse, {entity: set() for entity in graph}, {}), colors)
+        self.assertEqual(color_land(reverse, nearby, {}, FILL_COLORS), colors)
 
-    def test_an_exhausted_palette_reports_the_entity(self):
-        graph = {i: set() for i in range(7)}
-        for first, second in combinations(graph, 2):
-            graph[first].add(second)
-            graph[second].add(first)
-        with patch("worldatlas.map_releases.colors.extra_muted_shades", return_value=()):
-            with self.assertRaisesRegex(ValueError, "ran out of distinct land colors at entity 6"):
-                color_land(graph, {entity: set() for entity in graph}, {})
+    def test_an_exhausted_palette_reports_the_conflict(self):
+        color = (201, 111, 98)
+        with patch("worldatlas.map_releases.colors.muted_color_samples",
+                   return_value=((color,), oklab([color]))):
+            with self.assertRaisesRegex(ValueError, "ran out of distinct muted land colors"):
+                choose_muted_land_color({color}, {color}, FILL_COLORS)
 
 
 class ModeTests(TestCase):
@@ -125,7 +146,7 @@ class ModeTests(TestCase):
                 (y, [(0, 1, 1), (1, 2, 2), (2, 3, 3), (3, 6, 5), (6, 8, 4)])
                 for y in range(4)
             ])
-            modes = build_map_modes(directory / "grid", grid, geography, bindings, report["counts"])
+            modes = build_map_modes(directory / "grid", grid, geography, bindings, report["counts"], FILL_COLORS)
             self.assertEqual([mode["level_id"] for mode in modes], ["continent", "region", "area"])
             expected = [
                 ([2, 1, 1, 2, 1, None], {1: 20, 2: 12}, 0),
