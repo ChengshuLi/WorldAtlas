@@ -243,12 +243,11 @@ def assign_land_colors(
     heapq.heapify(color_queue)
     picker = LandColorPicker(reserved_colors, land_colors.values())
     while color_queue:
-        negative_color_count, _, entity_id = heapq.heappop(color_queue)
-        nearby_colors = nearby_colors_by_entity[entity_id]
-        # A newly colored neighbor can leave an older priority in the heap.
-        if entity_id in land_colors or -negative_color_count != len(nearby_colors):
+        _, _, entity_id = heapq.heappop(color_queue)
+        # An updated priority comes out first. Skip the older entry once colored.
+        if entity_id in land_colors:
             continue
-        color = picker.choose_muted_land_color(nearby_colors)
+        color = picker.choose_muted_land_color(nearby_colors_by_entity[entity_id])
         land_colors[entity_id] = color
         for neighbor_id in land_neighbors_by_entity[entity_id]:
             if (
