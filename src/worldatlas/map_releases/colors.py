@@ -78,7 +78,6 @@ def muted_color_samples() -> tuple[tuple[RGB, ...], np.ndarray]:
 
 def choose_muted_land_color(
     neighbor_colors: set[RGB],
-    border_colors: set[RGB],
     fill_colors: tuple[RGB, RGB],
 ) -> RGB:
     """Choose the muted color most distinct from nearby land and the fixed fills.
@@ -86,7 +85,6 @@ def choose_muted_land_color(
     Args:
         neighbor_colors: Colors of already colored land with a shared edge or
             close on the overview map.
-        border_colors: Colors of land that shares an edge, which cannot be reused.
         fill_colors: Fixed RGB colors in (water, unassigned land) order.
 
     Returns:
@@ -94,16 +92,16 @@ def choose_muted_land_color(
         to the nearest comparison color. Exact ties use RGB order.
 
     Raises:
-        ValueError: Every sample is already used by bordering land or as a fill.
+        ValueError: Every sample is already used by nearby land or as a fill.
     """
     colors, lab = muted_color_samples()
-    excluded = border_colors.union(fill_colors)
+    excluded = neighbor_colors.union(fill_colors)
     available = np.fromiter(
         (color not in excluded for color in colors), dtype=bool, count=len(colors)
     )
     if not available.any():
         raise ValueError("ran out of distinct muted land colors")
-    comparisons = oklab(sorted(neighbor_colors.union(fill_colors)))
+    comparisons = oklab(sorted(excluded))
     nearest, _ = cKDTree(comparisons).query(lab)
     nearest[~available] = -np.inf
     return colors[int(nearest.argmax())]
@@ -111,16 +109,14 @@ def choose_muted_land_color(
 
 def color_land(
     neighbors: dict[int, set[int]],
-    nearby: dict[int, set[int]],
     authored: dict[int, RGB],
     fill_colors: tuple[RGB, RGB],
 ) -> dict[int, RGB]:
     """Choose land colors in order of how constrained each entity is.
 
     Args:
-        neighbors: Land entity ID to IDs sharing a land edge. Include isolated
-            entities with an empty set.
-        nearby: Land IDs that look close on the overview, including across water.
+        neighbors: Each land entity and its neighbors. Include land sharing an
+            edge or close on the overview, and isolated land with an empty set.
         authored: Fixed colors keyed by land entity ID.
         fill_colors: Fixed RGB colors in (water, unassigned land) order.
 
@@ -128,41 +124,35 @@ def color_land(
         Land entity ID to 8-bit sRGB triple.
 
     Raises:
-        ValueError: Adjacent authored colors conflict or no swatch is available.
+        ValueError: Neighboring authored colors conflict or no color is available.
     """
     colors = authored.copy()
     for entity, color in authored.items():
         for neighbor in neighbors[entity]:
             if neighbor > entity and authored.get(neighbor) == color:
                 raise ValueError(
-                    f"adjacent land entities {entity} and {neighbor} share {color}"
+                    f"neighboring land entities {entity} and {neighbor} share {color}"
                 )
 
-    visible = {
-        entity: adjacent | nearby[entity] for entity, adjacent in neighbors.items()
-    }
     used = {
         entity: {authored[neighbor] for neighbor in adjacent if neighbor in authored}
-        for entity, adjacent in visible.items()
+        for entity, adjacent in neighbors.items()
         if entity not in authored
     }
     queue = [
-        (-len(seen), -len(visible[entity]), entity) for entity, seen in used.items()
+        (-len(seen), -len(neighbors[entity]), entity) for entity, seen in used.items()
     ]
     heapq.heapify(queue)
     while queue:
         saturation, _, entity = heapq.heappop(queue)
         if entity in colors or -saturation != len(used[entity]):
             continue
-        border_colors = {
-            colors[neighbor] for neighbor in neighbors[entity] if neighbor in colors
-        }
-        color = choose_muted_land_color(used[entity], border_colors, fill_colors)
+        color = choose_muted_land_color(used[entity], fill_colors)
         colors[entity] = color
-        for neighbor in visible[entity]:
+        for neighbor in neighbors[entity]:
             if neighbor not in colors and color not in used[neighbor]:
                 used[neighbor].add(color)
                 heapq.heappush(
-                    queue, (-len(used[neighbor]), -len(visible[neighbor]), neighbor)
+                    queue, (-len(used[neighbor]), -len(neighbors[neighbor]), neighbor)
                 )
     return colors

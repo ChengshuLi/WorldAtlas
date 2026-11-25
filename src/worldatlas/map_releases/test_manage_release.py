@@ -454,7 +454,7 @@ class BundleTests(unittest.TestCase):
         build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
         mode = json.loads((self.output / "config.json").read_bytes())["modes"][0]
         fills = (60, 98, 120), (227, 222, 210)
-        self.assertEqual(mode["legend"][0]["color"], list(choose_muted_land_color(set(), set(), fills)))
+        self.assertEqual(mode["legend"][0]["color"], list(choose_muted_land_color(set(), fills)))
 
     def test_candidate_name_identifies_the_release(self):
         self.assertEqual(version("v9.0-rc.2"), "v9.0")

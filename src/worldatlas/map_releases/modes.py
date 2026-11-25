@@ -74,10 +74,10 @@ def nearby_land_pairs(overview: np.ndarray, radius: int) -> set[int]:
     return pairs
 
 
-def land_code_relationships(
+def land_code_neighbors(
     directory: Path, grid: Grid, land_codes: Sequence[int]
-) -> tuple[set[tuple[int, int]], set[tuple[int, int]]]:
-    """Find exact land borders and nearby land on the overview in one grid read.
+) -> set[tuple[int, int]]:
+    """Find land neighbors from shared edges and proximity in one grid read.
 
     Args:
         directory: Final grid's decoded row offsets and runs.
@@ -85,17 +85,17 @@ def land_code_relationships(
         land_codes: Map codes with physical class land.
 
     Returns:
-        (Shared-edge pairs, nearby pairs), both as sets of ascending code tuples.
-        Proximity spans about two degrees on screen, including across water.
+        Set of ascending land-code pairs. Include both exact shared edges and
+        pairs at most about two degrees apart in the overview, across land or water.
     """
     if not land_codes:
-        return set(), set()
+        return set()
 
     # Search the sorted list without scanning every land code for each row.
     land = np.array(sorted(land_codes), dtype=np.uint32)
-    borders: set[int] = set()
-    # About half a degree per sample. Use this overview for color preferences
-    # and keep the exact shared-edge check on the original grid.
+    neighbors: set[int] = set()
+    # Sample about every half degree for proximity. Read exact shared edges
+    # on the original grid so even neighbors too small to sample are included.
     width = min(720, grid.width)
     height = max(1, round(grid.height * width / grid.width))
     sample_x = (np.arange(width) + 0.5) * grid.width / width
@@ -115,18 +115,15 @@ def land_code_relationships(
             if previous is not None:
                 _, _, (north, south) = overlay(previous, current)
                 first, second = np.r_[first, north], np.r_[second, south]
-            borders.update(packed_land_pairs(first, second))
+            neighbors.update(packed_land_pairs(first, second))
             if (overview_row := overview_row_by_source.get(y)) is not None:
                 overview[overview_row] = dry[
                     np.searchsorted(ends, sample_x, side="right")
                 ]
             previous = current
 
-    near = nearby_land_pairs(overview, radius=width // 180)
-    return (
-        {(pair >> 32, pair & 0xFFFFFFFF) for pair in borders},
-        {(pair >> 32, pair & 0xFFFFFFFF) for pair in near - borders},
-    )
+    neighbors.update(nearby_land_pairs(overview, radius=width // 180))
+    return {(pair >> 32, pair & 0xFFFFFFFF) for pair in neighbors}
 
 
 def build_map_modes(
@@ -180,7 +177,7 @@ def build_map_modes(
             level = parent
         return depth
 
-    borders, nearby = land_code_relationships(final, grid, land_codes)
+    neighboring_codes = land_code_neighbors(final, grid, land_codes)
     modes: list[MapMode] = []
     for level in sorted(owners_by_level, key=lambda name: (level_depth(name), name)):
         owners = owners_by_level[level]
@@ -190,20 +187,18 @@ def build_map_modes(
         neighbors: dict[int, set[int]] = {
             owners[code]: set() for code in land_codes if code in owners
         }
-        nearby_neighbors: dict[int, set[int]] = {entity: set() for entity in neighbors}
-        for graph, pairs in ((neighbors, borders), (nearby_neighbors, nearby)):
-            for a, b in pairs:
-                first, second = owners.get(a), owners.get(b)
-                if first is not None and second is not None and first != second:
-                    graph[first].add(second)
-                    graph[second].add(first)
+        for a, b in neighboring_codes:
+            first, second = owners.get(a), owners.get(b)
+            if first is not None and second is not None and first != second:
+                neighbors[first].add(second)
+                neighbors[second].add(first)
 
         authored: dict[int, RGB] = {}
         for entity_id in neighbors:
             if (color := entities[entity_id]["color_rgb"]) is not None:
                 red, green, blue = bytes.fromhex(color[1:])
                 authored[entity_id] = (red, green, blue)
-        colors = color_land(neighbors, nearby_neighbors, authored, fill_colors)
+        colors = color_land(neighbors, authored, fill_colors)
         modes.append(
             {
                 "level_id": level,
