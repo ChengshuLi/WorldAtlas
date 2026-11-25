@@ -17,7 +17,11 @@ MUTED_ATLAS: tuple[RGB, ...] = (
     (137, 121, 172),
     (185, 119, 146),
 )
-UNBUILT_LAND: RGB = (216, 213, 205)
+# Fill colors belong to the same scheme. Use a darker slate blue for water
+# and a light warm gray for land with no owner at this level.
+WATER: RGB = (60, 98, 120)
+UNBUILT_LAND: RGB = (227, 222, 210)
+_RESERVED_FILLS = frozenset((WATER, UNBUILT_LAND))
 
 # The OKLab matrices convert linear sRGB via cone responses. See CSS Color 4.
 _RGB_TO_LMS = np.array(
@@ -86,16 +90,16 @@ def extra_muted_shades() -> tuple[RGB, ...]:
 
 def color_land(
     neighbors: dict[int, set[int]],
+    nearby: dict[int, set[int]],
     authored: dict[int, RGB],
-    water: RGB,
 ) -> dict[int, RGB]:
     """Choose land colors in order of how constrained each entity is.
 
     Args:
         neighbors: Land entity ID to IDs sharing a land edge. Include isolated
             entities with an empty set.
+        nearby: Land IDs that look close on the overview, including across water.
         authored: Fixed colors keyed by land entity ID.
-        water: Water fill color, excluded from automatic choices.
 
     Returns:
         Land entity ID to 8-bit sRGB triple.
@@ -112,20 +116,27 @@ def color_land(
                     f"adjacent land entities {entity} and {neighbor} share {color}"
                 )
 
+    visible = {
+        entity: adjacent | nearby[entity] for entity, adjacent in neighbors.items()
+    }
     used = {
         entity: {authored[neighbor] for neighbor in adjacent if neighbor in authored}
-        for entity, adjacent in neighbors.items()
+        for entity, adjacent in visible.items()
         if entity not in authored
     }
     queue = [
-        (-len(seen), -len(neighbors[entity]), entity) for entity, seen in used.items()
+        (-len(seen), -len(visible[entity]), entity) for entity, seen in used.items()
     ]
     heapq.heapify(queue)
     while queue:
         saturation, _, entity = heapq.heappop(queue)
         if entity in colors or -saturation != len(used[entity]):
             continue
-        excluded = used[entity] | {water}
+        # Close land across water affects the contrast score. Only a true
+        # border makes a duplicate color a hard conflict.
+        excluded = _RESERVED_FILLS | {
+            colors[neighbor] for neighbor in neighbors[entity] if neighbor in colors
+        }
         candidates = [color for color in MUTED_ATLAS if color not in excluded]
         if not candidates:
             candidates = [
@@ -145,10 +156,10 @@ def color_land(
             color = min(candidates, key=usage.__getitem__)
         colors[entity] = color
         usage[color] += 1
-        for neighbor in neighbors[entity]:
+        for neighbor in visible[entity]:
             if neighbor not in colors and color not in used[neighbor]:
                 used[neighbor].add(color)
                 heapq.heappush(
-                    queue, (-len(used[neighbor]), -len(neighbors[neighbor]), neighbor)
+                    queue, (-len(used[neighbor]), -len(visible[neighbor]), neighbor)
                 )
     return colors

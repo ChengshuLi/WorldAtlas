@@ -16,7 +16,6 @@ let meta, data, renderer;
 let items = [];
 let categoriesByCode;
 let activeMode;
-let pendingMode;
 let selectedGroups = new Set();
 let hoveredGroup = null;
 let selectedCell = null;
@@ -369,12 +368,6 @@ function showError(error) {
   status.classList.add("error");
 }
 
-async function readMode(mode, configURL, signal) {
-  const response = await fetch(new URL(mode.path, configURL), { signal });
-  if (!response.ok) throw Error("Map legend could not load");
-  return makeModeDisplay(await response.json(), meta);
-}
-
 function applyMode(mode, display) {
   activeMode = mode.level_id;
   items = display.items;
@@ -399,9 +392,8 @@ function applyMode(mode, display) {
   selectCell(selectedCell);
 }
 
-function bindModeControls(configURL) {
+function bindModeControls() {
   const buttons = $("#map-modes");
-  const message = $("#mode-status");
   if (meta.modes.length < 2) return;
   buttons.hidden = false;
   for (const mode of meta.modes) {
@@ -410,22 +402,8 @@ function bindModeControls(configURL) {
     button.dataset.level = mode.level_id;
     button.textContent = mode.label;
     button.setAttribute("aria-pressed", String(mode.level_id === activeMode));
-    button.addEventListener("click", async () => {
-      pendingMode?.abort();
-      message.textContent = "";
-      if (mode.level_id === activeMode) return;
-
-      const controller = new AbortController();
-      pendingMode = controller;
-      try {
-        const display = await readMode(mode, configURL, controller.signal);
-        if (!controller.signal.aborted) applyMode(mode, display);
-      } catch {
-        if (!controller.signal.aborted)
-          message.textContent = `Could not load the ${mode.label.toLowerCase()} view.`;
-      } finally {
-        if (pendingMode === controller) pendingMode = null;
-      }
+    button.addEventListener("click", () => {
+      if (mode.level_id !== activeMode) applyMode(mode, makeModeDisplay(mode, meta));
     });
     buttons.append(button);
   }
@@ -443,10 +421,8 @@ async function startViewer() {
       $("#inland-water-release").textContent = `, release ${meta.inland_water_release}`;
     }
     const mode = meta.modes.find(({ level_id }) => level_id === meta.default_mode);
-    const [display, grid] = await Promise.all([
-      readMode(mode, configURL, signal),
-      loadLocalGrid(meta, configURL, signal),
-    ]);
+    const display = makeModeDisplay(mode, meta);
+    const grid = await loadLocalGrid(meta, configURL, signal);
     data = grid;
     applyMode(mode, display);
     if (meta.map_version) {
@@ -455,7 +431,7 @@ async function startViewer() {
       release.title = `SHA-256 of the decoded rows and runs. Full hash: ${meta.combined_sha256}`;
     }
     setRenderer(createRenderer(canvas, meta, grid));
-    bindModeControls(configURL);
+    bindModeControls();
     resize();
     fitWorld();
     status.textContent = "";

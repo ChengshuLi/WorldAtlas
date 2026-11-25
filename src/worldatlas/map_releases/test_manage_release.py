@@ -118,7 +118,6 @@ class BundleTests(unittest.TestCase):
         (self.viewer / "index.html").write_text(
             "<html><head></head><body></body></html>"
         )
-        (self.viewer / "config.json").write_text('{"water_rgb":[84,141,183]}')
         # The only row contains one water cell and one land cell, both in Africa.
         self.rows = struct.pack("<2I", 0, 2)
         self.runs = struct.pack("<4I", 1, 1, 2, 17)
@@ -187,10 +186,10 @@ class BundleTests(unittest.TestCase):
         self.assertEqual(config["local_grid"]["rows"], "rows.u32le.gz")
         self.assertEqual(config["map_version"], "v9.0")
         self.assertEqual(config["inland_water_release"], "2026-10-21.0")
-        self.assertEqual(config["water_rgb"], [84, 141, 183])
+        self.assertEqual(config["water_rgb"], [60, 98, 120])
+        self.assertEqual(config["unbuilt_land_rgb"], [227, 222, 210])
         self.assertNotIn("counts", config)
         self.assertEqual(config["default_mode"], "continent")
-        self.assertEqual(config["modes"], [dict(level_id="continent", label="Continent", path="modes/continent.json")])
         self.assertEqual(
             config["categories"],
             [
@@ -198,14 +197,15 @@ class BundleTests(unittest.TestCase):
                 {"id": 17, "entity_id": 42, "physical_class": "land"},
             ],
         )
-        path = config["modes"][0]["path"]
         self.assertEqual(
-            json.loads((self.output / path).read_bytes()),
-            {"entity_ids_by_category": [42, 42],
-             "legend": [{"id": 42, "name": "Africa", "color": [233, 180, 76], "count": 2}],
-             "unbuilt_cells": 0},
+            config["modes"],
+            [{"level_id": "continent", "label": "Continent",
+              "entity_ids_by_category": [42, 42],
+              "legend": [{"id": 42, "name": "Africa", "color": [233, 180, 76], "count": 2}],
+              "unbuilt_cells": 0}],
         )
-        self.assertIn(path, manifest["objects"])
+        self.assertIn("config.json", manifest["objects"])
+        self.assertFalse(any(name.startswith("modes/") for name in manifest["objects"]))
         self.assertEqual(
             config["combined_sha256"], hashlib.sha256(self.rows + self.runs).hexdigest()
         )
@@ -311,11 +311,15 @@ class BundleTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "single head and no base URL"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
 
-    def test_viewer_readmes_are_excluded(self):
-        (self.viewer / "docs").mkdir()
-        (self.viewer / "docs" / "README.md").write_text("viewer documentation")
+    def test_nested_viewer_assets_are_listed_and_readmes_are_excluded(self):
+        assets = self.viewer / "assets"
+        assets.mkdir()
+        (assets / "README.md").write_text("viewer documentation")
+        (assets / "extra.css").write_text("body { margin: 0; }")
         manifest = build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
-        self.assertNotIn("docs/README.md", manifest["objects"])
+        self.assertIn("assets/extra.css", manifest["objects"])
+        self.assertNotIn("assets/README.md", manifest["objects"])
+        self.assertNotIn("assets", manifest["objects"])
 
     def test_bundle_requires_captured_code(self):
         producer = self.attempt / "producer.json"
@@ -444,7 +448,7 @@ class BundleTests(unittest.TestCase):
         report["original_run_identity"] = pin_file(identity_path)
         self.report.write_text(json.dumps(report))
         build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
-        mode = json.loads((self.output / "modes/continent.json").read_bytes())
+        mode = json.loads((self.output / "config.json").read_bytes())["modes"][0]
         self.assertEqual(mode["legend"][0]["color"], [201, 111, 98])
 
     def test_candidate_name_identifies_the_release(self):

@@ -6,8 +6,7 @@ import { renderPixels } from "../viewer/grid-renderer.js";
 const read = (f) =>
   fs.readFileSync(new URL("../viewer/" + f, import.meta.url), "utf8");
 test("structure, checksum and small native-grid renderer", () => {
-  const html = read("index.html"),
-    meta = JSON.parse(read("config.json"));
+  const html = read("index.html");
   assert.doesNotMatch(
     html,
     /<aside|id="v2"|id="jump"|Map legend ·|Select any continents/,
@@ -28,7 +27,6 @@ test("structure, checksum and small native-grid renderer", () => {
   assert.match(html, /id="map-release"/);
   assert.doesNotMatch(html, /<details/);
   assert.doesNotMatch(read("app.js"), /document\.addEventListener\('keydown'/);
-  assert.deepEqual(meta, { water_rgb: [84, 141, 183] });
   const small = {
       width: 4,
       height: 2,

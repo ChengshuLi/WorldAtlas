@@ -19,13 +19,13 @@ from worldatlas.map_build.inputs.selection_types import (
     GeographicSelection,
 )
 from worldatlas.map_releases.catalog import HOMEPAGE, release_prefix, version
-from worldatlas.map_releases.colors import UNBUILT_LAND
+from worldatlas.map_releases.colors import UNBUILT_LAND, WATER
 from worldatlas.map_releases.inputs import (
     FILENAME,
     validate_replay_sources,
     write_inputs,
 )
-from worldatlas.map_releases.modes import write_map_modes
+from worldatlas.map_releases.modes import build_map_modes
 from worldatlas.shared.files import (
     FilePin,
     JSONValue,
@@ -287,7 +287,7 @@ def _write_viewer_data(
     """Write the canonical category lookup and per-level map display files.
 
     Args:
-        bundle: Local release folder containing the copied viewer settings.
+        bundle: Local release folder for the generated viewer configuration.
         final: Directory of the original decoded map streams.
         geography: Saved entities, colors, and map-code bindings.
         summary: Final grid report with counts by map code and the number of runs.
@@ -300,14 +300,7 @@ def _write_viewer_data(
     bindings = sorted(
         geography["category_bindings"], key=lambda binding: binding["code"]
     )
-    config = bundle / "config.json"
-    viewer = read_json(config)
-    if water_edition:
-        viewer["inland_water_release"] = water_edition
-    red, green, blue = viewer["water_rgb"]
-    modes = write_map_modes(
-        bundle, final, grid, geography, bindings, summary["counts"], (red, green, blue)
-    )
+    modes = build_map_modes(final, grid, geography, bindings, summary["counts"])
     categories = [
         {
             "id": binding["code"],
@@ -320,7 +313,7 @@ def _write_viewer_data(
     for stream, filename in STREAM_FILES.items():
         streams[stream] = f"{filename}.gz"
         streams[f"{stream}_sha256"] = decoded[stream]
-    viewer.update(
+    viewer = dict(
         width=grid.width,
         height=grid.height,
         step=grid.step,
@@ -329,10 +322,13 @@ def _write_viewer_data(
         combined_sha256=combined,
         modes=modes,
         default_mode=modes[0]["level_id"],
+        water_rgb=list(WATER),
         unbuilt_land_rgb=list(UNBUILT_LAND),
         categories=categories,
     )
-    config.write_bytes(json_bytes(viewer))
+    if water_edition:
+        viewer["inland_water_release"] = water_edition
+    (bundle / "config.json").write_bytes(json_bytes(viewer))
 
 
 def _file_manifest(bundle: Path, prefix: str) -> dict[str, dict[str, JSONValue]]:
