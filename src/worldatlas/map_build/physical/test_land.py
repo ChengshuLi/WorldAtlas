@@ -258,12 +258,14 @@ class RasterizeLandTests(unittest.TestCase):
                 'type': 'Polygon',
                 'coordinates': [
                     [[-180, 90], [-90, 90], [-90, -45], [-180, -45], [-180, 90]],
+                    # The hole ends at a strip boundary (0°), between cell
+                    # centers. This tests indexing without a GDAL center tie.
                     [
-                        [-157.5, 67.5],
-                        [-112.5, 67.5],
-                        [-112.5, -22.5],
-                        [-157.5, -22.5],
-                        [-157.5, 67.5],
+                        [-170, 80],
+                        [-100, 80],
+                        [-100, 0],
+                        [-170, 0],
+                        [-170, 80],
                     ],
                 ],
             },
