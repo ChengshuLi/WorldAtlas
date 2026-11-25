@@ -85,7 +85,7 @@ function bundle(prefix, version, east) {
         count: (60 + (east === 17 ? 25 : 0)) * mapHeight },
       { id: 2, name: "Asia", color: [222, 118, 110],
         count: (20 + (east === 18 ? 25 : 0)) * mapHeight },
-      { id: 7, name: "Atlantic Ocean", color: config.water_rgb, count: 15 * mapHeight },
+      { id: 7, name: "Atlantic Ocean", color: null, count: 15 * mapHeight },
     ],
   }];
   store(`${prefix}/config.json`, JSON.stringify(config), "application/json");
@@ -390,6 +390,13 @@ for (const { name, options, fallback, sparse, uploadFailure } of [
           1,
         );
         const legend = page.getByRole("region", { name: "Map legend" });
+        if (!sparse) {
+          const ocean = legend.getByRole("button", { name: /Atlantic Ocean/ });
+          assert.equal(
+            await ocean.locator(".swatch").evaluate((item) => item.style.backgroundColor),
+            "rgb(60, 98, 120)",
+          );
+        }
         await legend.getByRole("button", { name: "Collapse legend" }).click();
         assert.equal(await legend.isVisible(), false);
         const east = await pickPoint(page, 90, 20);

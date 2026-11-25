@@ -18,11 +18,11 @@ from worldatlas.shared.files import read_json, write_json
 
 
 class LegendEntry(TypedDict):
-    """Describe one entity shown in the legend."""
+    """Describe a legend entry. A missing land RGB uses the shared water blue."""
 
     id: int
     name: str
-    color: list[int]
+    color: list[int] | None
     count: int
 
 
@@ -68,18 +68,19 @@ def write_map_modes(
 
 
 def save_generated_colors(database: Connection, modes: list[MapMode]) -> None:
-    """Update the catalog with the latest RGBs from a completed build.
+    """Update the catalog with the latest land RGBs from a completed build.
 
     Args:
         database: Open writable catalog connection. The caller commits.
-        modes: Saved map modes with one RGB triple per displayed entity.
+        modes: Saved map modes with RGB triples for entities with land cells.
     """
     ids: list[int] = []
     colors: list[str] = []
     for mode in modes:
         for entry in mode["legend"]:
-            ids.append(entry["id"])
-            colors.append("#" + bytes(entry["color"]).hex().upper())
+            if (color := entry["color"]) is not None:
+                ids.append(entry["id"])
+                colors.append("#" + bytes(color).hex().upper())
     database.execute(
         """
         UPDATE atlas.geographic_entities AS entity
@@ -171,7 +172,9 @@ def build_map_modes(
                     {
                         "id": entity_id,
                         "name": entities[entity_id]["name"],
-                        "color": list(colors.get(entity_id, fill_colors[0])),
+                        "color": list(colors[entity_id])
+                        if entity_id in colors
+                        else None,
                         "count": count,
                     }
                     for entity_id, count in sorted(totals.items())

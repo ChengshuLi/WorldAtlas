@@ -40,6 +40,10 @@ BEGIN
   RAISE EXCEPTION 'invalid RGB accepted';
  EXCEPTION WHEN check_violation THEN NULL; END;
  BEGIN
+  UPDATE atlas.geographic_entities SET color_rgb='#0078FF' WHERE id=7;
+  RAISE EXCEPTION 'a water-only entity accepted a land RGB';
+ EXCEPTION WHEN check_violation THEN NULL; END;
+ BEGIN
   INSERT INTO atlas.map_category_bindings VALUES (42,2,'land');
   RAISE EXCEPTION 'duplicate entity/class encoding accepted';
  EXCEPTION WHEN unique_violation THEN NULL; END;

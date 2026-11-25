@@ -5,7 +5,7 @@ from pathlib import Path
 from random import Random
 from tempfile import TemporaryDirectory
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import numpy as np
 
@@ -18,7 +18,7 @@ from worldatlas.map_build.display.colors import (
     rgb_to_oklab,
     sample_muted_land_colors,
 )
-from worldatlas.map_build.display.modes import build_map_modes
+from worldatlas.map_build.display.modes import build_map_modes, save_generated_colors
 from worldatlas.map_build.display.neighbors import runs_within_distance, scan_color_neighbors
 
 FILL_COLORS = (60, 98, 120), (227, 222, 210)
@@ -85,6 +85,33 @@ class PaletteTests(TestCase):
 
 
 class ModeTests(TestCase):
+    def test_water_legend_uses_no_per_entity_rgb(self):
+        grid = Grid(4, 1, 90.0)
+        geography = selection()["geography"]
+        geography["levels"].append(dict(id="continent", parent_id="world"))
+        geography["entities"].extend([
+            dict(id=1, name="Land", level_id="continent", parent_id=0, physical_class="mixed"),
+            dict(id=2, name="Ocean", level_id="continent", parent_id=0, physical_class="water"),
+            dict(id=3, name="Mixed with only water built", level_id="continent", parent_id=0,
+                 physical_class="mixed"),
+        ])
+        bindings = [
+            dict(code=11, entity_id=1, physical_class="land"),
+            dict(code=12, entity_id=1, physical_class="water"),
+            dict(code=21, entity_id=2, physical_class="water"),
+            dict(code=31, entity_id=3, physical_class="water"),
+        ]
+        with TemporaryDirectory() as folder:
+            path = Path(folder) / "grid"
+            report = write_layer(path, grid, [(0, [(0, 1, 11), (1, 2, 12), (2, 3, 21), (3, 4, 31)])])
+            modes = build_map_modes(path, grid, geography, bindings, report["counts"], FILL_COLORS)
+        land, ocean, mixed = modes[0]["legend"]
+        self.assertIsNone(ocean["color"])
+        self.assertIsNone(mixed["color"])
+        database = Mock()
+        save_generated_colors(database, modes)
+        self.assertEqual(database.execute.call_args.args[1], ([1], ["#" + bytes(land["color"]).hex().upper()]))
+
     def test_run_search_rejects_close_bounds_without_close_cells(self):
         first = np.array([[8, 0, 1], [10, 0, 1]])
         second = np.array([[0, 0, 1], [7, 5, 6], [12, 5, 6], [20, 0, 1]])

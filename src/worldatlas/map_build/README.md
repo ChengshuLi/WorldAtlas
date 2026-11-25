@@ -77,7 +77,7 @@ Coloring runs after all selected subdivisions have been assembled. It detects wh
 
 The builder uses those pairs at every displayed level. Two subcontinents can influence each other's colors even when they have different parent continents. All water supplies the same blue. Land unbuilt at the selected level appears gray and stays out of the color calculation. `display_colors` in the build request supplies both reserved RGBs. The picker keeps candidate land colors with at least 85% of the best contrast against nearby colors, then chooses the one most distinct from the land colors already in that view. [Color selection code](display/colors.py)
 
-Each completed build keeps its colors in `map-modes.json`. Builds that load inputs from Neon also save the same generated colors in `geographic_entities.color_rgb`. A later build can replace those catalog values. Release packaging always takes colors from the build it is packaging.
+Each completed build keeps its land colors in `map-modes.json`. Builds that load inputs from Neon also save the same land colors in `geographic_entities.color_rgb`. Water-only entities leave that column blank and use the build's shared water blue for both cells and legend swatches. A later build can replace the saved land colors. Release packaging always takes colors from the build it is packaging.
 
 ### Dividing the hierarchy
 

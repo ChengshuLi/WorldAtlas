@@ -4,7 +4,9 @@ export function makeModeDisplay(mode, config) {
   if (ids.length !== config.categories.length)
     throw Error("Map legend does not match the map categories");
 
-  const groups = new Map(legend.map((item) => [item.id, { ...item, codes: [] }]));
+  const groups = new Map(legend.map((item) => [
+    item.id, { ...item, color: item.color ?? config.water_rgb, codes: [] },
+  ]));
   const categoriesByCode = new Map();
   const palette = new Map();
   config.categories.forEach(({ id, physical_class }, index) => {
