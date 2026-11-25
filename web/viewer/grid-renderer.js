@@ -387,8 +387,6 @@ function webglRenderer(canvas, gl, width, meta, data) {
   );
   const paletteHeight = Math.ceil((categoryIds.length + 1) / width);
   const paletteBytes = new Uint8Array(width * paletteHeight * 4);
-  for (const [code, slot] of slots)
-    paletteBytes.set(meta.palette.get(code), slot * 4);
   const paletteTexture = gl.createTexture();
   textures.push(paletteTexture);
   gl.activeTexture(gl.TEXTURE2);
@@ -408,6 +406,7 @@ function webglRenderer(canvas, gl, width, meta, data) {
   );
   gl.uniform1i(gl.getUniformLocation(program, "uPalette"), 2);
   let styleKey = null;
+  let lastPalette = null;
   let uniforms = Object.fromEntries(
     [
       "uViewport",
@@ -424,7 +423,6 @@ function webglRenderer(canvas, gl, width, meta, data) {
   // Texture upload is complete. Do not retain the large typed RLE streams in
   // the renderer closure; the WebGL textures are the renderer's owned copy.
   data = null;
-  meta = null;
   let disposed = false;
   return {
     canvas,
@@ -458,10 +456,13 @@ function webglRenderer(canvas, gl, width, meta, data) {
         [...activeCodes].sort((a, b) => a - b),
         [...outlineCodes].sort((a, b) => a - b),
       ]);
-      if (key !== styleKey) {
-        for (const [code, slot] of slots)
+      if (key !== styleKey || meta.palette !== lastPalette) {
+        for (const [code, slot] of slots) {
+          paletteBytes.set(meta.palette.get(code), slot * 4);
           paletteBytes[slot * 4 + 3] =
             (activeCodes.has(code) ? 1 : 0) | (outlineCodes.has(code) ? 2 : 0);
+        }
+        lastPalette = meta.palette;
         gl.activeTexture(gl.TEXTURE2);
         gl.bindTexture(gl.TEXTURE_2D, paletteTexture);
         gl.texSubImage2D(

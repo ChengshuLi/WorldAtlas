@@ -1,7 +1,7 @@
 import { loadLocalGrid, cellValue, wrapColumn } from "./grid-data.js";
 import { createRenderer, replaceWithCanvas } from "./grid-renderer.js";
 import {
-  makeLegendItems,
+  makeModeDisplay,
   matchingLegendItems,
   toggleSelection,
   activeCategoryCodes,
@@ -14,6 +14,9 @@ const status = $("#status");
 
 let meta, data, renderer;
 let items = [];
+let categoriesByCode;
+let activeMode;
+let pendingMode;
 let selectedGroups = new Set();
 let hoveredGroup = null;
 let selectedCell = null;
@@ -130,7 +133,7 @@ function selectCell(cell) {
   const selection = $("#selection");
   if (cell) {
     const value = cellValue(data.rows, data.runs, cell.x, cell.y);
-    const category = meta.categories.find((entry) => entry.id === value);
+    const category = categoriesByCode.get(value);
     const lon = -180 + (cell.x + 0.5) * meta.step;
     const lat = 90 - (cell.y + 0.5) * meta.step;
     selection.textContent = `Cell ${cell.x}, ${cell.y} · ${lat.toFixed(5)}°, ${lon.toFixed(5)}° · ${category?.name || "Unknown"} (${category?.physical_class || "unknown"})`;
@@ -366,6 +369,68 @@ function showError(error) {
   status.classList.add("error");
 }
 
+async function readMode(mode, configURL, signal) {
+  const response = await fetch(new URL(mode.path, configURL), { signal });
+  if (!response.ok) throw Error("Map legend could not load");
+  return makeModeDisplay(await response.json(), meta);
+}
+
+function applyMode(mode, display) {
+  activeMode = mode.level_id;
+  items = display.items;
+  categoriesByCode = display.categoriesByCode;
+  meta.palette = display.palette;
+  selectedGroups.clear();
+  hoveredGroup = null;
+
+  const search = $("#legend-search");
+  search.value = "";
+  const label = `Search ${mode.label.toLowerCase()}s`;
+  search.labels[0].textContent = label;
+  search.placeholder = label + "…";
+  $("#legend-list").setAttribute("aria-label", mode.label);
+  const unbuilt = $("#legend-unbuilt");
+  unbuilt.hidden = display.unbuiltCells === 0;
+  unbuilt.textContent = `Unbuilt at this level · ${display.unbuiltCells.toLocaleString()} cells`;
+  for (const button of $("#map-modes").children)
+    button.setAttribute("aria-pressed", String(button.dataset.level === activeMode));
+  $("#legend-list").scrollTop = 0;
+  renderLegend();
+  selectCell(selectedCell);
+}
+
+function bindModeControls(configURL) {
+  const buttons = $("#map-modes");
+  const message = $("#mode-status");
+  if (meta.modes.length < 2) return;
+  buttons.hidden = false;
+  for (const mode of meta.modes) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.dataset.level = mode.level_id;
+    button.textContent = mode.label;
+    button.setAttribute("aria-pressed", String(mode.level_id === activeMode));
+    button.addEventListener("click", async () => {
+      pendingMode?.abort();
+      message.textContent = "";
+      if (mode.level_id === activeMode) return;
+
+      const controller = new AbortController();
+      pendingMode = controller;
+      try {
+        const display = await readMode(mode, configURL, controller.signal);
+        if (!controller.signal.aborted) applyMode(mode, display);
+      } catch {
+        if (!controller.signal.aborted)
+          message.textContent = `Could not load the ${mode.label.toLowerCase()} view.`;
+      } finally {
+        if (pendingMode === controller) pendingMode = null;
+      }
+    });
+    buttons.append(button);
+  }
+}
+
 async function startViewer() {
   const controller = new AbortController();
   const { signal } = controller;
@@ -377,30 +442,20 @@ async function startViewer() {
     if (meta.inland_water_release) {
       $("#inland-water-release").textContent = `, release ${meta.inland_water_release}`;
     }
-    const legend = fetch(new URL(meta.legend, configURL), { signal }).then((response) => {
-      if (!response.ok) throw Error("Map legend could not load");
-      return response.json();
-    });
-    const [entries, grid] = await Promise.all([legend, loadLocalGrid(meta, configURL, signal)]);
-    items = makeLegendItems(entries, meta.categories);
-    const entities = new Map(items.map((item) => [item.id, item]));
-    meta.palette = new Map();
-    for (const category of meta.categories) {
-      const entity = entities.get(category.entity_id);
-      const rgb =
-        category.physical_class === "water" ? meta.water_rgb : entity.color;
-      if (!rgb) throw Error("Map configuration is missing a category color");
-      category.name = entity.name;
-      meta.palette.set(category.id, rgb);
-    }
+    const mode = meta.modes.find(({ level_id }) => level_id === meta.default_mode);
+    const [display, grid] = await Promise.all([
+      readMode(mode, configURL, signal),
+      loadLocalGrid(meta, configURL, signal),
+    ]);
+    data = grid;
+    applyMode(mode, display);
     if (meta.map_version) {
       const release = $("#map-release");
       release.textContent = `${meta.map_version.toUpperCase()} · SHA-256 ${meta.combined_sha256.slice(0, 12)}`;
       release.title = `SHA-256 of the decoded rows and runs. Full hash: ${meta.combined_sha256}`;
     }
     setRenderer(createRenderer(canvas, meta, grid));
-    data = grid;
-    renderLegend();
+    bindModeControls(configURL);
     resize();
     fitWorld();
     status.textContent = "";

@@ -102,6 +102,34 @@ button:disabled {
 .tools button {
   box-shadow: 0 2px 8px #17394a33;
 }
+.map-modes {
+  align-self: flex-start;
+  max-width: calc(100% - 148px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.map-modes button {
+  pointer-events: auto;
+  box-shadow: 0 2px 8px #17394a33;
+}
+.map-modes button[aria-pressed="true"] {
+  background: #19394a;
+  color: #fff;
+  border-color: #19394a;
+}
+.mode-status {
+  align-self: flex-start;
+  margin: 0;
+  padding: 7px 9px;
+  border-radius: 6px;
+  background: #fff4f3;
+  color: #a22;
+  font-size: var(--small-text-size);
+}
+.mode-status:empty {
+  display: none;
+}
 .map-footer {
   margin-top: auto;
   min-height: 0;
@@ -189,6 +217,13 @@ button:disabled {
   font-size: var(--small-text-size);
   white-space: nowrap;
 }
+.legend-unbuilt {
+  margin: 0;
+  padding: 6px 8px;
+  border-top: 1px solid #dce5e9;
+  color: #5f737e;
+  font-size: var(--small-text-size);
+}
 .legend-empty {
   padding: 12px;
   color: #617481;
@@ -248,6 +283,9 @@ button:disabled {
     position: static;
     align-self: flex-end;
     flex: none;
+  }
+  .map-modes {
+    max-width: 100%;
   }
   .legend-dock {
     width: min(240px, 100%);

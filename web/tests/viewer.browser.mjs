@@ -15,6 +15,7 @@ const mapHeight = 60;
 const published = "releases/v8.0-rc.1";
 const candidate = "releases/v9.0-rc.1";
 const objects = new Map();
+const multilevel = "releases/v9.5-rc.1";
 
 function store(key, bytes, type) {
   const body = Buffer.from(bytes);
@@ -56,7 +57,9 @@ function bundle(prefix, version, east) {
     step: 360 / mapWidth,
     map_version: version,
     inland_water_release: version === "v8.0" ? "2026-08-19.0" : "2026-10-21.0",
-    legend: "legend/entities.json",
+    modes: [{ level_id: "continent", label: "Continent", path: "modes/continent.json" }],
+    default_mode: "continent",
+    unbuilt_land_rgb: [216, 213, 205],
     categories: [
       { id: 1, entity_id: 1, physical_class: "water" },
       { id: 2, entity_id: 2, physical_class: "water" },
@@ -74,8 +77,11 @@ function bundle(prefix, version, east) {
     combined_sha256: sha256(Buffer.concat([rows, runs])),
   });
   store(
-    `${prefix}/legend/entities.json`,
-    JSON.stringify([
+    `${prefix}/modes/continent.json`,
+    JSON.stringify({
+      entity_ids_by_category: config.categories.map(({ entity_id }) => entity_id),
+      unbuilt_cells: 0,
+      legend: [
       {
         id: 1,
         name: "Africa",
@@ -94,7 +100,8 @@ function bundle(prefix, version, east) {
         color: config.water_rgb,
         count: 15 * mapHeight,
       },
-    ]),
+    ],
+    }),
     "application/json",
   );
   store(`${prefix}/config.json`, JSON.stringify(config), "application/json");
@@ -148,7 +155,7 @@ before(async () => {
     bundle(missingLegend, "v9.3", 18),
     "text/html",
   );
-  objects.delete(`${missingLegend}/legend/entities.json`);
+  objects.delete(`${missingLegend}/modes/continent.json`);
 
   const sparse = "releases/v9.4-rc.1";
   bundle(sparse, "v9.4", 18);
@@ -165,9 +172,7 @@ before(async () => {
     ]).flat(),
   );
   const config = JSON.parse(objects.get(`${sparse}/config.json`).body);
-  const legend = JSON.parse(
-    objects.get(`${sparse}/legend/entities.json`).body,
-  );
+  const mode = JSON.parse(objects.get(`${sparse}/modes/continent.json`).body);
   for (const category of config.categories)
     category.id = remap.get(category.id);
   for (let i = 0; i < 80; i++) {
@@ -176,7 +181,8 @@ before(async () => {
       entity_id: 1000 + i,
       physical_class: "land",
     });
-    legend.push({
+    mode.entity_ids_by_category.push(1000 + i);
+    mode.legend.push({
       id: 1000 + i,
       name: `Synthetic area ${i}`,
       color: [20, 80, 120],
@@ -188,11 +194,30 @@ before(async () => {
   config.combined_sha256 = sha256(Buffer.concat([rows, runs]));
   store(`${sparse}/config.json`, JSON.stringify(config), "application/json");
   store(
-    `${sparse}/legend/entities.json`,
-    JSON.stringify(legend),
+    `${sparse}/modes/continent.json`,
+    JSON.stringify(mode),
     "application/json",
   );
   store(`${sparse}/runs.u32le.gz`, gzipSync(runs), "application/gzip");
+
+  bundle(multilevel, "v9.5", 18);
+  const multiConfig = JSON.parse(objects.get(`${multilevel}/config.json`).body);
+  multiConfig.categories[4].entity_id = 80;
+  multiConfig.modes.push(
+    { level_id: "subcontinent", label: "Subcontinent", path: "modes/subcontinent.json" },
+    { level_id: "region", label: "Region", path: "modes/region.json" },
+  );
+  store(`${multilevel}/config.json`, JSON.stringify(multiConfig), "application/json");
+  store(`${multilevel}/modes/subcontinent.json`, JSON.stringify({
+    entity_ids_by_category: [null, null, null, null, 80],
+    legend: [{ id: 80, name: "East Asia", color: [85, 153, 135], count: 25 * mapHeight }],
+    unbuilt_cells: 95 * mapHeight,
+  }), "application/json");
+  store(`${multilevel}/modes/region.json`, JSON.stringify({
+    entity_ids_by_category: [null, null, null, null, 90],
+    legend: [{ id: 90, name: "Eastern Region", color: [185, 119, 146], count: 25 * mapHeight }],
+    unbuilt_cells: 95 * mapHeight,
+  }), "application/json");
 
   server = createServer(async (request, reply) => {
     try {
@@ -928,7 +953,7 @@ test("grid downloads start while the legend response is pending", async () => {
   const page = await browser.newPage();
   try {
     const legend = Promise.withResolvers();
-    await page.route("**/legend/entities.json", (route) => legend.resolve(route));
+    await page.route("**/modes/continent.json", (route) => legend.resolve(route));
     const [route] = await Promise.all([
       legend.promise,
       page.waitForRequest("**/rows.u32le.gz", { timeout: 5000 }),
@@ -977,3 +1002,71 @@ test(
     }
   },
 );
+
+
+for (const mobile of [false, true]) {
+  test(`geographic modes share the grid and update labels and colors (${mobile ? "touch Canvas" : "desktop WebGL"})`, async () => {
+    const page = await browser.newPage(mobile
+      ? { viewport: { width: 390, height: 780 }, hasTouch: true, isMobile: true }
+      : { viewport: { width: 950, height: 650 } });
+    try {
+      if (mobile) await page.addInitScript(() => {
+        const getContext = HTMLCanvasElement.prototype.getContext;
+        HTMLCanvasElement.prototype.getContext = function (type, ...args) {
+          return type === "webgl2" ? null : getContext.call(this, type, ...args);
+        };
+      });
+      const requests = [];
+      page.on("request", (request) => requests.push(new URL(request.url()).pathname));
+      await loaded(page, `/${multilevel}/index.html`, "v9.5");
+      const group = page.getByRole("group", { name: "Map level" });
+      const continent = group.getByRole("button", { name: "Continent", exact: true });
+      const subcontinent = group.getByRole("button", { name: "Subcontinent", exact: true });
+      assert.equal(await continent.getAttribute("aria-pressed"), "true");
+      assert.equal(requests.some((url) => url.endsWith("/modes/subcontinent.json")), false);
+      const canvas = page.locator("#canvas");
+      await canvas.click({ position: await pickPoint(page, 98, 24) });
+      const before = await page.locator("#selection").textContent();
+      assert.match(before, /Asia \(land\)/);
+      const search = page.getByRole("searchbox");
+      await search.fill("Africa");
+      if (mobile) await subcontinent.tap();
+      else await subcontinent.click();
+      await page.getByRole("button", { name: /East Asia/ }).waitFor();
+      assert.equal(await subcontinent.getAttribute("aria-pressed"), "true");
+      assert.equal(await search.inputValue(), "");
+      assert.equal(await page.locator("#selection").textContent(), before.replace("Asia", "East Asia"));
+      assert.match(await page.locator("#legend-unbuilt").textContent(), /5,700 cells/);
+      assert.deepEqual(await visiblePixel(page, await pickPoint(page, 87, 22)), [85, 153, 135, 255]);
+      assert.deepEqual(await visiblePixel(page, await pickPoint(page, 45, 22)), [216, 213, 205, 255]);
+      assert.deepEqual(await visiblePixel(page, await pickPoint(page, 69, 22)), [84, 141, 183, 255]);
+      assert.equal(requests.filter((url) => url.endsWith(".u32le.gz")).length, 2);
+      await canvas.click({ position: await pickPoint(page, 69, 22) });
+      assert.match(await page.locator("#selection").textContent(), /Unbuilt at this level \(water\)/);
+    } finally {
+      await page.close();
+    }
+  });
+}
+
+test("a slow or failed mode request keeps the last usable map", async () => {
+  const page = await browser.newPage();
+  try {
+    await loaded(page, `/${multilevel}/index.html`, "v9.5");
+    const pending = Promise.withResolvers();
+    await page.route("**/modes/subcontinent.json", (route) => pending.resolve(route));
+    const group = page.getByRole("group", { name: "Map level" });
+    await group.getByRole("button", { name: "Subcontinent", exact: true }).click();
+    const delayed = await pending.promise;
+    await group.getByRole("button", { name: "Region", exact: true }).click();
+    await page.getByRole("button", { name: /Eastern Region/ }).waitFor();
+    await delayed.continue();
+    await page.route("**/modes/continent.json", (route) => route.fulfill({ status: 503 }));
+    await group.getByRole("button", { name: "Continent", exact: true }).click();
+    await page.getByText("Could not load the continent view.").waitFor();
+    assert.equal(await group.getByRole("button", { name: "Region", exact: true }).getAttribute("aria-pressed"), "true");
+    assert.equal(await page.getByRole("button", { name: /Eastern Region/ }).count(), 1);
+  } finally {
+    await page.close();
+  }
+});

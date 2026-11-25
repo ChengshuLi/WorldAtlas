@@ -1,14 +1,22 @@
-// Legend entries come from the release. Category bindings connect them to cells.
-export function makeLegendItems(entries, categories) {
-  const groups = new Map(
-    entries.map((entry) => [entry.id, { ...entry, codes: [] }]),
-  );
-  for (const category of categories) {
-    const group = groups.get(category.entity_id);
-    if (!group) throw Error("Map legend is missing an entity");
-    group.codes.push(category.id);
-  }
-  return [...groups.values()];
+// Project canonical map codes onto the selected level without changing the grid.
+export function makeModeDisplay(mode, config) {
+  const { legend, entity_ids_by_category: ids, unbuilt_cells: unbuiltCells } = mode;
+  if (ids.length !== config.categories.length)
+    throw Error("Map legend does not match the map categories");
+
+  const groups = new Map(legend.map((item) => [item.id, { ...item, codes: [] }]));
+  const categoriesByCode = new Map();
+  const palette = new Map();
+  config.categories.forEach(({ id, physical_class }, index) => {
+    const owner = ids[index];
+    const group = groups.get(owner);
+    if (owner !== null && !group) throw Error("Map legend is missing an entity");
+    group?.codes.push(id);
+    categoriesByCode.set(id, { name: group?.name ?? "Unbuilt at this level", physical_class });
+    palette.set(id, physical_class === "water" ? config.water_rgb
+      : group?.color ?? config.unbuilt_land_rgb);
+  });
+  return { items: [...groups.values()], categoriesByCode, palette, unbuiltCells };
 }
 
 export function matchingLegendItems(items, query = "") {

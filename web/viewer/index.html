@@ -25,6 +25,8 @@
           <button id="tool-out" aria-label="Zoom out">−</button>
           <button id="tool-world">World</button>
         </div>
+        <div id="map-modes" class="map-modes" role="group" aria-label="Map level" hidden></div>
+        <p id="mode-status" class="mode-status" role="status"></p>
         <div class="map-footer">
           <div class="legend-dock">
             <button id="legend-toggle" class="legend-toggle" type="button" aria-expanded="false" aria-controls="legend-panel" hidden>Legend</button>
@@ -36,6 +38,7 @@
                 <button id="legend-collapse" type="button" aria-label="Collapse legend" title="Collapse legend">⌄</button>
               </div>
               <div id="legend-list" class="legend-list" role="group" aria-label="Continents"></div>
+              <p id="legend-unbuilt" class="legend-unbuilt" hidden></p>
             </section>
           </div>
           <div id="selection" class="selection" role="status">Click a cell to select it.</div>

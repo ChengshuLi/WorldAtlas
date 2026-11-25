@@ -61,6 +61,7 @@ class BundleTests(unittest.TestCase):
         request = self.request = root / "config.json"
         self.snapshot = self.run / "input-selection.json"
         self.selection = selection()
+        self.selection["geography"]["levels"].append(dict(id="continent", parent_id="world"))
         self.selection["geography"]["entities"].append(
             dict(
                 id=42,
@@ -188,7 +189,8 @@ class BundleTests(unittest.TestCase):
         self.assertEqual(config["inland_water_release"], "2026-10-21.0")
         self.assertEqual(config["water_rgb"], [84, 141, 183])
         self.assertNotIn("counts", config)
-        self.assertEqual(config["legend"], "legend/entities.json")
+        self.assertEqual(config["default_mode"], "continent")
+        self.assertEqual(config["modes"], [dict(level_id="continent", label="Continent", path="modes/continent.json")])
         self.assertEqual(
             config["categories"],
             [
@@ -196,13 +198,14 @@ class BundleTests(unittest.TestCase):
                 {"id": 17, "entity_id": 42, "physical_class": "land"},
             ],
         )
+        path = config["modes"][0]["path"]
         self.assertEqual(
-            json.loads((self.output / config["legend"]).read_bytes()),
-            [
-                {"id": 42, "name": "Africa", "color": [233, 180, 76], "count": 2},
-            ],
+            json.loads((self.output / path).read_bytes()),
+            {"entity_ids_by_category": [42, 42],
+             "legend": [{"id": 42, "name": "Africa", "color": [233, 180, 76], "count": 2}],
+             "unbuilt_cells": 0},
         )
-        self.assertIn(config["legend"], manifest["objects"])
+        self.assertIn(path, manifest["objects"])
         self.assertEqual(
             config["combined_sha256"], hashlib.sha256(self.rows + self.runs).hexdigest()
         )
@@ -428,7 +431,7 @@ class BundleTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "inside its build attempt"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
 
-    def test_missing_land_color_blocks_staging(self):
+    def test_missing_land_color_uses_the_automatic_palette(self):
         self.selection["geography"]["entities"][1]["color_rgb"] = None
         self.snapshot.write_text(json.dumps(self.selection))
         identity_path = self.run / "run-identity.json"
@@ -440,8 +443,9 @@ class BundleTests(unittest.TestCase):
         report = json.loads(self.report.read_text())
         report["original_run_identity"] = pin_file(identity_path)
         self.report.write_text(json.dumps(report))
-        with self.assertRaisesRegex(ValueError, "missing for land entities"):
-            build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+        build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+        mode = json.loads((self.output / "modes/continent.json").read_bytes())
+        self.assertEqual(mode["legend"][0]["color"], [201, 111, 98])
 
     def test_candidate_name_identifies_the_release(self):
         self.assertEqual(version("v9.0-rc.2"), "v9.0")

@@ -19,11 +19,13 @@ from worldatlas.map_build.inputs.selection_types import (
     GeographicSelection,
 )
 from worldatlas.map_releases.catalog import HOMEPAGE, release_prefix, version
+from worldatlas.map_releases.colors import UNBUILT_LAND
 from worldatlas.map_releases.inputs import (
     FILENAME,
     validate_replay_sources,
     write_inputs,
 )
+from worldatlas.map_releases.modes import write_map_modes
 from worldatlas.shared.files import (
     FilePin,
     JSONValue,
@@ -35,7 +37,6 @@ from worldatlas.shared.files import (
 )
 
 STREAM_FILES = {"rows": "rows.u32le", "runs": "runs.u32le"}
-LEGEND_FILE = "legend/entities.json"
 # Use Python's built-in media types to keep manifests stable across machines.
 MEDIA_TYPES = mimetypes.MimeTypes()
 
@@ -273,6 +274,7 @@ def _compress_grid(
 
 def _write_viewer_data(
     bundle: Path,
+    final: Path,
     geography: GeographicSelection,
     summary: dict[str, Any],
     grid: Grid,
@@ -282,10 +284,11 @@ def _write_viewer_data(
     combined: str,
     decoded: dict[str, str],
 ) -> None:
-    """Write the viewer's code lookup and legend from the saved bindings and counts.
+    """Write the canonical category lookup and per-level map display files.
 
     Args:
         bundle: Local release folder containing the copied viewer settings.
+        final: Directory of the original decoded map streams.
         geography: Saved entities, colors, and map-code bindings.
         summary: Final grid report with counts by map code and the number of runs.
         grid: Final dimensions and cell size.
@@ -293,11 +296,7 @@ def _write_viewer_data(
         water_edition: Source edition to display, when recorded.
         combined: SHA-256 over both uncompressed streams in rows-first order.
         decoded: SHA-256 for each uncompressed stream.
-
-    Raises:
-        ValueError: A land entity has no color.
     """
-    counts = summary["counts"]
     bindings = sorted(
         geography["category_bindings"], key=lambda binding: binding["code"]
     )
@@ -305,41 +304,18 @@ def _write_viewer_data(
     viewer = read_json(config)
     if water_edition:
         viewer["inland_water_release"] = water_edition
-    entities = {entity["id"]: entity for entity in geography["entities"]}
-    categories = []
-    legend = {}
-    for binding in bindings:
-        code, entity_id, physical_class = (
-            binding["code"],
-            binding["entity_id"],
-            binding["physical_class"],
-        )
-        entity = entities[entity_id]
-        categories.append(
-            {"id": code, "entity_id": entity_id, "physical_class": physical_class}
-        )
-        # Land and water have separate codes but share a legend row.
-        entry = legend.setdefault(
-            entity_id,
-            {
-                "id": entity_id,
-                "name": entity["name"],
-                "color": viewer["water_rgb"],
-                "count": 0,
-            },
-        )
-        entry["count"] += counts.get(str(code), 0)
-        if physical_class == "land":
-            color = entity.get("color_rgb")
-            if color is None:
-                raise ValueError(
-                    f"Saved colors are missing for land entities [{entity_id}]"
-                )
-            entry["color"] = list(bytes.fromhex(color[1:]))
-
-    legend_path = bundle / LEGEND_FILE
-    legend_path.parent.mkdir(exist_ok=True)
-    legend_path.write_bytes(json_bytes(list(legend.values())))
+    red, green, blue = viewer["water_rgb"]
+    modes = write_map_modes(
+        bundle, final, grid, geography, bindings, summary["counts"], (red, green, blue)
+    )
+    categories = [
+        {
+            "id": binding["code"],
+            "entity_id": binding["entity_id"],
+            "physical_class": binding["physical_class"],
+        }
+        for binding in bindings
+    ]
     streams: dict[str, JSONValue] = {"run_count": summary["run_count"]}
     for stream, filename in STREAM_FILES.items():
         streams[stream] = f"{filename}.gz"
@@ -351,7 +327,9 @@ def _write_viewer_data(
         map_version=map_version,
         local_grid=streams,
         combined_sha256=combined,
-        legend=LEGEND_FILE,
+        modes=modes,
+        default_mode=modes[0]["level_id"],
+        unbuilt_land_rgb=list(UNBUILT_LAND),
         categories=categories,
     )
     config.write_bytes(json_bytes(viewer))
@@ -416,6 +394,7 @@ def build_bundle(
     )
     _write_viewer_data(
         bundle,
+        final,
         selection["geography"],
         summary,
         grid,

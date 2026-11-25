@@ -59,7 +59,9 @@ Restore copies the saved build records as recorded. Use the release tooling from
 
 ### Release files and input archive
 
-Each release has one R2 folder, `releases/RELEASE_ID/`, containing its viewer, compressed map streams, generated configuration, legend and `inputs.json.gz`. The `rows` stream stores row offsets, and `runs` stores run endpoints and category codes. The manifest records checksums for both the stored files and the decoded streams.
+Each release has one R2 folder, `releases/RELEASE_ID/`, containing its viewer, compressed map streams, generated configuration, per-level legend and color files, and `inputs.json.gz`. The `rows` stream stores row offsets, and `runs` stores run endpoints and category codes. The manifest records checksums for both the stored files and the decoded streams.
+
+Each release serves one grid of the deepest assigned owners. Packaging uses the saved hierarchy to make one legend and code lookup per populated level. It counts cells from the final report and finds neighboring land owners from shared cell edges, including across ±180°. A saved `color_rgb` stays fixed. Packaging assigns a Muted atlas color when the field is empty. The generated colors are saved with the release, so palette changes can use the same completed map build.
 
 The archive holds the saved configuration, geographic selection, construction settings, source catalog references, run identity and build report. The run identity records the inputs and options needed to resume. Each attempt records its own runtime versions, source revision and setup files in `producer.json`. Packaging reads the saved run, never today's editable geography in Neon.
 
@@ -79,6 +81,6 @@ The snapshot includes source and setup definitions. Reproduction uses the record
 
 ## Code and tests
 
-[`bundle.py`](bundle.py) prepares the local bundle from a completed build. [`manage_release.py`](manage_release.py) drives staging and publication. [`catalog.py`](catalog.py) resolves bundle identities and verifies manifests. [`inputs.py`](inputs.py) creates and restores the input archive. Tests cover packaging, restoration and interruption cases.
+[`bundle.py`](bundle.py) prepares the local bundle from a completed build. [`manage_release.py`](manage_release.py) drives staging and publication. [`modes.py`](modes.py) builds the level-specific lookups and legends, with palette selection in [`colors.py`](colors.py). [`catalog.py`](catalog.py) resolves bundle identities and verifies manifests. [`inputs.py`](inputs.py) creates and restores the input archive. Tests cover packaging, restoration and interruption cases.
 
 Run tests with `python .github/scripts/run_tests.py --suite map_releases`.
