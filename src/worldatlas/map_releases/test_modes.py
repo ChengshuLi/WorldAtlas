@@ -12,12 +12,15 @@ from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.test_support import selection
 from worldatlas.map_releases.colors import (
     LandColorPicker,
-    color_land,
-    muted_color_samples,
-    oklab,
+    assign_land_colors,
+    rgb_to_oklab,
+    sample_muted_land_colors,
 )
-from worldatlas.map_releases.modes import build_map_modes, overview_neighbor_pairs, scan_color_neighbors
-
+from worldatlas.map_releases.modes import (
+    build_map_modes,
+    overview_neighbor_pairs,
+    scan_color_neighbors,
+)
 
 FILL_COLORS = (60, 98, 120), (227, 222, 210)
 RESERVED = set(FILL_COLORS)
@@ -28,9 +31,9 @@ class PaletteTests(TestCase):
         neighbor = (201, 111, 98)
         picked = LandColorPicker(RESERVED, ())
         chosen = picked.choose_muted_land_color({neighbor})
-        candidates, lab = muted_color_samples()
+        candidates, lab = sample_muted_land_colors()
         possible = [i for i, color in enumerate(candidates) if color not in (neighbor, *FILL_COLORS)]
-        references = oklab([neighbor])
+        references = rgb_to_oklab([neighbor])
         distances = np.linalg.norm(lab[:, None] - references, axis=2).min(axis=1)
         self.assertEqual(chosen, candidates[max(possible, key=lambda i: distances[i])])
 
@@ -40,9 +43,9 @@ class PaletteTests(TestCase):
         picked = LandColorPicker(RESERVED, (original,))
         chosen = picked.choose_muted_land_color({water})
 
-        candidates, lab = muted_color_samples()
-        local = np.linalg.norm(lab - oklab([water])[0], axis=1)
-        view = np.linalg.norm(lab - oklab([original])[0], axis=1)
+        candidates, lab = sample_muted_land_colors()
+        local = np.linalg.norm(lab - rgb_to_oklab([water])[0], axis=1)
+        view = np.linalg.norm(lab - rgb_to_oklab([original])[0], axis=1)
         eligible = [i for i, color in enumerate(candidates) if color not in RESERVED]
         best_local = max(local[i] for i in eligible)
         shortlist = [i for i in eligible if local[i] >= 0.85 * best_local]
@@ -52,8 +55,8 @@ class PaletteTests(TestCase):
 
     def test_distant_entities_can_reuse_colors_after_the_palette_is_used(self):
         swatches = ((80, 140, 60), (210, 150, 100), (200, 100, 110))
-        with patch("worldatlas.map_releases.colors.muted_color_samples",
-                   return_value=(swatches, oklab(swatches))):
+        with patch("worldatlas.map_releases.colors.sample_muted_land_colors",
+                   return_value=(swatches, rgb_to_oklab(swatches))):
             picked = LandColorPicker({swatches[0]}, ())
             first, second, third = (picked.choose_muted_land_color(set()) for _ in range(3))
         self.assertEqual((first, second, third), (swatches[1], swatches[2], swatches[1]))
@@ -61,21 +64,21 @@ class PaletteTests(TestCase):
     def test_coloring_preserves_authored_colors_and_rejects_conflicting_borders(self):
         fixed = (201, 111, 98)
         graph = {1: {2}, 2: {1}, 3: set()}
-        colors = color_land(graph, set(), {1: fixed}, FILL_COLORS)
+        colors = assign_land_colors(graph, set(), {1: fixed}, FILL_COLORS)
         self.assertEqual(colors[1], fixed)
         self.assertNotEqual(colors[2], fixed)
         self.assertEqual(len(set(colors.values())), 3)
         with self.assertRaisesRegex(ValueError, "entities 1 and 2 share"):
-            color_land(graph, set(), {1: fixed, 2: fixed}, FILL_COLORS)
+            assign_land_colors(graph, set(), {1: fixed, 2: fixed}, FILL_COLORS)
 
     def test_authored_colors_cannot_use_the_two_reserved_values(self):
         for fill in FILL_COLORS:
             with self.subTest(fill=fill):
                 with self.assertRaisesRegex(ValueError, "land entity 1 uses reserved"):
-                    color_land({1: set()}, set(), {1: fill}, FILL_COLORS)
+                    assign_land_colors({1: set()}, set(), {1: fill}, FILL_COLORS)
 
     def test_palette_has_richer_saturation_and_the_fills_are_outside_it(self):
-        samples, lab = muted_color_samples()
+        samples, lab = sample_muted_land_colors()
         chroma = np.linalg.norm(lab[:, 1:], axis=1)
         # Round to the intended precision to account for storing 8-bit RGB.
         self.assertTrue(np.all((0.10 <= np.round(chroma, 2)) & (np.round(chroma, 2) <= 0.14)))
@@ -84,16 +87,16 @@ class PaletteTests(TestCase):
     def test_many_adjacent_entities_use_distinct_generated_colors(self):
         ids = set(range(10))
         graph = {entity: ids - {entity} for entity in ids}
-        colors = color_land(graph, set(), {}, FILL_COLORS)
+        colors = assign_land_colors(graph, set(), {}, FILL_COLORS)
         self.assertEqual(len(set(colors.values())), len(graph))
         self.assertFalse(set(colors.values()).intersection(FILL_COLORS))
         reverse = dict(reversed(list(graph.items())))
-        self.assertEqual(color_land(reverse, set(), {}, FILL_COLORS), colors)
+        self.assertEqual(assign_land_colors(reverse, set(), {}, FILL_COLORS), colors)
 
     def test_an_exhausted_palette_reports_the_conflict(self):
         color = (201, 111, 98)
-        with patch("worldatlas.map_releases.colors.muted_color_samples",
-                   return_value=((color,), oklab([color]))):
+        with patch("worldatlas.map_releases.colors.sample_muted_land_colors",
+                   return_value=((color,), rgb_to_oklab([color]))):
             with self.assertRaisesRegex(ValueError, "ran out of distinct muted land colors"):
                 LandColorPicker(RESERVED, ()).choose_muted_land_color({color})
 

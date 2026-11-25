@@ -13,7 +13,7 @@ from worldatlas.map_build.inputs.selection_types import (
     GeographicSelection,
     MapCodeBinding,
 )
-from worldatlas.map_releases.colors import RGB, color_land
+from worldatlas.map_releases.colors import RGB, assign_land_colors
 
 
 class LegendEntry(TypedDict):
@@ -205,7 +205,7 @@ def build_map_modes(
                 red, green, blue = bytes.fromhex(color[1:])
                 authored[entity_id] = (red, green, blue)
         land_near_water = {owners[code] for code in codes_near_water if code in owners}
-        colors = color_land(neighbors, land_near_water, authored, fill_colors)
+        colors = assign_land_colors(neighbors, land_near_water, authored, fill_colors)
         modes.append(
             {
                 "level_id": level,
