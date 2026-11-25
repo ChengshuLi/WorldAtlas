@@ -6,6 +6,8 @@ from dataclasses import dataclass
 from itertools import chain
 from typing import TypedDict, cast
 
+from pydantic import TypeAdapter, ValidationError
+
 from worldatlas.geodesy.geojson import GeoJSONGeometry, Point
 from worldatlas.map_build.inputs.selection_types import (
     GeographicEntity,
@@ -102,16 +104,7 @@ class CompiledDivision:
     rules: list[CompiledRule]
 
 
-OPERATIONS = frozenset(
-    (
-        "assign_area",
-        "divide_area",
-        "nearest_land",
-        "nearest_coastal_water",
-        "nearest_basin_water",
-        "nearest_water",
-    )
-)
+RULE_SETTINGS_ADAPTER = TypeAdapter(RuleSettings)
 ROLE_TYPES = {
     "boundary_line": frozenset(("LineString", "MultiLineString")),
     "scope_area": frozenset(("Polygon", "MultiPolygon")),
@@ -208,17 +201,16 @@ class RuleIndex:
                 {"entity_id": target["entity_id"], "point": point}
             )
         result: list[CompiledRule] = []
-        for ident, rule in sorted(selected.items()):
+        for ident, source_rule in sorted(selected.items()):
+            try:
+                rule = RULE_SETTINGS_ADAPTER.validate_python(
+                    source_rule, strict=True, extra="ignore"
+                )
+            except ValidationError as error:
+                raise ValueError(f"invalid operation settings for {ident}") from error
             operation = rule["operation"]
             inputs = links[ident]
             output = targets[ident]
-            if (
-                operation not in OPERATIONS
-                or type(rule["unassigned_only"]) is not bool
-                or rule["unit"] not in ("cell", "component")
-                or rule["physical_class"] not in ("land", "water", "mixed")
-            ):
-                raise ValueError(f"invalid operation settings for {ident}")
             if bool(inputs["boundary_line"]) != (operation == "divide_area"):
                 raise ValueError(f"invalid boundary links for {ident}")
             if bool(inputs["distance_reference"]) != (operation == "nearest_land"):
@@ -270,15 +262,13 @@ class RuleIndex:
             ):
                 raise ValueError("rule physical class is incompatible with its target")
             result.append(
-                CompiledRule(
-                    id=ident,
-                    operation=operation,
-                    physical_class=rule["physical_class"],
-                    unit=rule["unit"],
-                    unassigned_only=rule["unassigned_only"],
-                    features={role: group for role, group in inputs.items() if group},
-                    targets=output,
-                )
+                {
+                    **rule,
+                    "features": {
+                        role: group for role, group in inputs.items() if group
+                    },
+                    "targets": output,
+                }
             )
         return CompiledDivision(children_by_id=children, rules=result)
 

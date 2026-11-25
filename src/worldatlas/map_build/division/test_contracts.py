@@ -66,7 +66,10 @@ class PhysicalEligibility(unittest.TestCase):
     def test_operation_validates_required_roles_and_output_class(self):
         original = self.rule.copy()
         cases = (
+            ({"operation": "unknown"}, [], "invalid operation settings"),
+            ({"physical_class": "ice"}, [], "invalid operation settings"),
             ({"unit": "row"}, [], "invalid operation settings"),
+            ({"unassigned_only": "false"}, [], "invalid operation settings"),
             ({"operation": "divide_area"}, [], "invalid boundary links"),
             ({"operation": "nearest_land"}, [], "invalid distance-reference"),
             ({"operation": "nearest_basin_water"}, [], "requires exactly one area"),
