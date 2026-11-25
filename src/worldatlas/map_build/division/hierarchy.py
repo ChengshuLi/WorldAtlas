@@ -9,12 +9,13 @@ from typing import Any
 import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
-from worldatlas.map_build.core.layers import write_layer
-from worldatlas.map_build.core.rle import open_grid, overlay, row
+from worldatlas.map_build.core.layers import write_layer, write_run_rows
+from worldatlas.map_build.core.rle import complete_row, open_grid, overlay, row
 from worldatlas.map_build.division.contracts import CompiledDivision
 from worldatlas.map_build.division.engine import ParentDivision, land_groups
 from worldatlas.map_build.division.intervals import spans
 from worldatlas.map_build.division.shores import ShoreGeometry, land_owner_order
+from worldatlas.map_build.execution.control import check_cancelled
 from worldatlas.map_build.execution.runtime import Checkpoints, RunFilePins
 from worldatlas.map_build.execution.timing import Timing
 from worldatlas.map_build.inputs.selection_types import GeographicSelection
@@ -90,14 +91,16 @@ def write_parent_membership_mask(
     ownership_directory: Path | str,
     parent_id: int,
     output_directory: Path | str,
+    row_range: range,
 ) -> dict[str, Any]:
     """Write a mask of the cells owned by one parent.
 
     Args:
         grid: Dimensions of the ownership grid.
-        ownership_directory: Folder with the current ownership row-run files.
+        ownership_directory: Folder with the immediate ancestor's subdivision.
         parent_id: Owner ID of the parent about to be divided.
         output_directory: New folder for the mask's row-run files and report.
+        row_range: Rows with possible assignments in the ancestor result.
 
     Returns:
         Row-run layer report for the parent's membership mask.
@@ -110,7 +113,8 @@ def write_parent_membership_mask(
             Yields:
                 (row, spans) with value 1 for cells owned by the parent.
             """
-            for y in range(grid.height):
+            for y in row_range:
+                check_cancelled()
                 ends, values = row(owners, y, grid.width)
                 records = spans(
                     np.r_[0, ends[:-1]], ends, (values == parent_id).astype(np.uint32)
@@ -121,56 +125,124 @@ def write_parent_membership_mask(
         return write_layer(output_directory, grid, rows())
 
 
-def substitute(
-    grid: Grid,
-    prior_directory: Path | str,
-    parent_directory: Path | str,
-    child_directory: Path | str,
-    directory: Path | str,
-) -> dict[str, Any]:
-    """Replace a parent's cells with the owners from its subdivision.
+def assigned_rows(report: Path) -> range:
+    """Read the half-open range of rows with owners from a layer report.
 
     Args:
-        grid: Dimensions shared by all layers.
-        prior_directory: Folder with the ownership files before the subdivision.
-        parent_directory: Folder with the mask files. Value 1 marks cells
-            inside the parent.
-        child_directory: Folder with the subdivision's ownership files.
-            Values are child entity IDs inside the parent and zero elsewhere.
-        directory: New folder for the combined ownership files and report.
+        report: Pinned report written alongside a layer's row-run files.
 
     Returns:
-        Layer report for the combined ownership.
+        Global row indices that may contain assignments. An empty layer gives
+        an empty range.
     """
-    with (
-        open_grid(prior_directory, grid) as prior,
-        open_grid(parent_directory, grid) as parent,
-        open_grid(child_directory, grid) as children,
-    ):
+    bounds = read_json(report)["assigned_bounds"]
+    return range(0) if bounds is None else range(bounds[2], bounds[3])
 
-        def rows() -> Iterator[tuple[int, list[tuple[int, int, int]]]]:
-            """Read each row and replace owners inside the divided parent.
 
-            Yields:
-                (row, spans) containing the combined owner IDs.
-            """
-            for y in range(grid.height):
-                starts, ends, (old, within, new) = overlay(
-                    row(prior, y, grid.width),
-                    row(parent, y, grid.width),
-                    row(children, y, grid.width),
-                )
-                if np.any((within != 0) & (new == 0)) or np.any(
-                    (within == 0) & (new != 0)
-                ):
-                    raise ValueError(
-                        "child division does not match its exact parent membership"
-                    )
-                records = spans(starts, ends, np.where(within != 0, new, old))
-                if records:
-                    yield y, records
+def assemble_ownership(
+    grid: Grid,
+    world: Path,
+    local_results: dict[int, Path],
+    compiled: dict[int, CompiledDivision],
+    directory: Path,
+) -> dict[str, Any]:
+    """Combine direct subdivisions into one grid of the deepest assigned owners.
 
-        return write_layer(directory, grid, rows())
+    Args:
+        grid: Dimensions shared by all layer files.
+        world: World division output, covering every grid cell.
+        local_results: Non-root subdivision output directories keyed by parent.
+        compiled: Selected divisions in ancestor-first order.
+        directory: New directory for the assembled row-run files.
+
+    Returns:
+        Layer report with final run count, assigned bounds and owner counts.
+
+    Raises:
+        ValueError: A local result contains the wrong owners or its cells
+            differ from the exact set previously assigned to its parent.
+    """
+    depths = {child: 1 for child in compiled[0].children_by_id}
+    parents_by_depth: dict[int, list[int]] = {}
+    parent_by_child: dict[int, int] = {}
+    for parent in local_results:
+        depth = depths[parent]
+        parents_by_depth.setdefault(depth, []).append(parent)
+        for child in compiled[parent].children_by_id:
+            depths[child] = depth + 1
+            parent_by_child[child] = parent
+
+    results = sorted(
+        (bounds.start, bounds.stop, parent)
+        for parent, path in local_results.items()
+        if (bounds := assigned_rows(path / "report.json"))
+    )
+
+    def combined_rows() -> Iterator[tuple[int, np.ndarray, np.ndarray]]:
+        """Read local results in row blocks and apply each level in order.
+
+        Yields:
+            (row index, exclusive run ends, owner IDs) for each complete row.
+        """
+        with open_grid(world, grid) as root:
+            active: list[tuple[int, int, int]] = []
+            next_result = 0
+            for first in range(0, grid.height, 256):
+                check_cancelled()
+                stop = min(first + 256, grid.height)
+                active = [result for result in active if result[1] > first]
+                while next_result < len(results) and results[next_result][0] < stop:
+                    active.append(results[next_result])
+                    next_result += 1
+
+                # Read one parent at a time so wide layers and many siblings
+                # do not require keeping all their files open at once.
+                patches: dict[tuple[int, int], list[tuple[int, int, int]]] = {}
+                for start_row, end_row, parent in active:
+                    check_cancelled()
+                    with open_grid(local_results[parent], grid) as children:
+                        for y in range(max(first, start_row), min(stop, end_row)):
+                            ends, owners = row(children, y, grid.width)
+                            claims = spans(np.r_[0, ends[:-1]], ends, owners)
+                            if any(
+                                parent_by_child.get(owner) != parent
+                                for _, _, owner in claims
+                            ):
+                                raise ValueError(
+                                    f"division {parent} assigned a non-child"
+                                )
+                            patches.setdefault((y, depths[parent]), []).extend(claims)
+
+                for y in range(first, stop):
+                    ends, owners = row(root, y, grid.width)
+                    for depth, parents in parents_by_depth.items():
+                        claims = patches.get((y, depth), [])
+                        if not claims:
+                            if np.any(np.isin(owners, parents)):
+                                raise ValueError(
+                                    "division leaves exact parent membership incomplete"
+                                )
+                            continue
+                        local = complete_row(grid.width, sorted(claims), minimum_code=1)
+                        _, ends, (owners, children) = overlay((ends, owners), local)
+                        ids, indices = np.unique(children, return_inverse=True)
+                        expected = np.array(
+                            [parent_by_child.get(int(child), 0) for child in ids],
+                            dtype=np.uint32,
+                        )[indices]
+                        inside = expected != 0
+                        if np.any(inside & (owners != expected)):
+                            raise ValueError(
+                                "division claims cells outside its exact parent membership"
+                            )
+                        if np.any(np.isin(owners[~inside], parents)):
+                            raise ValueError(
+                                "division leaves exact parent membership incomplete"
+                            )
+                        owners = np.where(inside, children, owners)
+                    yield y, ends.astype(np.uint32, copy=False), owners
+
+    return write_run_rows(directory, grid, combined_rows())
 
 
 class HierarchyDivision:
@@ -260,23 +332,27 @@ class HierarchyDivision:
             Division report with the final layer directory and each parent's
             output and reuse details.
         """
-        ownership = None
-        receipts = {}
+        outputs: dict[int, Path] = {}
+        receipts: dict[str, Any] = {}
+        entities = {entity["id"]: entity for entity in self.geography["entities"]}
         for parent, compiled in self.compiled_divisions.items():
             directory = self.directory / ("parent-" + str(parent))
             directory.mkdir(exist_ok=True)
             parent_directory = directory / "membership"
-            if ownership is not None:
+            ancestor = entities[parent]["parent_id"]
+            if ancestor is not None:
+                ancestor_output = outputs[ancestor]
                 self.task(
                     "membership-" + str(parent),
                     partial(
                         write_parent_membership_mask,
                         self.grid,
-                        ownership,
+                        ancestor_output,
                         parent,
                         parent_directory,
+                        assigned_rows(ancestor_output / "report.json"),
                     ),
-                    self.files.row_streams(ownership),
+                    receipts[str(ancestor)]["outputs"],
                     [parent_directory],
                 )
             settings = parent_division_reuse_inputs(
@@ -284,7 +360,7 @@ class HierarchyDivision:
                 parent,
                 self.grid,
                 self.physical,
-                parent_directory if ownership is not None else None,
+                parent_directory if ancestor is not None else None,
                 self.configuration,
                 compiled=compiled,
                 files=self.files,
@@ -317,7 +393,7 @@ class HierarchyDivision:
                     parent,
                     self.grid,
                     self.physical,
-                    parent_directory if ownership is not None else None,
+                    parent_directory if ancestor is not None else None,
                     self.configuration,
                     compiled=compiled,
                     files=self.files,
@@ -333,9 +409,7 @@ class HierarchyDivision:
                     directory / "calculation",
                     self.configuration,
                     compiled=compiled,
-                    parent_directory=parent_directory
-                    if ownership is not None
-                    else None,
+                    parent_directory=parent_directory if ancestor is not None else None,
                     checkpoints=self.checkpoints,
                     timing=self.timing,
                     input_pins=[definition_pin],
@@ -373,32 +447,27 @@ class HierarchyDivision:
             if not receipt_path.exists():
                 write_json(receipt_path, receipt)
             receipts[str(parent)] = receipt
-            if ownership is None:
-                ownership = output
-            else:
-                merged = directory / "finest"
-                self.task(
-                    "substitute-" + str(parent),
-                    partial(
-                        substitute,
-                        self.grid,
-                        ownership,
-                        parent_directory,
-                        output,
-                        merged,
-                    ),
-                    [
-                        definition_pin,
-                        *receipt["outputs"],
-                        *self.files.row_streams(ownership),
-                    ],
-                    [merged],
-                )
-                ownership = merged
-        if ownership is None:
+            outputs[parent] = output
+        if not outputs:
             raise ValueError("no geographic division selected")
-        for receipt in receipts.values():
-            self.files.verify(receipt["outputs"])
+
+        ownership = outputs.pop(0)
+        if outputs:
+            combined = self.directory / "ownership"
+            self.task(
+                "combine-ownership",
+                partial(
+                    assemble_ownership,
+                    self.grid,
+                    ownership,
+                    outputs,
+                    self.compiled_divisions,
+                    combined,
+                ),
+                [pin for receipt in receipts.values() for pin in receipt["outputs"]],
+                [combined],
+            )
+            ownership = combined
         report = dict(directory=str(ownership), parents=receipts, grid=vars(self.grid))
         path = self.directory / "report.json"
         if not path.exists():

@@ -29,6 +29,10 @@ The four World ocean rules link to explicit reference points and use S-130 polyg
 
 Coastal and basin claims run independently against the same ownership snapshot, sharing shore positions and indexes. Their overlapping claims must agree. Land-stage receipts separately pin their actual definitions and outputs, so water-only edits can reuse verified land without reusing an outdated final parent division.
 
+Each division reads its parent’s cells from the immediate ancestor’s saved result. For example, a province division reads the province cells from its area’s result. It can reuse its previous output if those cells, the physical grid, and the inputs to its rules still match. A change outside the province can leave its result reusable.
+
+After the divisions finish, one checkpoint assembles the deepest assigned owners into a complete grid. It reads local results a block of rows at a time. Where a branch stops, the existing owner stays in the grid. A World-only build can use World’s result directly.
+
 ## Code and tests
 
 | Files | Responsibility |
@@ -40,7 +44,7 @@ Coastal and basin claims run independently against the same ownership snapshot, 
 | `shores.py` | Shared physical shore extraction, owner attachment and indexes. |
 | `nearest.py`, `policies.py` | Common distance kernels and four reference/scope policies. |
 | `engine.py` | Parent execution, checkpoints, stage dependencies and coverage. |
-| `hierarchy.py` | Select ancestors, reuse unchanged divisions and substitute each child's result into its parent. |
+| `hierarchy.py` | Prepare each parent’s membership, reuse local results, and assemble the complete ownership grid. |
 | `encoding.py` | Convert ownership and physical class to published map codes. |
 
 Keep geographic choices in Neon and algorithms here. Generality and efficiency are equally required: reuse immutable geometry/indexes and vectorized intervals, measure substantial costs, and retain complete input coverage.

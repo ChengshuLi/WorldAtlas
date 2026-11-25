@@ -124,7 +124,8 @@ Each layer has its own pair of files. The physical grid stores land or water. Th
 | `physical/` | Keeps the coastline mask, inland-water masks and combined physical grid so rasterization can resume and later builds can reuse the grid. |
 | `division/parent-{ID}/` | Keeps calculations together for each parent. For example, World uses `division/parent-0/`. |
 | `division/parent-{ID}/definition.json` | Records the operative rules, geometry, and physical and membership file checksums that identify this parent calculation. |
-| `division/parent-{ID}/result.json` | Records where the parent’s ownership grid lives so the builder can resume after a completed division. A reused result can point to an earlier run. |
+| `division/parent-{ID}/result.json` | Records where the parent’s direct-child ownership grid lives so the builder can resume after a completed division. A reused result can point to an earlier run. |
+| `division/ownership/` | Ownership assembled after all selected subdivisions. A World-only build uses World’s result directly. |
 | `final/` | The finished map grid, encoded as map codes. |
 | `final/report.json` | Counts the cells using each map code. Release staging uses the counts to check coverage and build the legend. |
 | `report.json` | Marks the run complete and records final file paths, checksums and stage timings. Its `physical_directory` field locates the physical grid, including a grid reused from an earlier run. |

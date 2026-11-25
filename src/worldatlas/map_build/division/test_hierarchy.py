@@ -12,10 +12,10 @@ import numpy as np
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer, patch_rows
 from worldatlas.map_build.core.rle import open_grid, row
-from worldatlas.map_build.division.contracts import RuleIndex, selected_parents
+from worldatlas.map_build.division.contracts import CompiledDivision, RuleIndex, selected_parents
 from worldatlas.map_build.division.hierarchy import (
     parent_division_reuse_inputs,
-    substitute,
+    assemble_ownership,
     HierarchyDivision,
 )
 from worldatlas.map_build.division.engine import ParentDivision
@@ -426,9 +426,33 @@ class HierarchyTests(unittest.TestCase):
                 self.assertEqual(ends.tolist(), [10, 12, 14, 24])
                 self.assertEqual(ids.tolist(), [202, 303, 404, 202])
                 self.assertEqual(row(owners, 0, grid.width)[1].tolist(), [202])
-            resumed = build.run()
+            self.assertEqual(Path(result["directory"]), root / "division/ownership")
+            self.assertFalse((root / "division/parent-101/finest").exists())
+            with patch(
+                "worldatlas.map_build.division.hierarchy.write_run_rows",
+                side_effect=AssertionError("assembled checkpoint was recomputed"),
+            ):
+                resumed = build.run()
             self.assertEqual(resumed["directory"], result["directory"])
             self.assertTrue(all(p["reused"] for p in resumed["parents"].values()))
+
+            # World recalculates with changed settings, but gives the child the
+            # same exact cells. The child's previous assignment remains valid.
+            geography["rules"][0]["unassigned_only"] = True
+            changed = HierarchyDivision(
+                geography, grid, root / "physical", root / "changed", {},
+                compiled_divisions=compile_divisions(geography, [101]),
+                reuse=root / "division",
+                **self.checkpoint_arguments(root / "changed"),
+            ).run()
+            self.assertFalse(changed["parents"]["0"]["reused"])
+            self.assertTrue(changed["parents"]["101"]["reused"])
+            for filename in ("rows.u32le", "runs.u32le"):
+                self.assertEqual(
+                    sha256_file(Path(changed["directory"]) / filename),
+                    sha256_file(Path(result["directory"]) / filename),
+                )
+            geography["rules"][0]["unassigned_only"] = False
             geography["features"][0]["geometry"]["coordinates"] = [[1, 55], [1, 5]]
             with self.assertRaisesRegex(ValueError, "parent definition changed"):
                 build.run()
@@ -536,32 +560,55 @@ class HierarchyTests(unittest.TestCase):
             self.assertEqual(signature([8, 12, 1]), original)
             self.assertNotEqual(signature([12, 8, 1]), original)
 
-    def test_descendant_substitution_preserves_every_other_parent(self):
+    def test_assembly_keeps_siblings_and_applies_three_levels(self):
+        grid = Grid(720, 360, 0.5)
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            layers = {
+                "world": [(2, [(0, 3, 101), (3, 9, 202), (9, 720, 303)]),
+                          (259, [(0, 720, 202)])],
+                "west": [(2, [(0, 3, 711)])],
+                "east": [(2, [(3, 9, 815)]), (259, [(0, 720, 816)])],
+                "nested": [(2, [(0, 3, 719)])],
+                "empty": [],
+            }
+            for name, rows in layers.items():
+                write_layer(root / name, grid, rows)
+            compiled = {
+                key: CompiledDivision(dict.fromkeys(children, {}), [])
+                for key, children in ((0, [101, 202, 303, 404]),
+                                      (101, [711]), (202, [815, 816]),
+                                      (404, [417]), (711, [719]))
+            }
+            result = assemble_ownership(
+                grid, root / "world",
+                {101: root / "west", 202: root / "east",
+                 404: root / "empty", 711: root / "nested"},
+                compiled, root / "result",
+            )
+            with open_grid(result["directory"], grid) as data:
+                ends, owners = row(data, 2, grid.width)
+                self.assertEqual(ends.tolist(), [3, 9, 720])
+                self.assertEqual(owners.tolist(), [719, 815, 303])
+                self.assertEqual(row(data, 259, grid.width)[1].tolist(), [816])
+            self.assertEqual(result["counts"], {"719": 3, "815": 6, "303": 711, "816": 720})
+
+    def test_assembly_rejects_wrong_and_missing_children(self):
         grid = Grid(24, 12, 15)
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            write_layer(root / "prior", grid, [(3, [(2, 5, 101), (5, 9, 807)])])
-            write_layer(root / "membership", grid, [(3, [(2, 5, 1)])])
-            write_layer(root / "children", grid, [(3, [(2, 3, 503), (3, 5, 999)])])
-            result = substitute(
-                grid,
-                root / "prior",
-                root / "membership",
-                root / "children",
-                root / "result",
-            )
-            with open_grid(result["directory"], grid) as data:
-                ends, owners = row(data, 3, grid.width)
-                self.assertEqual(
-                    list(zip(map(int, ends), map(int, owners))),
-                    [(2, 0), (3, 503), (5, 999), (9, 807), (24, 0)],
-                )
-            write_layer(root / "incomplete", grid, [(3, [(2, 3, 503)])])
-            with self.assertRaisesRegex(ValueError, "exact parent membership"):
-                substitute(
-                    grid,
-                    root / "prior",
-                    root / "membership",
-                    root / "incomplete",
-                    root / "bad",
-                )
+            write_layer(root / "world", grid, [(3, [(2, 5, 101), (5, 9, 807)])])
+            compiled = {
+                0: CompiledDivision(dict.fromkeys((101, 807), {}), []),
+                101: CompiledDivision({503: {}}, []),
+            }
+            for name, claims, error in (
+                ("nonchild", [(2, 5, 807)], "assigned a non-child"),
+                ("outside", [(2, 6, 503)], "outside its exact parent membership"),
+                ("incomplete", [(2, 3, 503)], "membership incomplete"),
+                ("empty", [], "membership incomplete"),
+            ):
+                with self.subTest(name=name):
+                    write_layer(root / name, grid, [(3, claims)] if claims else [])
+                    with self.assertRaisesRegex(ValueError, error):
+                        assemble_ownership(grid, root / "world", {101: root / name}, compiled, root / (name + "-out"))
