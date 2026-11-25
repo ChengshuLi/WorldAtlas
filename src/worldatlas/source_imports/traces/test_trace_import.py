@@ -1,0 +1,125 @@
+"""Test imports, recipe edits, and links for traced boundaries."""
+
+from contextlib import nullcontext
+import os
+import unittest
+import psycopg
+from psycopg.types.json import Jsonb
+from worldatlas.source_imports.run_import import run_import
+
+
+@unittest.skipUnless(
+    os.environ.get("WORLDATLAS_TEST_DATABASE_URL"), "requires disposable PostgreSQL"
+)
+class DatabaseTests(unittest.TestCase):
+    """Run the trace importer against a disposable PostgreSQL database."""
+
+    def setUp(self):
+        self.db = psycopg.connect(os.environ["WORLDATLAS_TEST_DATABASE_URL"])
+        self.addCleanup(self.db.close)
+        self.addCleanup(self.db.rollback)
+        self.db.execute(
+            "INSERT INTO atlas.source_assets(id,title,provider,source_uri,license_name,license_uri,attribution,r2_bucket,r2_key,sha256,size_bytes) VALUES ('raw','Test','Test','test:source','Test','test:license','Test','test','figure.pdf',%s,10)",
+            ("a" * 64,),
+        )
+        self.recipe = dict(
+            source_ids=["raw"],
+            feature_id="line",
+            points=[[10.0, 1.0], [9.0, 0.0], [8.0, -1.0]],
+            max_step_metres=1000,
+        )
+        self.store()
+
+    def store(self):
+        self.db.execute(
+            "INSERT INTO atlas.construction_records(id,method,arguments,basis) "
+            "VALUES ('trace','geodesic_trace',%s,'Chosen points') "
+            "ON CONFLICT(id) DO UPDATE SET arguments=EXCLUDED.arguments",
+            (Jsonb(self.recipe),),
+        )
+
+    def build(self):
+        return run_import(lambda: nullcontext(self.db), "trace")
+
+    def row(self):
+        return self.db.execute(
+            "SELECT geometry,construction_id FROM atlas.source_features WHERE id='line'"
+        ).fetchone()
+
+    def test_repeat_and_edit_preserve_source_and_rule_links(self):
+        first = self.build()
+        before = self.row()
+        self.assertEqual(before[0]["coordinates"][0], [10.0, 1.0])
+        self.assertEqual(self.build(), first)
+        self.assertEqual(self.row(), before)
+        self.db.execute(
+            "INSERT INTO atlas.geographic_levels VALUES ('world',NULL),('continent','world')"
+        )
+        self.db.execute(
+            "INSERT INTO atlas.geographic_entities(id,name,level_id,parent_id,physical_class) VALUES (0,'World','world',NULL,'mixed'),(2,'Asia','continent',0,'mixed')"
+        )
+        self.db.execute(
+            "INSERT INTO atlas.geographic_rules VALUES ('rule',0,'divide_area','land','cell',false,'Selected divide')"
+        )
+        self.db.execute(
+            "INSERT INTO atlas.geographic_rule_features VALUES ('rule','line','boundary_line')"
+        )
+        self.recipe["points"] = [[12.0, 1.0], [11.0, 0.0], [10.0, -1.0]]
+        self.store()
+        self.build()
+        geometry, construction_id = self.row()
+        self.assertEqual(geometry["coordinates"][0], [12.0, 1.0])
+        self.assertEqual(construction_id, "trace")
+        self.assertEqual(
+            self.db.execute(
+                "SELECT source_id FROM atlas.construction_sources WHERE construction_id='trace'"
+            ).fetchall(),
+            [("raw",)],
+        )
+        self.assertEqual(
+            self.db.execute(
+                "SELECT feature_id FROM atlas.geographic_rule_features"
+            ).fetchone()[0],
+            "line",
+        )
+
+    def test_bad_source_preserves_previous_geometry(self):
+        self.build()
+        before = self.row()
+        self.recipe["source_ids"] = ["missing"]
+        with (
+            self.assertRaises(psycopg.errors.ForeignKeyViolation),
+            self.db.transaction(),
+        ):
+            self.store()
+        self.assertEqual(self.row(), before)
+
+    def test_duplicate_source_ids_preserve_previous_geometry(self):
+        self.build()
+        before = self.row()
+        self.recipe["source_ids"] = ["raw", "raw"]
+        self.store()
+
+        with self.assertRaisesRegex(ValueError, "trace sources must be nonempty and distinct"):
+            self.build()
+
+        self.assertEqual(self.row(), before)
+
+    def test_invalid_points_preserve_previous_geometry(self):
+        self.build()
+        before = self.row()
+        self.recipe["points"] = [[0, 0], [0, 0]]
+        self.store()
+        with self.assertRaises(ValueError):
+            self.build()
+        self.assertEqual(self.row(), before)
+
+    def test_description_does_not_change_geometry(self):
+        self.build()
+        before = self.row()
+        self.db.execute(
+            "UPDATE atlas.construction_records SET basis=%s WHERE id='trace'",
+            ("Chosen points from the Figure 1 caption",),
+        )
+        self.build()
+        self.assertEqual(self.row(), before)

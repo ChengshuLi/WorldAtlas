@@ -1,0 +1,228 @@
+"""Freeze working geographic decisions in one short, read-only transaction."""
+
+import json
+from collections.abc import Collection, Iterable
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import LiteralString, cast
+
+from psycopg import Connection
+
+from worldatlas.geodesy.geojson import validate_geometry
+from worldatlas.map_build.division.contracts import (
+    CompiledDivision,
+    RuleIndex,
+    selected_parents,
+)
+from worldatlas.map_build.inputs.selection_types import (
+    BuildSelection,
+    ConstructionRecord,
+    FeatureReference,
+    GeographicFeature,
+    GeographicSelection,
+    SourceAsset,
+)
+from worldatlas.shared.files import read_json
+
+HERE = Path(__file__).resolve().parent
+
+QUERY = HERE / "geography.sql"
+
+
+def validate_map_code_bindings(geography: GeographicSelection) -> None:
+    """Check the mappings between map codes and (entity, land or water) pairs.
+
+    Args:
+        geography: Geographic entities and their code bindings.
+
+    Raises:
+        ValueError: A code or (entity, physical class) pair is invalid or duplicated.
+    """
+    entities = {entity["id"]: entity for entity in geography["entities"]}
+    codes, pairs = set(), set()
+    for binding in geography["category_bindings"]:
+        code = binding.get("code")
+        entity_id = binding.get("entity_id")
+        physical_class = binding.get("physical_class")
+        if type(code) is not int or not 0 < code < 2**32:
+            raise ValueError(
+                f"map code {code!r} must be an integer from 1 to {2**32 - 1}"
+            )
+        if type(entity_id) is not int or entity_id == 0 or entity_id not in entities:
+            raise ValueError(
+                f"map code {code} refers to invalid entity ID {entity_id!r}"
+            )
+        if physical_class not in ("land", "water"):
+            raise ValueError(
+                f"map code {code} has invalid physical class {physical_class!r}"
+            )
+        if code in codes:
+            raise ValueError(f"map code {code} is used twice")
+        entity = entities[entity_id]
+        pair = (entity_id, physical_class)
+        if pair in pairs:
+            raise ValueError(f"{entity['name']} has two {physical_class} map codes")
+        if entity["physical_class"] not in ("mixed", physical_class):
+            raise ValueError(
+                f"map code {code} assigns {physical_class} to {entity['name']}, "
+                f"whose physical class is {entity['physical_class']}"
+            )
+        codes.add(code)
+        pairs.add(pair)
+
+
+def read_selection(
+    database: Connection,
+    *,
+    raw_sources: Iterable[str] = (),
+    parents: list[int] | None = None,
+) -> BuildSelection:
+    """Read the working build inputs from one consistent database snapshot.
+
+    Args:
+        database: Open PostgreSQL connection for a read-only transaction.
+        raw_sources: Catalog IDs for the coastline and inland-water files selected
+            in the build config.
+        parents: Parent IDs to load with their ancestors, or None for all
+            divisions.
+
+    Returns:
+        Selection dictionary with geographic rules, coordinates, construction
+        records and source catalog entries.
+
+    Raises:
+        ValueError: A requested parent or raw source record is missing.
+    """
+    selected_at = datetime.now(timezone.utc).isoformat()
+    with database.transaction():
+        database.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY")
+        if parents is not None:
+            found = database.execute(
+                """
+                WITH RECURSIVE required AS (
+                  SELECT id,parent_id FROM atlas.geographic_entities WHERE id=ANY(%s)
+                  UNION SELECT e.id,e.parent_id FROM atlas.geographic_entities e
+                    JOIN required r ON e.id=r.parent_id
+                ) SELECT id FROM required
+            """,
+                (parents,),
+            ).fetchall()
+            ancestors = {r[0] for r in found}
+            if set(parents) - ancestors:
+                raise ValueError("requested parent does not exist")
+            parents = sorted(ancestors)
+        # The query returns one row with one JSON text column. It includes rules
+        # for the requested parents and their ancestors, or all rules if parents
+        # is None. The object contains lists of levels, entities, map codes, rules
+        # and their links, features (ID and construction ID), and source references.
+        # Feature coordinates are fetched separately below.
+        result_row = database.execute(
+            cast(LiteralString, QUERY.read_text()), (parents, parents)
+        ).fetchone()
+        assert result_row is not None
+        data: GeographicSelection[FeatureReference] = json.loads(result_row[0])
+        feature_refs = {feature["id"]: feature for feature in data["features"]}
+        features: list[GeographicFeature] = []
+        with database.cursor(name="selected_features") as cursor:
+            cursor.execute(
+                "SELECT id,geometry::text FROM atlas.source_features "
+                "WHERE id=ANY(%s) ORDER BY id",
+                (sorted(feature_refs),),
+            )
+            for feature_id, geometry in cursor:
+                features.append(
+                    {**feature_refs[feature_id], "geometry": json.loads(geometry)}
+                )
+
+        # data["sources"] names the files behind the saved geometry and rule
+        # citations. Keep their catalog rows so we can trace those records.
+        # The physical stage may download the coastline and inland-water sources
+        # listed in raw_sources. Save the catalog rows for both groups here.
+        references = set(raw_sources) | {
+            source["source_id"] for source in data["sources"]
+        }
+        construction_ids = {feature["construction_id"] for feature in features}
+        rows = database.execute(
+            "SELECT (to_jsonb(a)-'created_at'-'id') || jsonb_build_object('source_id',a.id) "
+            "FROM atlas.source_assets a WHERE id=ANY(%s) ORDER BY id",
+            (sorted(references),),
+        ).fetchall()
+        source_assets: list[SourceAsset] = [row[0] for row in rows]
+        if missing := references - {source["source_id"] for source in source_assets}:
+            raise ValueError("selected raw source is missing: " + str(sorted(missing)))
+        rows = database.execute(
+            "SELECT id,method,arguments,basis FROM atlas.construction_records "
+            "WHERE id=ANY(%s) ORDER BY id",
+            (sorted(construction_ids),),
+        ).fetchall()
+        # The source_features foreign key guarantees these recipes in this snapshot.
+        constructions: list[ConstructionRecord] = [
+            {"id": ident, "method": method, "arguments": arguments, "basis": basis}
+            for ident, method, arguments, basis in rows
+        ]
+    return {
+        "schema": "worldatlas-input-selection-v4",
+        "selected_at": selected_at,
+        "geography": {**data, "features": features},
+        "construction_records": constructions,
+        "raw_sources": source_assets,
+    }
+
+
+def prepare_geography(
+    domain: GeographicSelection,
+    requested: Iterable[int] | None = None,
+    *,
+    configured_settings: Collection[str],
+) -> dict[int, CompiledDivision]:
+    """Compile selected divisions and check their geometry, codes and settings.
+
+    Args:
+        domain: Geographic part of a frozen selection.
+        requested: Parent IDs to divide, or None for all saved divisions.
+        configured_settings: Names of settings present in the validated build config.
+
+    Returns:
+        Compiled divisions keyed by parent ID, with ancestors before descendants.
+
+    Raises:
+        ValueError: The selection is invalid or a selected rule needs a missing setting.
+    """
+    if domain.get("schema") != "worldatlas-geographic-division-v2":
+        raise ValueError(
+            "unsupported geographic selection; restore the release's captured code"
+        )
+    for feature in domain["features"]:
+        validate_geometry(feature["geometry"])
+    index = RuleIndex(domain)
+    compiled = {
+        parent: index.compile(parent) for parent in selected_parents(domain, requested)
+    }
+    validate_map_code_bindings(domain)
+    if "coastal_band_metres" not in configured_settings and any(
+        rule["operation"] == "nearest_coastal_water"
+        for division in compiled.values()
+        for rule in division.rules
+    ):
+        raise ValueError("nearest_coastal_water requires coastal_band_metres")
+    return compiled
+
+
+def read_saved_build_selection(selection_path: Path | str) -> BuildSelection:
+    """Read a frozen map build selection from disk.
+
+    Args:
+        selection_path: Path to the selection JSON file.
+
+    Returns:
+        Saved geography, construction records, and raw source catalog entries.
+
+    Raises:
+        ValueError: The file has an incompatible schema.
+    """
+    saved_selection: BuildSelection = read_json(selection_path)
+    if saved_selection.get("schema") != "worldatlas-input-selection-v4":
+        raise ValueError(
+            "this selection requires its release archive's captured implementation"
+        )
+    return saved_selection
