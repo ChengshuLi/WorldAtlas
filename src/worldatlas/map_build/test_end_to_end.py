@@ -204,7 +204,8 @@ class EndToEndTests(unittest.TestCase):
                 cfg = write_json(
                     raw / "build.json",
                     dict(
-                        schema="worldatlas-end-to-end-pipeline-v3",
+                        schema="worldatlas-end-to-end-pipeline-v4",
+                        display_colors=dict(water_rgb=[60, 98, 120], unbuilt_land_rgb=[227, 222, 210]),
                         selection_notes="Input-contract fixture",
                         grid=grid,
                         coastal_band_metres=22224,
@@ -322,6 +323,32 @@ class EndToEndTests(unittest.TestCase):
                     text=True,
                 )
                 self.assertEqual(json.loads(resumed.stdout), report)
+                saved_modes = read_json(root / "run/map-modes.json")
+                self.assertEqual(len(saved_modes), 1)
+                expected_colors = {
+                    entry["id"]: "#" + bytes(entry["color"]).hex().upper()
+                    for entry in saved_modes[0]["legend"]
+                }
+                with psycopg.connect(url) as db:
+                    colors_query = "SELECT id,color_rgb FROM atlas.geographic_entities WHERE id<>0"
+                    self.assertEqual(dict(db.execute(colors_query).fetchall()), {
+                        81: "#FF8000", 42: "#0080FF"
+                    })
+                self.assertNotIn("color_rgb", frozen["geography"]["entities"][0])
+                with patch.dict(os.environ, {"NEON_DATABASE_URL": url}):
+                    live = Pipeline(cfg, root / "live", work_dir=root, reuse_from=root / "run")
+                    with patch("worldatlas.map_build.build.save_generated_colors",
+                               side_effect=OSError("fixture database unavailable")):
+                        with self.assertRaisesRegex(OSError, "fixture database unavailable"):
+                            live.run()
+                    receipt = live.out / "checkpoints/color-map/complete.json"
+                    original_receipt = receipt.read_bytes()
+                    self.assertFalse((live.out / "report.json").exists())
+                    completed = Pipeline(cfg, live.out, work_dir=root, resume=True).run()
+                    self.assertEqual(receipt.read_bytes(), original_receipt)
+                self.assertEqual(completed["map_modes"]["sha256"], report["map_modes"]["sha256"])
+                with psycopg.connect(url) as db:
+                    self.assertEqual(dict(db.execute(colors_query).fetchall()), expected_colors)
                 reused = Pipeline(
                     cfg,
                     root / "reused",

@@ -1,6 +1,8 @@
 """Verify edge adjacency, color choices, and the lookup for each actual level."""
 
+from itertools import combinations
 from pathlib import Path
+from random import Random
 from tempfile import TemporaryDirectory
 from unittest import TestCase
 from unittest.mock import patch
@@ -10,17 +12,14 @@ import numpy as np
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.test_support import selection
-from worldatlas.map_releases.colors import (
+from worldatlas.map_build.display.colors import (
     LandColorPicker,
     assign_land_colors,
     rgb_to_oklab,
     sample_muted_land_colors,
 )
-from worldatlas.map_releases.modes import (
-    build_map_modes,
-    overview_neighbor_pairs,
-    scan_color_neighbors,
-)
+from worldatlas.map_build.display.modes import build_map_modes
+from worldatlas.map_build.display.neighbors import runs_within_distance, scan_color_neighbors
 
 FILL_COLORS = (60, 98, 120), (227, 222, 210)
 RESERVED = set(FILL_COLORS)
@@ -29,7 +28,7 @@ RESERVED = set(FILL_COLORS)
 class PaletteTests(TestCase):
     def test_choice_maximizes_the_separation_from_its_closest_color(self):
         neighbor = (201, 111, 98)
-        picked = LandColorPicker(RESERVED, ())
+        picked = LandColorPicker(RESERVED)
         chosen = picked.choose_muted_land_color({neighbor})
         candidates, lab = sample_muted_land_colors()
         possible = [i for i, color in enumerate(candidates) if color not in (neighbor, *FILL_COLORS)]
@@ -39,8 +38,8 @@ class PaletteTests(TestCase):
 
     def test_view_variety_keeps_at_least_85_percent_of_nearby_contrast(self):
         water = FILL_COLORS[0]
-        original = LandColorPicker(RESERVED, ()).choose_muted_land_color({water})
-        picked = LandColorPicker(RESERVED, (original,))
+        picked = LandColorPicker(RESERVED)
+        original = picked.choose_muted_land_color({water})
         chosen = picked.choose_muted_land_color({water})
 
         candidates, lab = sample_muted_land_colors()
@@ -55,27 +54,11 @@ class PaletteTests(TestCase):
 
     def test_distant_entities_can_reuse_colors_after_the_palette_is_used(self):
         swatches = ((80, 140, 60), (210, 150, 100), (200, 100, 110))
-        with patch("worldatlas.map_releases.colors.sample_muted_land_colors",
+        with patch("worldatlas.map_build.display.colors.sample_muted_land_colors",
                    return_value=(swatches, rgb_to_oklab(swatches))):
-            picked = LandColorPicker({swatches[0]}, ())
+            picked = LandColorPicker({swatches[0]})
             first, second, third = (picked.choose_muted_land_color(set()) for _ in range(3))
         self.assertEqual((first, second, third), (swatches[1], swatches[2], swatches[1]))
-
-    def test_coloring_preserves_authored_colors_and_rejects_conflicting_borders(self):
-        fixed = (201, 111, 98)
-        graph = {1: {2}, 2: {1}, 3: set()}
-        colors = assign_land_colors(graph, set(), {1: fixed}, FILL_COLORS)
-        self.assertEqual(colors[1], fixed)
-        self.assertNotEqual(colors[2], fixed)
-        self.assertEqual(len(set(colors.values())), 3)
-        with self.assertRaisesRegex(ValueError, "entities 1 and 2 share"):
-            assign_land_colors(graph, set(), {1: fixed, 2: fixed}, FILL_COLORS)
-
-    def test_authored_colors_cannot_use_the_two_reserved_values(self):
-        for fill in FILL_COLORS:
-            with self.subTest(fill=fill):
-                with self.assertRaisesRegex(ValueError, "land entity 1 uses reserved"):
-                    assign_land_colors({1: set()}, set(), {1: fill}, FILL_COLORS)
 
     def test_palette_has_richer_saturation_and_the_fills_are_outside_it(self):
         samples, lab = sample_muted_land_colors()
@@ -87,21 +70,69 @@ class PaletteTests(TestCase):
     def test_many_adjacent_entities_use_distinct_generated_colors(self):
         ids = set(range(10))
         graph = {entity: ids - {entity} for entity in ids}
-        colors = assign_land_colors(graph, set(), {}, FILL_COLORS)
+        colors = assign_land_colors(graph, set(), FILL_COLORS)
         self.assertEqual(len(set(colors.values())), len(graph))
         self.assertFalse(set(colors.values()).intersection(FILL_COLORS))
         reverse = dict(reversed(list(graph.items())))
-        self.assertEqual(assign_land_colors(reverse, set(), {}, FILL_COLORS), colors)
+        self.assertEqual(assign_land_colors(reverse, set(), FILL_COLORS), colors)
 
     def test_an_exhausted_palette_reports_the_conflict(self):
         color = (201, 111, 98)
-        with patch("worldatlas.map_releases.colors.sample_muted_land_colors",
+        with patch("worldatlas.map_build.display.colors.sample_muted_land_colors",
                    return_value=((color,), rgb_to_oklab([color]))):
             with self.assertRaisesRegex(ValueError, "ran out of distinct muted land colors"):
-                LandColorPicker(RESERVED, ()).choose_muted_land_color({color})
+                LandColorPicker(RESERVED).choose_muted_land_color({color})
 
 
 class ModeTests(TestCase):
+    def test_run_search_rejects_close_bounds_without_close_cells(self):
+        first = np.array([[8, 0, 1], [10, 0, 1]])
+        second = np.array([[0, 0, 1], [7, 5, 6], [12, 5, 6], [20, 0, 1]])
+        self.assertFalse(runs_within_distance(first, second, 360, 3, 9))
+        self.assertFalse(runs_within_distance(first, second[1:2], 360, 3, 9))
+        second[2, 1:] = [2, 3]
+        self.assertTrue(runs_within_distance(first, second, 360, 3, 9))
+
+    def test_tiled_scan_matches_all_cell_pairs(self):
+        rng = Random(315)
+        land = (7, 21, 0xFFFFFFFF)
+        for trial in range(32):
+            width = rng.randrange(2, 22)
+            height = rng.randrange(1, width // 2 + 1)
+            degrees = rng.choice((2, 30, 45, 90, 120, 180))
+            grid = Grid(width, height, 360 / width)
+            dense = [[rng.choice((2, 3, *land)) for _ in range(width)] for _ in range(height)]
+            rows = [(y, [(x, x + 1, code) for x, code in enumerate(codes)])
+                    for y, codes in enumerate(dense)]
+            with self.subTest(width=width, height=height, degrees=degrees, trial=trial):
+                with TemporaryDirectory() as folder:
+                    directory = Path(folder) / "grid"
+                    write_layer(directory, grid, rows)
+                    actual = scan_color_neighbors(directory, grid, land, distance_degrees=degrees)
+                cells = [(y, x, code if code in land else 0)
+                         for y, codes in enumerate(dense) for x, code in enumerate(codes)]
+                expected = set()
+                for (y, x, code), (yy, xx, other) in combinations(cells, 2):
+                    dx = min(abs(x - xx), width - abs(x - xx))
+                    if code != other and ((y - yy) ** 2 + dx ** 2) * 360**2 <= (width * degrees)**2:
+                        expected.add(tuple(sorted((code, other))))
+                self.assertEqual(actual, (
+                    {(first, second) for first, second in expected if first},
+                    {second for first, second in expected if not first},
+                ))
+
+    def test_exact_cutoff_and_diagonals(self):
+        grid = Grid(360, 12, 1.0)
+        with TemporaryDirectory() as folder:
+            directory = Path(folder) / "grid"
+            write_layer(directory, grid, [
+                (1, [(0, 1, 10), (358, 359, 20)]),
+                (3, [(0, 1, 30), (2, 3, 40)]),
+            ])
+            pairs, water = scan_color_neighbors(directory, grid, (10, 20, 30, 40))
+        self.assertEqual(pairs, {(10, 20), (10, 30), (30, 40)})
+        self.assertEqual(water, {10, 20, 30, 40})
+
     def test_shared_land_and_water_edges_include_the_dateline(self):
         grid = Grid(8, 4, 45)
         with TemporaryDirectory() as folder:
@@ -114,19 +145,19 @@ class ModeTests(TestCase):
             ])
             self.assertEqual(scan_color_neighbors(path, grid, []), (set(), set()))
             self.assertEqual(
-                scan_color_neighbors(path, grid, (10, 20, 30, 0xFFFFFFFF)),
+                scan_color_neighbors(path, grid, (10, 20, 30, 0xFFFFFFFF), distance_degrees=45),
                 ({(10, 20), (10, 30), (10, 0xFFFFFFFF)}, {20, 30, 0xFFFFFFFF}),
             )
 
     def test_neighbors_across_water_follow_the_same_color_rule_as_shared_edges(self):
-        grid = Grid(1440, 9, 0.25)
+        grid = Grid(1440, 20, 0.25)
         geography = selection()["geography"]
         geography["levels"].append(dict(id="continent", parent_id="world"))
         codes = (10, 20, 30)
         for entity_id in codes:
             geography["entities"].append(dict(
                 id=entity_id, level_id="continent", parent_id=0, name=str(entity_id),
-                color_rgb="#C96F62", physical_class="land",
+                physical_class="land",
             ))
             geography["category_bindings"].append(dict(
                 code=entity_id, entity_id=entity_id, physical_class="land",
@@ -134,8 +165,8 @@ class ModeTests(TestCase):
         with TemporaryDirectory() as folder:
             path = Path(folder) / "grid"
             report = write_layer(path, grid, [
-                (3, [(0, 2, 10), (2, 4, 9), (4, 6, 20)]),
-                (8, [(0, 2, 10), (2, 4, 30)]),
+                (2, [(4, 5, 10), (5, 6, 9), (6, 7, 20)]),
+                (15, [(0, 2, 10), (2, 4, 30)]),
             ])
             pairs, _ = scan_color_neighbors(path, grid, codes)
             self.assertEqual(pairs, {(10, 30), (10, 20)})
@@ -144,35 +175,12 @@ class ModeTests(TestCase):
                 return build_map_modes(path, grid, geography, geography["category_bindings"],
                                        report["counts"], FILL_COLORS)
 
-            by_id = {entity["id"]: entity for entity in geography["entities"]}
-            by_id[20]["color_rgb"] = by_id[30]["color_rgb"] = None
-            for neighbor_id in (20, 30):
-                with self.subTest(neighbor_id=neighbor_id):
-                    by_id[neighbor_id]["color_rgb"] = by_id[10]["color_rgb"]
-                    with self.assertRaisesRegex(
-                        ValueError, f"neighboring land entities 10 and {neighbor_id}"
-                    ):
-                        build_modes()
-                    by_id[neighbor_id]["color_rgb"] = None
             colors = {entry["id"]: entry["color"] for entry in build_modes()[0]["legend"]}
             self.assertNotEqual(colors[10], colors[20])
             self.assertNotEqual(colors[10], colors[30])
 
-    def test_overview_pairs_cross_water_and_wrap_only_horizontally(self):
-        overview = np.array([
-            [10, 0, 0, 0, 0, 0, 20, 0],
-            [0,  0, 0, 30, 0, 0, 0,  0],
-            [0,  0, 0, 0, 0, 0, 0,  0],
-            [0,  0, 0, 40, 0, 0, 0,  0],
-            [0,  0, 0, 0, 0, 0, 0,  0],
-            [50, 0, 0, 0, 0, 0, 0,  0],
-        ], dtype=np.uint32)
-        self.assertEqual(overview_neighbor_pairs(overview, radius=2), {
-            (10 << 32) | 20, (30 << 32) | 40, 10, 20, 30, 40, 50,
-        })
-
     def test_modes_score_local_water_and_skip_unassigned_land(self):
-        grid = Grid(24, 12, 15)
+        grid = Grid(360, 12, 1.0)
         geography = selection()["geography"]
         geography["levels"] += [
             dict(id="continent", parent_id="world"),
@@ -185,7 +193,7 @@ class ModeTests(TestCase):
         ):
             geography["entities"].append(dict(
                 id=entity_id, parent_id=parent, level_id=level, name=str(entity_id),
-                color_rgb=None, physical_class=kind,
+                physical_class=kind,
             ))
         bindings = [
             dict(code=10, entity_id=1, physical_class="land"),
@@ -195,7 +203,7 @@ class ModeTests(TestCase):
         ]
         water, gray = FILL_COLORS
         land_row = [(0, 4, 10), (4, 8, 30), (8, 12, 10),
-                    (12, 16, 20), (16, 20, 40), (20, 24, 10)]
+                    (12, 16, 20), (16, 20, 40), (20, 360, 10)]
         with TemporaryDirectory() as folder:
             path = Path(folder) / "grid"
             report = write_layer(path, grid, [(y, land_row) for y in range(grid.height)])
@@ -205,7 +213,7 @@ class ModeTests(TestCase):
                     modes = build_map_modes(path, grid, geography, bindings, report["counts"], FILL_COLORS)
                     colors = {row["id"]: tuple(row["color"]) for row in modes[1]["legend"]}
                     # Land entity 2 sees water, including when it owns the water.
-                    picked = LandColorPicker({water, gray}, ())
+                    picked = LandColorPicker({water, gray})
                     self.assertEqual(colors[2], picked.choose_muted_land_color({water}))
                     # Entity 3 sees only land without a subcontinent assignment.
                     self.assertEqual(colors[3], picked.choose_muted_land_color(set()))
@@ -220,17 +228,17 @@ class ModeTests(TestCase):
             dict(id="continent", parent_id="world"),
             dict(id="province", parent_id="area"),
         ]
-        for entity_id, level_id, parent_id, name, color, kind in [
-            (1, "continent", 0, "West", "#C96F62", "mixed"),
-            (2, "continent", 0, "East", "#D6A34A", "mixed"),
-            (4, "region", 1, "West region", "#559987", "mixed"),
-            (8, "region", 2, "East region", None, "land"),
-            (9, "area", 4, "Western coast", None, "land"),
-            (10, "province", 9, "Unbuilt province", None, "land"),
+        for entity_id, level_id, parent_id, name, kind in [
+            (1, "continent", 0, "West", "mixed"),
+            (2, "continent", 0, "East", "mixed"),
+            (4, "region", 1, "West region", "mixed"),
+            (8, "region", 2, "East region", "land"),
+            (9, "area", 4, "Western coast", "land"),
+            (10, "province", 9, "Unbuilt province", "land"),
         ]:
             geography["entities"].append(dict(
                 id=entity_id, level_id=level_id, parent_id=parent_id, name=name,
-                color_rgb=color, physical_class=kind,
+                physical_class=kind,
             ))
         bindings = [
             dict(code=code, entity_id=entity_id, physical_class=kind)

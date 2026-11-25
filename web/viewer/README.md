@@ -12,7 +12,7 @@ On a touchscreen, tap to inspect a cell, drag with one finger to pan, and pinch 
 
 ## How it works
 
-Release packaging generates one `config.json` with the map version, grid dimensions, file paths, checksums, category bindings, and all geographic modes. The checked-in viewer config defines the fixed water and unbuilt land colors. Packaging copies those colors into the release config.
+Release packaging generates one `config.json` with the map version, grid dimensions, file paths, checksums, category bindings, and all geographic modes. It gets the legend colors from the completed map build and the water and unbuilt land colors from that build's saved configuration.
 
 The displayed combined SHA-256 is calculated over the decompressed little-endian u32 row-offset bytes followed immediately by the decompressed little-endian u32 run bytes. The client verifies the row and run hashes before use.
 

@@ -15,7 +15,7 @@ WITH selected_rules AS (
 SELECT jsonb_build_object(
   'schema','worldatlas-geographic-division-v2',
   'levels',COALESCE((SELECT jsonb_agg(to_jsonb(l) ORDER BY id) FROM atlas.geographic_levels l),'[]'::jsonb),
-  'entities',COALESCE((SELECT jsonb_agg(to_jsonb(e) ORDER BY id) FROM selected_entities e),'[]'::jsonb),
+  'entities',COALESCE((SELECT jsonb_agg(to_jsonb(e)-'color_rgb' ORDER BY id) FROM selected_entities e),'[]'::jsonb),
   'category_bindings',COALESCE((SELECT jsonb_agg((to_jsonb(b)-'id')||jsonb_build_object('code',id)
       ORDER BY id) FROM atlas.map_category_bindings b WHERE entity_id IN (SELECT id FROM selected_entities)),'[]'::jsonb),
   'rules',COALESCE((SELECT jsonb_agg(to_jsonb(r) ORDER BY id) FROM selected_rules r),'[]'::jsonb),

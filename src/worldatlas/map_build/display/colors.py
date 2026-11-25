@@ -91,14 +91,11 @@ def sample_muted_land_colors() -> tuple[tuple[RGB, ...], np.ndarray]:
 class LandColorPicker:
     """Choose colors for one map view and track the land colors it uses."""
 
-    def __init__(
-        self, reserved_colors: set[RGB], authored_colors: Iterable[RGB]
-    ) -> None:
-        """Prepare the candidate colors and account for saved land colors.
+    def __init__(self, reserved_colors: set[RGB]) -> None:
+        """Prepare the candidate colors for a fresh view.
 
         Args:
             reserved_colors: Exact RGBs for water and unassigned land.
-            authored_colors: Land colors saved in Neon for this view's level.
         """
         self._candidate_colors, self._candidate_oklab_coordinates = (
             sample_muted_land_colors()
@@ -110,13 +107,8 @@ class LandColorPicker:
             [color not in reserved_colors for color in self._candidate_colors],
             dtype=bool,
         )
-        self._used_land_colors = set(authored_colors)
+        self._used_land_colors: set[RGB] = set()
         self._closest_view_distance = np.full(len(self._candidate_colors), np.inf)
-        if self._used_land_colors:
-            used_colors = cKDTree(rgb_to_oklab(sorted(self._used_land_colors)))
-            self._closest_view_distance, _ = used_colors.query(
-                self._candidate_oklab_coordinates
-            )
 
     def choose_muted_land_color(self, neighbor_colors: set[RGB]) -> RGB:
         """Pick a land color and record it for future choices in this view.
@@ -182,57 +174,30 @@ class LandColorPicker:
 def assign_land_colors(
     land_neighbors_by_entity: dict[int, set[int]],
     land_near_water: set[int],
-    authored_colors: dict[int, RGB],
     fill_colors: tuple[RGB, RGB],
 ) -> dict[int, RGB]:
-    """Preserve saved land colors and choose colors for the other entities.
+    """Choose land colors for every displayed entity at one level.
 
     Args:
         land_neighbors_by_entity: Every entity with land cells at this level,
-            mapped to the IDs of other land entities that share a cell edge or
-            appear close on the overview map (within about two degrees at the
-            usual world resolution, as measured by ``scan_color_neighbors``).
+            mapped to the IDs of its nearby land entities.
             For example, {10: {20}, 20: {10}, 30: set()} means 10 and 20 are
             neighbors, and 30 has no land neighbors.
-        land_near_water: IDs of land entities that share a cell edge with water
-            or are within the overview map's proximity radius of water.
-        authored_colors: Land entity IDs mapped to saved Neon color overrides,
-            expressed as 8-bit sRGB triples. For example, {10: (185, 90, 70)}
-            keeps that color for entity 10. Every other entity gets a generated
-            color.
+        land_near_water: IDs of land entities that compare against water blue.
         fill_colors: Two 8-bit sRGB triples in (water, unassigned land) order.
 
     Returns:
         A dictionary mapping each land entity ID to its 8-bit sRGB triple.
 
     Raises:
-        ValueError: An authored color is reserved, neighboring authored colors
-            conflict, or no generated color is available.
+        ValueError: A land entity has no available generated color.
     """
     water_color, unassigned_land_color = fill_colors
-    reserved_colors = {water_color, unassigned_land_color}
-    land_colors = authored_colors.copy()
-    for entity_id, color in authored_colors.items():
-        if color in reserved_colors:
-            raise ValueError(f"land entity {entity_id} uses reserved color {color}")
-        for neighbor_id in land_neighbors_by_entity[entity_id]:
-            if neighbor_id > entity_id and authored_colors.get(neighbor_id) == color:
-                raise ValueError(
-                    f"neighboring land entities {entity_id} and {neighbor_id} "
-                    f"share {color}"
-                )
-
+    land_colors: dict[int, RGB] = {}
     nearby_colors_by_entity = {
-        entity_id: {
-            authored_colors[neighbor_id]
-            for neighbor_id in neighbor_ids
-            if neighbor_id in authored_colors
-        }
-        for entity_id, neighbor_ids in land_neighbors_by_entity.items()
-        if entity_id not in authored_colors
+        entity_id: {water_color} if entity_id in land_near_water else set()
+        for entity_id in land_neighbors_by_entity
     }
-    for entity_id in land_near_water.intersection(nearby_colors_by_entity):
-        nearby_colors_by_entity[entity_id].add(water_color)
     # The heap takes the smallest tuple first. Negative counts put entities
     # with more distinct nearby colors first, then those with more land
     # neighbors. Entity ID breaks any remaining tie.
@@ -241,7 +206,7 @@ def assign_land_colors(
         for entity_id, nearby_colors in nearby_colors_by_entity.items()
     ]
     heapq.heapify(color_queue)
-    picker = LandColorPicker(reserved_colors, land_colors.values())
+    picker = LandColorPicker({water_color, unassigned_land_color})
     while color_queue:
         _, _, entity_id = heapq.heappop(color_queue)
         # An updated priority comes out first. Skip the older entry once colored.

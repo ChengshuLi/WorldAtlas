@@ -194,7 +194,8 @@ class Fixture(unittest.TestCase):
         self.inputs = self.root / "inputs"
         self.inputs.mkdir()
         self.cfg = {
-            "schema": "worldatlas-end-to-end-pipeline-v3",
+            "schema": "worldatlas-end-to-end-pipeline-v4",
+            "display_colors": {"water_rgb": [60, 98, 120], "unbuilt_land_rgb": [227, 222, 210]},
             "selection_notes": "Synthetic processor integration fixture",
             "sources": {
                 "land_config": {"land": []},

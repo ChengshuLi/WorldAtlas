@@ -34,7 +34,6 @@ class BindingTests(unittest.TestCase):
                 parent_id=0,
                 level_id="continent",
                 physical_class="mixed",
-                color_rgb="#123456",
             )
         )
         self.geography["category_bindings"] = [

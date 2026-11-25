@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any, NotRequired, TypedDict
 
 from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.display.modes import save_generated_colors, write_map_modes
 from worldatlas.map_build.division.encoding import encode
 from worldatlas.map_build.division.hierarchy import HierarchyDivision
 from worldatlas.map_build.execution.control import install_build_stop_handlers
@@ -49,7 +50,7 @@ from worldatlas.shared.files import (
     write_json,
 )
 
-RUN_IDENTITY_SCHEMA = "worldatlas-end-to-end-run-identity-v2"
+RUN_IDENTITY_SCHEMA = "worldatlas-end-to-end-run-identity-v3"
 
 
 class PhysicalReuse(TypedDict):
@@ -71,6 +72,7 @@ class RunIdentity(TypedDict):
     reuse_from: str | None
     recompute_division: bool
     input_selection_sha256: str
+    save_colors_to_neon: bool
     physical_reuse: NotRequired[PhysicalReuse]
 
 
@@ -189,6 +191,11 @@ class Pipeline:
         self._prepare_workspace(output, work_dir)
         saved_identity = self._resolve_run_options(
             divide, reuse_from, recompute_division
+        )
+        self.save_colors_to_neon = (
+            saved_identity["save_colors_to_neon"]
+            if saved_identity is not None
+            else selection is None
         )
 
         self.selection = self._load_selection(
@@ -345,6 +352,7 @@ class Pipeline:
             "divide": self.requested_parents,
             "reuse_from": str(self.reuse_from) if self.reuse_from is not None else None,
             "recompute_division": self.recompute_division,
+            "save_colors_to_neon": self.save_colors_to_neon,
             "input_selection_sha256": hashlib.sha256(
                 compact_json_bytes(self.selection)
             ).hexdigest(),
@@ -471,8 +479,41 @@ class Pipeline:
         )
         return Path(result["directory"])
 
+    def color_map(self, final: Path) -> Path:
+        """Save the legend and colors for each level of the assembled map.
+
+        Args:
+            final: Directory with the final grid and cell counts.
+
+        Returns:
+            Path to the build's map mode snapshot.
+        """
+        output = self.out / "map-modes.json"
+        return Path(
+            self.checkpoints.run_function(
+                "color-map",
+                "package",
+                partial(
+                    write_map_modes,
+                    final,
+                    self.grid,
+                    self.selection["geography"],
+                    self.cfg["display_colors"],
+                    output,
+                ),
+                timing=self.timing,
+                inputs=[
+                    *self.checkpoints.files.row_streams(final),
+                    self.checkpoints.files.pin(final / "report.json"),
+                    self.checkpoints.files.pin(self.out / "input-selection.json"),
+                    self.checkpoints.files.pin(self.saved_config),
+                ],
+                outputs=[output],
+            )
+        )
+
     def run(self) -> dict[str, Any]:
-        """Run the build through physical grid, ownership, and final encoding.
+        """Build the physical grid, ownership, final map codes and colors.
 
         Write the finished run report or this attempt's failure report, then close.
 
@@ -482,7 +523,7 @@ class Pipeline:
         try:
             if (self.out / "report.json").exists():
                 report = read_json(self.out / "report.json")
-                verify_pins(report["final"].values())
+                verify_pins([*report["final"].values(), report["map_modes"]])
                 self.timing.verify_report(report)
                 return report
             with stage_context(self.cancelled):
@@ -496,6 +537,7 @@ class Pipeline:
                     ownership = self.divide(physical)
                 with self.timing.stage("package"):
                     final = self.package(physical, ownership)
+                    modes = self.color_map(final)
                 with self.timing.stage("verification"):
                     self.checkpoints.files.verify(physical_inputs)
                     if sha256_file(self.saved_config) != self.config_pin["sha256"]:
@@ -510,8 +552,15 @@ class Pipeline:
                             ("report", "report.json"),
                         ]
                     }
+                    modes_pin = self.checkpoints.files.pin(modes)
+                    if self.save_colors_to_neon:
+                        with (
+                            self.timing.measure("verification", "save-colors"),
+                            connect_neon() as database,
+                        ):
+                            save_generated_colors(database, read_json(modes))
             result = {
-                "schema": "worldatlas-end-to-end-report-v2",
+                "schema": "worldatlas-end-to-end-report-v3",
                 "status": "complete",
                 "request": self.config_pin,
                 "runner": pin_file(__file__),
@@ -520,6 +569,7 @@ class Pipeline:
                 "physical_directory": str(physical),
                 "physical_outputs": physical_inputs,
                 "final": final_pins,
+                "map_modes": modes_pin,
             }
             if self.physical_reuse is not None:
                 result["physical_reuse"] = self.physical_reuse

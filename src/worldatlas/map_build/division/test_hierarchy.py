@@ -475,7 +475,7 @@ class HierarchyTests(unittest.TestCase):
     def test_reuse_ignores_display_and_notes_but_tracks_operative_rules(self):
         geo = selection()["geography"]
         geo["entities"].append(
-            dict(id=101, parent_id=0, physical_class="mixed", color_rgb="#112233")
+            dict(id=101, parent_id=0, physical_class="mixed", name="Before")
         )
         geo["rules"].append(
             dict(
@@ -507,7 +507,7 @@ class HierarchyTests(unittest.TestCase):
                 files=files,
             )
             changed = copy.deepcopy(geo)
-            changed["entities"][1]["color_rgb"] = "#998877"
+            changed["entities"][1]["name"] = "After"
             changed["rules"][0]["rationale"] = "Clearer explanation"
             self.assertEqual(
                 parent_division_reuse_inputs(

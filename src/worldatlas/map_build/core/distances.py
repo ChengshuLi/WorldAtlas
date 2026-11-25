@@ -7,6 +7,7 @@ pair of cells. Longitude wraps at the edges of the grid.
 import math
 
 import numpy as np
+from numba.extending import register_jitable
 from numpy.typing import ArrayLike
 
 from worldatlas.geodesy.wgs84 import MIN_RADIUS, geodesic_distances
@@ -21,6 +22,36 @@ DISTANCE_BOUND_ROUNDING_METRES = 0.001
 # Give the chord limit a few dozen rounding steps at its maximum length
 # of 2, covering the trigonometry, coordinate differences and norm.
 CHORD_BOUND_ROUNDING = 32 * math.ulp(2.0)
+
+
+@register_jitable
+def wrapped_column_gap(
+    first_start: int | np.ndarray,
+    first_end: int | np.ndarray,
+    second_start: int | np.ndarray,
+    second_end: int | np.ndarray,
+    width: int,
+) -> int | np.ndarray:
+    """Find the smallest column gap between the cell centers in two runs.
+
+    Args:
+        first_start: Inclusive start column of the first run.
+        first_end: Exclusive end column of the first run.
+        second_start: Inclusive start column of the second run.
+        second_end: Exclusive end column of the second run.
+        width: Number of columns in one full turn. The ends of each run
+            are within that turn. Columns can also be matching signed arrays.
+
+    Returns:
+        The shortest gap in columns, wrapping at the seam. Overlapping runs
+        have a gap of zero. Runs [0, 2) and [7, 8) on an 8-column grid have
+        a gap of one because columns 0 and 7 are next to each other.
+    """
+    second_after_first = second_start - (first_end - 1)
+    first_after_second = first_start - (second_end - 1)
+    direct = np.maximum(0, np.maximum(second_after_first, first_after_second))
+    wrapped = width + np.minimum(second_after_first, first_after_second)
+    return np.minimum(direct, wrapped)
 
 
 def run_pairs_batch(
@@ -87,14 +118,7 @@ def run_pairs_batch(
     lat2 = north - (yy.astype(float) + 0.5) * step
     if abs(lat1) > 90 or np.any(np.abs(lat2) > 90):
         raise ValueError("invalid latitude")
-    # Use the first and last cell in each run. Overlapping runs have zero
-    # direct gap. Going around the seam turns the largest separation into
-    # the shortest wrapped gap.
-    reference_after_query = left - (b - 1)
-    query_after_reference = a - (right - 1)
-    direct_gap = np.maximum(0, np.maximum(reference_after_query, query_after_reference))
-    wrapped_gap = width + np.minimum(reference_after_query, query_after_reference)
-    gap = np.minimum(direct_gap, wrapped_gap)
+    gap = np.asarray(wrapped_column_gap(a, b, left, right, width))
     dl = np.deg2rad(gap * step)
     p1 = math.radians(lat1)
     p2 = np.deg2rad(lat2)

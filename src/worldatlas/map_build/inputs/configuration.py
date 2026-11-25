@@ -19,6 +19,7 @@ from worldatlas.shared.text import NonEmptyText
 from worldatlas.source_assets.pins import ArchiveMember, R2ObjectPin, RemoteFile
 
 type PositiveInt = Annotated[int, Field(gt=0)]
+type ColorChannel = Annotated[int, Field(ge=0, le=255)]
 
 
 class CatalogFile(TypedDict, closed=True):
@@ -131,12 +132,21 @@ class PhysicalControls(TypedDict):
 
 
 @with_config(extra="forbid")
+class DisplayColors(TypedDict):
+    """Set the reserved RGB triples for all map views."""
+
+    water_rgb: tuple[ColorChannel, ColorChannel, ColorChannel]
+    unbuilt_land_rgb: tuple[ColorChannel, ColorChannel, ColorChannel]
+
+
+@with_config(extra="forbid")
 class BuildConfiguration(TypedDict):
     """Describe the editable request for an end-to-end map build."""
 
-    schema: Literal["worldatlas-end-to-end-pipeline-v3"]
+    schema: Literal["worldatlas-end-to-end-pipeline-v4"]
     grid: GridSettings
     sources: BuildSources
+    display_colors: DisplayColors
     selection_notes: NotRequired[NonEmptyText]
     physical_controls: NotRequired[PhysicalControls]
     coastal_band_metres: NotRequired[Annotated[float, Field(ge=0, allow_inf_nan=False)]]

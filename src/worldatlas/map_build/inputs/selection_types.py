@@ -33,14 +33,13 @@ class GeographicLevel(TypedDict):
 
 
 class GeographicEntity(TypedDict):
-    """Record a geographic entity, its actual parent, and its display color."""
+    """Record a geographic entity, its actual parent, and physical class."""
 
     id: int
     name: str
     level_id: str
     parent_id: int | None
     physical_class: EligibleClass
-    color_rgb: str | None
 
 
 class MapCodeBinding(TypedDict):

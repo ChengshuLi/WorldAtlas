@@ -1,6 +1,6 @@
 # Map building
 
-The builder uses raw coastline and inland-water files from R2 to mark each map cell as land or water. It then uses rules from Neon to assign each cell to a geographic entity. The finished map encodes both the owner and the cell type. [Release packaging](../map_releases/README.md)
+The builder uses raw coastline and inland-water files from R2 to mark each map cell as land or water. It uses rules from Neon to assign owners, then saves the final cell codes and a legend with colors for each built level. [Release packaging](../map_releases/README.md)
 
 ## Use
 
@@ -22,7 +22,7 @@ Supply `--work-dir` and an output directory for every build. The builder creates
 | `--reuse-from PREVIOUS_RUN` | Use an earlier physical grid whose report points to its saved settings. The grid and physical input settings must match. The builder verifies the row-run files and their report. It also reuses compatible divisions. An edit confined to the later water stages can reuse the earlier assignments, including any water claimed by an explicit area or boundary rule in those earlier stages. |
 | `--recompute-division` | Off by default. Use with `--reuse-from` to reuse only the physical grid and recalculate the requested land and water assignments. |
 | `--resume` | Continue an interrupted build using its saved selection and options. Pass the original config, output directory, and `--work-dir`. Omit `--selection`, `--divide`, `--reuse-from`, and `--recompute-division`. |
-| `--selection INPUT_SELECTION.json` | Start a fresh build with a saved geographic selection. To rebuild a release, use its restored configuration, selection and captured code. |
+| `--selection INPUT_SELECTION.json` | Start a fresh build with a saved geographic selection. The build saves its colors locally and skips updating Neon. To rebuild a release, use its restored configuration, selection and captured code. |
 
 To run a restored copy of the builder directly, use `python -m worldatlas.map_build.build` from the archive’s `src` directory in its recorded environment. [Restore a release for rebuilding](../map_releases/README.md#restore-inputs)
 
@@ -68,8 +68,16 @@ Source imports save the coordinates of boundaries, areas and reference points in
 | Prepare | Build configuration and working Neon records or a saved selection | Saved geography and the resolved sources and settings for the physical build. |
 | Build the physical grid | Coastline polygons, inland-water polygons and grid settings | A land/water grid. A cell is land if it falls inside the coastline mask and outside the inland-water mask. |
 | Divide each parent | The land/water grid, the parent’s cells and its rules | An entity ID for each cell, using the most detailed division that was built. |
-| Package | The owner and cell type for each cell | Final map codes and cell counts. Release packaging separately creates the downloadable archive and viewer bundle. |
-| Verify | Final map files and input checksums | The completed run report with final file checksums and timings. |
+| Package | The assembled ownership grid, physical grid, and reserved display colors | Final map codes, counts, and the per-level legends with generated RGBs. The release command packages these outputs separately. |
+| Verify | Final map files and input checksums | The completed run report with final file checksums and timings. A build that read its inputs from Neon also updates the catalog's generated colors. |
+
+### Coloring the finished map
+
+Coloring runs after all selected subdivisions have been assembled. It detects which land labels and water lie within 2° on the flat map, measured between full-resolution cell centers. The search keeps runs along coasts and inland borders, compares only nearby tiles, and wraps longitude at the antimeridian. One pair of cells within the cutoff is enough to make the labels neighbors.
+
+The builder uses those pairs at every displayed level. Two subcontinents can influence each other's colors even when they have different parent continents. All water supplies the same blue. Land unbuilt at the selected level appears gray and stays out of the color calculation. `display_colors` in the build request supplies both reserved RGBs. The picker keeps candidate land colors with at least 85% of the best contrast against nearby colors, then chooses the one most distinct from the land colors already in that view. [Color selection code](display/colors.py)
+
+Each completed build keeps its colors in `map-modes.json`. Builds that load inputs from Neon also save the same generated colors in `geographic_entities.color_rgb`. A later build can replace those catalog values. Release packaging always takes colors from the build it is packaging.
 
 ### Dividing the hierarchy
 
@@ -127,7 +135,8 @@ Each layer has its own pair of files. The physical grid stores land or water. Th
 | `division/parent-{ID}/result.json` | Records where the parent’s direct-child ownership grid lives so the builder can resume after a completed division. A reused result can point to an earlier run. |
 | `division/ownership/` | Ownership assembled after all selected subdivisions. A World-only build uses World’s result directly. |
 | `final/` | The finished map grid, encoded as map codes. |
-| `final/report.json` | Counts the cells using each map code. Release staging uses the counts to check coverage and build the legend. |
+| `final/report.json` | Counts the cells using each map code. The builder uses the counts to make the legends. |
+| `map-modes.json` | Saves the category lookup, colors, and legend counts for each built level. Release packaging reads this file. |
 | `report.json` | Marks the run complete and records final file paths, checksums and stage timings. Its `physical_directory` field locates the physical grid, including a grid reused from an earlier run. |
 | `attempts/` | Records the code and runtime for each run attempt. Release staging uses these records to package the code needed for replay. |
 | `checkpoints/` | Records inputs and outputs for completed steps so resume can verify and reuse them. |
@@ -167,6 +176,8 @@ Start with `build.py`. Its `main()` reads the command options, and `Pipeline.run
 | [`land/`](land/README.md) | Finds connected pieces of land and supplies the tools for assigning islands by distance. |
 | [`water/`](water/README.md) | Finds shores and identifies which land owners border a basin. |
 | [`division/encoding.py`](division/encoding.py) | Combines ownership and land/water to write the final map codes. |
+| [`display/modes.py`](display/modes.py) | Builds and saves the category lookup and legend for each view. |
+| [`display/neighbors.py`](display/neighbors.py) | Finds nearby labels on the full grid. |
 | [`compare.py`](compare.py) | Compares a completed build with a release and writes the results to a separate directory. |
 | [`core/comparison.py`](core/comparison.py) | Compares every cell in two finished maps and records the locations and counts of changed assignments. |
 | [`core/`](core/) | Shared code for cell coordinates, shapes and row-run files. |

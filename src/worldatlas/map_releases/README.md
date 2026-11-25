@@ -61,9 +61,7 @@ Restore copies the saved build records as recorded. Use the release tooling from
 
 Each release has one R2 folder, `releases/RELEASE_ID/`, containing its viewer, compressed map streams, generated `config.json` with all geographic modes, and `inputs.json.gz`. The `rows` stream stores row offsets, and `runs` stores run endpoints and category codes. The manifest records checksums for both the stored files and the decoded streams.
 
-Each release serves one grid of the deepest assigned owners. Packaging uses the saved hierarchy to make one legend and code lookup per populated level. It counts cells from the final report and detects neighboring land and water through shared cell edges and proximity on the World overview. Water always contributes the same blue where it is nearby, regardless of its owner. Land that is unassigned in the selected view does not contribute a comparison color. Neighboring land entities must use distinct RGBs. A saved `color_rgb` stays fixed, and conflicts report the affected entity IDs.
-
-For automatic colors, packaging samples OKLCH lightness from 0.56 to 0.80 and chroma from 0.10 to 0.14. It keeps colors that provide at least 85% of the best contrast available against nearby assigned land and nearby water. Among those colors, it chooses the one that stands out most from the land colors already used in the view. When candidates are equally distinct across the view, it favors nearby contrast. The exact slate blue and warm gray in the viewer config are reserved for water and unassigned land. Places far apart can reuse a color. The generated colors live in the release's `config.json`, so palette changes can use the same completed map build.
+Each release serves one grid of the deepest assigned owners. Packaging verifies the completed build's `map-modes.json` and copies its colors, legend counts, and category lookups into the release's `config.json`. The reserved colors for water and unbuilt land come from the same build's saved request. This keeps the displayed colors paired with the boundaries used to generate them. [Build coloring step](../map_build/README.md#coloring-the-finished-map)
 
 The archive holds the saved configuration, geographic selection, construction settings, source catalog references, run identity and build report. The run identity records the inputs and options needed to resume. Each attempt records its own runtime versions, source revision and setup files in `producer.json`. Packaging reads the saved run, never today's editable geography in Neon.
 
@@ -83,6 +81,6 @@ The snapshot includes source and setup definitions. Reproduction uses the record
 
 ## Code and tests
 
-[`bundle.py`](bundle.py) prepares the local bundle from a completed build. [`manage_release.py`](manage_release.py) drives staging and publication. [`modes.py`](modes.py) builds the level-specific lookups and legends, with palette selection in [`colors.py`](colors.py). [`catalog.py`](catalog.py) resolves bundle identities and verifies manifests. [`inputs.py`](inputs.py) creates and restores the input archive. Tests cover packaging, restoration and interruption cases.
+[`bundle.py`](bundle.py) prepares the local bundle from a completed build. [`manage_release.py`](manage_release.py) drives staging and publication. [`catalog.py`](catalog.py) resolves bundle identities and verifies manifests. [`inputs.py`](inputs.py) creates and restores the input archive. Tests cover packaging, restoration and interruption cases.
 
 Run tests with `python .github/scripts/run_tests.py --suite map_releases`.

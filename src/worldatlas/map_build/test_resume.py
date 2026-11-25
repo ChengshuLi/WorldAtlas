@@ -21,7 +21,8 @@ class ExecutorResumeTests(unittest.TestCase):
         self.source.write_bytes(b"final-output\x00\x01\x02")
         source = r2_file_pin(self.source)
         cfg = {
-            "schema": "worldatlas-end-to-end-pipeline-v3",
+            "schema": "worldatlas-end-to-end-pipeline-v4",
+            "display_colors": {"water_rgb": [60, 98, 120], "unbuilt_land_rgb": [227, 222, 210]},
             "grid": dict(width=36, height=18, step=10),
             "sources": {
                 "land_config": {

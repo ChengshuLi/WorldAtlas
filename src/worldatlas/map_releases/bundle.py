@@ -11,8 +11,9 @@ from pathlib import Path
 from typing import Any, cast
 
 from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.display.modes import MapMode
 from worldatlas.map_build.execution.code_archive import read_source
-from worldatlas.map_build.inputs.configuration import BuildConfiguration
+from worldatlas.map_build.inputs.configuration import BuildConfiguration, DisplayColors
 from worldatlas.map_build.inputs.selection import validate_map_code_bindings
 from worldatlas.map_build.inputs.selection_types import (
     BuildSelection,
@@ -24,7 +25,6 @@ from worldatlas.map_releases.inputs import (
     validate_replay_sources,
     write_inputs,
 )
-from worldatlas.map_releases.modes import build_map_modes
 from worldatlas.shared.files import (
     FilePin,
     JSONValue,
@@ -76,7 +76,7 @@ def _read_build(
     """
     report = read_json(run / "report.json")
     if (
-        report.get("schema") != "worldatlas-end-to-end-report-v2"
+        report.get("schema") != "worldatlas-end-to-end-report-v3"
         or report.get("status") != "complete"
     ):
         raise ValueError("a completed map build is required")
@@ -273,8 +273,9 @@ def _compress_grid(
 
 def _write_viewer_data(
     bundle: Path,
-    final: Path,
     geography: GeographicSelection,
+    modes: list[MapMode],
+    display_colors: DisplayColors,
     summary: dict[str, Any],
     grid: Grid,
     *,
@@ -287,8 +288,9 @@ def _write_viewer_data(
 
     Args:
         bundle: Local release folder for the generated viewer configuration.
-        final: Directory of the original decoded map streams.
-        geography: Saved entities, colors, and map-code bindings.
+        geography: Saved entities and map-code bindings.
+        modes: Legends and colors saved by the completed build.
+        display_colors: Reserved RGB values for water and unbuilt land.
         summary: Final grid report with counts by map code and the number of runs.
         grid: Final dimensions and cell size.
         map_version: Display version such as v8.4.
@@ -298,18 +300,6 @@ def _write_viewer_data(
     """
     bindings = sorted(
         geography["category_bindings"], key=lambda binding: binding["code"]
-    )
-    config = bundle / "config.json"
-    viewer = read_json(config)
-    red, green, blue = viewer["water_rgb"]
-    gray_red, gray_green, gray_blue = viewer["unbuilt_land_rgb"]
-    modes = build_map_modes(
-        final,
-        grid,
-        geography,
-        bindings,
-        summary["counts"],
-        ((red, green, blue), (gray_red, gray_green, gray_blue)),
     )
     categories = [
         {
@@ -323,7 +313,8 @@ def _write_viewer_data(
     for stream, filename in STREAM_FILES.items():
         streams[stream] = f"{filename}.gz"
         streams[f"{stream}_sha256"] = decoded[stream]
-    viewer.update(
+    viewer = dict(
+        **display_colors,
         width=grid.width,
         height=grid.height,
         step=grid.step,
@@ -336,7 +327,7 @@ def _write_viewer_data(
     )
     if water_edition:
         viewer["inland_water_release"] = water_edition
-    config.write_bytes(json_bytes(viewer))
+    (bundle / "config.json").write_bytes(json_bytes(viewer))
 
 
 def _file_manifest(bundle: Path, prefix: str) -> dict[str, dict[str, JSONValue]]:
@@ -390,6 +381,12 @@ def build_bundle(
     report, identity, configuration, selection = _read_build(run)
     final = run / "final"
     grid, summary = _read_final_grid(final, report["final"], selection["geography"])
+    mode_pin = report["map_modes"]
+    modes_path = run / "map-modes.json"
+    if Path(mode_pin["path"]).resolve() != modes_path:
+        raise ValueError("expected map modes inside the build directory")
+    verify_pins([mode_pin])
+    modes: list[MapMode] = read_json(modes_path)
     attempts, code = _read_attempts(run)
 
     _copy_viewer(viewer, bundle, prefix)
@@ -398,8 +395,9 @@ def build_bundle(
     )
     _write_viewer_data(
         bundle,
-        final,
         selection["geography"],
+        modes,
+        configuration["display_colors"],
         summary,
         grid,
         map_version=map_version,

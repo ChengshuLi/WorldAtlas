@@ -22,7 +22,6 @@ from worldatlas.map_build.execution.code_archive import SCHEMA as SOURCE_SCHEMA
 from worldatlas.map_build.execution.code_archive import capture_source, write_source
 from worldatlas.map_build.test_support import selection
 from worldatlas.map_releases.bundle import build_bundle
-from worldatlas.map_releases.colors import LandColorPicker
 from worldatlas.map_releases.catalog import (
     RELEASE_BUCKET,
     lookup_release,
@@ -70,7 +69,6 @@ class BundleTests(unittest.TestCase):
                 physical_class="mixed",
                 level_id="continent",
                 parent_id=0,
-                color_rgb="#E9B44C",
             )
         )
         self.selection["geography"]["category_bindings"] = [
@@ -81,6 +79,7 @@ class BundleTests(unittest.TestCase):
         request.write_text(
             json.dumps(
                 {
+                    "display_colors": {"water_rgb": [60, 98, 120], "unbuilt_land_rgb": [227, 222, 210]},
                     "sources": {
                         "land_config": {"land": []},
                         "inland_water": {
@@ -119,9 +118,6 @@ class BundleTests(unittest.TestCase):
         (self.viewer / "index.html").write_text(
             "<html><head></head><body></body></html>"
         )
-        (self.viewer / "config.json").write_text(
-            '{"water_rgb":[60,98,120],"unbuilt_land_rgb":[227,222,210]}'
-        )
         # The only row contains one water cell and one land cell, both in Africa.
         self.rows = struct.pack("<2I", 0, 2)
         self.runs = struct.pack("<4I", 1, 1, 2, 17)
@@ -131,6 +127,13 @@ class BundleTests(unittest.TestCase):
         (final / "report.json").write_text(
             '{"counts":{"1":1,"17":1},"run_count":2,"grid":{"width":2,"height":1,"step":180}}'
         )
+        self.modes = self.run / "map-modes.json"
+        self.modes.write_text(json.dumps([
+            {"level_id": "continent", "label": "Continent",
+             "entity_ids_by_category": [42, 42],
+             "legend": [{"id": 42, "name": "Africa", "color": [233, 180, 76], "count": 2}],
+             "unbuilt_cells": 0},
+        ]))
         project = root / "source-project"
         package = project / "src/worldatlas"
         package.mkdir(parents=True)
@@ -153,11 +156,12 @@ class BundleTests(unittest.TestCase):
         self.report.write_text(
             json.dumps(
                 {
-                    "schema": "worldatlas-end-to-end-report-v2",
+                    "schema": "worldatlas-end-to-end-report-v3",
                     "status": "complete",
                     "original_run_identity": pin_file(identity),
                     "request": pin_file(request),
                     "comparison": None,
+                    "map_modes": pin_file(self.modes),
                     "final": {
                         name: pin_file(final / filename)
                         for name, filename in [
@@ -439,23 +443,19 @@ class BundleTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "inside its build attempt"):
             build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
 
-    def test_missing_land_color_uses_the_automatic_palette(self):
-        self.selection["geography"]["entities"][1]["color_rgb"] = None
-        self.snapshot.write_text(json.dumps(self.selection))
-        identity_path = self.run / "run-identity.json"
-        identity = json.loads(identity_path.read_text())
-        identity["input_selection_sha256"] = hashlib.sha256(
-            compact_json_bytes(self.selection)
-        ).hexdigest()
-        identity_path.write_text(json.dumps(identity))
+    def test_changed_map_modes_cannot_be_staged(self):
+        self.modes.write_text("[]")
+        with self.assertRaisesRegex(ValueError, "hash mismatch"):
+            build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
+
+    def test_map_modes_must_belong_to_the_completed_run(self):
+        other = self.run.parent / "map-modes.json"
+        other.write_bytes(self.modes.read_bytes())
         report = json.loads(self.report.read_text())
-        report["original_run_identity"] = pin_file(identity_path)
+        report["map_modes"] = pin_file(other)
         self.report.write_text(json.dumps(report))
-        build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
-        mode = json.loads((self.output / "config.json").read_bytes())["modes"][0]
-        fills = (60, 98, 120), (227, 222, 210)
-        picker = LandColorPicker(set(fills), ())
-        self.assertEqual(mode["legend"][0]["color"], list(picker.choose_muted_land_color({fills[0]})))
+        with self.assertRaisesRegex(ValueError, "map modes inside the build directory"):
+            build_bundle("v9.0-rc.1", self.run, self.viewer, self.output)
 
     def test_candidate_name_identifies_the_release(self):
         self.assertEqual(version("v9.0-rc.2"), "v9.0")

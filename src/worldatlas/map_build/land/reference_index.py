@@ -9,6 +9,7 @@ from typing import Any
 import numpy as np
 
 from worldatlas.map_build.core.grid import Grid
+from worldatlas.map_build.core.tiles import split_runs_into_tile_columns
 from worldatlas.shared.files import sha256_file, write_json
 
 
@@ -117,17 +118,13 @@ def build_reference_index(
         if ty != current_tile:
             flush()
             current_tile = ty
-        first_tiles, last_tiles = left // tile_cells, (right - 1) // tile_cells
-        lengths = (last_tiles - first_tiles + 1).astype(np.int64)
-        source = np.repeat(np.arange(len(parts)), lengths)
-        offsets = np.repeat(np.cumsum(lengths) - lengths, lengths)
-        tx = np.repeat(first_tiles, lengths) + np.arange(len(source)) - offsets
+        source, tx, starts, ends = split_runs_into_tile_columns(left, right, tile_cells)
         buffers.append(
             np.column_stack(
                 (
                     np.full(len(source), y),
-                    np.maximum(left[source], tx * tile_cells),
-                    np.minimum(right[source], (tx + 1) * tile_cells),
+                    starts,
+                    ends,
                     codes[source],
                 )
             )

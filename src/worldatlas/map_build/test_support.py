@@ -60,7 +60,6 @@ def selection():
                     level_id="world",
                     parent_id=None,
                     physical_class="mixed",
-                    color_rgb=None,
                 )
             ],
             features=[],
