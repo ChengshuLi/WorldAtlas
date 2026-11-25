@@ -35,31 +35,32 @@ class MapMode(TypedDict):
     unbuilt_cells: int
 
 
-def packed_land_pairs(first: np.ndarray, second: np.ndarray) -> list[int]:
-    """Deduplicate distinct land codes aligned by cell edge or screen proximity.
+def pack_neighbor_pairs(first: np.ndarray, second: np.ndarray) -> list[int]:
+    """Deduplicate neighboring pairs of land or water codes.
 
     Args:
-        first: Array of uint32 land codes or zero for water or uncovered cells.
+        first: Array of uint32 land codes. Zero stands for all water.
         second: Matching array of codes paired with the first array.
 
     Returns:
         Unique pairs packed into uint64 words, with the smaller code first.
+        A water pair has zero in the upper 32 bits.
     """
-    keep = (first != second) & (first != 0) & (second != 0)
+    keep = first != second
     low = np.minimum(first[keep], second[keep]).astype(np.uint64)
     high = np.maximum(first[keep], second[keep])
     return np.unique((low << 32) | high).tolist()
 
 
-def nearby_land_pairs(overview: np.ndarray, radius: int) -> set[int]:
-    """Find land codes that look close together on the overview map.
+def overview_neighbor_pairs(overview: np.ndarray, radius: int) -> set[int]:
+    """Find land and water codes that look close on the overview map.
 
     Args:
         overview: Two-dimensional uint32 land-code grid. Water is zero.
         radius: Maximum distance between sample centers, in overview pixels.
 
     Returns:
-        Packed pairs with land samples within the radius. Columns wrap at the
+        Packed pairs with samples within the radius. Columns wrap at the
         dateline. Rows stop at the top and bottom of the map.
     """
     pairs: set[int] = set()
@@ -69,27 +70,28 @@ def nearby_land_pairs(overview: np.ndarray, radius: int) -> set[int]:
                 continue
             aligned = np.roll(overview, -dx, axis=1)
             pairs.update(
-                packed_land_pairs(overview[: len(overview) - dy], aligned[dy:])
+                pack_neighbor_pairs(overview[: len(overview) - dy], aligned[dy:])
             )
     return pairs
 
 
-def land_code_neighbors(
+def scan_color_neighbors(
     directory: Path, grid: Grid, land_codes: Sequence[int]
-) -> set[tuple[int, int]]:
-    """Find land neighbors from shared edges and proximity in one grid read.
+) -> tuple[set[tuple[int, int]], set[int]]:
+    """Find nearby land and water from the finished grid in one scan.
 
     Args:
-        directory: Final grid's decoded row offsets and runs.
+        directory: Finished grid's decoded row offsets and runs. Every cell
+            holds a map code for land or water.
         grid: Grid dimensions. The last and first columns share an edge.
         land_codes: Map codes with physical class land.
 
     Returns:
-        Set of ascending land-code pairs. Include both exact shared edges and
-        pairs at most about two degrees apart in the overview, across land or water.
+        (Ascending land-code pairs, land codes near water). Both use shared
+        cell edges and proximity within about two degrees on the overview.
     """
     if not land_codes:
-        return set()
+        return set(), set()
 
     # Search the sorted list without scanning every land code for each row.
     land = np.array(sorted(land_codes), dtype=np.uint32)
@@ -109,21 +111,25 @@ def land_code_neighbors(
             # An insertion point beyond the last land code clips to the last
             # entry and fails the exact comparison.
             matching = land.take(land.searchsorted(codes), mode="clip")
-            dry = np.where(matching == codes, codes, np.uint32(0))
-            current = (ends, dry)
-            first, second = dry, np.r_[dry[1:], dry[:1]]
+            # Every water cell uses the same blue, regardless of its map code.
+            display_codes = np.where(matching == codes, codes, np.uint32(0))
+            current = (ends, display_codes)
+            first, second = display_codes, np.r_[display_codes[1:], display_codes[:1]]
             if previous is not None:
                 _, _, (north, south) = overlay(previous, current)
                 first, second = np.r_[first, north], np.r_[second, south]
-            neighbors.update(packed_land_pairs(first, second))
+            neighbors.update(pack_neighbor_pairs(first, second))
             if (overview_row := overview_row_by_source.get(y)) is not None:
-                overview[overview_row] = dry[
+                overview[overview_row] = display_codes[
                     np.searchsorted(ends, sample_x, side="right")
                 ]
             previous = current
 
-    neighbors.update(nearby_land_pairs(overview, radius=width // 180))
-    return {(pair >> 32, pair & 0xFFFFFFFF) for pair in neighbors}
+    neighbors.update(overview_neighbor_pairs(overview, radius=width // 180))
+    return (
+        {(pair >> 32, pair & 0xFFFFFFFF) for pair in neighbors if pair >> 32},
+        {pair for pair in neighbors if pair <= 0xFFFFFFFF},
+    )
 
 
 def build_map_modes(
@@ -177,7 +183,7 @@ def build_map_modes(
             level = parent
         return depth
 
-    neighboring_codes = land_code_neighbors(final, grid, land_codes)
+    neighboring_codes, codes_near_water = scan_color_neighbors(final, grid, land_codes)
     modes: list[MapMode] = []
     for level in sorted(owners_by_level, key=lambda name: (level_depth(name), name)):
         owners = owners_by_level[level]
@@ -198,7 +204,8 @@ def build_map_modes(
             if (color := entities[entity_id]["color_rgb"]) is not None:
                 red, green, blue = bytes.fromhex(color[1:])
                 authored[entity_id] = (red, green, blue)
-        colors = color_land(neighbors, authored, fill_colors)
+        land_near_water = {owners[code] for code in codes_near_water if code in owners}
+        colors = color_land(neighbors, land_near_water, authored, fill_colors)
         modes.append(
             {
                 "level_id": level,

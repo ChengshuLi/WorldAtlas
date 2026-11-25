@@ -16,60 +16,79 @@ from worldatlas.map_releases.colors import (
     muted_color_samples,
     oklab,
 )
-from worldatlas.map_releases.modes import build_map_modes, land_code_neighbors, nearby_land_pairs
+from worldatlas.map_releases.modes import build_map_modes, overview_neighbor_pairs, scan_color_neighbors
 
 
 FILL_COLORS = (60, 98, 120), (227, 222, 210)
+RESERVED = set(FILL_COLORS)
 
 
 class PaletteTests(TestCase):
     def test_choice_maximizes_the_separation_from_its_closest_color(self):
         neighbor = (201, 111, 98)
-        chosen = choose_muted_land_color({neighbor}, FILL_COLORS)
+        chosen = choose_muted_land_color({neighbor}, RESERVED)
         candidates, lab = muted_color_samples()
         possible = [i for i, color in enumerate(candidates) if color not in (neighbor, *FILL_COLORS)]
-        references = oklab([neighbor, *FILL_COLORS])
+        references = oklab([neighbor])
         distances = np.linalg.norm(lab[:, None] - references, axis=2).min(axis=1)
         self.assertEqual(chosen, candidates[max(possible, key=lambda i: distances[i])])
 
     def test_coloring_preserves_authored_colors_and_rejects_conflicting_borders(self):
         fixed = (201, 111, 98)
         graph = {1: {2}, 2: {1}, 3: set()}
-        colors = color_land(graph, {1: fixed}, FILL_COLORS)
+        colors = color_land(graph, set(), {1: fixed}, FILL_COLORS)
         self.assertEqual(colors[1], fixed)
         self.assertNotEqual(colors[2], fixed)
-        self.assertEqual(colors[3], choose_muted_land_color(set(), FILL_COLORS))
+        self.assertEqual(colors[3], choose_muted_land_color(set(), RESERVED))
         with self.assertRaisesRegex(ValueError, "entities 1 and 2 share"):
-            color_land(graph, {1: fixed, 2: fixed}, FILL_COLORS)
+            color_land(graph, set(), {1: fixed, 2: fixed}, FILL_COLORS)
+
+    def test_authored_colors_cannot_use_the_two_reserved_values(self):
+        for fill in FILL_COLORS:
+            with self.subTest(fill=fill):
+                with self.assertRaisesRegex(ValueError, "land entity 1 uses reserved"):
+                    color_land({1: set()}, set(), {1: fill}, FILL_COLORS)
+
+    def test_palette_has_richer_saturation_and_the_fills_are_outside_it(self):
+        samples, lab = muted_color_samples()
+        chroma = np.linalg.norm(lab[:, 1:], axis=1)
+        # Round to the intended precision to account for storing 8-bit RGB.
+        self.assertTrue(np.all((0.10 <= np.round(chroma, 2)) & (np.round(chroma, 2) <= 0.14)))
+        self.assertTrue(set(samples).isdisjoint(FILL_COLORS))
 
     def test_many_adjacent_entities_use_distinct_generated_colors(self):
         ids = set(range(10))
         graph = {entity: ids - {entity} for entity in ids}
-        colors = color_land(graph, {}, FILL_COLORS)
+        colors = color_land(graph, set(), {}, FILL_COLORS)
         self.assertEqual(len(set(colors.values())), len(graph))
         self.assertFalse(set(colors.values()).intersection(FILL_COLORS))
         reverse = dict(reversed(list(graph.items())))
-        self.assertEqual(color_land(reverse, {}, FILL_COLORS), colors)
+        self.assertEqual(color_land(reverse, set(), {}, FILL_COLORS), colors)
 
     def test_an_exhausted_palette_reports_the_conflict(self):
         color = (201, 111, 98)
         with patch("worldatlas.map_releases.colors.muted_color_samples",
                    return_value=((color,), oklab([color]))):
             with self.assertRaisesRegex(ValueError, "ran out of distinct muted land colors"):
-                choose_muted_land_color({color}, FILL_COLORS)
+                choose_muted_land_color({color}, RESERVED)
 
 
 class ModeTests(TestCase):
-    def test_only_land_edges_contribute_including_at_the_dateline(self):
+    def test_shared_land_and_water_edges_include_the_dateline(self):
         grid = Grid(8, 4, 45)
         with TemporaryDirectory() as folder:
             path = Path(folder) / "grid"
             write_layer(path, grid, [
                 (0, [(0, 1, 10), (1, 2, 20), (2, 7, 9), (7, 8, 0xFFFFFFFF)]),
                 (1, [(0, 1, 30), (1, 8, 9)]),
+                (2, [(0, 8, 9)]),
+                (3, [(0, 8, 9)]),
             ])
-            self.assertEqual(land_code_neighbors(path, grid, []), set())
-            self.assertEqual(land_code_neighbors(path, grid, [10, 20, 30, 0xFFFFFFFF]), {(10, 20), (10, 30), (10, 0xFFFFFFFF)})
+            self.assertEqual(scan_color_neighbors(path, grid, []), (set(), set()))
+            self.assertEqual(
+                scan_color_neighbors(path, grid, (10, 20, 30, 0xFFFFFFFF)),
+                ({(10, 20), (10, 30), (10, 0xFFFFFFFF)}, {20, 30, 0xFFFFFFFF}),
+            )
 
     def test_neighbors_across_water_follow_the_same_color_rule_as_shared_edges(self):
         grid = Grid(1440, 9, 0.25)
@@ -90,7 +109,8 @@ class ModeTests(TestCase):
                 (3, [(0, 2, 10), (2, 4, 9), (4, 6, 20)]),
                 (8, [(0, 2, 10), (2, 4, 30)]),
             ])
-            self.assertEqual(land_code_neighbors(path, grid, codes), {(10, 30), (10, 20)})
+            pairs, _ = scan_color_neighbors(path, grid, codes)
+            self.assertEqual(pairs, {(10, 30), (10, 20)})
 
             def build_modes():
                 return build_map_modes(path, grid, geography, geography["category_bindings"],
@@ -119,9 +139,48 @@ class ModeTests(TestCase):
             [0,  0, 0, 0, 0, 0, 0,  0],
             [50, 0, 0, 0, 0, 0, 0,  0],
         ], dtype=np.uint32)
-        self.assertEqual(nearby_land_pairs(overview, radius=2), {
-            (10 << 32) | 20, (30 << 32) | 40,
+        self.assertEqual(overview_neighbor_pairs(overview, radius=2), {
+            (10 << 32) | 20, (30 << 32) | 40, 10, 20, 30, 40, 50,
         })
+
+    def test_modes_score_local_water_and_skip_unassigned_land(self):
+        grid = Grid(24, 12, 15)
+        geography = selection()["geography"]
+        geography["levels"] += [
+            dict(id="continent", parent_id="world"),
+            dict(id="subcontinent", parent_id="continent"),
+        ]
+        for entity_id, parent, level, kind in (
+            (1, 0, "continent", "mixed"),
+            (2, 1, "subcontinent", "mixed"),
+            (3, 1, "subcontinent", "land"),
+        ):
+            geography["entities"].append(dict(
+                id=entity_id, parent_id=parent, level_id=level, name=str(entity_id),
+                color_rgb=None, physical_class=kind,
+            ))
+        bindings = [
+            dict(code=10, entity_id=1, physical_class="land"),
+            dict(code=20, entity_id=2, physical_class="land"),
+            dict(code=30, entity_id=3, physical_class="land"),
+            dict(code=40, entity_id=2, physical_class="water"),
+        ]
+        water, gray = FILL_COLORS
+        land_row = [(0, 4, 10), (4, 8, 30), (8, 12, 10),
+                    (12, 16, 20), (16, 20, 40), (20, 24, 10)]
+        with TemporaryDirectory() as folder:
+            path = Path(folder) / "grid"
+            report = write_layer(path, grid, [(y, land_row) for y in range(grid.height)])
+            for owner in (2, 1):
+                with self.subTest(water_owner=owner):
+                    bindings[-1]["entity_id"] = owner
+                    modes = build_map_modes(path, grid, geography, bindings, report["counts"], FILL_COLORS)
+                    colors = {row["id"]: tuple(row["color"]) for row in modes[1]["legend"]}
+                    # Land entity 2 sees water, including when it owns the water.
+                    self.assertEqual(colors[2], choose_muted_land_color({water}, {water, gray}))
+                    # Entity 3 sees only land without a subcontinent assignment.
+                    self.assertEqual(colors[3], choose_muted_land_color(set(), {water, gray}))
+                    self.assertNotEqual(colors[2], colors[3])
 
     def test_nested_modes_count_every_cell_once_and_merge_dissolved_borders(self):
         grid = Grid(8, 4, 45)
