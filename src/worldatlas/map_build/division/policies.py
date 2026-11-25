@@ -46,7 +46,7 @@ def nearest_land(
     roots = set()
     components = context.components("land")
     for feature in scope.rule["features"]["distance_reference"]:
-        root = components.component_at(*point_coordinates(feature))
+        root = components.component_at(*point_coordinates(feature["geometry"]))
         if root is None:
             raise ValueError("a distance reference does not identify parent land")
         roots.add(root)

@@ -1,6 +1,6 @@
 """Area operations preserve geometric context and label all eligible cells."""
 
-from contextlib import ExitStack
+from contextlib import nullcontext
 from pathlib import Path
 import tempfile
 import unittest
@@ -14,6 +14,7 @@ from worldatlas.map_build.division.areas import divide_area
 from worldatlas.map_build.division.scope import Scope
 from worldatlas.map_build.land.components import ComponentGrid
 from worldatlas.map_build.land.connected import build_components
+from worldatlas.map_build.test_support import open_test_scope_grids
 
 
 class AreaOperations(unittest.TestCase):
@@ -56,23 +57,17 @@ class AreaOperations(unittest.TestCase):
             ("snapshot", np.zeros_like(physical)),
         ]:
             write_layer(root / name, grid, patch_rows(data, grid.bounds, grid))
-        with ExitStack() as stack:
-            components = None
-            if unit == "component":
-                build_components(grid, root / "physical", root / "components")
-                components = stack.enter_context(
-                    ComponentGrid(root / "physical", root / "components", grid)
-                )
+        component_context = nullcontext()
+        if unit == "component":
+            build_components(grid, root / "physical", root / "components")
+            component_context = ComponentGrid(root / "physical", root / "components", grid)
+        with component_context as components, open_test_scope_grids(root, grid) as data:
 
             def component_grid(kind):
                 self.assertEqual(kind, "land")
                 self.assertIsNotNone(components)
                 return components
 
-            data = [
-                stack.enter_context(open_grid(root / name, grid))
-                for name in ("physical", "parent", "snapshot")
-            ]
             scope = Scope(
                 rule,
                 grid,
@@ -87,9 +82,7 @@ class AreaOperations(unittest.TestCase):
                 dict(
                     entity_id=entity,
                     point=dict(
-                        geometry=dict(
-                            type="Point", coordinates=self.coordinate(x + 0.5, y + 0.5)
-                        )
+                        type="Point", coordinates=self.coordinate(x + 0.5, y + 0.5)
                     ),
                 )
                 for entity, x, y in labels
@@ -125,22 +118,21 @@ class AreaOperations(unittest.TestCase):
 
     def test_last_column_accepts_a_label_just_west_of_the_seam(self):
         grid = Grid(169, 4, 360 / 169)
-        with tempfile.TemporaryDirectory() as temp, ExitStack() as stack:
+        with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             for name, start, code in (("physical", 0, 1), ("parent", 160, 1)):
                 records = ((y, [(start, grid.width, code)]) for y in range(grid.height))
                 write_layer(root / name, grid, records)
             write_layer(root / "snapshot", grid, ())
-            streams = [stack.enter_context(open_grid(root / name, grid))
-                       for name in ("physical", "parent", "snapshot")]
-            rule = dict(physical_class="water", unit="cell", unassigned_only=False, features={})
-            scope = Scope(rule, grid, *streams, lambda kind: self.fail("cell rule needs no components"))
-            cut = grid.west + 165 * grid.step
-            line = dict(geometry=dict(type="LineString", coordinates=[[cut, 90], [cut, 80]]))
-            targets = [dict(entity_id=owner, point=dict(geometry=dict(type="Point", coordinates=[lon, 86])))
-                       for owner, lon in ((101, grid.longitude(161)), (807, np.nextafter(180, 0)))]
-            result = divide_area(scope, [line], targets, root / "division")
-            self.assertEqual(result["counts"], {"101": 20, "807": 16})
+            with open_test_scope_grids(root, grid) as streams:
+                rule = dict(physical_class="water", unit="cell", unassigned_only=False, features={})
+                scope = Scope(rule, grid, *streams, lambda kind: self.fail("cell rule needs no components"))
+                cut = grid.west + 165 * grid.step
+                line = dict(geometry=dict(type="LineString", coordinates=[[cut, 90], [cut, 80]]))
+                targets = [dict(entity_id=owner, point=dict(type="Point", coordinates=[lon, 86]))
+                           for owner, lon in ((101, grid.longitude(161)), (807, np.nextafter(180, 0)))]
+                result = divide_area(scope, [line], targets, root / "division")
+                self.assertEqual(result["counts"], {"101": 20, "807": 16})
 
     def test_boundary_segments_may_meet_inside_the_division_scope(self):
         with tempfile.TemporaryDirectory() as temp:

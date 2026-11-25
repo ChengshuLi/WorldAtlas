@@ -7,14 +7,18 @@ from typing import Any, cast
 
 import numpy as np
 
+from worldatlas.geodesy.geojson import Point
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.core.layers import write_layer
 from worldatlas.map_build.core.partition import divide_regions, geographic_cuts
 from worldatlas.map_build.core.rle import complete_row, open_mapped_array, overlay
-from worldatlas.map_build.division.contracts import CompiledTarget, point_coordinates
+from worldatlas.map_build.division.contracts import (
+    CompiledFeature,
+    CompiledTarget,
+    point_coordinates,
+)
 from worldatlas.map_build.division.intervals import spans
 from worldatlas.map_build.division.scope import Scope, selected
-from worldatlas.map_build.inputs.selection_types import GeographicFeature
 
 
 def assign_area(scope: Scope, target: int, directory: Path | str) -> dict[str, Any]:
@@ -148,7 +152,7 @@ def component_owners(scope: Scope, faces: Faces) -> dict[str, dict[int, int]]:
 
 def divide_area(
     scope: Scope,
-    boundaries: Sequence[GeographicFeature],
+    boundaries: Sequence[CompiledFeature],
     targets: Sequence[CompiledTarget],
     directory: Path | str,
 ) -> dict[str, Any]:
@@ -160,7 +164,7 @@ def divide_area(
     Args:
         scope: Prepared area and output filters.
         boundaries: Source features holding boundary lines.
-        targets: Child IDs and their label point features.
+        targets: Child IDs and their label point geometries.
         directory: New directory for face files and claim layer.
 
     Returns:
@@ -180,7 +184,7 @@ def divide_area(
     labels = []
     for target in targets:
         # Compilation requires a point for every divide_area target.
-        lon, lat = point_coordinates(cast(GeographicFeature, target["point"]))
+        lon, lat = point_coordinates(cast(Point[list[float]], target["point"]))
         cell = grid.cell_at(lon, lat)
         if cell is None:
             raise ValueError("divided-face label is outside the grid")

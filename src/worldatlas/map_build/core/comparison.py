@@ -3,7 +3,6 @@
 import time
 from collections import Counter
 from collections.abc import Iterable
-from contextlib import ExitStack
 from pathlib import Path
 from typing import Any
 
@@ -127,45 +126,46 @@ def compare(
     before = {"reference": reference_sha256, "candidate": candidate_sha256}
     changed, transitions, offsets = 0, Counter(), [0]
     bounds = None
-    with ExitStack() as files:
-        new = files.enter_context(open_grid(candidate, grid))
-        old = files.enter_context(open_grid(reference, grid))
+    with (
+        open_grid(candidate, grid) as new,
+        open_grid(reference, grid) as old,
+    ):
         directory.mkdir()
-        stream = files.enter_context((directory / "changes.u32le").open("xb"))
-        for y in range(grid.height):
-            reference_row = row(old, y, grid.width)
-            candidate_row = row(new, y, grid.width)
-            records = []
-            if not (
-                np.array_equal(reference_row[0], candidate_row[0])
-                and np.array_equal(
-                    comparable_codes(reference_row[1], lookup), candidate_row[1]
-                )
-            ):
-                starts, ends, (old_codes, new_codes) = overlay(
-                    reference_row, candidate_row
-                )
-                # Compare the code meanings but report the original codes.
-                changed_spans = comparable_codes(old_codes, lookup) != new_codes
-                for i in np.flatnonzero(changed_spans):
-                    left, right, prior, after = map(
-                        int, (starts[i], ends[i], old_codes[i], new_codes[i])
+        with (directory / "changes.u32le").open("xb") as stream:
+            for y in range(grid.height):
+                reference_row = row(old, y, grid.width)
+                candidate_row = row(new, y, grid.width)
+                records = []
+                if not (
+                    np.array_equal(reference_row[0], candidate_row[0])
+                    and np.array_equal(
+                        comparable_codes(reference_row[1], lookup), candidate_row[1]
                     )
-                    count = right - left
-                    changed += count
-                    transitions[f"{prior}->{after}"] += count
-                    records.append((y, left, right, prior, after))
-                    if bounds is None:
-                        bounds = [left, right, y, y + 1]
-                    else:
-                        bounds = [
-                            min(bounds[0], left),
-                            max(bounds[1], right),
-                            bounds[2],
-                            y + 1,
-                        ]
-            np.asarray(records, dtype="<u4").tofile(stream)
-            offsets.append(offsets[-1] + len(records))
+                ):
+                    starts, ends, (old_codes, new_codes) = overlay(
+                        reference_row, candidate_row
+                    )
+                    # Compare the code meanings but report the original codes.
+                    changed_spans = comparable_codes(old_codes, lookup) != new_codes
+                    for i in np.flatnonzero(changed_spans):
+                        left, right, prior, after = map(
+                            int, (starts[i], ends[i], old_codes[i], new_codes[i])
+                        )
+                        count = right - left
+                        changed += count
+                        transitions[f"{prior}->{after}"] += count
+                        records.append((y, left, right, prior, after))
+                        if bounds is None:
+                            bounds = [left, right, y, y + 1]
+                        else:
+                            bounds = [
+                                min(bounds[0], left),
+                                max(bounds[1], right),
+                                bounds[2],
+                                y + 1,
+                            ]
+                np.asarray(records, dtype="<u4").tofile(stream)
+                offsets.append(offsets[-1] + len(records))
     np.asarray(offsets, dtype="<u8").tofile(directory / "change-rows.u64le")
     after = {
         label: {name: sha256_file(root / name) for name in names}

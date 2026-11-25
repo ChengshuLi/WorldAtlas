@@ -1,7 +1,6 @@
 """Encode entity ownership and physical class only when packaging a map grid."""
 
 from collections.abc import Iterator, Sequence
-from contextlib import ExitStack
 from pathlib import Path
 from typing import Any
 
@@ -43,9 +42,10 @@ def encode(
     codes = np.asarray([c for _, c in pairs], dtype=np.uint32)
     if not len(keys) or np.any(keys[1:] == keys[:-1]):
         raise ValueError("ambiguous map category bindings")
-    with ExitStack() as resources:
-        physical = resources.enter_context(open_grid(physical_directory, grid))
-        ownership = resources.enter_context(open_grid(ownership_directory, grid))
+    with (
+        open_grid(physical_directory, grid) as physical,
+        open_grid(ownership_directory, grid) as ownership,
+    ):
 
         def rows() -> Iterator[tuple[int, np.ndarray, np.ndarray]]:
             """Encode matching runs of land or water and entity IDs one row at a time.

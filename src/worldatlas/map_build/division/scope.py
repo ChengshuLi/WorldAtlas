@@ -102,7 +102,7 @@ class Scope:
         self._context_rows: tuple[int, int] | None = None
         self._query_rows: tuple[int, int] | None = None
         for point in inputs.get("scope_component", ()):
-            lon, lat = point_coordinates(point)
+            lon, lat = point_coordinates(point["geometry"])
             cell = grid.cell_at(lon, lat)
             if cell is None:
                 raise ValueError("scope component point is outside the grid")
@@ -383,7 +383,7 @@ class Scope:
         if self.connected is None:
             roots = set()
             for feature in references:
-                lon, lat = point_coordinates(feature)
+                lon, lat = point_coordinates(feature["geometry"])
                 root = data.component_at(lon, lat)
                 if root is None:
                     raise ValueError(

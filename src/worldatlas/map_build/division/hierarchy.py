@@ -2,7 +2,6 @@
 
 import hashlib
 from collections.abc import Callable, Iterator
-from contextlib import ExitStack
 from functools import partial
 from pathlib import Path
 from typing import Any
@@ -29,7 +28,7 @@ from worldatlas.shared.files import (
 )
 
 
-def definition(
+def parent_division_reuse_inputs(
     geography: GeographicSelection,
     parent: int,
     grid: Grid,
@@ -41,7 +40,7 @@ def definition(
     files: RunFilePins,
     land_only: bool = False,
 ) -> dict[str, Any]:
-    """Record only the inputs that affect the parent's assignment.
+    """Collect the inputs that must match to reuse a parent's subdivision.
 
     Args:
         geography: Frozen entities, rules, features and bindings.
@@ -62,34 +61,6 @@ def definition(
     children, rules = compiled.children_by_id, compiled.rules
     if land_only:
         rules = [rule for _, group in land_groups(rules) for rule in group]
-    operative = []
-    for rule in rules:
-        operative.append(
-            {
-                **{
-                    k: rule[k]
-                    for k in (
-                        "id",
-                        "operation",
-                        "physical_class",
-                        "unit",
-                        "unassigned_only",
-                    )
-                },
-                "features": {
-                    role: [dict(id=f["id"], geometry=f["geometry"]) for f in features]
-                    for role, features in rule["features"].items()
-                    if features
-                },
-                "targets": [
-                    dict(
-                        entity_id=t["entity_id"],
-                        point=t["point"]["geometry"] if t["point"] else None,
-                    )
-                    for t in rule["targets"]
-                ],
-            }
-        )
     result = dict(
         parent_id=parent,
         grid=vars(grid),
@@ -97,7 +68,7 @@ def definition(
             dict(id=e["id"], physical_class=e["physical_class"])
             for _, e in sorted(children.items())
         ],
-        rules=operative,
+        rules=rules,
         land_owner_order=land_owner_order(geography, children),
         physical={
             Path(pin["path"]).name: pin["sha256"] for pin in files.row_streams(physical)
@@ -114,16 +85,19 @@ def definition(
     return result
 
 
-def membership(
-    grid: Grid, ownership_directory: Path | str, parent: int, directory: Path | str
+def write_parent_membership_mask(
+    grid: Grid,
+    ownership_directory: Path | str,
+    parent_id: int,
+    output_directory: Path | str,
 ) -> dict[str, Any]:
     """Write a mask of the cells owned by one parent.
 
     Args:
         grid: Dimensions of the ownership grid.
-        ownership_directory: Input row-run ownership grid.
-        parent: Owner ID to select.
-        directory: New directory for the mask.
+        ownership_directory: Folder with the current ownership row-run files.
+        parent_id: Owner ID of the parent about to be divided.
+        output_directory: New folder for the mask's row-run files and report.
 
     Returns:
         Row-run layer report for the parent's membership mask.
@@ -139,12 +113,12 @@ def membership(
             for y in range(grid.height):
                 ends, values = row(owners, y, grid.width)
                 records = spans(
-                    np.r_[0, ends[:-1]], ends, (values == parent).astype(np.uint32)
+                    np.r_[0, ends[:-1]], ends, (values == parent_id).astype(np.uint32)
                 )
                 if records:
                     yield y, records
 
-        return write_layer(directory, grid, rows())
+        return write_layer(output_directory, grid, rows())
 
 
 def substitute(
@@ -158,24 +132,27 @@ def substitute(
 
     Args:
         grid: Dimensions shared by all layers.
-        prior_directory: Ownership grid before the subdivision.
-        parent_directory: Mask of cells owned by the parent.
-        child_directory: Owners from the subdivision.
-        directory: New directory for the combined ownership layer.
+        prior_directory: Folder with the ownership files before the subdivision.
+        parent_directory: Folder with the mask files. Value 1 marks cells
+            inside the parent.
+        child_directory: Folder with the subdivision's ownership files.
+            Values are child entity IDs inside the parent and zero elsewhere.
+        directory: New folder for the combined ownership files and report.
 
     Returns:
         Layer report for the combined ownership.
     """
-    with ExitStack() as stack:
-        prior = stack.enter_context(open_grid(prior_directory, grid))
-        parent = stack.enter_context(open_grid(parent_directory, grid))
-        children = stack.enter_context(open_grid(child_directory, grid))
+    with (
+        open_grid(prior_directory, grid) as prior,
+        open_grid(parent_directory, grid) as parent,
+        open_grid(child_directory, grid) as children,
+    ):
 
         def rows() -> Iterator[tuple[int, list[tuple[int, int, int]]]]:
             """Read each row and replace owners inside the divided parent.
 
             Yields:
-                (row, spans) containing owner IDs before and after the substitution.
+                (row, spans) containing the combined owner IDs.
             """
             for y in range(grid.height):
                 starts, ends, (old, within, new) = overlay(
@@ -292,11 +269,17 @@ class HierarchyDivision:
             if ownership is not None:
                 self.task(
                     "membership-" + str(parent),
-                    partial(membership, self.grid, ownership, parent, parent_directory),
+                    partial(
+                        write_parent_membership_mask,
+                        self.grid,
+                        ownership,
+                        parent,
+                        parent_directory,
+                    ),
                     self.files.row_streams(ownership),
                     [parent_directory],
                 )
-            settings = definition(
+            settings = parent_division_reuse_inputs(
                 self.geography,
                 parent,
                 self.grid,
@@ -329,7 +312,7 @@ class HierarchyDivision:
                 output = Path(saved["directory"])
                 receipt = dict(saved, reused=True)
             else:
-                land_settings = definition(
+                land_settings = parent_division_reuse_inputs(
                     self.geography,
                     parent,
                     self.grid,

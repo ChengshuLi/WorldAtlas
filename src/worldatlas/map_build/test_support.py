@@ -1,9 +1,10 @@
 """Small input-contract fixtures; no external sources or geographic decisions."""
 
 import io
-from contextlib import closing
+from contextlib import closing, contextmanager
 from unittest.mock import Mock, patch
 
+from worldatlas.map_build.core.rle import open_grid
 from worldatlas.shared import r2
 from worldatlas.shared.files import sha256_file
 from worldatlas.source_assets.cache import SourceCache
@@ -31,6 +32,17 @@ def cache_fixture_file(cache_directory, path, source):
         closing(SourceCache(cache_directory)) as cache,
     ):
         return cache.acquire(source)
+
+
+@contextmanager
+def open_test_scope_grids(directory, grid):
+    """Open the three prepared row-run layers used by a scope test."""
+    with (
+        open_grid(directory / "physical", grid) as physical,
+        open_grid(directory / "parent", grid) as parent,
+        open_grid(directory / "snapshot", grid) as snapshot,
+    ):
+        yield physical, parent, snapshot
 
 
 def selection():

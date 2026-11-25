@@ -4,15 +4,16 @@ from collections import defaultdict
 from collections.abc import Iterable
 from dataclasses import dataclass
 from itertools import chain
-from typing import cast
+from typing import TypedDict, cast
 
+from worldatlas.geodesy.geojson import GeoJSONGeometry, Point
 from worldatlas.map_build.inputs.selection_types import (
     GeographicEntity,
-    GeographicFeature,
     GeographicRule,
     GeographicSelection,
     RuleFeature,
     RuleFeatureRole,
+    RuleSettings,
     RuleTarget,
 )
 
@@ -72,16 +73,24 @@ def selected_parents(
     return sorted(selected, key=lambda ident: (depth(ident), ident))
 
 
-class CompiledTarget(RuleTarget):
-    """A rule target with its label point record attached, when it uses one."""
+class CompiledFeature(TypedDict):
+    """Identify a geometry used by a compiled rule."""
 
-    point: GeographicFeature | None
+    id: str
+    geometry: GeoJSONGeometry
 
 
-class CompiledRule(GeographicRule):
-    """A geographic rule with its feature records and targets attached."""
+class CompiledTarget(TypedDict):
+    """Name the target child and the point that labels its face, if required."""
 
-    features: dict[RuleFeatureRole, list[GeographicFeature]]
+    entity_id: int
+    point: Point[list[float]] | None
+
+
+class CompiledRule(RuleSettings):
+    """Keep the rule inputs used for assignment and reuse checks."""
+
+    features: dict[RuleFeatureRole, list[CompiledFeature]]
     targets: list[CompiledTarget]
 
 
@@ -168,9 +177,9 @@ class RuleIndex:
         selected = self.rules[parent_id]
         if not children or not selected:
             raise ValueError("a division needs child entities and rules")
-        links: defaultdict[
-            str, defaultdict[RuleFeatureRole, list[GeographicFeature]]
-        ] = defaultdict(lambda: defaultdict(list))
+        links: defaultdict[str, defaultdict[RuleFeatureRole, list[CompiledFeature]]] = (
+            defaultdict(lambda: defaultdict(list))
+        )
         targets: defaultdict[str, list[CompiledTarget]] = defaultdict(list)
         seen = set()
         for link in chain.from_iterable(self.links[ident] for ident in selected):
@@ -182,17 +191,21 @@ class RuleIndex:
             feature = features[ident]
             if feature["geometry"]["type"] not in ROLE_TYPES[role]:
                 raise ValueError(f"rule {link['rule_id']} has invalid {role} geometry")
-            links[link["rule_id"]][role].append(feature)
+            links[link["rule_id"]][role].append(
+                {"id": feature["id"], "geometry": feature["geometry"]}
+            )
         for target in chain.from_iterable(self.targets[ident] for ident in selected):
             if target["entity_id"] not in children:
                 raise ValueError("rule target is not a direct child")
             label = target["label_point_id"]
-            if label is not None and (
-                label not in features or features[label]["geometry"]["type"] != "Point"
-            ):
-                raise ValueError("a divided-face label must reference a Point")
+            point = None
+            if label is not None:
+                feature = features.get(label)
+                if feature is None or feature["geometry"]["type"] != "Point":
+                    raise ValueError("a divided-face label must reference a Point")
+                point = feature["geometry"]
             targets[target["rule_id"]].append(
-                {**target, "point": features[label] if label else None}
+                {"entity_id": target["entity_id"], "point": point}
             )
         result: list[CompiledRule] = []
         for ident, rule in sorted(selected.items()):
@@ -256,18 +269,28 @@ class RuleIndex:
                 for t in output
             ):
                 raise ValueError("rule physical class is incompatible with its target")
-            result.append({**rule, "features": dict(inputs), "targets": output})
+            result.append(
+                CompiledRule(
+                    id=ident,
+                    operation=operation,
+                    physical_class=rule["physical_class"],
+                    unit=rule["unit"],
+                    unassigned_only=rule["unassigned_only"],
+                    features={role: group for role, group in inputs.items() if group},
+                    targets=output,
+                )
+            )
         return CompiledDivision(children_by_id=children, rules=result)
 
 
-def point_coordinates(feature: GeographicFeature) -> tuple[float, float]:
-    """Read the coordinates of a feature already checked to be a point.
+def point_coordinates(geometry: GeoJSONGeometry) -> tuple[float, float]:
+    """Read the coordinates of a geometry already checked to be a point.
 
     Args:
-        feature: A compiled point feature.
+        geometry: GeoJSON point geometry.
 
     Returns:
         Longitude and latitude in degrees.
     """
-    lon, lat = cast(list[float], feature["geometry"]["coordinates"])
+    lon, lat = cast(list[float], geometry["coordinates"])
     return lon, lat

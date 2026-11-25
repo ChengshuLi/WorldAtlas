@@ -16,6 +16,7 @@ class ActiveTimingTests(unittest.TestCase):
             timing = Timing(Path(td) / "timing.jsonl", groups=("tiles", "publish"))
             with patch.object(time, "monotonic", side_effect=[0, 0, 2, 5, 8, 15, 16, 20]):
                 with timing.stage("tiles"), timing.measure("tiles", "file", kind="download"):
+                    # Rasterization starts during the failed download and ends after it.
                     with ExitStack() as rasterize:
                         with self.assertRaises(InterruptedError), timing.measure(
                             "tiles", "failed-file", kind="download"

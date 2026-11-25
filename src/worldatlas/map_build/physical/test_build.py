@@ -1,6 +1,6 @@
 from base64 import b64encode
 from functools import wraps
-from contextlib import contextmanager, ExitStack
+from contextlib import contextmanager
 import fcntl
 import io
 import json
@@ -45,12 +45,12 @@ def intercept_stages(effect):
 
         return intercepted
 
-    with ExitStack() as stack:
-        for module, name, original in (
-            (b.land, 'run', LAND), (b.water, 'run', WATER),
-            (b.water_union, 'run', UNION), (b.composition, 'run', COMPOSE),
-        ):
-            stack.enter_context(mock.patch.object(module, name, wrap_stage(original)))
+    with (
+        mock.patch.object(b.land, 'run', wrap_stage(LAND)),
+        mock.patch.object(b.water, 'run', wrap_stage(WATER)),
+        mock.patch.object(b.water_union, 'run', wrap_stage(UNION)),
+        mock.patch.object(b.composition, 'run', wrap_stage(COMPOSE)),
+    ):
         yield
 
 

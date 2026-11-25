@@ -29,10 +29,18 @@ class PhysicalEligibility(unittest.TestCase):
     def test_links_for_other_parents_are_outside_this_division(self):
         self.geo["rule_features"].extend([dict(self.link, rule_id="elsewhere"), self.link])
         self.geo["rule_targets"].append(dict(self.target, rule_id="elsewhere"))
+        self.geo["features"][0]["construction_id"] = "from-catalog"
+        self.rule["rationale"] = "Why this assignment is needed"
         compiled = RuleIndex(self.geo).compile(0)
         self.assertEqual(compiled.children_by_id[807], self.geo["entities"][-1])
         self.assertEqual(
-            compiled.rules[0]["features"]["scope_component"], self.geo["features"]
+            compiled.rules[0],
+            dict(
+                id="area", operation="assign_area", physical_class="land",
+                unit="cell", unassigned_only=False,
+                features={"scope_component": [dict(id="inside", geometry={"type": "Point"})]},
+                targets=[dict(entity_id=807, point=None)],
+            ),
         )
 
     def test_feature_roles_and_target_points_are_checked(self):

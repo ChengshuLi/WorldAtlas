@@ -14,7 +14,7 @@ from worldatlas.map_build.core.layers import write_layer, patch_rows
 from worldatlas.map_build.core.rle import open_grid, row
 from worldatlas.map_build.division.contracts import RuleIndex, selected_parents
 from worldatlas.map_build.division.hierarchy import (
-    definition,
+    parent_division_reuse_inputs,
     substitute,
     HierarchyDivision,
 )
@@ -472,7 +472,7 @@ class HierarchyTests(unittest.TestCase):
             physical = Path(temp) / "physical"
             write_layer(physical, grid, [(0, [(0, 24, 17)])])
             files = RunFilePins()
-            original = definition(
+            original = parent_division_reuse_inputs(
                 geo,
                 0,
                 grid,
@@ -486,7 +486,7 @@ class HierarchyTests(unittest.TestCase):
             changed["entities"][1]["color_rgb"] = "#998877"
             changed["rules"][0]["rationale"] = "Clearer explanation"
             self.assertEqual(
-                definition(
+                parent_division_reuse_inputs(
                     changed,
                     0,
                     grid,
@@ -500,7 +500,7 @@ class HierarchyTests(unittest.TestCase):
             )
             changed["rules"][0]["unassigned_only"] = True
             self.assertNotEqual(
-                definition(
+                parent_division_reuse_inputs(
                     changed,
                     0,
                     grid,
@@ -529,7 +529,9 @@ class HierarchyTests(unittest.TestCase):
                 geo["category_bindings"] = [
                     dict(code=code, entity_id=owner, physical_class=kind)
                     for code, owner, kind in zip(codes, (101, 807, 101), ("land", "land", "water"))]
-                return definition(geo, 0, grid, physical, None, {}, compiled=compiled, files=files)
+                return parent_division_reuse_inputs(
+                    geo, 0, grid, physical, None, {}, compiled=compiled, files=files
+                )
             original = signature([5, 10, 15])
             self.assertEqual(signature([8, 12, 1]), original)
             self.assertNotEqual(signature([12, 8, 1]), original)

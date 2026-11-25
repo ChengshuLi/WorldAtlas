@@ -20,7 +20,7 @@ from shapely.geometry import box
 
 from worldatlas.map_build.core.grid import Grid
 from worldatlas.map_build.division.areas import divide_area
-from worldatlas.map_build.division.scope import complete_row
+from worldatlas.map_build.core.rle import complete_row
 from worldatlas.source_imports.run_import import run_import
 from worldatlas.source_imports.watersheds.build_boundary import construct_boundary
 from worldatlas.source_imports.watersheds.test_basins import write_basin_shapefile
@@ -310,7 +310,7 @@ class ConstructionTests(unittest.TestCase):
                 query_row=lambda _: query,
             )
             targets = [
-                {'entity_id': owner, 'point': {'geometry': {'coordinates': [lon, .0035]}}}
+                {'entity_id': owner, 'point': {'type': 'Point', 'coordinates': [lon, .0035]}}
                 for owner, lon in [(301, .0015), (909, .0045)]
             ]
             boundaries = [{'geometry': geometry}]

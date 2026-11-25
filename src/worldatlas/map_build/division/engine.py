@@ -105,6 +105,7 @@ def merge_claims(
     Raises:
         ValueError: Two rules disagree or a claim is ineligible.
     """
+    # The rule group can produce any number of claim files.
     with ExitStack() as resources:
         physical = resources.enter_context(open_grid(physical_directory, grid))
         parent = resources.enter_context(open_grid(parent_directory, grid))

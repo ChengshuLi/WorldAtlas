@@ -51,15 +51,20 @@ class MapCodeBinding(TypedDict):
     physical_class: PhysicalClass
 
 
-class GeographicRule(TypedDict):
-    """Describe an assignment operation for one geographic parent."""
+class RuleSettings(TypedDict):
+    """Identify a rule and specify how it assigns cells or components."""
 
     id: str
-    parent_id: int
     operation: RuleOperation
     physical_class: EligibleClass
     unit: Literal["cell", "component"]
     unassigned_only: bool
+
+
+class GeographicRule(RuleSettings):
+    """Record a rule, its geographic parent, and the reason for using it."""
+
+    parent_id: int
     rationale: str
 
 
