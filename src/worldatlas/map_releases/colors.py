@@ -90,7 +90,7 @@ class LandColorPicker:
             reserved_colors: Exact RGBs for water and unassigned land.
             authored_colors: Colors already assigned to land by the input catalog.
         """
-        self._colors, self._lab = muted_color_samples()
+        self._colors, self._candidate_oklab_coordinates = muted_color_samples()
         self._index_by_color = {color: i for i, color in enumerate(self._colors)}
         self._available = np.array(
             [color not in reserved_colors for color in self._colors], dtype=bool
@@ -99,7 +99,7 @@ class LandColorPicker:
         self._closest_view_distance = np.full(len(self._colors), np.inf)
         if self._used:
             self._closest_view_distance, _ = cKDTree(oklab(sorted(self._used))).query(
-                self._lab
+                self._candidate_oklab_coordinates
             )
 
     def choose_muted_land_color(self, neighbor_colors: set[RGB]) -> RGB:
@@ -125,7 +125,9 @@ class LandColorPicker:
             raise ValueError("ran out of distinct muted land colors")
 
         if neighbor_colors:
-            nearby, _ = cKDTree(oklab(sorted(neighbor_colors))).query(self._lab)
+            nearby, _ = cKDTree(oklab(sorted(neighbor_colors))).query(
+                self._candidate_oklab_coordinates
+            )
             best_nearby = nearby[available].max()
             available &= nearby >= _MIN_NEARBY_CONTRAST_FRACTION * best_nearby
         else:
@@ -139,7 +141,11 @@ class LandColorPicker:
         if color not in self._used:
             self._used.add(color)
             # A new color can only decrease each candidate’s closest distance.
-            distance_to_color = np.linalg.norm(self._lab - self._lab[winner], axis=1)
+            distance_to_color = np.linalg.norm(
+                self._candidate_oklab_coordinates
+                - self._candidate_oklab_coordinates[winner],
+                axis=1,
+            )
             np.minimum(
                 self._closest_view_distance,
                 distance_to_color,
